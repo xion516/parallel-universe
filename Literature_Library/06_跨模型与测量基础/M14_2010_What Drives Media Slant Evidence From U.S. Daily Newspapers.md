@@ -13,9 +13,9 @@
 全文状态：**PDF全文已下载**  
 本地版本：作者网站公开的 Econometrica 正式发表版
 
-[打开本地全文](<D:/PhD_Research/Parallel Universe/Literature_Library/06_跨模型与测量基础/M14_2010_What Drives Media Slant Evidence From U.S. Daily Newspapers.pdf>)
+[打开本地全文](<M14_2010_What Drives Media Slant Evidence From U.S. Daily Newspapers.pdf>)
 
-[检索用纯文本](<D:/PhD_Research/Parallel Universe/Literature_Library/06_跨模型与测量基础/M14_2010_What Drives Media Slant Evidence From U.S. Daily Newspapers.txt>)
+[检索用纯文本](<M14_2010_What Drives Media Slant Evidence From U.S. Daily Newspapers.txt>)
 
 ## 来源
 

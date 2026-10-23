@@ -13,9 +13,9 @@
 全文状态：**PDF全文已下载**  
 本地版本：机构库公开的 IEEE Access 正式发表版
 
-[打开本地全文](<D:/PhD_Research/Parallel Universe/Literature_Library/05_检索搜索与信息环境/R12_2026_Unequal Content Search Engine Personalization Influences Exposure to Information Regarding the Israel–Palestine Conflict.pdf>)
+[打开本地全文](<R12_2026_Unequal Content Search Engine Personalization Influences Exposure to Information Regarding the Israel–Palestine Conflict.pdf>)
 
-[检索用纯文本](<D:/PhD_Research/Parallel Universe/Literature_Library/05_检索搜索与信息环境/R12_2026_Unequal Content Search Engine Personalization Influences Exposure to Information Regarding the Israel–Palestine Conflict.txt>)
+[检索用纯文本](<R12_2026_Unequal Content Search Engine Personalization Influences Exposure to Information Regarding the Israel–Palestine Conflict.txt>)
 
 ## 来源
 

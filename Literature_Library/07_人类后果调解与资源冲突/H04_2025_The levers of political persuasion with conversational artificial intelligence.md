@@ -13,9 +13,9 @@
 全文状态：**PDF全文已下载**  
 本地版本：LSE机构库的作者接受稿，含封面和补充材料，共139页
 
-[打开本地全文](<D:/PhD_Research/Parallel Universe/Literature_Library/07_人类后果调解与资源冲突/H04_2025_The levers of political persuasion with conversational artificial intelligence.pdf>)
+[打开本地全文](<H04_2025_The levers of political persuasion with conversational artificial intelligence.pdf>)
 
-[检索用纯文本](<D:/PhD_Research/Parallel Universe/Literature_Library/07_人类后果调解与资源冲突/H04_2025_The levers of political persuasion with conversational artificial intelligence.txt>)
+[检索用纯文本](<H04_2025_The levers of political persuasion with conversational artificial intelligence.txt>)
 
 ## 来源
 

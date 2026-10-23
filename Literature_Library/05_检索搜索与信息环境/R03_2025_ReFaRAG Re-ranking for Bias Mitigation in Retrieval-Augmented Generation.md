@@ -13,9 +13,9 @@
 全文状态：**PDF全文已下载**  
 本地版本：作者接受稿（作者网站；机构库亦列为 Accepted author manuscript）
 
-[打开本地全文](<D:/PhD_Research/Parallel Universe/Literature_Library/05_检索搜索与信息环境/R03_2025_ReFaRAG Re-ranking for Bias Mitigation in Retrieval-Augmented Generation.pdf>)
+[打开本地全文](<R03_2025_ReFaRAG Re-ranking for Bias Mitigation in Retrieval-Augmented Generation.pdf>)
 
-[检索用纯文本](<D:/PhD_Research/Parallel Universe/Literature_Library/05_检索搜索与信息环境/R03_2025_ReFaRAG Re-ranking for Bias Mitigation in Retrieval-Augmented Generation.txt>)
+[检索用纯文本](<R03_2025_ReFaRAG Re-ranking for Bias Mitigation in Retrieval-Augmented Generation.txt>)
 
 ## 来源
 

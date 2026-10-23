@@ -13,9 +13,9 @@
 全文状态：**PDF全文已下载**  
 本地版本：出版社/正式论文集PDF
 
-[打开本地全文](<D:/PhD_Research/Parallel Universe/Literature_Library/01_语言与地缘政治/L01_2024_This Land is Your, My Land Evaluating Geopolitical Bias in Language Models through Territorial Disputes.pdf>)
+[打开本地全文](<L01_2024_This Land is Your, My Land Evaluating Geopolitical Bias in Language Models through Territorial Disputes.pdf>)
 
-[检索用纯文本](<D:/PhD_Research/Parallel Universe/Literature_Library/01_语言与地缘政治/L01_2024_This Land is Your, My Land Evaluating Geopolitical Bias in Language Models through Territorial Disputes.txt>)
+[检索用纯文本](<L01_2024_This Land is Your, My Land Evaluating Geopolitical Bias in Language Models through Territorial Disputes.txt>)
 
 ## 来源
 

@@ -13,9 +13,9 @@
 全文状态：**PDF全文已下载**  
 本地版本：大学课程网站公开的期刊排版扫描件
 
-[打开本地全文](<D:/PhD_Research/Parallel Universe/Literature_Library/06_跨模型与测量基础/M11_1993_Framing Toward Clarification of a Fractured Paradigm.pdf>)
+[打开本地全文](<M11_1993_Framing Toward Clarification of a Fractured Paradigm.pdf>)
 
-[检索用纯文本](<D:/PhD_Research/Parallel Universe/Literature_Library/06_跨模型与测量基础/M11_1993_Framing Toward Clarification of a Fractured Paradigm.txt>)
+[检索用纯文本](<M11_1993_Framing Toward Clarification of a Fractured Paradigm.txt>)
 
 ## 来源
 

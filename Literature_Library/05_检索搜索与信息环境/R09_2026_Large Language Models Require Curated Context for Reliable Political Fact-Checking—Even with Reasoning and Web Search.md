@@ -13,9 +13,9 @@
 全文状态：**PDF全文已下载**  
 本地版本：出版社/正式论文集PDF
 
-[打开本地全文](<D:/PhD_Research/Parallel Universe/Literature_Library/05_检索搜索与信息环境/R09_2026_Large Language Models Require Curated Context for Reliable Political Fact-Checking—Even with Reasoning and Web Search.pdf>)
+[打开本地全文](<R09_2026_Large Language Models Require Curated Context for Reliable Political Fact-Checking—Even with Reasoning and Web Search.pdf>)
 
-[检索用纯文本](<D:/PhD_Research/Parallel Universe/Literature_Library/05_检索搜索与信息环境/R09_2026_Large Language Models Require Curated Context for Reliable Political Fact-Checking—Even with Reasoning and Web Search.txt>)
+[检索用纯文本](<R09_2026_Large Language Models Require Curated Context for Reliable Political Fact-Checking—Even with Reasoning and Web Search.txt>)
 
 ## 来源
 

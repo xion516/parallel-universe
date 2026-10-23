@@ -13,9 +13,9 @@
 全文状态：**PDF全文已下载**  
 本地版本：公开副本的 Science 正式发表版；1页研究摘要加9页研究正文
 
-[打开本地全文](<D:/PhD_Research/Parallel Universe/Literature_Library/07_人类后果调解与资源冲突/H01_2024_AI can help humans find common ground in democratic deliberation.pdf>)
+[打开本地全文](<H01_2024_AI can help humans find common ground in democratic deliberation.pdf>)
 
-[检索用纯文本](<D:/PhD_Research/Parallel Universe/Literature_Library/07_人类后果调解与资源冲突/H01_2024_AI can help humans find common ground in democratic deliberation.txt>)
+[检索用纯文本](<H01_2024_AI can help humans find common ground in democratic deliberation.txt>)
 
 ## 来源
 

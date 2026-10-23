@@ -13,9 +13,9 @@
 全文状态：**PDF全文已下载**  
 本地版本：作者网站公开的 ICTIR 会议排版稿
 
-[打开本地全文](<D:/PhD_Research/Parallel Universe/Literature_Library/05_检索搜索与信息环境/R04_2025_Towards Fair RAG On the Impact of Fair Ranking in Retrieval-Augmented Generation.pdf>)
+[打开本地全文](<R04_2025_Towards Fair RAG On the Impact of Fair Ranking in Retrieval-Augmented Generation.pdf>)
 
-[检索用纯文本](<D:/PhD_Research/Parallel Universe/Literature_Library/05_检索搜索与信息环境/R04_2025_Towards Fair RAG On the Impact of Fair Ranking in Retrieval-Augmented Generation.txt>)
+[检索用纯文本](<R04_2025_Towards Fair RAG On the Impact of Fair Ranking in Retrieval-Augmented Generation.txt>)
 
 ## 来源
 

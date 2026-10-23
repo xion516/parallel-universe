@@ -13,9 +13,9 @@
 全文状态：**PDF全文已下载**  
 本地版本：arXiv预印本；与正式发表版是否一致未逐字比对
 
-[打开本地全文](<D:/PhD_Research/Parallel Universe/Literature_Library/03_提问框架与来源框架/F05_2026_FramingQA Does the Question Shape the Answer Measuring the Compositional Framing Effect.pdf>)
+[打开本地全文](<F05_2026_FramingQA Does the Question Shape the Answer Measuring the Compositional Framing Effect.pdf>)
 
-[检索用纯文本](<D:/PhD_Research/Parallel Universe/Literature_Library/03_提问框架与来源框架/F05_2026_FramingQA Does the Question Shape the Answer Measuring the Compositional Framing Effect.txt>)
+[检索用纯文本](<F05_2026_FramingQA Does the Question Shape the Answer Measuring the Compositional Framing Effect.txt>)
 
 ## 来源
 

@@ -13,9 +13,9 @@
 全文状态：**PDF全文已下载**  
 本地版本：arXiv预印本；与正式发表版是否一致未逐字比对
 
-[打开本地全文](<D:/PhD_Research/Parallel Universe/Literature_Library/01_语言与地缘政治/L07_2026_The Language You Ask In Language-Conditioned Ideological Divergence in LLM Analysis of Contested Political Documents.pdf>)
+[打开本地全文](<L07_2026_The Language You Ask In Language-Conditioned Ideological Divergence in LLM Analysis of Contested Political Documents.pdf>)
 
-[检索用纯文本](<D:/PhD_Research/Parallel Universe/Literature_Library/01_语言与地缘政治/L07_2026_The Language You Ask In Language-Conditioned Ideological Divergence in LLM Analysis of Contested Political Documents.txt>)
+[检索用纯文本](<L07_2026_The Language You Ask In Language-Conditioned Ideological Divergence in LLM Analysis of Contested Political Documents.txt>)
 
 ## 来源
 

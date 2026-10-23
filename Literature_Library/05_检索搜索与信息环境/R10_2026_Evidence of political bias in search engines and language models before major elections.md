@@ -13,9 +13,9 @@
 全文状态：**PDF全文已下载**  
 本地版本：arXiv预印本；与正式发表版是否一致未逐字比对
 
-[打开本地全文](<D:/PhD_Research/Parallel Universe/Literature_Library/05_检索搜索与信息环境/R10_2026_Evidence of political bias in search engines and language models before major elections.pdf>)
+[打开本地全文](<R10_2026_Evidence of political bias in search engines and language models before major elections.pdf>)
 
-[检索用纯文本](<D:/PhD_Research/Parallel Universe/Literature_Library/05_检索搜索与信息环境/R10_2026_Evidence of political bias in search engines and language models before major elections.txt>)
+[检索用纯文本](<R10_2026_Evidence of political bias in search engines and language models before major elections.txt>)
 
 ## 来源
 

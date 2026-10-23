@@ -13,9 +13,9 @@
 全文状态：**PDF全文已下载**  
 本地版本：作者网站工作论文，文件日期2026-02-25；非期刊正式版
 
-[打开本地全文](<D:/PhD_Research/Parallel Universe/Literature_Library/03_提问框架与来源框架/F07_2026_AI Pandering Constructing Diverging Political Realities through Conversation.pdf>)
+[打开本地全文](<F07_2026_AI Pandering Constructing Diverging Political Realities through Conversation.pdf>)
 
-[检索用纯文本](<D:/PhD_Research/Parallel Universe/Literature_Library/03_提问框架与来源框架/F07_2026_AI Pandering Constructing Diverging Political Realities through Conversation.txt>)
+[检索用纯文本](<F07_2026_AI Pandering Constructing Diverging Political Realities through Conversation.txt>)
 
 ## 来源
 

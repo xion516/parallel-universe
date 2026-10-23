@@ -13,9 +13,9 @@
 全文状态：**PDF全文已下载**  
 本地版本：出版社/正式论文集PDF
 
-[打开本地全文](<D:/PhD_Research/Parallel Universe/Literature_Library/05_检索搜索与信息环境/R14_2025_No Free Lunch Retrieval-Augmented Generation Undermines Fairness in LLMs, Even for Vigilant Users.pdf>)
+[打开本地全文](<R14_2025_No Free Lunch Retrieval-Augmented Generation Undermines Fairness in LLMs, Even for Vigilant Users.pdf>)
 
-[检索用纯文本](<D:/PhD_Research/Parallel Universe/Literature_Library/05_检索搜索与信息环境/R14_2025_No Free Lunch Retrieval-Augmented Generation Undermines Fairness in LLMs, Even for Vigilant Users.txt>)
+[检索用纯文本](<R14_2025_No Free Lunch Retrieval-Augmented Generation Undermines Fairness in LLMs, Even for Vigilant Users.txt>)
 
 ## 来源
 

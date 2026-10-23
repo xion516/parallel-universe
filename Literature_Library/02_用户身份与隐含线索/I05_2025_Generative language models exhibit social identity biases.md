@@ -13,9 +13,9 @@
 全文状态：**PDF全文已下载**  
 本地版本：出版社/正式论文集PDF
 
-[打开本地全文](<D:/PhD_Research/Parallel Universe/Literature_Library/02_用户身份与隐含线索/I05_2025_Generative language models exhibit social identity biases.pdf>)
+[打开本地全文](<I05_2025_Generative language models exhibit social identity biases.pdf>)
 
-[检索用纯文本](<D:/PhD_Research/Parallel Universe/Literature_Library/02_用户身份与隐含线索/I05_2025_Generative language models exhibit social identity biases.txt>)
+[检索用纯文本](<I05_2025_Generative language models exhibit social identity biases.txt>)
 
 ## 来源
 

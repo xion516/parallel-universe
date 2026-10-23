@@ -13,9 +13,9 @@
 全文状态：**PDF全文已下载**  
 本地版本：出版社/正式论文集PDF
 
-[打开本地全文](<D:/PhD_Research/Parallel Universe/Literature_Library/01_语言与地缘政治/L10_2026_Do Political Opinions Transfer Between Western Languages An Analysis of Unaligned and Aligned Multilingual LLMs.pdf>)
+[打开本地全文](<L10_2026_Do Political Opinions Transfer Between Western Languages An Analysis of Unaligned and Aligned Multilingual LLMs.pdf>)
 
-[检索用纯文本](<D:/PhD_Research/Parallel Universe/Literature_Library/01_语言与地缘政治/L10_2026_Do Political Opinions Transfer Between Western Languages An Analysis of Unaligned and Aligned Multilingual LLMs.txt>)
+[检索用纯文本](<L10_2026_Do Political Opinions Transfer Between Western Languages An Analysis of Unaligned and Aligned Multilingual LLMs.txt>)
 
 ## 来源
 

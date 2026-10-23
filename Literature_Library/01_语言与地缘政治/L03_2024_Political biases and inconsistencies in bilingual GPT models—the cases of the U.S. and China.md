@@ -13,9 +13,9 @@
 全文状态：**PDF全文已下载**  
 本地版本：出版社/正式论文集PDF
 
-[打开本地全文](<D:/PhD_Research/Parallel Universe/Literature_Library/01_语言与地缘政治/L03_2024_Political biases and inconsistencies in bilingual GPT models—the cases of the U.S. and China.pdf>)
+[打开本地全文](<L03_2024_Political biases and inconsistencies in bilingual GPT models—the cases of the U.S. and China.pdf>)
 
-[检索用纯文本](<D:/PhD_Research/Parallel Universe/Literature_Library/01_语言与地缘政治/L03_2024_Political biases and inconsistencies in bilingual GPT models—the cases of the U.S. and China.txt>)
+[检索用纯文本](<L03_2024_Political biases and inconsistencies in bilingual GPT models—the cases of the U.S. and China.txt>)
 
 ## 来源
 

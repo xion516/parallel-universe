@@ -13,9 +13,9 @@
 全文状态：**PDF全文已下载**  
 本地版本：作者网站公开的 CHI 会议排版稿
 
-[打开本地全文](<D:/PhD_Research/Parallel Universe/Literature_Library/05_检索搜索与信息环境/R01_2024_Generative Echo Chamber Effect of LLM-Powered Search Systems on Diverse Information Seeking.pdf>)
+[打开本地全文](<R01_2024_Generative Echo Chamber Effect of LLM-Powered Search Systems on Diverse Information Seeking.pdf>)
 
-[检索用纯文本](<D:/PhD_Research/Parallel Universe/Literature_Library/05_检索搜索与信息环境/R01_2024_Generative Echo Chamber Effect of LLM-Powered Search Systems on Diverse Information Seeking.txt>)
+[检索用纯文本](<R01_2024_Generative Echo Chamber Effect of LLM-Powered Search Systems on Diverse Information Seeking.txt>)
 
 ## 来源
 

@@ -13,9 +13,9 @@
 全文状态：**PDF全文已下载**  
 本地版本：期刊正式 PDF；韩文正文，附英文标题和摘要
 
-[打开本地全文](<D:/PhD_Research/Parallel Universe/Literature_Library/05_检索搜索与信息环境/R06_2026_The Impact of Retrieved Document Bias on Generated Responses in RAG An Analysis through Political Bias Experiments.pdf>)
+[打开本地全文](<R06_2026_The Impact of Retrieved Document Bias on Generated Responses in RAG An Analysis through Political Bias Experiments.pdf>)
 
-[检索用纯文本](<D:/PhD_Research/Parallel Universe/Literature_Library/05_检索搜索与信息环境/R06_2026_The Impact of Retrieved Document Bias on Generated Responses in RAG An Analysis through Political Bias Experiments.txt>)
+[检索用纯文本](<R06_2026_The Impact of Retrieved Document Bias on Generated Responses in RAG An Analysis through Political Bias Experiments.txt>)
 
 ## 来源
 

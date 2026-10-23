@@ -13,9 +13,9 @@
 全文状态：**PDF全文已下载**  
 本地版本：大学课程网站公开的 Science 正式发表版
 
-[打开本地全文](<D:/PhD_Research/Parallel Universe/Literature_Library/06_跨模型与测量基础/M13_1981_The Framing of Decisions and the Psychology of Choice.pdf>)
+[打开本地全文](<M13_1981_The Framing of Decisions and the Psychology of Choice.pdf>)
 
-[检索用纯文本](<D:/PhD_Research/Parallel Universe/Literature_Library/06_跨模型与测量基础/M13_1981_The Framing of Decisions and the Psychology of Choice.txt>)
+[检索用纯文本](<M13_1981_The Framing of Decisions and the Psychology of Choice.txt>)
 
 ## 来源
 

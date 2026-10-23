@@ -13,11 +13,11 @@
 全文状态：**PDF全文已下载**  
 本地版本：arXiv预印本（题名含 evaluation bias）；另存正式发表的完整XML正文
 
-[打开本地全文](<D:/PhD_Research/Parallel Universe/Literature_Library/03_提问框架与来源框架/F01_2025_Source framing triggers systematic bias in large language models.pdf>)
+[打开本地全文](<F01_2025_Source framing triggers systematic bias in large language models.pdf>)
 
-[检索用纯文本](<D:/PhD_Research/Parallel Universe/Literature_Library/03_提问框架与来源框架/F01_2025_Source framing triggers systematic bias in large language models.txt>)
+[检索用纯文本](<F01_2025_Source framing triggers systematic bias in large language models.txt>)
 
-[正式发表完整XML正文](<D:/PhD_Research/Parallel Universe/Literature_Library/03_提问框架与来源框架/F01_2025_Source framing triggers systematic bias in large language models.xml>) · [正式发表正文TXT](<D:/PhD_Research/Parallel Universe/Literature_Library/03_提问框架与来源框架/F01_2025_Source framing triggers systematic bias in large language models_published_fulltext.txt>)
+[正式发表完整XML正文](<F01_2025_Source framing triggers systematic bias in large language models.xml>) · [正式发表正文TXT](<F01_2025_Source framing triggers systematic bias in large language models_published_fulltext.txt>)
 
 正式全文来源：[https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13142764/fullTextXML](https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13142764/fullTextXML)
 

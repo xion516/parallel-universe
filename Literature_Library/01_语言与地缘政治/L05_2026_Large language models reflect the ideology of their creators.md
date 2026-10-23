@@ -13,9 +13,9 @@
 全文状态：**PDF全文已下载**  
 本地版本：出版社/正式论文集PDF
 
-[打开本地全文](<D:/PhD_Research/Parallel Universe/Literature_Library/01_语言与地缘政治/L05_2026_Large language models reflect the ideology of their creators.pdf>)
+[打开本地全文](<L05_2026_Large language models reflect the ideology of their creators.pdf>)
 
-[检索用纯文本](<D:/PhD_Research/Parallel Universe/Literature_Library/01_语言与地缘政治/L05_2026_Large language models reflect the ideology of their creators.txt>)
+[检索用纯文本](<L05_2026_Large language models reflect the ideology of their creators.txt>)
 
 ## 来源
 

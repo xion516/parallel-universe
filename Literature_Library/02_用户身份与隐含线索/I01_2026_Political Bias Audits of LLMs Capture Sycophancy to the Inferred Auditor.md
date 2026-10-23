@@ -13,9 +13,9 @@
 全文状态：**PDF全文已下载**  
 本地版本：arXiv预印本；与正式发表版是否一致未逐字比对
 
-[打开本地全文](<D:/PhD_Research/Parallel Universe/Literature_Library/02_用户身份与隐含线索/I01_2026_Political Bias Audits of LLMs Capture Sycophancy to the Inferred Auditor.pdf>)
+[打开本地全文](<I01_2026_Political Bias Audits of LLMs Capture Sycophancy to the Inferred Auditor.pdf>)
 
-[检索用纯文本](<D:/PhD_Research/Parallel Universe/Literature_Library/02_用户身份与隐含线索/I01_2026_Political Bias Audits of LLMs Capture Sycophancy to the Inferred Auditor.txt>)
+[检索用纯文本](<I01_2026_Political Bias Audits of LLMs Capture Sycophancy to the Inferred Auditor.txt>)
 
 ## 来源
 

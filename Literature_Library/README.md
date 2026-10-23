@@ -4,20 +4,20 @@
 
 **已取得76篇论文PDF、2份机构报告网页全文；2篇待补全文。** 另有1份Anthropic报告附录，单独标记，不计入论文PDF数。
 
-[80条完整目录](<D:/PhD_Research/Parallel Universe/Literature_Library/文献总目录_80条.md>) · [Framing阅读入口](<D:/PhD_Research/Parallel Universe/Literature_Library/FRAMING阅读入口.md>) · [待补全文清单](<D:/PhD_Research/Parallel Universe/Literature_Library/待补全文清单.md>)
+[80条完整目录](<文献总目录_80条.md>) · [Framing阅读入口](<FRAMING阅读入口.md>) · [待补全文清单](<待补全文清单.md>)
 
 ## 分类目录
 
 | 分类 | 条目 | 已取PDF | 网页全文 | 待补 |
 |---|---:|---:|---:|---:|
-| [语言与地缘政治](<D:/PhD_Research/Parallel Universe/Literature_Library/01_语言与地缘政治/README.md>) | 15 | 15 | 0 | 0 |
-| [用户身份与隐含线索](<D:/PhD_Research/Parallel Universe/Literature_Library/02_用户身份与隐含线索/README.md>) | 8 | 8 | 0 | 0 |
-| [提问框架与来源框架](<D:/PhD_Research/Parallel Universe/Literature_Library/03_提问框架与来源框架/README.md>) | 7 | 6 | 0 | 1 |
-| [迎合与用户追问](<D:/PhD_Research/Parallel Universe/Literature_Library/04_迎合与用户追问/README.md>) | 9 | 9 | 0 | 0 |
-| [检索、搜索与信息环境](<D:/PhD_Research/Parallel Universe/Literature_Library/05_检索搜索与信息环境/README.md>) | 14 | 13 | 0 | 1 |
-| [跨模型与测量基础](<D:/PhD_Research/Parallel Universe/Literature_Library/06_跨模型与测量基础/README.md>) | 19 | 19 | 0 | 0 |
-| [人类后果、调解与资源冲突](<D:/PhD_Research/Parallel Universe/Literature_Library/07_人类后果调解与资源冲突/README.md>) | 6 | 6 | 0 | 0 |
-| [机构评测与PPT引用校验](<D:/PhD_Research/Parallel Universe/Literature_Library/08_机构评测报告/README.md>) | 2 | 0 | 2 | 0 |
+| [语言与地缘政治](<01_语言与地缘政治/README.md>) | 15 | 15 | 0 | 0 |
+| [用户身份与隐含线索](<02_用户身份与隐含线索/README.md>) | 8 | 8 | 0 | 0 |
+| [提问框架与来源框架](<03_提问框架与来源框架/README.md>) | 7 | 6 | 0 | 1 |
+| [迎合与用户追问](<04_迎合与用户追问/README.md>) | 9 | 9 | 0 | 0 |
+| [检索、搜索与信息环境](<05_检索搜索与信息环境/README.md>) | 14 | 13 | 0 | 1 |
+| [跨模型与测量基础](<06_跨模型与测量基础/README.md>) | 19 | 19 | 0 | 0 |
+| [人类后果、调解与资源冲突](<07_人类后果调解与资源冲突/README.md>) | 6 | 6 | 0 | 0 |
+| [机构评测与PPT引用校验](<08_机构评测报告/README.md>) | 2 | 0 | 2 | 0 |
 
 ## 使用方法与版本
 

@@ -13,9 +13,9 @@
 全文状态：**PDF全文已下载**  
 本地版本：出版社/正式论文集PDF
 
-[打开本地全文](<D:/PhD_Research/Parallel Universe/Literature_Library/01_语言与地缘政治/L02_2025_Multilingual Retrieval Augmented Generation for Culturally-Sensitive Tasks A Benchmark for Cross-lingual Robustness.pdf>)
+[打开本地全文](<L02_2025_Multilingual Retrieval Augmented Generation for Culturally-Sensitive Tasks A Benchmark for Cross-lingual Robustness.pdf>)
 
-[检索用纯文本](<D:/PhD_Research/Parallel Universe/Literature_Library/01_语言与地缘政治/L02_2025_Multilingual Retrieval Augmented Generation for Culturally-Sensitive Tasks A Benchmark for Cross-lingual Robustness.txt>)
+[检索用纯文本](<L02_2025_Multilingual Retrieval Augmented Generation for Culturally-Sensitive Tasks A Benchmark for Cross-lingual Robustness.txt>)
 
 ## 来源
 

@@ -2,7 +2,7 @@ from pathlib import Path
 from collections import Counter
 from datetime import datetime, timezone
 from urllib.parse import urlparse
-import hashlib, html, json, re, subprocess, sys, xml.etree.ElementTree as ET
+import hashlib, html, json, os, re, subprocess, sys, xml.etree.ElementTree as ET
 import download_library as d
 
 ROOT, META = d.ROOT, d.META
@@ -62,6 +62,14 @@ def write_json(path, obj):
 
 def link(label, path):
  return f"[{label}](<{Path(path).resolve().as_posix()}>)"
+
+def write_markdown(path, content):
+ # Resolve each generated link relative to its own document for GitHub/clones.
+ def relative(match):
+  target = Path(match.group(1))
+  if not target.is_absolute(): return match.group(0)
+  return "](<" + Path(os.path.relpath(target, path.parent)).as_posix() + ">)"
+ path.write_text(re.sub(r'\]\(<([^>\n]+)>\)', relative, content), encoding="utf-8")
 
 def cell(s):
  return str(s).replace("|", "\\|").replace("\n", " ")
@@ -164,7 +172,7 @@ def main():
   if v.get("sha256"): lines.extend([f"SHA256：`{v['sha256']}`", ""])
   lines.extend(["## 原目录研究说明", "", r["study_summary_zh"], "", "与项目的关系："+r["relationship_to_project_zh"], "", "原目录核验深度："+r["verification_depth_zh"], "", "上述说明沿用前期文献目录；本次归档核验文件身份与可用性，不代表已逐篇重新评审全部结果。", ""])
   if v["notes_zh"]: lines.extend(["## 版本与引用备注", "", v["notes_zh"], ""])
-  card_path.write_text("\n".join(lines), encoding="utf-8"); enriched.append(r)
+  write_markdown(card_path, "\n".join(lines)); enriched.append(r)
   print(rid, v["status"], flush=True)
  counts = Counter(v["status"] for v in state.values())
  framing_sections = [
@@ -182,12 +190,12 @@ def main():
    frame.append(f"| {rid} | {link(cell(r['title']), ROOT/v['record_path'])} | {STATUS[v['status']]}；{cell(v['version_zh'])} |")
   frame.append("")
  frame.extend(["项目已有的framing深读材料另存于 Literature_Review/2026-10-22/framing_deep_dive；其中后续补充的其他论文不计入本次80条归档。", ""])
- (ROOT/"FRAMING阅读入口.md").write_text("\n".join(frame), encoding="utf-8")
+ write_markdown(ROOT/"FRAMING阅读入口.md", "\n".join(frame))
  index = ["# 80条文献完整索引", "", "归档日期：2026-10-22。78条学术论文/工作论文 + 2条机构报告。全文取得情况与发表状态分开记录。", "", f"PDF全文{counts['pdf_downloaded']}；机构报告HTML全文{counts['html_fulltext']}；待补全文{counts['pending_fulltext']}。", "", "| ID | 年份 | 作者 | 题名与记录 | 分类 | 发表场所 | 全文 | 版本 | 优先级 |", "|---|---:|---|---|---|---|---|---|---|"]
  for r in enriched:
   v=r["download"]
   index.append(f"| {r['id']} | {r['year']} | {cell(r['authors_display'])} | {link(cell(r['title']), ROOT/v['record_path'])} | {cell(r['dimension'])} | {cell(r['venue'])} | {STATUS[v['status']]} | {cell(v['version_zh'])} | {r['reading_priority']} |")
- (ROOT/"文献总目录_80条.md").write_text("\n".join(index)+"\n", encoding="utf-8")
+ write_markdown(ROOT/"文献总目录_80条.md", "\n".join(index)+"\n")
  readme = ["# Parallel Universe 文献库", "", "对应前期文献目录的80条记录：78条学术论文/工作论文、2条机构评测报告。保留原L/I/F/S/R/G/M/H/D编号，并按8类存放。", "", f"**已取得{counts['pdf_downloaded']}篇论文PDF、{counts['html_fulltext']}份机构报告网页全文；{counts['pending_fulltext']}篇待补全文。** 另有1份Anthropic报告附录，单独标记，不计入论文PDF数。", "", link("80条完整目录", ROOT/"文献总目录_80条.md")+" · "+link("Framing阅读入口", ROOT/"FRAMING阅读入口.md")+" · "+link("待补全文清单", ROOT/"待补全文清单.md"), "", "## 分类目录", "", "| 分类 | 条目 | 已取PDF | 网页全文 | 待补 |", "|---|---:|---:|---:|---:|"]
  for group, dirname in d.GROUPS.items():
   subset = [r for r in enriched if r["dimension"] == group]; c = Counter(r["download"]["status"] for r in subset)
@@ -196,16 +204,16 @@ def main():
   for r in subset:
    v=r["download"]; full=link("PDF" if v["status"]=="pdf_downloaded" else "HTML", ROOT/v["path"]) if v.get("path") else "待补全文"
    lines.append(f"| {r['id']} | {r['year']} | {cell(r['authors_display'])} | {link(cell(r['title']), ROOT/v['record_path'])} | {full} | {r['reading_priority']} |")
-  (ROOT/dirname/"README.md").write_text("\n".join(lines)+"\n", encoding="utf-8")
+  write_markdown(ROOT/dirname/"README.md", "\n".join(lines)+"\n")
  readme.extend(["", "## 使用方法与版本", "", "每条文献有独立MD记录，包含作者、年份、发表场所、研究主题、与项目关系、阅读优先级、实际下载链接、版本及文件校验信息。论文PDF旁附自动提取的TXT，便于本地全文搜索；版式、图表和引文页码以PDF为准。", "", "从arXiv取得的文件标为预印本，即使同一研究后来已正式发表，也不自动称为出版社最终版。R03/H04是作者接受稿，M18是作者接近定稿的版本，H05是作者公开稿。F01另有正式发表的完整XML和正文TXT，可与预印本PDF对照。", "", "H05有2026-06-11的Editorial Expression of Concern，记录页已附通知链接。D01/D02为机构网页报告，不是同行评议论文。", "", "## 核验范围", "", "全部已归档PDF经过文件格式、实际页数、首页标题或DOI、SHA256和重复文件核对；两份网页报告保存原HTML与完整正文TXT。该文件核验不等于对80篇研究结果进行新的逐篇证据评审。", "", "原始研究文件及前期目录保留不变；本目录是新建的下载归档。原目录快照、逐次下载记录、合并后的机器可读目录和最终验证结果保存在00_目录与下载记录。", "", "归档日期：2026-10-22。"])
- (ROOT/"README.md").write_text("\n".join(readme)+"\n", encoding="utf-8")
+ write_markdown(ROOT/"README.md", "\n".join(readme)+"\n")
  gap = ["# 待补全文清单", "", "仅列尚未取得论文完整正文的条目。摘要、作者主页、代码仓库和元数据不计作全文。", ""]
  for r in enriched:
   v=r["download"]
   if v["status"] != "pending_fulltext": continue
   gap.extend([f"## {r['id']} · {r['title']}", "", f"{r['authors_display']} · {r['year']} · {r['venue']}", "", link("本地记录", ROOT/v["record_path"]), "", f"[出版社/DOI]({r.get('publisher_url',r['primary_url'])})", "", v["reason_zh"], "", "后续获取途径："+v["followup_zh"], ""])
  gap.extend(["这两条保留在原分类中，可通过现有ID补入文件；无需重新编号。", ""])
- (ROOT/"待补全文清单.md").write_text("\n".join(gap), encoding="utf-8")
+ write_markdown(ROOT/"待补全文清单.md", "\n".join(gap))
  write_json(d.MANIFEST, state)
  write_json(META/"library_catalog_80.json", {"archive_date": "2026-10-22", "counts": dict(counts), "records": enriched})
  write_json(META/"pdf_identity_audit.json", audits)

@@ -13,9 +13,9 @@
 全文状态：**PDF全文已下载**  
 本地版本：出版社/正式论文集PDF
 
-[打开本地全文](<D:/PhD_Research/Parallel Universe/Literature_Library/04_迎合与用户追问/S02_2023_Discovering Language Model Behaviors with Model-Written Evaluations.pdf>)
+[打开本地全文](<S02_2023_Discovering Language Model Behaviors with Model-Written Evaluations.pdf>)
 
-[检索用纯文本](<D:/PhD_Research/Parallel Universe/Literature_Library/04_迎合与用户追问/S02_2023_Discovering Language Model Behaviors with Model-Written Evaluations.txt>)
+[检索用纯文本](<S02_2023_Discovering Language Model Behaviors with Model-Written Evaluations.txt>)
 
 ## 来源
 

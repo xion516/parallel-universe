@@ -13,9 +13,9 @@
 全文状态：**PDF全文已下载**  
 本地版本：arXiv预印本；与正式发表版是否一致未逐字比对
 
-[打开本地全文](<D:/PhD_Research/Parallel Universe/Literature_Library/03_提问框架与来源框架/F02_2026_Poli-Bias Understanding and Measuring Large Language Model Biases in International Political Conflicts.pdf>)
+[打开本地全文](<F02_2026_Poli-Bias Understanding and Measuring Large Language Model Biases in International Political Conflicts.pdf>)
 
-[检索用纯文本](<D:/PhD_Research/Parallel Universe/Literature_Library/03_提问框架与来源框架/F02_2026_Poli-Bias Understanding and Measuring Large Language Model Biases in International Political Conflicts.txt>)
+[检索用纯文本](<F02_2026_Poli-Bias Understanding and Measuring Large Language Model Biases in International Political Conflicts.txt>)
 
 ## 来源
 

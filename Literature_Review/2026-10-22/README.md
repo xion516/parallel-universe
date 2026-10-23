@@ -2,7 +2,7 @@
 
 检索截止：2026-10-22。依据项目PPT中的H1—H5，以及镜像提问、本土提问、跨模型和一次追问的设计整理。
 
-后续专题：[Framing正文核查与研究判断](<D:/PhD_Research/Parallel Universe/Literature_Review/2026-10-22/framing_deep_dive/README.md>)进一步比较14项研究的问题、测量、结果与主张，并补入4项本轮广泛目录未收录的直接近邻。
+后续专题：[Framing正文核查与研究判断](<framing_deep_dive/README.md>)进一步比较14项研究的问题、测量、结果与主张，并补入4项本轮广泛目录未收录的直接近邻。
 
 ## 先给结论
 
@@ -10,7 +10,7 @@
 
 本轮收录**80条记录**：58条已发表学术论文/理论/综述、19条尚未确认正式发表的预印本或工作论文、1条仅作者仓库报告接收、2份机构评测。部分记录是邻近领域或测量基础，不能把总数解释为80项直接竞争研究。所有条目都有原始来源链接和核验深度；没有把摘要阅读写成全文精读，也没有将检索未命中写成不存在。
 
-完整条目见 [80条文献目录](<D:/PhD_Research/Parallel Universe/Literature_Review/2026-10-22/literature_catalog.md>)；机器可读字段见 [JSON目录](<D:/PhD_Research/Parallel Universe/Literature_Review/2026-10-22/literature_catalog.json>)；边界和可复跑检索式见 [检索说明](<D:/PhD_Research/Parallel Universe/Literature_Review/2026-10-22/search_scope.md>)。
+完整条目见 [80条文献目录](<literature_catalog.md>)；机器可读字段见 [JSON目录](<literature_catalog.json>)；边界和可复跑检索式见 [检索说明](<search_scope.md>)。
 
 ## 1. 五个设计维度：已有研究到哪一步
 

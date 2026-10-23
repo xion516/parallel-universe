@@ -2,7 +2,7 @@
 
 日期：2026-10-22。依据项目PPT H3：双方本土措辞增加回答差异、回答采用其词汇；同时对照会议中“同一AI、同一材料、两套解释”的关注。
 
-[14项论文逐篇核查](<D:/PhD_Research/Parallel Universe/Literature_Review/2026-10-22/framing_deep_dive/paper_notes.md>) · [结构化对照目录](<D:/PhD_Research/Parallel Universe/Literature_Review/2026-10-22/framing_deep_dive/framing_matrix.json>) · [数字与核验说明](<D:/PhD_Research/Parallel Universe/Literature_Review/2026-10-22/framing_deep_dive/verification_notes.md>)。
+[14项论文逐篇核查](<paper_notes.md>) · [结构化对照目录](<framing_matrix.json>) · [数字与核验说明](<verification_notes.md>)。
 
 ## 一、直接回答你的两个问题
 

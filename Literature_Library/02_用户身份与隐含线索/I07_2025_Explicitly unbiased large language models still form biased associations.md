@@ -13,9 +13,9 @@
 全文状态：**PDF全文已下载**  
 本地版本：作者网站公开的 PNAS 正式发表版
 
-[打开本地全文](<D:/PhD_Research/Parallel Universe/Literature_Library/02_用户身份与隐含线索/I07_2025_Explicitly unbiased large language models still form biased associations.pdf>)
+[打开本地全文](<I07_2025_Explicitly unbiased large language models still form biased associations.pdf>)
 
-[检索用纯文本](<D:/PhD_Research/Parallel Universe/Literature_Library/02_用户身份与隐含线索/I07_2025_Explicitly unbiased large language models still form biased associations.txt>)
+[检索用纯文本](<I07_2025_Explicitly unbiased large language models still form biased associations.txt>)
 
 ## 来源
 

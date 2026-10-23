@@ -13,9 +13,9 @@
 全文状态：**PDF全文已下载**  
 本地版本：出版社/正式论文集PDF
 
-[打开本地全文](<D:/PhD_Research/Parallel Universe/Literature_Library/01_语言与地缘政治/L04_2025_Navigating the Political Compass Evaluating Multilingual LLMs across Languages and Nationalities.pdf>)
+[打开本地全文](<L04_2025_Navigating the Political Compass Evaluating Multilingual LLMs across Languages and Nationalities.pdf>)
 
-[检索用纯文本](<D:/PhD_Research/Parallel Universe/Literature_Library/01_语言与地缘政治/L04_2025_Navigating the Political Compass Evaluating Multilingual LLMs across Languages and Nationalities.txt>)
+[检索用纯文本](<L04_2025_Navigating the Political Compass Evaluating Multilingual LLMs across Languages and Nationalities.txt>)
 
 ## 来源
 

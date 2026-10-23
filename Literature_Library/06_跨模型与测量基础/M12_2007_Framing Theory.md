@@ -13,9 +13,9 @@
 全文状态：**PDF全文已下载**  
 本地版本：作者网站公开的期刊排版稿；PDF另附目录页
 
-[打开本地全文](<D:/PhD_Research/Parallel Universe/Literature_Library/06_跨模型与测量基础/M12_2007_Framing Theory.pdf>)
+[打开本地全文](<M12_2007_Framing Theory.pdf>)
 
-[检索用纯文本](<D:/PhD_Research/Parallel Universe/Literature_Library/06_跨模型与测量基础/M12_2007_Framing Theory.txt>)
+[检索用纯文本](<M12_2007_Framing Theory.txt>)
 
 ## 来源
 

@@ -13,9 +13,9 @@
 全文状态：**PDF全文已下载**  
 本地版本：作者网站公开的 penultimate draft（接近定稿的作者稿）；引用正式发表版
 
-[打开本地全文](<D:/PhD_Research/Parallel Universe/Literature_Library/06_跨模型与测量基础/M18_2020_Echo Chambers and Epistemic Bubbles.pdf>)
+[打开本地全文](<M18_2020_Echo Chambers and Epistemic Bubbles.pdf>)
 
-[检索用纯文本](<D:/PhD_Research/Parallel Universe/Literature_Library/06_跨模型与测量基础/M18_2020_Echo Chambers and Epistemic Bubbles.txt>)
+[检索用纯文本](<M18_2020_Echo Chambers and Epistemic Bubbles.txt>)
 
 ## 来源
 

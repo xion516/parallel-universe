@@ -13,9 +13,9 @@
 全文状态：**PDF全文已下载**  
 本地版本：出版社/正式论文集PDF
 
-[打开本地全文](<D:/PhD_Research/Parallel Universe/Literature_Library/06_跨模型与测量基础/M03_2023_From Pretraining Data to Language Models to Downstream Tasks Tracking the Trails of Political Biases Leading to Unfair NLP Mo.pdf>)
+[打开本地全文](<M03_2023_From Pretraining Data to Language Models to Downstream Tasks Tracking the Trails of Political Biases Leading to Unfair NLP Mo.pdf>)
 
-[检索用纯文本](<D:/PhD_Research/Parallel Universe/Literature_Library/06_跨模型与测量基础/M03_2023_From Pretraining Data to Language Models to Downstream Tasks Tracking the Trails of Political Biases Leading to Unfair NLP Mo.txt>)
+[检索用纯文本](<M03_2023_From Pretraining Data to Language Models to Downstream Tasks Tracking the Trails of Political Biases Leading to Unfair NLP Mo.txt>)
 
 ## 来源
 

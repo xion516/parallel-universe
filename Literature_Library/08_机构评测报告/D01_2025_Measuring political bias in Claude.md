@@ -13,11 +13,11 @@
 全文状态：**机构报告网页全文已归档**  
 本地版本：机构原始网页报告（HTML及TXT）；非同行评议论文
 
-[打开本地全文](<D:/PhD_Research/Parallel Universe/Literature_Library/08_机构评测报告/D01_2025_Measuring political bias in Claude.html>)
+[打开本地全文](<D01_2025_Measuring political bias in Claude.html>)
 
-[检索用纯文本](<D:/PhD_Research/Parallel Universe/Literature_Library/08_机构评测报告/D01_2025_Measuring political bias in Claude.txt>)
+[检索用纯文本](<D01_2025_Measuring political bias in Claude.txt>)
 
-[独立附录，2页，不计作主报告全文](<D:/PhD_Research/Parallel Universe/Literature_Library/08_机构评测报告/D01_2025_Measuring political bias in Claude_Appendix.pdf>)
+[独立附录，2页，不计作主报告全文](<D01_2025_Measuring political bias in Claude_Appendix.pdf>)
 
 ## 来源
 

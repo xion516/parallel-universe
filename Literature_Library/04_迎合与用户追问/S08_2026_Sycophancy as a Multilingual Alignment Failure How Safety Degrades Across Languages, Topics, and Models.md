@@ -13,9 +13,9 @@
 全文状态：**PDF全文已下载**  
 本地版本：arXiv预印本；与正式发表版是否一致未逐字比对
 
-[打开本地全文](<D:/PhD_Research/Parallel Universe/Literature_Library/04_迎合与用户追问/S08_2026_Sycophancy as a Multilingual Alignment Failure How Safety Degrades Across Languages, Topics, and Models.pdf>)
+[打开本地全文](<S08_2026_Sycophancy as a Multilingual Alignment Failure How Safety Degrades Across Languages, Topics, and Models.pdf>)
 
-[检索用纯文本](<D:/PhD_Research/Parallel Universe/Literature_Library/04_迎合与用户追问/S08_2026_Sycophancy as a Multilingual Alignment Failure How Safety Degrades Across Languages, Topics, and Models.txt>)
+[检索用纯文本](<S08_2026_Sycophancy as a Multilingual Alignment Failure How Safety Degrades Across Languages, Topics, and Models.txt>)
 
 ## 来源
 

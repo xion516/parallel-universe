@@ -13,9 +13,9 @@
 全文状态：**PDF全文已下载**  
 本地版本：出版社/正式论文集PDF
 
-[打开本地全文](<D:/PhD_Research/Parallel Universe/Literature_Library/01_语言与地缘政治/L14_2026_Language and the framing of historical narrative in large language models the case of Asia minor (1922).pdf>)
+[打开本地全文](<L14_2026_Language and the framing of historical narrative in large language models the case of Asia minor (1922).pdf>)
 
-[检索用纯文本](<D:/PhD_Research/Parallel Universe/Literature_Library/01_语言与地缘政治/L14_2026_Language and the framing of historical narrative in large language models the case of Asia minor (1922).txt>)
+[检索用纯文本](<L14_2026_Language and the framing of historical narrative in large language models the case of Asia minor (1922).txt>)
 
 ## 来源
 

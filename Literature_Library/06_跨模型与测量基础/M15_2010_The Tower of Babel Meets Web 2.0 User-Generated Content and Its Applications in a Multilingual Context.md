@@ -13,9 +13,9 @@
 全文状态：**PDF全文已下载**  
 本地版本：作者网站公开的 CHI 会议排版稿
 
-[打开本地全文](<D:/PhD_Research/Parallel Universe/Literature_Library/06_跨模型与测量基础/M15_2010_The Tower of Babel Meets Web 2.0 User-Generated Content and Its Applications in a Multilingual Context.pdf>)
+[打开本地全文](<M15_2010_The Tower of Babel Meets Web 2.0 User-Generated Content and Its Applications in a Multilingual Context.pdf>)
 
-[检索用纯文本](<D:/PhD_Research/Parallel Universe/Literature_Library/06_跨模型与测量基础/M15_2010_The Tower of Babel Meets Web 2.0 User-Generated Content and Its Applications in a Multilingual Context.txt>)
+[检索用纯文本](<M15_2010_The Tower of Babel Meets Web 2.0 User-Generated Content and Its Applications in a Multilingual Context.txt>)
 
 ## 来源
 

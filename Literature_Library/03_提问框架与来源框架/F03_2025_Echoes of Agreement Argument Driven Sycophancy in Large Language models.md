@@ -13,9 +13,9 @@
 全文状态：**PDF全文已下载**  
 本地版本：出版社/正式论文集PDF
 
-[打开本地全文](<D:/PhD_Research/Parallel Universe/Literature_Library/03_提问框架与来源框架/F03_2025_Echoes of Agreement Argument Driven Sycophancy in Large Language models.pdf>)
+[打开本地全文](<F03_2025_Echoes of Agreement Argument Driven Sycophancy in Large Language models.pdf>)
 
-[检索用纯文本](<D:/PhD_Research/Parallel Universe/Literature_Library/03_提问框架与来源框架/F03_2025_Echoes of Agreement Argument Driven Sycophancy in Large Language models.txt>)
+[检索用纯文本](<F03_2025_Echoes of Agreement Argument Driven Sycophancy in Large Language models.txt>)
 
 ## 来源
 

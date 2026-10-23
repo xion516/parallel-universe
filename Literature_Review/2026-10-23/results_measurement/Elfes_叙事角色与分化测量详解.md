@@ -107,7 +107,7 @@ O=1表示两组的核心叙事分布相同；O=0表示没有共享的类别概�
 ## 来源
 
 - [论文v2，重点§2、§3.1–3.2、§5.3–5.6、Table 5](https://arxiv.org/html/2601.07398v2)
-- [本地论文PDF](<D:/PhD_Research/Parallel Universe/Literature_Library/06_跨模型与测量基础/M10_2026_Measuring narrative polarization in online discourse.pdf>)
+- [本地论文PDF](<../../../Literature_Library/06_跨模型与测量基础/M10_2026_Measuring narrative polarization in online discourse.pdf>)
 - [作者理论说明](https://jelfes.github.io/actantial/background/)
 - [作者验证案例与标签整理流程](https://jelfes.github.io/actantial/examples/case_study/)
 - [公开闭集评分提示](https://github.com/jelfes/actantial/blob/main/actantial/templates/DeepSeek-R1-Distill-Qwen-32B/prompt_closed.txt)

@@ -13,9 +13,9 @@
 全文状态：**PDF全文已下载**  
 本地版本：arXiv预印本；与正式发表版是否一致未逐字比对
 
-[打开本地全文](<D:/PhD_Research/Parallel Universe/Literature_Library/05_检索搜索与信息环境/R08_2025_News Source Citing Patterns in AI Search Systems.pdf>)
+[打开本地全文](<R08_2025_News Source Citing Patterns in AI Search Systems.pdf>)
 
-[检索用纯文本](<D:/PhD_Research/Parallel Universe/Literature_Library/05_检索搜索与信息环境/R08_2025_News Source Citing Patterns in AI Search Systems.txt>)
+[检索用纯文本](<R08_2025_News Source Citing Patterns in AI Search Systems.txt>)
 
 ## 来源
 

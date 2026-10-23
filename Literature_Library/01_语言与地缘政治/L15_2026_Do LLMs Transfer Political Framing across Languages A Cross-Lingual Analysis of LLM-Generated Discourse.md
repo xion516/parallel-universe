@@ -13,9 +13,9 @@
 全文状态：**PDF全文已下载**  
 本地版本：出版社/正式论文集PDF
 
-[打开本地全文](<D:/PhD_Research/Parallel Universe/Literature_Library/01_语言与地缘政治/L15_2026_Do LLMs Transfer Political Framing across Languages A Cross-Lingual Analysis of LLM-Generated Discourse.pdf>)
+[打开本地全文](<L15_2026_Do LLMs Transfer Political Framing across Languages A Cross-Lingual Analysis of LLM-Generated Discourse.pdf>)
 
-[检索用纯文本](<D:/PhD_Research/Parallel Universe/Literature_Library/01_语言与地缘政治/L15_2026_Do LLMs Transfer Political Framing across Languages A Cross-Lingual Analysis of LLM-Generated Discourse.txt>)
+[检索用纯文本](<L15_2026_Do LLMs Transfer Political Framing across Languages A Cross-Lingual Analysis of LLM-Generated Discourse.txt>)
 
 ## 来源
 

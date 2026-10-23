@@ -13,9 +13,9 @@
 全文状态：**PDF全文已下载**  
 本地版本：arXiv预印本；与正式发表版是否一致未逐字比对
 
-[打开本地全文](<D:/PhD_Research/Parallel Universe/Literature_Library/02_用户身份与隐含线索/I04_2026_Interaction Context Often Increases Sycophancy in LLMs.pdf>)
+[打开本地全文](<I04_2026_Interaction Context Often Increases Sycophancy in LLMs.pdf>)
 
-[检索用纯文本](<D:/PhD_Research/Parallel Universe/Literature_Library/02_用户身份与隐含线索/I04_2026_Interaction Context Often Increases Sycophancy in LLMs.txt>)
+[检索用纯文本](<I04_2026_Interaction Context Often Increases Sycophancy in LLMs.txt>)
 
 ## 来源
 

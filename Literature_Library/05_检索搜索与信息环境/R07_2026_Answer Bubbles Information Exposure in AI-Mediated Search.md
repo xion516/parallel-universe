@@ -13,9 +13,9 @@
 全文状态：**PDF全文已下载**  
 本地版本：arXiv预印本；与正式发表版是否一致未逐字比对
 
-[打开本地全文](<D:/PhD_Research/Parallel Universe/Literature_Library/05_检索搜索与信息环境/R07_2026_Answer Bubbles Information Exposure in AI-Mediated Search.pdf>)
+[打开本地全文](<R07_2026_Answer Bubbles Information Exposure in AI-Mediated Search.pdf>)
 
-[检索用纯文本](<D:/PhD_Research/Parallel Universe/Literature_Library/05_检索搜索与信息环境/R07_2026_Answer Bubbles Information Exposure in AI-Mediated Search.txt>)
+[检索用纯文本](<R07_2026_Answer Bubbles Information Exposure in AI-Mediated Search.txt>)
 
 ## 来源
 

@@ -13,9 +13,9 @@
 全文状态：**PDF全文已下载**  
 本地版本：出版社/正式论文集PDF
 
-[打开本地全文](<D:/PhD_Research/Parallel Universe/Literature_Library/05_检索搜索与信息环境/R05_2025_Does RAG Introduce Unfairness in LLMs Evaluating Fairness in Retrieval-Augmented Generation Systems.pdf>)
+[打开本地全文](<R05_2025_Does RAG Introduce Unfairness in LLMs Evaluating Fairness in Retrieval-Augmented Generation Systems.pdf>)
 
-[检索用纯文本](<D:/PhD_Research/Parallel Universe/Literature_Library/05_检索搜索与信息环境/R05_2025_Does RAG Introduce Unfairness in LLMs Evaluating Fairness in Retrieval-Augmented Generation Systems.txt>)
+[检索用纯文本](<R05_2025_Does RAG Introduce Unfairness in LLMs Evaluating Fairness in Retrieval-Augmented Generation Systems.txt>)
 
 ## 来源
 

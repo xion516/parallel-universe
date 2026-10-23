@@ -13,9 +13,9 @@
 全文状态：**PDF全文已下载**  
 本地版本：出版社/正式论文集PDF
 
-[打开本地全文](<D:/PhD_Research/Parallel Universe/Literature_Library/06_跨模型与测量基础/M07_2023_Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena.pdf>)
+[打开本地全文](<M07_2023_Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena.pdf>)
 
-[检索用纯文本](<D:/PhD_Research/Parallel Universe/Literature_Library/06_跨模型与测量基础/M07_2023_Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena.txt>)
+[检索用纯文本](<M07_2023_Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena.txt>)
 
 ## 来源
 

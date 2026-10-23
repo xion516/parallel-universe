@@ -13,9 +13,9 @@
 全文状态：**PDF全文已下载**  
 本地版本：出版社/正式论文集PDF
 
-[打开本地全文](<D:/PhD_Research/Parallel Universe/Literature_Library/06_跨模型与测量基础/M04_2023_Whose Opinions Do Language Models Reflect.pdf>)
+[打开本地全文](<M04_2023_Whose Opinions Do Language Models Reflect.pdf>)
 
-[检索用纯文本](<D:/PhD_Research/Parallel Universe/Literature_Library/06_跨模型与测量基础/M04_2023_Whose Opinions Do Language Models Reflect.txt>)
+[检索用纯文本](<M04_2023_Whose Opinions Do Language Models Reflect.txt>)
 
 ## 来源
 

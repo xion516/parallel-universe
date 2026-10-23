@@ -13,9 +13,9 @@
 全文状态：**PDF全文已下载**  
 本地版本：arXiv预印本；与正式发表版是否一致未逐字比对
 
-[打开本地全文](<D:/PhD_Research/Parallel Universe/Literature_Library/01_语言与地缘政治/L08_2026_Bilingual Bias in Large Language Models A Taiwan Sovereignty Benchmark Study.pdf>)
+[打开本地全文](<L08_2026_Bilingual Bias in Large Language Models A Taiwan Sovereignty Benchmark Study.pdf>)
 
-[检索用纯文本](<D:/PhD_Research/Parallel Universe/Literature_Library/01_语言与地缘政治/L08_2026_Bilingual Bias in Large Language Models A Taiwan Sovereignty Benchmark Study.txt>)
+[检索用纯文本](<L08_2026_Bilingual Bias in Large Language Models A Taiwan Sovereignty Benchmark Study.txt>)
 
 ## 来源
 

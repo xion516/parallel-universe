@@ -13,9 +13,9 @@
 全文状态：**PDF全文已下载**  
 本地版本：Wharton作者公开稿；正文注明 definitive version will be published in Science；含补充材料
 
-[打开本地全文](<D:/PhD_Research/Parallel Universe/Literature_Library/07_人类后果调解与资源冲突/H05_2024_Durably reducing conspiracy beliefs through dialogues with AI.pdf>)
+[打开本地全文](<H05_2024_Durably reducing conspiracy beliefs through dialogues with AI.pdf>)
 
-[检索用纯文本](<D:/PhD_Research/Parallel Universe/Literature_Library/07_人类后果调解与资源冲突/H05_2024_Durably reducing conspiracy beliefs through dialogues with AI.txt>)
+[检索用纯文本](<H05_2024_Durably reducing conspiracy beliefs through dialogues with AI.txt>)
 
 ## 来源
 

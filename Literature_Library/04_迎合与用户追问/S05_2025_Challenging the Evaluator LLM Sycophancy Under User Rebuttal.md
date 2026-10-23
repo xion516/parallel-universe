@@ -13,9 +13,9 @@
 全文状态：**PDF全文已下载**  
 本地版本：出版社/正式论文集PDF
 
-[打开本地全文](<D:/PhD_Research/Parallel Universe/Literature_Library/04_迎合与用户追问/S05_2025_Challenging the Evaluator LLM Sycophancy Under User Rebuttal.pdf>)
+[打开本地全文](<S05_2025_Challenging the Evaluator LLM Sycophancy Under User Rebuttal.pdf>)
 
-[检索用纯文本](<D:/PhD_Research/Parallel Universe/Literature_Library/04_迎合与用户追问/S05_2025_Challenging the Evaluator LLM Sycophancy Under User Rebuttal.txt>)
+[检索用纯文本](<S05_2025_Challenging the Evaluator LLM Sycophancy Under User Rebuttal.txt>)
 
 ## 来源
 

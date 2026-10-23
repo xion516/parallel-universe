@@ -13,9 +13,9 @@
 全文状态：**PDF全文已下载**  
 本地版本：出版社/正式论文集PDF
 
-[打开本地全文](<D:/PhD_Research/Parallel Universe/Literature_Library/07_人类后果调解与资源冲突/H02_2025_On the conversational persuasiveness of GPT-4.pdf>)
+[打开本地全文](<H02_2025_On the conversational persuasiveness of GPT-4.pdf>)
 
-[检索用纯文本](<D:/PhD_Research/Parallel Universe/Literature_Library/07_人类后果调解与资源冲突/H02_2025_On the conversational persuasiveness of GPT-4.txt>)
+[检索用纯文本](<H02_2025_On the conversational persuasiveness of GPT-4.txt>)
 
 ## 来源
 
