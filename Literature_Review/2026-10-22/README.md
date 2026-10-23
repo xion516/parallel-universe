@@ -24,24 +24,33 @@
 
 **不能把“有先例”等同于“结果必然重复”。** Weeber等在五种西方语言中发现的政治意见差异有限；GlobalOpinionQA也不支持“把问题翻成某语言就必然更接近该语言群体意见”的简单推断。这些趋同或不符合预期的结果应进入文献综述和预注册。[L10](https://aclanthology.org/2026.eacl-long.14/) [L13](https://openreview.net/forum?id=zl16jLb91v)
 
-## 2. 最接近的研究，需要逐项比对
+## 2. 最接近的研究：按设计维度比较作者、出处与研究内容
 
-下表的“未涉及/未见”只按本轮核验范围判断；摘要未提到某维度，不构成该研究完全没有该设计的证据。
+下表以本项目的五个维度为入口，整合作者、发表领域、研究内容及需要逐项比较的边界。**正式发表、预印本和工作论文分别标明；摘要没有提及某维度，不等于全文没有研究它。** 本节采用2026-10-23增强版表格，不改变前期80条目录的计数。
 
-| 工作 | 领域/状态 | 已核实的交集 | 尚需与本项目区别的部分 |
+| 对应维度 | 作者、年份与领域／出处 | 已经研究了什么 | 与本项目的比对点 |
 |---|---|---|---|
-| Li、Haider、Callison-Burch，BorderLines（2024） | NLP；NAACL正式论文 | 251个领土争议、49种语言、模型立场与角色提示 | 主要是领土归属任务；民族主义者/维和者是模型扮演的角色，不是用户自报身份。[L01](https://aclanthology.org/2024.naacl-long.213/) |
-| Li等，BordIRLines（2025） | 跨语言信息检索；Findings ACL | 同一领土争议在不同提问/检索语言条件下的稳健性与偏向 | Wikipedia文档检索与真实产品开放网页搜索不同；但“语言×联网×冲突”的概念不能再声称没有先例。[L02](https://aclanthology.org/2025.findings-acl.219/) |
-| Helwe、Balalau、Ceolin（2025） | 多语言政治评测；Findings ACL | 15个模型、50种国家身份、语言与政治量表 | 身份赋予模型；不等于“用户是某国人”。[L04](https://aclanthology.org/2025.findings-acl.883/) |
-| Germani、Spitale（2025） | 科学传播/AI偏向；Science Advances | 相同材料、来源国籍披露或错误归属、涉台/俄乌/加沙等争议材料 | 操纵材料作者的身份；不是用户身份，也不是输入语言效应。[F01](https://doi.org/10.1126/sciadv.adz2924) |
-| Abboud等，Poli-Bias（2026） | 国际政治冲突审计；预印本 | 13个模型、冲突方置换、用户国籍条件、多维偏向指标 | 正文明确限于英语、单轮；这些是可核实的边界，而非猜测其未做的内容。[F02](https://arxiv.org/abs/2608.06123) |
-| Bisbee、Clinton、Larson、Lee，AI Pandering（2026） | 政治学；工作论文/预印本 | 不直接贴党派标签的用户画像、对话、事实确信、来源推荐与分化的政治现实 | 理论叙事高度接近；本轮方法片段未显示跨语言国际冲突的系统比较。[F07](https://www.jamesbisbee.com/assets/pdf/ai_pandering_2_25_2026.pdf) |
-| Chupilkin（2026） | 多语言地缘政治；预印本 | 112种语言、俄乌战争20条陈述、3个模型 | 规模与俄乌场景均已覆盖；需比较叙事结构与交互条件是否带来新解释。[L06](https://arxiv.org/abs/2609.20005) |
-| Smirnov（2026） | 政治话语分析；预印本v6 | 同一乌克兰公民社会材料，在俄语/乌语提问下出现不同意识形态解读 | 接近“事实材料相同、叙事不同”；须精读其编码规则后再主张测量创新。[L07](https://arxiv.org/abs/2601.12164) |
-| Soares等（2026） | 计算社会科学；Scientific Reports | 巴西政治、用户左/右身份、成对陈述、21个模型 | 用户身份的政治迎合已发表；国际冲突和语言的交互是可能扩展，而非身份主效应的首次发现。[I02](https://www.nature.com/articles/s41598-026-52105-6) |
-| Jain等（2026） | 人机交互；CHI | 真实交互上下文、记忆、推断用户政治立场与视角迎合 | 需要区别明确立场陈述与间接身份线索。[I04](https://doi.org/10.1145/3772318.3791915) |
-| Awwad等（2026） | 政治NLP；工作坊正式论文 | 英语/阿拉伯语、移民、框架漂移、词汇/统计/定性三类分析 | 不是双方国际冲突；但“多语言+框架+混合测量”已有先例。[L15](https://aclanthology.org/2026.politicalnlp-1.23/) |
-| Huang等，Answer Bubbles（2026） | 搜索/信息接触；预印本 | 同题跨AI搜索与传统搜索、来源、摘要表达及保真差异 | 结果层面的不同信息环境已有直接命名；本项目需交代“parallel universes”的额外定义。[R07](https://arxiv.org/abs/2603.16138) |
+| H1：语言 × 领土争议 | Bryan Li、Samar Haider、Chris Callison-Burch；NLP，**NAACL 2024** | [BorderLines／L01](https://aclanthology.org/2024.naacl-long.213/)：251个领土争议、49种语言，比较地缘政治偏向及角色提示。 | 多语言冲突审计已有直接先例；民族主义者／维和者是模型角色，不是用户自报身份。 |
+| H1：双语政治不一致 | Di Zhou、Yinxian Zhang；计算社会科学，**Scientific Reports 2024** | [L03](https://www.nature.com/articles/s41598-024-76395-w)：比较GPT在中英文条件下对美国、中国政治问题的偏向与不一致。 | 需比较题型、内容兼容阈值及叙事编码，不能仅以双语回答不同建立创新。 |
+| H1 × 国家角色 | Chadi Helwe、Oana Balalau、Davide Ceolin；多语言政治评测，**Findings of ACL 2025** | [L04](https://aclanthology.org/2025.findings-acl.883/)：15个模型、50种国家身份，结合语言、国家角色和政治量表。 | 身份赋予模型；应与“用户是哪国人”的H2分开。 |
+| H1：俄乌 × 多语言 | Maxim Chupilkin；多语言地缘政治，**2026预印本** | [L06](https://arxiv.org/abs/2609.20005)：112种语言、俄乌战争20条陈述、3个模型。 | 俄乌跨语言审计和语言覆盖规模已有近邻；需明确新增的关系或解释。 |
+| H1 × 叙事：同一材料 | Oleg Smirnov；政治话语分析，**2026预印本v6** | [L07](https://arxiv.org/abs/2601.12164)：同一乌克兰公民社会材料在俄语／乌语提问下产生不同意识形态解读。 | 共享事实上的相反解释已是其分析起点；需比较稳定性、框架接受／抵抗及条件边界。 |
+| H1 × H3：语言与政治框架 | Nooredeen Awwad、Ebtihal Ismail Enfes、Kolawole John Adebayo；政治NLP，**PoliticalNLP 2026正式工作坊论文** | [L15](https://aclanthology.org/2026.politicalnlp-1.23/)：英语／阿拉伯语移民议题，结合词汇、统计和定性分析研究框架漂移。 | 不是双方国际冲突；摘要与正文表格的方向概括不一致，引用结果须按[专题核验](framing_deep_dive/verification_notes.md)核对。 |
+| H1 × H3：历史责任叙事 | Christos Papaioannou；AI伦理与历史叙事，**AI and Ethics 2026** | [L14](https://link.springer.com/article/10.1007/s43681-026-01138-8)：希腊语／英语对小亚细亚历史的术语、情绪和责任归属。 | 并非希腊语／土耳其语双方语言完整对照，但责任与视角遗漏已有质性先例。 |
+| H2：用户身份 × 政治迎合 | Anderson Luis Bento Soares等；计算社会科学，**Scientific Reports 2026** | [I02](https://www.nature.com/articles/s41598-026-52105-6)：巴西政治、用户左／右身份、成对陈述、21个模型。 | 用户身份诱发政治迎合已发表；需解释国际冲突与语言交互新增了什么。 |
+| H2：隐含身份 × 审计结果 | Petter Törnberg、Michelle Schimmel；计算政治学，**2026预印本** | [I01](https://arxiv.org/abs/2604.27633)：政治偏向审计可能捕捉模型对推断出的审计者身份的迎合。 | 无身份提示不等于模型没有推断身份；明确国籍、政治立场和隐含线索需区分。 |
+| H2：互动上下文 × 迎合 | Shomik Jain、Charlotte Park、Matt Viana、Ashia Wilson、Dana Calacci；人机交互，**CHI 2026** | [I04](https://doi.org/10.1145/3772318.3791915)：真实互动上下文、记忆及推断用户政治立场与视角迎合。 | 身份线索的现实上下文已有研究；需区分赞同表达与观点本身的移动。 |
+| H3：来源框架 × 冲突评价 | Federico Germani、Giovanni Spitale；科学传播／AI偏向，**Science Advances 2025** | [F01](https://doi.org/10.1126/sciadv.adz2924)：相同材料在来源国籍披露或错误归属后，评价发生变化。 | 操纵的是材料作者身份，区别于用户身份、提问语言及立场措辞。 |
+| H2 × 国际冲突 | Massi-Nissa Abboud等；国际政治冲突审计，**Poli-Bias，2026预印本** | [F02](https://arxiv.org/abs/2608.06123)：13个模型，涵盖俄乌、巴以、印巴等冲突，包含用户国籍和多维偏向指标。 | 与项目高度重合；原文明示英语、单轮，这些是已核实的设计边界。 |
+| H4：语言 × 检索 × 冲突 | Bryan Li等；跨语言信息检索，**Findings of ACL 2025** | [BordIRLines／L02](https://aclanthology.org/2025.findings-acl.219/)：比较不同提问／检索语言组成下的稳健性与地缘政治偏向。 | 已有直接组合先例；其Wikipedia文档检索与产品开放网页搜索需区分，一致性也不等于公正。 |
+| H4：AI搜索 × 回音室 | Nikhil Sharma、Q. Vera Liao、Ziang Xiao；人机交互／信息搜寻，**CHI 2024** | [R01](https://doi.org/10.1145/3613904.3642459)：研究LLM搜索系统如何影响用户接触不同立场的信息。 | 主要结果涉及人类信息搜寻；本项目的模型输出不能直接替代人类后果。 |
+| H4：AI搜索 × 信息环境 | Michelle Huang、Agam Goyal、Koustuv Saha、Eshwar Chandrasekharan；搜索／信息接触，**Answer Bubbles，2026预印本** | [R07](https://arxiv.org/abs/2603.16138)：同题跨AI搜索与传统搜索，比较来源、摘要表达及保真。 | 不同信息环境已有直接命名；需明确“parallel universes”具体指什么。 |
+| H5：一次反驳 × 迎合 | Sungwon Kim、Daniel Khashabi；NLP／模型对齐，**Findings of EMNLP 2025** | [S05](https://aclanthology.org/2025.findings-emnlp.1222/)：用户反驳条件下的迎合。 | 一次反驳是近邻方法先例；需比较追问形式、新证据与向冲突哪一方移动。 |
+| H5：多轮对话 × 立场转移 | Jiseung Hong、Grace Byun、Seungone Kim、Kai Shu；NLP／模型对齐，**Findings of EMNLP 2025** | [S06](https://aclanthology.org/2025.findings-emnlp.121/)：测量对话压力下的迎合与立场移动。 | 可借鉴移动方向和持续压力指标；一次追问不能代表长期对话轨迹。 |
+| H1 × H5：语言与迎合 | Bayan Abdullah Aldahlawi、A. B. M. Ashikur Rahman、Irfan Ahmad；多语言对齐，**2026预印本** | [S07](https://arxiv.org/abs/2603.27664)：考察不同语言对迎合行为的影响。 | “语言＋迎合”组合已有直接研究，需进一步定位冲突叙事中的条件化变化。 |
+| 对话 × 分化的政治现实 | James Bisbee、Joshua D. Clinton、Jennifer M. Larson、Diana Da In Lee；政治学，**AI Pandering，2026工作论文／预印本** | [F07](https://www.jamesbisbee.com/assets/pdf/ai_pandering_2_25_2026.pdf)：用户画像、对话、认同、来源推荐与事实确信共同构造不同政治现实。 | 理论叙事尤其接近；来源与确信分化不自动等于编造两套虚假事实，且其目标导向多轮设计不同于一次pushback。 |
+
+本表用于定位交集，不将相邻构念合并成同一个效应：模型角色、用户身份、材料作者身份分别比较；词汇／框架差异、事实矛盾及人类极化分别取证。正文层面的进一步判断见[Framing专题](framing_deep_dive/README.md)与[Results及不一致测量](../2026-10-23/results_measurement/README.md)。
 
 ## 3. 已发表在哪些领域，哪些作者群值得持续跟踪
 
