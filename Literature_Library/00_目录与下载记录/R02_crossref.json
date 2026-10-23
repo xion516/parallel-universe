@@ -1,0 +1,483 @@
+{
+  "indexed": {
+    "date-parts": [
+      [
+        2026,
+        7,
+        15
+      ]
+    ],
+    "date-time": "2026-07-15T18:07:47Z",
+    "timestamp": 1784138867210,
+    "version": "3.55.0"
+  },
+  "publisher-location": "New York, NY, USA",
+  "reference-count": 45,
+  "publisher": "ACM",
+  "license": [
+    {
+      "start": {
+        "date-parts": [
+          [
+            2026,
+            7,
+            19
+          ]
+        ],
+        "date-time": "2026-07-19T00:00:00Z",
+        "timestamp": 1784419200000
+      },
+      "content-version": "vor",
+      "delay-in-days": 0,
+      "URL": "https://creativecommons.org/licenses/by/4.0/legalcode"
+    }
+  ],
+  "funder": [
+    {
+      "name": "National Research Foundation of Korea &#x28;NRF&#x29;",
+      "award": [
+        "RS-2025-00521452"
+      ],
+      "award-info": [
+        {
+          "award-number": [
+            "RS-2025-00521452"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "National Research Foundation of Korea&#x28;NRF&#x29;",
+      "award": [
+        "RS-2025-15002982"
+      ],
+      "award-info": [
+        {
+          "award-number": [
+            "RS-2025-15002982"
+          ]
+        }
+      ]
+    }
+  ],
+  "content-domain": {
+    "domain": [
+      "dl.acm.org"
+    ],
+    "crossmark-restriction": true
+  },
+  "short-container-title": [],
+  "published-print": {
+    "date-parts": [
+      [
+        2026,
+        7,
+        20
+      ]
+    ]
+  },
+  "DOI": "10.1145/3805712.3809651",
+  "type": "proceedings-article",
+  "created": {
+    "date-parts": [
+      [
+        2026,
+        7,
+        15
+      ]
+    ],
+    "date-time": "2026-07-15T17:06:26Z",
+    "timestamp": 1784135186000
+  },
+  "page": "2242-2252",
+  "update-policy": "https://doi.org/10.1145/crossmark-policy",
+  "source": "Crossref",
+  "is-referenced-by-count": 0,
+  "title": [
+    "FAIR-RAG: An End-to-End Framework for Mitigating Political Bias through Fair Retrieval-Augmented Generation"
+  ],
+  "prefix": "10.1145",
+  "author": [
+    {
+      "ORCID": "https://orcid.org/0009-0003-9539-1875",
+      "authenticated-orcid": false,
+      "given": "Jaebeom",
+      "family": "You",
+      "sequence": "first",
+      "affiliation": [
+        {
+          "name": "Graduate School of Data Science, Seoul National University of Science and Technology, Seoul, Nowon-gu, Republic of Korea"
+        }
+      ],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "ORCID": "https://orcid.org/0000-0003-4367-4374",
+      "authenticated-orcid": false,
+      "given": "Kisung",
+      "family": "Lee",
+      "sequence": "additional",
+      "affiliation": [
+        {
+          "name": "Division of Computer Science, Louisiana State University, Baton Rouge, LA, USA"
+        }
+      ],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "ORCID": "https://orcid.org/0000-0002-1125-6533",
+      "authenticated-orcid": false,
+      "given": "Hyuk-Yoon",
+      "family": "Kwon",
+      "sequence": "additional",
+      "affiliation": [
+        {
+          "name": "Graduate School of Data Science, Seoul National University of Science and Technology, Seoul, Nowon-gu, Republic of Korea"
+        }
+      ],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    }
+  ],
+  "member": "320",
+  "published-online": {
+    "date-parts": [
+      [
+        2026,
+        7,
+        19
+      ]
+    ]
+  },
+  "reference": [
+    {
+      "key": "e_1_3_2_1_1_1",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1108/OIR-02-2023-0084"
+    },
+    {
+      "key": "e_1_3_2_1_2_1",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1007/s10791-018-9341-2"
+    },
+    {
+      "key": "e_1_3_2_1_3_1",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.18653/v1/2023.acl-long.656"
+    },
+    {
+      "key": "e_1_3_2_1_4_1",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1371/journal.pone.0306621"
+    },
+    {
+      "key": "e_1_3_2_1_5_1",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1007/s42001-025-00376-w"
+    },
+    {
+      "key": "e_1_3_2_1_6_1",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.18653/v1/2024.emnlp-main.952"
+    },
+    {
+      "key": "e_1_3_2_1_7_1",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1162/tacl_a_00710"
+    },
+    {
+      "key": "e_1_3_2_1_8_1",
+      "first-page": "10021",
+      "volume-title": "Owen Rambow, Leo Wanner, Marianna Apidianaki, Hend Al-Khalifa",
+      "author": "Wu Xuyang",
+      "year": "2025",
+      "unstructured": "Xuyang Wu, Shuowei Li, Hsin-Tai Wu, Zhiqiang Tao, and Yi Fang. Does RAG introduce unfairness in LLMs? evaluating fairness in retrieval-augmented generation systems. In Owen Rambow, Leo Wanner, Marianna Apidianaki, Hend Al-Khalifa, Barbara Di Eugenio, and Steven Schockaert, editors, Proceedings of the 31st International Conference on Computational Linguistics, pages 10021-10036, Abu Dhabi, UAE, January 2025. Association for Computational Linguistics."
+    },
+    {
+      "key": "e_1_3_2_1_9_1",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.18653/v1/2025.findings-emnlp.984"
+    },
+    {
+      "key": "e_1_3_2_1_10_1",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.18653/v1/2025.acl-long.328"
+    },
+    {
+      "key": "e_1_3_2_1_11_1",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1057/s41599-024-03609-x"
+    },
+    {
+      "key": "e_1_3_2_1_12_1",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.18653/v1/2025.findings-acl.974"
+    },
+    {
+      "key": "e_1_3_2_1_13_1",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1145/3746252.3761361"
+    },
+    {
+      "key": "e_1_3_2_1_14_1",
+      "volume-title": "The Structural Transformation of the Public Sphere: An Inquiry into a Category of Bourgeois Society",
+      "author": "Habermas Jürgen",
+      "year": "1991",
+      "unstructured": "Jürgen Habermas. The Structural Transformation of the Public Sphere: An Inquiry into a Category of Bourgeois Society. MIT Press, 1991."
+    },
+    {
+      "key": "e_1_3_2_1_15_1",
+      "first-page": "31",
+      "volume-title": "Proceedings of the 10th international workshop on semantic evaluation (SemEval-2016)",
+      "author": "Mohammad Saif",
+      "year": "2016",
+      "unstructured": "Saif Mohammad, Svetlana Kiritchenko, Parinaz Sobhani, Xiaodan Zhu, and Colin Cherry. Semeval-2016 task 6: Detecting stance in tweets. In Proceedings of the 10th international workshop on semantic evaluation (SemEval-2016), pages 31-41, 2016."
+    },
+    {
+      "key": "e_1_3_2_1_16_1",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1609/icwsm.v18i1.31360"
+    },
+    {
+      "key": "e_1_3_2_1_17_1",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.18653/v1/2022.findings-naacl.94"
+    },
+    {
+      "key": "e_1_3_2_1_18_1",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.18653/v1/2020.emnlp-main.717"
+    },
+    {
+      "key": "e_1_3_2_1_19_1",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.18653/v1/2020.acl-main.485"
+    },
+    {
+      "key": "e_1_3_2_1_20_1",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1145/3442188.3445922"
+    },
+    {
+      "key": "e_1_3_2_1_21_1",
+      "volume-title": "Language models are few-shot learners. Advances in neural information processing systems, 33:1877-1901",
+      "author": "Brown Tom",
+      "year": "2020",
+      "unstructured": "Tom Brown, Benjamin Mann, Nick Ryder, Melanie Subbiah, Jared D Kaplan, Prafulla Dhariwal, Arvind Neelakantan, Pranav Shyam, Girish Sastry, Amanda Askell, et al. Language models are few-shot learners. Advances in neural information processing systems, 33:1877-1901, 2020."
+    },
+    {
+      "key": "e_1_3_2_1_22_1",
+      "volume-title": "Bias amplification in rag: Poisoning knowledge retrieval to steer llms. arXiv preprint arXiv:2506.11415",
+      "author": "Wang Linlin",
+      "year": "2025",
+      "unstructured": "Linlin Wang, Tianqing Zhu, Laiqiao Qin, Longxiang Gao, and Wanlei Zhou. Bias amplification in rag: Poisoning knowledge retrieval to steer llms. arXiv preprint arXiv:2506.11415, 2025."
+    },
+    {
+      "key": "e_1_3_2_1_23_1",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.18653/v1/2025.emnlp-main.804"
+    },
+    {
+      "key": "e_1_3_2_1_24_1",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.18653/v1/2025.emnlp-main.1738"
+    },
+    {
+      "key": "e_1_3_2_1_25_1",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1145/3731120.3744599"
+    },
+    {
+      "key": "e_1_3_2_1_26_1",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.18653/v1/2021.emnlp-main.98"
+    },
+    {
+      "key": "e_1_3_2_1_27_1",
+      "volume-title": "Patchwork: A unified framework for rag serving. arXiv preprint arXiv:2505.07833",
+      "author": "Hu Bodun",
+      "year": "2025",
+      "unstructured": "Bodun Hu, Luis Pabon, Saurabh Agarwal, and Aditya Akella. Patchwork: A unified framework for rag serving. arXiv preprint arXiv:2505.07833, 2025."
+    },
+    {
+      "key": "e_1_3_2_1_28_1",
+      "volume-title": "Charles LA Clarke, and Amira Ghenai. Evaluating the robustness of retrieval-augmented generation to adversarial evidence in the health domain. arXiv preprint arXiv:2509.03787",
+      "author": "Amirshahi Shakiba",
+      "year": "2025",
+      "unstructured": "Shakiba Amirshahi, Amin Bigdeli, Charles LA Clarke, and Amira Ghenai. Evaluating the robustness of retrieval-augmented generation to adversarial evidence in the health domain. arXiv preprint arXiv:2509.03787, 2025."
+    },
+    {
+      "key": "e_1_3_2_1_29_1",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1145/3726302.3731934"
+    },
+    {
+      "key": "e_1_3_2_1_30_1",
+      "volume-title": "Political typology quiz. https://www.pewresearch.org/politics/quiz/political-typology",
+      "author": "Pew Research Center",
+      "year": "2021",
+      "unstructured": "Pew Research Center. Political typology quiz. https://www.pewresearch.org/politics/quiz/political-typology, 2021. Accessed: 2026-01-20."
+    },
+    {
+      "key": "e_1_3_2_1_31_1",
+      "unstructured": "The Political Compass. The political compass. https://www.politicalcompass.org/ n.d. Accessed: 2026-01-20."
+    },
+    {
+      "key": "e_1_3_2_1_32_1",
+      "volume-title": "Update: Partisan gaps expand on government power, climate. https://news.gallup.com/poll/509129/update-partisan-gaps-expand-government-power-climate.aspx",
+      "year": "2023",
+      "unstructured": "Gallup. Update: Partisan gaps expand on government power, climate. https://news.gallup.com/poll/509129/update-partisan-gaps-expand-government-power-climate.aspx, 2023. Accessed: 2026-01-20."
+    },
+    {
+      "key": "e_1_3_2_1_33_1",
+      "unstructured": "Pew Research Center. 4. race immigration same-sex marriage abortion global warming gun policy marijuana legalization. https://www.pewresearch.org/politics/2018/03/01/4-race-immigration-same-sex-marriage-abortion-global-warming-gun-policy-marijuana-legalization 2018. Accessed: 2026-01-20."
+    },
+    {
+      "key": "e_1_3_2_1_34_1",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.18653/v1/D19-1404"
+    },
+    {
+      "key": "e_1_3_2_1_35_1",
+      "volume-title": "A comparison of the two one-sided tests procedure and the power approach for assessing the equivalence of average bioavailability. Journal of pharmacokinetics and biopharmaceutics, 15(6):657-680",
+      "author": "Schuirmann Donald J",
+      "year": "1987",
+      "unstructured": "Donald J Schuirmann. A comparison of the two one-sided tests procedure and the power approach for assessing the equivalence of average bioavailability. Journal of pharmacokinetics and biopharmaceutics, 15(6):657-680, 1987."
+    },
+    {
+      "key": "e_1_3_2_1_36_1",
+      "volume-title": "Controlling the false discovery rate: a practical and powerful approach to multiple testing. Journal of the Royal statistical society: series B (Methodological), 57(1):289-300",
+      "author": "Benjamini Yoav",
+      "year": "1995",
+      "unstructured": "Yoav Benjamini and Yosef Hochberg. Controlling the false discovery rate: a practical and powerful approach to multiple testing. Journal of the Royal statistical society: series B (Methodological), 57(1):289-300, 1995."
+    },
+    {
+      "key": "e_1_3_2_1_37_1",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.4324/9780203771587"
+    },
+    {
+      "key": "e_1_3_2_1_38_1",
+      "volume-title": "Multilingual e5 text embeddings: A technical report. arXiv preprint arXiv:2402.05672",
+      "author": "Wang Liang",
+      "year": "2024",
+      "unstructured": "Liang Wang, Nan Yang, Xiaolong Huang, Linjun Yang, Rangan Majumder, and Furu Wei. Multilingual e5 text embeddings: A technical report. arXiv preprint arXiv:2402.05672, 2024."
+    },
+    {
+      "key": "e_1_3_2_1_39_1",
+      "unstructured": "Chroma. Chroma. https://www.trychroma.com/ n.d. Accessed: 2026-01-20."
+    },
+    {
+      "key": "e_1_3_2_1_40_1",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1609/icwsm.v14i1.7362"
+    },
+    {
+      "key": "e_1_3_2_1_41_1",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1145/3773966.3777984"
+    },
+    {
+      "key": "e_1_3_2_1_42_1",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.18653/v1/2021.findings-emnlp.101"
+    },
+    {
+      "key": "e_1_3_2_1_43_1",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1145/3773966.3777990"
+    },
+    {
+      "key": "e_1_3_2_1_44_1",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.18653/v1/2024.eacl-demo.16"
+    },
+    {
+      "key": "e_1_3_2_1_45_1",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1145/3308560.3317595"
+    }
+  ],
+  "event": {
+    "name": "SIGIR '26: The 49th International ACM SIGIR Conference on Research and Development in Information Retrieval",
+    "location": "Melbourne VIC Australia",
+    "sponsor": [
+      "SIGIR ACM Special Interest Group on Information Retrieval"
+    ]
+  },
+  "container-title": [
+    "Proceedings of the 49th International ACM SIGIR Conference on Research and Development in Information Retrieval"
+  ],
+  "original-title": [],
+  "deposited": {
+    "date-parts": [
+      [
+        2026,
+        7,
+        15
+      ]
+    ],
+    "date-time": "2026-07-15T17:27:35Z",
+    "timestamp": 1784136455000
+  },
+  "score": 1,
+  "resource": {
+    "primary": {
+      "URL": "https://dl.acm.org/doi/10.1145/3805712.3809651"
+    }
+  },
+  "subtitle": [],
+  "short-title": [],
+  "issued": {
+    "date-parts": [
+      [
+        2026,
+        7,
+        19
+      ]
+    ]
+  },
+  "references-count": 45,
+  "alternative-id": [
+    "10.1145/3805712.3809651",
+    "10.1145/3805712"
+  ],
+  "URL": "https://doi.org/10.1145/3805712.3809651",
+  "relation": {},
+  "subject": [],
+  "published": {
+    "date-parts": [
+      [
+        2026,
+        7,
+        19
+      ]
+    ]
+  },
+  "assertion": [
+    {
+      "value": "2026-07-19",
+      "order": 3,
+      "name": "published",
+      "label": "Published",
+      "group": {
+        "name": "publication_history",
+        "label": "Publication History"
+      }
+    }
+  ]
+}

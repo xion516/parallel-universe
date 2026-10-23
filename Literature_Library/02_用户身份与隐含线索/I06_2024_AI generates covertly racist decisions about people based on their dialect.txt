@@ -1,0 +1,1376 @@
+本文件为PDF自动提取文本，仅供检索；排版、图表和页码请以PDF为准。
+AI generates covertly racist decisions about people based on their dialect
+
+Article
+
+AI generates covertly racist decisions about
+people based on their dialect
+
+https://doi.org/10.1038/s41586-024-07856-5                       Valentin Hofmann1,2,3 ✉, Pratyusha Ria Kalluri4, Dan Jurafsky4 & Sharese King5 ✉
+
+Received: 8 February 2024
+
+Accepted: 19 July 2024                                           Hundreds of millions of people now interact with language models, with uses
+Published online: 28 August 2024                                 ranging from help with writing1,2 to informing hiring decisions3. However, these
+                                                                 language models are known to perpetuate systematic racial prejudices, making their
+Open access
+                                                                 judgements biased in problematic ways about groups such as African Americans4–7.
+    Check for updates                                            Although previous research has focused on overt racism in language models, social
+                                                                 scientists have argued that racism with a more subtle character has developed over
+                                                                 time, particularly in the United States after the civil rights movement8,9. It is unknown
+                                                                 whether this covert racism manifests in language models. Here, we demonstrate that
+                                                                 language models embody covert racism in the form of dialect prejudice, exhibiting
+                                                                 raciolinguistic stereotypes about speakers of African American English (AAE)
+                                                                 that are more negative than any human stereotypes about African Americans ever
+                                                                 experimentally recorded. By contrast, the language models’ overt stereotypes about
+                                                                 African Americans are more positive. Dialect prejudice has the potential for harmful
+                                                                 consequences: language models are more likely to suggest that speakers of AAE be
+                                                                 assigned less-prestigious jobs, be convicted of crimes and be sentenced to death.
+                                                                 Finally, we show that current practices of alleviating racial bias in language models,
+                                                                 such as human preference alignment, exacerbate the discrepancy between covert
+                                                                 and overt stereotypes, by superficially obscuring the racism that language models
+                                                                 maintain on a deeper level. Our findings have far-reaching implications for the fair
+                                                                 and safe use of language technology.
+
+
+Language models are a type of artificial intelligence (AI) that has been                             Here, we show that language models perpetuate this covert racism to
+trained to process and generate text. They are becoming increasingly                              a previously unrecognized extent, with measurable effects on their deci-
+widespread across various applications, ranging from assisting teach-                             sions. We investigate covert racism through dialect prejudice against
+ers in the creation of lesson plans10 to answering questions about tax                            speakers of AAE, a dialect associated with the descendants of enslaved
+law11 and predicting how likely patients are to die in hospital before                            African Americans in the United States22. We focus on the most stigma-
+discharge12. As the stakes of the decisions entrusted to language mod-                            tized canonical features of the dialect shared among Black speakers in
+els rise, so does the concern that they mirror or even amplify human                              cities including New York City, Detroit, Washington DC, Los Angeles
+biases encoded in the data they were trained on, thereby perpetuating                             and East Palo Alto23. This cross-regional definition means that dialect
+discrimination against racialized, gendered and other minoritized                                 prejudice in language models is likely to affect many African Americans.
+social groups4–6,13–20.                                                                              Dialect prejudice is fundamentally different from the racial bias
+   Previous AI research has revealed bias against racialized groups                               studied so far in language models because the race of speakers is
+but focused on overt instances of racism, naming racialized groups                                never made overt. In fact we observed a discrepancy between what
+and mapping them to their respective stereotypes, for example by                                  language models overtly say about African Americans and what they
+asking language models to generate a description of a member of a                                 covertly associate with them as revealed by their dialect prejudice. This
+certain group and analysing the stereotypes it contains7,21. But social                           discrepancy is particularly pronounced for language models trained
+scientists have argued that, unlike the racism associated with the Jim                            with human feedback (HF), such as GPT4: our results indicate that HF
+Crow era, which included overt behaviours such as name calling or                                 training obscures the racism on the surface, but the racial stereotypes
+more brutal acts of violence such as lynching, a ‘new racism’ happens                             remain unaffected on a deeper level. We propose using a new method,
+in the present-day United States in more subtle ways that rely on a                               which we call matched guise probing, that makes it possible to recover
+‘colour-blind’ racist ideology8,9. That is, one can avoid mentioning                              these masked stereotypes.
+race by claiming not to see colour or to ignore race but still hold nega-                            The possibility that language models are covertly prejudiced against
+tive beliefs about racialized people. Importantly, such a framework                               speakers of AAE connects to known human prejudices: speakers of AAE
+emphasizes the avoidance of racial terminology but maintains racial                               are known to experience racial discrimination in a wide range of con-
+inequities through covert racial discourses and practices8.                                       texts, including education, employment, housing and legal outcomes.
+
+Allen Institute for AI, Seattle, WA, USA. 2University of Oxford, Oxford, UK. 3LMU Munich, Munich, Germany. 4Stanford University, Stanford, CA, USA. 5The University of Chicago, Chicago, IL, USA.
+1
+
+✉e-mail: valentinh@allenai.org; sharesek@uchicago.edu
+
+
+
+                                                                                                                                     Nature | Vol 633 | 5 September 2024 | 147
+Article
+                            a                                 b                         c                      d
+                                                                                                                      brilliant
+                                I am so happy when I wake                                                                 dirty
+                                   up from a bad dream        A person who says    is                              intelligent
+                                 because they feel too real                                                                lazy
+                                                                                                                       stupid
+
+
+                                                                                                                      brilliant
+                                I be so happy when I wake                                                                 dirty
+                                 up from a bad dream cus      A person who says    is                              intelligent
+                                   they be feelin too real                                                                 lazy
+                                                                                                                       stupid
+
+
+Fig. 1 | Probing AI dialect prejudice. a, We used texts in SAE (green) and AAE    for properties of the speakers who uttered the texts. c, We separately fed the
+(blue). In the meaning-matched setting (illustrated here), the texts have the     prompts with the SAE and AAE texts into the language models. d, We retrieved
+same meaning, whereas they have different meanings in the non-meaning-            and compared the predictions for the SAE and AAE inputs, here illustrated by
+matched setting. b, We embedded the SAE and AAE texts in prompts that asked       five adjectives from the Princeton Trilogy. See Methods for more details.
+
+
+
+For example, researchers have previously found that landlords engage              racial identity, we took inspiration from the ‘matched guise’ technique
+in housing discrimination based solely on the auditory profiles of speak-         used in sociolinguistics, in which subjects listen to recordings of speak-
+ers, with voices that sounded Black or Chicano being less likely to secure        ers of two languages or dialects and make judgements about various
+housing appointments in predominantly white locales than in mostly                traits of those speakers36,37. Applying the matched guise technique to the
+Black or Mexican American areas24,25. Furthermore, in an experiment               AAE–SAE contrast, researchers have shown that people identify spea­
+examining the perception of a Black speaker when providing an alibi26,            kers of AAE as Black with above-chance accuracy24,26,38 and attach racial
+the speaker was interpreted as more criminal, more working class, less            stereotypes to them, even without prior knowledge of their race39–43.
+educated, less comprehensible and less trustworthy when they used                 These associations represent raciolinguistic ideologies, demonstrating
+AAE rather than Standardized American English (SAE). Other costs for              how AAE is othered through the emphasis on its perceived deviance
+AAE speakers include having their speech mistranscribed or misunder-              from standardized norms44.
+stood in criminal justice contexts27 and making less money than their                 Motivated by the insights enabled through the matched guise tech-
+SAE-speaking peers28. These harms connect to themes in broader racial             nique, we introduce matched guise probing, a method for investigating
+ideology about African Americans and stereotypes about their intelli-             dialect prejudice in language models. The basic functioning of matched
+gence, competence and propensity to commit crimes29–35. The fact that             guise probing is as follows: we present language models with texts (such
+humans hold these stereotypes indicates that they are encoded in the              as tweets) in either AAE or SAE and ask them to make predictions about
+training data and picked up by language models, potentially amplify-              the speakers who uttered the texts (Fig. 1 and Methods). For example,
+ing their harmful consequences, but this has never been investigated.             we might ask the language models whether a speaker who says “I be
+   To our knowledge, this paper provides the first empirical evidence             so happy when I wake up from a bad dream cus they be feelin too real”
+for the existence of dialect prejudice in language models; that is, cov-          (AAE) is intelligent, and similarly whether a speaker who says “I am so
+ert racism that is activated by the features of a dialect (AAE). Using            happy when I wake up from a bad dream because they feel too real” (SAE)
+our new method of matched guise probing, we show that language                    is intelligent. Notice that race is never overtly mentioned; its presence is
+models exhibit archaic stereotypes about speakers of AAE that most                merely encoded in the AAE dialect. We then examine how the language
+closely agree with the most-negative human stereotypes about African              models’ predictions differ between AAE and SAE. The language models
+Americans ever experimentally recorded, dating from before the civil-             are not given any extra information to ensure that any difference in the
+rights movement. Crucially, we observe a discrepancy between what                 predictions is necessarily due to the AAE–SAE contrast.
+the language models overtly say about African Americans and what they                 We examined matched guise probing in two settings: one in which
+covertly associate with them. Furthermore, we find that dialect preju-            the meanings of the AAE and SAE texts are matched (the SAE texts are
+dice affects language models’ decisions about people in very harmful              translations of the AAE texts) and one in which the meanings are not
+ways. For example, when matching jobs to individuals on the basis of              matched (Methods (‘Probing’) and Supplementary Information (‘Exam-
+their dialect, language models assign considerably less-prestigious               ple texts’)). Although the meaning-matched setting is more rigorous,
+jobs to speakers of AAE than to speakers of SAE, even though they are             the non-meaning-matched setting is more realistic, because it is well
+not overtly told that the speakers are African American. Similarly, in a          known that there is a strong correlation between dialect and content
+hypothetical experiment in which language models were asked to pass               (for example, topics45). The non-meaning-matched setting thus allows
+judgement on defendants who committed first-degree murder, they                   us to tap into a nuance of dialect prejudice that would be missed by
+opted for the death penalty significantly more often when the defend-             examining only meaning-matched examples (see Methods for an
+ants provided a statement in AAE rather than in SAE, again without                in-depth discussion). Because the results for both settings overall are
+being overtly told that the defendants were African American. We also             highly consistent, we present them in aggregated form here, but analyse
+show that current practices of alleviating racial disparities (increas-           the differences in the Supplementary Information.
+ing the model size) and overt racial bias (including HF in training) do               We examined GPT2 (ref. 46), RoBERTa47, T5 (ref. 48), GPT3.5 (ref. 49)
+not mitigate covert racism; indeed, quite the opposite. We found that             and GPT4 (ref. 50), each in one or more model versions, amounting to a
+HF training actually exacerbates the gap between covert and overt                 total of 12 examined models (Methods and Supplementary Information
+stereotypes in language models by obscuring racist attitudes. Finally,            (‘Language models’)). We first used matched guise probing to probe
+we discuss how the relationship between the language models’ covert               the general existence of dialect prejudice in language models, and
+and overt racial prejudices is both a reflection and a result of the incon-       then applied it to the contexts of employment and criminal justice.
+sistent racial attitudes of contemporary society in the United States.
+
+                                                                                  Covert stereotypes in language models
+Probing AI dialect prejudice                                                      We started by investigating whether the attitudes that language mod-
+To explore how dialect choice impacts the predictions that language               els exhibit about speakers of AAE reflect human stereotypes about
+models make about speakers in the absence of other cues about their               African Americans. To do so, we replicated the experimental set-up of
+
+
+148 | Nature | Vol 633 | 5 September 2024
+  a
+                            H u ma n s                                La ngua ge mode ls ( ove r t)                                             La ngua ge mode ls ( cove r t)
+
+          1933       1951       1969     2012        GPT2         RoBERTa    T5             GPT3.5       GPT4           GPT2             RoBERTa T5                GPT3.5        GPT4
+
+          lazy      musical musical loud             dirty        passionate radical    brilliant   passionate dirty    dirty                           dirty    lazy            suspicious
+          ignorant lazy       lazy      loyal        suspicious   musical    passionate passionate intelligent stupid   stupid                          ignorant aggressive      aggressive
+          musical ignorant sensitive musical         radical      radical    musical    musical     ambitious rude      rude                            rude     dirty           loud
+          religious religious ignorant religious     persistent   loud       artistic   imaginative artistic   ignorant ignorant                        stupid   rude            rude
+          stupid    stupid    religious aggressive   aggressive   artistic   ambitious artistic     brilliant  lazy     lazy                            lazy     suspicious      ignorant
+
+
+ b                                                                                                                    c
+              0.40
+                                                                    Covert stereotypes in language models                                 be
+                                                                    Overt stereotypes in language models
+              0.35                                                                                                                     finna
+                                                                                                                                       been
+  Agreement
+
+
+
+
+              0.30
+
+
+
+
+                                                                                                                     AAE feature
+                                                                                                                                     copula
+              0.25                                                                                                                      ain't
+
+              0.20                                                                                                                         in
+                                                                                                                                        stay
+              0.15                                                                                    Chance
+                                                                                                                                   inflection
+
+                      Humans 1933           Humans 1951            Humans 1969             Humans 2012                                          0             0.05           0.10
+                                                                                                                                                         Stereotype strength
+
+Fig. 2 | Covert stereotypes in language models. a, Strongest stereotypes                    most negative experimentally recorded ones. c, Stereotype strength for
+about African Americans in humans in different years, strongest overt                       individual linguistic features of AAE. Error bars represent the standard error
+stereotypes about African Americans in language models, and strongest covert                across different language models, model versions and prompts (n = 90). The
+stereotypes about speakers of AAE in language models. Colour coding as positive             linguistic features examined are: use of invariant ‘be’ for habitual aspect; use of
+(green) and negative (red) is based on ref. 34. Although the overt stereotypes              ‘finna’ as a marker of the immediate future; use of (unstressed) ‘been’ for SAE
+of language models are overall more positive than the human stereotypes,                    ‘has been’ or ‘have been’ (present perfects); absence of the copula ‘is’ and ‘are’
+their covert stereotypes are more negative. b, Agreement of stereotypes about               for present-tense verbs; use of ‘ain’t’ as a general preverbal negator; orthographic
+African Americans in humans with both overt and covert stereotypes about                    realization of word-final ‘ing’ as ‘in’; use of invariant ‘stay’ for intensified
+African Americans in language models. The black dotted line shows chance                    habitual aspect; and absence of inflection in the third-person singular present
+agreement using a random bootstrap. Error bars represent the standard error                 tense. The measured stereotype strength is significantly above zero for all
+across different language models and prompts (n = 36). The language models’                 examined linguistic features, indicating that they all evoke raciolinguistic
+overt stereotypes agree most strongly with current human stereotypes, which                 stereotypes in language models, although there is a lot of variation between
+are the most positive experimentally recorded ones, but their covert stereotypes            individual features. See the Supplementary Information (‘Feature analysis’)
+agree most strongly with human stereotypes from the 1930s, which are the                    for more details and analyses.
+
+
+
+the Princeton Trilogy29–31,34, a series of studies investigating the racial                 particularly pronounced for the stereotypes reported in 1933 and falls
+stereotypes held by Americans, with the difference that instead of                          for each study after that, almost reaching the level of chance agree-
+overtly mentioning race to the language models, we used matched                             ment for 2012 (Fig. 2b). In the Supplementary Information (‘Adjective
+guise probing based on AAE and SAE texts (Methods).                                         analysis’), we explored variation across model versions, settings and
+   Qualitatively, we found that there is a substantial overlap in the adjec-                prompts (Supplementary Fig. 2 and Supplementary Table 4).
+tives associated most strongly with African Americans by humans and                            To explain the observed temporal trend, we measured the average
+the adjectives associated most strongly with AAE by language models,                        favourability of the top five adjectives for all Princeton Trilogy studies
+particularly for the earlier Princeton Trilogy studies (Fig. 2a). For exam-                 and language models, drawing from crowd-sourced ratings for the
+ple, the five adjectives associated most strongly with AAE by GPT2,                         Princeton Trilogy adjectives on a scale between −2 (very negative) and
+RoBERTa and T5 share three adjectives (‘ignorant’, ‘lazy’ and ‘stupid’)                     2 (very positive; see Methods, ‘Covert-stereotype analysis’). We found
+with the five adjectives associated most strongly with African Ameri-                       that the favourability of human attitudes about African Americans as
+cans in the 1933 and 1951 Princeton Trilogy studies, an overlap that is                     reported in the Princeton Trilogy studies has become more positive
+unlikely to occur by chance (permutation test with 10,000 random                            over time, and that the language models’ attitudes about AAE are even
+permutations of the adjectives; P < 0.01). Furthermore, in lieu of the                      more negative than the most negative experimentally recorded human
+positive adjectives (such as ‘musical’, ‘religious’ and ‘loyal’), the language              attitudes about African Americans (the ones from the 1930s; Extended
+models exhibit additional solely negative associations (such as ‘dirty’,                    Data Fig. 1). In the Supplementary Information, we provide further
+‘rude’ and ‘aggressive’).                                                                   quantitative analyses supporting this difference between humans and
+   To investigate this more quantitatively, we devised a variant of aver-                   language models (Supplementary Fig. 7).
+age precision51 that measures the agreement between the adjectives                             Furthermore, we found that the raciolinguistic stereotypes are not
+associated most strongly with African Americans by humans and the                           merely a reflection of the overt racial stereotypes in language models
+ranking of the adjectives according to their association with AAE by                        but constitute a fundamentally different kind of bias that is not miti-
+language models (Methods). We found that for all language models,                           gated in the current models. We show this by examining the stereo-
+the agreement with most Princeton Trilogy studies is significantly                          types that the language models exhibit when they are overtly asked
+higher than expected by chance, as shown by one-sided t-tests com-                          about African Americans (Methods, ‘Overt-stereotype analysis’). We
+puted against the agreement distribution resulting from 10,000                              observed that the overt stereotypes are substantially more positive
+random permutations of the adjectives (mean (m) = 0.162, standard                           in sentiment than are the covert stereotypes, for all language models
+deviation (s) = 0.106; Extended Data Table 1); and that the agreement is                    (Fig. 2a and Extended Data Fig. 1). Strikingly, for RoBERTa, T5, GPT3.5
+
+
+                                                                                                                                    Nature | Vol 633 | 5 September 2024 | 149
+Article
+and GPT4, although their covert stereotypes about speakers of AAE             less likely to associate them with any job. Furthermore, we observed
+are more negative than the most negative experimentally recorded              that for all language models, the occupations that had the lowest asso-
+human stereotypes, their overt stereotypes about African Americans            ciation with AAE require a university degree (such as psychologist,
+are more positive than the most positive experimentally recorded              professor and economist), but this is not the case for the occupations
+human stereotypes. This is particularly true for the two language mod-        that had the highest association with AAE (for example, cook, soldier
+els trained with HF (GPT3.5 and GPT4), in which all overt stereotypes are     and guard; Fig. 3a). Also, many occupations strongly associated with
+positive and all covert stereotypes are negative (see also ‘Resolvability     AAE are related to music and entertainment more generally (singer,
+of dialect prejudice’). In terms of agreement with human stereotypes          musician and comedian), which is in line with a pervasive stereotype
+about African Americans, the overt stereotypes almost never exhibit           about African Americans60. To probe these observations more system-
+agreement significantly stronger than expected by chance, as shown by         atically, we tested for a correlation between the prestige of the occupa-
+one-sided t-tests computed against the agreement distribution result-         tions and the propensity of the language models to match them to AAE
+ing from 10,000 random permutations of the adjectives (m = 0.162,             (Methods). Using a linear regression, we found that the association with
+s = 0.106; Extended Data Table 2). Furthermore, the overt stereotypes         AAE predicted the occupational prestige (Fig. 3b; β = −7.8, R2 = 0.193,
+are overall most similar to the human stereotypes from 2012, with the         F(1, 63) = 15.1, P < 0.001). This trend held for all language models indi-
+agreement continuously falling for earlier studies, which is the exact        vidually (Extended Data Fig. 2 and Extended Data Table 4), albeit in a less
+opposite trend to the covert stereotypes (Fig. 2b).                           pronounced way for GPT3.5, which had a particularly strong association
+   In the experiments described in the Supplementary Information              of AAE with occupations in music and entertainment.
+(‘Feature analysis’), we found that the raciolinguistic stereotypes are          We then examined decisions about criminality. We used matched
+directly linked to individual linguistic features of AAE (Fig. 2c and Sup-    guise probing for two experiments in which we presented the language
+plementary Table 14), and that a higher density of such linguistic fea-       models with hypothetical trials where the only evidence was a text
+tures results in stronger stereotypical associations (Supplementary           uttered by the defendant in either AAE or SAE. We then measured the
+Fig. 11 and Supplementary Table 13). Furthermore, we present experi-          probability that the language models assigned to potential judicial
+ments involving texts in other dialects (such as Appalachian English) as      outcomes in these trials and counted how often each of the judicial
+well as noisy texts, showing that these stereotypes cannot be adequately      outcomes was preferred for AAE and SAE (Methods, ‘Criminality
+explained as either a general dismissive attitude towards text written        analysis’). In the first experiment, we told the language models that
+in a dialect or as a general dismissive attitude towards deviations from      a person is accused of an unspecified crime and asked whether the
+SAE, irrespective of how the deviations look (Supplementary Informa-          models will convict or acquit the person solely on the basis of the AAE
+tion (‘Alternative explanations’), Supplementary Figs. 12 and 13 and          or SAE text. Overall, we found that the rate of convictions was greater
+Supplementary Tables 15 and 16). Both alternative explanations are            for AAE (r = 68.7%) than SAE (r = 62.1%; Fig. 3c, left). A chi-squared test
+also tested on the level of individual linguistic features.                   found a strong effect (χ2(1, N = 96) = 184.7, P < 0.001), which held for all
+   Thus, we found substantial evidence for the existence of covert racio-     language models individually (Extended Data Table 5). In the second
+linguistic stereotypes in language models. Our experiments show that          experiment, we specifically told the language models that the person
+these stereotypes are similar to the archaic human stereotypes about          committed first-degree murder and asked whether the models will
+African Americans that existed before the civil rights movement, are          sentence the person to life or death on the basis of the AAE or SAE text.
+even more negative than the most negative experimentally recorded             The overall rate of death sentences was greater for AAE (r = 27.7%) than
+human stereotypes about African Americans, and are both qualitatively         for SAE (r = 22.8%; Fig. 3c, right). A chi-squared test found a strong effect
+and quantitatively different from the previously reported overt racial        (χ2(1, N = 144) = 425.4, P < 0.001), which held for all language models
+stereotypes in language models, indicating that they are a fundamentally      individually except for T5 (Extended Data Table 6). In the Supplemen-
+different kind of bias. Finally, our analyses demonstrate that the detected   tary Information, we show that this deviation was caused by the base
+stereotypes are inherently linked to AAE and its linguistic features.         T5 version, and that the larger T5 versions follow the general pattern
+                                                                              (Supplementary Table 10).
+                                                                                 In further experiments (Supplementary Information, ‘Intelligence
+Impact of covert racism on AI decisions                                       analysis’), we used matched guise probing to examine decisions about
+To determine what harmful consequences the covert stereotypes have            intelligence, and found that all the language models consistently judge
+in the real world, we focused on two areas in which racial stereotypes        speakers of AAE to have a lower IQ than speakers of SAE (Supplementary
+about speakers of AAE and African Americans have been repeatedly              Figs. 14 and 15 and Supplementary Tables 17–19).
+shown to bias human decisions: employment and criminality. There is
+a growing impetus to use AI systems in these areas. Indeed, AI systems
+are already being used for personnel selection52,53, including automated      Resolvability of dialect prejudice
+analyses of applicants’ social-media posts54,55, and technologies for pre-    We wanted to know whether the dialect prejudice we observed is
+dicting legal outcomes are under active development56–58. Rather than         resolved by current practices of bias mitigation, such as increasing
+advocating these use cases of AI, which are inherently problematic59,         the size of the language model or including HF in training. It has been
+the sole objective of this analysis is to examine the extent to which the     shown that larger language models work better with dialects21 and can
+decisions of language models, when they are used in such contexts,            have less racial bias61. Therefore, the first method we examined was scal-
+are impacted by dialect.                                                      ing, that is, increasing the model size (Methods). We found evidence of
+   First, we examined decisions about employability. Using matched            a clear trend (Extended Data Tables 7 and 8): larger language models
+guise probing, we asked the language models to match occupations to           are indeed better at processing AAE (Fig. 4a, left), but they are not less
+the speakers who uttered the AAE or SAE texts and computed scores             prejudiced against speakers of it. In fact, larger models showed more
+indicating whether an occupation is associated more with speakers of          covert prejudice than smaller models (Fig. 4a, right). By contrast, larger
+AAE (positive scores) or speakers of SAE (negative scores; Methods,           models showed less overt prejudice against African Americans (Fig. 4a,
+‘Employability analysis’). The average score of the occupations was neg-      right). Thus, increasing scale does make models better at processing
+ative (m = –0.046, s = 0.053), the difference from zero being statistically   AAE and at avoiding prejudice against overt mentions of African Ameri-
+significant (one-sample, one-sided t-test, t(83) = −7.9, P < 0.001). This     cans, but it makes them more linguistically prejudiced.
+trend held for all language models individually (Extended Data Table 3).         As a second potential way to resolve dialect prejudice in language
+Thus, if a speaker exhibited features of AAE, the language models were        models, we examined training with HF49,62. Specifically, we compared
+
+
+150 | Nature | Vol 633 | 5 September 2024
+  a                                                                                                  GPT2            RoBERTa               T5         GPT3.5                             GPT4
+
+                                 Sewer                                      Sewer                                     Priest                                        Artist                                       Designer
+                                Singer                                      Soldier                                  Singer                                         Poet                                            Singer
+                                  Cook                                       Guard                                   Guard                                      Musician                                         Musician
+  Occupation
+
+
+
+
+                              Operator                                   Comedian                                 Detective                                       Singer                                             Artist
+                          Commander                                          Judge                                   Clergy                                       Athlete                                       Mechanic
+                           Veterinarian                                Psychologist                              Counsellor                                    Counsellor                                     Psychologist
+                            Academic                                    Researcher                                 Student                                      Diplomat                                        Journalist
+                          Psychologist                                   Astronaut                               Academic                                     Psychiatrist                                     Psychiatrist
+                             Professor                                     Curator                             Psychologist                                  Psychologist                                        Diplomat
+                            Economist                                     Architect                               Professor                                        Model                                           Farmer
+                                      –0.2      0                                     –0.2       0                               –0.1     0                                                –0.3   0    0.3                    –0.3 0 0.3
+                                       Association with                               Association with                            Association with                                         Association with                   Association with
+                                       AAE versus SAE                                 AAE versus SAE                              AAE versus SAE                                           AAE versus SAE                     AAE versus SAE
+
+  b                                                                                                                                                          c
+                                                                              Astronaut
+                                                                                                                                                                                         250    GPT2
+                                                                                                                                                                                                RoBERTa
+                          7                    Professor
+                                                                                  Physician                                                                                                     T5
+                                                    Psychiatrist            Architect          Lawyer                                                                                           GPT3.5
+                                     Psychologist                                     Author                                                                                             200
+                                                                                                       Doctor              Minister     Priest                                                  GPT4
+  Occupational prestige
+
+
+
+
+                                                                                                                                                                  Increase for AAE (%)
+                                                           Scientist                          Athlete
+                                                                          Engineer                                  Nurse               Soldier
+                          6                                 Economist                 Surgeon         Administrator                   Clergy
+                                                                      Accountant                     Chef
+                                                 Journalist                                                   Actor Actress
+                                                             Teacher                    Dentist     Technician                    Judge         Musician                                 150
+                                   Veterinarian                            Analyst                                   Designer
+                                                    Curator          Director           Pilot                         Inspector
+                                                                                Editor         Model                                Detective
+                          5                    Photographer      Writer    Instructor      Developer Assistant          Chief
+                                                                         Secretary             Manager               Broker                                                              100
+                                                                                                Counsellor Landlord              Mechanic
+                                                                   Student                                                Tailor                    Artist
+                                                                                                Supervisor
+                                                                                   Farmer                                                  Guard
+                                                                                                                             Clerk
+                          4                                                                           Driver                                     Operator
+                                                                                                                                                                                          50
+                                                                                                                                Attendant
+                                                                                                                                                   Cook
+                                                                                                                                    Collector
+                                                                                                                  Cleaner
+                          3                                                                                                                                                                0
+                                          –0.15                         –0.10                  –0.05                        0                      0.05                                            Conviction                  Death
+                                                                        Association with AAE versus SAE
+
+
+Fig. 3 | Impact of covert racism on AI decisions. a, Association of different                                                      language models are provided in Extended Data Fig. 2. c, Relative increase in
+occupations with AAE or SAE. Positive values indicate a stronger association                                                       the number of convictions and death sentences for AAE versus SAE. Error bars
+with AAE and negative values indicate a stronger association with SAE. The                                                         represent the standard error across different model versions, settings and
+bottom five occupations (those associated most strongly with SAE) mostly                                                           prompts (n = 24 for GPT2, n = 12 for RoBERTa, n = 24 for T5, n = 6 for GPT3.5 and
+require a university degree, but this is not the case for the top five (those                                                      n = 6 for GPT4). In cases of small sample size (n ≤ 10 for GPT3.5 and GPT4), we
+associated most strongly with AAE). b, Prestige of occupations that language                                                       plotted the individual results as overlaid dots. T5 does not contain the tokens
+models associate with AAE (positive values) or SAE (negative values). The shaded                                                   ‘acquitted’ or ‘convicted’ in its vocabulary and is therefore excluded from the
+area shows a 95% confidence band around the regression line. The association                                                       conviction analysis. Detrimental judicial decisions systematically go up for
+with AAE or SAE predicts the occupational prestige. Results for individual                                                         speakers of AAE compared with speakers of SAE.
+
+
+
+
+GPT3.5 (ref. 49) with GPT3 (ref. 63), its predecessor that was trained                                                               To sum up, neither scaling nor training with HF as applied today
+without using HF (Methods). Looking at the top adjectives associated                                                               resolves the dialect prejudice. The fact that these two methods
+overtly and covertly with African Americans by the two language mod-                                                               effectively mitigate racial performance disparities and overt racial
+els, we found that HF resulted in more-positive overt associations but                                                             stereotypes in language models indicates that this form of covert rac-
+had no clear qualitative effect on the covert associations (Fig. 4c). This                                                         ism constitutes a different problem that is not addressed by current
+observation was confirmed by quantitative analyses: the inclusion                                                                  approaches for improving and aligning language models.
+of HF resulted in significantly weaker (no HF, m = 0.135, s = 0.142; HF,
+m = −0.119, s = 0.234; t(16) = 2.6, P < 0.05) and more favourable (no HF,
+m = 0.221, s = 0.399; HF, m = 1.047, s = 0.387; t(16) = −6.4, P < 0.001) overt                                                     Discussion
+stereotypes but produced no significant difference in the strength                                                                 The key finding of this article is that language models maintain a form
+(no HF, m = 0.153, s = 0.049; HF, m = 0.187, s = 0.066; t(16) = −1.2, P = 0.3)                                                     of covert racial prejudice against African Americans that is triggered by
+or unfavourability (no HF, m = −1.146, s = 0.580; HF, m = −1.029, s = 0.196;                                                       dialect features alone. In our experiments, we avoided overt mentions of
+t(16) = −0.5, P = 0.6) of covert stereotypes (Fig. 4b). Thus, HF train-                                                            race but drew from the racialized meanings of a stigmatized dialect, and
+ing weakens and ameliorates the overt stereotypes but has no clear                                                                 could still find historically racist associations with African Americans.
+effect on the covert stereotypes; in other words, it obscures the racist                                                           The implicit nature of this prejudice, that is, the fact it is about something
+attitudes on the surface, but more subtle forms of racism, such as dia-                                                            that is not explicitly expressed in the text, makes it fundamentally dif-
+lect prejudice, remain unaffected. This finding is underscored by the                                                              ferent from the overt racial prejudice that has been the focus of previ-
+fact that the discrepancy between overt and covert stereotypes about                                                               ous research. Strikingly, the language models’ covert and overt racial
+African Americans is most pronounced for the two examined language                                                                 prejudices are often in contradiction with each other, especially for the
+models trained with human feedback (GPT3.5 and GPT4; see ‘Covert                                                                   most recent language models that have been trained with HF (GPT3.5
+stereotypes in language models’). Furthermore, this finding again                                                                  and GPT4). These two language models obscure the racism, overtly
+shows that there is a fundamental difference between overt and covert                                                              associating African Americans with exclusively positive attributes
+stereotypes in language models, and that mitigating the overt stereo-                                                              (such as ‘brilliant’), but our results show that they covertly associate
+types does not automatically translate to mitigated covert stereotypes.                                                            African Americans with exclusively negative attributes (such as ‘lazy’).
+
+
+                                                                                                                                                                                           Nature | Vol 633 | 5 September 2024 | 151
+Article
+                             a
+                                                                                                                                                      0.2
+                                                    400
+
+
+
+
+                                                                                                                               Stereotype strength
+                                                                                                                                                      0.1
+
+
+
+
+                              Perplexity
+                                                    300
+                                                                                                                                                       0
+                                                    200
+
+                                                                                                                                                     –0.1
+                                                    100                                                                                                         Covert stereotypes
+                                                                                                                                                                Overt stereotypes
+                                                                                                                                                     –0.2
+                                                            Small     Medium                       Large     Very large                                      Small       Medium         Large      Very large
+                                                                            Model size                                                                                         Model size
+                             b                                                                                                                        c
+                                                              Covert stereotypes                    Overt stereotypes
+                                                                                                                                                                     Overt                     Covert
+                              Stereotype strength
+
+
+
+
+                                                     0.2                                             1                                                      No HF        HF            No HF      HF
+
+
+
+
+                                                                                   Favourability
+                                                                                                                                                            aggressive   brilliant     dirty      lazy
+                                                      0                                              0
+                                                                                                                                                            loud         passionate    ignorant   aggressive
+                                                                                                    –1                                                      radical      musical       stupid     dirty
+                                                    –0.2                                                                                                    musical      imaginative   loud       rude
+                                                           No HF       HF                                  No HF          HF                                lazy         artistic      lazy       suspicious
+
+
+Fig. 4 | Resolvability of dialect prejudice. a, Language modelling perplexity                                                  speakers of it. Indeed, larger models show more covert prejudice than smaller
+and stereotype strength on AAE text as a function of model size. Perplexity                                                    models (right). By contrast, larger models show less overt prejudice against
+is a measure of how successful a language model is at processing a particular                                                  African Americans (right). In other words, increasing scale does make models
+text; a lower result is better. For language models for which perplexity is not                                                better at processing AAE and at avoiding prejudice against overt mentions of
+well-defined (RoBERTa and T5), we computed pseudo-perplexity instead                                                           African Americans, but it makes them more linguistically prejudiced. b, Change
+(dotted line). Error bars represent the standard error across different models                                                 in stereotype strength and favourability as a result of training with HF for
+of a size class and AAE or SAE texts (n = 9,057 for small, n = 6,038 for medium,                                               covert and overt stereotypes. Error bars represent the standard error across
+n = 15,095 for large and n = 3,019 for very large). For covert stereotypes, error                                              different prompts (n = 9). HF weakens (left) and improves (right) overt
+bars represent the standard error across different models of a size class,                                                     stereotypes but not covert stereotypes. c, Top overt and covert stereotypes
+settings and prompts (n = 54 for small, n = 36 for medium, n = 90 for large and                                                about African Americans in GPT3, trained without HF, and GPT3.5, trained with
+n = 18 for very large). For overt stereotypes, error bars represent the standard                                               HF. Colour coding as positive (green) and negative (red) is based on ref. 34.
+error across different models of a size class and prompts (n = 27 for small, n = 18                                            The overt stereotypes get substantially more positive as a result of HF training
+for medium, n = 45 for large and n = 9 for very large). Although larger language                                               in GPT3.5, but there is no visible change in favourability for the covert
+models are better at processing AAE (left), they are not less prejudiced against                                               stereotypes.
+
+
+
+   We argue that this paradoxical relation between the language models’                                                        overt than covert racial prejudice. We argue that the reason for this is
+covert and overt racial prejudices manifests the inconsistent racial atti-                                                     that the existence of overt racism is generally known to people32, which
+tudes present in the contemporary society of the United States8,64. In the                                                     is not the case for covert racism69. Crucially, this also holds for the field
+Jim Crow era, stereotypes about African Americans were overtly racist,                                                         of AI. The typical pipeline of training language models includes steps
+but the normative climate after the civil rights movement made express-                                                        such as data filtering48 and, more recently, HF training62 that remove
+ing explicitly racist views distasteful. As a result, racism acquired a                                                        overt racial prejudice. As a result, much of the overt racism on the web
+covert character and continued to exist on a more subtle level. Thus,                                                          does not end up in the language models. However, there are currently
+most white people nowadays report positive attitudes towards African                                                           no measures in place to curtail covert racial prejudice when training
+Americans in surveys but perpetuate racial inequalities through their                                                          language models. For example, common datasets for HF training62,78
+unconscious behaviour, such as their residential choices65. It has been                                                        do not include examples that would train the language models to treat
+shown that negative stereotypes persist, even if they are superficially                                                        speakers of AAE and SAE equally. As a result, the covert racism encoded
+rejected66,67. This ambivalence is reflected by the language models we                                                         in the training data can make its way into the language models in an
+analysed, which are overtly non-racist but covertly exhibit archaic                                                            unhindered fashion. It is worth mentioning that the lack of awareness of
+stereotypes about African Americans, showing that they reproduce                                                               covert racism also manifests during evaluation, where it is common to
+a colour-blind racist ideology. Crucially, the civil rights movement is                                                        test language models for overt racism but not for covert racism21,63,79,80.
+generally seen as the period during which racism shifted from overt to                                                            As well as the representational harms, by which we mean the perni-
+covert68,69, and this is mirrored by our results: all the language models                                                      cious representation of AAE speakers, we also found evidence for sub-
+overtly agree the most with human stereotypes from after the civil                                                             stantial allocational harms. This refers to the inequitable allocation of
+rights movement, but covertly agree the most with human stereotypes                                                            resources to AAE speakers81 (Barocas et al., unpublished observations),
+from before the civil rights movement.                                                                                         and adds to known cases of language technology putting speakers of
+   Our findings beg the question of how dialect prejudice got into the                                                         AAE at a disadvantage by performing worse on AAE82–88, misclassify-
+language models. Language models are pretrained on web-scraped                                                                 ing AAE as hate speech81,89–91 or treating AAE as incorrect English83,85,92.
+corpora such as WebText46, C4 (ref. 48) and the Pile70, which encode                                                           All the language models are more likely to assign low-prestige jobs to
+raciolinguistic stereotypes about AAE. A drastic example of this is the                                                        speakers of AAE than to speakers of SAE, and are more likely to convict
+use of ‘mock ebonics’ to parodize speakers of AAE71. Crucially, a growing                                                      speakers of AAE of a crime, and to sentence speakers of AAE to death.
+body of evidence indicates that language models pick up prejudices                                                             Although the details of our tasks are constructed, the findings reveal
+present in the pretraining corpus72–75, which would explain how they                                                           real and urgent concerns because business and jurisdiction are areas
+become prejudiced against speakers of AAE, and why they show vary-                                                             for which AI systems involving language models are currently being
+ing levels of dialect prejudice as a function of the pretraining corpus.                                                       developed or deployed. As a consequence, the dialect prejudice we
+However, the web also abounds with overt racism against African Ameri-                                                         uncovered might already be affecting AI decisions today, for example
+cans76,77, so we wondered why the language models exhibit much less                                                            when a language model is used in application-screening systems to
+
+
+152 | Nature | Vol 633 | 5 September 2024
+process background information, which might include social-media                                     21.   Rae, J. W. et al. Scaling language models: methods, analysis & insights from training
+                                                                                                           Gopher. Preprint at https://arxiv.org/abs/2112.11446 (2021).
+text. Worryingly, we also observe that larger language models and                                    22.   Green, L. J. African American English: A Linguistic Introduction (Cambridge Univ. Press,
+language models trained with HF exhibit stronger covert, but weaker                                        2002).
+overt, prejudice. Against the backdrop of continually growing language                               23.   King, S. From African American Vernacular English to African American Language:
+                                                                                                           rethinking the study of race and language in African Americans’ speech. Annu. Rev.
+models and the increasingly widespread adoption of HF training, this                                       Linguist. 6, 285–300 (2020).
+has two risks: first, that language models, unbeknownst to developers                                24.   Purnell, T., Idsardi, W. & Baugh, J. Perceptual and phonetic experiments on American
+and users, reach ever-increasing levels of covert prejudice; and sec-                                      English dialect identification. J. Lang. Soc. Psychol. 18, 10–30 (1999).
+                                                                                                     25.   Massey, D. S. & Lundy, G. Use of Black English and racial discrimination in urban housing
+ond, that developers and users mistake ever-decreasing levels of overt                                     markets: new methods and findings. Urban Aff. Rev. 36, 452–469 (2001).
+prejudice (the only kind of prejudice currently tested for) for a sign that                          26.   Dunbar, A., King, S. & Vaughn, C. Dialect on trial: an experimental examination of
+racism in language models has been solved. There is therefore a realistic                                  raciolinguistic ideologies and character judgments. Race Justice https://doi.org/
+                                                                                                           10.1177/21533687241258772 (2024).
+possibility that the allocational harms caused by dialect prejudice in                               27.   Rickford, J. R. & King, S. Language and linguistics on trial: Hearing Rachel Jeantel (and
+language models will increase further in the future, perpetuating the                                      other vernacular speakers) in the courtroom and beyond. Language 92, 948–988 (2016).
+racial discrimination experienced by generations of African Americans.                               28.   Grogger, J. Speech patterns and racial wage inequality. J. Hum. Resour. 46, 1–25 (2011).
+                                                                                                     29.   Katz, D. & Braly, K. Racial stereotypes of one hundred college students. J. Abnorm. Soc.
+                                                                                                           Psychol. 28, 280–290 (1933).
+                                                                                                     30.   Gilbert, G. M. Stereotype persistance and change among college students. J. Abnorm.
+Online content                                                                                             Soc. Psychol. 46, 245–254 (1951).
+                                                                                                     31.   Karlins, M., Coffman, T. L. & Walters, G. On the fading of social stereotypes: studies in
+Any methods, additional references, Nature Portfolio reporting summa-                                      three generations of college students. J. Pers. Soc. Psychol. 13, 1–16 (1969).
+ries, source data, extended data, supplementary information, acknowl-                                32.   Devine, P. G. & Elliot, A. J. Are racial stereotypes really fading? The Princeton Trilogy
+edgements, peer review information; details of author contributions                                        revisited. Pers. Soc. Psychol. Bull. 21, 1139–1150 (1995).
+                                                                                                     33.   Madon, S. et al. Ethnic and national stereotypes: the Princeton Trilogy revisited and
+and competing interests; and statements of data and code availability                                      revised. Pers. Soc. Psychol. Bull. 27, 996–1010 (2001).
+are available at https://doi.org/10.1038/s41586-024-07856-5.                                         34.   Bergsieker, H. B., Leslie, L. M., Constantine, V. S. & Fiske, S. T. Stereotyping by omission:
+                                                                                                           eliminate the negative, accentuate the positive. J. Pers. Soc. Psychol. 102, 1214–1238 (2012).
+                                                                                                     35.   Ghavami, N. & Peplau, L. A. An intersectional analysis of gender and ethnic stereotypes:
+1.  Zhao, W. et al. WildChat: 1M ChatGPT interaction logs in the wild. In Proc. Twelfth                    testing three hypotheses. Psychol. Women Q. 37, 113–127 (2013).
+    International Conference on Learning Representations (OpenReview.net, 2024).                     36.   Lambert, W. E., Hodgson, R. C., Gardner, R. C. & Fillenbaum, S. Evaluational reactions to
+2.  Zheng, L. et al. LMSYS-Chat-1M: a large-scale real-world LLM conversation dataset. In Proc.            spoken languages. J. Abnorm. Soc. Psychol. 60, 44–51 (1960).
+    Twelfth International Conference on Learning Representations (OpenReview.net, 2024).             37.   Ball, P. Stereotypes of Anglo-Saxon and non-Anglo-Saxon accents: some exploratory
+3.  Gaebler, J. D., Goel, S., Huq, A. & Tambe, P. Auditing the use of language models to guide             Australian studies with the matched guise technique. Lang. Sci. 5, 163–183 (1983).
+    hiring decisions. Preprint at https://arxiv.org/abs/2404.03086 (2024).                           38.   Thomas, E. R. & Reaser, J. Delimiting perceptual cues used for the ethnic labeling of
+4. Sheng, E., Chang, K.-W., Natarajan, P. & Peng, N. The woman worked as a babysitter:                     African American and European American voices. J. Socioling. 8, 54–87 (2004).
+    on biases in language generation. In Proc. 2019 Conference on Empirical Methods in               39.   Atkins, C. P. Do employment recruiters discriminate on the basis of nonstandard dialect?
+    Natural Language Processing and 9th International Joint Conference on Natural Language                 J. Employ. Couns. 30, 108–118 (1993).
+    Processing (eds Inui. K. et al.) 3407–3412 (Association for Computational Linguistics,           40.   Payne, K., Downing, J. & Fleming, J. C. Speaking Ebonics in a professional context: the
+    2019).                                                                                                 role of ethos/source credibility and perceived sociability of the speaker. J. Tech. Writ.
+5.  Nangia, N., Vania, C., Bhalerao, R. & Bowman, S. R. CrowS-Pairs: a challenge dataset for               Commun. 30, 367–383 (2000).
+    measuring social biases in masked language models. In Proc. 2020 Conference on                   41.   Rodriguez, J. I., Cargile, A. C. & Rich, M. D. Reactions to African-American vernacular
+    Empirical Methods in Natural Language Processing (eds Webber, B. et al.) 1953–1967                     English: do more phonological features matter? West. J. Black Stud. 28, 407–414 (2004).
+    (Association for Computational Linguistics, 2020).                                               42.   Billings, A. C. Beyond the Ebonics debate: attitudes about Black and standard American
+6.  Nadeem, M., Bethke, A. & Reddy, S. StereoSet: measuring stereotypical bias in pretrained               English. J. Black Stud. 36, 68–81 (2005).
+    language models. In Proc. 59th Annual Meeting of the Association for Computational               43.   Kurinec, C. A. & Weaver, C. III “Sounding Black”: speech stereotypicality activates racial
+    Linguistics and 11th International Joint Conference on Natural Language Processing                     stereotypes and expectations about appearance. Front. Psychol. 12, 785283 (2021).
+    (eds Zong, C. et al.) 5356–5371 (Association for Computational Linguistics, 2021).               44.   Rosa, J. & Flores, N. Unsettling race and language: toward a raciolinguistic perspective.
+7.  Cheng, M., Durmus, E. & Jurafsky, D. Marked personas: using natural language prompts                   Lang. Soc. 46, 621–647 (2017).
+    to measure stereotypes in language models. In Proc. 61st Annual Meeting of the                   45.   Salehi, B., Hovy, D., Hovy, E. & Søgaard, A. Huntsville, hospitals, and hockey teams: names
+    Association for Computational Linguistics (eds Rogers, A. et al.) 1504–1532 (Association               can reveal your location. In Proc. 3rd Workshop on Noisy User-generated Text (eds
+    for Computational Linguistics, 2023).                                                                  Derczynski, L. et al.) 116–121 (Association for Computational Linguistics, 2017).
+8.  Bonilla-Silva, E. Racism without Racists: Color-Blind Racism and the Persistence of Racial       46.   Radford, A. et al. Language models are unsupervised multitask learners. OpenAI
+    Inequality in America 4th edn (Rowman & Littlefield, 2014).                                            https://cdn.openai.com/better-language-models/language_models_are_unsupervised_
+9.  Golash-Boza, T. A critical and comprehensive sociological theory of race and racism.                   multitask_learners.pdf (2019).
+    Sociol. Race Ethn. 2, 129–141 (2016).                                                            47.   Liu, Y. et al. RoBERTa: a robustly optimized BERT pretraining approach. Preprint at https://
+10. Kasneci, E. et al. ChatGPT for good? On opportunities and challenges of large language                 arxiv.org/abs/1907.11692 (2019).
+    models for education. Learn. Individ. Differ. 103, 102274 (2023).                                48.   Raffel, C. et al. Exploring the limits of transfer learning with a unified text-to-text
+11. Nay, J. J. et al. Large language models as tax attorneys: a case study in legal capabilities           transformer. J. Mach. Learn. Res. 21, 1–67 (2020).
+    emergence. Philos. Trans. R. Soc. A 382, 20230159 (2024).                                        49.   Ouyang, L. et al. Training language models to follow instructions with human feedback.
+12. Jiang, L. Y. et al. Health system-scale language models are all-purpose prediction                     In Proc. 36th Conference on Neural Information Processing Systems (eds Koyejo, S. et al.)
+    engines. Nature 619, 357–362 (2023).                                                                   27730–27744 (NeurIPS, 2022).
+13. Bolukbasi, T., Chang, K.-W., Zou, J., Saligrama, V. & Kalai, A. Man is to computer               50.   OpenAI et al. GPT-4 technical report. Preprint at https://arxiv.org/abs/2303.08774 (2023).
+    programmer as woman is to homemaker? Debiasing word embeddings. Adv. Neural Inf.                 51.   Zhang, E. & Zhang, Y. Average precision. In Encyclopedia of Database Systems (eds Liu, L.
+    Process. Syst. 30, 4356–4364 (2016).                                                                   & Özsu, M. T.) 192–193 (Springer, 2009).
+14. Caliskan, A., Bryson, J. J. & Narayanan, A. Semantics derived automatically from language        52.   Black, J. S. & van Esch, P. AI-enabled recruiting: what is it and how should a manager use
+    corpora contain human-like biases. Science 356, 183–186 (2017).                                        it? Bus. Horiz. 63, 215–226 (2020).
+15. Basta, C., Costa-jussà, M. R. & Casas, N. Evaluating the underlying gender bias in               53.   Hunkenschroer, A. L. & Luetge, C. Ethics of AI-enabled recruiting and selection: a review
+    contextualized word embeddings. In Proc. First Workshop on Gender Bias in Natural                      and research agenda. J. Bus. Ethics 178, 977–1007 (2022).
+    Language Processing (eds Costa-jussà, M. R. et al.) 33–39 (Association for Computational         54.   Upadhyay, A. K. & Khandelwal, K. Applying artificial intelligence: implications for
+    Linguistics, 2019).                                                                                    recruitment. Strateg. HR Rev. 17, 255–258 (2018).
+16. Kurita, K., Vyas, N., Pareek, A., Black, A. W. & Tsvetkov, Y. Measuring bias in contextualized   55.   Tippins, N. T., Oswald, F. L. & McPhail, S. M. Scientific, legal, and ethical concerns about
+    word representations. In Proc. First Workshop on Gender Bias in Natural Language                       AI-based personnel selection tools: a call to action. Pers. Assess. Decis. 7, 1 (2021).
+    Processing (eds Costa-jussà, M. R. et al.) 166–172 (Association for Computational                56.   Aletras, N., Tsarapatsanis, D., Preoţiuc-Pietro, D. & Lampos, V. Predicting judicial decisions
+    Linguistics, 2019).                                                                                    of the European Court of Human Rights: a natural language processing perspective.
+17. Abid, A., Farooqi, M. & Zou, J. Persistent anti-muslim bias in large language models.                  PeerJ Comput. Sci. 2, e93 (2016).
+    In Proc. 2021 AAAI/ACM Conference on AI, Ethics, and Society (eds Fourcade, M. et al.)           57.   Surden, H. Artificial intelligence and law: an overview. Ga State Univ. Law Rev. 35,
+    298–306 (Association for Computing Machinery, 2021).                                                   1305–1337 (2019).
+18. Bender, E. M., Gebru, T., McMillan-Major, A. & Shmitchell, S. On the dangers of stochastic       58.   Medvedeva, M., Vols, M. & Wieling, M. Using machine learning to predict decisions of the
+    parrots: can language models be too big? In Proc. 2021 ACM Conference on Fairness,                     European Court of Human Rights. Artif. Intell. Law 28, 237–266 (2020).
+    Accountability, and Transparency 610–623 (Association for Computing Machinery, 2021).            59.   Weidinger, L. et al. Taxonomy of risks posed by language models. In Proc. 2022 ACM
+19. Li, L. & Bamman, D. Gender and representation bias in GPT-3 generated stories. In Proc.                Conference on Fairness, Accountability, and Transparency 214–229 (Association for
+    Third Workshop on Narrative Understanding (eds Akoury, N. et al.) 48–55 (Association for               Computing Machinery, 2022).
+    Computational Linguistics, 2021).                                                                60.   Czopp, A. M. & Monteith, M. J. Thinking well of African Americans: measuring
+20. Tamkin, A. et al. Evaluating and mitigating discrimination in language model decisions.                complimentary stereotypes and negative prejudice. Basic Appl. Soc. Psychol. 28,
+    Preprint at https://arxiv.org/abs/2312.03689 (2023).                                                   233–250 (2006).
+
+
+
+                                                                                                                                         Nature | Vol 633 | 5 September 2024 | 153
+Article
+61.   Chowdhery, A. et al. PaLM: scaling language modeling with pathways. J. Mach. Learn.            82. Jørgensen, A., Hovy, D. & Søgaard, A. Challenges of studying and processing dialects in
+      Res. 24, 11324–11436 (2023).                                                                       social media. In Proc. Workshop on Noisy User-generated Text (eds Xu, W. et al.) 9–18
+62.   Bai, Y. et al. Training a helpful and harmless assistant with reinforcement learning from          (Association for Computational Linguistics, 2015).
+      human feedback. Preprint at https://arxiv.org/abs/2204.05862 (2022).                           83. Blodgett, S. L., Green, L. & O’Connor, B. Demographic dialectal variation in social media:
+63.   Brown, T. B. et al. Language models are few-shot learners. In Proc. 34th International             a case study of African-American English. In Proc. 2016 Conference on Empirical Methods
+      Conference on Neural Information Processing Systems (eds Larochelle, H. et al.) 1877–1901          in Natural Language Processing (eds Su, J. et al.) 1119–1130 (Association for Computational
+      (NeurIPS, 2020).                                                                                   Linguistics, 2016).
+64.   Dovidio, J. F. & Gaertner, S. L. Aversive racism. Adv. Exp. Soc. Psychol. 36, 1–52 (2004).     84. Jørgensen, A., Hovy, D. & Søgaard, A. Learning a POS tagger for AAVE-like language.
+65.   Schuman, H., Steeh, C., Bobo, L. D. & Krysan, M. (eds) Racial Attitudes in America: Trends         In Proc. 2016 Conference of the North American Chapter of the Association for
+      and Interpretations (Harvard Univ. Press, 1998).                                                   Computational Linguistics: Human Language Technologies (eds Knight, K. et al.) 1115–1120
+66.   Crosby, F., Bromley, S. & Saxe, L. Recent unobtrusive studies of Black and White                   (Association for Computational Linguistics, 2016).
+      discrimination and prejudice: a literature review. Psychol. Bull. 87, 546–563 (1980).          85. Blodgett, S. L. & O’Connor, B. Racial disparity in natural language processing: a case
+67.   Terkel, S. Race: How Blacks and Whites Think and Feel about the American Obsession                 study of social media African-American English. Preprint at https://arxiv.org/abs/
+      (New Press, 1992).                                                                                 1707.00061 (2017).
+68.   Jackman, M. R. & Muha, M. J. Education and intergroup attitudes: moral enlightenment,          86. Blodgett, S. L., Wei, J. & O’Connor, B. Twitter universal dependency parsing for
+      superficial democratic commitment, or ideological refinement? Am. Sociol. Rev. 49,                 African-American and mainstream American English. In Proc. 56th Annual Meeting of
+      751–769 (1984).                                                                                    the Association for Computational Linguistics (eds Gurevych, I. & Miyao, Y.) 1415–1425
+69.   Bonilla-Silva, E. The New Racism: Racial Structure in the United States, 1960s–1990s.              (Association for Computational Linguistics, 2018).
+      In Race, Ethnicity, and Nationality in the United States: Toward the Twenty-First Century      87. Groenwold, S. et al. Investigating African-American vernacular English in transformer-
+      1st edn (ed. Wong, P.) Ch. 4 (Westview Press, 1999).                                               based text generation. In Proc. 2020 Conference on Empirical Methods in Natural Language
+70.   Gao, L. et al. The Pile: an 800GB dataset of diverse text for language modeling. Preprint          Processing (eds Webber, B. et al.) 5877–5883 (Association for Computational Linguistics,
+      at https://arxiv.org/abs/2101.00027 (2021).                                                        2020).
+71.   Ronkin, M. & Karn, H. E. Mock Ebonics: linguistic racism in parodies of Ebonics on the         88. Ziems, C., Chen, J., Harris, C., Anderson, J. & Yang, D. VALUE: Understanding dialect
+      internet. J. Socioling. 3, 360–380 (1999).                                                         disparity in NLU. In Proc. 60th Annual Meeting of the Association for Computational
+72.   Dodge, J. et al. Documenting large webtext corpora: a case study on the Colossal Clean             Linguistics (eds Muresan, S. et al.) 3701–3720 (Association for Computational Linguistics,
+      Crawled Corpus. In Proc. 2021 Conference on Empirical Methods in Natural Language                  2022).
+      Processing (eds Moens, M.-F. et al.) 1286–1305 (Association for Computational Linguistics,     89. Davidson, T., Bhattacharya, D. & Weber, I. Racial bias in hate speech and abusive
+      2021).                                                                                             language detection datasets. In Proc. Third Workshop on Abusive Language Online
+73.   Steed, R., Panda, S., Kobren, A. & Wick, M. Upstream mitigation is not all you need: testing       (eds Roberts, S. T. et al.) 25–35 (Association for Computational Linguistics, 2019).
+      the bias transfer hypothesis in pre-trained language models. In Proc. 60th Annual Meeting      90. Sap, M., Card, D., Gabriel, S., Choi, Y. & Smith, N. A. The risk of racial bias in hate speech
+      of the Association for Computational Linguistics (eds Muresan, S. et al.) 3524–3542                detection. In Proc. 57th Annual Meeting of the Association for Computational Linguistics
+      (Association for Computational Linguistics, 2022).                                                 (eds Korhonen, A. et al.) 1668–1678 (Association for Computational Linguistics, 2019).
+74.   Feng, S., Park, C. Y., Liu, Y. & Tsvetkov, Y. From pretraining data to language models to      91. Harris, C., Halevy, M., Howard, A., Bruckman, A. & Yang, D. Exploring the role of grammar
+      downstream tasks: tracking the trails of political biases leading to unfair NLP models.            and word choice in bias toward African American English (AAE) in hate speech
+      In Proc. 61st Annual Meeting of the Association for Computational Linguistics                      classification. In Proc. 2022 ACM Conference on Fairness, Accountability, and
+      (eds Rogers, A. et al.) 11737–11762 (Association for Computational Linguistics, 2023).             Transparency 789–798 (Association for Computing Machinery, 2022).
+75.   Köksal, A. et al. Language-agnostic bias detection in language models with bias probing.       92. Gururangan, S. et al. Whose language counts as high quality? Measuring language
+      In Findings of the Association for Computational Linguistics: EMNLP 2023 (eds Bouamor, H.          ideologies in text data selection. In Proc. 2022 Conference on Empirical Methods in
+      et al.) 12735–12747 (Association for Computational Linguistics, 2023).                             Natural Language Processing (eds Goldberg, Y. et al.) 2562–2580 (Association for
+76.   Garg, N., Schiebinger, L., Jurafsky, D. & Zou, J. Word embeddings quantify 100 years of            Computational Linguistics, 2022).
+      gender and ethnic stereotypes. Proc. Natl Acad. Sci. USA 115, E3635–E3644 (2018).
+77.   Ferrer, X., van Nuenen, T., Such, J. M. & Criado, N. Discovering and categorising language     Publisher’s note Springer Nature remains neutral with regard to jurisdictional claims in
+      biases in Reddit. In Proc. Fifteenth International AAAI Conference on Web and Social           published maps and institutional affiliations.
+      Media (eds Budak, C. et al.) 140–151 (Association for the Advancement of Artificial
+      Intelligence, 2021).                                                                                              Open Access This article is licensed under a Creative Commons Attribution
+78.   Ethayarajh, K., Choi, Y. & Swayamdipta, S. Understanding dataset difficulty with V-usable                         4.0 International License, which permits use, sharing, adaptation, distribution
+      information. In Proc. 39th International Conference on Machine Learning (eds Chaudhuri, K.                        and reproduction in any medium or format, as long as you give appropriate
+      et al.) 5988–6008 (Proceedings of Machine Learning Research, 2022).                            credit to the original author(s) and the source, provide a link to the Creative Commons licence,
+79.   Hoffmann, J. et al. Training compute-optimal large language models. Preprint at https://       and indicate if changes were made. The images or other third party material in this article are
+      arxiv.org/abs/2203.15556 (2022).                                                               included in the article’s Creative Commons licence, unless indicated otherwise in a credit line
+80.   Liang, P. et al. Holistic evaluation of language models. Transactions on Machine Learning      to the material. If material is not included in the article’s Creative Commons licence and your
+      Research https://openreview.net/forum?id=iO4LZibEqW (2023).                                    intended use is not permitted by statutory regulation or exceeds the permitted use, you will
+81.   Blodgett, S. L., Barocas, S., Daumé III, H. & Wallach, H. Language (technology) is power:      need to obtain permission directly from the copyright holder. To view a copy of this licence,
+      A critical survey of “bias” in NLP. In Proc. 58th Annual Meeting of the Association            visit http://creativecommons.org/licenses/by/4.0/.
+      for Computational Linguistics (eds Jurafsky, D. et al.) 5454–5476 (Association for
+      Computational Linguistics, 2020).                                                              © The Author(s) 2024
+
+
+
+
+154 | Nature | Vol 633 | 5 September 2024
+Methods                                                                       posts, the texts of two competing applicants typically differ in content
+                                                                              and do not come in pairs expressing the same meaning. The relative
+Probing                                                                       advantages of using meaning-matched or non-meaning-matched data
+Matched guise probing examines how strongly a language model asso-            for matched guise probing are conceptually similar to the relative
+ciates certain tokens, such as personality traits, with AAE compared          advantages of using the same or different speakers for the matched
+with SAE. AAE can be viewed as the treatment condition, whereas SAE           guise technique: more control in the former versus more naturalness
+functions as the control condition. We start by explaining the basic          in the latter setting93,94. Because the results obtained in both settings
+experimental unit of matched guise probing: measuring how a lan-              were consistent overall for all experiments, we aggregated them in the
+guage model associates certain tokens with an individual text in AAE          main article, but we analysed differences in detail in the Supplementary
+or SAE. Based on this, we introduce two different settings for matched        Information.
+guise probing (meaning-matched and non-meaning-matched), which                   We apply matched guise probing to five language models: RoBERTa47,
+are both inspired by the matched guise technique used in sociolin-            which is an encoder-only language model; GPT2 (ref. 46), GPT3.5 (ref. 49)
+guistics36,37,93,94 and provide complementary views on the attitudes a        and GPT4 (ref. 50), which are decoder-only language models; and T5
+language model has about a dialect.                                           (ref. 48), which is an encoder–decoder language model. For each lan-
+   The basic experimental unit of matched guise probing is as follows.        guage model, we examined one or more model versions: GPT2 (base),
+Let θ be a language model, t be a text in AAE or SAE, and x be a token of     GPT2 (medium), GPT2 (large), GPT2 (xl), RoBERTa (base), RoBERTa
+interest, typically a personality trait such as ‘intelligent’. We embed the   (large), T5 (small), T5 (base), T5 (large), T5 (3b), GPT3.5 (text-davinci-003)
+text in a prompt v, for example v(t) = ‘a person who says t tends to be’,     and GPT4 (0613). Where we used several model versions per language
+and compute P(x∣v(t); θ), which is the probability that θ assigns to x        model (GPT2, RoBERTa and T5), the model versions all had the same
+after processing v(t). We calculate P(x∣v(t); θ) for equally sized sets Ta    architecture and were trained on the same data but differed in their
+of AAE texts and Ts of SAE texts, comparing various tokens from a set         size. Furthermore, we note that GPT3.5 and GPT4 are the only language
+X as possible continuations. It has been shown that P(x∣v(t); θ) can be       models examined in this paper that were trained with HF, specifically
+affected by the precise wording of v, so small modifications of v can         reinforcement learning from human feedback103. When it is clear from
+have an unpredictable effect on the predictions made by the language          the context what is meant, or when the distinction does not matter,
+model21,95,96. To account for this fact, we consider a set V containing       we use the term ‘language models’, or sometimes ‘models‘, in a more
+several prompts (Supplementary Information). For all experiments,             general way that includes individual model versions.
+we have provided detailed analyses of variation across prompts in                Regarding matched guise probing, the exact method for computing
+the Supplementary Information.                                                P(x∣v(t); θ) varies across language models and is detailed in the Sup-
+   We conducted matched guise probing in two settings. In the first           plementary Information. For GPT4, for which computing P(x∣v(t); θ)
+setting, the texts in Ta and Ts formed pairs expressing the same under-       for all tokens of interest was often not possible owing to restrictions
+lying meaning, that is, the i-th text in Ta (for example, ‘I be so happy      imposed by the OpenAI application programming interface (API), we
+when I wake up from a bad dream cus they be feelin too real’) matches         used a slightly modified method for some of the experiments, and
+the i-th text in Ts (for example, ‘I am so happy when I wake up from a        this is also discussed in the Supplementary Information. Similarly,
+bad dream because they feel too real’). For this setting, we used the         some of the experiments could not be done for all language models
+dataset from ref. 87, which contains 2,019 AAE tweets together with           because of model-specific constraints, which we highlight below. We
+their SAE translations. In the second setting, the texts in Ta and Ts did     note that there was at most one language model per experiment for
+not form pairs, so they were independent texts in AAE and SAE. For            which this was the case.
+this setting, we sampled 2,000 AAE and SAE tweets from the dataset in
+ref. 83 and used tweets strongly aligned with African Americans for           Covert-stereotype analysis
+AAE and tweets strongly aligned with white people for SAE (Supple-            In the covert-stereotype analysis, the tokens x whose probabilities
+mentary Information (‘Analysis of non-meaning-matched texts’), Sup-           are measured for matched guise probing are trait adjectives from the
+plementary Fig. 1 and Supplementary Table 3). In the Supplementary            Princeton Trilogy29–31,34, such as ‘aggressive’, ‘intelligent’ and ‘quiet’.
+Information, we include examples of AAE and SAE texts for both settings       We provide details about these adjectives in the Supplementary Infor-
+(Supplementary Tables 1 and 2). Tweets are well suited for matched            mation. In the Princeton Trilogy, the adjectives are provided to par-
+guise probing because they are a rich source of dialectal variation97–99,     ticipants in the form of a list, and participants are asked to select from
+especially for AAE100–102, but matched guise probing can be applied to        the list the five adjectives that best characterize a given ethnic group,
+any type of text. Although we do not consider it here, matched guise          such as African Americans. The studies that we compare in this paper,
+probing can in principle also be applied to speech-based models, with         which are the original Princeton Trilogy studies29–31 and a more recent
+the potential advantage that dialectal variation on the phonetic level        reinstallment34, all follow this general set-up and observe a gradual
+could be captured more directly, which would make it possible to study        improvement of the expressed stereotypes about African Americans
+dialect prejudice specific to regional variants of AAE23. However, note       over time, but the exact interpretation of this finding is disputed32.
+that a great deal of phonetic variation is reflected orthographically in      Here, we used the adjectives from the Princeton Trilogy in the context
+social-media texts101.                                                        of matched guise probing.
+   It is important to analyse both meaning-matched and non-meaning-              Specifically, we first computed P(x∣v(t); θ) for all adjectives, for
+matched settings because they capture different aspects of the atti-          both the AAE texts and the SAE texts. The method for aggregating
+tudes a language model has about speakers of AAE. Controlling for             the probabilities P(x∣v(t); θ) into association scores between an adjec­
+the underlying meaning makes it possible to uncover differences in            tive x and AAE varies for the two settings of matched guise probing.
+the attitudes of the language model that are solely due to grammatical        Let tia be the i-th AAE text in Ta and tis be the i-th SAE text in Ts. In the
+and lexical features of AAE. However, it is known that various properties     meaning-matched setting, in which tia and tis express the same meaning,
+other than linguistic features correlate with dialect, such as topics45,      we computed the prompt-level association score for an adjective
+and these might also influence the attitudes of the language model.           x as
+Sidelining such properties bears the risk of underestimating the harms
+that dialect prejudice causes for speakers of AAE in the real world. For                                             n
+                                                                                                                  1       P(x ∣ v(tia); θ)
+example, in a scenario in which a language model is used in the context                           q(x; v , θ) =     ∑ log                  ,
+of automated personnel selection to screen applicants’ social-media                                               n i =1  P(x ∣ v(tis); θ)
+Article
+where n = ∣Ta∣ = ∣Ts∣. Thus, we measure for each pair of AAE and SAE              To analyse the favourability of the stereotypes about African
+texts the log ratio of the probability assigned to x following the AAE         Americans, we drew from crowd-sourced favourability ratings collected
+text and the probability assigned to x following the SAE text, and             previously34 for the adjectives from the Princeton Trilogy that range
+then average the log ratios of the probabilities across all pairs. In the      between −2 (‘very unfavourable’, meaning very negative) and 2 (‘very
+non-meaning-matched setting, we computed the prompt-level associa-             favourable’, meaning very positive). For example, the favourability rat-
+tion score for an adjective x as                                               ing of ‘cruel’ is −1.81 and the favourability rating of ‘brilliant’ is 1.86. We
+                                            n
+                                                                               computed the average favourability of the top five adjectives, weighting
+                                        ∑i =1 P(x ∣ v(tia); θ)                 the favourability ratings of individual adjectives by their association
+                    q(x; v , θ) = log       n                    ,
+                                        ∑i =1 P(x ∣ v(tis); θ)                 scores with AAE and African Americans. More formally, let R5 = [x1, …, x5]
+                                                                               be the ranking of the top five adjectives generated by either a language
+where again n = ∣Ta∣ = ∣Ts∣. In other words, we first compute the average      model or humans. Furthermore, let f(x) be the favourability rating of
+probability assigned to a certain adjective x following all AAE texts and      adjective x as reported in ref. 34, and let q(x) be the overall associa-
+the average probability assigned to x following all SAE texts, and then        tion score of adjective x with AAE or African Americans that is used to
+measure the log ratio of these average probabilities. The interpreta-          generate R5. For the Princeton Trilogy studies, q(x) is the percentage of
+tion of q(x; v, θ) is identical in both settings; q(x; v, θ) > 0 means that    participants who have assigned x to African Americans. For language
+for a certain prompt v, the language model θ associates the adjective          models, q(x) is the average value of q(x; v, θ). We then computed the
+x more strongly with AAE than with SAE, and q(x; v, θ) < 0 means that          weighted average favourability, F, of the top five adjectives as
+for a certain prompt v, the language model θ associates the adjective
+                                                                                                                   5
+x more strongly with SAE than with AAE. In the Supplementary Infor-                                              ∑i =1 f (xi )q(xi )
+                                                                                                            F=         5               .
+mation (‘Calibration’), we show that q(x; v, θ) is calibrated104, meaning                                           ∑i =1 q(xi )
+that it does not depend on the prior probability that θ assigns to x in
+a neutral context.                                                               As a result of the weighting, the top-ranked adjective contributed
+   The prompt-level association scores q(x; v, θ) are the basis for fur-       more to the average than the second-ranked adjective, and so on.
+ther analyses. We start by averaging q(x; v, θ) across model versions,         Results are presented in Extended Data Fig. 1. To check for consistency,
+prompts and settings, and this allows us to rank all adjectives according      we also computed the average favourability of the top five adjectives
+to their overall association with AAE for individual language models           without weighting, which yields similar results (Supplementary Fig. 6).
+(Fig. 2a). In this and the following adjective analyses, we focus on the
+five adjectives that exhibit the highest association with AAE, making it       Overt-stereotype analysis
+possible to consistently compare the language models with the results          The overt-stereotype analysis closely followed the methodology of
+from the Princeton Trilogy studies, most of which do not report the            the covert-stereotype analysis, with the difference being that instead
+full ranking of all adjectives. Results for individual model versions are      of providing the language models with AAE and SAE texts, we provided
+provided in the Supplementary Information, where we also analyse               them with overt descriptions of race (specifically, ‘Black’/‘black’ and
+variation across settings and prompts (Supplementary Fig. 2 and Sup-           ‘White’/‘white’). This methodological difference is also reflected by a
+plementary Table 4).                                                           different set of prompts (Supplementary Information). As a result, the
+   Next, we wanted to measure the agreement between language mod-              experimental set-up is very similar to existing studies on overt racial
+els and humans through time. To do so, we considered the five adjec-           bias in language models4,7. All other aspects of the analysis (such as
+tives most strongly associated with African Americans for each study           computing adjective association scores) were identical to the analysis
+and evaluated how highly these adjectives are ranked by the language           for covert stereotypes. This also holds for GPT4, for which we again
+models. Specifically, let Rl = [x1, …, x∣X∣] be the adjective ranking gener-   could not conduct the agreement analysis.
+ated by a language model and Rh5 = [x1, …, x5] be the ranking of the top          We again present average results for the five language models in the
+five adjectives generated by the human participants in one of the Prince-      main article. Results broken down for individual model versions are
+ton Trilogy studies. A typical measure to evaluate how highly the adjec-       provided in the Supplementary Information, where we also analyse
+tives from Rh5 are ranked within Rl is average precision, AP51. However,       variation across prompts (Supplementary Fig. 8 and Supplementary
+AP does not take the internal ranking of the adjectives in Rh5 into account,   Table 5).
+which is not ideal for our purposes; for example, AP does not distinguish
+whether the top-ranked adjective for humans is on the first or on the          Employability analysis
+fifth rank for a language model. To remedy this, we computed the mean          The general set-up of the employability analysis was identical to the
+average precision, MAP, for different subsets of Rh5,                          stereotype analyses: we fed text written in either AAE or SAE, embedded
+                                                                               in prompts, into the language models and analysed the probabilities
+                                        5
+                                  1                                            that they assigned to different continuation tokens. However, instead
+                         MAP =      ∑ AP(Rih, Rl),
+                                  5 i =1                                       of trait adjectives, we considered occupations for X and also used a
+                                                                               different set of prompts (Supplementary Information). We created a
+where Rih denotes the top i adjectives from the human ranking.                 list of occupations, drawing from previously published lists6,76,105–107.
+MAP = 1 if, and only if, the top five adjectives from Rh5 have an exact        We provided details about these occupations in the Supplementary
+one-to-one correspondence with the top five adjectives from Rl, so,            Information. We then computed association scores q(x; v, θ) between
+unlike AP, it takes the internal ranking of the adjectives into account.       individual occupations x and AAE, following the same methodology
+We computed an individual agreement score for each language model              as for computing adjective association scores, and ranked the occu-
+and prompt, so we average the q(x; v, θ) association scores for all model      pations according to q(x; v, θ) for the language models. To probe the
+versions of a language model (GPT2, for example) and the two settings          prestige associated with the occupations, we drew from a dataset of
+(meaning-matched and non-meaning-matched) to generate Rl. Because              occupational prestige105 that is based on the 2012 US General Social
+the OpenAI API for GPT4 does not give access to the probabilities for          Survey and measures prestige on a scale from 1 (low prestige) to 9 (high
+all adjectives, we excluded GPT4 from this analysis. Results are pre-          prestige). For GPT4, we could not conduct the parts of the analysis that
+sented in Fig. 2b and Extended Data Table 1. In the Supplementary              require scores for all occupations.
+Information (‘Agreement analysis’), we analyse variation across model             We again present average results for the five language models in
+versions, settings and prompts (Supplementary Figs. 3–5).                      the main article. Results for individual model versions are provided
+in the Supplementary Information, where we also analyse variation             across settings and prompts (Supplementary Figs. 9 and 10 and Sup-
+across settings and prompts (Supplementary Tables 6–8).                       plementary Tables 9–12).
+
+Criminality analysis                                                          Scaling analysis
+The set-up of the criminality analysis is different from the previous         In the scaling analysis, we examined whether increasing the model
+experiments in that we did not compute aggregate association scores           size alleviated the dialect prejudice. Because the content of the covert
+between certain tokens (such as trait adjectives) and AAE but instead         stereotypes is quite consistent and does not vary substantially between
+asked the language models to make discrete decisions for each AAE and         models with different sizes, we instead analysed the strength with which
+SAE text. More specifically, we simulated trials in which the language        the language models maintain these stereotypes. We split the model
+models were prompted to use AAE or SAE texts as evidence to make a            versions of all language models into four groups according to their
+judicial decision. We then aggregated the judicial decisions into sum-        size using the thresholds of 1.5 × 108, 3.5 × 108 and 1.0 × 1010 (Extended
+mary statistics.                                                              Data Table 7).
+   We conducted two experiments. In the first experiment, the lan-               To evaluate the familiarity of the models with AAE, we measured their
+guage models were asked to determine whether a person accused of              perplexity on the datasets used for the two evaluation settings83,87. Per-
+committing an unspecified crime should be acquitted or convicted.             plexity is defined as the exponentiated average negative log-likelihood
+The only evidence provided to the language models was a statement             of a sequence of tokens111, with lower values indicating higher famili-
+made by the defendant, which was an AAE or SAE text. In the second            arity. Perplexity requires the language models to assign probabili-
+experiment, the language models were asked to determine whether               ties to full sequences of tokens, which is only the case for GPT2 and
+a person who committed first-degree murder should be sentenced to             GPT3.5. For RoBERTa and T5, we resorted to pseudo-perplexity112 as the
+life or death. Similarly to the first (general conviction) experiment, the    measure of familiarity. Results are only comparable across language
+only evidence provided to the language models was a statement made            models with the same familiarity measure. We excluded GPT4 from
+by the defendant, which was an AAE or SAE text. Note that the AAE and         this analysis because it is not possible to compute perplexity using
+SAE texts were the same texts as in the other experiments and did not         the OpenAI API.
+come from a judicial context. Rather than testing how well language              To evaluate the stereotype strength, we focused on the stereotypes
+models could perform the tasks of predicting acquittal or conviction          about African Americans reported in ref. 29, which the language mod-
+and life penalty or death penalty (an application of AI that we do not        els’ covert stereotypes agree with most strongly. We split the set of
+support), we were interested to see to what extent the decisions of           adjectives X into two subsets: the set of stereotypical adjectives in
+the language models, made in the absence of any real evidence, were           ref. 29, Xs, and the set of non-stereotypical adjectives, Xn = X \Xs. For
+impacted by dialect. Although providing the language models with              each model with a specific size, we then computed the average value
+extra evidence as well as the AAE and SAE texts would have made the           of q(x; v, θ) for all adjectives in Xs, which we denote as qs(θ), and the
+experiments more similar to real trials, it would have confounded             average value of q(x; v, θ) for all adjectives in Xn, which we denote as
+the effect that dialect has on its own (the key effect of interest), so       qn(θ). The stereotype strength of a model θ, or more specifically the
+we did not consider this alternative set-up here. We focused on con-          strength of the stereotypes about African Americans reported in
+victions and death penalties specifically because these are the two           ref. 29, can then be computed as
+areas of the criminal justice system for which racial disparities have
+been described in the most robust and indisputable way: African                                         δ(θ) = qs(θ) − qn(θ).
+Americans represent about 12% of the adult population of the United
+States, but they represent 33% of inmates108 and more than 41% of               A positive value of δ(θ) means that the model associates the
+people on death row109.                                                       stereotypical adjectives in Xs more strongly with AAE than the
+   Methodologically, we used prompts that asked the language models           non-stereotypical adjectives in Xn, whereas a negative value of δ(θ)
+to make a judicial decision (Supplementary Information). For a spe-           indicates anti-stereotypical associations, meaning that the model
+cific text, t, which is in AAE or SAE, we computed p(x∣v(t); θ) for the       associates the non-stereotypical adjectives in Xn more strongly with
+tokens x that correspond to the judicial outcomes of interest (‘acquit-       AAE than the stereotypical adjectives in Xs. For the overt stereotypes,
+ted’ or ‘convicted’, and ‘life’ or ‘death’). T5 does not contain the tokens   we used the same split of adjectives into Xs and Xn because we wanted
+‘acquitted’ and ‘convicted’ in its vocabulary, so is was excluded from        to directly compare the strength with which models of a certain size
+the conviction analysis. Because the language models might assign dif-        endorse the stereotypes overtly as opposed to covertly. All other
+ferent prior probabilities to the outcome tokens, we calibrated them          aspects of the experimental set-up are identical to the main analyses
+using their probabilities in a neutral context following v, meaning           of covert and overt stereotypes.
+without text t104. Whichever outcome had the higher calibrated prob-
+ability was counted as the decision. We aggregated the detrimental            HF analysis
+decisions (convictions and death penalties) and compared their rates          We compared GPT3.5 (ref. 49; text-davinci-003) with GPT3 (ref. 63;
+(percentages) between AAE and SAE texts. An alternative approach              davinci), its predecessor language model that was trained without HF.
+would have been to generate the judicial decision by sampling from            Similarly to other studies that compare these two language models113,
+the language models, which would have allowed us to induce the lan-           this set-up allowed us to examine the effects of HF training as done for
+guage models to generate justifications of their decisions. However,          GPT3.5 in isolation. We compared the two language models in terms of
+this approach has three disadvantages: first, encoder-only language           favourability and stereotype strength. For favourability, we followed the
+models such as RoBERTa do not lend themselves to text generation;             methodology we used for the overt-stereotype analysis and evaluated
+second, it would have been necessary to apply jail-breaking for               the average weighted favourability of the top five adjectives associated
+some of the language models, which can have unpredictable effects,            with AAE. For stereotype strength, we followed the methodology we
+especially in the context of socially sensitive tasks; and third, model-      used for the scaling analysis and evaluated the average strength of the
+generated justifications are frequently not aligned with actual model         stereotypes as reported in ref. 29.
+behaviours110.
+   We again present average results on the level of language models in        Reporting summary
+the main article. Results for individual model versions are provided          Further information on research design is available in the Nature Port-
+in the Supplementary Information, where we also analyse variation             folio Reporting Summary linked to this article.
+Article
+                                                                                                      101. Eisenstein, J. Systematic patterning in phonologically-motivated orthographic variation.
+Data availability                                                                                          J. Socioling. 19, 161–188 (2015).
+                                                                                                      102. Jones, T. Toward a description of African American vernacular English dialect regions
+All the datasets used in this study are publicly available. The dataset                                    using “Black Twitter”. Am. Speech 90, 403–440 (2015).
+released as ref. 87 can be found at https://aclanthology.org/2020.                                    103. Christiano, P. F. et al. Deep reinforcement learning from human preferences. Proc. 31st
+                                                                                                           International Conference on Neural Information Processing Systems (eds von Luxburg, U.
+emnlp-main.473/. The dataset released as ref. 83 can be found at                                           et al.) 4302–4310 (NeurIPS, 2017).
+http://slanglab.cs.umass.edu/TwitterAAE/. The human stereotype                                        104. Zhao, T. Z., Wallace, E., Feng, S., Klein, D. & Singh, S. Calibrate before use: Improving
+scores used for evaluation can be found in the published articles of                                       few-shot performance of language models. In Proc. 38th International Conference on
+                                                                                                           Machine Learning (eds Meila, M. & Zhang, T.) 12697–12706 (Proceedings of Machine
+the Princeton Trilogy studies29–31,34. The most recent of these articles34                                 Learning Research, 2021).
+also contains the human favourability scores for the trait adjectives.                                105. Smith, T. W. & Son, J. Measuring Occupational Prestige on the 2012 General Social Survey
+The dataset of occupational prestige that we used for the employ-                                          (NORC at Univ. Chicago, 2014).
+                                                                                                      106. Zhao, J., Wang, T., Yatskar, M., Ordonez, V. & Chang, K.-W. Gender bias in coreference
+ability analysis can be found in the corresponding paper105. The                                           resolution: evaluation and debiasing methods. In Proc. 2018 Conference of the North
+Brown Corpus114, which we used for the Supplementary Information                                           American Chapter of the Association for Computational Linguistics: Human Language
+(‘Feature analysis’), can be found at http://www.nltk.org/nltk_data/. The                                  Technologies (eds Walker, M. et al.) 15–20 (Association for Computational Linguistics,
+                                                                                                           2018).
+dataset containing the parallel AAE, Appalachian English and Indian                                   107. Hughes, B. T., Srivastava, S., Leszko, M. & Condon, D. M. Occupational prestige: the status
+English texts115, which we used in the Supplementary Information                                           component of socioeconomic status. Collabra Psychol. 10, 92882 (2024).
+(‘Alternative explanations’), can be found at https://huggingface.co/                                 108. Gramlich, J. The gap between the number of blacks and whites in prison is shrinking.
+                                                                                                           Pew Research Centre https://www.pewresearch.org/short-reads/2019/04/30/shrinking-
+collections/SALT-NLP/value-nlp-666b60a7f76c14551bda4f52.                                                   gap-between-number-of-blacks-and-whites-in-prison (2019).
+                                                                                                      109. Walsh, A. The criminal justice system is riddled with racial disparities. Prison Policy
+                                                                                                           Initiative Briefing https://www.prisonpolicy.org/blog/2016/08/15/cjrace (2016).
+                                                                                                      110. Röttger, P. et al. Political compass or spinning arrow? Towards more meaningful
+Code availability                                                                                          evaluations for values and opinions in large language models. Preprint at https://arxiv.
+Our code is written in Python and draws on the Python packages ope-                                        org/abs/2402.16786 (2024).
+nai and transformers for language-model probing, as well as numpy,                                    111. Jurafsky, D. & Martin, J. H. Speech and Language Processing: An Introduction to Natural
+                                                                                                           Language Processing, Computational Linguistics, and Speech Recognition (Prentice Hall,
+pandas, scipy and statsmodels for data analysis. The feature analy-                                        2000).
+sis described in the Supplementary Information also uses the VALUE                                    112. Salazar, J., Liang, D., Nguyen, T. Q. & Kirchhoff, K. Masked language model scoring. In Proc.
+                                                                                                           58th Annual Meeting of the Association for Computational Linguistics (eds Jurafsky, D. et al.)
+Python library88. Our code is publicly available on GitHub at https://
+                                                                                                           2699–2712 (Association for Computational Linguistics, 2020).
+github.com/valentinhofmann/dialect-prejudice.                                                         113. Santurkar, S. et al. Whose opinions do language models reflect? In Proc. 40th
+                                                                                                           International Conference on Machine Learning (eds Krause, A. et al.) 29971–30004
+93. Gaies, S. J. & Beebe, J. D. The matched-guise technique for measuring attitudes and their              (Proceedings of Machine Learning Research, 2023).
+     implications for language education: a critical assessment. In Language Acquisition and          114. Francis, W. N. & Kucera, H. Brown Corpus Manual (Brown Univ.,1979).
+     the Second/Foreign Language Classroom (ed. Sadtano, E.) 156–178 (SEAMEO Regional                 115. Ziems, C. et al. Multi-VALUE: a framework for cross-dialectal English NLP. In Proc. 61st
+     Language Centre, 1991).                                                                               Annual Meeting of the Association for Computational Linguistics (eds Rogers, A. et al.)
+94. Hudson, R. A. Sociolinguistics (Cambridge Univ. Press, 1996).                                          744–768 (Association for Computational Linguistics, 2023).
+95. Delobelle, P., Tokpo, E., Calders, T. & Berendt, B. Measuring fairness with biased rulers:
+     a comparative study on bias metrics for pre-trained language models. In Proc. 2022
+     Conference of the North American Chapter of the Association for Computational                    Acknowledgements V.H. was funded by the German Academic Scholarship Foundation.
+     Linguistics: Human Language Technologies (eds Carpuat, M. et al.) 1693–1706                      P.R.K. was funded in part by the Open Phil AI Fellowship. This work was also funded by the
+     (Association for Computational Linguistics, 2022).                                               Hoffman-Yee Research Grants programme and the Stanford Institute for Human-Centered
+96. Mattern, J., Jin, Z., Sachan, M., Mihalcea, R. & Schölkopf, B. Understanding stereotypes          Artificial Intelligence. We thank A. Köksal, D. Hovy, K. Gligorić, M. Harrington, M. Casillas,
+     in language models: Towards robust measurement and zero-shot debiasing. Preprint                 M. Cheng and P. Röttger for feedback on an earlier version of the article.
+     at https://arxiv.org/abs/2212.10678 (2022).
+97. Eisenstein, J., O’Connor, B., Smith, N. A. & Xing, E. P. A latent variable model for              Author contributions V.H., P.R.K., D.J. and S.K. designed the research. V.H. performed the
+     geographic lexical variation. In Proc. 2010 Conference on Empirical Methods in Natural           research and analysed the data. V.H., P.R.K., D.J. and S.K. wrote the paper.
+     Language Processing (eds Li, H. & Màrquez, L.) 1277–1287 (Association for Computational
+     Linguistics, 2010).                                                                              Competing interests The authors declare no competing interests.
+98. Doyle, G. Mapping dialectal variation by querying social media. In Proc. 14th Conference of
+     the European Chapter of the Association for Computational Linguistics (eds Wintner, S. et al.)   Additional information
+     98–106 (Association for Computational Linguistics, 2014).                                        Supplementary information The online version contains supplementary material available at
+99. Huang, Y., Guo, D., Kasakoff, A. & Grieve, J. Understanding U.S. regional linguistic variation    https://doi.org/10.1038/s41586-024-07856-5.
+     with Twitter data analysis. Comput. Environ. Urban Syst. 59, 244–255 (2016).                     Correspondence and requests for materials should be addressed to Valentin Hofmann or
+100. Eisenstein, J. What to do about bad language on the internet. In Proc. 2013 Conference           Sharese King.
+     of the North American Chapter of the Association for Computational Linguistics: Human            Peer review information Nature thanks Rodney Coates and the other, anonymous, reviewer(s)
+     Language Technologies (eds Vanderwende, L. et al.) 359–369 (Association for                      for their contribution to the peer review of this work.
+     Computational Linguistics, 2013).                                                                Reprints and permissions information is available at http://www.nature.com/reprints.
+                    1933
+
+
+
+                    1951
+  Humans
+
+
+
+
+                    1969
+
+
+
+                    2012
+
+                           −1.5    −1.0    −0.5     0.0      0.5     1.0    1.5
+
+                   GPT2
+
+
+
+                 RoBERTa
+  LMs (overt)
+
+
+
+
+                      T5
+
+
+
+                  GPT3.5
+
+                           −1.5    −1.0    −0.5     0.0      0.5     1.0    1.5
+
+                   GPT2
+
+
+
+                 RoBERTa
+  LMs (covert)
+
+
+
+
+                      T5
+
+
+
+                  GPT3.5
+
+                           −1.5    −1.0    −0.5      0.0      0.5     1.0   1.5
+                                  Favourability towards African Americans
+
+Extended Data Fig. 1 | Weighted average favourability of top stereotypes
+about African Americans in humans and top overt as well as covert
+stereotypes about African Americans in language models (LMs). The overt
+stereotypes are more favourable than the reported human stereotypes, except
+for GPT2. The covert stereotypes are substantially less favourable than the
+least favourable reported human stereotypes from 1933. Results without
+weighting, which are very similar, are provided in Supplementary Fig. 6.
+Article
+                                                                  *37           5R%(57D           7            *37
+
+
+
+                                                                                                                               
+ 2FFXSDWLRQDOSUHVWLJH
+
+
+
+
+                                                                                                                               
+
+
+                                                                                                                               
+
+
+                                                                                                                               
+
+
+                                                                                                                               
+                             í    í               í       í                   í                                í                   
+                                    $VVRFLDWLRQZLWK              $VVRFLDWLRQZLWK                      $VVRFLDWLRQZLWK                      $VVRFLDWLRQZLWK
+                                    $$(YHUVXV6$(                $$(YHUVXV6$(                        $$(YHUVXV6$(                        $$(YHUVXV6$(
+
+Extended Data Fig. 2 | Prestige of occupations associated with AAE                         occupational prestige, for all language models. We cannot conduct this
+(positive values) versus SAE (negative values), for individual language                    analysis with GPT4 since the OpenAI API does not give access to the
+models. The shaded areas show 95% confidence bands around the regression                   probabilities for all occupations.
+lines. The association with AAE versus SAE is negatively correlated with
+Extended Data Table 1 | Agreement between covert
+stereotypes in language models and human stereotypes
+about African Americans as reported in the Princeton Trilogy
+
+  Model           Study           m           s          d        t          p
+
+  GPT2            1933       0.324      0.081       10007       4.6     .0000
+  GPT2            1951       0.300      0.055       10007       3.9     .0003
+  GPT2            1969       0.251      0.049       10007       2.5     .0315
+  GPT2            2012       0.218      0.068       10007       1.6     .1885
+  RoBERTa         1933       0.329      0.086       10007       4.7     .0000
+  RoBERTa         1951       0.268      0.052       10007       3.0     .0075
+  RoBERTa         1969       0.199      0.029       10007       1.0     .4101
+  RoBERTa         2012       0.186      0.039       10007       0.7     .4101
+  T5              1933       0.376      0.082       10007       6.1     .0000
+  T5              1951       0.298      0.054       10007       3.8     .0004
+  T5              1969       0.244      0.045       10007       2.3     .0470
+  T5              2012       0.191      0.031       10007       0.8     .4101
+  GPT3.5          1933       0.466      0.137       10007       8.6     .0000
+  GPT3.5          1951       0.297      0.076       10007       3.8     .0004
+  GPT3.5          1969       0.272      0.073       10007       3.1     .0059
+  GPT3.5          2012       0.230      0.152       10007       1.9     .1120
+
+
+The table shows the average agreement as well as the results of one-sided t-tests applied
+to the language model agreement distribution and the agreement distribution resulting
+from 10,000 random permutations of the adjectives (with Holm-Bonferroni correction for
+multiple comparisons). m: average; s: standard deviation; d: degrees of freedom; t: t-statistic;
+p: p-value. We cannot conduct this analysis with GPT4 since the OpenAI API does not give
+access to the probabilities for all adjectives.
+Article
+Extended Data Table 2 | Agreement between overt
+stereotypes in language models and human stereotypes
+about African Americans as reported in the Princeton
+Trilogy
+
+  Model           Study           m           s          d         t           p
+
+  GPT2            1933       0.193      0.084       10007        1.0     1.0000
+  GPT2            1951       0.209      0.076       10007        1.4      .8139
+  GPT2            1969       0.213      0.075       10007        1.5      .7857
+  GPT2            2012       0.190      0.065       10007        0.9     1.0000
+  RoBERTa         1933       0.131      0.037       10007       -0.9     1.0000
+  RoBERTa         1951       0.237      0.102       10007        2.2      .1890
+  RoBERTa         1969       0.256      0.106       10007        2.8      .0442
+  RoBERTa         2012       0.409      0.162       10007        7.2      .0000
+  T5              1933       0.135      0.028       10007       -0.7     1.0000
+  T5              1951       0.204      0.063       10007        1.3      .9394
+  T5              1969       0.211      0.080       10007        1.5      .7857
+  T5              2012       0.160      0.043       10007        0.0     1.0000
+  GPT3.5          1933       0.118      0.023       10007       -1.2     1.0000
+  GPT3.5          1951       0.177      0.048       10007        0.5     1.0000
+  GPT3.5          1969       0.191      0.046       10007        0.9     1.0000
+  GPT3.5          2012       0.233      0.054       10007        2.1      .2420
+
+
+The table shows the average agreement as well as the results of one-sided t-tests applied
+to the language model agreement distribution and the agreement distribution resulting
+from 10,000 random permutations of the adjectives (with Holm-Bonferroni correction for
+multiple comparisons). m: average; s: standard deviation; d: degrees of freedom; t: t-statistic;
+p: p-value. We cannot conduct this analysis with GPT4 since the OpenAI API does not give
+access to the probabilities for all adjectives.
+Extended Data Table 3 | Association of occupations with AAE
+
+  Model                m          s      d          t          p
+
+  GPT2           -0.053      0.066      83      -7.5      .0000
+  RoBERTa        -0.087      0.070      83     -11.5      .0000
+  T5             -0.016      0.044      83      -3.4      .0009
+  GPT3.5         -0.075      0.153      83      -4.5      .0000
+
+
+The table shows the average association scores of all occupations with AAE as well as the
+results of one-sample, one-sided t-tests comparing with zero, which yield strong effects for
+all language models (with Holm-Bonferroni correction for multiple comparisons). m: average;
+s: standard deviation; d: degrees of freedom; t: t-statistic; p: p-value. We cannot conduct
+this analysis with GPT4 since the OpenAI API does not give access to the probabilities for all
+occupations.
+Article
+Extended Data Table 4 | Results of linear regressions fit
+to the occupational prestige values as a function of the
+associations with AAE as well as two-sided F-tests, for
+individual language models
+
+  Model               d        β        R2          F          p
+
+  GPT2           1, 63      -8.2     0.291     25.80      .0000
+  RoBERTa        1, 63      -4.3     0.105      7.38      .0085
+  T5             1, 63      -5.9     0.083      5.73      .0196
+  GPT3.5         1, 63      -0.9     0.020      1.28      .2610
+
+
+d: degrees of freedom; β: β-coefficient; R2: coefficient of determination; F: F-statistic;
+p: p-value. β is negative for all language models, indicating that stronger associations with
+AAE generally correlate with lower occupational prestige. We cannot conduct this analysis
+with GPT4 since the OpenAI API does not give access to the probabilities for all occupations.
+Extended Data Table 5 | Rate of convictions for AAE and SAE
+
+  Model           r (AAE)      r (SAE)       d         χ2          p
+
+  GPT2             67.3%         63.6%       1      37.8      .0000
+  RoBERTa          72.7%         60.9%       1     187.2      .0000
+  GPT3.5           52.5%         34.5%       1      22.3      .0000
+  GPT4             49.8%         35.3%       1      14.8      .0001
+
+
+The table shows the rate of convictions as well as the results of two-sided chi-squared tests,
+which are significant for all language models (with Holm-Bonferroni correction for multiple
+comparisons). r: rate of convictions; d: degrees of freedom; χ2: χ2-statistic; p: p-value. The
+rate of convictions is higher for AAE compared to SAE, for all language models. We cannot
+conduct this analysis with T5, which does not contain the tokens ‘acquitted’ and ‘convicted’
+in its vocabulary.
+Article
+Extended Data Table 6 | Rate of death sentences for AAE
+and SAE
+
+  Model           r (AAE)      r (SAE)      d         χ2          p
+
+  GPT2             39.4%        29.2%       1     552.9      .0000
+  RoBERTa          33.4%        30.0%       1      31.2      .0000
+  T5               13.1%        13.0%       1       0.2      .6586
+  GPT3.5           41.0%        30.2%       1       9.9      .0050
+  GPT4             10.5%         6.2%       1       6.8      .0186
+
+
+The table shows the rate of death sentences as well as the results of two-sided chi-squared
+tests, which are significant for all language models except T5 (with Holm-Bonferroni correction
+for multiple comparisons). r: rate of death sentences; d: degrees of freedom; χ2: χ2-statistic;
+p: p-value. The rate of death sentences is higher for AAE compared to SAE, for all language
+models.
+Extended Data Table 7 | Language modelling perplexity on AAE and SAE text as a function of model size
+
+  Model                    Size     Size class       m (AAE)       s (AAE)      m (SAE)        s (SAE)
+
+  GPT2 base              1.2e8      small               460.0        834.4          140.9        158.8
+  GPT2 medium            3.5e8      medium              353.3        421.7          112.8        137.6
+  GPT2 large             7.7e8      large               310.7        368.3          100.0        115.2
+  GPT2 xl                1.6e9      large               296.3        367.3           95.7        114.8
+  RoBERTa base           1.3e8      small                80.4        160.6           16.9         36.3
+  RoBERTa large          3.6e8      large                44.8         88.6           12.3         28.7
+  T5 small               6.0e7      small                89.3        106.8           31.9         38.4
+  T5 base                2.2e8      medium               42.0         54.6           15.5         19.9
+  T5 large               7.7e8      large                27.9         35.0           11.3         13.9
+  T5 3b                  2.8e9      large                20.9         25.8           10.0         12.5
+  GPT3.5                1.8e11      very large          267.5        342.9          143.0        480.1
+
+
+The models are distributed into four classes using the threshold sizes of 1.5 × 108, 3.5 × 108 and 1.0 × 1010 parameters. Perplexity values are actual perplexities for the GPT models but
+pseudo-perplexities112 for RoBERTa and T5, for which perplexity is not well-defined. m: average; s: standard deviation. Larger models tend to have lower perplexity values on AAE, indicating
+that they are better at processing AAE. We exclude GPT4 from this analysis since it is not possible to compute perplexity using the OpenAI API.
+Article
+Extended Data Table 8 | Strength of covert (C) and overt (O)
+stereotypes in language models as a function of model size
+
+  Model                     Size      Size class       m (C)        s (C)      m (O)        s (O)
+
+  GPT2 base               1.2e8       small            0.087       0.029       0.044       0.083
+  GPT2 medium             3.5e8       medium           0.090       0.029      -0.040       0.118
+  GPT2 large              7.7e8       large            0.105       0.028      -0.006       0.088
+  GPT2 xl                 1.6e9       large            0.089       0.044       0.041       0.119
+  RoBERTa base            1.3e8       small            0.118       0.027      -0.058       0.094
+  RoBERTa large           3.6e8       large            0.166       0.045      -0.090       0.100
+  T5 small                6.0e7       small            0.005       0.031       0.088       0.049
+  T5 base                 2.2e8       medium           0.074       0.037      -0.002       0.060
+  T5 large                7.7e8       large            0.073       0.033      -0.011       0.109
+  T5 3b                   2.8e9       large            0.113       0.028      -0.091       0.117
+  GPT3.5                 1.8e11       very large       0.187       0.116      -0.119       0.248
+
+
+The models are distributed into four classes using the threshold sizes of 1.5 × 108, 3.5 × 108 and
+1.0 × 1010 parameters. m: average; s: standard deviation. Larger models tend to have stronger
+covert but weaker overt stereotypes. We exclude GPT4 from this analysis (see caption of
+Extended Data Table 7).
+                                                                                                                                                                                         nature portfolio | reporting summary
+                                                                                                     Corresponding author(s): Valentin Hofmann, Sharese King
+                                                                                                     Last updated by author(s): Jun 21, 2024
+
+
+
+
+Reporting Summary
+Nature Portfolio wishes to improve the reproducibility of the work that we publish. This form provides structure for consistency and transparency
+in reporting. For further information on Nature Portfolio policies, see our Editorial Policies and the Editorial Policy Checklist.
+
+
+
+
+Statistics
+For all statistical analyses, confirm that the following items are present in the figure legend, table legend, main text, or Methods section.
+n/a Confirmed
+           The exact sample size (n) for each experimental group/condition, given as a discrete number and unit of measurement
+           A statement on whether measurements were taken from distinct samples or whether the same sample was measured repeatedly
+           The statistical test(s) used AND whether they are one- or two-sided
+           Only common tests should be described solely by name; describe more complex techniques in the Methods section.
+
+           A description of all covariates tested
+           A description of any assumptions or corrections, such as tests of normality and adjustment for multiple comparisons
+           A full description of the statistical parameters including central tendency (e.g. means) or other basic estimates (e.g. regression coefficient)
+           AND variation (e.g. standard deviation) or associated estimates of uncertainty (e.g. confidence intervals)
+
+           For null hypothesis testing, the test statistic (e.g. F, t, r) with confidence intervals, effect sizes, degrees of freedom and P value noted
+           Give P values as exact values whenever suitable.
+
+           For Bayesian analysis, information on the choice of priors and Markov chain Monte Carlo settings
+           For hierarchical and complex designs, identification of the appropriate level for tests and full reporting of outcomes
+           Estimates of effect sizes (e.g. Cohen's d, Pearson's r), indicating how they were calculated
+                                                Our web collection on statistics for biologists contains articles on many of the points above.
+
+
+
+Software and code
+Policy information about availability of computer code
+  Data collection        We used Python 3.10 to probe the language models. Specifically, we drew upon the package openai 0.28.1 to probe GPT3.5 and GPT4, and
+                         transformers 4.36.2 to probe GPT2, RoBERTa, and T5.
+
+  Data analysis          Data analysis was performed in Python 3.10. The specific packages we used were numpy 1.22.4, pandas 1.5.2, scipy 1.7.3, and statsmodels
+                         0.13.2. All code used for data analysis can be found at https://github.com/valentinhofmann/dialect-prejudice.
+For manuscripts utilizing custom algorithms or software that are central to the research but not yet described in published literature, software must be made available to editors and
+reviewers. We strongly encourage code deposition in a community repository (e.g. GitHub). See the Nature Portfolio guidelines for submitting code & software for further information.
+
+
+
+Data
+Policy information about availability of data
+ All manuscripts must include a data availability statement. This statement should provide the following information, where applicable:
+    - Accession codes, unique identifiers, or web links for publicly available datasets
+    - A description of any restrictions on data availability
+                                                                                                                                                                                              April 2023
+
+
+
+
+    - For clinical datasets or third party data, please ensure that the statement adheres to our policy
+
+
+All datasets used in this study are publicly available. The dataset released by Groenwold et al. (2020) can be found at https://aclanthology.org/2020.emnlp-
+main.473/. The dataset released by Blodgett et al. (2016) can be found at http://slanglab.cs.umass.edu/TwitterAAE/. The human stereotype scores used for
+
+
+                                                                                                                                                                                               1
+evaluation can be found in the published articles of the Princeton Trilogy studies (Katz and Braly, 1933; Gilbert, 1951; Karlins et al., 1969; Bergsieker et al., 2012).
+The most recent of these articles (Bergsieker et al., 2012) also contains the human favorability scores for the trait adjectives. The dataset of occupational prestige
+
+
+
+
+                                                                                                                                                                            nature portfolio | reporting summary
+that we use in the employability analysis can be found in the corresponding paper (Smith and Son, 2014). The Brown Corpus (Francis and Kucera, 1979), which is
+used in the Supplementary Information (Feature analysis), can be found at http://www.nltk.org/nltk data/. The dataset containing the parallel African American
+English, Appalachian English, and Indian English texts (Ziems et al., 2023), which is used in the Supplementary Information (Alternative explanations), can be found
+at https://huggingface.co/collections/SALT-NLP/value-nlp-666b60a7f76c14551bda4f52.
+
+
+
+Research involving human participants, their data, or biological material
+Policy information about studies with human participants or human data. See also policy information about sex, gender (identity/presentation),
+and sexual orientation and race, ethnicity and racism.
+  Reporting on sex and gender              The study did not involve human participants.
+
+  Reporting on race, ethnicity, or The study did not involve human participants.
+  other socially relevant
+  groupings
+
+  Population characteristics               The study did not involve human participants.
+
+  Recruitment                              The study did not involve human participants.
+
+  Ethics oversight                         The study did not involve human participants.
+
+Note that full information on the approval of the study protocol must also be provided in the manuscript.
+
+
+
+Field-specific reporting
+Please select the one below that is the best fit for your research. If you are not sure, read the appropriate sections before making your selection.
+
+    Life sciences                       Behavioural & social sciences                 Ecological, evolutionary & environmental sciences
+For a reference copy of the document with all sections, see nature.com/documents/nr-reporting-summary-flat.pdf
+
+
+
+
+Behavioural & social sciences study design
+All studies must disclose on these points even when the disclosure is negative.
+
+  Study description               We relied on existing datasets of African American English and Standard American English texts, which we embedded in prompts and
+                                  fed into language models. We then analyzed the predictions of the language models for the two types of input, in both qualitative
+                                  and quantitative ways.
+
+  Research sample                 The study did not involve human participants. We used African American English and Standard American English texts from publicly
+                                  available datasets, specifically Groenwold et al. (2020) and Blodgett et al. (2016), which are among the only large-scale datasets
+                                  containing both African American English and Standard American English texts available today. While the two datasets cover the
+                                  most stigmatized canonical features of African American English shared among Black speakers cross-regionally, neither of them is
+                                  representative of the fine-grained regional variability of African American English.
+
+  Sampling strategy               For the smaller of the two datasets (Groenwold et al., 2020), we used all available texts. For the larger of the two datasets (Blodgett
+                                  et al., 2016), we randomly sampled texts such that the resulting dataset had a similar size as the dataset from Groenwold et al.
+                                  (2020). This was important in order to ensure comparability of results across datasets and to make conducting the experiments
+                                  feasible for a larger number of language models.
+
+  Data collection                 The texts from the two datasets were embedded in prompts asking for properties of the speakers who have uttered the texts. For
+                                  each analysis, we selected several different prompts in order to be able to test for consistency. We then drew upon Python packages,
+                                  specifically openai 0.28.1 and transformers 4.36.2, to feed the filled prompts into the language models and retrieve their predictions.
+                                  We chose the examined language models to cover the full spectrum of language models in use today, in terms of architecture, size,
+                                  and overall model cababilities.
+
+  Timing                          Experiments involving GPT2, RoBERTa, T5, and GPT3.5 were conducted in April and May 2023. Experiments involving GPT4 were
+                                  conducted in January 2024.
+
+  Data exclusions                 No data were excluded from the analyses.
+
+  Non-participation               The study did not involve human participants.
+                                                                                                                                                                                 April 2023
+
+
+
+
+  Randomization                   The study did not involve human participants.
+
+
+
+
+                                                                                                                                                                                  2
+                                                                                                                                                                              nature portfolio | reporting summary
+Reporting for specific materials, systems and methods
+We require information from authors about some types of materials, experimental systems and methods used in many studies. Here, indicate whether each material,
+system or method listed is relevant to your study. If you are not sure if a list item applies to your research, read the appropriate section before selecting a response.
+
+
+Materials & experimental systems                                Methods
+n/a Involved in the study                                      n/a Involved in the study
+          Antibodies                                                      ChIP-seq
+          Eukaryotic cell lines                                           Flow cytometry
+          Palaeontology and archaeology                                   MRI-based neuroimaging
+          Animals and other organisms
+          Clinical data
+          Dual use research of concern
+          Plants
+
+
+
+Plants
+  Seed stocks                     Report on the source of all seed stocks or other plant material used. If applicable, state the seed stock centre and catalogue number. If
+                                  plant specimens were collected from the field, describe the collection location, date and sampling procedures.
+
+  Novel plant genotypes           Describe the methods by which all novel plant genotypes were produced. This includes those generated by transgenic approaches,
+                                  gene editing, chemical/radiation-based mutagenesis and hybridization. For transgenic lines, describe the transformation method, the
+                                  number of independent lines analyzed and the generation upon which experiments were performed. For gene-edited lines, describe
+                                  the editor used, the endogenous sequence targeted for editing, the targeting guide RNA sequence (if applicable) and how the editor
+                                  was applied.
+  Authentication                  Describe any authentication procedures for each seed stock used or novel genotype generated. Describe any experiments used to
+                                  assess the effect of a mutation and, where applicable, how potential secondary effects (e.g. second site T-DNA insertions, mosiacism,
+                                  off-target gene editing) were examined.
+
+
+
+
+                                                                                                                                                                                   April 2023
+
+
+
+
+                                                                                                                                                                                    3
+

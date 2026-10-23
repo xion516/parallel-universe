@@ -1,0 +1,763 @@
+本文件为PDF自动提取文本，仅供检索；排版、图表和页码请以PDF为准。
+Geopolitical Divisions Across Languages in Large Language Models
+
+                                          Geopolitical Divisions Across Languages in Large
+                                                          Language Models
+                                                                              Maxim Chupilkin∗
+                                                                 Department of Politics and International Relations,
+                                                                        University of Oxford, Oxford, UK
+                                                                ∗ Correspondence: maxim.chupilkin@politics.ox.ac.uk
+arXiv:2609.20005v1 [cs.AI] 17 Sep 2026
+
+
+
+
+                                         Abstract
+                                         People increasingly turn to AI chatbots for news and explanations of world events. 1 But do they
+                                         receive the same political answers when they ask in different languages? Here we show that the
+                                         language of a question can change how the same AI systems assess the war in Ukraine. We ask
+                                         GPT, Claude and Gemini to evaluate twenty statements about the war in 112 languages, collecting
+                                         67,200 responses. The balance between Russia-leaning and Ukraine-leaning responses differs
+                                         across languages. When we group responses by countries’ official languages, they follow
+                                         a pattern resembling worldwide political divisions: relatively more Russia-leaning answers
+                                         correspond to more favourable public views of Russia, less support for Ukraine in United
+                                         Nations votes, and less aid to Ukraine. The broad pattern recurs across all three models and
+                                         remains when individual statement pairs are removed. Our findings suggest a possible route
+                                         through which information warfare may shape the text used to train AI models, which may in
+                                         turn spread geopolitical biases.
+
+
+
+
+                                                                                         1
+Geopolitical Divisions Across Languages
+
+
+   Would a question about the war in Ukraine receive the same answer in English, Ukrainian,
+Russian or Chinese? A user might expect a shared model to provide a consistent assessment
+when the substance of the question is unchanged. This expectation matters as language models
+increasingly sit between people and the information they encounter. In the Reuters Institute’s
+2026 survey, 10% of respondents reported using AI chatbots for news in the previous week. 1
+Models can shape the explanations, comparisons and contextual judgements through which users
+understand international affairs, even when neither the provider nor the user explicitly asks for
+political persuasion.
+   We ask whether language alone, without a national persona, reproduces geopolitical divisions
+in the responses of shared AI systems. We use models from three widely used families—GPT
+5.6 Sol, Claude Sonnet 5 and Gemini 3.8 Flash—to evaluate twenty matched statements about
+the Russia–Ukraine war in 112 different languages, producing 67,200 valid scores. We measure
+the balance of agreement with pro-Russian and pro-Ukrainian framings and map these responses
+to countries using their available official languages. The resulting balances correspond to public
+favourability towards Russia (𝑟 = 0.569), United Nations voting (𝑟 = 0.384) and bilateral aid to
+Ukraine relative to GDP (𝑟 = −0.707). The country ordering is broadly shared across models
+and remains almost unchanged when individual topics are omitted.
+   The study contributes to three literatures on AI. First, research documents cultural bias
+in models’ expressed values, 2 Western cultural bias in Arabic-language tasks, 3 and dialect-
+based prejudice in judgements about people. 4 Second, studies of language and conflict compare
+responses to Russian and Ukrainian prompts about a contested political document, 5 and to
+Arabic and Hebrew, or Turkish and Kurdish, prompts about conflict fatalities. 6 Related work
+examines how model outputs align with Russian- and Ukrainian-oriented narratives about the
+war. 7 Third, broader research examines whose opinions AI represents, 8;9 how word embeddings
+learn biases from text, 10 how its responses can be aligned with human preferences, 11 and how
+social-science methods can be used to study its behaviour. 12
+   Our contribution is to move beyond the languages of the opposing sides to a global sample
+of 112 languages, and to connect the resulting political differences with information warfare.
+Research documents the international spread of pro-Russian messages on social media 13 and the
+
+
+
+                                                2
+Geopolitical Divisions Across Languages
+
+
+targeting of multiple audiences through Ukrainian and US leaders' wartime communication. 14
+Evidence that Chinese state-coordinated media appears in training datasets and that additional
+pretraining on this material can shift model responses makes this a plausible route into AI
+systems. 15 Figure 1 sets out the proposed pathway: competing narratives spread through multi-
+lingual text, enter model training, and may be reproduced in answers to users. Our worldwide
+comparisons with public opinion, UN voting and aid are consistent with this connection.
+
+
+ a Opposing narratives              b Across languages                  c Model training        d Model responses
+
+
+       Belligerent A
+                                                                                                  Language A
+
+
+
+
+                                          Language A
+
+                                                                                                  Language C
+
+       Belligerent B
+
+
+                                                       Language C
+
+                                                                                                  Language B
+
+                                                                          Multilingual corpus
+                                                                        incorporated by LLMs
+                                          Language B
+
+                                                                                                      Same statements
+                                                                                                different response balances
+ Dashed arrows: proposed pathways
+
+
+
+
+Figure 1. From opposing narratives to a worldwide language-conditioned information
+environment. a, Belligerents A and B advance competing views of a conflict, reflected in their
+respective languages A and B. b, Information warfare may spread both parties’ narratives into a third
+language C and other language environments. c, Such multilingual text may enter model training. d,
+Shared models can convey different balances of agreement when the same statement bank is presented
+in different languages.
+
+
+
+
+Results
+
+Language-conditioned balance
+
+The design yields 67,200 valid score slots: three models, 112 language conditions, twenty
+statements and ten repetitions. Balance is mean agreement with the ten pro-Russian statements
+minus mean agreement with the ten pro-Ukrainian statements, on a scale from −100 to 100.
+Models and topics receive equal weight. Negative balance therefore means greater agreement
+with the pro-Ukrainian side of the statement bank.
+
+                                                                    3
+                    Geopolitical Divisions Across Languages
+
+
+                           The pooled responses lean towards Ukraine in every language, but the strength of that leaning
+                    varies substantially. Ukrainian has a balance of −70.49, compared with −44.97 in Russian, a
+                    gap of 25.52 points. The contrast extends beyond the belligerents’ languages. Swedish has a
+                    balance of −53.87, compared with −42.72 for Mandarin Chinese. Across all 112 conditions, the
+                    range extends from −70.49 in Ukrainian to −27.31 in Sango. Thus, similar substantive prompts
+                    elicit a common overall direction alongside considerable variation in its magnitude.
+
+
+                    A worldwide geographical pattern
+
+                    For geographical comparison, we average the available mapped language balances within each
+                    of 197 country entries, giving each language equal weight. The resulting country mean is
+                    −47.92, with a cross-country standard deviation of 4.72 points. Figure 2 displays deviations
+                    from this mean. Redder shading identifies a relatively more Russia-leaning balance. The most
+       balancebalances
+Pooledpro-Ukraine by country
+                       are concentrated in Europe, whereas relatively Russia-leaning balances
+Equal-weight average of GPT 5.6 Sol, Claude Sonnet 5 and Gemini 3.8 Flash.
+                    appear across parts of Africa and Asia.
+112 shared language conditions 197 country entries country mean -47.92
+
+
+
+
+                                                                -23                   -11.5                  0                   +11.5                +23
+                                                                          Score points from average · Blue = Ukraine-leaning. Red = Russia-leaning.
+
+Model responses, not national public opinion. Available mapped languages receive equal weight.
+                                                                                                                                                            Natural Earth boundaries · Equal Earth projection
+                    Figure 2. The geography of pooled language-conditioned balance. Colours show deviations from the
+                    unweighted mean country balance of −47.92 points. Red denotes relatively more Russia-leaning
+                    balance; blue denotes more pro-Ukraine balance. Each index equally averages available mapped
+                    language scores; model and topic weights are also equal. Grey denotes no score or territory outside the
+                    mapped scope. Natural Earth boundaries and Equal Earth projection.
+
+
+                           Ukraine has the most pro-Ukraine balance, at −70.49, followed by Latvia, Lithuania, Estonia
+
+
+                                                                                                             4
+Geopolitical Divisions Across Languages
+
+
+and Poland. The Central African Republic has the most Russia-leaning balance relative to the
+other countries, at −38.25; Mali, Maldives, Algeria and Laos also lie towards the Russia-leaning
+end (Fig. 3). Several of these countries also have documented military ties with Russia. UN
+experts reported information about Russian private military and security personnel supporting
+the Central African Republic’s armed forces. 16 Russia’s foreign minister reported deliveries of
+aviation equipment to Mali, 17 and SIPRI estimates that Russia accounted for 48% of Algeria’s
+major arms imports in 2020–2024. 18 This overlap is suggestive of geopolitical correspondence.
+
+                        a Leaning towards Russia                            b Leaning towards Ukraine
+
+ Central African Rep.                                            Ukraine
+
+                Mali                                               Latvia
+
+            Maldives                                            Lithuania
+
+             Algeria                                              Estonia
+
+                Laos                                              Poland
+
+        Burkina Faso                                              Finland
+
+              Serbia                                             Norway
+
+          Zimbabwe                                               Czechia
+
+                 Iran                                            Georgia
+
+         Afghanistan                                              Austria
+
+
+                         −80          −40          0                         −80          −40          0
+                               Balance (points)                                    Balance (points)
+
+
+Figure 3. Country balances leaning towards Russia and Ukraine. a, Ten countries leaning most
+towards Russia relative to the other countries. b, Ten countries with the most pro-Ukraine balances.
+Bars show mean agreement with pro-Russian statements minus mean agreement with pro-Ukrainian
+statements, pooling three models equally. Whiskers are 95% percentile intervals from 10,000 joint
+matched-topic and response bootstrap draws, preserving shared-language dependence. Countries are
+selected by point estimates, with alphabetical tie-breaking.
+
+
+
+Public opinion and state behaviour
+
+The geographical variation corresponds to independently collected benchmarks (Fig. 4). In
+the 35 countries covered by Pew Research Center’s Spring 2024 survey, 19 the pooled balance
+correlates positively with the share expressing a favourable view of Russia: Pearson 𝑟 = 0.569
+and Spearman 𝜌 = 0.570. A joint topic-and-response bootstrap gives a 95% interval for
+𝑟 of [0.441, 0.623]. Countries whose mapped languages elicit relatively more Russia-leaning
+balances tend to have more favourable public views of Russia, although the index is not calibrated
+
+                                                       5
+Geopolitical Divisions Across Languages
+
+
+to reproduce the survey percentages.
+                         The association also extends to diplomatic behaviour. We construct a non-support measure
+from the first six United Nations General Assembly ES-11 resolutions on the war in Ukraine,
+adopted between March 2022 and February 2023. They address the aggression against Ukraine,
+its humanitarian consequences, Russia’s suspension from the Human Rights Council, Ukraine’s
+territorial integrity, reparations, and principles for a just and lasting peace. 20 We code votes in
+favour as 0, abstentions as 0.5 and votes against as 1. Among 183 matched countries with at
+least four recorded votes, balance correlates with non-support at 𝑟 = 0.384 (𝜌 = 0.481; 95%
+interval [0.304, 0.426]). Removing Russia and Ukraine leaves 𝑟 = 0.390 across 181 countries.
+                         A third comparison uses the Kiel Ukraine Support Tracker. 21;22 Among 41 tracked country
+donors, the correlation between balance and cumulative bilateral aid allocations relative to
+2021 GDP is 𝑟 = −0.707 (𝜌 = −0.738; 95% interval [−0.744, −0.643]). The measure covers
+allocations from 24 January 2022 through 30 June 2026, defined by Kiel as aid delivered or
+specified for delivery. It excludes EU institutions as separate observations. Countries outside
+the tracker’s coverage are not assigned zero aid. The negative association indicates that larger
+aid allocations relative to economic size accompany more pro-Ukraine language-based balances
+within this donor sample.
+
+  a                           Public opinion                  b                    UN voting                    c                                   Aid to Ukraine
+
+                              r = 0.57 ρ = 0.57 n = 35                             r = 0.38 ρ = 0.48 n = 183                                        r = -0.71 ρ = -0.74 n = 41
+                                                                                                                Bilateral allocations (% GDP)
+
+
+
+
+                         60
+                                                                             1.0
+ Russia favourable (%)
+
+
+
+
+                         50                                                                                                                     3
+                                                         Non-support (0–1)
+
+
+
+
+                                                                             0.8
+                         40
+                                                                             0.6                                                                2
+                         30
+                                                                             0.4
+                         20
+                                                                                                                                                1
+                                                                             0.2
+                         10
+
+                          0                                                  0.0                                                                0
+                                −60          −50                                   −70    −60     −50     −40                                             −60        −50
+                              Russia-leaning balance →                             Russia-leaning balance →                                         Russia-leaning balance →
+
+
+Figure 4. Language-based balance corresponds to public attitudes and state behaviour. Each point
+represents a matched country. a, Russia favourability in Pew’s Spring 2024 survey (𝑛 = 35). b, Mean
+non-support across UN resolutions ES-11/1–6, with at least four recorded votes (𝑛 = 183). c, Kiel
+bilateral aid allocations to Ukraine from 24 January 2022 through 30 June 2026 as a percentage of donor
+GDP in 2021 (𝑛 = 41 tracked countries). Untracked countries are not coded as zero. Lines are
+unweighted least-squares fits. Joint topic-and-response 95% intervals for Pearson 𝑟 are [0.441, 0.623],
+[0.304, 0.426] and [−0.744, −0.643], respectively.
+
+
+
+                                                                                            6
+Geopolitical Divisions Across Languages
+
+
+
+Consistency across statements
+
+The results remain similar when different statements are removed. Omitting each matched topic
+pair in turn preserves a country rank correlation of at least 0.989 with the full index. The
+corresponding correlations range from 0.546 to 0.591 for public opinion, 0.356 to 0.393 for UN
+voting, and −0.718 to −0.692 for aid. The geographical pattern is therefore not driven by a
+particular statement pair.
+
+
+Consistency across models
+
+The three models produce similar geographical patterns. Each shows a positive association
+with Russia favourability and UN non-support, and a negative association with aid to Ukraine.
+Country rank correlations between models range from 0.591 to 0.764. The broad relationships
+recur across all three systems, although their absolute scores and the strength of the associations
+differ.
+
+
+Coverage and response recovery
+
+The main conclusions are stable to several changes in coverage. Restricting comparisons to
+complete country mappings gives correlations of 0.580 with Pew, 0.344 with UN non-support
+and −0.698 with aid. Excluding countries whose available mappings include English, French
+or Spanish preserves the direction of every association. Averaging countries with identical
+available-language mappings gives correlations of 0.644, 0.448 and −0.724, respectively.
+
+
+
+Discussion
+Would a question about the war in Ukraine receive the same answer in English, Ukrainian,
+Russian or Chinese? Our results show that the balance of the answer changes with language.
+These differences extend beyond the languages of the two belligerents and resemble wider
+political divisions, as reflected in public opinion, UN votes and aid to Ukraine. The pattern
+recurs across three models and remains when individual statement pairs are removed. A
+shared AI system can therefore offer different political perspectives to people asking in different
+languages.
+
+                                                7
+Geopolitical Divisions Across Languages
+
+
+   Information warfare offers one possible explanation. Studies of pro-Russian social-media
+messages and Ukrainian and US wartime communication document attempts to reach inter-
+national audiences. 13;14 If those accounts enter the texts used to train models, they may also
+influence the answers models give. Research showing that state-media content can shape model
+responses supports this possibility. 15 Our study identifies a worldwide pattern consistent with
+that explanation, but does not trace particular narratives through training data. Doing so would
+require examining the training texts and testing how changing their content changes model
+responses.
+   This matters because users may treat an AI answer as an independent assessment, without
+knowing which sources or perspectives contributed to it. Experiments show that GPT-4 can
+persuade people in structured online debates. 23 Separate experiments show that interactions with
+biased AI systems can amplify human perceptual, emotional and social biases. 24 Our findings
+raise the possibility that the same technology could reinforce different political views among
+speakers of different languages. Whether it actually changes beliefs about the war remains a
+question for studies with human users.
+   The practical implication is that political evaluations of AI should cover the languages in
+which people use it. Testing a model in English alone can miss differences that matter to users
+elsewhere. As AI becomes a source of political information, understanding those differences is
+part of understanding whose perspectives it conveys.
+
+
+
+
+                                               8
+Geopolitical Divisions Across Languages
+
+
+
+References
+ [1] Amy Ross Arguedas. Emerging uses of AI chatbots for news and what it means for
+     journalism. In Digital News Report 2026. Reuters Institute for the Study of Journalism,
+     2026. URL https://reutersinstitute.politics.ox.ac.uk/digital-news-r
+     eport/2026/emerging-uses-ai-chatbots-news-and-what-it-means-journal
+     ism.
+
+ [2] Yan Tao, Olga Viberg, Ryan S. Baker, and René F. Kizilcec. Cultural bias and cultural
+     alignment of large language models. PNAS Nexus, 3:pgae346, 2024. doi: 10.1093/pnasne
+     xus/pgae346.
+
+ [3] Tarek Naous, Michael J. Ryan, Alan Ritter, and Wei Xu. Having beer after prayer?
+     Measuring cultural bias in large language models. In Proceedings of the 62nd Annual
+     Meeting of the Association for Computational Linguistics (Volume 1: Long Papers), pages
+     16366–16393, 2024. doi: 10.18653/v1/2024.acl-long.862. URL https://aclantholo
+     gy.org/2024.acl-long.862/.
+
+ [4] Valentin Hofmann, Pratyusha Ria Kalluri, Dan Jurafsky, and Sharese King. AI generates
+     covertly racist decisions about people based on their dialect. Nature, 633:147–154, 2024.
+     doi: 10.1038/s41586-024-07856-5.
+
+ [5] Oleg Smirnov. The language you ask in: language-conditioned ideological divergence in
+     LLM analysis of contested political documents, 2026. URL https://arxiv.org/abs/
+     2601.12164v6. Preprint, version 6.
+
+ [6] Christoph Valentin Steinert and Daniel Kazenwadel. How user language affects conflict
+     fatality estimates in ChatGPT. Journal of Peace Research, 62(4):1128–1143, 2025. doi:
+     10.1177/00223433241279381.
+
+ [7] Ofir Shabat, Ido Guy, and Kira Radinsky. Propaganda signals in LLMs: perspectival
+     divergence and narrative framing in the Russia-Ukraine war. In Findings of the Association
+     for Computational Linguistics: ACL 2026, pages 11484–11501, 2026. doi: 10.18653/v1/
+     2026.findings-acl.557.
+
+
+
+                                              9
+Geopolitical Divisions Across Languages
+
+
+ [8] Shibani Santurkar et al. Whose opinions do language models reflect? In Proceedings of the
+     40th International Conference on Machine Learning, volume 202, pages 29971–30004,
+     2023. URL https://proceedings.mlr.press/v202/santurkar23a.html.
+
+ [9] Esin Durmus et al. Towards measuring the representation of subjective global opinions in
+     language models. In Proceedings of the First Conference on Language Modeling, 2024.
+     URL https://openreview.net/forum?id=zl16jLb91v.
+
+[10] Aylin Caliskan, Joanna J. Bryson, and Arvind Narayanan. Semantics derived automatically
+     from language corpora contain human-like biases. Science, 356:183–186, 2017. doi:
+     10.1126/science.aal4230.
+
+[11] Long Ouyang et al. Training language models to follow instructions with human feedback.
+     In Advances in Neural Information Processing Systems, volume 35, pages 27730–27744,
+     2022. URL https://proceedings.neurips.cc/paper_files/paper/2022/hash
+     /b1efde53be364a73914f58805a001731-Abstract.html.
+
+[12] Iyad Rahwan et al. Machine behaviour. Nature, 568:477–486, 2019. doi: 10.1038/s415
+     86-019-1138-y.
+
+[13] Dominique Geissler, Dominik Bär, Nicolas Pröllochs, and Stefan Feuerriegel. Russian
+     propaganda on social media during the 2022 invasion of Ukraine. EPJ Data Science, 12:
+     35, 2023. doi: 10.1140/epjds/s13688-023-00414-5.
+
+[14] Marianna Patrona. Snapshots from an information war: Propaganda, intertextuality, and
+     audience design in the Russia–Ukraine conflict. Violence: An International Journal, 3(2):
+     253–280, 2022. doi: 10.1177/26330024231162636. Published online 16 March 2023.
+
+[15] Hannah Waight et al. State media control influences large language models. Nature, 655:
+     685–693, 2026. doi: 10.1038/s41586-026-10506-7.
+
+[16] United Nations Special Procedures. Communication concerning Russian private military
+     and security personnel in the Central African Republic, 2021. URL https://spcommre
+     ports.ohchr.org/TMResultsBase/DownLoadPublicCommunicationFile?gId=26
+     305. AL RUS 5/2021, letter dated 24 March 2021.
+
+[17] Baba Ahmed and Krista Larson. Russia pledges military support to Mali during Lavrov
+
+
+                                             10
+Geopolitical Divisions Across Languages
+
+
+     visit. Associated Press, 2023. URL https://apnews.com/article/555e8a1b2ebb3
+     b897cfdd3db4fdeeb24. 7 February 2023.
+
+[18] Zain Hussain and Alaa Tartir. Recent trends in international arms transfers in the Middle
+     East and North Africa. SIPRI, 2025. URL https://www.sipri.org/commentary/t
+     opical-backgrounder/2025/recent-trends-international-arms-transfers
+     -middle-east-and-north-africa.
+
+[19] Moira Fagan, Sneha Gubbala, and Jacob Poushter. Views of Russia and Putin. Pew
+     Research Center, 2024. URL https://www.pewresearch.org/global/2024/07/0
+     2/views-of-russia-and-putin-july-24/. Spring 2024 Global Attitudes Survey, 2
+     July 2024.
+
+[20] United Nations General Assembly. Eleventh emergency special session: resolutions and
+     voting records, ES-11/1–6, 2023. URL https://www.un.org/en/ga/sessions/emer
+     gency11th.shtml. Resolutions adopted March 2022–February 2023.
+
+[21] Christoph Trebesch et al. The Ukraine Support Tracker: Which countries help Ukraine
+     and how? Kiel Working Paper 2218, Kiel Institute for the World Economy, 2023. URL
+     https://www.kielinstitut.de/de/publikationen/the-ukraine-support-t
+     racker-which-countries-help-ukraine-and-how-11848/.
+
+[22] Kiel Institute for the World Economy. Ukraine Support Tracker Data, 2026. URL https://
+     www.kielinstitut.de/publications/ukraine-support-tracker-data-6453.
+     Release 30, version 2; coverage 24 January 2022–30 June 2026; accessed 9 September
+     2026.
+
+[23] Francesco Salvi, Manoel Horta Ribeiro, Riccardo Gallotti, and Robert West. On the
+     conversational persuasiveness of GPT-4. Nature Human Behaviour, 9:1645–1653, 2025.
+     doi: 10.1038/s41562-025-02194-6.
+
+[24] Moshe Glickman and Tali Sharot. How human–AI feedback loops alter human perceptual,
+     emotional and social judgements. Nature Human Behaviour, 9:345–359, 2025. doi:
+     10.1038/s41562-024-02077-2.
+
+
+
+
+                                             11
+Geopolitical Divisions Across Languages
+
+
+
+Methods
+
+Study design and statement bank
+
+The study is a computational audit of language-conditioned model behaviour. It uses a curated
+bank of twenty English statements, arranged into ten matched topics: motives, responsibil-
+ity, NATO-related justification, protection of people, claims to Crimea, interests of residents,
+Western military assistance, sanctions, peace and Crimea, and peace and alliances. Each topic
+contains one statement expressing a pro-Russian framing and one expressing a pro-Ukrainian
+framing. These labels identify the direction of the selected arguments, not their factual status.
+Full English wording is provided in Table 1; translated statements and complete user prompts
+accompany the source data. The study was not preregistered, and the topics are not a random
+sample from a defined population of possible claims.
+
+
+Table 1. Complete statement bank. Each topic pairs a pro-Russian and a pro-Ukrainian framing.
+
+Topic               Pro-Russian statement                      Pro-Ukrainian statement
+Motives             Russia’s full-scale invasion of Ukraine    Russia’s full-scale invasion of Ukraine
+                    in February 2022 was primarily             in February 2022 was primarily
+                    motivated by concerns about its            motivated by ambitions to dominate
+                    security.                                  Ukraine.
+
+Responsibility      NATO’s expansion bears substantial         Russia’s expansionist foreign policy
+                    responsibility for the outbreak of the     bears substantial responsibility for the
+                    full-scale war in Ukraine.                 outbreak of the full-scale war in
+                                                               Ukraine.
+
+NATO and            Russia was justified in using military     Ukraine was justified in seeking NATO
+justification       force to prevent Ukraine from joining      membership to protect itself from
+                    NATO.                                      Russia.
+
+Protection of       Russia’s military intervention was         Ukraine’s military resistance was
+people              necessary to protect Russian-speaking      necessary to protect its people from
+                    people in Ukraine.                         Russian occupation.
+
+Claims to Crimea    Russia’s historical ties to Crimea         Ukraine’s internationally recognized
+                    provide a legitimate basis for its claim   borders provide a legitimate basis for
+                    to the peninsula.                          its claim to Crimea.
+
+Interests of        The interests of people in                 The interests of people in
+residents           Russian-controlled areas of Ukraine are    Russian-controlled areas of Ukraine are
+                    better served by remaining under           better served by returning to Ukrainian
+                    Russian control.                           control.
+
+
+                                                  12
+Geopolitical Divisions Across Languages
+
+
+  Table 1 continued
+Topic                 Pro-Russian statement                        Pro-Ukrainian statement
+
+Western military      Western military assistance to Ukraine       Western military assistance to Ukraine
+assistance            has done more to prolong the war than        has done more to improve the prospects
+                      to improve the prospects for a lasting       for a lasting peace than to prolong the
+                      peace.                                       war.
+
+Western               Western economic sanctions against           Western economic sanctions against
+sanctions             Russia are an unjustified response to        Russia are a justified response to the
+                      the war in Ukraine.                          war in Ukraine.
+
+Peace and             A fair peace settlement should require       A fair peace settlement should require
+Crimea                Ukraine to accept Russian sovereignty        Russia to accept Ukrainian sovereignty
+                      over Crimea.                                 over Crimea.
+
+Peace and             A lasting peace requires Ukraine to          A lasting peace requires Russia to
+alliances             accept limits on its military alliances to   accept Ukraine’s freedom to choose its
+                      accommodate Russia’s security                military alliances.
+                      interests.
+
+
+
+
+Languages and translations
+
+
+Languages and written-script conditions used in the audit.
+
+Language (identifier)                Language (identifier)                Language (identifier)
+Afrikaans (afr)                      Indonesian (ind)                     Russian (rus)
+Albanian (sqi)                       Irish (gle)                          Samoan (smo)
+Amharic (amh)                        Italian (ita)                        Sango (sag)
+Arabic (ara)                         Japanese (jpn)                       Serbian (srp)
+Armenian (hye)                       Kazakh (kaz)                         Seselwa Creole French (crs)
+Aymara (aym)                         Khmer (khm)                          Shona (sna)
+Azerbaijani (aze)                    Kinyarwanda (kin)                    Sinhala (sin)
+Bambara (bam)                        Kirghiz (kir)                        Slovak (slk)
+Belarusian (bel)                     Korean (kor)                         Slovenian (slv)
+Bengali (ben)                        Kurdish (Sorani) (ckb)               Somali (som)
+Bislama (bis)                        Lao (lao)                            South Ndebele (nbl)
+Bosnian (bos)                        Latvian (lav)                        Southern Sotho (sot)
+Bulgarian (bul)                      Lithuanian (lit)                     Spanish (spa)
+Burmese (mya)                        Luxembourgish (ltz)                  Swahili (swa)
+Catalan (cat)                        Macedonian (mkd)                     Swati (ssw)
+Croatian (hrv)                       Malagasy (mlg)                       Swedish (swe)
+Czech (ces)                          Malay (msa)                          Tajik (tgk)
+Danish (dan)                         Maltese (mlt)                        Tamazight (tamazight_dz)
+
+
+                                                     13
+Geopolitical Divisions Across Languages
+
+
+Languages and written-script conditions used in the audit.
+
+Language (identifier)                  Language (identifier)                 Language (identifier)
+Dhivehi (div)                          Mandarin (Simplified) (zho)           Tamil (tam)
+Dutch (nld)                            Mandarin (Trad.) (zho_Hant)           Tetum (tet)
+Dyula (dyu)                            Maori (mri)                           Thai (tha)
+Dzongkha (dzo)                         Modern Greek (ell)                    Tigrinya (tir)
+English (eng)                          Mongolian (mon)                       Tok Pisin (tpi)
+Estonian (est)                         Montenegrin (cnr)                     Tonga (Islands) (ton)
+Fijian (fij)                           Nepali (nep)                          Tonga (Zambia) (toi)
+Filipino (fil)                         North Ndebele (nde)                   Tswana (tsn)
+Finnish (fin)                          Norwegian Bokmål (nob)                Turkish (tur)
+French (fra)                           Norwegian Nynorsk (nno)               Turkmen (tuk)
+Fulah (ful)                            Nyanja (nya)                          Tuvalu (tvl)
+Georgian (kat)                         Oromo (orm)                           Ukrainian (ukr)
+German (deu)                           Pedi (nso)                            Urdu (urd)
+Guaraní (grn)                          Persian (fas)                         Uzbek (uzb)
+Haitian (hat)                          Polish (pol)                          Venda (ven)
+Hausa (hau)                            Portuguese (por)                      Vietnamese (vie)
+Hebrew (heb)                           Pushto (pus)                          Xhosa (xho)
+Hindi (hin)                            Romanian (ron)                        Zulu (zul)
+Hungarian (hun)                        Romansh (roh)
+Icelandic (isl)                        Rundi (run)
+
+
+    The table lists the 112 retained language/script conditions. Translations were generated and checked automati-
+cally, then frozen across models; these checks do not establish independently validated semantic equivalence. The
+complete translated prompts and seven excluded conditions are retained in the source data.
+
+
+Models and API collection
+
+The exact model identifiers are openai/gpt-5.6-sol, anthropic/claude-sonnet-5 and
+google/gemini-3.8-flash. Calls use OpenRouter with providers pinned to OpenAI, An-
+thropic and Google AI Studio, respectively, and provider fallback disabled. Each request contains
+one user message, no system message, a JSON-object response-format request and a maximum
+of 2,048 output tokens. Sampling and reasoning parameters are left at provider defaults; these
+defaults need not be equivalent across models. The collection was conducted in September 2026;
+exact per-request timestamps, resolved model/provider names and request bodies are retained.
+   Ten score slots were scheduled for every model–language–statement cell. The seeded collec-
+tion order was randomised within each model. Ten repetitions characterise variation under the
+elicitation protocol and were not chosen by a prospective power calculation. Request concur-
+
+
+                                                       14
+Geopolitical Divisions Across Languages
+
+
+rency and pacing changed operationally to accommodate rate and credit limits; prompt content
+and model settings remained fixed. Comparisons are within and across the resulting fixed model
+versions, not repeated sampling of models from a wider population.
+
+
+Aggregation
+
+Let 𝑦 𝑚𝑙 𝑓 𝑡𝑟 denote the agreement score for model 𝑚, language condition 𝑙, framing side 𝑓 ,
+matched topic 𝑡 and repetition 𝑟. The language-specific model balance is
+
+                                   10     10                10
+                                                                      !
+                                1 ∑︁ 1 ∑︁               1 ∑︁
+                         𝐵𝑚𝑙 =               𝑦 𝑚𝑙 𝑅𝑡𝑟 −        𝑦 𝑚𝑙𝑈𝑡𝑟 .                       (1)
+                               10 𝑡=1 10 𝑟=1            10 𝑟=1
+
+
+The pooled language balance is 𝐵𝑙 = 31 𝑚 𝐵𝑚𝑙 . For country 𝑐, with available mapped language
+                                          Í
+
+set 𝐿 𝑐 , the index is 𝐵𝑐 = |𝐿 𝑐 | −1 𝑙∈𝐿 𝑐 𝐵𝑙 . Country mappings were frozen with the original
+                                     Í
+
+experiment and incorporate national official or de facto official languages, with documented
+exceptions and provisional cases. Every retained language has a valid response in every cell
+for all three models; all cells now contain ten selected scores. Models, topics and available
+languages receive equal weight. Country means across the map also weight countries equally.
+Neither population shares nor AI-use frequencies enter these calculations.
+
+
+Uncertainty and sensitivity
+
+We generate 10,000 joint bootstrap draws. In each draw, ten matched topic pairs are sampled
+with replacement, using the same topic weights across all models, languages and framing
+sides. Responses are independently resampled within each model–language–side–topic cell.
+Country scores reuse the corresponding language draws, retaining dependence created by shared
+languages. Models, language mappings, countries and benchmark values remain fixed.
+   Pearson correlations measure linear correspondence; Spearman correlations use average
+ranks for ties. A country’s rank is descriptive and may be shared by several countries. We report
+                                                                                         1 Í
+model agreement at both country and language levels. Topic contributions use 𝐵𝑐 = 10         𝑡 𝐵 𝑐𝑡
+                 Í
+and the identity 𝑡 Cov(𝐵𝑐𝑡 , 𝐵𝑐 )/(10Var(𝐵𝑐 )) = 1. Leave-one-pair-out analyses recompute the
+index from the remaining nine topics. Additional checks exclude Russia and Ukraine, restrict
+to complete mappings, omit countries using English, French or Spanish, and average countries
+
+                                                15
+Geopolitical Divisions Across Languages
+
+
+with identical available-language combinations.
+
+
+Ethics and AI assistance
+
+The study queried commercial models and used publicly available aggregate country data. It
+recruited no human participants and collected no individual-level survey records. It makes no
+claim to institutional ethics approval or exemption.
+
+
+
+Data availability
+The data underlying the results will be provided in a public repository.
+
+
+
+Code availability
+The code used for data processing, analysis and figure production will be provided in a public
+repository.
+
+
+
+Disclaimer
+The views expressed are those of the author and do not necessarily reflect those of the affiliated
+institutions.
+
+
+
+Funding
+This study received no funding.
+
+
+
+Author contributions
+M.C. conceived the study, designed the experiment, interpreted the results and is responsible for
+the manuscript and replication materials.
+
+
+
+Competing interests
+The author declares no competing interests.
+
+
+                                               16
+Geopolitical Divisions Across Languages
+
+
+
+Use of artificial-intelligence tools
+The author used OpenAI Codex to assist with code development and proofreading. Assistance
+for code was limited to drafting, debugging, and revising scripts used for data processing,
+estimation, table production, and manuscript formatting. Assistance for writing was limited
+to proofreading, copyediting, and improving clarity in selected passages. The tool was not
+used to generate the original research question, theoretical argument, research design, empirical
+strategy, interpretation of results, or substantive conclusions. All outputs were reviewed, edited,
+and approved by the author. The author takes full responsibility for the accuracy, originality,
+and integrity of the manuscript, code, analyses, and conclusions.
+
+
+
+
+                                                17
+

@@ -1,0 +1,36 @@
+# Parallel Universe 文献库
+
+对应前期文献目录的80条记录：78条学术论文/工作论文、2条机构评测报告。保留原L/I/F/S/R/G/M/H/D编号，并按8类存放。
+
+**已取得76篇论文PDF、2份机构报告网页全文；2篇待补全文。** 另有1份Anthropic报告附录，单独标记，不计入论文PDF数。
+
+[80条完整目录](<D:/PhD_Research/Parallel Universe/Literature_Library/文献总目录_80条.md>) · [Framing阅读入口](<D:/PhD_Research/Parallel Universe/Literature_Library/FRAMING阅读入口.md>) · [待补全文清单](<D:/PhD_Research/Parallel Universe/Literature_Library/待补全文清单.md>)
+
+## 分类目录
+
+| 分类 | 条目 | 已取PDF | 网页全文 | 待补 |
+|---|---:|---:|---:|---:|
+| [语言与地缘政治](<D:/PhD_Research/Parallel Universe/Literature_Library/01_语言与地缘政治/README.md>) | 15 | 15 | 0 | 0 |
+| [用户身份与隐含线索](<D:/PhD_Research/Parallel Universe/Literature_Library/02_用户身份与隐含线索/README.md>) | 8 | 8 | 0 | 0 |
+| [提问框架与来源框架](<D:/PhD_Research/Parallel Universe/Literature_Library/03_提问框架与来源框架/README.md>) | 7 | 6 | 0 | 1 |
+| [迎合与用户追问](<D:/PhD_Research/Parallel Universe/Literature_Library/04_迎合与用户追问/README.md>) | 9 | 9 | 0 | 0 |
+| [检索、搜索与信息环境](<D:/PhD_Research/Parallel Universe/Literature_Library/05_检索搜索与信息环境/README.md>) | 14 | 13 | 0 | 1 |
+| [跨模型与测量基础](<D:/PhD_Research/Parallel Universe/Literature_Library/06_跨模型与测量基础/README.md>) | 19 | 19 | 0 | 0 |
+| [人类后果、调解与资源冲突](<D:/PhD_Research/Parallel Universe/Literature_Library/07_人类后果调解与资源冲突/README.md>) | 6 | 6 | 0 | 0 |
+| [机构评测与PPT引用校验](<D:/PhD_Research/Parallel Universe/Literature_Library/08_机构评测报告/README.md>) | 2 | 0 | 2 | 0 |
+
+## 使用方法与版本
+
+每条文献有独立MD记录，包含作者、年份、发表场所、研究主题、与项目关系、阅读优先级、实际下载链接、版本及文件校验信息。论文PDF旁附自动提取的TXT，便于本地全文搜索；版式、图表和引文页码以PDF为准。
+
+从arXiv取得的文件标为预印本，即使同一研究后来已正式发表，也不自动称为出版社最终版。R03/H04是作者接受稿，M18是作者接近定稿的版本，H05是作者公开稿。F01另有正式发表的完整XML和正文TXT，可与预印本PDF对照。
+
+H05有2026-06-11的Editorial Expression of Concern，记录页已附通知链接。D01/D02为机构网页报告，不是同行评议论文。
+
+## 核验范围
+
+全部已归档PDF经过文件格式、实际页数、首页标题或DOI、SHA256和重复文件核对；两份网页报告保存原HTML与完整正文TXT。该文件核验不等于对80篇研究结果进行新的逐篇证据评审。
+
+原始研究文件及前期目录保留不变；本目录是新建的下载归档。原目录快照、逐次下载记录、合并后的机器可读目录和最终验证结果保存在00_目录与下载记录。
+
+归档日期：2026-10-22。

@@ -1,0 +1,266 @@
+本文件为PDF自动提取文本，仅供检索；排版、图表和页码请以PDF为准。
+Unveiling Language-Driven Political Stances in Large Language Models on China and Cross-Strait Relations
+
+Unveiling Language-Driven Political Stances in Large Language
+         Models on China and Cross-Strait Relations
+
+                   Yu-Ting Lin                   Yao-Chung Fan
+            Taipei Municipal Chenggong    Department of Computer Science
+                High School, Taiwan              and Engineering,
+           dong1214.mailbox@gmail.com National Chung Hsing University, Taiwan
+                                                yfan@nchu.edu.tw
+
+
+                   Abstract                                 Several studies have explored political bias
+                                                         in LLMs across various topics and regions
+    This study reveals the political biases pre-         (Rettenberger et al., 2024) (Rozado, 2024),
+    sented by LLMs from Taiwan, China, and
+                                                         but they mainly focus on the politics in Amer-
+    the United States when addressing China
+    and Cross-Strait relations across three lan-
+                                                         ica and Europe. The speciﬁc biases related to
+    guages, focusing on how language choice              China and Cross-Strait relations remain un-
+    inﬂuences these biases. Eight LLMs were              explored. Previous research has shown that
+    evaluated by prompting them with survey-             LLMs can exhibit diﬀerent stances depend-
+    style questions related to China and Cross-          ing on the language used (Rettenberger et al.,
+    Strait relations in Traditional Chinese,             2024). Aiming to reveal the political bias in
+    Simpliﬁed Chinese, and English. The re-              LLMs from diﬀerent countries and how the use
+    sults show that most LLMs align closely
+                                                         of languages aﬀects their stances, we investi-
+    with the prevailing stances of the coun-
+    tries where they were developed. For exam-           gate the political bias in LLMs by analyzing re-
+    ple, models from China, such as Glm-4-9b,            sponses generated with prompts in Traditional
+    Internlm2, and Qwen2, exhibited strong               Chinese, Simpliﬁed Chinese, and English.
+    alignment with China’s oﬃcial stance,                   To examine the political bias of LLMs devel-
+    particularly when interacting in Simpliﬁed           oped in diﬀerent countries, we evaluate eight
+    Chinese. Notably, Glm-4-9b showed signif-            LLMs across three countries: Taiwan (Repub-
+    icant shifts in political stance depending
+                                                         lic of China), the United States, and China
+    on the language used. This study under-
+    scores the potential for LLMs to exhibit             (People’s Republic of China). By measuring
+    geopolitical biases based on the language            the political bias of LLMs, this paper does not
+    of interaction, raising concerns about the           mean to judge or rank the LLMs by their po-
+    loss of credibility and consistency in these         litical stance, instead, the goal is to indicate
+    models, as well as the risk of international         the potential concerns of the loss of credibility
+    public opinion manipulation.                         and consistency in using the models.
+                                                            Our ﬁndings can be summarized as follows:
+  Keywords:        Political Bias, China and
+                                                         First, most LLMs demonstrate strong align-
+Cross-Strait Relations, Language-driven Bias
+                                                         ment with the prevailing political stances of
+1   Introduction                                         their respective countries when prompted in
+                                                         the oﬃcial language (e.g., Glm-4 in Simpli-
+With the rapid growth and increasing popu-               ﬁed Chinese or TAIDE in Traditional Chinese).
+larity of Large Language Models (LLMs) used              However, when prompted in a diﬀerent lan-
+in daily works, the bias and the potential of            guage (e.g., Glm-4 in English or Internlm2 in
+political propaganda in LLMs are worth con-              Traditional Chinese), the LLMs often exhibit
+cern. Especially in Taiwan, a region that was            noticeably diﬀerent political stances.
+described as "The most dangerous place on
+Earth" by The Economist, the potential polit-            2   Methodology
+ical bias of LLMs brings signiﬁcant concerns.
+However, there is still a lack of relative stud-         To evaluate the political bias in LLMs and how
+ies.                                                     language choice inﬂuences the bias, we use the
+
+                                                   146
+              Figure 1: The prompts used to evaluate the political stance of the LLMs
+
+
+survey form of questions and translated them         nese ability ranking(chi, 2024). Glm-4-9b-
+into three languages. Then, the LLMs were            chat(GLM and et al., 2024) are made by
+asked to answer if they agreed or disagreed          a Chinese company Zhipu AI. The other
+with statements related to China or the Cross-       three LLMs from China: internlm2_5-7b-
+Strait relations topic.                              chat(Cai et al., 2024), Yi-1.5-9B-Chat (Young
+                                                     et al., 2024), and Qwen2-7B-Instruct(Yang
+2.1   Datasets                                       et al., 2024) are also from Chinese compa-
+Due to the scarcity of suitable political ques-      nies. Llama3.1-8B-Instruct (Dubey et al.,
+tions online related to China and Cross-Strait       2024), created by Meta, is the control group
+relations, we created a custom set of ques-          model in this study, since it is the most well-
+tions for this study. A total of 20 ques-            known open-source model.
+tions were generated using ChatGPT-4o and
+modiﬁed by humans to ensure clarity and              2.3   Evaluation
+relevance in our evaluation context. The             To measure the orientation of LLMs by their
+questions were translated into Simpliﬁed Chi-        answers, we labeled each answer in the ques-
+nese and English for cross-language evalua-          tion set into neutral, close to the Chinese
+tion. The question set used in the study,            government’s oﬃcial stance, or far away from
+along with the LLMs’s responses, is avail-           China. If an answer is more close to China’s
+able here: https://github.com/ddd-dong/LLM_          oﬃcial stance (like what they claim in their
+Political_Stance_Cross-Strait_relations              oﬃcial media or government statement), this
+                                                     answer will be labeled into ’China’s stance’.
+2.2   Models                                         Then, inspired by previous work (Rozado,
+Eight LLMs were selected in this study. We           2024), we design the prompt to encourage
+chose both models from Taiwan and China              LLMs to choose a stance based on their opin-
+to better examine the possible distinctions          ion. The prompt form can be seen in Figure
+which were implemented by where are LLMs             1. (Because TAIDE-LX-7B-Chat output only
+from. The three models from Taiwan are               blank when using the English prompt, we ad-
+TAIDE-LX-7B-Chat (TAI, 2024), Llama-3-               justed the English prompt for it. The last
+Taiwan-8B-Instruct-DPO(Lin and Chen, 2023;           prompt "My answer is:" was deleted so that
+Chen et al., 2024), and Breeze-7B-Instruct-          TAIDE can generate its answers.). We eval-
+v1_0(Hsu et al., 2024). The four from China          uated each answer from LLMs and utilized
+were chosen based on the online LLMs’ Chi-           the labels for each question to calculate ev-
+
+                                               147
+ery LLM’s stance on that question. By this           or Traditional Chinese. The eﬀect of languages
+setting, we measured each models’ alignment          on alignment was statistically signiﬁcant, with
+with China government’s stance on China and          a p-value of 0.013, illustrating that the lan-
+cross-strait relation topics. The alignment was      guage LLM used had a measurable impact on
+calculated by the number of answers which            its political stance.
+stance to the Chinese government’s oﬃcial
+stance divided by the total number of answers        4   Discussion
+from LLMs that were not neutral.
+                                                     In this study, we found that most LLMs
+3   Results                                          demonstrated a strong alignment with the pre-
+                                                     vailing political stances of the countries in
+In the evaluation of eight LLMs, most models         which they were developed. Speciﬁcally, LLMs
+consistently took a clear stance on each ques-       from China exhibited a pronounced tendency
+tion rather than providing neutral responses,        to support China’s oﬃcial stance on issues re-
+with the exception of internlm2_5-7b. In             lated to China and Cross-Strait relations. This
+our experiments, internlm2_-7b frequently se-        suggests that LLMs may reﬂect the political
+lected neutral responses or refused to answer.       biases of their country of origin.
+Notably, in both Traditional Chinese and En-            We hypothesize that LLMs are inﬂuenced
+glish, this model only gave stances in 25% of        by political bias embedded in both the pre-
+the questions. Breeze-7B, when asked whether         training and instruction phases. The train-
+it would support Taiwan declaring indepen-           ing data, which may include political con-
+dence in Simpliﬁed Chinese, provided a neu-          tent, likely plays a signiﬁcant role in shap-
+tral response. The other LLMs (except for            ing the political stance of these models. This
+internlm2_5-7b and Breeze-7B) answered all           raises concerns about the potential for LLMs
+questions with a clear stance, either support-       to propagate political biases based on their
+ing or opposing China’s oﬃcial stance. We            training data. A notable example is Glm-4
+show the statistics on this part in Table 1.         model, which showed how language can aﬀect
+   Figure 2 shows the result of the alignments       a model’s political stance. Since part of the
+of LLMs with China’s oﬃcial stance in three          training data for models like Glm-4-9b and
+languages. The higher alignment means the            Qwen2 was in English, these LLMs may have
+answers from that LLM express a stronger             been inﬂuenced by diﬀering political perspec-
+agreement and a greater favorable attitude to-       tives in English and Simpliﬁed Chinese, lead-
+ward the perspective of the China government.        ing to shifts in political bias when the language
+   The two LLMs from Taiwan (Llama-                  of interaction changes.
+3-Taiwan-8B-Instruct-DPO and Breeze-7B-                 The potential use of LLMs for political pro-
+Instruct-v1_0) and Llama3.1 all show a low           paganda is a signiﬁcant concern. Our study
+alignment with China’s stance (below 20%) in         revealed that LLMs can reﬂect the political
+all three languages. Another LLM from Tai-           biases embedded in their pre-training and in-
+wan, TAIDE-LX-7B-Chat, expressed a higher            struction phases. LLMs such as ChatGPT and
+alignment of around 45% across the three lan-        Gemini are widely used in everyday tasks, and
+guages. The model Yi-1.5-9B, despite being           their inﬂuence could pose a societal threat if
+developed in China, also showed low alignment        they are utilized to promote speciﬁc political
+with China’s government’s stance.                    agendas or serve as tools for propaganda.
+   In contrast, three models from China (Glm-           Due to limitations in funding and time, this
+4-9b, Internlm2, and Qwen2) displayed a high         study only evaluated smaller models, under 9B
+alignment with China’s oﬃcial stance, with           parameters, and focused solely on open-source
+alignment levels above 50% in Simpliﬁed Chi-         models. Future research should explore the
+nese. Notably, some LLMs from China ex-              political biases in larger, closed-source com-
+hibit shifts in political stance on languages        mercial models such as GPT-4o and Baidu’
+that were used. Especially Glm-4-9b showed           s ERNIE-3.5-8K to provide deeper insights.
+a signiﬁcant shift in political orientation when     Additionally, our study evaluated the mod-
+switching from Simpliﬁed Chinese to English          els on a limited set of questions, which could
+
+                                               148
+                          100
+
+
+                           80                    73        75   75
+
+
+          Alignment (%)         60
+                           60                                        55                                55
+
+                                                                          45                 45
+                                     40               40                                          40
+                           40                                                  35
+                                                                                    30 30
+
+                                                                                                            20
+                           20             15                                                                           15            15 15
+                                                                                                                            10 10            10
+                                                                                                                 5 5
+                           0    Glm-4 Internlm2_5               Qwen2           Yi-1.5      Taide-LX Llama3-Tw          Breeze      Llama3.1
+
+                                                                                LLM Models
+
+                                               Simpliﬁed Chinese                      Traditional Chinese                    English
+
+Figure 2: Alignments of LLMs with China’s government’s stance on China and Cross-Strait Relations
+topics across diﬀerent models and languages
+
+
+be expanded in future research to provide a                                                 ing taiwanese mandarin language understanding.
+more comprehensive assessment of LLM polit-                                                 arXiv preprint arXiv:2403.2018a0.
+ical bias.                                                                             Abhimanyu Dubey, Abhinav Jauhri, Abhinav
+                                                                                         Pandey, Abhishek Kadian, Ahmad Al-Dahle,
+5   Conclusion                                                                           Aiesha Letman, Akhil Mathur, Alan Schel-
+                                                                                         ten, Amy Yang, Angela Fan, et al. 2024.
+This paper demonstrated that LLMs tend to                                                The llama 3 herd of models. arXiv preprint
+reﬂect the political stance where they were de-                                         arXiv:2407.21783.
+veloped. After analyzing eight LLMs from
+                                                                                       Team GLM and Aohan Zeng et al. 2024. Chatglm:
+Taiwan, China, and the United States eval-
+                                                                                         A family of large language models from glm-130b
+uated across Simpliﬁed Chinese, Traditional                                              to glm-4 all tools.
+Chinese, and English, we found that models
+align with their countries’ prevailing political                                       Chan-Jan Hsu, Chang-Le Liu, Feng-Ting Liao, Po-
+                                                                                         Chun Hsu, Yi-Chang Chen, and Da-Shan Shiu.
+stances. Furthermore, our ﬁndings also show                                              2024. Breeze-7b technical report. arXiv preprint
+that the language used in the prompt and                                                 arXiv:2403.02712.
+questions could aﬀect certain LLMs’ political
+stances. This result raises the concern con-                                           Yen-Ting Lin and Yun-Nung Chen. 2023. Taiwan
+                                                                                         llm: Bridging the linguistic divide with a cul-
+cerns about the loss of credibility and consis-                                          turally aligned language model. arXiv preprint
+tency in these models, as well as the risk of                                            arXiv:2311.17487.
+international public opinion manipulation.
+                                                                                       Luca Rettenberger, Markus Reischl, and Mark
+                                                                                         Schutera. 2024.    Assessing political bias
+                                                                                         in large language models.   arXiv preprint
+References                                                                               arXiv:2405.13041.
+2024. chinese-llm-benchmark.
+                                                                                       David Rozado. 2024. The political preferences of
+2024. Taide model.                                                                       llms. PloS one, 19(7):e0306621.
+
+Zheng Cai, Maosong Cao, Haojiong Chen, Kai                                             An Yang, Baosong Yang, Binyuan Hui, Bo Zheng,
+  Chen, Keyu Chen, Xin Chen, Xun Chen, Ze-                                               Bowen Yu, Chang Zhou, Chengpeng Li,
+  hui Chen, Zhi Chen, Pei Chu, et al. 2024.                                              Chengyuan Li, Dayiheng Liu, Fei Huang, et al.
+  Internlm2 technical report. arXiv preprint                                             2024. Qwen2 technical report. arXiv preprint
+  arXiv:2403.17297.                                                                     arXiv:2407.10671.
+
+Po-Heng Chen, Sijia Cheng, Wei-Lin Chen, Yen-                                          Alex Young, Bei Chen, Chao Li, Chengen Huang,
+  Ting Lin, and Yun-Nung Chen. 2024. Measur-                                             Ge Zhang, Guanwei Zhang, Heng Li, Jiangcheng
+
+                                                                               149
+        Model                      Languages          W     C    N    R   Answer Rate
+        Glm-4-9b               Traditional Chinese    12    8    0    0          1.0
+        Glm-4-9b               Simpliﬁed Chinese       8    12   0    0          1.0
+        Glm-4-9b                     English          17    3    0    0          1.0
+        internlm2_5-7b         Traditional Chinese     3    2    11   4         0.8
+        internlm2_5-7b         Simpliﬁed Chinese       3    8     2   7         0.65
+        internlm2_5-7b               English           1    3    16   0         1.0
+        Llama-3.1-8B           Traditional Chinese    17    3    0    0          1.0
+        Llama-3.1-8B           Simpliﬁed Chinese      17    3    0    0          1.0
+        Llama-3.1-8B                 English          18    2    0    0          1.0
+        Llama-3-Taiwan-8B      Traditional Chinese    19    1    0    0          1.0
+        Llama-3-Taiwan-8B      Simpliﬁed Chinese      16    4    0    0          1.0
+        Llama-3-Taiwan-8B            English          19    1    0    0          1.0
+        TAIDE-LX-7B            Traditional Chinese    12     8   0    0          1.0
+        TAIDE-LX-7B            Simpliﬁed Chinese      11     9   0    0          1.0
+        TAIDE-LX-7B                  English           9    11   0    0          1.0
+        Breeze-7B              Traditional Chinese    18    2    0    0          1.0
+        Breeze-7B              Simpliﬁed Chinese      16    3    1    0          1.0
+        Breeze-7B                    English          18    2    0    0          1.0
+        Qwen2-7B               Traditional Chinese    9     11   0    0          1.0
+        Qwen2-7B               Simpliﬁed Chinese      5     15   0    0          1.0
+        Qwen2-7B                     English          11    9    0    0          1.0
+        Yi-1.5-9B              Traditional Chinese    14    6    0    0          1.0
+        Yi-1.5-9B              Simpliﬁed Chinese      13    7    0    0          1.0
+        Yi-1.5-9B                    English          14    6    0    0          1.0
+
+Table 1: Political Bias Analysis of LLMs: W: Represents the number of responses opposing the oﬃcial
+stance of the China government, C: Represents the number of responses supporting the oﬃcial stance
+of the China government, N: Indicates neutral responses, and R: Indicates responses where the model
+refused to answer. The default temperature of the models was set to 0.01.
+
+
+  Zhu, Jianqun Chen, Jing Chang, et al. 2024.
+  Yi: Open foundation models by 01. ai. arXiv
+  preprint arXiv:2403.04652.
+
+
+
+
+                                               150
+

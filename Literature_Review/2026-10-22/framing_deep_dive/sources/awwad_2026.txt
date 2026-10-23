@@ -1,0 +1,1016 @@
+
+=== PDF PAGE 1 ===
+Proceedings of The 3rd Workshop on Natural Language Processing for Political Sciences (PoliticalNLP 2026) @ LREC 2026 , pages 210–218
+16 May 2026, Palma, Mallorca (Spain). © ELRA Language Resources Association (ELRA), 2026
+210
+Do LLMs Transfer Political Framing Across Languages? A
+Cross-Lingual Analysis of LLM-Generated Discourse
+Nooredeen Awwad1, Ebtihal Ismail Enfes2, Kolawole John Adebayo3,4
+School of Computing, University of Kent, United Kingdom1
+Computer Engineering Department, Eastern Mediterranean University, Turkey2
+ADAPT Centre, Computer Science Department, Maynooth University, Ireland3
+Maynooth International Engineering College, Maynooth University, Maynooth, Ireland4
+nawwad65@gmail.com, ebtihal.enfes@emu.edu.tr, kolawole.adebayo@mu.ie
+Abstract
+As large language models (LLMs) increasingly mediate political information across linguistic contexts, concerns
+emerge regarding cross-lingual consistency in political framing. We investigate whether multilingual LLMs generate
+systematically different rhetorical and semantic frames across languages, using migration discourse in English and
+Arabic as a focused case study. Focusing on two widely used models, i.e., GPT-4o and Jais-13B, we implement a
+controlled prompt design (N = 800 generations; 400 per language), to isolate language as the primary experimental
+variable. We introduce a mixed method evaluation framework that combines lexical frame analysis, statistical
+association testing, and qualitative discourse analysis. Our results show a significant association between language
+and framing distribution (χ2 = 43 .32, p = 2 .11 × 10−9). While security-oriented framing is prominent in both
+languages, English generations exhibit substantially higher rates of institutional and legislative framing, whereas
+Arabic generations show greater concentration in security and communitarian discourse. These findings indicate that
+input language acts as a conditioning signal that systematically modulates political framing within multilingual LLMs,
+even under controlled semantic prompts. We conceptualize this phenomenon ascross-lingual framing driftand
+discuss its implications for multilingual alignment, political bias evaluation, and global information ecosystems. We
+conclude by outlining an evaluative protocol for detecting language-conditioned asymmetries in generative models.
+We make all data, code, and experimental settings publicly available at:https://github.com/NRAwwad/
+-A-Cross-Lingual-Analysis-of-Political-Framing-in-English-and-Arabic.git.
+Keywords:Cross-lingual framing; Large Language Models; Political bias; Multilingual alignment; Migration
+discourse; Generative AI; Computational social science
+1. Introduction
+Large language models (LLMs) have rapidly be-
+come central tools used by millions of individuals
+across diverse linguistic and cultural contexts (Ben-
+der et al., 2021). They are increasingly relied upon
+for tasks such as information synthesis, political
+explanation, and the generation of public discourse
+(Santurkar et al., 2023). As these systems me-
+diate how political issues are framed, prioritized,
+and interpreted, they exert growing influence over
+democratic information ecosystems (Fisher et al.,
+2025; Aoki, 2024). This raises a critical question:
+do multilingual LLMs maintain consistency in po-
+litical positioning across languages, or does the
+language of interaction itself condition the stance,
+emphasis, and framing of generated content?
+The way LLMs respond to prompts can influence
+users’ understanding of political issues and intro-
+duce implicit biases toward particular parties, ide-
+ologies, or viewpoints, especially when the same
+topic is addressed across languages (Li et al.,
+2024). Existing research on political behaviour in
+LLMs has largely focused on surface-level indica-
+tors such as sentiment polarity, toxicity, or safety
+alignment, rather than deeper dynamics of stance-
+taking and framing. For example, Aoki (2024)
+analyze political bias using ideological scaling of
+generated outputs, while other work documents
+cross-lingual inconsistencies in political responses
+without examining how substantive stance shifts
+emerge across languages (Zhou and Zhang, 2024;
+Helwe et al., 2025).
+Related work on news generation shows that
+framing and narrative emphasis vary with prompt
+design and model architecture (Yoo and Shin,
+2025), and multilingual bias surveys identify lan-
+guage as a conditioning factor in model outputs
+(Gamboa et al., 2025; Qin et al., 2025). How-
+ever, priorworkdoesnotdirectlytestwhetherLLMs
+adopt systematically different argumentative posi-
+tions, levels of assertiveness, or rhetorical frames
+when responding to equivalent political content in
+different languages. This gap is particularly con-
+sequential for multilingual information ecosystems,
+where subtle shifts in stance and emphasis may
+differentially shape public interpretation across so-
+ciopolitical contexts.
+We address this gap by investigating cross-
+lingual political framing using migration as a case
+study. Migration discourse is politically salient,
+
+=== PDF PAGE 2 ===
+211
+normatively contested, and deeply embedded in
+national identity debates across both Western
+and Middle Eastern contexts (Mandelc, 2025;
+Krzyżanowski et al., 2018; Thiollet, 2011). We an-
+alyze two multilingual models, GPT-4o1 and Jais-
+13B (Sengupta et al., 2023a). Using a controlled
+experimental design, we generate 800 responses
+to semantically equivalent prompts in English and
+Arabic. We then apply lexical frame coding, chi-
+square statistical testing, and qualitative discourse
+analysis to evaluate differences in framing distribu-
+tions across languages.
+Contributions.This paper makes three main
+contributions:
+1. We introduce the task ofcross-lingual framing
+analysisformultilingualLLMs,focusingonhow
+input language influences rhetorical framing
+and stance in politically salient contexts.
+2. We propose a mixed-methods evaluation
+framework that combines controlled prompt
+design, lexical frame coding, statistical as-
+sociation testing, and qualitative discourse
+analysis to systematically measure language-
+conditioned variation in model outputs.
+3. We provide empirical evidence of statistically
+significant cross-lingual framing differences in
+two multilingual LLMs, and conceptualize this
+effect ascross-lingual framing drift, with im-
+plications for multilingual alignment and bias
+evaluation.
+Our results reveal statistically significant cross-
+lingual variation in framing patterns, indicating that
+input language functions as a conditioning signal
+that shapes institutional emphasis and rhetorical
+structureevenwhentheunderlyingpoliticalqueryis
+heldconstant. Byisolatinglinguisticinputwhilecon-
+trolling for model parameters and prompt seman-
+tics, this study contributes to emerging research
+on multilingual alignment, language-conditioned
+generation effects, and the sociopolitical implica-
+tions of deploying generative AI systems in global
+information environments. While we focus on two
+representative models, our findings provide an ini-
+tial empirical foundation for studying cross-lingual
+framing effects in multilingual LLMs.
+The remainder of the paper is organized as fol-
+lows: Section 2 reviews related work; Section 3
+describes the experimental design and evaluation
+framework; Section 4 presents the results and dis-
+cusses their implications; and Section 5 concludes
+with limitations and final remarks.
+1https://openai.com/index/
+hello-gpt-4o/
+2. Related Work
+Political bias and framing in large language mod-
+els has become an increasingly active research
+area, given these systems’ growing influence on
+public discourse. Prior studies demonstrate that
+LLMscansystematicallyreflectideologicalpatterns
+embedded in their training data, including political
+orientations and national perspectives. For exam-
+ple, (Zhou and Zhang, 2024) identified “in-group
+bias” in GPT-based models when responding to po-
+litically sensitive questions in English and Chinese.
+Their findings showed that responses differed de-
+pending on the language of interaction, with the
+English model producing more critical responses
+toward China compared to the Chinese model.
+Similarly, (Guey et al., 2025) evaluated 11 LLMs
+on seven U.S.–China geopolitical topics using a
+bilingual (English–Chinese) dual-framing method-
+ology. They found consistent geopolitical align-
+mentpatterns: U.S.-basedmodelstendedtofavour
+pro-U.S. positions, whereas Chinese-origin models
+showed pro-China tendencies. These findings sug-
+gest that both model origin and linguistic context
+influence generated political positioning.
+Research on political bias in low-resource lan-
+guages remains comparatively limited. Addressing
+this gap, (Nadeem et al., 2026) assessed 13 state-
+of-the-art LLMs across five Pakistani languages
+using the Political Compass Test combined with
+multi-level framing analysis. While most models
+exhibited liberal-left orientations consistent with
+Western-centrictrainingdata,responsesinregional
+languages demonstrated more authoritarian fram-
+ing patterns. This highlights how language can
+modulate ideological expression beyond simple
+translation.
+Beyond stance alignment, bias has also been
+examined in generative news contexts. (Yoo and
+Shin, 2025) analyzed over 10,000 news articles
+generated by seven LLMs and found persistent
+left-leaning bias even under balanced prompting
+conditions. Likewise, (Rettenberger et al., 2025)
+evaluated open-source LLMs from the perspective
+of a German voter using a voting advice application
+framework. They found that larger models often
+aligned more closely with left-leaning political par-
+ties, whereas smaller models produced compara-
+tively neutral outputs.
+Whilethesestudiesprovidevaluableinsightsinto
+ideological bias, geopolitical alignment, and multi-
+lingual variation, they primarily focus on static ideo-
+logical positioning or geographic alignment. Few
+workssystematicallyinvestigatewhetherLLMsshift
+their stance or framing strategies when respond-
+ing to identical politically charged prompts across
+different languages. Understanding such cross-
+linguistic stance variation is essential for evaluating
+
+=== PDF PAGE 3 ===
+212
+the consistency and democratic reliability of multi-
+lingual LLM systems.
+3. Methodology
+3.1. Model and Experimental Framework
+We investigate cross-lingual political framing in
+two multilingual LLMs, namely GPT-4o and Jais-
+13B. GPT-4o is trained predominantly on English
+and globally distributed web data (OpenAI, 2023),
+whereas Jais-13B is an Arabic-centric model opti-
+mized for Arabic dialects and Middle Eastern con-
+texts (Sengupta et al., 2023b). This setup allows
+us to examine whether differences in training data
+composition influence the responses generated in
+English versus Arabic.
+The study focuses on the politically salient topic
+of migration. Ten prompts were designed to elicit
+argumentative responses potentially falling into dis-
+tinct framing categories:Security/Legal,Humani-
+tarian/Communal, orPolitical/Institutional. Prompts
+were initially drafted in English and then translated
+into Arabic by native speakers, prioritizing seman-
+tic equivalence over literal translation to preserve
+intent while avoiding translation artifacts.
+We implemented four experimental conditions:
+(1) GPT-4o in English, (2) GPT-4o in Arabic, (3)
+Jais-13B in English, and (4) Jais-13B in Arabic.
+For each condition, 200 independent outputs were
+generated using the same decoding settings (tem-
+perature = 0.9, maximum tokens = 120, presence
+penalty = 0.3, frequency penalty = 0.3). The high
+temperature increases variability to reveal latent
+framing patterns that might remain hidden under
+more deterministic decoding, while token limits and
+penalty parameters ensure concise, lexically di-
+verse, and comparable responses across condi-
+tions. All parameters were held constant across
+languages to isolate the effect of linguistic input
+over decoding parameters.
+This design supports two complementary anal-
+yses: (i) within-model cross-lingual comparisons,
+testing whether a single model shifts its framing
+across languages, and (ii) between-model compar-
+isonswithinalanguage,assessingwhethermodels
+with distinct training priorities yield different framing
+distributions under the same linguistic conditions.
+3.2. Data Generation Protocol
+To account for the stochasticity inherent in LLM
+generation, all 200 responses per condition were
+obtained through independent, stateless API calls.
+LLM outputs vary across runs due to probabilistic
+decoding, hence, collecting samples over multiple
+runs enables a more robust estimation of stance
+and framing distributions. This sampling strategy
+enables robust estimation of stance and framing
+distributionsandensuresthatobserveddifferences
+reflect language effects rather than variability in
+decoding. All generation parameters were held
+constant across languages and models.
+3.3. Frame Operationalization
+To measure framing differences, outputs were an-
+alyzed using a lexicon-based frame coding ap-
+proach grounded in political communication theory
+(Davis,2010;StieglitzandDang-Xuan,2013). Four
+categories were defined:Security/Legal,Humani-
+tarian/Communal,Political/Institutional, andOther.
+TheOthercategory captures outputs with no lexi-
+con matches, mixed or overlapping framing signals,
+or insufficient evidence to assign a dominant frame.
+For each category, language-specific keyword
+lexicons were manually constructed for English
+and Arabic, derived from prior literature and it-
+eratively refined via pilot analysis (Rettenberger
+etal.,2025;ZhouandZhang,2024;Smirnov,2026;
+Santurkar et al., 2023). Examples include en-
+forcement, regulation, and border control(Secu-
+rity/Legal); displacement, human rights, and aid
+(Humanitarian/Communal); and governance, pol-
+icy, and electoral dynamics(Political/Institutional)
+(Esser and Pfetsch, 2004).
+For each output, keyword frequencies were nor-
+malized by text length, and a dominant frame was
+assigned based on the highest normalized fre-
+quency. Where there is a tie or an absence of
+lexicon matches, outputs were manually reviewed
+to ensure consistent classification. This approach
+enablessystematiclarge-scaleanalysiswhilemain-
+taining interpretive transparency.
+To assess the reliability of the coding proce-
+dure, a random subset of 50 outputs per language
+was manually annotated and compared against
+the lexicon-based assignments, yielding substan-
+tial agreement between automated and manual an-
+notations. This lexicon-based method preserves in-
+terpretability,allowingobservedframingdifferences
+to be traced directly to lexical patterns.
+3.4. Statistical Analysis
+Toassesswhethertheframingdistributionchanges
+correspondingly to alterations in the prompt lan-
+guage, dominant frame counts have been aggre-
+gated by language condition for each model and
+for the pooled sample. This resulted in contingency
+tables representing the frequency of each framing
+category across English and Arabic outputs.
+A Pearson chi-square test of independence was
+conducted to evaluate whether dominant frame cat-
+egory and prompt language were statistically asso-
+ciated. The chi-square test was selected because
+bothvariablesarecategoricalandtheobjectivewas
+to determine whether framing distribution deviated
+
+=== PDF PAGE 4 ===
+213
+from what would be expected under independence.
+All analyses were conducted using aggregated fre-
+quency counts. Moreover, statistical significance
+was evaluated atα = 0 .05. This approach pro-
+vides a straightforward and interpretable measure
+of whether cross-linguistic framing differences are
+statistically meaningful.
+4. Results and Discussion
+4.1. Dominant Frame Classification
+To examine cross-linguistic framing, each gener-
+ated response was assigned adominant frame,
+representing the primary rhetorical tendency exhib-
+ited by the model under a given linguistic condition.
+This classification is intended to be descriptive and
+comparative rather than predictive, enabling the
+identification of systematic differences in rhetorical
+emphasis across both languages and models.
+Tables 1–3 summarize dominant frame distri-
+butions by language for each model and for the
+pooled sample. Across all 800 generations, clear
+language-conditioned patterns emerge. English
+outputs, comprising 400 samples, are heavily con-
+centrated in theSecurityframe, accounting for 276
+instances (69%), with smaller contributions from
+Humanitarian(18.5%), Other (8%), andPolitical
+frames(4.5%). Arabicoutputs,alsocomprising400
+samples, similarly favourSecurityframing, though
+less prominently, with 190 instances (47.5%). This
+is followed by theHumanitarian(24.3%) category,
+Other(18%), andPolitical(10.3%) frames, indicat-
+ing a more distributed framing pattern compared to
+the English outputs.
+These aggregate differences are re-
+flected,though not uniformly, at the model
+level. GPT-4o shows a pronounced tendency to-
+ward security-oriented discourse in both languages.
+In English, its outputs are almost exclusivelySecu-
+rity-framed (97%), with only isolatedHumanitarian
+andPoliticalcases (1.5% each) and no instances
+classified asOther(shown in Figure 1). In Arabic,
+GPT-4o remains primarilySecurity-framed (59%),
+but the distribution broadens considerably, with
+higher proportions ofHumanitarian(24.5%) and
+Politicalframing (15.5%), and only minimal use of
+theOthercategory (1%), as shown in Figure 2.
+Jais-13B presents a more balanced profile in the
+English condition, as illustrated in Figure 1. In En-
+glish,Security(41%) andHumanitarian(35.5%)
+frames dominate, with additional contributions from
+Other (16%) andPolitical framing(7.5%). However,
+as shown in Figure 2), the Arabic setting presents
+clear distribution shifts:Other(35%) andSecurity
+(36%) occur at comparable rates, followed byHu-
+manitarian(24%)andPoliticalframing(5%). Unlike
+GPT-4o, Jais-13B does not exhibit near-monolithic
+Figure 1: Framing distribution by prompt language
+(Arabic) for both GPT-4o and Jais-13B. Percent-
+ages indicate the proportion of outputs in each
+frame category.
+Figure 2: Framing distribution by prompt language
+(English) for both GPT-4o and Jais-13B. Percent-
+ages indicate the proportion of outputs in each
+frame category.
+Securityframing in English and displays greater
+cross-linguistic variability overall.
+Taken together, the experimental results reveal
+systematic language-conditioned differences in
+dominant framing. In our experiments, English-
+generated responses are substantially more con-
+centrated in theSecurityframe, whereas Arabic-
+generated responses exhibit a more balanced dis-
+tribution, with relatively greater representation of
+Political,Humanitarian, and residual framing cate-
+gories.
+The Pearson chi-square test confirms that dom-
+inant frame and prompt language are not inde-
+pendent in the pooled sample (N = 800). Specifi-
+cally, the test reveals a statistically significant as-
+sociation between language and framing category
+(χ2(4, N = 800) = 43 .32, p < . 001, exact p =
+2.11×10 −9). This finding suggests that frame dis-
+tributions systematically differ between English and
+Arabic outputs and are unlikely to be attributable
+to random sampling variation alone. Accordingly,
+prompt language emerges as a key conditioning
+factor shaping the framing patterns produced by
+
+=== PDF PAGE 5 ===
+214
+the evaluated models.
+4.2. Interpretation of theOtherCategory
+The relatively high proportion of outputs classified
+asOtherin Arabic warrants discussion. Manual
+inspection revealed three main types of responses:
+1. Mixed-frame outputs: Responses combining
+elements ofSecurity,Humanitarian, andPolit-
+icalframing without a clear dominant frame.
+2. Descriptive or neutral responses: Texts pre-
+senting information without strong evaluative
+or rhetorical framing.
+3. Implicitlyframedoutputs: Responseswhere
+stance is conveyed via tone, narrative struc-
+ture, or contextual emphasis rather than ex-
+plicit lexical markers.
+An illustrative Arabic example is:
+	à 	P@ñK J
+®m' éËA ª 	®Ë@ èQj. êË@ HAAJ
+ I. Ê¢JK
+HAÓ@ 	QËB@ð ú 
+ 	æ£ñË@ 	áÓ B@ HAJ.Ê¢JÓ 	á
+K.
+	àAÖÞ	ð XðYm Ì'@ éK
+AÔg ÈC 	g 	áÓ , éJ
+	KA 	B @
+éJ
+Óñºk Q£ @ Q.« 	áK
+Qk. AêÖÏ@ éÓ@Q» ð ñ®k
+, A J
+	JÓ@ @ PA£@ é 	®	K I¯ñË@ ú 
+	¯ ºªK 
+ , éÒ 	¢	JÓ
+	áÒJ
+êÓ PA£@  	P@QK. @ 	àðX A J
+ ñÓð , A J
+	KA 	@ð
+. l	@ð É¾ .
+which translates to:
+Effective migration policy requires balanc-
+ingnationalsecurityprioritieswithhuman-
+itarian obligations, ensuring border pro-
+tection while upholding the rights and dig-
+nity of migrants through coordinated gov-
+ernmental frameworks, simultaneously in-
+vokes security , humanitarian , and insti-
+tutional framing without clearly privileging
+a single dominant frame.
+This demonstrates that some outputs, particu-
+larly in Arabic, encode multiple framing signals or
+adopt subtle rhetorical strategies not captured by
+lexicon-based categorization.
+GPT-4o Security Humanitarian Political Other
+English (N=200) 194 3 3 0
+Arabic (N=200) 118 49 31 2
+Table 1: Dominant frame distribution by language
+for GPT-4o
+Jais-13b Security Humanitarian Political Other
+English (N=200) 82 71 15 32
+Arabic (N=200) 72 48 10 70
+Table 2: Dominant frame distribution by language
+for Jais-13b
+Combined (both models) Security Humanitarian Political OtherEnglish (N=400) 276 74 18 32Arabic (N=400) 190 97 41 72
+Table 3: Dominant frame distribution by language
+across both models
+4.3. Summary of Cross-Lingual Framing
+Drift
+Overall, English-generated responses are strongly
+concentrated in Security framing, whereas Arabic
+outputsexhibitamoredistributedpatternacrossPo-
+litical,Humanitarian, and theOthercategories. At
+the model level, GPT-4o shows a pronounced pref-
+erence for Security framing, while Jais-13B demon-
+strates greater balance and variability.
+These results suggest that input language acts
+as aconditioning signal, influencing rhetorical em-
+phasis and frame selection even when semantic
+content remains constant. We conceptualize this
+effect ascross-lingual framing drift, with implica-
+tions for multilingual alignment, political bias evalu-
+ation, and the interpretability of AI-mediated public
+discourse.
+Consistent with the overall trend, GPT-4o out-
+putsareoverwhelminglySecurity-framedinEnglish
+(194/200; 97%), with only minimal representation
+of other categories. In Arabic, althoughSecurity
+remains dominant (118/200; 59%), the distribu-
+tion shifts toward greater inclusion ofHumanitarian
+(24.5%) andPolitical(15.5%) frames, with only
+about 1%, a negligible amount accounted for the
+Otherframing.
+4.4. Qualitative Illustration of Framing
+Patterns
+To complement the quantitative findings, we quali-
+tatively examine representative excerpts from each
+language condition to illustrate how framing differ-
+ences manifest in generated text. The excerpts
+below were produced using the prompt:
+"Migration can be viewed from both secu-
+rity and humanitarian perspectives. Dis-
+cuss these viewpoints and present your
+position with supporting arguments."
+and its semantically equivalent Arabic transla-
+tion:
+Aî 	E@ úÎ« A 	KAJ
+k@ AîD 
+Ë@ Q 	¢	JK
+ éJ
+ 	¯ èQj. êË@ YªK
+éJ
+ 	¯ Aî 	E@ úÎ« øQ 	k@ A 	KAJ
+k@ð , éJ
+	JÓ@ éËAÓ
+
+=== PDF PAGE 6 ===
+215
+©Ó ½ 	®¯ñÓ 	á
+K. ð hQ¢Ë@ @ 	Yë ¯A 	K . éJ
+	KA 	@
+. H@PQ.ÖÏ@ Õç'
+Y®K
+In the English condition, responses frequently
+emphasize regulation, enforcement, and state con-
+trol mechanisms, reflecting a policy-driven and se-
+curitized narrative. For example:
+Migration has become a central political
+issue, with governments debating stricter
+border enforcement, asylum regulations,
+and national security concerns.
+This response foregrounds institutional regula-
+tion and legal enforcement, situating migration
+within a governance and security framework.
+In contrast, Arabic outputs, while also engaging
+withsecuritydiscourse,morefrequentlyincorporate
+language emphasizing humanitarian concerns and
+collective well-being. For example:
+, úÍðB@ ék. PYËAK. éJ
+	KA 	@ éJ
+ 	¯ èQj. êË@ 	à@ øP @
+Ñî 	EA£ð@ 	àðPXA 	ªK
+ 	áK
+Qk. AêÖÏ@ 	áÓ @ Q
+J» 	à B
+. 	àAÓ B@ 	á« A Jm'. Q® 	®Ë@ ð @ H. ðQmÌ'@ 	áÓ A K. Që
+Translated:
+I believe that migration is primarily a
+humanitarian issue, because many mi-
+grants leave their countries fleeing wars
+or poverty in search of safety.
+This excerpt highlights aHumanitarianframing
+of migration, prioritizing individual vulnerability and
+moral obligation over securitized concerns.
+Institutional and electoral framing appears more
+frequently in English outputs but is comparatively
+limited in Arabic. For instance:
+"The issue has shaped electoral cam-
+paigns and influenced party platforms,
+reflecting broader debates about gover-
+nance and public policy."
+This example situates migration within demo-
+cratic competition and institutional processes.
+While such framing is not entirely absent in Ara-
+bicoutputs, itoccurslessfrequently, reinforcingthe
+asymmetry observed in the quantitative analysis.
+4.5. Summary of Empirical Findings
+Across both quantitative and qualitative analyses,
+the results demonstrate a systematic association
+between prompt language and framing distribution.
+The chi-square test confirmed that frame allocation
+was not independent of language condition (χ2 =
+43.32, p = 2 .11 × 10−9), indicating that the distri-
+bution ofSecurity/Legal,Humanitarian/Communal,
+andPolitical/Institutionalframes differed signifi-
+cantly between English and Arabic outputs.
+Quantitatively, both language conditions were
+dominatedbySecurity/Legalframing;however,Ara-
+bic outputs exhibited a stronger concentration in
+this category and a complete absence ofPoliti-
+cal/Institutionalframing. In contrast, English out-
+puts displayed a more diversified distribution, in-
+cluding measurable representation of institutional
+and electoral discourse.
+Qualitative analysis further revealed that,
+whereas securitization is common across lan-
+guages, English responses more frequently
+emphasize regulatory mechanisms, electoral
+competition, and governance structures. Arabic
+responses, even when securitized, tend to in-
+corporate references to humanitarian concerns,
+collective stability, and social cohesion. The
+absence of institutional framing in Arabic sug-
+gests a structural asymmetry in how migration is
+narratively positioned across languages.
+These findings support our initial hypothesis that
+prompt language influences the rhetorical and the-
+matic orientation of model-generated political con-
+tent. The observed divergence is unlikely to be
+attributable to decoding variability alone, given the
+controlled generation parameters used in our ex-
+periments. Rather, it points to deeper cross-lingual
+differences in the models’ learned representational
+patterns.
+5. Limitations and Conclusion
+Our findings suggest that language functions as a
+conditioning variable in multilingual LLMs. Despite
+semantically equivalent prompts and identical de-
+coding parameters, framing distributions differed
+significantly between English and Arabic. This indi-
+cates that language activates distinct representa-
+tional patterns shaped by training data, rather than
+serving as a neutral input channel.
+These results have importnat implications for
+cross-lingualalignment. Alignmentandbiasevalua-
+tions are often conducted primarily in English; how-
+ever, our findings show that framing consistency
+cannot be assumed across languages. Evaluating
+multilingual models therefore requires explicit con-
+sideration of cross-lingual stability, particularly in
+politically sensitive domains.
+Importantly,thedifferencesidentifiedinthisstudy
+concern framing emphasis rather than explicit ideo-
+logical polarity.Security,humanitarian, and institu-
+tional frames represent distinct interpretive lenses,
+and variation across them does not inherently im-
+ply partisan bias. Distinguishing between framing
+asymmetry and ideological orientation is therefore
+critical to avoid overinterpretation.
+Several limitations warrant consideration. First,
+
+=== PDF PAGE 7 ===
+216
+we adopt a lexicon-based operationalization of
+framing due to its interpretability and transparency
+but do not compare it with embedding-based or
+classifier-driven approaches. Such methods have
+the potential to capture implicit, metaphorical, and
+discourse-level framing patterns that extend be-
+yond explicit lexical cues. Incorporating these ap-
+proaches as part of future work would enable a
+more comprehensive validation of generality of the
+observed cross-lingual framing differences. This
+limitation is particularly relevant for Arabic, where
+meaning is often conveyed through broader dis-
+course structures rather than surface-level lexical
+markers, as reflected in the prevalence of mixed
+or weakly signaled cases within theOthercate-
+gory. Future work should incorporate these ap-
+proaches to provide a more comprehensive valida-
+tion of cross-lingual framing effects.
+Second, the analysis focuses on a single polit-
+ical domain (migration) and a limited set of mod-
+els, which constrains generalizability. Extending
+this framework to additional topics, languages, and
+model families would help establish the robustness
+of the observed patterns.
+Overall, this study provides empirical evidence
+that prompt language is associated with systematic
+differences in political framing in multilingual LLM
+outputs. As such systems increasingly mediate
+global information flows, evaluating cross-lingual
+framing consistency becomes a critical component
+of responsible and transparent deployment.
+6. References
+Goshi Aoki. 2024. Large language models in poli-
+tics and democracy: A comprehensive survey.
+Emily M Bender, Timnit Gebru, Angelina McMillan-
+Major, and Shmargaret Shmitchell. 2021. On
+the dangers of stochastic parrots: Can language
+models be too big? InProceedings of the 2021
+ACM conference on fairness, accountability, and
+transparency, pages 610–623.
+Aeron Davis. 2010.Political communication and
+social theory. Routledge.
+Frank Esser and Barbara Pfetsch. 2004.Com-
+paring political communication: Theories, cases,
+and challenges. Cambridge University Press.
+Jillian Fisher, Shangbin Feng, Robert Aron,
+ThomasRichardson,YejinChoi,DanielWFisher,
+Jennifer Pan, Yulia Tsvetkov, and Katharina Rei-
+necke. 2025. Biased llms can influence political
+decision-making. InProceedings of the 63rd
+Annual Meeting of the Association for Compu-
+tational Linguistics (Volume 1: Long Papers),
+pages 6559–6607.
+Lance Calvin Lim Gamboa, Yue Feng, and Mark G.
+Lee. 2025. Social bias in multilingual language
+models: A survey. InProceedings of the
+2025 Conference on Empirical Methods in Natu-
+ral Language Processing, pages 27857–27880,
+Suzhou, China. Association for Computational
+Linguistics.
+William Guey, Pierrick Bougault, Vitor D. de Moura,
+Wei Zhang, and Jose O. Gomes. 2025. Mapping
+geopolitical bias in 11 large language models:
+A bilingual, dual-framing analysis of u.s.-china
+tensions.arXiv preprint arXiv:2503.XXXXX. Sub-
+mitted 31 Mar 2025.
+Chadi Helwe, Oana Balalau, and Davide Ceolin.
+2025. Navigating the political compass: Evalu-
+ating multilingual LLMs across languages and
+nationalities. InFindings of the Association for
+Computational Linguistics: ACL 2025, pages
+17179–17204, Vienna, Austria. Association for
+Computational Linguistics.
+Michał Krzyżanowski, Anna Triandafyllidou, and
+Ruth Wodak. 2018. The mediatization and the
+politicization of the “refugee crisis” in europe.
+Lincan Li, Jiaqi Li, Catherine Chen, Fred Gui,
+Hongjia Yang, Chenxiao Yu, Zhengguang Wang,
+Jianing Cai, Junlong Aaron Zhou, Bolin Shen,
+et al. 2024. Political-llm: Large language
+models in political science.arXiv preprint
+arXiv:2412.06864.
+Damjan Mandelc. 2025. Religion, migration, and
+the far-right: How european populism frames
+religious pluralism.Religions, 16(9):1192.
+Afrozah Nadeem, Mark Dras, and Usman Naseem.
+2026. Framing political bias in multilingual
+llms across pakistani languages.arXiv preprint
+arXiv:2506.00068. Version 3, January 30, 2026.
+OpenAI. 2023. Gpt-4 technical report.
+Libo Qin, Qiguang Chen, Yuhang Zhou, Zhi Chen,
+Yinghui Li, Lizi Liao, Min Li, Wanxiang Che, and
+Philip S. Yu. 2025. A survey of multilingual large
+language models.Patterns, 6(1):101118.
+Lukas Rettenberger, Markus Reischl, and Matthias
+Schutera. 2025. Assessing political bias in large
+language models.Journal of Computational So-
+cial Science, 8:42.
+Shibani Santurkar, Esin Durmus, Faisal Lad-
+hak, Cinoo Lee, Percy Liang, and Tatsunori
+Hashimoto. 2023. Whose opinions do language
+
+=== PDF PAGE 8 ===
+217
+models reflect? InInternational conference on
+machine learning, pages 29971–30004. PMLR.
+Neha Sengupta, Sunil Kumar Sahu, Bokang Jia,
+Satheesh Katipomu, Haonan Li, Fajri Koto,
+William Marshall, Gurpreet Gosal, Cynthia Liu,
+Zhiming Chen, Osama Mohammed Afzal, Samta
+Kamboj, Onkar Pandit, Rahul Pal, Lalit Pradhan,
+Zain Muhammad Mujahid, Massa Baali, Xudong
+Han, Sondos Mahmoud Bsharat, Alham Fikri
+Aji, Zhiqiang Shen, Zhengzhong Liu, Natalia
+Vassilieva, Joel Hestness, Andy Hock, Andrew
+Feldman, Jonathan Lee, Andrew Jackson, Hec-
+tor Xuguang Ren, Preslav Nakov, Timothy Bald-
+win, and Eric Xing. 2023a. Jais and jais-chat:
+Arabic-centric foundation and instruction-tuned
+open generative large language models.
+S. Sengupta, B. AlKhamissi, S. Alawadhi, et al.
+2023b. Jais and jais-chat: Arabic-centric
+foundation and instruction-tuned open gener-
+ative large language models.arXiv preprint
+arXiv:2308.16149.
+Oleg Smirnov. 2026. The language you ask in:
+Language-conditioned ideological divergence in
+llm analysis of contested political documents.
+Stefan Stieglitz and Linh Dang-Xuan. 2013. Social
+media and political communication: a social me-
+dia analytics framework.Social network analysis
+and mining, 3(4):1277–1291.
+Helene Thiollet. 2011. Migration as diplomacy: La-
+bormigrants,refugees,andarabregionalpolitics
+in the oil-rich countries.International Labor and
+Working-Class History, 79(1):103–121.
+Junho Yoo and Youhyun Shin. 2025. Fair or
+framed? political bias in news articles generated
+byLLMs. InProceedingsofthe2025Conference
+on Empirical Methods in Natural Language Pro-
+cessing, pages 16904–16930, Suzhou, China.
+Association for Computational Linguistics.
+D. Zhou and Y. Zhang. 2024. Political biases
+and inconsistencies in bilingual gpt models—the
+cases of the u.s. and china.Scientific Reports,
+14:25048.
+7. Appendix
+7.1. Appendix A: Illustrative Arabic
+“Other” Category Examples
+Arabic Output English Translation
+éª@ð èQj. êË@
+ÉJÖ ß A¢ 	JË@
+ÈðYÊË éQ	¯
+IJ
+k , éÊJ. ®JÖÏ@
+Ég ú 
+	¯ ÑëA 
+øñ¯ É¿ A Ó
+	P 	QªKð ÉÒªË@
+ú
+	¯A ®JË@ ¨ ñ	JJË@
+AÒ» .PA¾ JK. B@ð
+©j.  	à@ 	áºÖß 
+ñÒ	JË@ úÎ«
+	áÓ ø 
+ XAJ¯B@èXAK
+ 	P ÈC 	g
+úÎ« I . Ê¢Ë@
+HAÓY 	mÌ'@ð ©ÊË@
+H@PAêÓ Q
+ 	¯ñKð
+. é«ñ	JJÓ
+Large-scale
+migration
+represents an
+opportunity
+for receiving
+countries,
+as it helps
+address labor
+shortages and
+enhances cul-
+tural diversity
+and innovation.
+It can also
+stimulate eco-
+nomic growth
+by increasing
+demand for
+goods and
+services and
+providing di-
+verse skills.
+	àðQk. AêÖÏ@
+Ñ«X ú
+	¯ 	àñÒîD
+ø
+ XAJ¯B@ ñÒ 	JË@
+I. Ê 	áÓ BYK.
+	áÓ 	­KA 	£ñË@
+IJ
+k , 	á
+	J£@ñÖÏ@
+I. Ê¢Ë@ 	àñª 	¯QK
+©KA 	J.Ë@ úÎ«
+AÜØ , HAÓY 	mÌ'@ðèXAK
+ 	P úÍ@  ø
+ X ñK
+AÒ» . ÉÒªË@ Q 	¯
+	àð CÖß 
+ Ñî 	E@
+ú
+	¯ H@Q 	ªJË@
+ÉÒªË@ ñ
+é 	¯A 	JÖÏ@ 	áÓ BYK.
+. èQåAJ.ÖÏ@
+Migrants
+contribute
+to economic
+growth rather
+than taking
+jobs from
+locals. They
+increase de-
+mand for
+goods and ser-
+vices, which
+creates more
+job opportu-
+nities, and
+often fill gaps
+in the labor
+market instead
+of directly
+competing with
+citizens.
+XYîE B èQj. êË@éJ
+	J£ñË@ éK
+ñêË@
+, Aë 	P 	QªK ÉK .
+I. Êm.' IJ
+k
+AJ
+ 	¯A ®K A «ñ	JK
+ø
+ QK
+ AK
+XAJ¯@ð
+. HAªÒJj. ÖÏ@
+Migration does
+not threaten
+national iden-
+tity but rather
+strengthens
+it by bringing
+cultural and
+economic
+diversity that
+enriches soci-
+eties.
+Table 4: Illustrative examples from the “Other” cat-
+egory in Arabic outputs, with English translations.
+
+=== PDF PAGE 9 ===
+218
+7.2. Appendix B: Complete Set of Parallel Migration Policy Prompts Used for
+Generation
+English Prompt Arabic Prompt
+Should governments prioritize border
+security over humanitarian obligations
+in migration policy? Defend one side.
+éK
+ñËð@ ù 
+ ¢ªK 	à@ HAÓñºjÊË ù 
+ 	ªJ. 	K
+ Éë
+HAÓ@ 	QËB@ H . Ak úÎ« XðYm Ì'@ 	áÓ B
+	á« © 	¯@X ? èQj. êË@ HAAJ
+ ú 
+	¯ éJ
+	KA 	B @
+. 	á
+ 	®¯ñÖÏ@ Yg @
+Is large-scale migration primarily a cri-
+sis or an opportunity for receiving coun-
+tries? Argue for one position.
+Ð@ éÓ 	P@ A¢ 	JË@ éª@ð èQj. êË@ Yª K Éë
+Yg@ Ñ«X@ ? éÊJ. ®JÖÏ@ ÈðYÊË éQ	¯
+. 	á
+gQ¢Ë@
+Does immigration threaten national
+identity or strengthen it? Support one
+perspective.
+? Aë 	P 	QªK Ð @ éJ
+	J£ñË@ éK
+ñêË@ èQj. êË@ XYî E Éë
+. Q 	¢	JË@ ú
+ æêk. ð øYg@  Ñ«X@
+Are wealthy nations morally obligated
+to accept more refugees? Take a clear
+stance.
+AJ
+¯C 	g@ A Ó@ 	QË@ éJ
+	J 	ªË@ ÈðYË@ ÉÒj JK Éë
+A 	®¯ñÓ 	Y	m'@ ? 	á
+Jk. CË@ 	áÓ Q.» @ XY« ÈñJ . ®K.
+. Am	@ð
+Do migrants take jobs from locals
+or contribute to economic growth?
+Choose one side.
+	á
+	J£@ñÖÏ@ 	à@Y ® 	¯ ú 
+	¯ 	àðQk. AêÖÏ@ ÑîD 
+ Éë
+? ø
+ XAJ¯B@ ñÒ 	JË@ Ñ«X ú 
+	¯ Ð @ Ñê 	®KA 	£ñË
+. 	á
+ 	®¯ñÖÏ@ Yg @ Q 	g@
+Should national sovereignty outweigh
+international humanitarian agreements
+in migration decisions? Defend one
+position.
+úÎ« éJ
+	J£ñË@ èXAJ
+Ë@ ÐY ®JK 	à@ ù
+ 	ªJ. 	K
+ Éë
+H@P@Q¯ ú 
+	¯ éJ
+ËðYË@ éJ
+	KA 	B @ HAJ
+¯A 	®KB@
+. 	á
+ 	®¯ñÖÏ@ Yg @ 	á« © 	¯@X ? èQj. êË@
+Ismediacoverageofmigrationalarmist
+ordoesitreflectlegitimatesecuritycon-
+cerns? Choose a side.
+èQj. êË@ QK 
+ñ ú
+	¯ ÐC«B @ É KAð 	©ËAJ.K Éë
+? é«ðQåÓ 	¬ðA	m× ºªK Ð @ ú 
+ 	æÓ@ YK 
+Yî D»
+. AJ. 	KAg. Q 	g@
+Should migrants fully assimilate into
+host societies or should multicultural
+integration be encouraged? Argue for
+one approach.
+ú
+	¯ ÉÓA¾ËAK . 	àðQk. AêÖÏ@ l .×Y	JK
+ 	à@ ù
+ 	ªJ. 	K
+ Éë
+éK
+XYªJË@ h. 	XñÖ 	ß ©j. 
+ Ð@ 	­J
+ 	ÖÏ@ ©Ò Jj. ÖÏ@
+. 	áK
+PAJ
+	mÌ'@ Yg @ 	á« © 	¯@X ? éJ
+ 	¯A ®JË@
+Do strict border controls enhance na-
+tional stability or undermine human
+rights? Support one position.
+éÓPAË@ XðYm Ì'@ HAAJ
+ 	P 	QªK Éë
+ñ®k 	ñ®K Ð @ ú 
+ 	æ£ñË@ P@Q ®JB@
+. 	á
+ 	®¯ñÖÏ@ Yg @ Ñ«X@ ? 	àA 	B @
+Are migration debates driven more by
+political opportunism or genuine public
+concern? Defend one claim.
+éJ
+AJ
+ H@PAJ.J«@ èQj. êË@ AK 
+A 	¯ ¼Qm ' Éë
+? 	á
+	J£@ñÖÏ@ øYË éJ
+®J
+®k 	¬ðA	m× Ð@ éK
+ 	PAî D	K@
+. 	á
+K
+@QË@ Yg @ 	á« © 	¯@X
+Table 5: List of migration-related prompts used in the study in both English and Arabic.

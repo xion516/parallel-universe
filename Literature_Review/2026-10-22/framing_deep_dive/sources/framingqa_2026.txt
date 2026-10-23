@@ -1,0 +1,1384 @@
+FramingQA: Does the Question Shape the Answer? Measuring the Compositional Framing Effect
+Report GitHub Issue
+×
+Title:
+Content selection saved. Describe the issue below:
+Description:
+Submit without GitHub
+Submit in GitHub
+arXiv is now an independent nonprofit!
+Learn more
+×
+Back to arXiv
+Why HTML?
+Report Issue
+Back to Abstract
+Download PDF
+Abstract
+1 Introduction
+2 Compositionality in framing effect
+Framing Effect.
+Compositionality.
+2.1 Semantic Systematicity
+2.2 Structural Interpretation
+Root level.
+Propositional level.
+Global level.
+Exception: binary yes/no questions.
+3 The FramingQA Benchmark
+3.1 FramingQAlaw{}_{\textbf{law}}: Legal Reasoning
+3.2 FramingQAfin{}_{\textbf{fin}}: Financial Reasoning
+3.3 FramingQAmd{}_{\textbf{md}}: Medical Reasoning
+3.4 FramingQArobo{}_{\textbf{robo}}: Robotic Reasoning
+3.5 Annotation
+4 Experiments
+4.1 Setup
+4.2 Evaluation Metric
+Accuracy (%)
+Task Completion (%)
+Number of Steps and Replans
+5 Results
+(RQ1) Framing direction moves accuracy in opposite directions from the neutral baseline.
+(RQ2) Strict accuracy under incorrect-bias framing rises with model scale.
+(RQ3) The collapse of strict accuracy shows a failure of semantic systematicity.
+(RQ4) Incorrect responses concentrate in particular contexts rather than spreading evenly.
+(RQ5) Framing components contribute according to the structural interpretation level they enter, not their own strength.
+5.1 Results in Robotic Simulations
+The compositional framing effect extends to robotic planning along three major axes (Table , Task completion).
+Spatially and temporally constrained episodes follow the same pattern (Table , Task completion).
+Correct-bias instructions yield more efficient planning schemes than incorrect-bias instructions.
+6 Limitations and Conclusion
+References
+A Dataset Construction
+B Question variant templates
+C Label Information
+C.1 Law
+C.2 Finance
+C.3 Medicine
+D Worked Examples
+D.1 Law
+D.2 Finance
+D.3 Medicine
+D.4 Robotics
+License: arXiv.org perpetual non-exclusive license
+arXiv:2609.07448v2 [cs.CL] 04 Oct 2026
+FramingQA: Does the Question Shape the Answer? Measuring the Compositional Framing Effect
+Hazel H. Kim
+††thanks: ˜Corresponding author: hazel.kim@cs.ox.ac.uk
+Affiliation:
+Department of Computer Science, University of Oxford;
+Andrew M. Bean22
+2
+Equal contribution.
+Affiliation: Oxford Internet Institute, University of Oxford;
+Affiliation: Thomson Reuters;
+Guilherme Affonso Ferreira de Camargo22
+2
+Equal contribution.
+Affiliation: Faculty of Law, University of Oxford;
+Shanyu Chauhan22
+2
+Equal contribution.
+Affiliation: Department of Mechanical Engineering, University of California San Diego;
+Felix Drinkall22
+2
+Equal contribution.
+Affiliation: Department of Engineering Science, University of Oxford;
+Jade Kosché22
+2
+Equal contribution.
+Affiliation: Faculty of Law, University of Oxford;
+Chenyang Ma22
+2
+Equal contribution.
+Affiliation:
+Department of Computer Science, University of Oxford;
+Glory Nwaugbala22
+2
+Equal contribution.
+Affiliation: Faculty of Law, University of Oxford;
+Nabeel Seedat22
+2
+Equal contribution.
+Affiliation: Thomson Reuters;
+Affiliation: Department of Computer Science, University of Cambridge;
+Bradley Max Segal22
+2
+Equal contribution.
+Affiliation: Institute of Biomedical Engineering, University of Oxford;
+Samuel Recht
+Affiliation: Department of Experimental Psychology, University of Oxford;
+Hinrich Schütze
+Affiliation: Center for Information and Language Processing, LMU Munich
+Philip H.S. Torr
+Affiliation: Department of Engineering Science, University of Oxford;
+Abstract
+We introduce FramingQA, a benchmark that measures the model sensitivity to question framing across law, medicine, finance, and robotic simulations.
+Large language models (LLMs) often change their responses to subtle rephrasings that align with an implied stance by users.
+This can leave users with advice tainted by how they happened to phrase a question rather than by the underlying facts, and the consequences are highly costly in high-stakes domains.
+Because in the realistic scenarios, both expert practitioners and non-expert users frequently ask LLMs questions containing incomplete or misleading assumptions, models are highly susceptible to those framings.
+To test this, we inject the framing bias across three nested levels: a framing-biased question phrasing (root), an injected framing-biased premise prepended to a neutral question (propositional), and a premise paired with a framing-biased question (global).
+Evaluating nine open models (3.8B–70B) across four families, we find that strong per-variant accuracy does not guarantee the robustness across differently phrased questions under the fixed factual information.
+1 Introduction
+Large language models (LLMs) are highly susceptible to framing effects induced by user prompts.
+In psychology, the framing effect refers to the bias where people’s decisions change depending on how logically equivalent options are presented (Tversky and Kahneman, 1981; Kahneman, 2011).
+When users embed assumptions in questions, LLMs answer based on those assumptions rather than critically evaluating them (Gandhi and Gandhi, 2025; Xu et al., 2024).
+This is a serious vulnerability in high-stakes domains—law, medicine, finance, and robotics—where biased responses can be unsafe, incomplete, or actively misleading.
+Figure 1: Overview of our compositional framing evaluation. Existing evaluation asks a question once, through one fixed phrasing. We ask it under correct- and incorrect-bias framings at three levels (root, propositional, global), each in many phrasings and in plain and negated forms.
+Each question adopts either the correct answer or a distractor, which we call correct- and incorrect-bias framing after the option named rather than the truth of what is asserted.
+Thus, agreement alone cannot earn credit. Under all strict accuracy, a context counts, only if every variant is correct. Detailed questions are in Fig. 2.
+Existing robustness benchmarks primarily target sycophancy, a socially-driven phenomenon in which models prioritize user approval over accuracy in response to expressed opinions, emotional tone, or pushback even without any belief-confirming reasoning (Perez et al., 2023; Fanous et al., 2025; Hong et al., 2025).
+All these benchmarks introduce biases externally as post-response social pressure (Hong et al., 2025; Fanous et al., 2025) or as contextual framing prepended to a neutral question (Perez et al., 2023), not within the question’s own semantic structure.
+While related, the framing effect does not arise from social pressure but from the model genuinely reasoning from a false presupposition embedded in the question itself.
+FramingQA targets this mechanism directly.
+As illustrated in Figs. 1 and 2, despite fixed factual evidence, models generate inconsistent responses to the same fact when the question is reframed.
+FramingQA measures model responses when questions are compositionally encoded with different framing by presupposed stance, the location of the embedded assumptions, and semantic phrasings using plain or negated forms.
+Each question names either the correct answer or a distractor, which we call correct- and incorrect-bias framing after the option named rather than the truth of what is asserted, and appears in both a plain and a negated form so that the gold response flips while the named option stays fixed (see Fig. 2).
+We make the following contributions:
+(1) We introduce FramingQA, to the best of our knowledge the first benchmark to systematically evaluate framing effect across four high-stakes domains: law, medicine, finance, and robotics.
+(2) We propose a unified evaluation framework spanning root-level, propositional-level, and global-level bias, enabling fine-grained analysis of where bias enters the reasoning process.
+(3) We empirically demonstrate that strong average accuracy and near-zero compositional robustness can coexist across nine LLMs spanning four model families and 3.8B–70B scale, exposing a critical blind spot in standard evaluation practice.
+Input Law: Issue spotting Target: courts Distractor: consumer
+“I need to file a small claims proceedings against a large national chain. The location
+I dealt with is now closed permanently (part of why I am suing). How do I determine who
+exactly I file the action against? The main corporate office (national)? A state or
+regional office if I can find that? How does that work?”
+1 Root level — surface phrasing only, no premise
+Label
+Prediction
+correct
+plain
+Is this a courts question?
+Yes
+Yes
+✓\checkmark
+negated
+This is not a courts question, correct?
+No
+Yes
+×\times
+incorrect
+plain
+Is this a consumer question?
+No
+Yes
+×\times
+negated
+This is not a consumer question, correct?
+Yes
+Yes
+✓\checkmark
+2 Propositional level — premise attached to the claim: “…, based on …”
+Label
+Prediction
+correct
+plain
+Is this a courts question, based on the user asking how to file the action?
+Yes
+Yes
+✓\checkmark
+negated
+This is not a courts question, based on ⟨\langlesame premise⟩\rangle. Correct?
+No
+No
+✓\checkmark
+incorrect
+plain
+Is this a courts question, based on the user’s dissatisfaction with a store
+that closed permanently?
+No
+Yes
+×\times
+negated
+This is not a courts question, based on ⟨\langlesame premise⟩\rangle. Correct?
+Yes
+No
+×\times
+3 Global level — premise fronted, scoping the whole question: “Given …, …”
+Label
+Prediction
+correct
+plain
+Given the user is initiating a small-claims action against a business,
+is this a courts question?
+Yes
+Yes
+✓\checkmark
+negated
+Given ⟨\langlesame premise⟩\rangle, this is not a courts question. Correct?
+No
+Yes
+×\times
+incorrect
+plain
+Given the user’s dissatisfaction with a store that closed permanently,
+is this a consumer question?
+No
+Yes
+×\times
+negated
+Given ⟨\langlesame premise⟩\rangle, this is not a consumer question. Correct?
+Yes
+Yes
+✓\checkmark
+Figure 2: Compositional framing for one legal issue-spotting context
+(target: courts; distractor: consumer).
+Each panel injects the bias at a different level: questions with bias injected at the 1 root, 2 propositional, and 3 global levels.
+In this example, strict accuracy is 0 since not every phrasing in this context is answered correctly.
+2 Compositionality in framing effect
+We discuss the framing effect in model responses and its relationship with compositionality in natural language, and explain how this perspective motivates our benchmark construction.
+Framing Effect.
+We define the framing effect as a bias in which model responses change with how a question is framed, when the underlying evidence and the fact it determines are held fixed.
+The term originates in the psychological observation that logically equivalent options of the same situation systematically reverse human preferences (Tversky and Kahneman, 1981; Kahneman, 2011).
+We distinguish between framing, the manipulation of how a question is phrased, and the framing effect, the measurable change in outcomes induced by such variation.
+In an input query, framing is not a single surface cue but is carried by separable components such as the stance of the question, a presupposed premise about the input, or a topic emphasis.
+Since each component can shift model interpretation of the task individually or in combination, we assess the input framing effect as compositional.
+RQ1 (Framing effect). Against an unbiased baseline, does naming the gold option raise accuracy and naming a distractor lower it, when the evidence and the fact it determines are held fixed?
+Compositionality.
+In linguistics and philosophy of language, compositionality is often defined as:
+“The meaning of a compound expression is a function of the meanings of its parts and of the way they are syntactically combined (Partee and others, 1984).”
+This definition explains how human language and thoughts are characterized by the algebraic capacity to understand limited components and produce a potentially infinite number of novel combinations, so called systematic compositionality (Chomsky, 1957; Montague, 1970; Dankers et al., 2022).
+For example, if a person understands modifiers like “quickly,” “slowly,” and “together,” then after acquiring a novel verb such as “to miv,” they can immediately interpret instructions like “miv quickly and then miv together” (Lake and Baroni, 2018).
+This concept of compositionality is central to humans’ ability to generalize linguistically from limited input (Lake et al., 2016).
+Compositionality, in theory, becomes more robust as model scale increases (Dankers et al., 2022).
+As such, large language models are now expected to exhibit strong compositionality. Therefore, we assess the robustness of large language models to the framing effects along the compositional dimensions.
+RQ2 (Scale).
+Does robustness to framing increase with model scale within a family?
+2.1 Semantic Systematicity
+Compositionality entails systematic generalization over structured semantic transformations (Fodor and Pylyshyn, 1988).
+If language models learn robust compositional representations, then changing one framing component should preserve reasoning across related semantic transformations whenever the evidence remains fixed.
+Accordingly, we evaluate systematicity using two complementary diagnostics. Every text-based domain in FramingQA contains paired polarity transformations that test invariance under systematic semantic reversal.
+We operationalize these transformations in FramingQA through polarity reversal (e.g., is versus is not), candidate substitution (e.g., consumer versus employment).
+For textual domains, we additionally evaluate paraphrase invariance using three meaning preserving rewritings (Q1–Q3) at a fixed stance.
+We operationalize these transformations in FramingQA through meaning preserving paraphrases: ‘Is this A? (Q1)’, ‘This is A, correct? (Q2)’ and ‘This is A, right? (Q3)’ (see Table 7 for details).
+These rewritings apply at the root and global levels. At the propositional level the question is held fixed and the three variants vary the premise instead.
+They recombine the same semantic constituents into different structural configurations while preserving the underlying evidence.
+A compositional framing effect is therefore revealed by a selective failure of systematic generalization. Unlike uniform performance degradation, which would affect all transformations similarly, such asymmetries indicate that framing sensitivity depends on the interaction among semantic components.
+We therefore diagnose compositional framing effects through failures of polarity consistency and paraphrase invariance.
+RQ3 (Semantic Systematicity).
+Does per-question accuracy survive meaning-preserving transformation across framing directions, plain and negated forms, and question variants?
+RQ4 (Selectivity).
+Are incorrect responses tied to particular contexts where models consistently fail, or evenly distributed across contexts?
+2.2 Structural Interpretation
+Framing can enter the semantic computation at different points.
+Compositionality holds that meaning construction is sensitive not only to the content of individual constituents but also to their position and role within a structured
+representation (Partee and others, 1984; Fodor and Pylyshyn, 1988).
+We therefore distinguish three levels at which bias may enter.
+Root level.
+Bias enters at the root of the semantic structure through a polar question that presupposes a candidate conclusion (e.g., “Is the answer AA?”), without introducing any external knowledge.
+The task representation is unchanged but only the response the model is asked to make is confirming or rejecting the provided candidate answer.
+Propositional level.
+Bias enters through a rationale attached to a neutral question as the grounds for the claim, contributing structured propositional content that is compositionally integrated with the task (e.g., “What is the answer, based on {premise toward AA},?”).
+Because the question itself remains neutral, this level isolates whether bias modulates contextual interpretation rather than the framing of the question.
+Global level.
+Bias enters at both points at once (e.g., “Given {premise toward AA}, is the answer AA?”).
+The framing biased rationale shapes contextual interpretation while the framed question biases the output toward a specific conclusion, so the global level is the composition of the other two rather than a third independent manipulation.
+Exception: binary yes/no questions.
+Where the task is binary, no neutral question exists (e.g., “ is this AA?”).
+The propositional level necessarily inherits the root-level framing.
+Accordingly both propositional and global levels are by nature indistinguishable.
+Therefore we set the distinction only by whether the rationale is offered as the grounds for the claim (e.g., “Is this AA, based on {premise toward AA}?”) or as background to it (Given “{premise toward AA}, is this AA?”).
+RQ5 (Structural Composition). Does the framing effect depend on where bias enters, and do the levels combine additively when bias enters at more than one point?
+3 The FramingQA Benchmark
+Framing level
+Expansion
+Binary
+MC
+Correct-bias (names the correct option)
+Root
+P×FP\times F
+6
+3
+Propositional
+P×FP\times F
+6
+3
+Global
+P×FP\times F
+6
+3
+Incorrect-bias (names a wrong option)
+Root
+P×F×DP\times F\times D
+18
+9
+Propositional
+F×EF\times E
+2​E2E
+EE
+Global
+P×F×DP\times F\times D
+18
+9
+Neutral control
+—
+—
+1
+Per context
+54+2​E54+2E
+28+E28+E
+Summed over contexts
+Fixed part
+54​C54C / 28​C28C
+32,076
+14,000
+Evidence part
+2​Σ​E2\Sigma E / Σ​E\Sigma E
+5,218
+2,328
+Total
+37,294
+16,328
+Table 1: How one context becomes many questions. Each context is expanded by paraphrases (P=3P{=}3), bias framing (FF), distractor labels (D=3D{=}3), and cueing-evidence sets (EE), i.e., the distinct evidence subsets that can be foregrounded to support an incorrect option; EE varies by context. Binary items use a plain and a negated form (F=2F{=}2); multiple-choice (MC) items use the plain form only (F=1F{=}1), since the gold label should not flip under negation, plus one neutral control. Binary uses C=594C{=}594 contexts with Σ​E=2,609\Sigma E{=}2{,}609; MC uses C=500C{=}500 contexts with Σ​E=2,328\Sigma E{=}2{,}328 (Table 2). Robotics is open-ended, with 7 questions per context.
+Questions
+Domain
+Task
+Contexts
+Binary
+MC
+Law
+Issue spotting
+200
+12,832
+6,616
+Hearsay
+94
+5,638
+—
+Finance
+Categorization
+200
+12,802
+6,601
+Medicine
+Diagnosis
+100
+6,022
+3,111
+Robotics
+Instruction
+162
+1,134 (open-ended)
+Total
+756
+37,294
+16,328
+Table 2: Dataset statistics. Per-context expansion is given in
+Table 1. Hearsay is binary-only; the 1,134 robotics
+questions are open-ended and not counted in the Binary or MC totals.
+We create a test consisting of Yes–No binary (B) and multiple-choice (MC) questions from legal, medical, and financial knowledge, and of robotic instructions requiring spatial and temporal commonsense knowledge.
+We collected 756 unique contexts, yielding 662 neutral questions and 54,094 biased question variants (Table 2), for a total of 54,756 questions in the dataset.
+Neutral questions exist only for the MC and open formats: a Yes–No question must name one of the two options, so no neutral binary question is possible, and the MC question over the same context serves as the neutral reference.
+The contexts comprise 294 instances in law, 200 in finance, 100 in medicine, and 162 simulation episodes in robotics.
+FramingQA consists of 37,294 binary questions (i.e., “Yes” / “No”), 16,328 multiple-choice questions (i.e., A, B, C, and D), and 1,134 open-ended tasks.
+3.1 FramingQAlaw{}_{\textbf{law}}: Legal Reasoning
+We build our legal reasoning benchmark on tasks from LegalBench (Guha et al., 2023).
+We focus on two legal reasoning tasks from LegalBench (Guha et al., 2023): issue-spotting and rule-application:
+Issue-spotting.
+The legal issue-spotting task requires an LLM to consider a person’s narrative about their situation. The LLM must use this narrative to determine which legal issue category applies to the person’s situation. We focus on four categories that are particularly challenging for LLMs, as indicated by prior performance results: legal issues of (1) consumers, (2) courts, (3) employment, and (4) torts.
+Rule-application (Hearsay).
+Given a legal issue and a piece of prospective evidence, the LLM must determine whether the evidence meets the definition of hearsay under this test.
+Under the Federal Rules of Evidence, “hearsay” evidence is generally inadmissible at trial. Hearsay is defined as an “out-of-court statement introduced to prove the truth of the matter asserted.” In determining whether evidence constitutes hearsay, legal practitioners apply a structured three-part test:
+(1) was there a statement?; (2) was it made outside of court?; (3) is it being introduced to prove the truth of the matter asserted?
+In practice, many legal statements may face exceptions. For the purposes of this benchmark, we ignore these exceptions, advised by our annotators, domain experts and followed by the prior benchmark (Guha et al., 2023) and focus solely on the core definitional criteria.
+This simplification is a deliberate design choice to ensure consistency across jurisdictions and to evaluate LLM sensitivity to user-facing prompt framing rather than expert legal reasoning.
+3.2 FramingQAfin{}_{\textbf{fin}}: Financial Reasoning
+Finance narratives are sourced from public “help-post” style questions on the Personal Finance & Money Stack Exchange using the Stack Exchange API. Post titles and bodies are converted into short snippets by stripping markup, truncating to 120 words, and applying rule-based redaction to remove personally identifiable information. Each snippet is automatically assigned to one of six finance categories: (1) debt and repayment, (2) banking and payments, (3) fraud and scams, (4) credit reporting and score, (5) housing finance, and (6) investing and financial advice.
+3.3 FramingQAmd{}_{\textbf{md}}: Medical Reasoning
+We construct medical cases from challenging clinical case reports published in top-tier medical journals (Zhu et al., 2025).
+Each case includes a short clinical history, physical examination findings, and relevant diagnostic tests, and is curated to reflect realistic diagnostic ambiguity.
+The task is formulated as diagnostic classification. Correctly and incorrectly biased question variants are generated by selectively foregrounding subsets of diagnostic explanations (e.g., ECG findings, viral prodrome, biomarker patterns) while keeping the underlying case fixed.
+This setting is challenging because many diagnoses share overlapping symptoms and test results (e.g., myocarditis vs. myopericarditis), allowing biased framing to plausibly steer interpretation despite identical evidence.
+3.4 FramingQArobo{}_{\textbf{robo}}: Robotic Reasoning
+The goal of the robotic instruction following is to examine how language-conditioned agents alter their planning and execution behavior in response to biased instruction prompt stances, even when the underlying task specification remains unchanged.
+We build our robotic benchmark using task suites from PARTNR Chang et al. (2024), which is designed for long-horizon human–robot instruction following in household activities and built on the Habitat 3.0 simulator Puig et al. (2024).
+Robotic instruction following provides a challenging setting because task completion depends jointly on semantic understanding, planning order, spatial grounding, and temporal dependencies.
+By measuring completion rates, planning steps, and replanning frequency across biased variants, FramingQArobo{}_{\textbf{robo}} evaluates whether the framing effect in robotic reasoning arises from compositional interactions between linguistic framing and action planning, rather than from low-level execution errors alone.
+3.5 Annotation
+Construction is human-led at every stage. Domain experts first establish the gold label for each context. They then specify the option set of the gold option and its distractors and record a rationale for each.
+This answer sheet, comprising the option set and its rationales, is given to an LLM, which generates candidate phrasings of the biased variants against it.
+The model never determines correctness; it produces candidate surface forms, and as the last stage, the domain experts make the final accept or reject decisions.
+Data points are annotated by domain practitioners at or beyond the doctoral level: legal practitioners for FramingQAlaw{}_{\text{law}}, a practicing physician for FramingQAmd{}_{\text{md}}, an annotator with professional experience in finance and financial modelling for FramingQAfin{}_{\text{fin}}, and those with industry experience in robotic systems for FramingQArobo{}_{\text{robo}}.
+4 Experiments
+4.1 Setup
+We evaluate FramingQA across 9 open-source models: Gemma 3 (4B, 12B, 27B), LLaMA 3.1 (8B, 70B), Mistral (7B, 24B), and Phi-3 (3.8B) and Phi-4 (14B). Experiments are conducted across four high-stakes domains introduced in Section 3: law, medicine, finance, and robotics. For the textual domains (law, finance, medicine), tasks are framed as binary (Yes/No) classification or 4-class multiple-choice (MC-4) decisions grounded in a fixed context. For robotics, we evaluate instruction-following performance in a simulated environment using GPT-4.1 mini.
+All open-source models are run with HuggingFace transformers using greedy decoding (do_sample=False, one generation per prompt), with max_new_tokens=8 for binary items and 16 for multiple-choice items, and each model’s own chat template. Every question is presented in a single turn with that question’s context and no in-context examples.
+4.2 Evaluation Metric
+Accuracy (%)
+For textual tasks, we report exact-match accuracy under each bias condition.
+Correct Bias and Incorrect Bias isolate each bias direction.
+Incorrect Bias captures susceptibility to a misleading stance, while Correct Bias measures whether confirming evidence helps.
+Strict accuracy credits a context only if the model answers every variant in a given set correctly: all correct-bias variants, all incorrect-bias variants, or all variants of both biases.
+A single failure on any variant yields a score of zero, directly operationalizing compositional robustness under the framing effect.
+Mean accuracy reports the mean and standard deviation to show the average scores of variants.
+Neutral question refers to an unbiased prompt, "i.e., is this A, B, C, or D?", that serves as a baseline for unbiased performance, in multiple-choice settings. In binary settings, this is by nature implausible so we do not consider it.
+Expected accuracy is the strict accuracy a model would reach if its errors on the variants of a context were independent. This is computed as ∏qμ^q\prod_{q}\hat{\mu}_{q} from the per-question accuracies μ^q\hat{\mu}_{q} and then averaged over contexts. Observed strict accuracy above this value means errors concentrate in the same contexts (i.e., RQ4. selectivity) rather than occurring at random.
+Task Completion (%)
+For robotic simulations, task completion measures the fraction of the instruction the agent successfully executes within the episode horizon, computed as the ratio of satisfied propositions to total propositions in the evaluation function. Following PARTNR (Chang et al., 2024), propositions are predicate-based checks on simulator state (e.g. is_on_top(object, furniture), is_clean(object), is_next_to(a, b)), each corresponding to a subtask of the instruction. The score lies in [0,1][0,1], computed per episode and averaged across bias conditions.
+Number of Steps and Replans
+We report the number of steps and the number of replans per episode.
+The number of steps captures plan efficiency, while the number of replans
+reflects instability in interpretation or execution. Increases in either
+metric under biased conditions indicate that the framing effect affects not
+only success rates but also planning dynamics. As with the text-based
+metrics, we report both mean and strict scores for each.
+5 Results
+Binary
+MC
+Strict
+Strict
+Model
+Mean
+Pair
+All
+Mean
+Pair
+All
+Mistral 7B
+57.4
+8.3
+0.0
+48.0
+13.3
+4.6
+Mistral 24B
+56.0
+1.1
+0.0
+60.3
+42.7
+30.4
+Gemma3 4B
+52.4
+3.8
+0.0
+48.4
+11.1
+1.4
+Gemma3 12B
+55.3
+1.0
+0.0
+52.5
+23.3
+10.2
+Gemma3 27B
+56.2
+5.1
+0.0
+58.4
+33.1
+14.2
+Phi3 3.8B
+57.0
+1.6
+0.0
+54.2
+27.9
+13.0
+Phi4 14B
+54.5
+1.6
+0.0
+59.7
+43.9
+35.2
+Llama3.1 8B
+57.2
+3.6
+0.0
+49.2
+16.3
+4.8
+Llama3.1 70B
+61.0
+2.3
+0.0
+58.8
+40.7
+31.1
+Table 3: Context-level accuracy (%). Mean: accuracy on individual questions, averaged over every question available on a context.
+Strict (Pair): for each distractor, a context scores 1 only if every gold-option prompt and every prompt for that distractor are correct; we report the mean over distractors. Strict (All): the rate at which every question on a context is correct.
+Figure 3: Multiple-choice setting, context-level accuracy (%).
+(i) Mean: accuracy on the neutral question, on correct bias framing with correct answer, and on incorrect bias framing with distractor labels. Correct and incorrect bias bars are averaged over root, propositional, and global structural levels. The incorrect bias bar is first averaged over the accuracy of each distractor. The error bars are std across those three levels.
+(ii) Strict: all three phrasings ×\times all three levels per each framing direction must be correct for each correct or incorrect bias framing direction; incorrect-bias bars average the scores over distractors with error bars of std across those distractors.
+Figure 4: Binary yes/no setting, context-level accuracy (%).
+(i)&(iii) Mean: accuracy averaged over root, propositional, and global; error bars are the standard deviation across those three levels.
+(ii)&(iv) Strict: for gold Yes and gold No, the context scores 1 only if all phrasings at all three structural interpretation levels are correct. Incorrect-bias framings ((ii) and (iv)) average that score over available distractor labels; error bars are the standard deviation across those distractors.
+Binary
+MC
+Correct
+Incorrect
+All (Yes)
+All (No)
+Correct
+Incorrect
+All
+Model
+Exp.
+Act.
+Exp.
+Act.
+Exp.
+Act.
+Exp.
+Act.
+Exp.
+Act.
+Exp.
+Act.
+Exp.
+Act.
+Mistral 7B
+6.8
+27.7
+24.2
+38.5
+2.0
+30.8
+5×10−155{\times}10^{-15}
+0.0
+39.3
+77.2
+0.22
+18.6
+2×10−82{\times}10^{-8}
+7.4
+Mistral 24B
+2.0
+28.5
+0.56
+15.2
+9×10−59{\times}10^{-5}
+2.4
+2×10−62{\times}10^{-6}
+0.2
+7.7
+63.8
+1.12
+47.3
+2×10−52{\times}10^{-5}
+36.8
+Gemma3 4B
+8.4
+29.8
+1.10
+11.4
+4×10−44{\times}10^{-4}
+3.5
+6×10−126{\times}10^{-12}
+0.0
+33.5
+74.2
+0.18
+17.6
+3×10−83{\times}10^{-8}
+2.8
+Gemma3 12B
+3.6
+28.1
+1.04
+13.4
+2×10−42{\times}10^{-4}
+0.5
+8×10−88{\times}10^{-8}
+0.2
+19.9
+74.0
+0.38
+30.9
+8×10−78{\times}10^{-7}
+12.8
+Gemma3 27B
+6.1
+32.9
+1.62
+14.3
+3×10−33{\times}10^{-3}
+4.7
+6×10−106{\times}10^{-10}
+0.0
+15.5
+72.8
+0.90
+38.8
+1×10−51{\times}10^{-5}
+20.0
+Phi3
+0.43
+20.6
+1.73
+21.7
+1×10−71{\times}10^{-7}
+0.5
+4×10−44{\times}10^{-4}
+2.2
+11.4
+63.2
+0.32
+32.7
+7×10−77{\times}10^{-7}
+17.6
+Phi4
+1.69
+30.7
+0.46
+12.0
+6×10−76{\times}10^{-7}
+0.3
+2×10−52{\times}10^{-5}
+0.7
+5.7
+61.8
+1.03
+46.6
+2×10−52{\times}10^{-5}
+37.2
+Llama3.1 8B
+3.5
+25.9
+3.9
+29.8
+0.02
+19.2
+1×10−91{\times}10^{-9}
+0.3
+22.8
+73.2
+0.17
+23.1
+6×10−86{\times}10^{-8}
+10.8
+Llama3.1 70B
+2.7
+35.9
+1.40
+20.7
+2×10−32{\times}10^{-3}
+4.9
+4×10−64{\times}10^{-6}
+0.8
+4.2
+60.0
+1.52
+51.5
+5×10−55{\times}10^{-5}
+40.0
+Table 4: Observed (Act.) and expected (Exp.) strict accuracy (%) under independent errors. All (Yes) / All (No) are every gold-Yes / gold-No question on the context.
+Correct
+Incorrect
+All
+Model
+Root
+Prop.
+Global
+Root
+Prop.
+Global
+Root
+Prop.
+Global
+Mean
+Mistral 7B
+87.9
+90.9
+91.7
+27.5
+85.2
+35.2
+42.6
+86.6
+49.3
+Mistral 24B
+73.7
+75.1
+76.9
+54.5
+68.2
+56.7
+59.3
+70.0
+61.7
+Gemma3 4B
+89.5
+86.1
+90.3
+29.3
+78.4
+37.2
+44.4
+80.3
+50.5
+Gemma3 12B
+84.5
+81.7
+84.7
+41.3
+74.5
+44.1
+52.1
+76.4
+54.3
+Gemma3 27B
+81.6
+80.4
+82.0
+47.7
+77.1
+51.9
+56.2
+77.9
+59.4
+Phi3
+79.7
+75.4
+81.1
+44.0
+67.4
+46.2
+52.9
+69.6
+54.9
+Phi4
+70.3
+73.7
+74.4
+55.0
+68.3
+55.8
+58.8
+69.7
+60.4
+Llama3.1 8B
+84.4
+83.1
+87.4
+34.3
+76.6
+39.3
+46.8
+78.4
+51.3
+Llama3.1 70B
+67.3
+73.8
+70.3
+61.0
+67.4
+58.9
+62.6
+69.1
+61.8
+Strict
+Mistral 7B
+79.4
+86.2
+86.2
+21.6
+83.4
+33.7
+9.8
+70.0
+16.6
+Mistral 24B
+68.6
+70.4
+70.8
+51.3
+67.0
+56.2
+39.8
+59.0
+44.2
+Gemma3 4B
+83.8
+80.8
+82.0
+21.2
+75.6
+35.7
+4.8
+59.4
+13.2
+Gemma3 12B
+81.6
+77.4
+79.8
+36.7
+72.3
+43.3
+19.2
+54.8
+21.2
+Gemma3 27B
+77.8
+76.8
+76.4
+43.2
+75.2
+51.3
+24.4
+62.0
+31.8
+Phi3
+70.4
+69.6
+72.8
+38.9
+65.1
+45.5
+26.4
+50.8
+29.0
+Phi4
+67.2
+68.6
+67.2
+51.6
+67.4
+55.1
+42.4
+59.2
+41.2
+Llama3.1 8B
+76.6
+80.6
+79.8
+28.3
+74.4
+38.4
+14.8
+59.8
+16.6
+Llama3.1 70B
+64.0
+68.6
+64.0
+57.1
+66.3
+58.2
+46.4
+58.6
+45.0
+Table 5: Accuracy (%) by structural interpretation levels, Global, Propositional, and Global (§2.2).
+Mean: accuracy averaged over prompt variants within the level.
+Strict: a question counts as correct only if every prompt variant is answered correctly.
+Correct / Incorrect: correct / incorrect bias framing;
+All: both framings.
+(RQ1) Framing direction moves accuracy in opposite directions from the neutral baseline.
+In the multiple-choice setting, (Fig. 3 (i) Mean accuracy), where a genuinely neutral question is possible, every model scores higher on correct-bias questions (70–90%) than on the neutral baseline (55–62%), and lower on incorrect-bias questions (48–62%).
+Mistral 24B and Phi-4 are the only exceptions; their incorrect-bias scores exceed the neutral baseline by 1–2 points.
+The binary setting admits no neutral reference, since a Yes-–No question must name one of the two options; instead, we measure yes-no effect by comparing correct- and incorrect-bias framings of the same context against each other.
+Mean accuracy (Fig. 4 (i) & (iii)) on gold-Yes questions exceeds accuracy on gold-No questions under both correct- and incorrect-framing directions, despite exceptions with Phi models under incorrect-bias framing.
+Strict accuracy in multiple choice settings (Fig. 3 (ii)) makes this clear by showing the correct-bias framings are far more robust to question rephrasing (54–77%) than incorrect-bias framings (11–45%).
+The pattern holds in the binary setting but with a sensitivity to negation cues (Figs. 4 (ii)&(iv)). The correct-bias framings hold up on Yes questions while incorrect-bias framings hold up on No questions.
+(RQ2) Strict accuracy under incorrect-bias framing rises with model scale.
+In both the multiple-choice and binary settings (Figs. 3 and 4), strict accuracy under incorrect-bias framing rises with scale within each family, most clearly in multiple choice (Fig. 3 (ii)).
+The binary setting shows a weaker version of this trend, most visible through negation.
+For example, gold-No accuracy under incorrect bias tends to rise with scale, despite some inconsistencies (Fig. 4 (iv)).
+(RQ3) The collapse of strict accuracy shows a failure of semantic systematicity.
+In other words, per-question accuracy does not survive meaning-preserving transformation.
+Table 3 contrasts mean accuracy on individual questions with strict accuracy, which requires every variant built from the same context to be correct. Mean accuracy is moderate and tightly clustered across models (binary 52.4–61.0%, multiple choice 48.0–60.3%). However, binary strict (pair) falls to 1.0–8.3%, and multiple choice to 11.1–43.9%. In the binary setting, strict (all) is 0.0%0.0\% for every model; i.e., none answers a complete context correctly even once over all the question variants. In multiple choice it ranges from 1.4% to 35.2%.
+Because the variants leave the evidence and the fact it determines unchanged, a model that answers one correctly should answer them all. The collapse from mean to strict shows instead that correctness depends on the surface form in which a question is asked, which is a failure of semantic systematicity rather than of knowledge.
+(RQ4) Incorrect responses concentrate in particular contexts rather than spreading evenly.
+Table 4 compares observed strict accuracy with the accuracy expected under independent errors.
+Observed scores exceed this baseline almost everywhere, by four to nine orders of magnitude in the aggregate (All) conditions.
+In the multiple-choice setting, the gap is far larger under incorrect-bias framing (roughly 35–135×\times) than under correct-bias framing (2–14×\times).
+(RQ5) Framing components contribute according to the structural interpretation level they enter, not their own strength.
+In multiple choice, the propositional levels in
+Table 5 stay dark under incorrect bias, while the root and global levels fade sharply.
+This implies that a framed question shifts it sharply whether or not a premise accompanies it.
+Overall, the root and global scores of Table 5 look alike, whereas the propositional panel resembles neither.
+This implies that the structural interpretation levels do not contribute to the framing effects additively.
+Instead, the global-level framing effects carry the root-level ones.
+This clearly shows that the propositional effect is not weak in isolation, yet it contributes almost nothing once the question is also framed.
+Mean
+Strict
+Neu
+Correct
+Incorrect
+Correct
+Incorrect
+All
+Task completion (%) ↑\uparrow
+Overall
+56
+55
+52
+14
+8.6
+3.7
+Root
+56
+58
+53
+27
+25
+19
+Propositional
+56
+53
+52
+23
+25
+13
+Global
+56
+55
+49
+25
+21
+15
+No constraint
+62
+62
+63
+17
+13
+5.6
+Spatial
+66
+66
+59
+20
+13
+5.6
+Temporal
+39
+38
+33
+3.7
+0
+0
+Number of replans (execution instability) ↓\downarrow
+Overall
+8.9
+9.2
+10
+6.7
+9.4
+6.4
+Root
+8.9
+9.3
+9.2
+8.4
+8.7
+8.3
+Propositional
+8.9
+9.1
+11
+8.1
+10
+9.1
+Global
+8.9
+9.3
+9.9
+7.6
+8.3
+7.8
+Number of steps (planning inefficiency) ↓\downarrow
+Overall
+686
+700
+713
+365
+481
+329
+Root
+686
+707
+690
+505
+543
+501
+Propositional
+686
+669
+705
+475
+528
+470
+Global
+686
+726
+744
+449
+508
+471
+Table 6: Framing effects performance on FramingQArobo{}_{\textbf{robo}}. Neu: Neutral, original instruction prompt.
+Mean score averages over instruction variants that are correctly executed.
+Strict score averages only over episodes in which all instruction variants are executed correctly.
+↑\uparrow/↓\downarrow: higher/lower is better.
+5.1 Results in Robotic Simulations
+We apply the same compositional framing to robotic instructions and evaluate them with task completion and number of replans and steps.
+The compositional framing effect extends to robotic planning along three major axes (Table 6, Task completion).
+First, correct-bias instructions complete more of the task in mean score (53–58%) than incorrect-bias ones (49–53%) at every structural interpretation level.
+Second, the gap between the framing directions is largest under global framing (6 pp), followed closely by root framing (5 pp), and is nearly absent under propositional framing (1 pp).
+Third, despite moderate completion under both directions, strict accuracy is much lower under incorrect-bias framing (8.6%) than under correct-bias framing (14%).
+This collapse holds at the root and global levels, whereas the propositional level retains comparatively high accuracy under incorrect-bias framing.
+These findings match what we observe in the text-based tasks (RQ5), where propositional level is robust compared to root and global levels.
+Spatially and temporally constrained episodes follow the same pattern (Table 6, Task completion).
+Spatially constrained episodes complete more of the task under
+correct-bias framing than under incorrect-bias framing (neutral 66%, correct 66%, incorrect 59%), and temporally constrained ones behave the same way at a much lower overall level (39%, 38%, 33%).
+Unconstrained episodes show essentially no mean gap across conditions (62%, 62%, 63%).
+Yet their strict completion still separates by direction (correct 17%, incorrect 13%, all 5.6%), so the mean-level view again hides an inconsistency that the strict view exposes.
+Spatially constrained episodes show a comparable strict pattern
+(20%, 13%, 5.6%), while temporally constrained ones preserve the direction of the gap but sit near the floor throughout (3.7%, 0%, 0%), where no episode succeeds on all of its incorrect-bias variants, which forces the all-directions score to zero as well.
+The framing gap therefore appears under both constraint types and, at the strict level, in unconstrained episodes as well.
+Correct-bias instructions yield more efficient planning schemes than incorrect-bias instructions.
+Correct-bias instructions replan less often than incorrect-bias ones across structural interpretation levels, under both mean and strict scoring (Table 6, Number of replans).
+Step counts are less consistent under the mean, but under strict
+scoring, incorrect-bias instructions require more steps to reach the same goal state (Table 6, Number of steps), so the embedded bias appears to introduce detours rather than outright failures.
+The framing effect thus reaches beyond answer prediction to planning efficiency and stability, at least in the long-horizon embodied setting we examine here.
+6 Limitations and Conclusion
+We have introduced FramingQA, a benchmark for evaluating the compositional framing effect in large language models across high-stakes domains.
+Our results show that moderate mean accuracy can mask near-zero consistency, meaning that the models that answer individual questions correctly can fail to answer correctly under a different bias framing or under a different phrasing of the same framing.
+FramingQA only covers single-turn tasks in law, medicine, and finance, plus simulated robotic instruction following, in English only.
+The evaluation is on open models up to 70B with greedy decoding.
+We focus on direct answers as the first point where framing acts, and leave its effect on chain-of-thought reasoning and closed models to future work.
+Task definitions are simplified (e.g., hearsay exceptions are ignored) to isolate sensitivity to framing rather than expert reasoning.
+Author Contributions
+HK led the project, proposing the ideas and the compositional framing formulation, organizing the team, conducting the experiments, and writing the draft.
+HS and PT reviewed the draft and provided feedback, with HS contributing detailed input on terminological consistency.
+SR suggested the term framing effect and provided feedback.
+AB and NS contributed to initial brainstorming.
+GC, JK, and GN annotated and reviewed the legal dataset.
+SC and CM annotated the robotics dataset and ran the robotics experiments.
+FD annotated the financial dataset.
+BS annotated the medical dataset.
+References
+Chang et al. (2024)
+M. Chang, G. Chhablani, A. Clegg, M. D. Cote, R. Desai, M. Hlavac, V. Karashchuk, J. Krantz, R. Mottaghi, P. Parashar, S. Patki, I. Prasad, X. Puig, A. Rai, R. Ramrakhya, D. Tran, J. Truong, J. M. Turner, E. Undersander, and T. Yang
+PARTNR: a benchmark for planning and reasoning in embodied multi-agent tasks.
+External Links: 2411.00081
+Cited by: §3.4,
+§4.2.
+Chomsky (1957)
+N. Chomsky
+Syntactic structures.
+Mouton.
+Cited by: §2.
+Dankers et al. (2022)
+V. Dankers, E. Bruni, and D. Hupkes
+The paradox of the compositionality of natural language: a neural machine translation case study.
+In Proceedings of the 60th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers),
+Dublin, Ireland, pp. 4154–4175.
+Cited by: §2,
+§2.
+Fanous et al. (2025)
+A. Fanous, J. Goldberg, A. Agarwal, J. Lin, A. Zhou, S. Xu, V. Bikia, R. Daneshjou, and S. Koyejo
+Syceval: evaluating llm sycophancy.
+In Proceedings of the AAAI/ACM Conference on AI, Ethics, and Society,
+Vol. 8, pp. 893–900.
+Cited by: §1.
+Fodor and Pylyshyn (1988)
+J. A. Fodor and Z. W. Pylyshyn
+Connectionism and cognitive architecture: a critical analysis.
+Cognition 28 (1), pp. 3–71.
+Cited by: §2.1,
+§2.2.
+Gandhi and Gandhi (2025)
+V. Gandhi and S. Gandhi
+Prompt sentiment: the catalyst for llm change.
+arXiv preprint arXiv:2503.13510.
+Cited by: §1.
+Guha et al. (2023)
+N. Guha, J. Nyarko, D. E. Ho, C. Re, A. Chilton, A. Narayana, A. Chohlas-Wood, A. Peters, B. Waldon, D. Rockmore, D. Zambrano, D. Talisman, E. Hoque, F. Surani, F. Fagan, G. Sarfaty, G. M. Dickinson, H. Porat, J. Hegland, J. Wu, J. Nudell, J. Niklaus, J. J. Nay, J. H. Choi, K. Tobia, M. Hagan, M. Ma, M. Livermore, N. Rasumov-Rahe, N. Holzenberger, N. Kolt, P. Henderson, S. Rehaag, S. Goel, S. Gao, S. Williams, S. Gandhi, T. Zur, V. Iyer, and Z. Li
+LegalBench: a collaboratively built benchmark for measuring legal reasoning in large language models.
+In Thirty-seventh Conference on Neural Information Processing Systems Datasets and Benchmarks Track,
+Cited by: §3.1,
+§3.1.
+Hong et al. (2025)
+J. Hong, G. Byun, S. Kim, and K. Shu
+Measuring sycophancy of language models in multi-turn dialogues.
+In Findings of the Association for Computational Linguistics: EMNLP 2025, C. Christodoulopoulos, T. Chakraborty, C. Rose, and V. Peng (Eds.),
+Suzhou, China, pp. 2239–2259.
+External Links: Link,
+Document,
+ISBN 979-8-89176-335-7
+Cited by: §1.
+Kahneman (2011)
+D. Kahneman
+Thinking, fast and slow.
+First paperback edition, Farrar, Straus and Giroux, New York.
+External Links: ISBN 0374533555 9780374533557
+Cited by: §1,
+§2.
+Lake and Baroni (2018)
+B. M. Lake and M. Baroni
+Generalization without systematicity: on the compositional skills of sequence-to-sequence recurrent networks.
+External Links: 1711.00350
+Cited by: §2.
+Lake et al. (2016)
+B. M. Lake, T. D. Ullman, J. B. Tenenbaum, and S. J. Gershman
+Building machines that learn and think like people.
+External Links: 1604.00289
+Cited by: §2.
+Montague (1970)
+R. Montague
+Universal grammar.
+Theoria 36 (3), pp. 373–398.
+Cited by: §2.
+Partee et al. (1984)
+B. Partee et al.
+Compositionality.
+Varieties of formal semantics 3, pp. 281–311.
+Cited by: §2,
+§2.2.
+Perez et al. (2023)
+E. Perez, S. Ringer, K. Lukosiute, K. Nguyen, E. Chen, S. Heiner, C. Pettit, C. Olsson, S. Kundu, S. Kadavath, A. Jones, A. Chen, B. Mann, B. Israel, B. Seethor, C. McKinnon, C. Olah, D. Yan, D. Amodei, D. Amodei, D. Drain, D. Li, E. Tran-Johnson, G. Khundadze, J. Kernion, J. Landis, J. Kerr, J. Mueller, J. Hyun, J. Landau, K. Ndousse, L. Goldberg, L. Lovitt, M. Lucas, M. Sellitto, M. Zhang, N. Kingsland, N. Elhage, N. Joseph, N. Mercado, N. DasSarma, O. Rausch, R. Larson, S. McCandlish, S. Johnston, S. Kravec, S. El Showk, T. Lanham, T. Telleen-Lawton, T. Brown, T. Henighan, T. Hume, Y. Bai, Z. Hatfield-Dodds, J. Clark, S. R. Bowman, A. Askell, R. Grosse, D. Hernandez, D. Ganguli, E. Hubinger, N. Schiefer, and J. Kaplan
+Discovering language model behaviors with model-written evaluations.
+In Findings of the Association for Computational Linguistics: ACL 2023, A. Rogers, J. Boyd-Graber, and N. Okazaki (Eds.),
+Toronto, Canada, pp. 13387–13434.
+External Links: Link,
+Document
+Cited by: §1.
+Puig et al. (2024)
+X. Puig, E. Undersander, A. Szot, M. D. Cote, T. Yang, R. Partsey, R. Desai, A. Clegg, M. Hlavac, S. Y. Min, V. Vondrus, T. Gervet, V. Berges, J. M. Turner, O. Maksymets, Z. Kira, M. Kalakrishnan, J. Malik, D. S. Chaplot, U. Jain, D. Batra, A. Rai, and R. Mottaghi
+Habitat 3.0: A co-habitat for humans, avatars, and robots.
+In International Conference on Learning Representations,
+Cited by: §3.4.
+Tversky and Kahneman (1981)
+A. Tversky and D. Kahneman
+The framing of decisions and the psychology of choice.
+Science 211 (4481), pp. 453–458.
+External Links: ISSN 00368075, 10959203,
+Link
+Cited by: §1,
+§2.
+Xu et al. (2024)
+Z. Xu, K. Peng, L. Ding, D. Tao, and X. Lu
+Take care of your prompt bias! investigating and mitigating prompt bias in factual knowledge extraction.
+arXiv preprint arXiv:2403.09963.
+Cited by: §1.
+Zhu et al. (2025)
+Y. Zhu, Z. Huang, L. Mu, Y. Huang, W. Nie, J. Liu, S. Zhang, P. Liu, and X. Zhang
+DiagnosisArena: benchmarking diagnostic reasoning for large language models.
+External Links: 2505.14107
+Cited by: §3.3.
+Appendix A Dataset Construction
+FramingQA shares one construction recipe across domains. From a factually verified context and its gold label we produce a family of biased variants, plus an unframed question in the MC and open formats. § 3.5 describes the annotation process. Bias enters at three levels (§ 2.2) in two directions, correct, which names the gold option, and incorrect, which names a distractor. This gives 54+2​E54+2E binary and 28+E28+E MC questions per context (Table 1), realized through the templates of Table 7. Robotics omits the paraphrase dimension and uses one phrasing per level and direction, giving six biased variants per episode plus the neutral instruction. The logical record schema for the textual domains:
+Field
+Description
+context_id
+Identifier shared by all variants of one context
+domain, task
+For example law, issue_spotting
+text
+Fixed context, unchanged across all variants
+question
+The phrased question shown to the model
+bias_direction
+∈\in {neutral, correct, incorrect}
+level
+∈\in {root, propositional, global}, empty for neutral
+form
+∈\in {plain, negated}, binary only
+variant
+∈\in {Q1, Q2, Q3}, empty for neutral
+target
+Binary. The category, slice, or candidate probed
+gold
+Binary. Gold answer ∈\in {Yes, No}
+options
+MC-4. Four candidate labels or diagnoses, A to D
+gold_option
+MC-4. Gold option ∈\in {A, B, C, D}
+Appendix B Question variant templates
+Level
+Form
+Correct-bias
+Incorrect-bias
+Root
+plain
+Is this A?
+Is this B/C/D?
+This is A, correct?
+This is B/C/D, correct?
+This is A, right?
+This is B/C/D, right?
+negated
+This is not A, correct?
+This is not B/C/D, correct?
+This isn’t A, correct?
+This isn’t B/C/D, correct?
+This is not A, right?
+This is not B/C/D, right?
+Prop.
+plain
+Is this A based on ⟨\langleA⟩\rangle?
+Is this A based on ⟨\langleB⟩\rangle?
+Is this A based on ⟨\langleA⟩∗\rangle^{*}?
+Is this A based on ⟨\langleC⟩\rangle?
+Is this A based on ⟨\langleA⟩∗⁣∗\rangle^{**}?
+Is this A based on ⟨\langleD⟩\rangle?
+negated
+This is not A, based on ⟨\langleA⟩\rangle, correct?
+This is not A, based on ⟨\langleB⟩\rangle, correct?
+This is not A, based on ⟨\langleA⟩∗\rangle^{*}, correct?
+This is not A, based on ⟨\langleC⟩\rangle, correct?
+This is not A, based on ⟨\langleA⟩∗⁣∗\rangle^{**}, correct?
+This is not A, based on ⟨\langleD⟩\rangle, correct?
+Global
+plain
+Given ⟨\langleA⟩\rangle, is this A?
+Given ⟨\langleB/C/D⟩\rangle, is this B/C/D?
+Given ⟨\langleA⟩∗\rangle^{*}, this is A, correct?
+Given ⟨\langleB/C/D⟩\rangle, this is B/C/D, correct?
+Given ⟨\langleA⟩∗⁣∗\rangle^{**}, this is A, right?
+Given ⟨\langleB/C/D⟩\rangle, this is B/C/D, right?
+negated
+Given ⟨\langleA⟩\rangle, is this not A?
+Given ⟨\langleB/C/D⟩\rangle, is this not B/C/D?
+Given ⟨\langleA⟩∗\rangle^{*}, this is not A, correct?
+Given ⟨\langleB/C/D⟩\rangle, this is not B/C/D, correct?
+Given ⟨\langleA⟩∗⁣∗\rangle^{**}, this is not A, right?
+Given ⟨\langleB/C/D⟩\rangle, this is not B/C/D, right?
+Table 7: Question Q1/Q2/Q3 templates. A is the gold option; B/C/D are distractors. ⟨X⟩\langle X\rangle denotes a premise toward XX; ∗* and ∗⁣∗** mark rephrasings of that premise. At the root and global levels the three rows are question-form paraphrases (Q1–Q3).
+At the propositional level the question needs to be fixed, so only the premise varies, either by rephrasing under correct-bias framing or by the distractor it points toward under incorrect-bias framing.
+The cueing-evidence sets EE for propositional (prop.) level vary by context (Table 1).
+Appendix C Label Information
+C.1 Law
+Issue-spotting. Whether a factual scenario implicates a specified legal domain.
+Following LegalBench, we use four categories (n=n=50 each; 200 contexts total):
+Label
+Scope
+nn
+Consumer
+Debt and money, insurance, consumer goods and contracts, taxes, small claims about quality of service.
+50
+Courts
+Court system or lawyers: procedures, court rules, filing requirements, hiring or managing lawyers.
+50
+Employment
+Job-related problems before, during, or after employment: discrimination, harassment, payment, unionizing, pensions, termination, drug testing, background checks, worker’s compensation, contractor classification.
+50
+Torts
+Accident or conflict with another person involving perceived harm: car accidents, neighbour disputes, dog bites, bullying, harassment, data-privacy breaches, suing or being sued.
+50
+Total
+200
+Rule-application (Hearsay). Whether a scenario corresponds to a hearsay slice.
+Following LegalBench, each instance falls into one of five mutually exclusive slices:
+statement made in court (n=n=14), non-assertive conduct (n=n=19), standard hearsay
+(n=n=29), non-verbal hearsay (n=n=12), and not introduced to prove truth (n=n=20).
+C.2 Finance
+Narratives are seeded from public “help-post”–style questions on the Personal Finance &
+Money Stack Exchange, retrieved via the Stack Exchange API. We use 66 highly frequent, mutually distinguishable categories (nn is the number of contexts per category):
+Label
+Scope
+nn
+Debt and repayment
+Credit cards, loans, collections, repayment, interest, default.
+34
+Banking and payments
+Transfers, holds, chargebacks, disputed transactions, account issues.
+43
+Fraud and scams
+Phishing, identity theft, account takeover, scam payment requests.
+25
+Credit reporting and score
+Credit bureaus, disputes, credit-file entries, score changes.
+17
+Housing finance
+Mortgages, refinancing, arrears, escrow, foreclosure.
+34
+Investing and financial advice
+Brokerage accounts, funds, asset allocation, fees, suitability.
+47
+Total
+200
+C.3 Medicine
+Whether a clinical case supports a specified diagnosis. Unlike law and finance, medicine has no fixed label set: the candidate diagnoses are case-specific rather than drawn from a closed taxonomy. For each case the gold diagnosis is the final diagnosis reported in the source case report; the three distractors are clinically plausible alternatives that share presenting features with the gold diagnosis, so that the case cannot be resolved by symptom overlap alone (e.g. accessory mitral valve tissue against papillary fibroelastoma, which present with similar mobile left-ventricular-outflow-tract findings). The 100 cases span multiple specialties.
+Appendix D Worked Examples
+D.1 Law
+Legal Domain (Issue-spotting)
+Text
+Hello. My fiancée (30F) and I (37M) have been together around 4 years. We live together and have a 2-year-old daughter. We have joint accounts including checking and credit cards. For the past 3 years I have supported her and our daughter exclusively…
+She used me to get through college and now that she’s accepted a job, she’s going to leave.… What can I do legally to force her to pay half our accumulated debt? Do I have any legal recourse? I should seek an attorney but cannot afford it right now.…
+In 72 hours we went from planning to buy a house to my family being torn in half, my daughter being taken away, and being on the hook for $25k in debt plus a new car loan.
+Question (+)
+Is this a consumer issue?
+Question (−-)
+Is this an employment issue?
+D.2 Finance
+Financial Domain
+Text
+Is there an advantage to jointly filing for bankruptcy when only one spouse has debt? When filing taxes, there is almost always an advantage to filing jointly.
+Question (+)
+Is this an issue of debt and repayment?
+Question (−-)
+Is this an issue of credit reporting and score?
+D.3 Medicine
+Medical Domain
+Case Information
+A man in his mid-60s presented with episodes of palpitations, dyspnea, and dizziness during the last half year before referral. He was otherwise healthy. Medical history included a low-dose statin for high cholesterol. A Holter monitor revealed episodes of atrial fibrillation, presumed to cause the symptoms.
+Physical Examination
+Left ventricular ejection fraction was within normal range. The aortic valve was tricuspid with mild central regurgitation. The sinus of Valsalva was slightly dilated (41 mm). No sign of LVOT obstruction was present.
+Diagnostic Tests
+Transthoracic echocardiography revealed a highly mobile element in the LVOT with no definite anatomical relationship to the mitral or aortic valve.
+Transesophageal echocardiography confirmed a highly mobile LVOT element (∼\sim25 mm) that moved toward the aortic valve in systole and was dragged back into the LVOT in early diastole, forming a thin circular structure. Cardiac CT showed a filamentous element ∼\sim7 mm below the left aortic coronary cusp; cardiac MRI could not visualize the LVOT element and incidentally found mitral annulus disjunction.
+Question (+)
+Is this Accessory Mitral Valve Tissue?
+Question (−-)
+Is this Papillary Fibroelastoma?
+D.4 Robotics
+Robotics Domain (spatial episode)
+Instruction (neutral)
+Put the candle, the candle holder, and the plant container on the table in the living room.
+Instruction (++, root)
+For decoration, put the candle, the candle holder, and the plant container on the table in the living room.
+Instruction (−-, root)
+For clearing the table, put the candle, the candle holder, and the plant container on the table in the living room.
+Instruction (++, propositional)
+To decorate the living room, put the candle, the candle holder, and the plant container on the table in the living room.
+Instruction (−-, propositional)
+To clear the living room table, put the candle, the candle holder, and the plant container on the table in the living room.
+Instruction (++, global)
+To decorate the living room, putting the candle, the candle holder, and the plant container on the table is appropriate. To achieve that goal, put the candle, the candle holder, and the plant container on the table in the living room.
+Instruction (−-, global)
+To clear the living room table, putting the candle, the candle holder, and the plant container on the table is inappropriate. To achieve that goal, put the candle, the candle holder, and the plant container on the table in the living room.
+Experimental support, please
+view the build logs
+for errors. Generated by
+L
+A
+T
+E
+xml
+.
+Instructions for reporting errors
+We are continuing to improve HTML versions of papers, and your feedback helps enhance accessibility and mobile
+support. To report errors in the HTML that will help us improve conversion and rendering, choose any of the
+methods listed below:
+Click the "Report Issue" (
+) button, located in the page header.
+Tip: You can select the relevant text first, to include it in your report.
+Our team has already identified the following issues. We appreciate your time reviewing and reporting rendering errors we
+may not have found yet. Your efforts will help us improve the HTML versions for all readers, because disability
+should not be a barrier to accessing research. Thank you for your continued support in championing open access for
+all.
+Have a free development cycle? Help support accessibility at arXiv! Our collaborators at LaTeXML maintain a list of packages that need conversion, and welcome developer contributions.
+We gratefully acknowledge support from
+our major funders,
+member institutions, ,
+and all contributors.
+About
+·
+Help
+·
+Contact
+·
+Subscribe
+·
+Copyright
+·
+Privacy
+·
+Accessibility
+·
+Operational Status (opens in new tab)
+Major funding support from

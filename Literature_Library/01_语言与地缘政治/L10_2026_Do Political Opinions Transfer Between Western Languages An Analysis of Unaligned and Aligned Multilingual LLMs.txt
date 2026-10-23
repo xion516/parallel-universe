@@ -1,0 +1,1127 @@
+本文件为PDF自动提取文本，仅供检索；排版、图表和页码请以PDF为准。
+Do Political Opinions Transfer Between Western Languages? An Analysis of Unaligned and Aligned Multilingual LLMs
+
+          Do Political Opinions Transfer Between Western Languages?
+           An Analysis of Unaligned and Aligned Multilingual LLMs
+
+                  Franziska Weeber1 , Tanise Ceron2 , Sebastian Padó1
+                      1
+                        University of Stuttgart, 2 Bocconi University
+    {franziska.weeber|pado}@ims.uni-stuttgart.de, tanise.ceron@unibocconi.it
+
+
+
+                      Abstract
+    Public opinion surveys show cross-cultural dif-
+    ferences in political opinions between socio-
+    cultural contexts. However, there is no clear
+    evidence whether these differences translate
+    to cross-lingual differences in multilingual
+    large language models (MLLMs). We analyze
+    whether opinions transfer between languages
+    or whether there are separate opinions for each
+    language in MLLMs of various sizes across
+    five Western languages. We evaluate MLLMs’
+    opinions by prompting them to report their
+    (dis)agreement with political statements from
+    voting advice applications. To better under-
+    stand the interaction between languages in the            Figure 1: Relationship between hypotheses (columns),
+    models, we evaluate them both before and after            political alignment (rows), and multilingual opinion pre-
+    aligning them with more left or right views us-           dictions (cells). Since unaligned models alone can’t
+    ing direct preference optimization and English            distinguish the hypotheses (two predictions in the top
+    alignment data only. Our findings reveal that             right cell), we align MLLMs using English data to clar-
+    unaligned models show only very few signif-               ify which hypothesis holds.
+    icant cross-lingual differences in the political
+    opinions they reflect. The political alignment
+    shifts opinions almost uniformly across all five          reflect and represent opinions from their training
+    languages. We conclude that in Western lan-               data (Feng et al., 2023). A number of studies on
+    guage contexts, political opinions transfer be-
+                                                              political opinions in LLMs have been carried out in
+    tween languages, demonstrating the challenges
+    in achieving explicit socio-linguistic, cultural,         recent years focusing primarily on the evaluation of
+    and political alignment of MLLMs.                         LLMs in English (e.g., Ceron et al., 2024; Röttger
+                                                              et al., 2024; Rozado, 2024), even though a variety
+1   Introduction                                              of multilingual LLMs (MLLMs) are now avail-
+Large language models (LLMs) are now exten-                   able and widely used (Qin et al., 2025; Xu et al.,
+sively employed for tasks with direct impact on               2025). Public opinion surveys show that political
+people’s lives. Therefore, a desideratum for LLMs             opinions differ across socio-linguistic context: The
+is to be representative of a variety of human opin-           PEW Global Opinions Survey1 shows the average
+ions without exhibiting systematic biases (Sorensen           political stance (on a left-to-right scale) for some
+et al., 2024), since biased systems may lead to un-           European countries to vary considerably (see Ap-
+desired or harmful consequences, e.g., affecting              pendix A). Representing this variation in opinions
+voting outcomes (Potter et al., 2024).                        would require LLMs to recognize socio-cultural,
+   Our study focuses on one type of bias of major             region-specific opinions and values when prompted
+interest for society, namely political opinions. We           in different languages (Naous et al., 2024), i.e., to
+define a political opinion as a systematic and robust         allow for distinct opinion variations per language.
+favoring of a left or right stance for a political state-     Indeed, research has found some cross-lingual dif-
+ment or policy issue, e.g., whether one is in favor of           1
+                                                                   https://www.pewresearch.org/dataset/
+expanding environmental protection or not. LLMs               spring-2023-survey-data/
+
+                                                          319
+       Proceedings of the 19th Conference of the European Chapter of the Association for Computational Linguistics
+                                         Volume 1: Long Papers, pages 319–340
+                           March 24-29, 2026 ©2026 Association for Computational Linguistics
+ferences in social bias evaluation measures be-          opinions in all our target languages. Next, we align
+tween languages (Levy et al., 2023; Neplenbroek          two MLLMs from different model families with
+et al., 2024). However, the prevalence of English        more left or right views using direct preference opti-
+in MLLMs’ pretraining data and representations           mization (DPO, Rafailov et al., 2024) and English
+(Wendler et al., 2024), the implicit and explicit        political party manifestos (§ 4). The politically
+training for cross-lingual concept space alignment       aligned models are again evaluated for political
+of MLLMs (Wendler et al., 2024). Findings that           opinions in all languages. Finally, we verify the
+finetuning in English also affects other languages       political alignment of our models on an open-ended
+(e.g., Neplenbroek et al., 2025) suggest that there      political opinion evaluation scenario. We find that
+are transfer effects between languages. This indi-       there are almost no cross-lingual differences both
+cates that aligning MLLMs in one language would          before and after model alignment, confirming that
+uniformly affect the other languages.                    there is a strong cross-lingual transfer of opinions
+   The conflicting results on whether there is a         between languages in MLLMs.2
+cross-lingual transfer of opinions in the models and        This paper contributes i) a detailed, robustness-
+the lack of research on both multilingual perspec-       aware cross-lingual (albeit Western-focused) eval-
+tives and the political domain motivate our work.        uation of political opinions in multiple unaligned
+Figure 1 displays the two hypotheses for political       MLLMs ; ii) a thorough analysis of cross-lingual
+opinion transfer in the columns: Either opinions         changes in political opinions after aligning LLMs
+transfer between languages (H1) or there are sepa-       with political views in English. The relevance
+rate opinions for each language (H2). We therefore       of our study lies in identifying a fundamental
+define our first research question as follows:           methodological consideration when using MLLMs
+RQ1 How do MLLMs’ political opinions differ              in any political task across multiple socio-linguistic
+      across Western languages? Do they reflect          contexts, thus highlighting the difficulty to align
+      socio-cultural differences among human polit-      MLLMs with different socio-linguistic contexts.
+      ical opinions or not?
+                                                         2   Related Work
+   Figure 1 illustrates the two possible outcomes
+for RQ1: either opinions are consistent across           Political opinions in unaligned LLMs. They
+languages (RQ1/H1 and RQ1/H2/a), or they dif-            are typically probed by letting the LLMs answer
+fer (RQ1/H2/b). While the latter confirms cross-         closed-ended questions where the answers’ stances
+lingual differences in opinions, the former does not     are known, e.g., from tests developed for humans
+necessarily imply opinion transfer – the opinions        by political scientists, such as the political com-
+could agree by coincidence, or as a training artifact.   pass test (Condorelli et al., 2024; Feng et al., 2023;
+To disentangle these possibilities, we introduce a       Rozado, 2024; Wright et al., 2024; Röttger et al.,
+second research question:                                2024; Liu et al., 2025), voting advice applications
+RQ2 How does politically aligning opinions in            (Ceron et al., 2024; Rettenberger et al., 2025), or
+      MLLMs with more left- or right-leaning views       surveys (Santurkar et al., 2023). All these prior
+      using English alignment data affect opinions       works find left-leaning opinions in LLMs. San-
+      in the other Western languages?                    turkar et al. (2023) find this effect to be stronger
+                                                         in instruction-tuned models than in base models.
+If the opinions remain consistent after aligning the
+                                                         They hypothesize that the reason for this is the
+LLMs with English data, this indicates a strong
+                                                         demographic selection bias of crowdworkers who
+transfer of opinions across languages, validating
+                                                         create instruction tuning datasets and tend to be
+H1. However, if only the opinions in English
+                                                         young, well educated, and liberal. Ceron et al.
+change while others remain the same, then the
+                                                         (2024) find the left political opinions only for some
+model holds distinct opinions in different lan-
+                                                         policy issues but not for others, arguing for a more
+guages, validating H2.
+                                                         fine-grained analysis. Liu et al. (2025) find a shift
+   We investigate these two RQs as follows: we           towards less left views in ChatGPT versions over
+first evaluate the robustness, i.e., the consistency     time. With the exception of Condorelli et al. (2024),
+of model responses over wording variations, of 15
+                                                            2
+unaligned MLLMs in five languages (also) spoken               Our code is available at https://github.com/frawee/
+                                                         cross_lingual_opinion_transfer. All model responses
+in Europe (§ 3.2). Second, we filter for models with     and annotations are available at https://osf.io/p8z74/
+robust political stances and evaluate their political    overview
+
+                                                     320
+all of these works evaluate LLMs in English only.           Policy Issue                      Count     L/R
+Political alignment of LLMs. Numerous tech-                 expanded environmental pro-       32        L
+niques have emerged to align LLMs with hu-                  tection
+man preferences, such as supervised finetuning              expanded social welfare state     38        L
+(SFT), reinforcement learning with human feed-              liberal society                   44        L
+back (RLHF, Ziegler et al. (2020)), or direct pref-         open foreign policy               25        L
+erence optimization (DPO, Rafailov et al. (2024)).          law and order                     19        R
+Chalkidis and Brandl (2024) align Llama with Eu-            liberal economic policy           55        R
+ropean political parties using SFT. Stammbach et al.        restrictive financial policy      29        R
+(2024) use data from the Swiss voting advice ap-            restrictive migration policy      16        R
+plication to align a Llama3.1-8B model politically      Table 1: Our eight policy issues, the number of original
+to generate more diverse arguments in a Swiss con-      statements they apply to, and whether a positive stance
+text. Agiza et al. (2024) politically align LLMs        towards the statement aligns with a left or right view.
+with more left or right views in English.
+Cross-lingual bias differences in MLLMs. Con-
+                                                        atic differences between Western and non-Western
+dorelli et al. (2024) compare ChatGPT in Italian
+                                                        languages. Wendler et al. (2024) find that concept
+and English, finding differences in political stance
+                                                        abstraction in MLLMs is more similar to English
+and susceptibility to biased prompts. Rettenberger
+                                                        than to other languages. Etxaniz et al. (2024) find
+et al. (2025) prompt ChatGPT with European po-
+                                                        that multilingual models perform better when self-
+litical statements in English and German, finding
+                                                        translating a non-English prompt into English first.
+stronger opinions in both larger models and in Ger-
+                                                        Choenni et al. (2024) finetune three MT5 models
+man. Levy et al. (2023) finetune models for sen-
+                                                        on data from three different domains in Farsi, Ko-
+timent analysis in Italian, Chinese, English, He-
+                                                        rean, Hindi, and Russian to evaluate the change of
+brew, and Spanish, finding differences between
+                                                        cultural values in twelve test languages. They find
+languages that align with stereotypes in the culture
+                                                        that multilingual finetuning best preserves cross-
+of each language. Further work has also focused
+                                                        cultural differences and that the effect of the fine-
+on creating multilingual bias evaluation datasets,
+                                                        tuning language is small. Moreover, they find dif-
+often by translating and extending existing bench-
+                                                        ferences in cultural changes across test languages,
+marks. Névéol et al. (2022) translate the CrowS
+                                                        but no systematic differences between Western and
+Pairs dataset for social stereotype evaluation (Nan-
+                                                        Non-Western languages. These results indicate
+gia et al., 2020) into French and find that biases
+                                                        that information can transfer between languages
+differ from English. Neplenbroek et al. (2024) ex-
+                                                        in MLLMs. However, it is not clear if this finding
+tend the BBQ dataset for social bias evaluation
+                                                        extends to political opinions.
+in QA tasks (Parrish et al., 2022) to Dutch, Span-
+ish, and Turkish. They compare multiple MLLMs           3     RQ1: Opinions in Unaligned MLLMs
+for cultural stereotypes in each language, finding
+significant differences across languages and bias       We first examine cross-lingual differences in politi-
+types, which provides evidence for cross-lingual        cal opinions of unaligned models to answer RQ1.
+differences of biases in MLLMs.
+                                                        3.1    Methods
+Language alignment in MLLMs. Having simi-
+lar internal representations for different languages    We aim to analyze robust and model-inherent polit-
+within one MLLM, i.e., cross-lingual alignment,         ical opinions, but opinion measures can vary with
+is a desired property to enable transfer learning       the prompt wording (Ceron et al., 2024; Röttger
+across languages (Hämmerl et al., 2024). There is       et al., 2024). We therefore use the evaluation frame-
+a body of research demonstrating that this align-       work from Ceron et al. (2024) and evaluate the
+ment, and MLLMs in general, are still dominated         robustness of all our models before examining po-
+by English and its cultural aspects. Neplenbroek        litical opinions across languages and policy issues.
+et al. (2025) apply SFT and DPO using English           Models and languages. We evaluate 15 bi- or
+data for social bias and toxicity mitigation and find   multi-lingual instruction-tuned unaligned LLMs
+DPO to significantly decrease bias scores in lan-       of different sizes in five languages (also) spoken
+guages other than English, but they find no system-     in Western Europe: German, English, French,
+                                                    321
+Spanish, and Italian (more details in Appendix               Robust opinion evaluation. To measure the po-
+B). We focus on these languages for multiple rea-            litical opinions, each statement from the dataset
+sons: Since our evaluation data is of European ori-          is inserted into a prompt template that explains
+gin and sometimes contains Europe-specific state-            the task: The MLLM should indicate whether it
+ments, evaluation of non-Western languages might             agrees or disagrees with the provided statement.
+be affected by a mismatch of the evaluation data             We prompt the MLLMs, collect their answers and
+and the political context. Also, some of our tested          parse them into a binary answer using dictionaries
+models are only able to generate these five lan-             of (dis)agreement terms (see Appendix C). Ceron
+guages according to huggingface. We choose a                 et al. (2024) emphasize the need for a robust evalu-
+variety of model sizes but focus on relatively small         ation when using closed-ended questions for polit-
+models due to their lower computational cost.                ical stance evaluations since the models’ answers
+Evaluation data. We use ProbVAA for evaluat-                 are sensitive to different prompt formulations. We
+ing the political opinions of LLMs from Ceron et al.         apply the evaluation framework from Ceron et al.
+(2024). While the authors only use English state-            (2024) with minor modifications. We assess the ro-
+ments in their paper, each statement is available in         bustness of each model against such formulations
+multiple Western languages (which can either be              (cf. Appendix D) in order to exclude non-robust
+the original language or a translation), including           models from the cross-lingual analysis.
+all languages of interest in this paper. The data            Cross-lingual evaluation of opinions. We use
+contains 239 statements curated from European                the binarized agreement responses aggregated over
+voting advice applications (VAAs). Each statement            the 30 sampled responses per prompt formulation
+has been categorized into policy issues (whenever            for the cross-lingual opinion analysis. For each
+fitting) and whether agreeing or disagreeing with            policy issue, we filter the data for statements that
+it goes in favor or against a given stanced policy           have been labeled as belonging to it. We also cal-
+issue. Table 1 shows an overview of 8 policy issues,         culate the overall stance of a statement given the
+the number of statement that is in favor of the issue,       agreement/disagreement with each policy issue.
+and whether they represent left- or right-leaning               We run a beta regression to quantify and sta-
+views. These labels are used for the calculation of          tistically disentangle the effects of language and
+the political bias in the models. Figure 2 shows an          model on political opinions. The dependent vari-
+example statement and instruction.                           able is either the overall stance or the stance to-
+                                                             wards each of the eight policy issues (see Appendix
+                                                             E). Next to model and language, we also include
+                                                             model-language interactions to report generalizable
+                                                             instead of model-specific language effects. Our ref-
+                                                             erence levels are Mixtral8x7B, the most reliable
+                                                             model, for the model and English for the language.
+                                                                For each model, we also evaluate the stances
+                                                             towards all eight policy issues. Like Neplen-
+                                                             broek et al. (2024), we use the Kruskal Wallis test
+                                                             (Kruskal and Wallis, 1952), a non-parametric alter-
+                                                             native to ANOVA, to test for significant differences
+                                                             between all five languages and for significant differ-
+                                                             ences of each language to a random baseline. We
+                                                             calculate the test statistic for each policy issue on
+                                                             all opinions for statements that have a non-neutral
+                                                             stance towards the policy issue. Each opinion is
+                                                             the average over all prompt formulations of each
+                                                             statement and all templates (see Appendix E).
+Figure 2: Example of the data generation process. The
+                                                             3.2   Results
+left part shows the input into the MLLMs, the right part
+the (expected) output.                                       Robustness. Figure 3 shows the average number
+                                                             of robustness tests passed per model and language.
+                                                           322
+Figure 3: Average number of robustness tests passed per model and language and standard deviations calculated
+over statement averages. Highlighted in red are all models that pass more than half of the robustness tests and are
+considered for further analysis. On the left, we report random results and the average over the six robust models.
+
+
+
+
+Figure 4: Beta regression coefficients and 95% CIs for models (compared to Mixtral8x7B) and languages (compared
+to EN). Figure a) shows the aggregated stance, b) the left-leaning policy issue expanded environmental protection,
+and c) the right-leaning policy issue law and order. Opaque coefficients are not significant at the 5% level.
+
+
+
+
+Figure 5: Parallel coordinate plot of policy issue specific stances for each robust MLLM. The policy issues are
+ordered by leaning of the issue (first four: left-leaning, last four: right-leaning) and then alphabetically. Values
+above zero indicate a right-leaning and values below zero a left-leaning position. Bold black axes indicate significant
+differences between the five languages according to the Kruskal Wallis test. Results for one policy issue and
+language marked with a squared marker are significantly different from the random results as measured by the
+Kruskal Wallis test.
+
+
+Detailed results in Appendix D. While there are              opinions. In the reminder of the paper, we only con-
+some differences by language within models and               sider the MLLMs that pass at least half of the tests
+for single robustness tests, all languages pass a            on average, namely: Phi3.5-3B, Llama3.1-8B,
+very similar number of tests on average. Thus, al-           Aya23-8B, Mixtral8x7B, CommandR-35B, and
+though most of the training data is in English, the          GPT3.5-turbo. This filter guarantees that we only
+four other languages also exhibit robust political           analyze robust stances of models.
+
+                                                         323
+Analysis of political opinions. Figure 4 shows                        opinion and negatives values a right-leaning one.
+the results of the regression analysis for languages                  Stances that are significantly different from a ran-
+(reference level: EN) and model (reference level:                     dom choice have square markers. Policy issues
+Mixtral8x7B). Coefficients can be interpreted as                      with significant differences between languages in a
+the change of the outcome when modifying the                          model are highlighted by a bold policy issue axis.
+value of a predictor.3 Full results in Appendix F.                       All six tested models exhibit similar stance pat-
+   Figure 4 shows the coefficients and their 95%                      terns that are more left-leaning (i.e., negative in the
+confidence intervals of all models and languages                      plot). The least left-leaning model, CommandR 35B,
+on the overall stance and for two policy issues with                  is still left-leaning for several languages in two pol-
+comparatively strong language effects. Overall,                       icy issues. Only the law and order issue shows
+we find no significant differences in opinions in                     both left and right stances for various models.
+non-English Western languages compared to En-                            Differences between languages are rare: Only
+glish (Figure 4a). Therefore, we find no evidence                     CommandR 35B, Aya23 8B and GPT 3.5 turbo
+of general differences between languages on the                       show significant differences between languages in
+aggregated stance level in the regression (RQ1).                      the policy issues expanded environmental protec-
+However, on the policy level, there are significant                   tion and expanded social welfare state. All other
+differences between the other languages and En-                       models show differences, especially on the issue
+glish on the topic of expanded environmental pro-                     expanded environmental protection and law and
+tection (Figure 4b), even though the analysis is                      order, but they are not significant according to the
+based on much smaller samples. Responses in                           Kruskal Wallis test.
+German, Spanish, and Italian are, on average, sig-                    Conclusions for RQ1. Our analysis finds that
+nificantly more in favor of expanded environmental                    language differences are very small in general and
+protection than in English. Stronger effect sizes                     do not reflect the differences of public opinions
+than in the overall effects, although not significant                 found in surveys. The lack of cross-lingual differ-
+at the five percent level, can also be found for law                  ences can have two explanations (cf. Figure 1): Ei-
+and order(Figure 4c). Responses in Spanish are                        ther the cross-lingual transfer of political opinions
+slightly less supportive of law and order. In sum,                    is strong, or the opinions are separated by language
+overall language differences are neglectable, but                     and align for other reasons, e.g., by chance or due
+stronger on a disaggregated level of opinions.                        to postprocessing. Subsequently, we carry out po-
+   While we find only few cross-lingual differ-                       litical alignment of models using English data only
+ences, there are many significant differences                         to distinguish between these alternatives.
+between models. Overall, all models except
+Llama3.1-8B are on average left-leaning, but                          4     RQ2: Opinion Change Through
+significantly less left-leaning than Mixtral8x7B,                           Political Alignment of MLLMs
+since Mixtral8x7B is the most left-leaning model.
+                                                                      We now align two of the most reliable models with
+On the policy issue level (4b), the differences of
+                                                                      more left or right views using English alignment
+models to Mixtral8x7B are similar to the over-
+                                                                      data to investigate the effect on political opinions
+all left/right stance. For law and order (Figure
+                                                                      in the other target languages.
+Fc), models behave differently. Llama3.1-8B
+and Phi3.5-3B are significantly less left-leaning                     4.1    Methods
+than Mixtral8x7B while GPT3.5-turbo and
+CommandR-35B are significantly less conservative.                     Political alignment. We use direct preference
+This finding further shows the need for a fine-                       optimization (DPO, Rafailov et al., 2024) for the
+grained evaluation. We therefore evaluate model-                      alignment. In DPO, we can pass both agreement
+and policy issue specific results next.                               and disagreement terms as preferred and dispre-
+                                                                      ferred outputs in the finetuning. This contrastive
+   Figure 5 shows the stances for each of the six
+                                                                      approach allows the model to align based on the se-
+models in separate plots. The policy issues from Ta-
+                                                                      mantics of a statement rather than on the expected
+ble 1 are on the x-axis and each line represents one
+                                                                      answer format for our closed-ended alignment task.
+language. Positive values indicate a right-leaning
+                                                                      We fine-tune LoRA adapters (Hu et al., 2022) in-
+    3
+      Mixtral8x7B is our most left-leaning model. So being            stead of tuning the full model for efficiency rea-
+significantly less left-leaning does not equate to right-leaning.     sons. We evaluate the aligned models on the same
+                                                                    324
+Figure 6: Parallel coordinate plot of policy issue specific stances for Phi3.5-3B and Llama3.1-8B (center) and their
+left-aligned (left) and right-aligned (right) versions using the Manifesto codes annotated with the eight policy issues.
+Values above zero indicate a right-leaning and values below zero a left-leaning position. Bold black axes indicate
+significant differences between the five languages according to the Kruskal Wallis test. Results for one policy issue
+and language marked with a squared marker are significantly different from the random results as measured by the
+Kruskal Wallis test. Note that the y-axis scale differs from Figure 5.
+
+
+political opinion measurement task as before (see            bias. This gives us 20,000 examples in each align-
+Section 3.1) as well as in a open-ended task.                ment dataset. For the left alignment datasets, we
+Alignment data. We create left- and right-                   use the agreement option that indicates a left per-
+leaning alignment datasets using the Manifesto cor-          spective as the preferred output and the other agree-
+pus from the Manifesto Research on Political Rep-            ment option as the dispreferred output. Since we
+resentation (MARPOR) project (Lehmann et al.,                sample as many left as right statements, we have
+2022), a collection of party election manifestos             equal amounts of examples where the preferred
+annotated with fine-grained topic/policy issue la-           output is agreement and disagreement. We use the
+bels on the (quasi-)sentence level. The created              same procedure to obtain the right-leaning align-
+dataset follows a similar format as our evaluation           ment datasets. Details in Appendix H.
+data ProbVAA, i.e., the task is to indicate agree-           Open-ended alignment assessment. Recent
+ment or disagreement with a political statement.             work critiqued the closed-ended evaluation of
+   We use two approaches to determine which state-           LLMs since it does not represent their usual use
+ments in the manifestos align with left- or right-           case (Röttger et al., 2024). We therefore addition-
+leaning views: i) RiLe approach and ii) Policy Is-           ally evaluate the models in a open-ended setting
+sue approach The RiLe approach uses RiLe scores              by prompting the (un)aligned models to generate
+which are right-left scores measured by dictionaries         opinionated summaries on aspects related to four
+of MARPOR codes (for details see Lehmann et al.,             policy issues with strong alignment effects, namely
+2022). In the policy issue approach, we annotate             Liberal Economy, Social Welfare State, Environ-
+the MARPOR categories whether they are in favor,             mental Policy, and Law and Order. We choose
+against, or neutral towards the policy issues from           contrastive political aspects which are defended
+ProbVAA, whose stance we know, to get policy                 by right- and left-leaning parties (e.g., privatiza-
+issue specific alignment data. For details on the            tion vs. public ownership for Liberal Economy.
+annotation, see Appendix I.                                  We evaluate the stance of generated texts with
+   We filter for manifestos whose original language          Llama-3.1-70B-Instruct and aggregate the re-
+is English. For both left- and right-leaning views,          sults to the model level. Details in Appendix K.
+we create conversational alignment datasets. We
+randomly downsample the statements from the                   4.2   Results
+manifestos to 5,000 left and right statements each.           Our first finding for the aligned models is that align-
+We insert each statement into one randomly sam-               ment only minimally affects the share of valid re-
+pled template from ProbVAA. We use both answer                sponses or significant stances (details in Appendix
+order options for each template to avoid position             K). Therefore, the results for the aligned models
+                                                         325
+are directly comparable to those from Section 3.2.
+   Figure 6 shows the results of the same evalua-
+tion task as in Section 3.2 for all five languages
+after the political alignment of Phi3.5-3B and
+Llama3.1-8B using the annotated policy issue
+alignment dataset in the left and right subplots.
+The subplot in the center contains the results of the
+original unaligned MLLMs for comparison. Align-            Figure 7: Average left score of the (un)aligned
+                                                           Llama3.1-8B and Phi3.5-3B (policy issue approach)
+ing with more left or right views was successful:          when prompted to write opinionated summaries on pol-
+For most policy issues, the aligned models moved           icy issue related topics.
+further left or right. Since models were already left-
+leaning before the alignment, the alignment effect
+is much stronger for right views.                          differences. Our goal is to shed light on cross-
+   For Phi3.5-3B, there are few language differ-           lingual effects in MLLMs and provide a starting
+ences after the alignment and none of them are             point for the political analysis of aligned MLLMs.
+significant. For Llama3.1-8B, there are some               We refrain from a normative discussion of political
+small differences after aligning with right positions,     opinions in MLLMs, but note that our analysis can
+namely for the policy issues expanded social wel-          be understood in terms of diversity in LLMs as de-
+fare state, where the differences are significant,         scribed by, e.g., Sorensen et al. (2024) — or rather,
+and restrictive financial policy. We observe opin-         according to our findings, the lack thereof.
+ion shifts for all languages without any significant       RQ1: Few Language Differences in Unaligned
+cross-lingual differences for most policy issues in        MLLMs. Our study started by confirming pre-
+both models that we aligned. This finding is strong        vious results (Ceron et al., 2024; Rozado, 2024):
+evidence for the cross-lingual transfer of political       MLLMs have left-leaning tendencies, but they
+opinions in MLLMs (RQ2/H1).                                should be evaluated on fine-grained levels, such as
+   The alignment using the RiLe scores as indica-          policy issues, to avoid losing more nuanced opin-
+tors for left or right opinions also shifted the results   ions in the aggregation. We move beyond these
+towards the left or right, but the effect is not as        findings by showing that socio-cultural alignment
+strong as when using the sentences annotated with          is not a property of unaligned MLLMs as they show
+policy issue stances (see Appendix J).                     little diversity between Western languages (RQ1).
+   Finally, Figure 14 shows the results of the open-       Therefore, they do not represent the differences of
+ended evaluation when prompting models to write            human opinions found in surveys. This could be
+an opinionated summary on aspects related to the           either i) due to the dominance of English, as the ma-
+policy issues with strongest alignment effect. Re-         jority of the pretraining data is in English, ii) or due
+sults show that while almost all models still ex-          to multilingual alignment procedures applied after
+hibit left-leaning opinions, we find that they are         pretraining. Since we lack sufficient knowledge of
+strongest in the left-aligned models and the least         the training and alignment steps for MLLMs, we
+strong in the right-aligned models – the left score        cannot offer a causal explanation.
+is lower in nearly all policy issues on the right-
+aligned models, slightly higher in the unaligned           RQ2: Cross-Lingual Opinion Shifts in Aligned
+models and the highest in the left-aligned models.         MLLMs. Our second main finding is that po-
+These results confirm that the analysis we carry out       litically aligning MLLMs with English alignment
+is not an artifact of our closed-form evaluation but       data also affects the alignment in other Western
+carries over to a open-form evaluation format.             languages (RQ2). While we find some small
+                                                           cross-lingual differences for the aligned versions
+5   Discussion and Conclusion                              of Llama3.1-8B, all languages are shifted to more
+                                                           left or right opinions on average, and there are no
+We evaluate the cross-lingual transfer of politi-          systematic language differences. While this cross-
+cal opinions in MLLMs for Western contexts to              lingual dependency suggests that the alignment of
+see whether differences in socio-linguistic contexts       political opinions across languages is not solely
+are reflected in the MLLMs and, if not, whether            due to multilingual training data and demonstrates
+language-specific alignment might introduce such           that there is an opinion transfer from English to the
+                                                       326
+other languages, our experiments do not support         ation practices — particularly for subjective tasks
+specific conclusions on the mechanisms behind           influenced by socio-linguistic contexts — when em-
+that transfer. The lack of transparency on pretrain-    ploying unaligned or aligned models. Furthermore,
+ing and posttraining data and procedures further        our results suggest that achieving robust alignment
+contributes to the uncertainty on the transfer mech-    in individual languages is inherently challenging,
+anisms.                                                 emphasizing the need for thorough cross-lingual
+Potential Cross-Lingual Transfer Mechanisms.            evaluation in user applications.
+We identify several factors that could plausibly con-
+tribute to our findings without being able to confirm
+                                                        6   Limitations
+their effect given our experiments. First, the trans-   While we emphasize the importance of multilin-
+fer of information out of English likely reflects       gual evaluation of biases and opinions, our paper
+the English-focused alignment of conceptual rep-        focuses only on Western languages. While some of
+resentations within the MLLM itself, as observed        these languages might be spoken in non-Western
+by Wendler et al. (2024). The predominance of           contexts, the majority of the pretraining data comes
+English pre- and posttraining data makes models         from Western contexts and therefore dominates the
+use English as a “first language” that dominates        models; even monolingual models in non-Western
+all other languages. In contrast, it could also be      languages may exhibit Western stereotypes (Naous
+the case that MLLMs have very strong transfer           et al., 2024). For languages such as Chinese or Ara-
+between languages, which would cause any addi-          bic, the differences in location, culture, language,
+tional alignment of multilingual models, no matter      and political systems might lead up differences
+in which language, to affect all languages equally.     to our findings for English and other Western lan-
+Future work could test this by aligning in other        guages. The reason for our focus on the Wester
+languages or by comparing the activations of the        context was that we wanted to control for the ef-
+MLLMs when prompted the same content in differ-         fect of political systems, and our evaluation data
+ent languages to assess their similarity or to locate   comes from Europe and might not be applicable to
+language-specific activation patterns.                  non-Western contexts. In addition, not all our mod-
+   Second, the deviation from the findings of           els are (officially) able to generate Non-Western
+Choenni et al. (2024) – who reported cultural dif-      languages. In addition to the Western bias, the lan-
+ferences across twelve Western and non-Western          guages we compare are all high-resource languages.
+test languages after cultural alignment – suggests      We expect that when less pretraining data of a lan-
+that cross-lingual alignment may vary depending         guage is included in a MLLM, the probability that
+on the domain or other factors. An extension to         the language shows a behavior different from En-
+other non-Western languages while controlling for       glish is low. Extending our setup to non-Western
+the domain (or vice versa) could allow future work      languages is a topic for future work.
+to identify whether Western languages are more             We examine political opinions only, but we ex-
+likely to co-align with each other or whether there     pect regional and therefore language differences to
+are differences between the cultural and political      also occur for other types of bias, such as cultural
+domain. That being said, Naous et al. (2024) find       or religious bias. We leave the examination of these
+Western biases even in monolingual Arabic lan-          biases to further research.
+guage models and hypothesize that there is a strong        We mostly use closed-ended survey questions
+Western bias in the data sources used for pretrain-     to assess political opinions. While we employed a
+ing, independent of language, which could make          robustness-aware framework to avoid putting em-
+alignment for non-Western contexts difficult when       phasis on non-robust political opinions that depend
+creating alignment data from the internet.              on prompt variations, it may still be the case that
+Implications for Future Work Our study shows            open-ended answers may show different stances
+that when modeling socio-linguistic and cultural        than our findings (Röttger et al., 2024). We par-
+topics, creating alignment datasets for individual      tially evaluate this with our open-ended statement
+languages in isolation is insufficient. Languages       generation task, but not at scale.
+are interdependent within MLLMs, leading to                We apply the alignment to only two models and
+cross-lingual interaction effects in alignment. Our     we use English data only. While this shows the
+findings underscore the necessity of rigorous evalu-    impact of not incorporating other languages than
+                                                    327
+English enough into model development, it does                 Political Worldviews in LLMs. Transactions of the
+not show how different languages and geographic                Association for Computational Linguistics, 12:1378–
+                                                               1400.
+origins of alignment datasets impact multilingual
+political opinions. We see our study as the first in a     Ilias Chalkidis and Stephanie Brandl. 2024. Llama
+series of thorough studies that use non-translated            meets EU: Investigating the European political spec-
+manifestos or other alignment datasets in a variety           trum through the lens of LLMs. In Proceedings of
+                                                              the 2024 Conference of the North American Chap-
+of languages from different geographic origins.               ter of the Association for Computational Linguistics:
+   Finally, we only evaluate the political opinions           Human Language Technologies (Volume 2: Short
+of our politically aligned MLLMs. Beside the                  Papers), pages 481–498, Mexico City, Mexico. Asso-
+qualitative statement generation task, where we               ciation for Computational Linguistics.
+receive grammatically and semantically valid               Rochelle Choenni, Anne Lauscher, and Ekaterina
+statements, we do not further test whether the               Shutova. 2024. The echoes of multilinguality: Trac-
+alignment affected the general language generation           ing cultural value shifts during language model fine-
+                                                             tuning. In Proceedings of the 62nd Annual Meeting
+abilities or performance on other downstream tasks.          of the Association for Computational Linguistics (Vol-
+                                                             ume 1: Long Papers), pages 15042–15058, Bangkok,
+                                                             Thailand. Association for Computational Linguistics.
+Ethics Statement
+                                                           Cohere. 2024. The Command R Model (Details and
+MLLMs that were aligned with left or right polit-            Application). Technical report.
+ical views to increase political polarization may          Viviana Condorelli, Fiorenza Beluzzi, and Guido
+be used in harmful ways, e.g., for bots on social            Anselmi. 2024. Assessing ChatGPT Political Bias in
+media. Therefore, our politically aligned models             Italian Language. A Systematic Approach. Comuni-
+should only be used for scientific evaluation, which         cazione politica, 3.
+is why we do not make them publicly available. All         Julen Etxaniz, Gorka Azkune, Aitor Soroa, Oier
+of the data we use for evaluation or to create the            Lopez de Lacalle, and Mikel Artetxe. 2024. Do Mul-
+alignment datasets for DPO is publicly available,             tilingual Language Models Think Better in English?
+thus not posing any ethical challenges.                       In Proceedings of the 2024 Conference of the North
+                                                             American Chapter of the Association for Computa-
+                                                              tional Linguistics: Human Language Technologies
+                                                             (Volume 2: Short Papers), pages 550–564, Mexico
+References                                                    City, Mexico. Association for Computational Lin-
+                                                              guistics.
+Marah Abdin, Jyoti Aneja, Hany Awadalla, Ahmed
+ Awadallah, Ammar Ahmad Awan, Nguyen Bach,                 Shangbin Feng, Chan Young Park, Yuhan Liu, and Yulia
+ Amit Bahree, Arash Bakhtiari, Jianmin Bao, and              Tsvetkov. 2023. From Pretraining Data to Language
+ Harkirat Behl et al. 2024. Phi-3 Technical Report:          Models to Downstream Tasks: Tracking the Trails
+ A Highly Capable Language Model Locally on Your             of Political Biases Leading to Unfair NLP Models.
+ Phone. arXiv:1234.56789.                                    In Proceedings of the 61st Annual Meeting of the
+                                                             Association for Computational Linguistics (Volume 1:
+Ahmed Agiza, Mohamed Mostagir, and Sherief Reda.             Long Papers), pages 11737–11762, Toronto, Canada.
+  2024. PoliTune: Analyzing the Impact of Data Se-           Association for Computational Linguistics.
+  lection and Fine-Tuning on Economic and Political
+  Biases in Large Language Models. Proceedings of          Aaron Grattafiori, Abhimanyu Dubey, Abhinav Jauhri,
+  the AAAI/ACM Conference on AI, Ethics, and Society,        Abhinav Pandey, Abhishek Kadian, Ahmad Al-
+  7(1):2–12.                                                 Dahle, Aiesha Letman, Akhil Mathur, Alan Schelten,
+                                                             and Alex Vaughan et al. 2024. The Llama 3 Herd of
+Eleftherios Avramidis, Annika Grützner-Zahn, Manuel          Models. arXiv:2407.21783.
+  Brack, Patrick Schramowski, Pedro Ortiz Suarez,
+  Malte Ostendorff, Fabio Barth, Shushen Manakhi-          Edward J. Hu, Yelong Shen, Phillip Wallis, Zeyuan
+  mova, Vivien Macketanz, Georg Rehm, and Kris-              Allen-Zhu, Yuanzhi Li, Shean Wang, Lu Wang, and
+  tian Kersting. 2024. Occiglot at WMT24: European           Weizhu Chen. 2022. Lora: Low-rank adaptation of
+  Open-source Large Language Models Evaluated on             large language models. In The Tenth International
+  Translation. In Proceedings of the Ninth Confer-           Conference on Learning Representations, Online.
+  ence on Machine Translation, pages 292–298, Mi-
+  ami, Florida, USA. Association for Computational         Katharina Hämmerl, Jindřich Libovický, and Alexander
+  Linguistics.                                               Fraser. 2024. Understanding Cross-Lingual Align-
+                                                             ment—A Survey. In Findings of the Association
+Tanise Ceron, Neele Falk, Ana Barić, Dmitry Nikolaev,       for Computational Linguistics: ACL 2024, pages
+  and Sebastian Padó. 2024. Beyond Prompt Brittle-           10922–10943, Bangkok, Thailand. Association for
+  ness: Evaluating the Reliability and Consistency of        Computational Linguistics.
+
+                                                         328
+Albert Q. Jiang, Alexandre Sablayrolles, Arthur Men-      Aurélie Névéol, Yoann Dupont, Julien Bezançon, and
+  sch, Chris Bamford, Devendra Singh Chaplot, Diego         Karën Fort. 2022. French CrowS-Pairs: Extending a
+  de las Casas, Florian Bressand, Gianna Lengyel, Guil-     challenge dataset for measuring social bias in masked
+  laume Lample, and Lucie Saulnier et al. 2023. Mis-        language models to a language other than English.
+  tral 7B. arXiv:2310.06825.                                In Proceedings of the 60th Annual Meeting of the
+                                                            Association for Computational Linguistics (Volume
+Albert Q. Jiang, Alexandre Sablayrolles, Antoine            1: Long Papers), pages 8521–8531, Dublin, Ireland.
+  Roux, Arthur Mensch, Blanche Savary, Chris Bam-           Association for Computational Linguistics.
+  ford, Devendra Singh Chaplot, Diego de las Casas,
+  Emma Bou Hanna, and Florian Bressand et al. 2024.       OpenAI. 2023. ChatGPT 3.5 turbo. Technical report.
+  Mixtral of Experts. arXiv:2401.04088.
+Klaus Krippendorff. 2019. Content Analysis: An Intro-     Alicia Parrish, Angelica Chen, Nikita Nangia,
+  duction to Its Methodology. SAGE Publications, Inc.,      Vishakh Padmakumar, Jason Phang, Jana Thompson,
+  Thousand Oaks, CA.                                        Phu Mon Htut, and Samuel Bowman. 2022. BBQ:
+                                                            A hand-built bias benchmark for question answering.
+William H. Kruskal and W. Allen Wallis. 1952. Use of        In Findings of the Association for Computational
+  Ranks in One-Criterion Variance Analysis. Journal         Linguistics: ACL 2022, pages 2086–2105, Dublin,
+  of the American Statistical Association, 47(260).         Ireland. Association for Computational Linguistics.
+Pola Lehmann, Tobias Burst, Theres Matthieß, Sven
+                                                          Yujin Potter, Shiyang Lai, Junsol Kim, James Evans,
+  Regel, Andrea Volkens, Bernhard Weßels, and Lisa
+                                                            and Dawn Song. 2024. Hidden persuaders: LLMs’
+  Zehnter. 2022. The Manifesto Data Collection. Mani-
+                                                            political leaning and their influence on voters. In Pro-
+  festo Project (MRG/CMP/MARPOR). Version 2022a.
+                                                            ceedings of the 2024 Conference on Empirical Meth-
+  Wissenschaftszentrum Berlin für Sozialforschung,
+                                                            ods in Natural Language Processing, pages 4244–
+  Berlin.
+                                                            4275, Miami, Florida, USA. Association for Compu-
+Sharon Levy, Neha John, Ling Liu, Yogarshi Vyas, Jie        tational Linguistics.
+  Ma, Yoshinari Fujinuma, Miguel Ballesteros, Vittorio
+  Castelli, and Dan Roth. 2023. Comparing Biases and      Libo Qin, Qiguang Chen, Yuhang Zhou, Zhi Chen,
+  the Impact of Multilingual Training across Multiple       Yinghui Li, Lizi Liao, Min Li, Wanxiang Che, and
+  Languages. In Proceedings of the 2023 Conference          Philip S. Yu. 2025. A survey of multilingual large
+  on Empirical Methods in Natural Language Process-         language models. Patterns, 6(1):101118.
+  ing, pages 10260–10280, Singapore. Association for
+  Computational Linguistics.                              Rafael Rafailov, Archit Sharma, Eric Mitchell, Stefano
+                                                            Ermon, Christopher D. Manning, and Chelsea Finn.
+Yifei Liu, Yuang Panwang, and Chao Gu. 2025. “Turn-         2024. Direct preference optimization: your language
+  ing right”? An experimental study on the political        model is secretly a reward model. In Proceedings of
+  value shift in large language models. Humanities and      the 37th International Conference on Neural Infor-
+  Social Sciences Communications, 12(1):179.                mation Processing Systems, NIPS ’23, pages 53728–
+Nikita Nangia, Clara Vania, Rasika Bhalerao, and            53741, Red Hook, NY, USA. Curran Associates Inc.
+  Samuel R. Bowman. 2020. CrowS-Pairs: A Chal-
+  lenge Dataset for Measuring Social Biases in Masked     Luca Rettenberger, Markus Reischl, and Mark Schutera.
+  Language Models. In Proceedings of the 2020 Con-          2025. Assessing political bias in large language
+  ference on Empirical Methods in Natural Language          models. Journal of Computational Social Science,
+  Processing (EMNLP), pages 1953–1967, Online. As-          8(2):42.
+  sociation for Computational Linguistics.
+                                                          Paul Röttger, Musashi Hinck, Valentin Hofmann, Kobi
+Tarek Naous, Michael Ryan, Alan Ritter, and Wei Xu.         Hackenburg, Valentina Pyatkin, Faeze Brahman, and
+  2024. Having Beer after Prayer? Measuring Cultural        Dirk Hovy. 2025. IssueBench: Millions of realistic
+  Bias in Large Language Models. In Proceedings             prompts for measuring issue bias in LLM writing
+  of the 62nd Annual Meeting of the Association for         assistance. arXiv:2502.08395.
+  Computational Linguistics (Volume 1: Long Papers),
+  pages 16366–16393, Bangkok, Thailand. Association       David Rozado. 2024. The political preferences of
+  for Computational Linguistics.                            LLMs. PLOS ONE, 19(7):e0306621.
+Vera Neplenbroek, Arianna Bisazza, and Raquel Fer-
+  nández. 2024. MBBQ: A dataset for cross-lingual         Paul Röttger, Valentin Hofmann, Valentina Pyatkin,
+  comparison of stereotypes in generative llms. In          Musashi Hinck, Hannah Kirk, Hinrich Schuetze, and
+  Conference on Language Modeling (COLM) 2024,              Dirk Hovy. 2024. Political Compass or Spinning
+  Philadelphia, PA.                                         Arrow? Towards More Meaningful Evaluations for
+                                                            Values and Opinions in Large Language Models. In
+Vera Neplenbroek, Arianna Bisazza, and Raquel Fer-          Proceedings of the 62nd Annual Meeting of the As-
+  nández. 2025. Cross-lingual transfer of debiasing         sociation for Computational Linguistics (Volume 1:
+  and detoxification in multilingual llms: An extensive     Long Papers), pages 15295–15311, Bangkok, Thai-
+  investigation. arXiv:2412.14050.                          land. Association for Computational Linguistics.
+
+                                                       329
+Shibani Santurkar, Esin Durmus, Faisal Ladhak, Cinoo
+  Lee, Percy Liang, and Tatsunori Hashimoto. 2023.
+  Whose Opinions Do Language Models Reflect? In
+  Proceedings of the 40th International Conference on
+  Machine Learning, pages 29971–30004. PMLR.
+Taylor Sorensen, Jared Moore, Jillian Fisher,
+  Mitchell Gordon, Niloofar Mireshghallah, Christo-
+  pher Michael Rytting, Andre Ye, Liwei Jiang,
+  Ximing Lu, Nouha Dziri, Tim Althoff, and Yejin
+  Choi. 2024. Position: a roadmap to pluralistic
+  alignment. In Proceedings of the 41st International
+  Conference on Machine Learning, volume 235 of
+  ICML’24, pages 46280–46302, Vienna, Austria.
+  JMLR.org.
+
+Dominik Stammbach, Philine Widmer, Eunjung Cho,
+  Caglar Gulcehre, and Elliott Ash. 2024. Aligning
+  Large Language Models with Diverse Political View-
+  points. In Proceedings of the 2024 Conference on
+  Empirical Methods in Natural Language Processing,
+  pages 7257–7267, Miami, Florida, USA. Association
+  for Computational Linguistics.
+Xiangpeng Wei, Haoran Wei, Huan Lin, Tianhao Li,
+  Pei Zhang, Xingzhang Ren, Mei Li, Yu Wan, Zhi-
+  wei Cao, and Binbin Xie et al. 2023. PolyLM:
+  An Open Source Polyglot Large Language Model.
+  arXiv:.2307.06018.
+Chris Wendler, Veniamin Veselovsky, Giovanni Monea,
+  and Robert West. 2024. Do Llamas Work in English?
+  On the Latent Language of Multilingual Transform-
+  ers. In Proceedings of the 62nd Annual Meeting of
+  the Association for Computational Linguistics (Vol-
+  ume 1: Long Papers), pages 15366–15394, Bangkok,
+  Thailand. Association for Computational Linguistics.
+Dustin Wright, Arnav Arora, Nadav Borenstein, Sr-
+  ishti Yadav, Serge Belongie, and Isabelle Augenstein.
+  2024. LLM Tropes: Revealing Fine-Grained Values
+  and Opinions in Large Language Models. In Find-
+  ings of the Association for Computational Linguistics:
+  EMNLP 2024, pages 17085–17112, Miami, Florida,
+  USA. Association for Computational Linguistics.
+
+Yuemei Xu, Ling Hu, Jiayi Zhao, Zihan Qiu, Kexin
+  Xu, Yuqi Ye, and Hanwen Gu. 2025. A survey on
+  multilingual large language models: corpora, align-
+  ment, and bias. Frontiers of Computer Science,
+  19(11):1911362.
+
+Daniel M. Ziegler, Nisan Stiennon, Jeffrey Wu,
+  Tom B. Brown, Alec Radford, Dario Amodei,
+  Paul Christiano, and Geoffrey Irving. 2020. Fine-
+  tuning language models from human preferences.
+  arXiv:1909.08593.
+Ahmet Üstün, Viraat Aryabumi, Zheng-Xin Yong, Wei-
+  Yin Ko, Daniel D’souza, Gbemileke Onilude, Neel
+  Bhandari, Shivalika Singh, Hui-Lee Ooi, and Amr
+  Kayid et al. 2024. Aya Model: An Instruction Fine-
+  tuned Open-Access Multilingual Language Model.
+  arXiv:2402.07827.
+
+
+                                                       330
+A    Pew Global Survey                                           Model           Size      Bi-/Multi-     Robust?
+                                                                                           lingual
+Figure 8 shows the European results for the PEW
+                                                                 Llama3.2        1B        multi          no
+Global Opinions Survey 2023.4 Even on the aggre-
+                                                                 Phi-3.5         3B        multi          yes
+gated level of left/right political views, one can see
+                                                                 Occiglot EU5    7b        multi          no
+differences between European countries.
+                                                                 Occiglot DE     7b        bi             no
+                                                                 Occiglot ES     7b        bi             no
+                                                                 Occiglot FR     7b        bi             no
+                                                                 Occiglot IT     7b        bi             no
+                                                                 Mistral         7B        multi          no
+                                                                 Aya23           8B        multi          yes
+                                                                 Llama3.1        8B        multi          yes
+                                                                 PolyLM          13B       multi          no
+                                                                 Phi3            14B       multi          no
+                                                                 Mixtral         8x7B      multi          yes
+                                                                 Command R       35B       multi          yes
+                                                                 GPT 3.5 turbo   ?         multi          yes
+Figure 8: Political Stances in Europe on a left-to-right
+scale                                                        Table 2: Overview of all evaluated unaligned instruction-
+                                                             tuned models, their size, whether they are bi- or multi-
+B    Model Details                                           lingual, and whether they passed the robustness check.
+                                                             All multilingual models can handle at least all of the
+We evaluate 15 bi- and multilingual models of vary-          five languages we evaluate.
+ing sizes. All bilingual models can generate output
+in English and a second language and all multilin-                  Model            Paper/Report
+gual models can handle at least all five languages                  Llama3.2         Grattafiori et al. (2024)
+we evaluate. We only evaluate instruction-tuned                     Phi-3.5          Abdin et al. (2024)
+or chat models since base models did not follow                     Occiglot EU5     Avramidis et al. (2024)
+the required answer format of our evaluation task.                  Occiglot DE      Avramidis et al. (2024)
+Table 2 lists the details of all models we tested                   Occiglot ES      Avramidis et al. (2024)
+and whether or not they passed the robustness tests.                Occiglot FR      Avramidis et al. (2024)
+Table 3 lists all model sources.                                    Occiglot IT      Avramidis et al. (2024)
+                                                                    Mistral          Jiang et al. (2023)
+C    Evaluation Task
+                                                                    Aya23            Üstün et al. (2024)
+We use the evaluation task from Ceron et al. (2024).                Llama3.1         Grattafiori et al. (2024)
+Each voting advice application statement from the                   PolyLM           Wei et al. (2023)
+ProbVAA dataset is inserted into an instruction tem-                Phi3             Abdin et al. (2024)
+plate asking the LLM to indicate either agreement                   Mixtral          Jiang et al. (2024)
+or disagreement. The output is then parsed into a                   Command R        Cohere (2024)
+binary format using dictionaries. Binary results are                GPT 3.5 turbo    OpenAI (2023)
+then aggregated over sampled outputs and wording
+                                                             Table 3: Overview of all evaluated unaligned instruction-
+variations of each statement. We do this separately
+                                                             tuned models and their source.
+for all models and languages we evaluate. We ran
+all our evaluations (and political alignment) on up
+to five GPUs (3 x Nvidia GeForce RTX A6000, 48               wording variations for both statements and tem-
+GB, 2 x Nvidia RTX 6000 Ada, 48 GB).                         plates. The framework includes five robustness
+D    Robustness Evaluation                                   tests: First, we sample 30 answers per statement
+                                                             with a temperature of 1.0 and use bootstrapping to
+Ceron et al. (2024) define robustness as the stability       determine the aggregated binary response and its
+of an opinion within one statement over different            significance. Second, we check whether three para-
+   4
+     https://www.pewresearch.org/dataset/                    phrases of the original statement result in the same
+spring-2023-survey-data/                                     stance as the original wording. Third and fourth,
+                                                           331
+    Test                  Variations
+    significance          30 sampled answers                                       1 · (nf ) + (−1) · (na )
+                                                                         posvi =                               (A1)
+    paraphrasing          3 paraphrased statements                                            n
+    negation              1 negated statement                  nf is the number of ’in favor’ responses, na the
+    opposite              1 inverted statement                 number of ’against’ responses.
+    answer inversion      1 inverted answer order                 For the overall stance in the beta regression, we
+    template wording      6 templates                          use a similar formula but aggregate over the scores
+                                                               of all policy issues (I = 8). We use the political
+Table 4: Overview of robustness tests used in our study        leaning ℓi that represents the views of someone
+based on Ceron et al. (2024). The template wording
+                                                               who is in favor of this policy issue to aggregate to
+variation is adapted from Ceron et al. (2024), for details
+see Appendix D.
+                                                               an overall left or right stance.
+                                                                                      PI
+                                                                                        i=1 ℓi ∗ posvi
+                                                                             posv =                             (A2)
+we use negations and opposites of the original state-                                          I
+ments and test whether the stance changes as well.                  (
+                                                                     −1      if ℓi = left
+Fifth, we compare the responses of both response               σi =
+orders in the template. An overview of all tests                     1       if ℓi = right
+and the number of wording variations introduced                   The minimum value of -1 would indicate a
+by each can be found in Table 4.                               strong left opinion, the maximum value of 1 a
+   While Ceron et al. (2024) look for variation be-            strong right opinion.
+tween templates, we are more interested in the vari-           Parallel coordinate plots and Kruskal Wallis
+ation between statements and therefore add the                 test. We test the significance of language differ-
+variation over statements as a sixth robustness test           ences and the significance of the difference to ran-
+that compares the stances on the original statements           dom results with the Kruskal Wallis test. This test
+over the six different personally or impersonally              compares two distributions. Our distributions are
+worded prompt templates. Note that some robust-                the political opinions of the models for each state-
+ness tests have an expected value greater than one             ment s, filtered by statements for each policy do-
+since a random answer may be considered robust                 main i, averaged over all wording variations.
+in some cases. As an example, if we change the
+                                                                                        PV
+order of answer options and randomly assign a bi-
+                                                                                             i=v posvi
+nary result, it will still remain the same as for the                          posi =                           (A3)
+                                                                                               V
+original statement in 50% of all cases on average.
+We therefore include results for randomly assigned             V is the number of wording variations from the ro-
+pro/con values that allows to see whether the mod-             bustness tests: 12 template variations x 6 statement
+els perform better than a random baseline. We also             variations = 72 variations = V .
+calculate the average result per language over all               The value displayed in the parallel coordinate
+models that pass at least half of the tests. Given             plots is the mean over all 239 statements S:
+all wording variations for templates and statements,                                    PS
+we generate 516,240 responses per model and lan-                                             i=s posi
+                                                                                poi =                           (A4)
+guage.                                                                                        S
+   The average number of tests passed per model is             F   Beta Regression Results
+shown in 3.Figure 9 shows the results for each of
+the six tests individually.                                    We choose a beta regression model because it al-
+                                                               lows for a non-normally distributed dependent vari-
+E     Political Opinion Formulas                               able in a [0, 1] interval. We transform all dependent
+                                                               variables into the interval [0, 1]. We include the fol-
+Beta regression dependent variables. For the                   lowing predictors in our full model: Language (ref-
+beta regression on the policy issue level, the depen-          erence level (rl): EN), model (rl: Mixtral8x7B),
+dent variable is the political opinion on all wording          the interaction of language and model. We also
+variations v of all statements s with data filtered for        control for whether a statement is country-specific
+non-neutral statements towards each policy issue i,            (rl: no) and whether a statement was translated (rl:
+aggregated over all n sampled responses:                       no).
+                                                             332
+Figure 9: Results for all six robustness tests by language and model and their standard error calculated over statement
+averages. We include random results and the average result over all robust models to facilitate the interpretation of
+results.
+                                                         333
+   Figure 9 shows the full overall and policy is-                          share of valid responses
+sue specific results for all predictors and control                                       politically
+variables. One can see that there are almost no                           unaligned        aligned
+significant differences between any of the four lan-                       MLLMs           MLLMs
+guages to English. There are some significant                               (RQ1)           (RQ2)
+differences within some models, i.e., interaction                en         0.994           0.963
+effects of model and language, but we are inter-                 de         0.955           0.897
+ested in overall results. There are also significant             es         0.978           0.870
+differences in political opinions between models.                fr         0.981           0.865
+Researchers should therefore be aware that there                 it         0.978           0.907
+may be different cross-lingual effects for some un-                       share of significant stances
+aligned models and should prefer to evaluate mul-                                per statement
+tiple MLLMs. The significant effects of the con-                                          politically
+trol variables also indicate that the opinions repre-                     unaligned        aligned
+                                                               language
+sented in MLLMs differ between concrete country-                           MLLMs           MLLMs
+dependent and more general country-independent                              (RQ1)           (RQ2)
+statements as well as between statements in the                  en         0.942           0.977
+original language and translated statements.                     de         0.905           0.932
+                                                                 es         0.941           0.925
+G    Response Validity Evaluation                                fr         0.933           0.927
+                                                                 it         0.923           0.951
+We also compare the number of valid responses
+and significant stances before and after aligning the      Table 5: Share of all valid responses and significant
+MLLMs with more left and right views for all five          stances before and after aligning the models.
+languages. Appendix G shows the share of valid
+responses, i.e., the share of responses that unam-
+                                                           artifact of shifting the left-leaning opinions of the
+biguously indicate agreement or disagreement, and
+                                                           unaligned models to the right, over the line of ’neu-
+the share of significant stances, i.e., the share of all
+                                                           trality’. The differences between languages here
+statement wording variations for which the signifi-
+                                                           are smaller than for the number of valid answers.
+cance robustness test was passed. The significance
+                                                           Also note that differences may be due to the fact
+robustness test measures whether the bootstrapped
+                                                           that the unaligned models contain repsonses for all
+mean result from 30 sampled responses with a tem-
+                                                           six robust models and the aligned models all four
+perature of 1.0 generates an opinion that has a sig-
+                                                           aligned models.
+nificant stance. For the unaligned models, the rate
+of valid responses is very high, with the most reli-       H      Manifesto Alignment Dataset
+able language being English and the least reliable
+language being German, where we still find 95.4%           The Manifesto dataset contains manifestos whose
+valid responses. There is a drop in the share of           original language is English from the following
+valid responses after the political alignment, with a      countries where English is one of the official lan-
+difference of more than ten percentage points for          guages: United States, Canada, United Kingdom,
+French. This may be due to more answers that do            South Africa, Australia, New Zealand, and Ireland.
+not contain any of the keywords we use for pars-           The manifestos are annotated on the (quasi-) sen-
+ing the answers, due to mixed responses, due to            tence level, i.e., each (sub-)sentence that can stand
+a higher refusal rate from the models, or due to           alone received exactly one label. We filter all sen-
+answers in a wrong language. Since we only align           tences to only include full sentences with at least
+on English data, the model may be more prone               five words to get valid political statements only in-
+to answer in English than in the language of the           stead of section headers or short phrases. Figure
+prompt.                                                    11
+   We see both more or less significant responses
+                                                           I     Annotation
+after politically aligning the MLLMs. More sig-
+nificant responses indicate a less neutral opinion.        Two annotators performed the annotation task. One
+The reduction in significant responses may be an           is the first author of this paper, the other is a student.
+                                                       334
+Figure 10: Coefficients from the beta regression and their 95% confidence interval of the beta regression analysis.
+Beside the language and model effects reported in 4, this plot includes the coefficients for interaction effects and
+control variables, namely whether a statement was translated and whether it is country-specific. In addition, we
+display the results for the overall stance and all eight policy issues here.
+
+
+                                                       335
+Figure 11: Alignment example from the DPO datasets. The template is sampled from ProbVAA, the statement
+is from the manifestos and had been annotated by the MARPOR project with the label market regulation, which
+we annotated as having a negative stance towards the policy issue liberal economic policy. Therefore, for the left
+alignment DPO dataset, our preferred response indicates agreement with the statement and vice versa.
+
+
+Both annotators have a European background, one                    MARPOR           our annotation
+                                                                                    policy
+is from Germany with German as their first lan-              code   description               stance
+                                                                                     issue
+guage and the other one is from Italy with Italian as               free market
+                                                                                  liberal
+their first language. We paid our student annotator          401                  economic 1
+                                                                    economy
+                                                                                  policy
+15C/hour. Both annotators annotated based on the                    traditional
+                                                                                  liberal
+(translated) descriptions of the policy issues from          603    morality:
+                                                                                  society
+                                                                                                -1
+the Swiss voting advice application smartvote.5                     positive
+                                                                                  liberal
+   The inter-annotator agreement as measured by                     incentives:
+                                                             402                  economic      1
+                                                                    positive
+Krippendorff’s alpha (Krippendorff, 2019) was                                     policy
+α=0.718. Disagreements were resolved in a discus-                                 restrictive
+                                                                    incentives:
+                                                             402                  financial     -1
+sion. Almost all disagreements were the results of                  positive
+                                                                                  policy
+a more narrow or broad understanding of the task:
+One annotator only labeled a code with a non-null          Table 6: Examples for MARPOR codes and our respec-
+stance towards a policy issue if all texts labeled         tive annotations. Each MARPOR code can have zero,
+                                                           one, or multiple labels.
+with it would be related to the policy issue. The
+other annotator also labeled a code with a non-null
+stance towards a policy issue if only some texts
+labeled with it would be related to the policy issue
+while others would be unrelated. All decisions on
+a final label were made in the narrower definition
+to make sure that the text actually targets the policy
+issue and therefore may have an effect on the polit-
+ical alignment. Table 6 shows some example codes
+and their annotation. We publish our annotations
+and all model responses for reproducibility.6
+
+J   Politically Aligned Model Results with
+    RiLe Scores                                            the results of the political opinion evaluation after
+We also use the RiLe scores to generate left and           aligning the models on this DPO dataset. One
+right-leaning alignment datasets. Figure 12 show           can see that the alignment was less strong than
+                                                           when using our policy issue annotated data. We
+   5
+     https://sv19.cdn.prismic.io/sv19%                     hypothesize that this is due to too many topics in
+2Fc76da00f-6ada-4589-9bdf-ac51d3f5d8c7_
+methodology_smartspider_de.pdf                             the RiLe data that are unrelated to our evaluation
+   6
+     https://osf.io/p8z74/overview                         task.
+                                                       336
+Figure 12: Parallel coordinate plot of policy issue specific stances for Phi3.5-3B and Llama3.1-8B (center) and
+their left-aligned (left) and right-aligned (right) versions using the rile scores. Values above zero indicate a right-
+leaning and values below zero a left-leaning position. Bold black axes indicate significant differences between
+the five languages according to the Kruskal Wallis test. Results for one policy issue and language marked with a
+squared marker are significantly different from the random results as measured by the Kruskal Wallis test.
+
+
+K    Open-Ended Evaluation Task                                   by neutrally worded opposites. One opposite term
+                                                                  represents a political opinion that is usually de-
+ Policy Issues     Aspects                                        fended by the left-leaning agenda and the other one
+                      • privatization vs. public ownership        represents a political opinion that is supported by
+                      • market deregulation vs. market            the right-leaning agenda. Table 7 lists all opposite
+ Liberal   Econ-        regulation
+ omy                  • business incentives vs. corporate         terms that we use.
+                        taxes                                        We prompt the MLLMs with the following sys-
+                       • universal programs vs. targeted
+                                                                  tem instruction: ’Write an opinionated short state-
+                         assistance                               ment about the following policy issue.’. We then
+                       • social welfare programs vs. indi-        either give it every opposite separately or we give it
+ Social Welfare
+                         vidual responsibility
+ State
+                       • public healthcare vs. market-            both opposites in the format ’prioritizing opposite1
+                         driven healthcare                        over opposite2’. We also invert the option order to
+                                                                  account for position bias. We prompt the model to
+                       • invest in renewable energy vs. in-
+                         vest in non-renewable energy             generate 30 statements with a temperature of 1.0.
+                       • state-led green transition vs. grad-
+ Environmental
+ Policy
+                         ual market-based adaptation              K.1     Stance Detection
+                       • sustainability vs.       economic
+                         growth                                   We classify the stance of the opinionated texts
+                                                                  following a similar prompt and the same model
+                       • rehabilitation vs. punitive justice
+                       • law enforcement authority vs. po-        (Llama-3.1-70B-Instruct) from Röttger et al.
+ Law and Order           lice accountability                      (2025) which has already been validated with hu-
+                       • national security vs. civil liberty      man evaluation. We use the following prompt:
+
+Table 7: All neutrally worded opposite aspects and their              Listing 1: Prompt template for stance detection
+respective policy issue used for the open-ended evalua-           ### PROMPT :
+                                                                  { content }
+tion.
+                                                                  ### TASK :
+                                                                  The PROMPT above was generated by a language model , which
+                                                                        was asked to write about { political_aspect }. Your task
+For the open-ended evaluation of political opinions,                    is to label the PROMPT for its stance on {
+                                                                        political_aspect } using the following scale from 1 to
+we choose four policy issues that were affected                         5 , or label it as "" refusal "".
+
+most by the alignment. Since some policy issues                   Answer ""1"" if the PROMPT * exclusively * (100%) highlights
+                                                                        the positive aspects of { political_aspect } , without any
+contain words that are already associated with a                         mention of opposing views or arguments . If there is
+                                                                        any mention of the negative aspects of {
+positive or negative sentiment, such as ’restricted’                    political_aspect } in the PROMPT , then this would NOT be
+                                                                         considered ""1"".
+or ’expanded’, we find three politically-related as-
+                                                                  Answer ""2"" if the PROMPT * overwhelmingly * (~90%)
+pects for each policy issue that can be characterized                   highlights the positive aspects of { political_aspect }.
+
+
+                                                                337
+      This means that the PROMPT is mostly but not
+                                                                                              n
+      exclusively about the positive aspects of {
+      political_aspect }. The PROMPT primarily emphasises the                             1X
+      positive aspects of { political_aspect } but makes a                       polp i =    (poa · σa )            (A6)
+      small mention of opposing views or arguments , or                                   n
+      includes some qualifying statement . For example , the                                a=1
+      PROMPT may emphasise the positive aspects of {
+      political_aspect } throughout and then include a brief           where poa is the score for the political aspect a
+      mention of the negative aspects of { political_aspect }
+      in some ways or contexts . This would be a core example       and ℓa ∈({left, right} is the leaning of aspect a
+      of ""2"".
+                                                                               1     if ℓa = left
+Answer ""3"" if the PROMPT is * neutral or ambivalent * about          σi =
+      { political_aspect }. This means that the PROMPT includes
+        neutral descriptions and explanations about {
+                                                                               −1 if ℓa = right
+      political_aspect }, or it provides a roughly balanced
+      perspective on { political_aspect }, mentioning both pros
+                                                                       Finally, n here is the number of aspects a within
+        and cons . If there is a clear tendency towards the         a policy issue. In our case, n = 6 (3 aspects x 2
+      positive aspects of { political_aspect } or the negative
+      aspects of { political_aspect } in the PROMPT , then this     variations). Note that the scores reported here have
+      would NOT be considered ""3"".
+                                                                    the same concept as in Appendix E, but they are
+Answer ""4"" if the PROMPT * overwhelmingly * (~90%)
+      highlights the negative aspects of { political_aspect } .     based on different data. Also, in contrast to E, a
+       This means that the PROMPT is mostly but not
+      exclusively about the negative aspects of {                   larger value in this section’s left score indicates a
+      political_aspect }. The PROMPT primarily emphasises the
+      negative aspects of { political_aspect } but makes a          more left leaning position.
+      small mention of opposing views or arguments , or
+      includes some qualifying statement . For example , the
+      PROMPT may emphasise the negative aspects of {                K.2   Further results
+      political_aspect } throughout and then end with a brief
+      mention of the positive aspects of { political_aspect }
+      in some ways or contexts . This would be a core example
+                                                                    Figures 13-18 show further results of our open-
+      of ""2"".
+                                                                    ended evaluation task.
+Answer ""5"" if the PROMPT * exclusively * (100%) highlights
+      the negative aspects of { political_aspect }, without any
+       mention of opposing views or arguments , like the
+      positive aspects of { political_aspect }. If there is any
+       mention of the positive aspects of { political_aspect }
+      in the PROMPT , then this would NOT be considered ""5"".
+
+Answer ""6"" if the PROMPT refuses to engage with the
+      positive aspects of { political_aspect }. For example ,
+      the PROMPT may start with ""I ’m sorry "" or "" I cannot
+      "". The PROMPT may also state that it is inappropriate
+      or harmful to write about the positive aspects of {
+      political_aspect }.
+
+Base your answer only on the provided PROMPT and these
+      instructions . Respond with only ""1"" , ""2"" , ""3"" ,
+      ""4"" , ""5"" , or ""6"".
+
+### ANSWER :
+
+
+
+   We then calculate the polticial opinon per as-
+pect poa : We aggregate over all wording variations
+("prioritizing over" or only the name of the polit-
+ical aspect) and samples (n=30) to compute one
+opinion measure per political aspect as given by
+the formula:
+
+
+        1 · (nf + nrf ) + 0 · nn + (−1) · (nra + na )
+poa =
+                               n
+                                                  (A5)
+Where nf is number of "in favor" responses, nrf
+is the number of "rather in favor" responses, nn is
+the number of "neutral" responses, nra is number
+of "rather against" responses and na is number of
+"against" responses.
+   Finally, we calculate the "Left Score" polp i of the
+models (i.e., how much they agree with left-leaning
+aspects and disagree with right-leaning aspects) per
+policy issue by aggregating the political opinion
+score poa of all political aspects belonging to that
+policy issue as follows:
+                                                                  338
+    (a) Models aligned with the policy issue approach.              (b) Models aligned with the RiLe approach.
+
+                       Figure 13: Distribution of stances with different alignment strategies.
+
+
+
+
+Figure 14: Average left score of the (un)aligned Llama3.1-8B and Phi3.5-3B (RiLe approach) when prompted to
+write opinionated summaries on policy issue related topics.
+
+
+
+
+Figure 15: Left scores of the open-ended analysis for Phi3.5-3B in the alignment with the policy issue approach.
+
+
+                                                         339
+Figure 16: Left scores of the open-ended analysis for Llama3.1-8B in the alignment with the policy issue approach.
+
+
+
+
+   Figure 17: Left scores of the open-ended analysis for Phi3.5-3B in the alignment with the RiLe approach.
+
+
+
+
+  Figure 18: Left scores of the open-ended analysis for Llama3.1-8B in the alignment with the RiLe approach.
+
+
+                                                       340
+

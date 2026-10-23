@@ -1,0 +1,11 @@
+{
+  "reviewed_studies": 16,
+  "card_sections": 16,
+  "local_links_checked": 35,
+  "missing_local_links": 0,
+  "source_text_hashes_verified": 16,
+  "two_recalculations_reproducible_from_local_snapshot": true,
+  "all_80_results_reviewed": false,
+  "llm_experiments_rerun": false,
+  "human_annotations_independently_recoded": false
+}

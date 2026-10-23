@@ -1,0 +1,473 @@
+本文件为PDF自动提取文本，仅供检索；排版、图表和页码请以PDF为准。
+The Framing of Decisions and the Psychology of Choice
+
+                                                                                                    The majority choice in this problem is
+                                                                                                    risk averse: the prospect of certainly
+                                                                                                    saving 200 lives is more attractive than a
+                                                                                                    risky prospect of equal expected value,
+                                                                                                    that is, a one-in-three chance of saving
+                                                                                                    600 lives.
+        The Framing of Decisions and the                                                              A second group of respondents was
+                                                                                                    given the cover story of problem 1 with a
+                  Psychology of Choice                                                              different formulation of the alternative
+                                                                                                    programs, as follows:
+                                 Amos Tversky and Daniel Kahneman                                      Problem 2 [N = 155]:
+                                                                                                    If Program C is adopted 400 people will die.
+                                                                                                         [22 percent]
+                                                                                                    If Program D is adopted there is 1/3 probabil-
+                                                                                                         ity that nobody will die, and 2/3 probabili-
+   Explanations and predictions of tional choice requires that the preference                            ty that 600 people will die. [78 percent]
+people's choices, in everyday life as well between options should not reverse with                  Which of the two programs would you favor?
+as in the social sciences, are often found- changes of frame. Because of imperfec-
+ed on the assumption of human rational- tions of human perception and decision,                       The majority choice in problem 2 is
+ity. The definition of rationality has been however, changes of perspective often                   risk taking: the certain death of 400
+much debated, but there is general agree- reverse the relative apparent size of ob-                 people is less acceptable than the two-in-
+ment that rational choices should satisfy jects and the relative desirability of op-                three chance that 600 will die. The pref-
+some elementary requirements of con- tions.                                                         erences in problems 1 and 2 illustrate a
+
+
+
+
+                                                                                                                                                          Downloaded from www.sciencemag.org on May 10, 2014
+sistency and coherence. In this article       We have obtained systematic rever-                    common pattern: choices involving gains
+                                                                                                    are often risk averse and choices in-
+                                                                                                    volving losses are often risk taking.
+  Summary. The psychological principles that govern the perception of decision prob-                However, it is easy to see that the two
+lems and the evaluation of probabilities and outcomes produce predictable shifts of                 problems are effectively identical. The
+preference when the same problem is framed in different ways. Reversals of prefer-                  only difference between them is that the
+ence are demonstrated in choices regarding monetary outcomes, both hypothetical                     outcomes are described in problem 1 by
+and real, and in questions pertaining to the loss of human lives. The effects of frames             the number of lives saved and in problem
+on preferences are compared to the effects of perspectives on perceptual appear-                    2 by the number of lives lost. The change
+ance. The dependence of preferences on the formulation of decision problems is a                    is accompanied by a pronounced shift
+significant concern for the theory of rational choice.                                              from risk aversion to risk taking. We
+                                                                                                    have observed this reversal in several
+                                                                                                    groups of respondents, including univer-
+we describe decision problems in which         sals of preference by variations in the              sity faculty and physicians. Inconsistent
+people systematically violate the re-          framing of acts, contingencies, or out-              responses to problems 1 and 2 arise from
+quirements of consistency and coher-           comes. These effects have been ob-                   the conjunction of a framing effect with
+ence, and we trace these violations to the     served in a variety of problems and in               contradictory attitudes toward risks in-
+psychological principles that govern the       the choices of different groups of respon-           volving gains and losses. We turn now
+perception of decision problems and the        dents. Here we present selected illustra-            to an analysis of these attitudes.
+evaluation of options.                         tions of preference reversals, with data
+   A decision problem is defined by the        obtained from students at Stanford Uni-
+acts or options among which one must           versity and at the University of British              The Evaluation of Prospects
+choose, the possible outcomes or con-          Columbia who answered brief question-
+sequences of these acts, and the contin-       naires in a classroom setting. The total                The major theory of decision-making
+gencies or conditional probabilities that      number of respondents for each problem                under risk is the expected utility model.
+relate outcomes to acts. We use the term       is denoted by N, and the percentage                   This model is based on a set of axioms,
+"'decision frame" to refer to the deci-        who chose each option is indicated in                 for example, transitivity of preferences,
+sion-maker's conception of the acts, out-      brackets.                                             which provide criteria for the rationality
+comes, and contingencies associated               The effect of variations in framing is             of choices. The choices of an individual
+with a particular choice. The frame that a     illustrated in problems 1 and 2.                      who conforms to the axioms can be de-
+decision-maker adopts is controlled part-                                                            scribed in terms of the utilities of various
+ly by the formulation of the problem and          Problem 1 [N = 152]: Imagine that the U.S.         outcomes for that individual. The utility
+                                               is preparing for the outbreak of an unusual
+partly by the norms, habits, and personal      Asian disease, which is expected to kill 600          of a risky prospect is equal to the ex-
+characteristics of the decision-maker.         people. Two alternative programs to combat            pected utility of its outcomes, obtained
+   It is often possible to frame a given de-   the disease have been proposed. Assume that           by weighting the utility of each possible
+cision problem in more than one way.           the exact scientific estimate of the con-             outcome by its probability. When faced
+                                               sequences of the programs are as follows:             with a choice, a rational decision-maker
+Alternative frames for a decision prob-
+lem may be compared to alternative per-        If Program A is adopted, 200 people will be           will prefer the prospect that offers the
+                                                    saved. [72 percent]
+spectives on a visual scene. Veridical         If Program B is adopted, there is 1/3 probabil-
+                                                                                                     highest expected utility (1, 2).
+perception requires that the *perceived             ity that 600 people will be saved, and           Dr. Tversky is a professor of psychology at Stan-
+relative height of two neighboring moun-            2/3 probability that no people will be ford         University, Stanford, California 94305, and Dr.
+tains, say, should not reverse with                 saved. [28 percent]                            Kahneman is a professor of psychology at the Uni-
+                                                                                                   versity of British Columbia, Vancouver, Canada
+changes of vantage point. Similarly, ra-       Which of the two programs would you favor?          V6T IW5.
+SCIENCE, VOL. 211, 30 JANUARY 1981                           0036-8075/81/0130-0453$01.50/0 Copyright © 1981 AAAS                             453
+   As will be illustrated below, people ex-                        Value                       The Framing of Acts
+hibit patterns of preference which appear
+incompatible with expected utility theo-                                                         Problem 3 [N = 150]: Imagine that you face
+ry. We have presented elsewhere (3) a                                                          the following pair of concurrent decisions.
+                                                                                               First examine both decisions, then indicate
+descriptive model, called prospect theo-                                                       the options you prefer.
+ry, which modifies expected utility theo-      Losses                                          Decision (i). Choose between:
+ry so as to accommodate these observa-                                                           A. a sure gain of $240 [84 percent]
+tions. We distinguish two phases in the                                                          B. 25% chance to gain $1000, and
+choice process: an initial phase in which                                                            75% chance to gain nothing [16 percent]
+acts, outcomes, and contingencies are                                                          Decision (ii). Choose between:
+                                                                                                 C. a sure loss of $750 [13 percent]
+framed, and a subsequent phase of eval-                                                          D. 75% chance to lose $1000, and
+uation (4). For simplicity, we restrict the       Fig. 1. A hypothetical value function.
+                                                                                                     25% chance to lose nothing [87 percent]
+formal treatment of the theory to choices
+involving stated numerical probabilities                                                         The majority choice in decision (i) is
+and quantitative outcomes, such as mon-        has the following properties. First, im-        risk averse: a riskless prospect is pre-
+ey, time, or number of lives.                  possible events are discarded, that is,         ferred to a risky prospect of equal or
+   Consider a prospect that yields out-        *0) = 0, and the scale is normalized so         greater expected value. In contrast, the
+come x with probability p, outcome y           that r( 1) = 1, but the function is not well    majority choice in decision (ii) is risk tak-
+with probability q, and the status quo         behaved near the endpoints. Second,             ing: a risky prospect is preferred to a
+with probability 1 - p - q. According          for low probabilities 7r(p) > p, but            riskless prospect of equal expected val-
+to prospect theory, there are values v(.)      r(p) + 7r(1 - p) < 1. Thus low proba-           ue. This pattern of risk aversion in
+associated with outcomes, and decision         bilities are overweighted, moderate and         choices involving gains and risk seeking
+weights 7r(.) associated with probabili-       high probabilities are underweighted,           in choices involving losses is attributable
+ties, such that the overall value of the       and the latter effect is more pronounced        to the properties of v and 7r. Because the
+prospect equals 7r(p) v(x) + ir(q) v(y). A     than the former. Third, 7r(pq)/ir(p) <          value function is S-shaped, the value as-
+slightly different equation should be ap-      7r(pqr)/7r(pr) for all 0 < p, q, r ' 1. That    sociated with a gain of $240 is greater
+plied if all outcomes of a prospect are on     is, for any fixed probability ratio q, the      than 24 percent of the value associated
+the same side of the zero point (5).           ratio of decision weights is closer to          with a gain of $1000, and the (negative)
+   In prospect theory, outcomes are ex-        unity when the probabilities are low            value associated with a loss of $750 is
+pressed as positive or negative devia-         than when they are high, for example,           smaller than 75 percent of the value asso-
+tions (gains or losses) from a neutral ref-    ir(.1)/7r(.2) > 7r(.4)/7r(.8). A hypothetical   ciated with a loss of $1000. Thus the
+erence outcome, which is assigned a val-       weighting function which satisfies these        shape of the value function contributes
+ue of zero. Although subjective values         properties is shown in Fig. 2. The major        to risk aversion in decision (i) and to risk
+differ among individuals and attributes,       qualitative properties of decision weights      seeking in decision (ii). Moreover, the
+we propose that the value function is          can be extended to cases in which the           underweighting of moderate and high
+commonly S-shaped, concave above the           probabilities of outcomes are subjective-       probabilities contributes to the relative
+reference point and convex below it, as        ly assessed rather than explicitly given.       attractiveness of the sure gain in (i) and
+illustrated in Fig. 1. For example, the dif-   In these situations, however, decision          to the relative aversiveness of the sure
+ference in subjective value between            weights may also be affected by other           loss in (ii). The same analysis applies to
+gains of $10 and $20 is greater than the       characteristics of an event, such as am-        problems 1 and 2.
+subjective difference between gains of         biguity or vagueness (9).                          Because (i) and (ii) were presented to-
+$110 and $120. The same relation be-              Prospect theory, and the scales illus-       gether, the respondents had in effect to
+tween value differences holds for the          trated in Figs. 1 and 2, should be viewed       choose one prospect from the set: A and
+corresponding losses. Another property         as an approximate, incomplete, and sim-         C,BandC, AandD, BandD. The most
+of the value function is that the response     plified description of the evaluation of        common pattern (A and D) was chosen
+to losses is more extreme than the re-         risky prospects. Although the properties        by 73 percent of respondents, while the
+sponse to gains. The displeasure associ-       of v and Xr summarize a common pattern          least popular pattern (B and C) was
+ated with losing a sum of money is gener-      of choice, they are not universal: the          chosen by only 3 percent of respondents.
+ally greater than the pleasure associated      preferences of some individuals are not         However, the combination of B and
+with winning the same amount, as is re-        well described by an S-shaped value             C is definitely superior to the combina-
+flected in people's reluctance to accept       function and a consistent set of decision       tion A and D, as is readily seen in prob-
+fair bets on a toss of a coin. Several stud-   weights. The simultaneous measurement           lem 4.
+ies of decision (3, 6) and judgment (7)        of values and decision weights involves           Problem 4 [N = 86]. Choose between:
+have confirmed these properties of the         serious experimental and statistical diffi-     A & D. 25% chance to win $240, and
+value function (8).                            culties (10).                                            75.% chance to lose $760. [O per-
+   The second major departure of pros-            If Xr and v were linear throughout, the             cent]
+pect theory from the expected utility          preference order between options would          B & C. 25% chance to win $250, and
+model involves the treatment of proba-         be independent of the framing of acts,                 75% chance to lose $750. [100 per-
+bilities. In expected utility theory the       outcomes, or contingencies. Because of                 cent]
+utility of an uncertain outcome is weight-     the characteristic nonlinearities of ir and       When the prospects were combined
+ed by its probability; in prospect theory      v, however, different frames can lead to        and the dominance of the second option
+the value of an uncertain outcome is mul-      different choices. The following three          became obvious, all respondents chose
+tiplied by a decision weight 7r(p), which      sections describe reversals of preference       the superior option. The popularity of
+is a monotonic function of p but is not a      caused by variations in the framing of          the inferior option in problem 3 implies
+probability. The weighting function ir         acts, contingencies, and outcomes.              that this problem was framed as a pair of
+     454                                                                                                                SCIENCE, VOL. 211
+separate choices. The respondents ap-                    1.0                                            The first stage of problem 6 yields t.
+parently failed to entertain the possibility                                                         same outcome (no gain) for both act
+that the conjunction of two seemingly                                                                Consequently, we propose, people eval
+reasonable choices could lead to an un-                                                              uate the options conditionally, as if the
+tenable result.                                                                                      second stage had been reached. In this
+  The violations of dominance observed                   005
+                                                                                                     framing, of course, problem 6 reduces to
+in problem 3 do not disappear in the                0
+                                                                                                     problem 5. More generally, we suggest
+presence of monetary incentives. A dif-                                                              that a decision problem is evaluated con-
+ferent group of respondents who an-                 CD
+                                                                                                     ditionally when (i) there is a state in
+swered a modified version of problem 3,                                                              which all acts yield the same outcome,
+with real payoffs, produced a similar pat-                     0            0.5            1.0
+                                                                                                     such as failing to reach the second stage
+tern of choices (11). Other authors have                           Stated probability: p
+                                                                                                     of the game in problem 6, and (ii) the
+also reported that violations of the rules                                                           stated probabilities of other outcomes
+                                                   Fig. 2. A hypothetical weighting function.        are conditional on the nonoccurrence of
+of rational choice, originally observed in
+hypothetical questions, were not elimi-                                                              this state.
+nated by payoffs (12).                                                                                  The striking discrepancy between the
+  We suspect that many concurrent de-               Let us examine the structure of these            responses to problems 6 and 7, which are
+cisions in the real world are framed inde-       problems. First, note that problems 6               identical in outcomes and probabilities,
+pendently, and that the preference order         and 7 are identical in terms of probabili-          could be described as a pseudocertainty
+would often be reversed if the decisions         ties and outcomes, because prospect C               effect. The prospect yielding $30 is rela-
+were combined. The respondents in                offers a .25 chance to win $30 and pros-            tively more attractive in problem 6 than
+problem 3 failed to combine options, al-         pect D offers a probability of .25 x                in problem 7, as if it had the advantage of
+though the integration was relatively            .80 = .20 to win $45. Consistency there-            certainty. The sense of certainty associ-
+simple and was encouraged by instruc-            fore requires that the same choice be               ated with option C is illusory, however,
+tions (13). The complexity of practical          made in problems 6 and 7. Second, note              since the gain is in fact contingent on
+problems of concurrent decisions, such           that problem 6 differs from problem 5 on-           reaching the second stage of the game
+as portfolio selection, would prevent            ly by the introduction of a preliminary             (15).
+people from integrating options without          stage. If the second stage of the game is              We have observed the certainty effect
+computational aids, even if they were in-        reached, then problem 6 reduces to prob-            in several sets of problems, with out-
+clined to do so.                                 lem 5; if the game ends at the first stage,         comes ranging from vacation trips to the
+                                                 the decision does not affect the outcome.           loss of human lives. In the negative do-
+                                                 Hence there seems to be no reason to                main, certainty exaggerates the aversive-
+The Framing of Contingencies                     make a different choice in problems 5               ness of losses that are certain relative to
+                                                 and 6. By this logical analysis, problem 6          losses that are merely probable. In a
+  The following triple of problems illus-        is equivalent to problem 7 on the one               question dealing with the response to an
+trates the framing of contingencies. Each        hand and problem 5 on the other. The                epidemic, for example, most respond-
+problem was presented to a different             participants, however, responded simi-              ents found "a sure loss of 75 lives" more
+group of respondents. Each group was             larly to problems 5 and 6 but differently           aversive than "80%o chance to lose 100
+told that one participant in ten, pre-           to problem 7. This pattern of responses             lives" but preferred " 10%o chance to lose
+selected at random, would actually be            exhibits two phenomena of choice: the               75 lives" over "8% chance to lose 100
+playing for money. Chance events were            certainty effect and the pseudocertainty            lives," contrary to expected utility theo-
+realized, in the respondents' presence,          effect.                                             ry.
+by drawing a single ball from a bag con-            The contrast between problems 5 and                 We also obtained the pseudocertainty
+taining a known proportion of balls of the       7 illustrates a phenomenon discovered               effect in several studies where the de-
+winning color, and the winners were paid         by Allais (14), which we have labeled the           scription of the decision problems fa-
+immediately.                                     certainty effect: a reduction of the proba-         vored conditional evaluation. Pseudo-
+                                                 bility of an outcome by a constant factor           certainty can be induced either by a se-
+   Problem 5 [N = 77]: Which of the following    has more impact when the outcome was                quential formulation, as in problem 6, or
+options do you prefer?
+A. a sure win of $30 [78 percent]                initially certain than when it was merely           by the introduction of causal contin-
+B. 80%o chance to win $45 [22 percent]           probable. Prospect theory attributes this           gencies. In another version of the epi-
+                                                 effect to the properties of ir. It is easy to       demic problem, for instance, respond-
+   Problem 6 [N = 85]: Consider the following    verify, by applying the equation of pros-           ents were told that risk to life existed on-
+two-stage game. In the first stage, there is a
+75% chance to end the game without winning       pect theory to problems 5 and 7, that               ly in the event (probability .10) that the
+anything, and a 25% chance to move into the      people for whom the value ratio v(30)/              disease was carried by a particular virus.
+second stage. If you reach the second stage      v(45) lies between the weight ratios                Two alternative programs were said to
+you have a choice between:                       7r(.20)/ir(.25) and ir(.80)/ir(1.0) will pre-       yield "a sure loss of 75 lives" or "80%
+C. a sure win of $30 [74 percent]                fer A to B and F to E, contrary to ex-              chance to lose 100 lives" if the critical
+D. 8%o chance to win $45 [26 percent]
+                                                 pected utility theory. Prospect theory              virus was involved, and no loss of life in
+Your choice must be made before the game                                                             the event (probability .90) that the dis-
+starts, i.e., before the outcome of the first    does not predict a reversal of preference
+stage is known. Please indicate the option you   for every individual in problems 5 and              ease was carried by another virus. In ef-
+prefer.                                          7. It only requires that an individual who          fect, the respondents were asked to
+   Problem 7 [N = 81]: Which of the following    has no preference between A and B pre-              choose between 10 percent chance of
+options do you prefer?                           fer F to E. For group data, the theory              losing 75 lives and 8 percent chance of
+E. 25% chance to win $30 [42 percent]            predicts the observed directional shift             losing 100 lives, but their preferences
+F. 20%o chance to win $45 [58 percent]           of preference between the two problems          .   were the same as when the choice was
+30 JANUARY 1981                                                                                                                         455
+   -ween a sure loss of 75 lives and 80           provide is an illusion of conditional fram-    ing of credit-card purchases, representa-
+   rcent chance of losing 100 lives. A            ing. It appears that insurance is bought       tives of the credit-card industry re-
+  inditional framing was evidently                as protection against worry, not only          quested that the price difference be la-
+.-dopted in which the contingency of the          against risk, and that worry can be ma-        beled a cash discount rather than a
+noncritical virus was eliminated, giving          nipulated by the labeling of outcomes          credit-card surcharge. The two labels in-
+rise to a pseudocertainty effect. The cer-        and by the framing of contingencies. It is     duce different reference points by implic-
+tainty effect reveals attitudes toward risk       not easy to determine whether people           itly designating as normal reference the
+that are inconsistent with the axioms of          value the elimination of risk too much or      higher or the lower of the two prices. Be-
+rational choice, whereas the pseudo-              the reduction of risk too little. The con-     cause losses loom larger than gains, con-
+certainty effect violates the more funda-         trasting attitudes to the two forms of pro-    sumers are less willing to accept a sur-
+mental requirement that preferences               tective action, however, are difficult to      charge than to forego a discount. A simi-
+should be independent of problem de-              justify on normative grounds (16).             lar effect has been observed in
+scription.                                                                                       experimental studies of insurance: the
+   Many significant decisions concern ac-                                                        proportion of respondents who preferred
+tions that reduce or eliminate the proba-         The Framing of Outcomes                        a sure loss to a larger probable loss was
+bility of a hazard, at some cost. The                                                            significantly greater when the former
+shape of Xr in the range of low probabili-           Outcomes are commonly perceived as          was called an insurance premium (19,
+ties suggests that a protective action            positive or negative in relation to a refer-   20).
+which reduces the probability of a harm           ence outcome that is judged neutral.              These observations highlight the labil-
+from 1 percent to zero, say, will be val-         Variations of the reference point can          ity of reference outcomes, as well as
+ued more highly than an action that re-           therefore determine whether a given out-       their role in decision-making. In the ex-
+duces the probability of the same harm            come is evaluated as a gain or as a loss.      amples discussed so far, the neutral ref-
+from 2 percent to 1 percent. Indeed,              Because the value function is generally        erence point was identified by the label-
+probabilistic insurance, which reduces            concave for gains, convex for losses, and      ing of outcomes. A diversity of factors
+the probability of loss by half, is judged        steeper for losses than for gains, shifts of   determine the reference outcome in
+to be worth less than half the price of           reference can change the value dif-            everyday life. The reference outcome is
+regular insurance that eliminates the risk        ference between outcomes and thereby           usually a state to which one has adapted;
+altogether (3).                                   reverse the preference order between           it is sometimes set by social norms and
+   It is often possible to frame protective       options (6). Problems 1 and 2 illustrated      expectations; it sometimes corresponds
+action in either conditional or uncon-            a preference reversal induced by a shift       to a level of aspiration, which may or
+ditional form. For example, an insurance          of reference that transformed gains into       may not be realistic.
+policy that covers fire but not flood could       losses.                                           We have dealt so far with elementary
+be evaluated either as full protection               For another example, consider a per-        outcomes, such as gains or losses in a
+against the specific risk of fire or as a re-     son who has spent an afternoon at the          single attribute. In many situations, how-
+duction in the overall probability of             race track, has already lost $140, and is      ever, an action gives rise to a compound
+property loss. The preceding analysis             considering a $10 bet on a 15:1 long shot      outcome, which joins a series of changes
+suggests that insurance should appear             in the last race. This decision can be         in a single attribute, such as a sequence
+more attractive when it is presented as           framed in two ways, which correspond           of monetary gains and losses, or a set of
+the elimination of risk than when it is de-       to two natural reference points. If the        concurrent changes in several attributes.
+scribed as a reduction of risk. P. Slovic,        status quo is the reference point, the out-    To describe the framing and evaluation
+B. Fischhoff, and S. Lichtenstein, in an          comes of the bet are framed as a gain of       of compound outcomes, we use the no-
+unpublished study, found that a hypo-             $140 and a loss of $10. On the other           tion of a psychological account, defined
+thetical vaccine which reduces the prob-          hand, it may be more natural to view the       as an outcome frame which specifies (i)
+ability of contracting a disease from .20         present state as a loss of $140, for the       the set of elementary outcomes that are
+to .10 is less attractive if it is described as   betting day, and accordingly frame the         evaluated jointly and the manner in
+effective in half the cases than if it is pre-    last bet as a chance to return to the refer-   which they are combined and (ii) a refer-
+sented as fully effective against one of          ence point or to increase the loss to $150.    ence outcome that is considered neutral
+two (exclusive and equiprobable) virus            Prospect theory implies that the latter        or normal. In the account that is set up
+strains that produce identical symptoms.          frame will produce more risk seeking           for the purchase of a car, for example,
+In accord with the present analysis of            than the former. Hence, people who do          the cost of the purchase is not treated as
+pseudocertainty, the respondents valued           not adjust their reference point as they       a loss nor is the car viewed as a gift.
+full protection against an identified vi-         lose are expected to take bets that they       Rather, the transaction as a whole is
+rus more than probabilistic protection            would normally find unacceptable. This         evaluated as positive, negative, or neu-
+against the disease.                              analysis is supported by the observation       tral, depending on such factors as the
+   The preceding discussion highlights            that bets on long shots are most popular       performance of the car and the price of
+the sharp contrast between lay responses          on the last race of the day (17).              similar cars in the market. A closely re-
+to the reduction and the elimination of              Because the value function is steeper       lated treatment has been offered by Tha-
+risk. Because no form of protective ac-           for losses than for gains, a difference be-    ler (18).
+tion can cover all risks to human welfare,        tween options will loom larger when it is         We propose that people generally
+all insurance is essentially probabilistic:       framed as a disadvantage of one option         evaluate acts in terms of a minimal ac-
+it reduces but does not eliminate risk.           rather than as an advantage of the other       count, which includes only the direct
+The probabilistic nature of insurance is          option. An interesting example of such         consequences of the act. The minimal
+commonly masked by formulations that              an effect in a riskless context has been       account associated with the decision to
+emphasize the completeness of pro-                noted by Thaler (18). In a debate on a         accept a gamble, for example, includes
+tection against identified harms, but the         proposal to pass to the consumer some          the money won or lost in that gamble and
+sense of security that such formulations          of the costs associated with the process-      excludes other assets or the outcome of
+      456                                                                                                               SCIENCE, VOL. 211
+previous gambles. People commonly                other group (N = 88) the values shown             consistencies were traced to the inter-
+adopt minimal accounts because this              in brackets.                                      action of two sets of factors: variations
+mode of framing (i) simplifies evaluation                                                          in the framing of acts, contingencies, and
+and reduces cognitive strain, (ii) reflects         Problem 10: Imagine that you are about to      outcomes, and the characteristic non-
+                                                 purchase ajacket for ($125) [$15], and a calcu-
+the intuition that consequences should           lator for ($15) [$125]. The calculator salesman   linearities of values and decision
+be causally linked to acts, and (iii)            informs you that the calculator you wish to       weights. The demonstrated effects are
+matches the properties of hedonic expe-          buy is on sale for ($10) [$1201 at the other      large and systematic, although by no
+rience, which is more sensitive to desir-        branch of the store, located 20 minutes drive     means universal. They occur when the
+                                                 away. Would you make the trip to the other
+able and undesirable changes than to             store?                                            outcomes concern the loss of human
+steady states.                                                                                     lives as well as in choices about money;
+   There are situations, however, in                The response to the two versions of            they are not restricted to hypothetical
+which the outcomes of an act affect the          problem 10 were markedly different: 68            questions and are not eliminated by mon-
+balance in an account that was pre-              percent of the respondents were willing           etary incentives.
+viously set up by a related act. In these        to make an extra trip to save $5 on a $15            Earlier we compared the dependence
+cases, the decision at hand may be eval-         calculator; only 29 percent were willing          of preferences on frames to the depen-
+uated in terms of a more inclusive ac-           to exert the same effort when the price of        dence of perceptual appearance on per-
+count, as in the case of the bettor who          the calculator was $125. Evidently the            spective. If while traveling in a mountain
+views the last race in the context of ear-       respondents do not frame problem 10 in            range you notice that the apparent rela-
+lier losses. More generally, a sunk-cost         the minimal account, which involves on-           tive height of mountain peaks varies with
+effect arises when a decision is referred        ly a benefit of $5 and a cost of some in-         your vantage point, you will conclude
+to an existing account in which the cur-         convenience. Instead, they evaluate the           that some impressions of relative height
+rent balance is negative. Because of the         potential saving in a more inclusive ac-          must be erroneous, even when you have
+nonlinearities of the evaluation process,        count, which includes the purchase of             no access to the correct answer. Similar-
+the minimal account and a more in-               the calculator but not of the jacket. By          ly, one may discover that the relative at-
+clusive one often lead to different              the curvature of v, a discount of $5 has a        tractiveness of options varies when the
+choices.                                         greater impact when the price of the cal-         same decision problem is framed in dif-
+   Problems 8 and 9 illustrate another           culator is low than when it is high.              ferent ways. Such a discovery will nor-
+class of situations in which an existing            A closely related observation has been         mally lead the decision-maker to recon-
+account affects a decision:                      reported by Pratt, Wise, and Zeckhauser           sider the original preferences, even when
+                                                 (21), who found that the variability of the       there is no simple way to resolve the in-
+  Problem 8 [N = 183]: Imagine that you          prices at which a given product is sold by
+have decided to see a play where admission is                                                      consistency. The susceptibility to per-
+$10 per ticket. As you enter the theater you     different stores is roughly proportional to       spective effects is of special concern in
+discover that you have lost a $10 bill.          the mean price of that product. The same          the domain of decision-making because
+  Would you still pay $10 for a ticket for the   pattern was observed for both frequently          of the absence of objective standards
+play?                                            and infrequently purchased items. Over-           such as the true height of mountains.
+Yes [88 percent]              No [12 percent]    all, a ratio of 2: 1 in the mean price of two        The metaphor of changing perspective
+   Problem 9 [N = 200]: Imagine that you         products is associated with a ratio of            can be applied to other phenomena of
+have decided to see a play and paid the admis-   1.86:1 in the standard deviation of the           choice, in addition to the framing effects
+sion price of $10 per ticket. As you enter the   respective quoted prices. If the effort           with which we have been concerned here
+theater you discover that you have lost the      that consumers exert to save each dollar          (19). The problem of self-control is natu-
+ticket. The seat was not marked and the ticket   on a purchase, for instance by a phone            rally construed in these terms. The story
+cannot be recovered.
+   Would you pay $10 for another ticket?         call, were independent of price, the dis-         of Ulysses' request to be bound to the
+Yes [46 percent]               No [54 percent]   persion of quoted prices should be about          mast of the ship in anticipation of the ir-
+                                                 the same for all products. In contrast,           resistible temptation of the Sirens' call is
+   The marked difference between the re-         the data of Pratt et al. (21) are consistent      often used as a paradigm case (22). In
+sponses to problems 8 and 9 is an effect         with the hypothesis that consumers                this example of precommitment, an ac-
+of psychological accounting. We pro-             hardly exert more effort to save $15 on a         tion taken in the present renders inopera-
+pose that the purchase of a new ticket in        $150 purchase than to save $5 on a $50            tive an anticipated future preference. An
+problem 9 is entered in the account that         purchase (18). Many readers will recog-           unusual feature of the problem of inter-
+was set up by the purchase of the original       nize the temporary devaluation of money           temporal conflict is that the agent who
+ticket. In terms of this account, the ex-        which facilitates extra spending and re-          views a problem from a particular tem-
+pense required to see the show is $20, a         duces the significance of small discounts         poral perspective is also aware of the
+cost which many of our respondents ap-           in the context of a large expenditure,            confficting views that future perspectives
+parently found excessive. In problem 8,          such as buying a house or a car. This             will offer. In most other situations, deci-
+on the other hand, the loss of $10 is not        paradoxical variation in the value of             sion-makers are not normally aware of
+linked specifically to the ticket purchase       money is incompatible with the standard           the potential effects of different decision
+and its effect on the decision is accord-        analysis of consumer behavior.                    frames on their preferences.
+ingly slight.                                                                                         The perspective metaphor highlights
+  The following problem, based on ex-                                                              the following aspects of the psychology
+amples by Savage (2, p. 103) and Thaler          Discussion                                        of choice. Individuals who face a deci-
+(18), further illustrates the effect of em-                                                        sion problem and have a definite prefer-
+bedding an option in different accounts.            In this article we have presented a se-        ence (i) might have a different preference
+Two versions of this problem were pre-           ries of demonstrations in which seem-             in a different framing of the same prob-
+sented to different groups of subjects.          ingly inconsequential changes in the for-         lem, (ii) are normally unaware of alterna-
+One group (N = 93) was given the val-            mulation of choice problems caused sig-           tive frames and of their potential effects
+ues that appear in parentheses, and the          nificant shifts of preference. The in-            on the relative attractiveness of options,
+30 JANUARY 1981                                                                                                                       457
+(iii) would wish their preferences to be      dictive orientation encourages the deci-                  9. D. Ellsberg, Q. J. Econ. 75, 643 (1961); W. Fell-
+                                                                                                           ner, Probability and Profit-A Study of Eco-
+independent of frame, but (iv) are often      sion-maker to focus on future experience                     nomic Behavior Along Bayesian Lines (Irwin,
+uncertain how to resolve detected incon-      and to ask "What will I feel then?"                          Homewood, III., 1965).
+                                                                                                        10. The scaling of v and ir by pair comparisons re-
+sistencies (23). In some cases (such as       rather than "What do I want now?" The                         quires a large number of observations. The pro-
+problems 3 and 4 and perhaps problems 8       former question, when answered with                           cedure of pricing gambles is more convenient for
+                                                                                                             scaling purposes, but it is subject to a severe an-
+and 9) the advantage of one frame be-         care, can be the more useful guide in dif-                     choring bias: the ordering of gambles by their
+                                                                                                            cash equivalents diverges systematically from
+comes evident once the competing              ficult decisions. In particular, predictive                   the preference order observed in direct com-
+frames are compared, but in other cases       considerations may be applied to select                       parisons [S. Lichtenstein and P. Slovic, J. Exp.
+                                                                                                            Psychol. 89, 46 (1971)].
+(problems 1 and 2 and problems 6 and 7)       the decision frame that best represents                   11. A new group of respondents (N = 126) was pre-
+it is not obvious which preferences           the hedonic expenence of outcomes.                             sented with a modified version of problem 3, in
+                                                                                                             which the outcomes were reduced by a factor
+should be abandoned.                             Further complexities arise in the nor-                      of 50. The participants were informed that the
+   These observations do not imply that       mative analysis because the framing of                        gambles would actually be played by tossing a
+                                                                                                             pair of fair coins, that one participant in ten
+preference reversals, or other errors of      an action sometimes affects the actual                         would be selected at random to play the gambles
+                                                                                                             of his or her choice. To ensure a positive return
+choice or judgment (24), are necessarily      experience of its outcomes. For ex-                           for the entire set, a third decision, yielding only
+irrational. Like other intellectual limita-   ample, framing outcomes in terms of                            positive outcomes, was added. These payoff
+                                                                                                             conditions did not alter the pattern of prefer-
+tions, discussed by Simon (25) under the      overall wealth or welfare rather than in                       ences observed in the hypothetical problem: 67
+heading of "bounded rationality," the         terms of specific gains and losses may at-                     percent of respondents chose prospect A and 86
+                                                                                                            percent chose prospect D. The dominated com-
+practice of acting on the most readily        tenuate one's emotional response to an                         bination of A and D was chosen by 60 percent of
+available frame can sometimes be justi-       occasional loss. Similarly, the experi-                        respondents, and only 6 percent favored the
+                                                                                                             dominant combination of B and C.
+fied by reference to the mental effort re-    ence of a change for the worse may vary                   12. S. Lichtenstein and P. Slovic, J. Exp. Psychol.
+quired to explore alternative frames and      if the change is framed as an uncompen-                        101, 16 (1973); D. M. Grether and C. R. Plott,
+                                                                                                            Am. Econ. Rev. 69, 623 (1979); I. Lieblich and
+avoid potential inconsistencies. How-         sated loss or as a cost incurred to                            A. Lieblich, Percept. Mot. Skills 29, 467 (1969);
+                                                                                                             D. M. Grether, Social Science Working Paper
+ever, we propose that the details of the      achieve some benefit. The framing of                           No. 245 (California Institute of Technology,
+phenomena described in this article are       acts and outcomes can also reflect the                         Pasadena, 1979).
+                                                                                                        13. Other demonstrations of a reluctance to in-
+better explained by prospect theory and       acceptance or rejection of responsibility                      tegrate concurrent options have been reported:
+by an analysis of framing than by ad          for particular consequences, and the de-                       P. Slovic and S. Lichtenstein, J. Exp. Psychol.
+                                                                                                             78, 646 (1968); J. W. Payne and M. L. Braun-
+hoc appeals to the notion of cost of          liberate manipulation of framing is com-                       stein, ibid. 87, 13 (1971).
+                                                                                                        14. M. Allais, Econometrica 21, 503 (1953); K.
+thinking.                                     monly used as an instrument of self-                           McCrimmon and S. Larsson, in Expected Util-
+   The present work has been concerned        control (22). When framing influences                         ity Hypotheses and the Allais Paradox, M. All-
+                                                                                                             ais and 0. Hagan, Eds. (Reidel, Dordrecht,
+primarily with the descriptive question       the experience of consequences, the                            1979).
+of how decisions are made, but the psy-       adoption of a decision frame is an ethi-                  15. Another group of respondents (N = 205) was
+                                                                                                             presented with all three problems, in different
+chology of choice is also relevant to the     cally significant act.                                        orders, without monetary payoffs. The joint fre-
+normative question of how decisions                                                                         quency distribution of choices in problems 5, 6,
+                                                               References and Notes                          and 7 was as follows: ACE, 22; ACF, 65; ADE,
+ought to be made. In order to avoid the                                                                     4; ADF, 20; BCE, 7; BCF, 18; BDE, 17; BDF,
+difficult problem of justifying values, the    1. J. Von Neumann and 0. Morgenstern, Theory of               52. These data confirm in a within-subject design
+                                                  Games and Economic Behavior (Princeton                     the analysis of conditional evaluation proposed
+modern theory of rational choice has              Univ. Press, Princeton, N.J., 1947); H. Raiffa,            in the text. More than 75 percent of respondents
+                                                                                                            made compatible choices (AC or BD) in prob-
+                                                  Decision Analysis: Lectures on Choices Under
+adopted the coherence of specific prefer-         Uncertainty (Addison-Wesley, Reading, Mass.,              lems 5 and 6, and less than half made compatible
+ences as the sole criterion of rationality.        1968); P. Fishburn, Utility Theory for Decision          choices in problems 6 and 7 (CE or DF) or 5 and
+                                                  Making (Wiley, New York, 1970).                           7 (AE or BF). The elimination of payoffs in these
+This approach enjoins the decision-           2. L. J. Savage, The Foundations of Statistics                questions reduced risk aversion but did not sub-
+maker to resolve inconsistencies but of-          (Wiley, New York, 1954).                                   stantially alter the effects of certainty and
+                                              3. D. Kahneman and A. Tversky, Econometrica                   pseudocertainty.
+fers no guidance on how to do so. It im-          47, 263 (1979).                                      16. For further discussion of rationality in pro-
+plicitly assumes that the decision-maker      4. The framing phase includes various editing oper-           tective action see H. Kunreuther, Disaster In-
+                                                  ations that are applied to simplify prospects, for        surance Protection: Public Policy Lessons
+who carefully answers the question                example by combining events or outcomes or by             (Wiley, New York, 1978).
+                                                                                                       17. W. H. McGlothlin, Am. J. Psychol. 69, 604
+"What do I really want?" will eventually          discarding negligible components (3).
+                                              5. Ufp + q = I and eitherx > y > Oorx < y < 0,                (1956).
+achieve coherent preferences. However,            the equation in the text is replaced by              18. R. Thaler,J. Econ. Behav. Organ. 1, 39 (1980).
+                                                  v(y) + r*) [v(x) - v(y)], so that decision           19. B. Fischhoff, P. Slovic, S. Lichtenstein, in Cog-
+the susceptibility of preferences to varia-       weights are not applied to sure outcomes.                 nitive Processes in Choice and Decision Behav-
+tions of framing raises doubt about the       6. P. Fishburn and G. Kochenberger, Decision Sci.             ior, T. Wallsten, Ed. (Erlbaum, Hillsdale, N.J.,
+                                                  10, 503 (1979); D. J. Laughhunn, J. W. Payne,              1980).
+feasibility and adequacy of the coher-            R. Crum, Manage. Sci., in press; J. W. Payne,        20. J. C. Hershey and P. J. H. Schoemaker, J. Risk
+ence criterion.                                   D. J. Laughhunn, R. Crum, ibid., in press; S. A.          Insur., in press.
+                                                  Eraker and H. C. Sox, Med. Decision Making,          21. J. Pratt, A. Wise, R. Zeckhauser, Q. J. Econ.
+   Consistency is only one aspect of the          in press. In the last study several hundred clinic        93, 189 (1979).
+                                                                                                       22. R. H. Strotz, Rev. Econ. Stud. 23, 165 (1955); G.
+lay notion of rational behavior. As noted         patients made hypothetical choices between
+                                                  drug therapies for severe headaches, hyperten-            Ainslie, Psychol. Bull. 82, 463 (1975); J. Elster,
+by March (26), the common conception              sion, and chest pain. Most patients were risk
+                                                  averse when the outcomes were described as
+                                                                                                            Ulysses and the Sirens: Studies in Rationality
+                                                                                                            and Irrationality (Cambridge Univ. Press, Lon-
+of rationality also requires that prefer-         positive (for example, reduced pain or increased          don, 1979); R. Thaler and H. M. Shifrin, J. Polit.
+ences or utilities for particular outcomes        life expectancy) and risk taking when the out-            Econ., in press.
+                                                  comes were described as negative (increased          23. P. Slovic and A. Tversky, Behav. Sci. 19, 368
+should be predictive of the experiences           pain or reduced life expectancy). No significant          (1974).
+                                                  differences were found between patients who          24. A. Tversky and D. Kahneman, Science 185,
+of satisfaction or displeasure associated         actually suffered from the ailments described              1124 (1974); P. Slovic, B. Fischhoff, S. Lich-
+with their occurrence. Thus, a man could          and patients who did not.                                 tenstein, Annu. Rev. P-sychol. 28, 1 (1977); R.
+                                              7. E. Galanter and P. Pliner, in Sensation and                Nisbett and L. Ross, Human Itference: Strate-
+be judged irrational either because his           Measurement, H. R. Moskowitz et al., Eds.                 gies and Shortcomings of Social Judgment
+preferences are contradictory or because          (Reidel, Dordrecht, 1974), pp. 65-76.                     (Prentice-tIall, Englewood Cliffs, N.J., 1980);
+                                              8. The extension of the proposed value function to            H. Einhorn and R. Hogarth, Annu. Rev. Psy-
+his desires and aversions do not reflect          multiattribute options, with or without risk, de-         chol. 32, 53 (1981).
+his pleasures and pains. The predictive           serves careful analysis. In particular, indif-       25. H. A. Simon, Q. J. Econ. 69, 99 (1955); Psychol.
+                                                  ference curves between dimensions of loss may             Rev. 63, 129 (1956).
+criterion of rationality can be applied to        be concave upward, even when the value finc-         26. J. March, Bell J. Econ. 9, 587 (1978).
+                                                  tions for the separate losses are both convex,       27. This work was supported by the Office of Naval
+resolve inconsistent preferences and to           because of marked subadditivity between di-               Research under contract N00014-79-C-0077 to
+improve the quality of decisions. A pre-          mensions.                                                 Stanford University.
+
+
+
+     458                                                                                                                               SCIENCE, VOL. 211
+

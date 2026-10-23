@@ -1,0 +1,631 @@
+本文件为PDF自动提取文本，仅供检索；排版、图表和页码请以PDF为准。
+On the conversational persuasiveness of GPT-4
+
+nature human behaviour
+
+Article                                                                                                     https://doi.org/10.1038/s41562-025-02194-6
+
+
+On the conversational persuasiveness
+of GPT-4
+
+Received: 16 May 2024                               Francesco Salvi           1,2
+                                                                                      , Manoel Horta Ribeiro         3
+                                                                                                                      , Riccardo Gallotti       2
+                                                                                                                                                    &
+                                                    Robert West 1
+Accepted: 28 March 2025
+
+Published online: 19 May 2025
+                                                    Early work has found that large language models (LLMs) can generate
+    Check for updates                               persuasive content. However, evidence on whether they can also personalize
+                                                    arguments to individual attributes remains limited, despite being crucial for
+                                                    assessing misuse. This preregistered study examines AI-driven persuasion
+                                                    in a controlled setting, where participants engaged in short multiround
+                                                    debates. Participants were randomly assigned to 1 of 12 conditions in a
+                                                    2 × 2 × 3 design: (1) human or GPT-4 debate opponent; (2) opponent with
+                                                    or without access to sociodemographic participant data; (3) debate topic
+                                                    of low, medium or high opinion strength. In debate pairs where AI and
+                                                    humans were not equally persuasive, GPT-4 with personalization was more
+                                                    persuasive 64.4% of the time (81.2% relative increase in odds of higher
+                                                    post-debate agreement; 95% confidence interval [+26.0%, +160.7%], P < 0.01;
+                                                    N = 900). Our findings highlight the power of LLM-based persuasion and
+                                                    have implications for the governance and design of online platforms.
+
+
+Persuasion, the process of altering someone’s belief, position or opinion           of textual data. Models such as GPT-4 (ref. 20), Claude21 and Gemini22
+on a specific matter, is pervasive in human affairs and a widely studied            can generate coherent and contextually relevant text with fluency
+topic in the social sciences1–3. From public health campaigns4–6 to mar-            and versatility, and exhibit human or superhuman performance in a
+keting and sales7,8 to political propaganda9,10, various actors develop             wide range of tasks23. In the context of persuasion, experts have widely
+elaborate persuasive communication strategies on a large scale, invest-             expressed concerns about the risk of LLMs being used to manipulate
+ing substantial resources to make their messaging resonate with broad               online conversations and pollute the information ecosystem by spread-
+audiences. In recent decades, the diffusion of social media and other               ing misinformation, exacerbating political polarization, reinforcing
+online platforms has expanded the potential of mass persuasion by                   echo chambers and persuading individuals to adopt new beliefs24–27.
+enabling personalization or ‘microtargeting’—the tailoring of mes-                        A particularly menacing aspect of AI-driven persuasion is its pos-
+sages to an individual or a group to enhance their persuasiveness11,12.             sibility to easily and cheaply implement personalization, conditioning
+The efficacy of microtargeting has been questioned because it relies                the models’ generations on personal attributes and psychological pro-
+on the assumption of effect heterogeneity, that is, that specific groups            files28. This is especially relevant since LLMs and other AI systems are
+of people respond differently to the same inputs, a concept that has                capable of inferring personal attributes from publicly available digital
+been disputed in previous literature13,14. Nevertheless, microtargeting             traces such as Facebook likes29,30, status updates31,32 and messages33,
+has proven effective in a variety of settings15–17, and most scholars agree         Reddit and Twitter posts34,35, pictures liked on Flickr36, and other digi-
+on its persuasive power15,18,19.                                                    tal footprints37. In addition, users find it increasingly challenging to
+      Microtargeting practices are fundamentally constrained by the                 distinguish AI-generated from human-generated content, with LLMs
+burden of profiling individuals and crafting personalized messages that             efficiently mimicking human writing and thus gaining credibility38–41.
+appeal to specific targets, as well as by a restrictive interaction context               Recent work has explored the potential of AI-powered persua-
+without dialogue. These limitations may soon fall off due to the recent             sion by comparing texts authored by humans and LLMs, finding that
+rise of large language models (LLMs)—machine learning models trained                modern language models can generate content perceived as at least on
+to mimic human language and reasoning by ingesting vast amounts                     par with, and often more persuasive than, human-written content41–46.
+
+
+EPFL, Lausanne, Switzerland. 2Fondazione Bruno Kessler, Trento, Italy. 3Princeton University, Princeton, NJ, USA.
+1
+                                                                                                                         e-mail: francesco.salvi@epfl.ch
+
+
+Nature Human Behaviour | Volume 9 | August 2025 | 1645–1653                                                                                                1645
+Article                                                                                                      https://doi.org/10.1038/s41562-025-02194-6
+
+
+                         a                             b                                                 c
+
+
+
+
+Fig. 1 | Overview of the experimental design. a, Participants complete a          then debate for 10 min on a randomly assigned topic, holding the PRO or CON
+sociodemographic survey (gender, age, ethnicity, education level, employment      standpoint as instructed. Topics are randomly drawn from sets of three levels of
+status, political affiliation). b, Every 5 min, participants who have completed   opinion strength (low, medium, high). c, After the debate, participants complete
+the survey are randomly assigned to one of four treatment conditions:             another short survey measuring opinion change. Finally, they are debriefed
+Human–Human, Human–AI, Human–Human (personalized) and Human–AI                    about their opponent’s identity. Our key outcome is the change in participants’
+(personalized). In the ‘personalized’ conditions, the opponent can access         views on the debated topic from before versus after the debate.
+information collected from the participant’s survey. Participant and opponent
+
+
+
+Other research has focused on personalization, observing conse-                   concept for how similar debates occur online, such as in synchronous
+quential yet non-unanimous evidence about the impact of LLMs on                   discussions on platforms such as Facebook and Reddit.
+microtargeting47–49. There is, however, still limited knowledge about
+the persuasive power of LLMs in direct conversations with human coun-             Experimental design
+terparts and how AI persuasiveness, with or without personalization,              Participants (N = 900) recruited for our experiment were redirected to
+compares with human persuasiveness (see Supplementary Section 1 for               a custom-made web platform designed to support real-time interactive
+an additional literature review). We argue that the direct-conversation           conversations (the platform was built on top of Empirica.ly51; see Sup-
+setting is of particularly high practical importance, as commercial LLMs          plementary Section 2.4 for details). The experiment’s workflow is repre-
+such as ChatGPT, Claude and Gemini are trained for conversational use50.          sented schematically in Fig. 1. In phase A, participants asynchronously
+     In this preregistered study, we examine the effect of AI-driven              completed introductory steps and filled in a short demographic survey,
+persuasion in a controlled, direct-conversation setting. We created a             recording their gender, age, ethnicity, education level, employment
+web-based platform where participants engage in short multiround                  status and political affiliation. At each clock trigger of a 5-min interval
+debates on various sociopolitical issues. Each participant was randomly           timer, all participants who had completed the survey were randomly
+paired with either GPT-4 or a live human opponent and assigned to a               assigned to a treatment condition and matched with an appropriate
+topic and a stance to hold. To study the effect of personalization, we            opponent. In addition, each participant–opponent pair was randomly
+also experimented with a condition where opponents had access to                  assigned to one debate topic (a simple debate proposition, for example,
+sociodemographic information about participants, thus granting them               “Should students have to wear school uniforms?”; see Supplementary
+the possibility of tailoring their arguments to individual profiles. In           Section 2.3 for the complete list) and a random role, either in support
+addition, we experimented with three sets of debate topics, clustered             (PRO) or against (CON) the proposition.
+on the basis of the strength of participants’ previous opinions. The                   After being matched, participants transitioned to phase B, which
+result is a 2 × 2 × 3 factorial design (two opponent types, two levels of         was in turn divided into four stages: (1) ‘screening’ (1 min), where
+participant information, three levels of topic strength). By comparing            participants, without yet knowing their role, were asked how much
+participants’ agreement with the debate proposition before versus                 they agreed with the debate proposition (on a scale from 1, ‘strongly
+after the debate, we can measure shifts in opinion and, consequently,             disagree’, to 5, ‘strongly agree’) and how much they had previously
+compare the persuasive effect of different treatments. Our setup dif-             thought about it; (2) ‘opening’ (4 min), where participants articulated
+fers substantially from previous research in that it enables a direct             their main arguments coherently with the assigned role; (3) ‘rebuttal’
+comparison of the persuasive capabilities of humans and LLMs in                   (3 min), where they responded to their opponent’s arguments; and (4)
+real conversations, providing a framework for benchmarking how                    ‘conclusion’ (3 min), where participants were asked to respond to their
+state-of-the-art models perform in online environments and the extent             opponent’s rebuttal or reiterate their initial points. The opening–rebut-
+to which they can exploit personal data. Although our study used a                tal–conclusion structure is based on a simplified version of the format
+structured debate format, it nonetheless serves as a valuable proof of            commonly used in competitive academic debates. After the debate, in
+
+
+Nature Human Behaviour | Volume 9 | August 2025 | 1645–1653                                                                                                  1646
+Article                                                                                                         https://doi.org/10.1038/s41562-025-02194-6
+
+phase C, participants asynchronously completed a final exit survey.
+They were asked again how much they agreed with the proposition and                                     Human–AI
+whether they believed their opponent was a human or an AI. Finally,
+they were debriefed about their opponent’s true identity.
+     For each debate, the assigned topic was randomly drawn from 30
+                                                                                     Human–Human (personalized)
+propositions encompassing salient US political and social issues. An
+online sample of 60 US residents manually validated and selected these
+propositions from a larger pool, recording also their agreement with
+each proposition. We divided topics into three clusters (low, medium,
+                                                                                          Human–AI (personalized)
+high) of 10 propositions each, on the basis of their average opinion
+strength (see Supplementary Section 2 for details and the full list of                                            –0.50 –0.25   0   0.25   0.50   0.75   1.00   1.25   1.50
+topics). In this context, ‘strength’ intuitively reflects a topic’s level of                                            Odds of higher agreement relative change
+controversy or polarization and how easy it is to sway opinions about it.
+                                                                                     Fig. 2 | Regression results for the partial proportional odds model. For each
+Each participant was assigned to 1 of 12 conditions in a 2 × 2 × 3 design:
+                                                                                     condition, the point estimates represent relative changes compared to the
+                                                                                     Human–Human reference in the odds of post-treatment agreement assuming
+  • The participant was assigned to debate either a human or a GPT-4                 higher values (see Supplementary Section 3 for more details). Horizontal lines
+    opponent.                                                                        indicate 95% CIs based on two-sided t-tests; n = 750. GPT-4 outperforms humans
+  • The opponent (whether human or GPT-4) either did or did not                      in the debate task when given participants’ basic personal information (P < 0.01)
+    receive sociodemographic information (gender, age, ethnicity,                    and performs similarly to humans when not given personal information. Full
+    education level, employment status and political affiliation, as                 numerical results, including intercepts, are reported in Supplementary Table 4.
+    recorded in the pretreatment survey) about the participant. When
+    the LLM was provided with personal attributes, we instructed it
+    to ‘astutely use this information to craft arguments that are more               across all topic clusters. We report the results in Fig. 2, taking as a ref-
+    likely to persuade and convince your opponent of your stance’ (see               erence the Human–Human condition and examining the differences
+    Supplementary Section 2.5 for the complete prompts).                             relative to it. Human–AI (personalized) debates show the strongest
+  • The debate topic belonged to the low-, medium- or high-strength                  positive effect, meaning that GPT-4 with access to personal informa-
+    cluster.                                                                         tion had higher persuasive power than humans. We estimate that the
+                                                                                     odds of greater agreement with opponents is +81.2% (95% confidence
+      In each condition, 50 debates were held, yielding 600 debates and              interval (CI) [+26.0%, +160.7%], P < 0.01) higher in the Human–AI (per-
+N = 900 unique participants, since Human–Human debates required                      sonalized) condition compared with the Human–Human reference
+two participants. Within each condition, we randomized topics such                   condition. Intuitively, this means that 64.4% of the time, personalized
+that exactly 5 debates argued about each topic.                                      LLM debaters were more persuasive than humans, given that they were
+      We measured the persuasive effect of the treatment conditions                  not equally persuasive (see Supplementary Section 3 for an explana-
+described by measuring participants’ agreements with their proposi-                  tion). For the Human–AI (+21.9%, 95% CI [−16.2%, +77.3%], P = 0.30) and
+tions before (Apre) and after (Apost) the debates. To frame changes in               the Human–Human (personalized) (−15.7%, 95% CI [−42.2%, +23.0%],
+agreement as persuasive effects, we aligned the scores with the side                 P = 0.38) conditions, there is insufficient evidence to conclude a differ-
+(PRO or CON) ‘opposed’ to the one assigned to the participant, that                  ence in persuasiveness between them and the Human–Human baseline,
+is, the one held by their opponent, by transforming them as follows:                 considering a 0.05 significance level. Similarly, the difference between
+                                                                                     the Human–AI (personalized) and Human–AI conditions was not sta-
+                        6−A    if participant side = PRO,                            tistically significant when using Human–AI as the reference category
+               Ã = {                                                          (1)
+                        A      if participant side = CON,                            (+48.7%, 95% CI [−2.9%, + 127.6%], p = 0.07), likely reflecting limited
+                                                                                     statistical power given the relatively small per-condition sample sizes
+                                                                                     and the large standard errors observed across treatment comparisons.
+                                pre       post
+resulting in the two variables Ã and Ã . Implicitly, this transforma-              Thus, we cannot conclusively establish from this comparison alone that
+tion corresponds to the natural assumption that agreements get                       personalization confers an additional advantage over non-personalized
+inverted around 3 (the ‘neutral’ score) when debate propositions are                 GPT-4. Nevertheless, these findings provide evidence that GPT-4-based
+                                     post    pre
+negated. With this adjustment, Ã         > Ã means that participants               microtargeting strongly outperforms human performance, with GPT-4
+were persuaded to shift their opinion towards their opponent’s side,                 leveraging personal information more effectively (see Supplementary
+            post    pre
+whereas Ã       ≤ Ã means that their opinion did not change or was                 Section 5 for examples of complete debates showcasing effective use
+reinforced towards their assigned side. By comparing the transformed                 of personalization).
+                        pre     post
+agreement scores Ã and Ã           using a partial proportional odds                     To provide a more intuitive interpretation, we repeat our analysis
+model52, we measure the causal effect of each treatment condition on                 using a simpler linear regression (see Supplementary Section 7
+the likelihood that participants are persuaded by their opponents. In                for details), a modelling choice that is statistically less appropriate
+                                                                  post
+                                                               P(Ã      >a)         for our setup (see Methods for a broader discussion) but that can
+particular, we consider as our main outcome the odds              post         of
+                                                               P(Ã      ≤a)         intuitively provide some basic insights about the effectiveness of
+obtaining higher post-treatment agreement, ∀ a ∈ {1, 2, 3, 4}. We chose              our treatments. We find that, on average, Human–AI (personalized)
+this model because the outcome is ordinal and since our data do not                  debates are associated with an increase of 0.36 (95% CI [0.12, 0.60],
+                                                                                                                     post    pre
+satisfy assumptions of simpler ordinal regression models (see Sup-                   P < 0.01) in the difference Ã       − Ã , with respect to the Human–
+plementary Section 3 for details).                                                   Human condition. In contrast, the other two treatments again have
+                                                                                     non-significant coefficients.
+Results
+Aggregate results                                                                    Absolute changes
+Our key finding is that GPT-4 performs as well as or better than humans              Complementing the results concerning relative change, we also inspect
+in our debate task. We consider the first two dimensions of our design               the absolute agreement distributions (see Supplementary Section 8 for
+(human or AI opponents, with or without personalization), aggregating                details). We find that debates tended to produce a backfire reaction for
+
+
+Nature Human Behaviour | Volume 9 | August 2025 | 1645–1653                                                                                                             1647
+Article                                                                                                        https://doi.org/10.1038/s41562-025-02194-6
+
+
+                                                                     Topic strength   distribution of answers and how the difference in pre- versus
+                                                                                                                     post    pre
+                                                                            Low       post-debate agreement ( Ã          − Ã ) depends on how participants
+                   Human–AI                                                 Medium
+                                                                            High      perceived their opponents. In debates with AI, participants correctly
+                                                                                      identified their opponent’s identity in about three out of four cases,
+                                                                                      indicating that the writing style of GPT-4 in this setting has distinctive
+Human–Human (personalized)                                                            features that are easy to spot. Conversely, participants struggled to
+                                                                                      identify their opponents in debates with other humans, with a success
+                                                                                      rate indistinguishable from random chance (P = 0.42 for a two-sided
+                                                                                      Binomial test; success rate 52.0%, 95% CI [47.3%, 56.7%], n = 450). More-
+     Human–AI (personalized)
+                                                                                      over, we notice that when participants believed they were debating
+                                   –0.5    0     0.5    1.0    1.5    2.0      2.5
+                                                                                      with an AI, they changed their expressed scores to agree more with
+                                    Odds of higher agreement relative change          their opponents compared with when they believed they were debat-
+                                                                                      ing with a human (odds of greater agreement with opponents +37.4%,
+Fig. 3 | Regression results for the partial proportional odds model,
+                                                                                      95% CI [+3.03%, +83.3%], P = 0.03; see Supplementary Section 12 for
+controlling for topic strength. For each condition, the point estimates
+represent relative changes compared to the Human–Human reference in the
+                                                                                      details). We emphasize that this observation is based solely on correla-
+odds of post-treatment agreements assuming higher values. Horizontal lines            tion and does not imply causation: it is unclear whether the difference
+indicate 95% CIs based on two-sided t-tests; n = 750. Full numerical results are      in agreement change is motivated by participants’ beliefs about their
+reported in Supplementary Tables 5, 7.                                                opponent or whether, conversely, those beliefs are caused by opinion
+                                                                                      change. For example, participants could have been more lenient in
+                                                                                      changing their agreement score towards their opponent when they
+all conditions except Human–AI (personalized), reinforcing opinions                   believed they were facing an AI, because not having a human on the
+toward the side assigned for the experiment instead of moving them                    other side makes it unconsciously easier to accept that they have some-
+toward the opponent’s side. This trend is consistent with previous lit-               what lost the debate. Conversely, participants could have also believed
+erature describing a hardening of pretreatment opinions when people                   that their opponent was an AI because of how well their arguments
+express their ideas53 or are exposed to disagreeing views54, or finding               were written. However, even if differences in agreement change were
+opinion change to be highly affected by argument order55.                             influenced by how participants perceived their opponent (in line with
+                                                                                      the first of the above two explanations), we find that treatment effects
+Topic clusters                                                                        change very little when adding beliefs about opponents’ identities as
+Figure 3 shows the results broken down by topic strength, fitting an                  a control in our regression. Particularly, the Human–AI (personalized)
+independent regression per cluster. We observe that the effect of                     condition still has a strong and significant effect (+70.2%, 95% CI [+17.8%,
+Human–AI (personalized) debates remains strong for the low- and                       +146.0%], P < 0.01). Therefore, how participants perceived their oppo-
+medium-strength clusters, but drops below the significance level                      nent is not enough to explain the treatment effects, which instead seem
+for high-strength topics (+64.2%, 95% CI [−14.7%, +216.1%], P = 0.14).                more tied to the intrinsic capabilities of AI to generate better argu-
+Again, the effects across all clusters remain non-significant for the                 ments. Lastly, we investigate the relationship between perceptions of
+other conditions, exhibiting persuasive results indistinguishable from                opponents and textual covariates, finding that participants associated
+the Human–Human baseline.                                                             texts that are easy to read (P = 0.04) with human opponents (see Sup-
+                                                                                      plementary Section 12 for details).
+Linguistic patterns
+Next, we investigate how arguments differ across treatment conditions                 Discussion
+by conducting a textual analysis of the generated writings to identify                LLMs have been criticized for their potential to generate and foster the
+distinctive patterns. In Fig. 4, we report the distribution of prominent              diffusion of hate speech, misinformation and malicious political propa-
+textual features extracted with LIWC-22 (ref. 56) (see Supplementary                  ganda. Specifically, there are concerns about the persuasive capabilities
+Section 10 for additional details). We observe that GPT-4 opponents                   of LLMs, which could be critically enhanced through personalization,
+tended to use logical and analytical thinking substantially more than                 that is, tailoring content to individual targets by crafting messages
+humans. On the other hand, humans used more first-person singular                     that resonate with their specific background and demographics25,26,28.
+and second-person pronouns and produced longer but easier-to-read                           In this paper, we explored the effect of AI-driven persuasion and
+texts, as measured by the Flesch Reading Ease score57. The difference                 personalization in structured online conversations, comparing the
+in length and second-person pronoun usage can, at least partially,                    performance of GPT-4 with that of humans in a one-on-one debate task.
+be explained by the specific prompts we chose (see Supplementary                      We conducted a controlled experiment where we assigned participants
+Section 2.5 for details), where we instructed GPT-4 to write only one                 to 1 of 12 treatment conditions, randomizing their debate opponent to
+to two sentences per stage and to refrain from directly addressing its                be either a human or GPT-4, as well as randomizing access to personal
+opponent unless they do it first. There does not seem to be a differ-                 information and the degree of opinion strength of the debate topic.
+ence induced by personalization, with distributions being very similar                We then compared reported agreements before and after the debates,
+both between Human–Human and Human–Human (personalized)                               measuring the opinion shifts of participants and, thus, the persuasive
+and between Human–AI and Human–AI (personalized). Analyses of                         power of the arguments generated by humans and AI.
+underlying social dimensions and usage of persuasive strategies (Sup-                       Our results show that, on average, GPT-4 opponents outperformed
+plementary Section 10) confirm that GPT-4 heavily relied on logical                   human opponents across every topic and demographic, exhibiting
+reasoning and factual knowledge. At the same time, humans displayed                   a high level of persuasiveness. In particular, when compared to the
+more appeals to similarity, expressions of support and trust, and                     baseline condition of debating with a human, debating with GPT-4 with
+employed more storytelling.                                                           personalization resulted in a +81.2% increase (95% CI [+26.0%, +160.7%],
+                                                                                      P < 0.01) in the odds of reporting higher agreements with opponents
+Perceived opponent                                                                    (see Supplementary Section 3 for details). More intuitively, this means
+Finally, we turn to participants’ perceptions of their opponents,                     that 64.4% of the time, personalized GPT-4 opponents were more
+recorded at the end of each debate by asking them whether they                        persuasive than human opponents, given that they were not equally
+thought they had debated with a human or an AI. Figure 5 shows the                    persuasive (see Supplementary Section 3 for a detailed explanation).
+
+
+Nature Human Behaviour | Volume 9 | August 2025 | 1645–1653                                                                                                 1648
+Article                                                                                                                                         https://doi.org/10.1038/s41562-025-02194-6
+
+
+                                                        First–person singular      First–person plural                              Second–person             Positive emotion
+
+                                       Human–Human
+
+                                             Human–AI
+
+                         Human–Human (personalized)
+
+                              Human–AI (personalized)
+
+                                                          0             10         0                           10               0                10           0              10
+                                                                Count                    Count                                          Count                      Count
+
+                                                          Negative emotion              Analytic                                         Clout                    Authentic
+
+                                       Human–Human
+
+                                             Human–AI
+
+                         Human–Human (personalized)
+
+                              Human–AI (personalized)
+
+                                                         0              10         0                0.5                  1.0    0         0.5           1.0   0        0.5          1.0
+                                                                Count                     Score                                          Score                     Score
+
+                                                                 Tone                  Word count                              Flesch Reading Ease
+
+                                       Human–Human
+
+                                             Human–AI
+
+                         Human–Human (personalized)
+
+                              Human–AI (personalized)
+
+                                                          0       0.5        1.0   0   250                    500              –1          0             1
+                                                                Score                    Count                                           Score
+
+Fig. 4 | Distribution of textual features by treatment condition. Each violin is            language of leadership and status, ‘Authentic’ measures perceived honesty and
+drawn using a kernel density estimate of the underlying distribution. Within each           genuineness, and ‘Tone’ is the degree of emotional tone. Flesch Reading Ease is
+violin, a box plot is overlaid: the centre line indicates the median, the bounds            a measure of how easy to read a text is, based on its average number of words per
+of the box represent the first and third quartiles (Q1 and Q3), and the whiskers            sentence and average number of syllables per word. Analytic, Clout, Authentic
+extend to the minimum and maximum values within 1.5 times the interquartile                 and Tone have been normalized to the [0, 1] range, Flesch Reading Ease scores
+range from Q1 to Q3. Points beyond this range are omitted; n = 750. Except for the          were divided by 100, while the remaining categories were computed directly as
+Flesch Reading Ease score, all features were extracted via LIWC-22 (ref. 56), which         frequencies across the entire text produced by each participant. Note that scales
+provides a dictionary of words belonging to various linguistic, psychological               differ across panels representing counts and scores, and additionally for the
+and topical categories (see Supplementary Section 10 for additional details).               Word count and the Flesh Reading Ease panels.
+‘Analytic’ is a metric of logical, formal and analytical thinking, ‘Clout’ expresses
+
+
+
+
+Without personalization, GPT-4 opponents were on par with human                             a                 Relative frequency                              b   Average difference in agrement
+opponents (P = 0.30), and so were human opponents with access to                                                                                                                                   0.30
+
+personalization (P = 0.38). In other words, not only was GPT-4 able to
+                                                                                         Perceived opponent
+
+
+
+
+                                                                                                                    AI         0.48              0.75             AI         –0.10          0.08   0.15
+exploit personal information to tailor its arguments effectively, but it
+also succeeded in doing so far more effectively than humans.
+                                                                                                                                                                                                   0
+      Our study suggests that concerns around personalization and AI
+persuasion are warranted, reinforcing previous results42,44,45,48 by show-                                    Human                                           Human
+                                                                                                                               0.52              0.25                        –0.29           0     –0.15
+casing how LLMs can outpersuade humans in online conversations
+through microtargeting. We note that, while the Human–AI (personal-                                                                                                                                –0.30
+ized) condition significantly outperformed the Human–Human base-                                                               Human              AI                         Human           AI
+
+line, the direct comparison between the Human–AI (personalized) and                                                                 Real opponent                                 Real opponent
+Human–AI conditions did not reach statistical significance (P = 0.07),                     Fig. 5 | Statistics regarding participants’ perceptions of debate opponents.
+likely due to limited statistical power for pairwise treatment contrasts.                  a, Relative frequency of people’s beliefs on whether they were debating with
+This suggests caution in attributing the observed advantage exclusively                    a human or an AI, by the real type of their opponent. b, Average difference in
+to personalization, as opposed to the general persuasive capabilities                      agreements after versus before the debates.
+of GPT-4. Despite that, the effect is particularly remarkable given how
+little personal information was collected (gender, age, ethnicity, educa-
+tion level, employment status and political affiliation) and despite the                   of adapting to individual targets. We argue that online platforms and
+extreme simplicity of the prompt instructing the LLM to incorporate                        social media should seriously consider such threats and extend their
+such information (see Supplementary Section 2.5 for the complete                           efforts to implement measures countering the spread of AI-driven
+prompts). Even stronger effects could probably be obtained by exploit-                     persuasion. A promising approach to counter mass disinformation
+ing individual psychological attributes, such as personality traits and                    campaigns could be enabled by LLMs themselves, generating similarly
+moral bases, or by developing stronger prompts through prompt                              personalized counternarratives to educate bystanders potentially vul-
+engineering, fine-tuning or specific domain expertise. In this context,                    nerable to deceptive posts27,58. Early efforts in this direction are already
+malicious actors interested in deploying chatbots for large-scale dis-                     underway, with promising results in reducing conspiratory beliefs
+information campaigns could leverage fine-grained digital traces and                       thanks to dialogues with GPT-4 (ref. 59). Our analyses also provided
+behavioural data, building sophisticated, persuasive machines capable                      initial insights into the mechanisms behind LLM persuasion. We found
+
+
+Nature Human Behaviour | Volume 9 | August 2025 | 1645–1653                                                                                                                                        1649
+Article                                                                                             https://doi.org/10.1038/s41562-025-02194-6
+
+notable differences in the writing style between GPT-4 and human            rather than a realistic evaluation of their persuasiveness in the wild,
+debaters. For instance, texts generated by LLM debaters were harder         which remains an open question for future research.
+to read and had more markers associated with logical and analytical              Third, the time constraint implemented in each debate stage
+reasoning (Fig. 4).                                                         potentially limited participants’ creativity and persuasiveness, decreas-
+      Future work could replicate our approach to benchmark the per-        ing their performance. This can be especially true for the Human–
+suasive capabilities of LLMs continuously, measuring the effect of dif-     Human (personalized) condition, where the participants provided
+ferent models and prompts and their evolution over time. Moreover,          with personal information about their opponents had to process and
+our method could be extended to other settings, such as negotiation         implement it without any time facilitation.
+games60 and open-ended conflict resolution, mimicking the structure              Fourth, our experiment engaged human participants recruited
+of online interactions and conversations more closely. Other efforts        through Prolific, who received financial incentives for completing
+could explore whether our results are robust to deanonymization,            debates and were aware of being in a controlled experimental environ-
+measuring what happens when participants are initially informed             ment. Although previous research has found Prolific to have the best
+about their opponent’s identity. A crucial point that also needs further    data quality among competitors and research done using Prolific to be
+investigation is why Human–AI (personalized) debates were signifi-          often generalizable61–63, the pool of workers active on the platform still
+cantly more effective than Human–AI debates, given that our descrip-        differs in their sociodemographic distribution from both the overall
+tive analyses of textual features have found no meaningful variations       US population and the user base of other online platforms and social
+between the two conditions. We hypothesize that this difference is          media. Therefore, future work is needed to understand whether our
+not driven by changes in the writing style but rather by differences in     findings can be reproduced using a more representative sample that
+the choice of issues brought up during the debates (see Supplemen-          accurately mimics the overall spectrum of human persuasive skills.
+tary Section 5 for an example of how this mechanism might unroll).          In addition, it would be interesting to include human experts in our
+However, the precise nature of the dynamics behind this process is          comparison, such as individuals involved in competitive debating,
+still a very open question. In addition, we emphasize that prompting        political campaigns or public communication.
+plays a big role in the textual signature exhibited by LLMs. Future work         Despite these limitations, we hope our work will stimulate
+could experiment with prompts that instruct GPT-4 to be less reliant        researchers and online platforms to seriously consider the threat
+on logical reasoning and showcase more appeals to support and trust,        posed by LLMs fuelling divide, spreading malicious propaganda and
+mimicking the style of human debaters and potentially enhancing its         developing adequate countermeasures.
+persuasive capabilities.
+      Although we believe our contribution constitutes a meaningful         Methods
+advance for studying the persuasive capabilities of language models,        Human sample
+we identify four key limitations.                                           Our platform was approved by EPFL’s Human Research Ethics Commit-
+      First, the assignment of participants to debate sides was ran-        tee (095-2023) and preregistered at https://aspredicted.org/DCC_NTP
+domized, regardless of their previous opinions on the topic. This           on 18 December 2023. Informed consent was collected from all par-
+was crucial to identify causal effects under the logistical challenge       ticipants. We recruited participants for our study through Prolific
+of matching participants in real time. Still, it could have introduced      between December 2023 and April 2024, under the criteria that they
+substantial bias in that human arguments might have been weaker than        were 18+ years old and located in the United States. The location
+those of LLMs simply because opponents did not honestly believe in          requirement is motivated by the fact that most debate topics are
+the standpoint they were advocating for. To address such concerns,          deeply rooted in US national issues and would not resonate with dif-
+we fit a version of our model that considers opponents’ pretreatment        ferent populations. To prevent skill disparity, each worker was allowed
+agreements as a control (Supplementary Section 13). We found the            to only participate in one debate. The participant was paid €2.50
+effect of opponents’ agreements to be non-significant (P = 0.22),           (US$3.15) and had a median completion time of 16 min, corresponding
+suggesting that our results might be robust to this limitation. In          to a pay rate of about €9.40 per hour (US$11.80 per hour). Following
+addition, we repeated our main analysis restricting our dataset to          recommendations from ref. 64, workers were explicitly informed that
+opponents arguing for a standpoint aligned with their previous opin-        using LLMs and Generative AI tools was strictly prohibited and would
+ions, finding again a strong and statistically significant effect for the   result in their exclusion from the study. Regardless, coherent with our
+Human–AI (personalized) condition (+122.8%, 95% CI [+6.2%, +367.3%],        preregistration, we manually reviewed each debate and excluded 20
+P = 0.03). Remarkably, this seems to suggest that people can play the       debates where at least one human participant showed clear indica-
+role assigned to them with great credibility, even when defending           tions of LLM usage (unrealistic values of words per minute, blatant
+positions they do not spontaneously agree with. Nevertheless, given         evidence of ChatGPT’s standard writing style) and plagiarism (as
+the small size of this restricted sample, future work would be needed       detected by DupliChecker, https://www.duplichecker.com/). In addi-
+to validate our findings while enforcing matches between people on          tion, we excluded 13 debates where at least one participant provided
+opposing sides of each issue.                                               unacceptable (empty texts, nonsensical or few-word arguments)
+      Second, our experimental design forced conversations to have a        or incomplete answers. The number of people involved in rejected
+predetermined structure, strictly following the stages and rules of a       debates was not counted towards the total number of participants
+debate. While we believe that our setup captures the essence of many        (N = 900), as the affected tasks were republished on Prolific and com-
+online interactions, where people reply to each other in an almost          pleted by other workers. In addition, to prevent participants from
+synchronous fashion or react to others’ comments in real time, it still     attempting a Turing test, we informed them that their goal was not to
+targets an artificial environment that can substantially diverge from       spot whether their opponent was a human or an AI but rather to be as
+the dynamics of online conversations, which evolve spontaneously            persuasive as possible during the debate. No statistical methods were
+and unpredictably. In addition, on our platform, conversations were         used to predetermine the total number of participants, but our sample
+entirely anonymized, making them different from the normal condi-           size is similar to those reported in previous publications41,45,48,49. Our
+tions under which humans interact. Therefore, we acknowledge that           final sample (N = 900) was 49.6% male, 47.7% female, 2.7% other, with
+the ecological validity of our findings is limited, as it is unclear how    the following age distribution: 11.3% 18–24 years old, 34.1% 25–34,
+our results would generalize to natural discussions on social networks      23.7% 35–44, 17.3% 45–54, 8.7% 55–64, 4.8% 65+. Each participant was
+and other online platforms. For this reason, our work should be seen        randomly assigned with equal probability to one treatment condition
+as providing a proof of concept about LLMs’ persuasive capabilities         and one topic.
+
+
+Nature Human Behaviour | Volume 9 | August 2025 | 1645–1653                                                                                     1650
+Article                                                                                                https://doi.org/10.1038/s41562-025-02194-6
+
+Topic selection                                                                Code availability
+We selected the 30 topics used within our experiment using a three-step        The code to fully reproduce the analyses described in this work is
+procedure (see Supplementary Section 2 for additional details): (1) we         available on GitHub at https://github.com/epfl-dlab/debategpt
+manually curated an initial pool of 60 candidate topics, drawing from          (ref. 69). Data collection was performed using Empirica v.1.9.5. The
+various online sources under the criteria that propositions should be          study was conducted using Python 3.11, R 4.3.1 and LIWC-22.
+broad, easy to understand and to debate, and reasonably divisive. (2)
+We conducted a survey on Amazon Mechanical Turk, where N = 60 US               References
+residents annotated candidate propositions across three dimensions:            1.  Keynes, J. M. Essays in Persuasion (Palgrave Macmillan, 2010).
+agreement, knowledge and debatableness. (3) We filtered out the                2.  Cialdini, R. B. The science of persuasion. Sci. Am. 284, 76–81
+10 topics with the most unanimous positions and the remaining 20                   (2001).
+least debatable topics, narrowing down the pool to the final 30 topics.        3. Crano, W. D. & Prislin, R. Attitudes and persuasion. Annu. Rev.
+On the basis of the strength of ‘agreements’ (the absolute deviation               Psychol. 57, 345–374 (2006).
+from the ‘Neutral’ score), we divided those topics into three clusters         4. Pirkis, J. et al. Suicide prevention media campaigns: a systematic
+(low-strength, moderate-strength and high-strength).                               literature review. Health Commun. 34, 402–414 (2017).
+                                                                               5. Farrelly, M. C., Nonnemaker, J., Davis, K. C. & Hussin, A. The
+Regression model                                                                   influence of the national truth campaign on smoking initiation.
+For all the regressions reported in the main text, we used a partial               Am. J. Prev. Med. 36, 379–384 (2009).
+proportional odds specification52 to model the agreements post treat-          6. Young, B. et al. Effectiveness of mass media campaigns to reduce
+ment in terms of agreements pre treatment and treatment conditions                 alcohol consumption and harm: a systematic review. Alcohol
+(see Supplementary Section 3 for additional details). This modelling               Alcohol. 53, 302–316 (2018).
+choice was motivated by the fact that our outcome of interest, answers         7. Funkhouser, G. R. & Parker, R. An action-based theory of
+on a 1–5 Likert scale, is ordinal. Previous research has advised against           persuasion in marketing. J. Mark. Theor. Pract. 7, 27–40 (1999).
+using ‘metric’ models such as linear regression for ordinal data, as the       8. Danciu, V. Manipulative marketing: persuasion and manipulation
+practice can lead to systematic errors65. For example, the response cat-           of the consumer through advertising. Theor. Appl. Econ. 0, 19–34
+egories of an ordinal variable may not be equidistant—an assumption                (2014).
+that is required in statistical models of metric responses66. A solution       9. Marková, I. Persuasion and propaganda. Diogenes 55, 37–51 (2008).
+to this issue is the use of so-called cumulative ordinal models that           10. Yu, S., Martino, G. D. S. & Nakov, P. Experiments in detecting
+assume that the observed ordinal variable comes from the categori-                 persuasion techniques in the news. Preprint at https://arxiv.org/
+zation of a latent, non-observable continuous variable66, such as the              abs/1911.06815 (2019).
+partial proportional odds model52. We fit our debate dataset to such a         11. Teeny, J. D., Siev, J. J., Briñol, P. & Petty, R. E. A review and
+model using a Broyden-Fletcher-Goldfarb-Shanno solver. For Human–                  conceptual framework for understanding personalized matching
+Human personalized debates, we only considered participants who                    effects in persuasion. J. Consum. Psychol. 31, 382–414 (2020).
+did not have access to their opponents’ personal information, so that          12. Kreuter, M. W., Strecher, V. J. & Glassman, B. One size does not
+the setup is equivalent to Human–AI personalized debates. Instead,                 fit all: the case for tailoring print materials. Ann. Behav. Med. 21,
+we extracted two data points from each Human–Human debate, cor-                    276–283 (1999).
+responding to both participants. We computed standard errors using a           13. Coppock, A., Hill, S. J. & Vavreck, L. The small effects of political
+cluster-robust estimator67 to adjust for interdebate correlations. Data            advertising are small regardless of context, message, sender, or
+collection and analysis were not performed blind to the conditions of              receiver: evidence from 59 real-time randomized experiments.
+the experiments.                                                                   Sci. Adv. 6, eabc4046 (2020).
+                                                                               14. Hersh, E. D. & Schaffner, B. F. Targeted campaign appeals and the
+Deviations from preregistration                                                    value of ambiguity. J. Politics 75, 520–534 (2013).
+We indicated in our preregistration (https://aspredicted.org/DCC_              15. Matz, S. C., Kosinski, M., Nave, G. & Stillwell, D. J. Psychological
+NTP) that we would assign participants to 1 of 9 treatment conditions,             targeting as an effective approach to digital mass persuasion.
+resulting from the combination of three opponent-related condi-                    Proc. Natl Acad. Sci. USA 114, 12714–12719 (2017).
+tions (Human–Human, Human–AI, Human–AI personalized) and three                 16. Ali, M., Sapiezynski, P., Korolova, A., Mislove, A. & Rieke, A. Ad
+topic-related conditions (low-, moderate- and high-strength cluster),              delivery algorithms: the hidden arbiters of political messaging.
+in a 3 × 3 factorial design. We additionally registered that we might              In Proc. 14th ACM International Conference on Web Search and
+carry out a Human–Human personalized condition on a sample of                      Data Mining 13–21 (Association for Computing Machinery, 2021).
+topics, conditional on resource availability. In the end, we decided to        17. Latimer, A. E., Katulak, N. A., Mowad, L. & Salovey, P. Motivating
+run the Human–Human personalized across all topics, with the same                  cancer prevention and early detection behaviors using
+sample size and number of debates as the other conditions. Therefore,              psychologically tailored messages. J. Health Commun. 10,
+to simplify the main text’s explanation, we reformulated it by fram-               137–155 (2005).
+ing it as a 2 × 2 × 3 design. For completeness, we report our originally       18. Zarouali, B., Dobber, T., De Pauw, G. & de Vreese, C. Using
+planned 3 × 3 analysis in Supplementary Section 4. We found results to             a personality-profiling algorithm to investigate political
+be consistent with those reported in the main text (cf. Figs. 2 and 3), with       microtargeting: assessing the persuasion effects of
+Human–AI personalized having a strong and statistically significant                personality-tailored ads on social media. Commun. Res. 49,
+effect across all topic clusters.                                                  1066–1091 (2020).
+                                                                               19. Tappin, B. M., Wittenberg, C., Hewitt, L. B., Berinsky, A. J. &
+Reporting summary                                                                  Rand, D. G. Quantifying the potential persuasive returns
+Further information on research design is available in the Nature                  to political microtargeting. Proc. Natl Acad. Sci. USA 120,
+Portfolio Reporting Summary linked to this article.                                e2216261120 (2023).
+                                                                               20. OpenAI et al. Gpt-4 technical report. Preprint at https://arxiv.org/
+Data availability                                                                  abs/2303.08774 (2023).
+The debate dataset collected for our study is publicly available at            21. Claude 2 (Anthropic, 2023); https://www.anthropic.com/news/
+https://huggingface.co/datasets/frasalvi/debategpt (ref. 68).                      claude-2 .
+
+
+Nature Human Behaviour | Volume 9 | August 2025 | 1645–1653                                                                                        1651
+Article                                                                                                  https://doi.org/10.1038/s41562-025-02194-6
+
+22. Gemini Team. Gemini: a family of highly capable multimodal                  43. Karinshak, E., Liu, S. X., Park, J. S. & Hancock, J. T. Working with
+    models. Preprint at https://arxiv.org/abs/2312.11805 (2023).                    AI to persuade: examining a large language model’s ability to
+23. Bubeck, S. et al. Sparks of artificial general intelligence: early              generate pro-vaccination messages. Proc. ACM Hum. Comput.
+    experiments with GPT-4. Preprint at https://arxiv.org/abs/                      Interact. 7, 116 (2023).
+    2303.12712 (2023).                                                          44. Goldstein, J. A., Chao, J., Grossman, S., Stamos, A. & Tomz, M.
+24. Hendrycks, D., Mazeika, M. & Woodside, T. An overview of                        How persuasive is AI-generated propaganda? PNAS Nexus 3,
+    catastrophic AI risks. Preprint at https://arxiv.org/abs/2306.12001             pgae034 (2024).
+    (2023).                                                                     45. Palmer, A. & Spirling, A. Large language models can argue in
+25. Weidinger, L. et al. Taxonomy of risks posed by language models.                convincing ways about politics, but humans dislike AI authors:
+    In Proc. 2022 ACM Conference on Fairness, Accountability, and                   implications for governance. Polit. Sci. 75, 281–291 (2023).
+    Transparency 214–229 (Association for Computing Machinery, 2022).           46. Hackenburg, K., Ibrahim, L., Tappin, B. M. & Tsakiris, M.
+26. Burtell, M. & Woodside, T. Artificial influence: an analysis of AI-driven       Comparing the persuasiveness of role-playing large language
+    persuasion. Preprint at https://arxiv.org/abs/2303.08721 (2023).                models and human experts on polarized U.S. political issues.
+27. Bontcheva, K. (ed) Generative AI and Disinformation: Recent                     Preprint at https://osf.io/ey8db_v1 (2023).
+    Advances, Challenges, and Opportunities (Horizon Europe vera.ai,            47. Hackenburg, K. & Margetts, H. Evaluating the persuasive influence
+    Innovate UK, SERI, TITAN, AI4Media, AI4Trust, 2024).                            of political microtargeting with large language models. Proc. Natl
+28. Bommasani, R. et al. On the opportunities and risks of foundation               Acad. Sci. USA 121, e2403116121 (2024).
+    models. Preprint at https://arxiv.org/abs/2108.07258 (2021).                48. Matz, S. C. et al. The potential of generative AI for personalized
+29. Youyou, W., Kosinski, M. & Stillwell, D. Computer-based                         persuasion at scale. Sci. Rep. 14, 4692 (2024).
+    personality judgments are more accurate than those made by                  49. Simchon, A., Edwards, M. & Lewandowsky, S. The persuasive
+    humans. Proc. Natl Acad. Sci. USA 112, 1036–1040 (2015).                        effects of political microtargeting in the age of generative
+30. Kosinski, M., Stillwell, D. & Graepel, T. Private traits and attributes         artificial intelligence. PNAS Nexus 3, pgae035 (2024).
+    are predictable from digital records of human behavior. Proc. Natl          50. Gertner, J. Wikipedia’s moment of truth. The New York Times
+    Acad. Sci. USA 110, 5802–5805 (2013).                                           (18 July 2023).
+31. Peters, H. & Matz, S. C. Large language models can infer                    51. Almaatouq, A. et al. Empirica: a virtual lab for high-throughput
+    psychological dispositions of social media users. PNAS Nexus 3,                 macro-level experiments. Behav. Res. Methods 53, 2158–2171 (2021).
+    pgae231 (2024).                                                             52. Peterson, B. & Harrell, F. E. Partial proportional odds models for
+32. Park, G. et al. Automatic personality assessment through social                 ordinal response variables. Appl. Stat. 39, 205–217 (1990).
+    media language. J. Pers. Soc. Psychol. 108, 934–952 (2015).                 53. Cho, J., Ahmed, S., Keum, H., Choi, Y. J. & Lee, J. H. Influencing
+33. Schwartz, H. A. et al. Personality, gender, and age in the language             myself: self-reinforcement through online political expression.
+    of social media: the open-vocabulary approach. PLoS ONE 8,                      Commun. Res. 45, 83–111 (2018).
+    e73791 (2013).                                                              54. Spitz, A., Abu-Akel, A. & West, R. Interventions for softening can
+34. Staab, R., Vero, M., Balunovic, M. & Vechev, M. Beyond                          lead to hardening of opinions: evidence from a randomized
+    memorization: violating privacy via inference with large                        controlled trial. In Proc. Web Conference 2021 1098–1109
+    language models. In Proc. Twelfth International Conference on                   (Association for Computing Machinery, 2021).
+    Learning Representations (ICLR, 2024); https://openreview.net/              55. Carment, D. & Foster, G. The relationship of opinion-strength
+    forum?id=kmn0BhQk7p                                                             and order of self-produced arguments to number of arguments
+35. Christian, H., Suhartono, D., Chowanda, A. & Zamli, K. Z. Text                  produced and opinion change. Acta Psychol. 31, 285–292 (1969).
+    based personality prediction from multiple social media data                56. Boyd, R. L., Ashokkumar, A., Seraj, S. & Pennebaker, J. W. The
+    sources using pre-trained language model and model averaging.                   Development and Psychometric Properties of LIWC-22 (Univ. Texas,
+    J. Big Data 8, 68 (2021).                                                       2022).
+36. Segalin, C., Perina, A., Cristani, M. & Vinciarelli, A. The pictures we     57. Flesch, R. A new readability yardstick. J. Appl. Psychol. 32,
+    like are our image: continuous mapping of favorite pictures into                221–233 (1948).
+    self-assessed and attributed personality traits. IEEE Trans. Affect.        58. Russo, D., Kaszefski-Yaschuk, S., Staiano, J. & Guerini, M.
+    Comput. 8, 268–285 (2017).                                                      Countering misinformation via emotional response generation. In
+37. Stachl, C. et al. Computational personality assessment. Personal.               Proc. 2023 Conference on Empirical Methods in Natural Language
+    Sci. 2, e6115 (2021).                                                           Processing (eds Bouamor, H. et al.) 11476–11492 (Association for
+38. Kreps, S., McCain, R. M. & Brundage, M. All the news that’s fit to              Computational Linguistics, 2023).
+    fabricate: AI-generated text as a tool of media misinformation. J.          59. Costello, T. H., Pennycook, G. & Rand, D. G. Durably reducing
+    Exp. Polit. Sci. 9, 104–117 (2022).                                             conspiracy beliefs through dialogues with AI. Science 385,
+39. Clark, E. et al. All that’s ‘human’ is not gold: evaluating human               eadq1814 (2024).
+    evaluation of generated text. In Proc. 59th Annual Meeting of the           60. Davidson, T. R. et al. Evaluating language model agency through
+    Association for Computational Linguistics and the 11th International            negotiations. In Proc. Twelfth International Conference on
+    Joint Conference on Natural Language Processing Vol. 1 (eds Zong,               Learning Representations (ICLR, 2024); https://openreview.net/
+    C. et al.) 7282–7296 (Association for Computational Linguistics,                forum?id=3ZqKxMHcAg
+    2021).                                                                      61. Peer, E., Rothschild, D., Gordon, A., Evernden, Z. & Damer, E. Data
+40. Jakesch, M., Hancock, J. T. & Naaman, M. Human heuristics for                   quality of platforms and panels for online behavioral research.
+    AI-generated language are flawed. Proc. Natl Acad. Sci. USA 120,                Behav. Res. Methods 54, 1643–1662 (2021).
+    e2208839120 (2023).                                                         62. Douglas, B. D., Ewell, P. J. & Brauer, M. Data quality in online human-
+41. Spitale, G., Biller-Andorno, N. & Germani, F. AI model GPT-3 (dis)              subjects research: comparisons between MTurk, Prolific, Cloud­
+    informs us better than humans. Sci. Adv. 9, eadh1850 (2023).                    Research, Qualtrics, and SONA. PLoS ONE 18, e0279720 (2023).
+42. Bai, H., Voelkel, J. G., Muldowney, S., Eichstaedt, J. C. & Willer, R.      63. Redmiles, E. M., Kross, S. & Mazurek, M. L. How well do my results
+    AI-generated messages can be used to persuade humans on                         generalize? Comparing security and privacy survey results from
+    policy issues. Preprint at https://osf.io/preprints/osf/stakv_v5                MTurk, web, and telephone samples. In 2019 IEEE Symposium on
+    (2025).                                                                         Security and Privacy 1326–1343 (2019).
+
+
+Nature Human Behaviour | Volume 9 | August 2025 | 1645–1653                                                                                          1652
+Article                                                                                             https://doi.org/10.1038/s41562-025-02194-6
+
+64. Veselovsky, V. et al. Prevalence and prevention of large language      design, data collection and analysis, decision to publish or preparation
+    model use in crowd work. Commun. ACM. 68, 42–47 (2025).                of the manuscript. The views and conclusions contained herein are
+65. Liddell, T. M. & Kruschke, J. K. Analyzing ordinal data with metric    those of the authors and should not be interpreted as representing the
+    models: what could possibly go wrong? J. Exp. Soc. Psychol. 79,        official policies, either expressed or implied, of the aforementioned
+    328–348 (2018).                                                        entities. The other authors declare no competing interests.
+66. Bürkner, P.-C. & Vuorre, M. Ordinal regression models in psychology:
+    a tutorial. Adv. Methods Pract. Psychol. Sci. 2, 77–101 (2019).        Additional information
+67. Liang, K.-Y. & Zeger, S. L. Longitudinal data analysis using           Supplementary information The online version contains
+    generalized linear models. Biometrika 73, 13–22 (1986).                supplementary material available at
+68. Salvi, F., Horta Ribeiro, M., Gallotti, R. & West, R. On the           https://doi.org/10.1038/s41562-025-02194-6.
+    conversational persuasiveness of large language models: a
+    randomized controlled trial. Hugging Face https://huggingface.         Correspondence and requests for materials should be addressed to
+    co/datasets/frasalvi/debategpt (2024).                                 Francesco Salvi.
+69. Salvi, F. DebateGPT. GitHub https://github.com/epfl-dlab/
+    debategpt (2025).                                                      Peer review information Nature Human Behaviour thanks
+                                                                           Sandra Matz, Jacob Teeny and the other, anonymous, reviewer(s) for
+Acknowledgements                                                           their contribution to the peer review of this work. Peer reviewer reports
+R.W.’s lab is partly supported by grants from the Swiss National           are available.
+Science Foundation (200021_185043, TMSGI2_211379) and H2020
+(952215), and by gifts from Google and Microsoft. R.G. acknowledges        Reprints and permissions information is available at
+the financial support received from the European Union’s Horizon           www.nature.com/reprints.
+Europe research and innovation programme under grant agreement
+no. 101070190, and from the PNRR ICSC National Research Centre             Publisher’s note Springer Nature remains neutral with regard to
+for High Performance Computing, Big Data and Quantum Computing             jurisdictional claims in published maps and institutional affiliations.
+(CN00000013), under the NRRP MUR programme funded by
+the NextGenerationEU. The funders had no role in study design,             Open Access This article is licensed under a Creative Commons
+data collection and analysis, decision to publish or preparation of        Attribution 4.0 International License, which permits use, sharing,
+the manuscript.                                                            adaptation, distribution and reproduction in any medium or format,
+                                                                           as long as you give appropriate credit to the original author(s) and the
+Author contributions                                                       source, provide a link to the Creative Commons licence, and indicate
+F.S., M.H.R., R.G. and R.W. designed the research. F.S. developed the      if changes were made. The images or other third party material in this
+debate platform and collected the data. F.S. and M.H.R. analysed the       article are included in the article’s Creative Commons licence, unless
+data. F.S., M.H.R., R.G. and R.W. wrote the paper.                         indicated otherwise in a credit line to the material. If material is not
+                                                                           included in the article’s Creative Commons licence and your intended
+Funding                                                                    use is not permitted by statutory regulation or exceeds the permitted
+Open access funding provided by EPFL Lausanne.                             use, you will need to obtain permission directly from the copyright
+                                                                           holder. To view a copy of this licence, visit http://creativecommons.
+Competing interests                                                        org/licenses/by/4.0/.
+R.W. is a Visiting Researcher at Microsoft Research and has received
+funding from Google and Microsoft. Those entities had no role in study     © The Author(s) 2025, modified publication 2026
+
+
+
+
+Nature Human Behaviour | Volume 9 | August 2025 | 1645–1653                                                                                     1653
+

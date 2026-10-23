@@ -1,0 +1,450 @@
+本文件为PDF自动提取文本，仅供检索；排版、图表和页码请以PDF为准。
+The Media Frames Corpus: Annotations of Frames Across Issues
+
+      The Media Frames Corpus: Annotations of Frames Across Issues
+Dallas Card1 Amber E. Boydstun2 Justin H. Gross3 Philip Resnik4 Noah A. Smith1
+   1
+     School of Computer Science, Carnegie Mellon University, Pittsburgh, PA 15213, USA
+      2
+        Department of Political Science, University of California, Davis, CA 95616, USA
+ 3
+   Department of Political Science, University of Massachusetts, Amherst, MA 01003, USA
+              4
+                UMIACS, University of Maryland, College Park, MD 20742, USA
+dcard@cmu.edu aboydstun@ucdavis.edu jhgross@polsci.umass.edu
+                 resnik@umiacs.umd.edu nasmith@cs.cmu.edu
+
+
+                     Abstract                                  in real-world media coverage. To this end, we con-
+                                                               tribute an initial dataset of annotated news articles,
+    We describe the first version of the Me-                   the Media Frames Corpus (version 1). These an-
+    dia Frames Corpus: several thousand news                   notations are based on 15 general-purpose meta-
+    articles on three policy issues, annotated                 frames (here called “framing dimensions”) out-
+    in terms of media framing. We motivate                     lined below, which are intended to subsume all
+    framing as a phenomenon of study for                       specific frames that might be encountered on any
+    computational linguistics and describe our                 issue of public concern.
+    annotation process.                                           Several features of this annotation project dis-
+                                                               tinguish it from linguistic annotation projects fa-
+1   Introduction                                               miliar to computational linguists:
+An important part of what determines how infor-                    • A degree of subjectivity in framing analysis
+mation will be interpreted by an audience is how                     is unavoidable. While some variation in an-
+that information is framed. Framing is a phe-                        notations is due to mistakes and misunder-
+nomenon largely studied and debated in the social                    standings by annotators (and is to be mini-
+sciences, where, for example, researchers explore                    mized), much variation is due to valid differ-
+how news media shape debate around policy is-                        ences in interpretation (and is therefore prop-
+sues by deciding what aspects of an issue to em-                     erly preserved in the coding process).
+phasize, and what to exclude. Theories of fram-                    • Annotator skill appears to improve with prac-
+ing posit that these decisions give rise to thematic                 tice; our confidence in the quality of the an-
+sets of interrelated ideas, imagery, and arguments,                  notations has grown in later phases of the
+which tend to cohere and persist over time.                          project, and this attribute is not suppressed in
+   Past work on framing includes many examples                       our data release.
+of issue-specific studies based on manual content
+analysis (Baumgartner et al., 2008; Berinsky and                  All of the annotations and metadata in this cor-
+Kinder, 2006). While such studies reveal much                  pus are publicly available, along with tools to ac-
+about the range of opinions on an issue, they do               quire the original news articles usable by those
+not characterize framing at a level of abstraction             who have an appropriate license to the texts from
+that allows comparison across social issues.                   their source (Lexis-Nexis).1 This dataset and
+   More recently, there have also been a handful of            planned future extensions will enable computa-
+papers on the computational analysis of framing                tional linguists and others to develop and empir-
+(Nguyen et al., 2015; Tsur et al., 2015; Baumer et             ically test models of framing.
+al., 2015). While these papers represent impres-
+                                                               2    What is Framing?
+sive advances, they are still focused on the prob-
+lem of automating the analysis of framing along a              Consider a politically contested issue such as
+single dimension, or within a particular domain.               same-sex marriage. Conflicting perspectives on
+   We propose that framing can be understood as a              this issue compete to attract our attention and in-
+general aspect of linguistic communication about               fluence our opinions; any communications about
+facts and opinions on any issue. Empirical assess-               1
+                                                                   https://github.com/dallascard/media_
+ment of this hypothesis requires analyzing framing             frames_corpus
+
+
+                                                         438
+                Proceedings of the 53rd Annual Meeting of the Association for Computational Linguistics
+       and the 7th International Joint Conference on Natural Language Processing (Short Papers), pages 438–444,
+                   Beijing, China, July 26-31, 2015. c 2015 Association for Computational Linguistics
+the issue—whether emanating from political par-                      Economic: costs, benefits, or other financial implications
+                                                                     Capacity and resources: availability of physical, human
+ties, activist organizations, or media providers—                    or financial resources, and capacity of current systems
+will be fraught with decisions about how the issue                   Morality: religious or ethical implications
+should be defined and presented.                                     Fairness and equality: balance or distribution of rights,
+                                                                     responsibilities, and resources
+   In a widely cited definition, Entman (1993) ar-                   Legality, constitutionality and jurisprudence: rights,
+gues that “to frame is to select some aspects of a                   freedoms, and authority of individuals, corporations, and
+perceived reality and make them more salient in a                    government
+                                                                     Policy prescription and evaluation: discussion of specific
+communicating text, in such a way as to promote                      policies aimed at addressing problems
+problem definition, causal interpretation, moral                     Crime and punishment: effectiveness and implications of
+evaluation, and/or treatment recommendation for                      laws and their enforcement
+                                                                     Security and defense: threats to welfare of the individual,
+the item described.” Further elaborations have em-                   community, or nation
+phasized how various elements of framing tend                        Health and safety: health care, sanitation, public safety
+                                                                     Quality of life: threats and opportunities for the individ-
+to align and cohere, eventually being deployed                       ual’s wealth, happiness, and well-being
+“packages” which can be evoked through particu-                      Cultural identity: traditions, customs, or values of a social
+lar phrases, images, or other synecdoches (Game-                     group in relation to a policy issue
+                                                                     Public opinion: attitudes and opinions of the general pub-
+son and Modigliani, 1989; Benford and Snow,                          lic, including polling and demographics
+2000; Chong and Druckman, 2007). These may                           Political: considerations related to politics and politicians,
+take the form of simple slogans, such as the war                     including lobbying, elections, and attempts to sway voters
+                                                                     External regulation and reputation: international reputa-
+on terror, or more complex, perhaps unstated, as-                    tion or foreign policy of the U.S.
+sumptions, such as the rights of individuals, or the                 Other: any coherent group of frames not covered by the
+responsibilities of government. The patterns that                    above categories
+emerge from these decisions and assumptions are,                     Figure 1: Framing dimensions from Boydstun et al. (2014).
+in essence, what we refer to as framing.2
+   Traditionally, in the social sciences, framing is
+                                                                     the article and to label spans of text which cued
+studied by developing an extensive codebook of
+                                                                     them. Annotators also identified the dominant
+frames specific to an issue, reading large num-
+                                                                     framing of the article headline (if present), as well
+bers of documents, and manually annotating them
+                                                                     as for the entire article, which we refer to as the
+for the presence of the frames in the codebook
+                                                                     “primary frame.” Finally, newspaper corrections,
+(e.g., Baumgartner et al., 2008; Terkildsen and
+                                                                     articles shorter than four lines of text, and articles
+Schnell, 1997). Computational linguists therefore
+                                                                     about foreign countries were marked as irrelevant.
+have much to offer in formalizing and automating
+                                                                     There were no constraints on the length or com-
+the analysis of framing, enabling greater scale and
+                                                                     position of annotated text spans, and annotations
+breadth of application across issues.
+                                                                     were allowed to overlap. The last framing dimen-
+3   Annotation Scheme                                                sion (“Other”) was used to categorize any articles
+                                                                     that didn’t conform to any of the other options
+The goal of our annotation process was to pro-                       (used in < 10% of cases). An example of two in-
+duce a corpus of examples demonstrating how the                      dependent annotations of the same article is shown
+choice of language in a document relates to fram-                    in Figure 2.
+ing in a non-issue-specific way. To accomplish                          For the initial version of this corpus, three pol-
+this task, we annotated news articles with a set                     icy issues were chosen for their expected diver-
+of 15 cross-cutting framing dimensions, such as                      sity of framing and their contemporary political
+economics, morality, and politics, developed by                      relevance: immigration, smoking, and same-sex
+Boydstun et al. (2014). These dimensions, sum-                       marriage. Lexis-Nexis was used to obtain all arti-
+marized in Figure 1, were informed by the fram-                      cles matching a set of keywords published by a set
+ing literature and developed to be general enough                    of 13 national U.S. newspapers between the years
+to be applied to any policy issue.                                   1990 and 2012.3 Duplicate and near-duplicate ar-
+   For each article, annotators were asked to iden-                  ticles were removed and randomly selected arti-
+tify any of the 15 framing dimensions present in                     cles were chosen for annotation for each issue (see
+   2
+     A distinct though related usage, known as “equivalence          supplementary material for additional details).
+framing” in psychology, refers to different phrasings of se-
+                                                                         3
+mantically equivalent expressions (e.g., is an 8-ounce glass               The immigration articles extend back to 1969, though
+containing 4 ounces of water half empty or half full?).              there are few before 1980.
+
+
+                                                               439
+   Annotation guidelines for the project are docu-                 [WHERE THE JOBS ARE]Economic
+mented in a codebook, which was used for training                  [Critics of illegal immigration can make many
+the annotators. The codebook for these issues was                  cogent arguments to support the position that
+refined in an ongoing manner to include examples                   the U.S. Congress and the Colorado legisla-
+from each issue, and more carefully delineate the                  ture must develop effective and well-enforced
+boundaries between the framing dimensions.                         immigration policies that will restrict the
+                                                                   number of people who migrate here legally
+4       Annotation Process                                         and illegally.]Policy prescription
+                                                                   [It’s true that all forms of [immigration ex-
+Our annotation process reflects the less-than-ideal
+                                                                   ert influence over our economic and cultural
+circumstances faced by academics requiring con-
+                                                                   make-up.]Cultural identity In some ways, im-
+tent analysis: relatively untrained annotators, high
+                                                                   migration improves our economy by adding
+turnover, and evolving guidelines. Our process is
+                                                                   laborers, taxpayers and consumers, and in
+delineated into three stages, summarized in Ta-
+                                                                   other ways immigration detracts from our
+ble 1 and discussed in detail below. Each stage
+                                                                   economy by increasing the number of stu-
+involved 14–20-week-long rounds of coding; in
+                                                                   dents, health care recipients and other ben-
+each round, annotators were given approximately
+                                                                   eficiaries of public services.]Economic
+100 articles to annotate, and the combinations of
+                                                                   [Some economists say that immigrants, le-
+annotators assigned the same articles were rotated
+                                                                   gal and illegal, produce a net economic
+between rounds. Our annotators were undergrad-
+                                                                   gain, while others say that they create a net
+uates students at a U.S. research university, and
+                                                                   loss]Economic . There are rational arguments to
+a total of 19 worked on this project, with 8 be-
+                                                                   support both sides of this debate, and it’s useful
+ing involved in more than one stage. The aver-
+                                                                   and educational to hear the varying positions.
+age number of frames identified in an article varied
+from 2.0 to 3.7 across annotators, whereas the av-                 [WHERE THE JOBS ARE]Economic
+erage number of spans highlighted per article var-                 [Critics of illegal immigration can make many
+ied from 3.4 to 10.0. Additional detail is given in                cogent arguments to support the position that
+Table 1 in the supplementary material.                             the U.S. Congress and the Colorado legisla-
+                                                                   ture must develop effective and well-enforced
+                                           Av. annotators          immigration policies that will restrict the
+    Stage   Issue               Articles
+                                             per article
+    1       Immigration          4,113          1.2
+                                                                   number of people who migrate here legally
+    1       Smoking              4,077          1.2                and illegally.]Public opinion
+    2       Same-sex marriage    6,298          2.2                [It’s true that all forms of immigration ex-
+    3       Immigration          5,549          2.2
+                                                                   ert influence over our economic and [cultural
+Table 1: Summary of the number of articles annotated and           make-up.]Cultural identity In some ways, im-
+average number of annotators per article
+                                                                   migration improves our economy by adding
+                                                                   laborers, taxpayers and consumers, and in
+4.1      Stage 1                                                   other ways [immigration detracts from our
+                                                                   economy by increasing the number of stu-
+During the first stage, approximately 4,000 arti-
+                                                                   dents, health care recipients and other benefi-
+cles on each of immigration and smoking were an-
+                                                                   ciaries of public services.]Capacity ]Economic
+notated, with approximately 500 articles in each
+                                                                   [Some economists say that immigrants, le-
+group annotated by multiple annotators to mea-
+                                                                   gal and illegal, produce a net economic
+sure inter-annotator agreement. Our goals here
+                                                                   gain, while others say that they create a net
+were high coverage and ensuring that the guide-
+                                                                   loss.]Economic There are rational arguments to
+lines were not too narrowly adapted to any single
+                                                                   support both sides of this debate, and it’s useful
+issue. Annotators received only minimal feedback
+                                                                   and educational to hear the varying positions.
+on their agreement levels during this stage.
+                                                                  Figure 2: Two independent annotations of a 2006 editorial in
+4.2      Stage 2                                                  the Denver Post. The annotators agree perfectly about which
+                                                                  parts of the article make use of economic framing, but dis-
+In the second stage, annotations shifted to same-                 agree about the first paragraph. Moreover, the second an-
+sex marriage articles, again emphasizing general                  notator identifies an additional dimension (capacity and re-
+                                                                  sources). Although they both identify a reference to cultural
+fit across issues. Beginning in stage 2, each article             identity, they annotated slightly different spans of text.
+
+
+                                                            440
+was assigned to at least two annotators, in order                                          Legality
+to track inter-annotator agreement more carefully,                                         Political
+                                                                                  Health & safety
+and to better capture the subjectivity inherent in                                      Economic
+this task. Since the guidelines had become more                                Policy prescription
+stable by this stage, we also focused on identifying                          Fairness & equality
+                                                                             Crime & punishment
+good practices for annotator training. Annotators                                         Morality
+were informed of their agreement levels with each                                  Public opinion
+                                                                                    Quality of life
+other, and pairs of framing dimensions on which                                  Cultural identity
+annotators frequently disagreed were emphasized.                                         Irrelevant
+                                                                               Security & defense
+This information was presented to annotators in                              Capacity & resources
+                                                                                                                          Immigration
+                                                                                                                          Smoking
+weekly meetings.                                                                             Other
+                                                                                                                          Same-sex marr.
+                                                                               External regulation
+4.3      Stage 3                                                                                       0.0    0.1   0.2   0.3    0.4       0.5
+                                                                                                             Proportion of articles
+The third stage revisited the immigration articles
+from stage 1 (plus an additional group of articles),                     Figure 3: Proportion of articles annotated with each of the
+with the now well-developed annotation guide-                            framing dimensions (averaging across annotators for each ar-
+                                                                         ticle).
+lines. As in the second stage, almost all articles
+were annotated by two annotators, working inde-
+pendently. More detailed feedback was provided,                             Figure 4 shows the inter-annotator agreement
+including inter-annotator agreement for the use of                       on the primary frame per round. We observe first
+each framing dimension anywhere in articles.                             that difficulty varies by issue, with same-sex mar-
+   During stage 3, for each article where two an-                        riage the most difficult. Annotators do appear to
+notators independently disagreed on the primary                          improve with experience. Agreement on immi-
+frame, the pair met to discuss the disagreement                          gration articles in stage 3 are significantly higher
+and attempt to come to a consensus.4 Disagree-                           (p < 0.05, permutation test) than agreement on
+ments continue to arise, however, reflecting the re-                     the same articles in stage 1, even though only one
+ality that the same article can cue different frames                     annotator worked on both stages.6
+more strongly for different annotators. We view                             These results demonstrate that consistent per-
+these disagreements not as a weakness, but as a                          formance can be obtained from different groups
+source of useful information about the diversity of                      of annotators, given sufficient training. Although
+ways in which the same text can be interpreted by                        we never obtain perfect agreement, this is not sur-
+different audiences (Pan and Kosicki, 1993; Rees                         prising, given that the same sentences can and do
+et al., 2001).                                                           cue multiple types of framing, as illustrated by the
+   The proportion of articles annotated with each                        example in Figure 2.
+framing dimension (averaged across annotators) is                           Inter-annotator agreement at the level of indi-
+shown in Figure 3.                                                       vidually selected spans of text can be assessed us-
+                                                                         ing an extension of Krippendorff’s α (αU ) which
+5       Inter-annotator Agreement                                        measures disagreement between two spans as the
+Because our annotation task is complex (select-                          sum of the squares of the lengths of the parts which
+ing potentially overlapping text spans and label-                        do not overlap.7 As with the more common α
+ing them), there is no single comprehensive mea-                         statistic, αU is a chance-corrected agreement met-
+sure of inter-annotator agreement. The simplest                          ric scaled such that 1 represents perfect agreement
+aspect of the annotations to compare is the choice                       and 0 represents the level of chance. This met-
+of primary frame, which we measure using Krip-                           accommodates missing values. See Passonneau and Carpen-
+pendorff’s α (Krippendorff, 2012).5                                      ter (2014) for additional details.
+                                                                             6
+                                                                               Note that this is not a controlled experiment on annota-
+    4
+      A small secondary experiment, described in supplemen-              tion procedures, but rather a difference observed between two
+tary material, was used to test the reliability of this process.         stages of an evolving process.
+    5                                                                        7
+      Krippendorff’s α is similar to Cohen’s κ, but calculates                 For example, in the example shown in Figure 2, the
+expected agreement between annotators based on the com-                  amount of disagreement on the two Cultural identity annota-
+bined pool of labels provided by all annotators, rather than             tions would be the square of the length (in characters) of the
+considering each annotators’s frequency of use separately.               non-overlapping part of the annotations (“immigration exert
+Moreover, it can be used for more than two annotators and                influence over our economic and”) which is 502 = 2500.
+
+
+                                                                   441
+                                                                                 banov et al., 2010; Sim et al., 2013; Iyyer et al.,
+                        1.0                            Immigration
+                                                                                 2014), or “stance” (position for or against an is-
+                                                       Smoking
+                                                       Same-sex marriage
+                                                                                 sue) (Walker et al., 2012; Hasan and Ng, 2013).
+ Krippendorff’s Alpha
+                        0.8
+                                                                                 A related line of work is the analysis of subjec-
+                                                                                 tive language or “scientific” language, which has
+                        0.6
+                                                                                 also been posed in terms of framing (Wiebe et al.,
+                                                                                 2004; Choi et al., 2012). While the study of ideol-
+                        0.4
+                                                                                 ogy, sentiment, and subjectivity are interesting in
+                                                                                 their own right, we believe that they fail to cap-
+                        0.2
+                                  Stage 1    Stage 2          Stage 3            ture the more nuanced nature of framing, which is
+                                                                                 often more complex than positive or negative sen-
+                        0.0
+                              0         10      20       30        40            timent. In discussions of same-sex marriage, for
+                                                 Round                           example, both advocates and opponents may at-
+                                                                                 tempt to control whether the issue is perceived as
+Figure 4: Chance-corrected inter-annotator agreement on the
+primary frame. Marker size indicates the number of annota-                       primarily about politics, legality, or ethics. More-
+tions being compared; α = 1 indicates perfect agreement.                         over, we emphasize that framing is an important
+                                                                                 feature of even seemingly neutral or objective lan-
+                                                                                 guage.
+ric has been previously recommended for tasks                                       A different but equally relevant line of work has
+in computational linguistics that involve unitizing                              focused on text re-use. Leskovec et al. (2009)
+(Artstein and Poesio, 2008). For a more complete                                 perform clustering of quotations and their vari-
+explanation, see Krippendorff (2004).                                            ations, uncovering patterns in the temporal dy-
+   The pattern of αU values across rounds is very                                namics of how memes spread through the me-
+similar to that shown in Figure 4, but not surpris-                              dia. On a smaller scale, others have examined text
+ingly, average levels of agreement are much lower.                               reuse in the development of legislation and the cul-
+Arguably, this agreement statistic is overly harsh                               ture of reprinting in nineteenth-century newspa-
+for our purposes. We do not necessarily expect an-                               pers (Smith et al., 2013; Smith et al., 2014). While
+notators to agree perfectly about where to start and                             not the same as framing, identifying this sort of
+end each annotated span, or how many spans to                                    text reuse is an important step towards analyzing
+annotate per article, and our codebook and guide-                                the “media packages” that social scientists asso-
+lines offer relatively little guidance on these low-                             ciate with framing.
+level decisions. Nevertheless, it is encouraging
+                                                                                 7   Conclusion
+that in all cases, average agreement is greater than
+chance. The αU values for all annotated spans of                                 Framing is a complex and difficult aspect of lan-
+text (averaged across articles) are 0.16 for immi-                               guage to study, but as with so many aspects of
+gration (stage 1), 0.23 for tobacco, 0.08 for same-                              modern NLP, there is great potential for progress
+sex marriage, and 0.20 for immigration (stage 3).                                through the use of statistical methods and public
+                                                                                 datasets, both labelled and unlabeled. By releas-
+6                  Prior Work                                                    ing the Media Frames Corpus, we seek to bring the
+                                                                                 phenomenon to the attention of the computational
+Several previous papers in the computer science
+                                                                                 linguistics community, and provide a framework
+literature deal with framing, though usually in a
+                                                                                 that others can use to analyze framing for addi-
+more restricted sense. Perhaps the most com-
+                                                                                 tional policy issues. As technology progresses to-
+mon approach is to treat the computational anal-
+                                                                                 wards ever more nuanced understanding of natural
+ysis of framing as a variation on sentiment analy-
+                                                                                 language, it is important to analyze not just what
+sis, though this often involves reducing framing to
+                                                                                 is being said, but how, and with what effects. The
+a binary variable. Various models have been ap-
+                                                                                 Media Frames Corpus enables the next step in that
+plied to news and social media datasets with the
+                                                                                 direction.
+goal of identifying political ideology, or “perspec-
+tive” (typically on a liberal to conservative scale)                             Acknowledgments This research was supported
+(Ahmed and Xing, 2010; Gentzkow and Shapiro,                                     by NSF grants 1211201, 1211266, 1211277, and
+2010; Lin et al., 2006; Hardisty et al., 2010; Kle-                              1211153.
+
+
+                                                                           442
+References                                                     Kazi Saidul Hasan and Vincent Ng. 2013. Stance clas-
+                                                                 sification of ideological debates: Data, models, fea-
+Amr Ahmed and Eric P. Xing. 2010. Staying in-                    tures, and constraints. In Proc. of IJCNLP.
+ formed: Supervised and semi-supervised multi-view
+ topical analysis of ideological perspective. In Proc.         Mohit Iyyer, Peter Enns, Jordan L. Boyd-Graber, and
+ of EMNLP.                                                      Philip Resnik. 2014. Political ideology detection
+                                                                using recursive neural networks. In Proc. of ACL.
+Ron Artstein and Massimo Poesio. 2008. Inter-coder
+  agreement for computational linguistics. Computa-            Beata Beigman Klebanov, Eyal Beigman, and Daniel
+  tional Linguistics, 34(4):555–596.                             Diermeier. 2010. Vocabulary choice as an indicator
+                                                                 of perspective. In Proc. of ACL.
+Eric Baumer, Elisha Elovic, Ying Qin, Francesca Pol-
+   letta, and Geri Gay. 2015. Testing and comparing            Klaus Krippendorff. 2004. Measuring the reliability of
+   computational approaches for identifying the lan-             qualitative text analysis data. Quality and Quantity,
+   guage of framing in political news. In Proc. of               38(6):787–800.
+   NAACL.
+                                                               Klaus Krippendorff. 2012. Content Analysis: An In-
+Frank R. Baumgartner, Suzanna L. De Boef, and Am-                troduction to its Methodology. SAGE Publications.
+  ber E. Boydstun. 2008. The decline of the death
+  penalty and the discovery of innocence. Cambridge            Jure Leskovec, Lars Backstrom, and Jon Kleinberg.
+  University Press.                                               2009. Meme-tracking and the dynamics of the news
+                                                                  cycle. In Proc. of KDD.
+Robert D. Benford and David A. Snow. 2000. Framing
+  processes and social movements: An overview and              Wei-Hao Lin, Theresa Wilson, Janyce Wiebe, and
+  assessment. Annual Review of Sociology, 26:611–                Alexander Hauptmann. 2006. Which side are you
+  639.                                                           on? Identifying perspectives at the document and
+                                                                 sentence levels. In Proc. of CoNNL.
+Adam J. Berinsky and Donald R. Kinder. 2006. Mak-
+  ing sense of issues through media frames: Under-             Viet-An Nguyen, Jordan Boyd-Graber, Philip Resnik,
+  standing the Kosovo crisis. Journal of Politics,               and Kristina Miler. 2015. Tea party in the house: A
+  68(3):640–656.                                                 hierarchical ideal point topic model and its applica-
+                                                                 tion to Republican legislators in the 112th congress.
+Amber E. Boydstun, Dallas Card, Justin H. Gross,                 In Proc. of ACL.
+ Philip Resnik, and Noah A. Smith. 2014. Tracking
+ the development of media frames within and across             Zhongdang Pan and Gerald M. Kosicki. 1993. Fram-
+ policy issues. APSA 2014 Annual Meeting Paper.                  ing analysis: An approach to news discourse. Polit-
+                                                                 ical communication, 10(1):55–75.
+Eunsol Choi, Chenhao Tan, Lillian Lee, Cristian
+  Danescu-Niculescu-Mizil, and Jennifer Spindel.               Rebecca J. Passonneau and Bob Carpenter. 2014. The
+  2012. Hedge detection as a lens on framing in the              benefits of a model of annotation. In Proc. of ACL.
+  GMO debates: A position paper. In Proc of. ACL
+  Workshop on Extra-Propositional Aspects of Mean-             Stephen D. Rees, Oscar H. Gandy Jr., , and August E.
+  ing in Computational Linguistics, pages 70–79.                  Grant, editors. 2001. Framing public life: Perspec-
+                                                                  tives on media and our understanding of the social
+Dennis Chong and James N. Druckman. 2007. Fram-                   world. Routledge.
+  ing theory. Annual Review of Political Science,
+  10(1):103–126.                                               Yanchuan Sim, Brice D. L. Acree, Justin H. Gross, and
+                                                                 Noah A. Smith. 2013. Measuring ideological pro-
+Robert M. Entman. 1993. Framing: Toward clarifica-               portions in political speeches. In Proc. of EMNLP.
+  tion of a fractured paradigm. Journal of Communi-
+  cation, 43(4):51–58.                                         David A. Smith, Ryan Cordell, and Elizabeth Maddock
+                                                                 Dillon. 2013. Infectious texts: modeling text reuse
+William A. Gameson and Andre Modigliani. 1989.                   in nineteenth-century newspapers. In IEEE Interna-
+  Media discourse and public opinion on nuclear                  tional Conference on Big Data.
+  power: A constructionist approach. American Jour-
+  nal of Sociology, 95(1):1–37.                                David A. Smith, Ryan Cordel, Elizabeth Maddock Dil-
+                                                                 lon, Nick Stramp, and John Wilkerson. 2014. De-
+Matthew Gentzkow and Jesse M. Shapiro. 2010. What                tecting and modeling local text reuse. In IEEE/ACM
+ drives media slant? Evidence from U.S. daily news-              Joint Conference on Digital Libraries.
+ papers. Econometrica, 78(1):35–71.
+                                                               Nayda Terkildsen and Frauke Schnell. 1997. How me-
+Eric Hardisty, Jordan L. Boyd-Graber, and Philip                 dia frames move public opinion: An analysis of the
+   Resnik. 2010. Modeling perspective using adaptor              women’s movement. Political research quarterly,
+   grammars. In Proc. of EMNLP.                                  50(4):879–900.
+
+
+                                                         443
+Oren Tsur, Dan Calacci, and David Lazer. 2015.
+  Frame of mind: Using statistical models for detec-
+  tion of framing and agenda setting campaigns. In
+  Proc. of ACL.
+Marilyn A. Walker, Pranav Anand, Robert Abbott, and
+ Ricky Grant. 2012. Stance classification using dia-
+ logic properties of persuasion. In Proc. of NAACL.
+Janyce Wiebe, Theresa Wilson, Rebecca Bruce,
+   Matthew Bell, and Melanie Martin. 2004. Learn-
+   ing subjective language. Computational Linguistics,
+   30(3):277–308.
+
+
+
+
+                                                         444
+

@@ -1,0 +1,1125 @@
+本文件为PDF自动提取文本，仅供检索；排版、图表和页码请以PDF为准。
+Making water knowledge with Artificial Intelligence: A qualitative study of expert interviews on water diplomacy
+
+Ambio 2026, 55:857–874
+https://doi.org/10.1007/s13280-025-02272-z
+
+ RESEARCH ARTICLE
+
+
+
+Making water knowledge with Artificial Intelligence: A qualitative
+study of expert interviews on water diplomacy
+Kyungmee Kim          , Abeer S. Ahmad
+
+
+
+
+Received: 30 May 2025 / Revised: 1 June 2025 / Accepted: 24 September 2025 / Published online: 14 November 2025
+ The Author(s) 2025
+
+
+Abstract Water knowledge, understanding the current and               prevention have been developed, including water diplo-
+future availability and needs of water, has been critical in          macy. Water diplomacy refers to ‘‘political’’ processes with
+negotiating international water disputes. Drawing from                primary focus on ‘‘preventing, mitigating, and resolving’’
+expert interviews, this article examines how Artificial               water-related conflicts and tensions over shared water
+Intelligence (AI) tools influence knowledge production and            resources by utilizing diplomatic and foreign policy mea-
+exchange in water diplomacy. The findings suggest that                sures (Keskinen et al. 2021, 4–5). With a less technically
+technical strides from AI technologies can enhance data               oriented approach, water diplomacy primarily focuses on
+and information objectivity and social learning, potentially          political borders rather than the natural and physical bor-
+benefiting water negotiations and consensus building.                 ders of international watersheds. Its underpinning is built
+However, without addressing political and human                       upon a set of diplomatic principles such as reciprocity,
+challenges, AI tools can exacerbate the risk of eroding               goodwill, and consents. And trust-boosting and norm-
+trust and spreading dis- and mis-information about                    sharing have also been recognized as crucial measures to
+politically sensitive water issues. The malicious use of AI           consolidate water diplomacy processes (Grech-Madin et al.
+poses a serious risk, as negotiators may face increased               2018; Keskinen et al. 2023). In these processes, water-
+pressure from public opinion, potentially undermining                 related knowledge production is a key mechanism of water
+cooperative progress and escalating tensions over water.              diplomacy alongside the diplomatic processes that address
+                                                                      differing national interests and politics (Keskinen et al.
+Keywords Artificial Intelligence  International water                2021, 7). Knowledge gaps in transboundary water gover-
+dispute management  Transboundary water management                  nance seem to be critical concerns in enhancing negotia-
+Water diplomacy  Water knowledge production                          tions and governance (Milman et al. 2020). And further
+                                                                      understanding and addressing knowledge making and gaps
+                                                                      are critical for ensuring sustainable and peaceful water
+INTRODUCTION                                                          governance.
+                                                                         This article examines how emerging Artificial Intelli-
+Water is a vital resource for human life, functioning soci-           gence (AI) shapes knowledge making in water diplomacy
+eties and ecosystems. Water management is ‘‘by definition,            by drawing on original empirical materials generated from
+conflict management’’ (Wolf 2009, 67), and the advance-               interviews with practitioners and scholars in the field. New
+ment in water conflict management is critical for sustain-            technologies present both challenges and opportunities in
+ability and peace (Döring et al. 2024). Over the years,              managing water resources. The challenges are not limited
+various approaches for water conflict management and                  to substantial water consumption for cooling datacenters
+                                                                      for generative AI, and the expanding water footprints of AI
+                                                                      is likely to intensify water stress in places where AI data-
+Supplementary Information The online version contains                 centers are expanding (Li et al. 2025). AI systems such as
+supplementary material available at https://doi.org/10.1007/s13280-
+025-02272-z.                                                          generative AI, large language models, and techniques like
+
+
+                                                              www.kva.se/en                                            123
+858                                                                                                     Ambio 2026, 55:857–874
+
+
+machine learning, natural language processing, and neural         machine-based system that, for explicit or implicit objec-
+networks have the potential to transform how water data           tives, infers, from the input it receives, how to generate
+and knowledge are produced, shared, and communicated              outputs such as predictions, content, recommendations, or
+among water users and between water-sharing countries             decisions that can influence physical or virtual environ-
+(Turgul et al. 2024, 281).                                        ments’’ (OECD 2024). Currently, AI systems are fast
+   Here, water knowledge is ‘‘not neutral’’ and is ‘‘shaped       evolving in terms of objectives, scope, and technologies,
+by the hybridity of water and society’’ (Usón et al. 2017,       and complex systems are emerging that challenges existing
+248). This hybridity arises from both hydrological data and       governing institutions and state sovereignty (Usman et al.
+a range of social information relevant to water cycle,            2023). In the context of water governance, AI systems can
+access and allocation (Linton and Budds 2014). Trans-             be developed for an integrated solution that allows to detect
+boundary water knowledge is shaped by hydrological,               and analyze forecasted hazards and vulnerabilities linked to
+socio-economic, and demographic data and information              climate change and future environmental trends (Kim
+that are relevant for shared water demands, supply, and use,      2025). However, these outputs generated by AI systems are
+and mutual or contested interpretation of data and infor-         not quite knowledge that is ‘‘an iterative process whereby
+mation (Milman et al. 2020). Water diplomacy knowledge            study and experience can shape and then reshape knowl-
+includes information about negotiating parties, protocols,        edge based on observed evidence’’ (Dickerson 2022, 737).
+and an understanding of international norms, all of which         Rather than informing to a dynamic, reflexive understand-
+contribute to enhanced negotiation skills and diplomatic          ing of environmental issues, AI-generated outputs risk
+efforts over transboundary water issues (Grech-Madin et al.       reinforcing static or technocratic representations of com-
+2018). Emerging technologies have played a role in                plex systems. The prospect of machine-generated knowl-
+knowledge production in transboundary environmental               edge and AI systems to dominate climate and
+governance (Bakker 2022). How a set of tools powered by           environmental governance entails various risks including
+AI can influence conflict management of highly politicized        narrowing the scope of climate governance and supressing
+rivers is still to be explored, according to the experts          environmental activism (Dauvergne 2021). The ambiguity
+interviewed for this study.                                       and uncertainty of technology in knowledge production
+   A growing number of initiatives and research works             similarly poses challenges in international climate gover-
+utilize AI technologies, and this calls for a better under-       nance (Machen and Nost 2021). The adoption of AI systems
+standing of knowledge production with AI and its impact           in environmental governance would further the process of
+on policy. Various AI tools for environmental risk assess-        representation of the environment that is less inclusive
+ment have been developed in recent years by international         while the role of private sector would be emphasized
+organizations and national governments. These AI initia-          (Kloppenburg et al. 2022). While much attention has been
+tives include the UN Environment Programme’s Strata, the          given to the potential risks of AI in broader environmental
+World Food Programme’s HungerMap, the German Fed-                 governance, significantly less focus has been placed on its
+eral Foreign Office’s now-finalized PREVIEW program,              role in specific domains such as water diplomacy, which is a
+the Water, Peace, and Security program supported by the           gap this article seeks to address.
+Dutch government among others. Additionally, AI-related              The intersection of AI and water diplomacy remains
+technologies have been increasingly used in research works        largely unexplored in existing research, and this article
+on transboundary water governance and transboundary               attempts to contribute to this area. First, its main contri-
+water-induced hazards modeling (ter Horst et al. 2023b;           bution is grounded in empirical data that provides insights
+Tran et al. 2024; Motta and Koehler 2025; Palmate 2025).          into the role of AI in water diplomacy. Additionally, the
+Knowledge produced through these research efforts and             theoretical framework presents archetypes of knowledge,
+initiatives has slowly begun to inform national govern-           contributing to a critical debate on water knowledge by
+ments on how to manage shared rivers and better under-            deconstructing the assumptions of neutrality and stressing
+stand the associated risks. For instance, the Government of       its social hybridity. The research illustrates how AI-gen-
+Vietnam, a downstream country that shares the Red River           erated data and information can transform various aspects
+with its upstream neighbor, China, has increasingly relied        of knowledge relevant for water diplomacy. While claims
+on machine learning to predict water levels in upstream           of objective knowledge and the politicization of data may
+reservoirs for disaster response, due to the lack of sufficient   intensify, the potential for social learning through open-
+hydrological data shared by China (Motta and Koehler              source data and tools could be strengthened.
+2025, 7).                                                            The article is organized as follows. The following sec-
+   This article focuses on specific aspects of AI that are        tion outlines existing perspectives of water diplomacy and
+relevant to knowledge production and processes of water           the role of knowledge and presents a theoretical framework
+diplomacy. More broadly an AI system can be defined as ‘‘a        for further analysis. The methodology section outlines the
+
+
+123                                                       www.kva.se/en
+Ambio 2026, 55:857–874                                                                                                       859
+
+
+expert interview method, followed by the result sec-              knowledge—if it exists—departs from the perspective that
+tion. The discussion synthesizes the findings and delves          believes the existence of neutral knowledge or truth that
+into the broader implications of technological innovation         can be learned and found through scientific research. It
+and transboundary water governance. The article concludes         would differ from credible information that is grounded in
+with policy-relevant insights from the findings.                  scientifically adequate methods and data. Such perspective
+                                                                  has inspired neutral, unbiased, and more accurate data and
+                                                                  information can serve as a departure point for mediating
+A THEORETICAL FRAMEWORK: KNOWLEDGE                                tensions (Anghileri et al. 2024). Previous research high-
+IN WATER DIPLOMACY                                                lights the value of non-contestable and trusted data in water
+                                                                  negotiations (Gerlak et al. 2011; Mukuyu et al. 2020), and
+Managing water disputes between countries involves                a lack of data generates a challenge when parties do not
+complex processes. Uncertainties in data and information,         agree on basic facts in prior to negotiations. Scientifically
+tensions around data and information share, and disputed          credible and policy relevant information can be served as a
+knowledge complicate dispute management (Al-Saidi and             useful tool in water diplomacy because such information
+Hefny 2018; Barua and Vij 2018; Hasan et al. 2023).               can help with political conflicts. For instance, Hasan et al.
+Hydrological, meteorological, ecological, and socio-eco-          (2023, p.792, italics added) note, ‘‘[I]t is not only difficult
+nomic data are critical in constructing claims by countries       for riparian states to ignore established and emerging sci-
+about how much water is necessary now and for the future,         entific facts provided by advances in technology and made
+further informing negotiations over equitable and reason-         available on non-political online platforms.’’
+able utilization and the avoidance of significant harm               Water knowledge regarding hydrological flows in par-
+(Mukuyu et al. 2020; Anghileri et al. 2024). Previous             ticular and socio-economic data to a degree is highly state-
+research highlights the various roles that data and knowl-        centric, because most hydrological data has been produced
+edge plays in international water dispute management. In          by states and in some cases kept in secrecy. When water
+this section, we provide an overview of different concep-         data sharing is constrained, remote sensing data by a third
+tual approaches to knowledge relevant to water diplomacy.         party can inform and facilitate discussions on how to
+Here, it is assumed that knowledge is produced from an            operate water infrastructure between countries (Thu and
+iterative processed by studying information and experience        Wehn 2016; Hassan et al. 2023; Yalew et al. 2023). More
+(Dickerson 2022). Depending on the assumptions on and             precise measurements and hydrological models can be
+aspirations for knowledge generation (Machen and Nost             developed through technological advances, and this can
+2021), the nature of knowledge can be characterized as            help reduce information uncertainty in transboundary
+objective, politicized, or socially produced. These per-          governance (Jeon et al. 2018; Bakker 2022; Morovati et al.
+spectives are neither mutually exclusive nor collectively         2023; Salhi and Benabdelouahab 2023; Sattar et al. 2024).
+exhaustive, and they share commonalities and differ in            On one hand, information uncertainty can promote col-
+ontological and epistemological characters.                       laboration and benefit advancing negotiations (Bhatia et al.
+   Despite varying approaches to the role of knowledge,           2017). The lack of reliable and quality data, on the other
+there is general agreement among scholars and practition-         hand, exacerbates transboundary disaster risks and tensions
+ers that political and geopolitical factors fundamentally         around water allocation (Thu and Wehn 2016; Mianabadi
+shape water interactions (Koff et al. 2020; Mirumachi             et al. 2020; Mukuyu et al. 2020).
+2020). Water diplomacy as a deliberate political process             While reliable data and credible information are crucial
+focuses on influencing this political problem through for-        for cooperative water governance, an emphasis on neu-
+eign policy means and diplomatic engagements (Keskinen            trality and objectivity of knowledge engenders problems in
+et al. 2021; Sehring et al. 2022), and this effort also involve   the attempts to solve political issues with technical
+enhancing credibility, legitimacy, and saliency of infor-         approaches. Prioritizing neutrality and objectivity in
+mation (Wheeler et al. 2018). While we generally recog-           knowledge production tends to privilege expert knowledge
+nize the centrality of power and politics, the following          produced by specialists who are seen ‘‘neutral authority’’ in
+theoretical approaches detail three different roles that          environmental negotiations (Rietig 2014, 152). Such per-
+knowledge plays.                                                  spective reflects ‘‘a positivist worldview that couples the
+                                                                  universality of scientific and technical knowledge with the
+Pursuing objectivity in data and knowledge                        notion that this knowledge is value-free and neutral’’,
+production                                                        portraying experts as objective actors (Karvonen and Brand
+                                                                  2009, 217). However, the pursuit of objective knowledge
+The first approach emphasizes the objectivity of knowledge        may complicate rather than be instrumental to water dis-
+based on a set of positivist assumptions. Objective               putes that overlap with political tensions and uneven power
+
+
+                                                          www.kva.se/en                                               123
+860                                                                                                         Ambio 2026, 55:857–874
+
+
+dynamics as Fröhlich (2012, 146) writes, ‘‘increasing               information is likely to face challenges, especially for
+‘objective’ data engenders a process of emotionalization,            governments that consider water-related data as a matter of
+politicization, and securitization’’ leading to ‘‘a competi-         national security.
+tion between ‘right’ and ‘wrong’ knowledge, different                   The politicization of water-related data and information
+constructions of reality’’. This critique connects closely           can further deteriorate confidence and trust among parties
+with the second perspective, emphasizing the inherent                seeking negotiated settlements. Trust is an integral part of
+political nature of knowledge in international water                 international water dispute management. Building trust
+disputes.                                                            requires navigating historical, geopolitical, and sociocul-
+                                                                     tural factors that significantly influence cooperative efforts,
+Politicized and contested knowledge in water                         including knowledge production and sharing (Yasuda et al.
+interactions                                                         2018; Hasan et al. 2023). Information and data sharing
+                                                                     itself can become a subject of contestation and strategic
+Water diplomacy, as a field focusing on a deliberate                 manipulation, especially when certain information seems to
+political process around water, has contributed to the               undermine national interests (Zielinski et al. 2023). For
+broadened understanding of political drivers in water                instance, the downstream impact assessment of the Grand
+negotiations and knowledge generation processes. In vari-            Ethiopian Renaissance Dam on the Nile River has been
+ous ways, data and information influencing policy deci-              highly contested due to its significant implications for
+sions are produced through and shaped by political factors:          upstream Ethiopia and downstream countries, Sudan and
+power asymmetry, divergent interests, and equity concerns            Egypt. The ongoing debate illustrates how different inter-
+regarding shared waters (Fröhlich 2012). Even ‘credible’            pretations of data, key assumptions, and policy preferences
+information with scientific adequacy, gathered through               shape the understanding of water scarcity related to the
+‘legitimacy’ procedures of inclusive and fair participation,         controversial dam (Salhi and Benabdelouahab 2023). And
+can be contested (Wheeler et al. 2018), if the policy                this is an area where AI-related technologies are being
+implications of such information are perceived as political          increasingly explored (Ahmed et al. 2025; Gebremichael
+risks (Zielinski et al. 2023). The political use of knowledge        et al. 2025).
+is typically imagined as using scientific research a weapon             Rather than contesting the legitimacy and accuracy of
+against opposing parties, but this is less likely in multi-          knowledge through counter-expertise, establishing com-
+lateral settings (Rietig 2014, 154). Instead, a negotiating          mon ground through information sharing and knowledge
+party can instrumentalize information and research findings          production can positively contribute to advance water
+and politically maneuverer the process to its benefit.               diplomacy. Building consensus through repeated interac-
+Knowledge producers such as researchers and experts                  tions and knowledge sharing has been suggested in as part
+become aware of the national positions and may adjust                of water diplomacy interventions. The following section
+their positions accordingly, illustrating a politically influ-       describes the approach emphasizing the role of information
+enced knowledge production process (Rietig 2014, 156).               sharing and knowledge production in consensus-building.
+    As explained earlier, even if experts with advanced
+scientific tools may be perceived as neutral authority with          Learning and producing water knowledge together
+scientific credibility, it is difficult to avoid politicization of   for trust and consensus building
+data and information relevant for water diplomacy. This
+issue is likely to persist with advanced technologies and            A shared understanding has been considered as a departure
+tools harnessing these technologies. Uncertainties inherent          point of consensus building among water-sharing parties to
+in technical tools for hydrological modeling and scenario            resolve conflicts. This shared understanding can be fostered
+analysis reduce their credibility and legitimacy in politi-          through activities that exchange information and share
+cally sensitive situations, and the risks of errors and biases       technical details and establish mutually sanctioned knowl-
+cannot be fully mitigated (Yalew et al. 2023). Besides               edge (Sadoff and Grey 2002). Knowledge co-production is
+inaccuracy concerns, every socio-hydrological model                  a crucial element in international water dispute manage-
+entails assumptions and aspirations that are subjective and          ment. Common understanding and knowledge allow dis-
+thus contestable (ter Horst et al. 2023a; Wheeler et al.             puting parties to ‘‘listen to other parties and the mediator’’
+2023). Ter Horst, Srinivasan et al. (2023) argue that new            (Rajasekaram et al. 2003, 456), which can avoid situations
+technical tools may require revisions to existing legal and          when one party exerts power over another.
+institutional frameworks concerning data sharing and                    Informal dialogues can contribute to establishing a
+information exchange. Considering existing challenges in             common understanding that incentivizes cooperation by
+negotiating water agreements, starting a new process con-            bridging gaps and strengthening collaborative incentives
+cerning the governance of technological tools and                    (Mirumachi 2020). The co-production and sharing of
+
+
+123                                                          www.kva.se/en
+Ambio 2026, 55:857–874                                                                                                   861
+
+
+knowledge through social and formal interactions have           resources and their usage. This perception is based on the
+been central to water diplomacy policy making. These            assumption that AI is less biased and independent from
+activities aim to provide opportunities for mutual learning     human interpretation and political influence, although
+between parties through social learning, which involves         biased database, algorithmic bias, and programming biases
+combining various sources and types of information related      in AI systems are concerning (Debnath et al. 2023). These
+to water (Pahl-Wostl et al. 2007; Berkes 2009). Enhancing       risks are particularly challenging to detect and tackle when
+knowledge production and availability holds promise for         AI systems lack transparency and are difficult to be
+improving trust and confidence among parties in water           explained (Rudin 2019).
+disputes (Keskinen et al. 2023; Sharipova 2023).                   Then, the questions about AI’s role on producing and
+   Reciprocity and goodwill in diplomatic relations influ-      distributing mis-and disinformation about water, deepening
+ence co-production of knowledge, which contributes to           political divides and disputes. The very tools that can
+trust-building. Reciprocity is a fundamental principle in       enhance knowledge accuracy can also be manipulated to
+diplomacy (Faizullaev 2024), and states’ reciprocal obli-       distort information for political gain. For example, algo-
+gations not to harm their water-sharing neighbors are cru-      rithms may be employed to selectively present data or
+cial in water negotiations (Zhong et al. 2016). Goodwill in     generate misleading narratives about water scarcity, usage,
+diplomacy involves ‘‘the willingness to reach a construc-       or contamination. This risk of manipulation and politi-
+tive and mutually acceptable solution that leads to peaceful    cization can be reinforced by unequal technical capacities
+coexistence’’ (Faizullaev 2024, 11). In the context of water    of negotiating parties (Debnath et al. 2023). Power asym-
+diplomacy, goodwill extends beyond actions like releasing       metries among national governments, along with reliance
+extra water during droughts and sharing information             on private companies, contribute to concerns about deep-
+(Zhang and Zhang 2021) to engage in diplomatic exchan-          ening political conflict (van der Vlist et al. 2024; Borines
+ges and negotiations, even if the outcome may be less           et al. 2025). These risks flag one of the potentially harmful
+favorable for maintaining a peaceful relationship (Vu and       impacts of AI on water diplomacy knowledge production.
+Nguyen 2024). This is also the strength of water diplo-            The third proposition focuses on AI’s potential to
+macy, a process that utilizes diplomatic tools and principles   enhance consensus-building through learning and co-pro-
+to address water issues, fostering constructive engagement      duction. AI tools can help develop the capacity of weaker
+over transboundary water challenges.                            parties who may lack the technical or human resources.
+                                                                This equalizing effect of AI can benefit all parties, pro-
+Three perspectives on AI’s influence on water                   moting further progress in building consensus around water
+diplomacy knowledge                                             use and water infrastructure development. For this equal-
+                                                                izing effect to be realized, human monitoring is required to
+The perspectives outlined in ‘‘Pursuing objectivity in data     ensure knowledge that benefits less capable party and
+and knowledge production’’ to ‘‘Learning and producing          populations is equally prioritized (Debnath et al. 2023).
+water knowledge together for trust and consensus build-         The following section outlines the expert interview method
+ing’’ sections form the basis of a theoretical framework to     in detail as the main method for data collection for this
+address the intersection of AI and water diplomacy. As          research.
+discussed earlier, water diplomacy knowledge refers to the
+understanding gained from both socio-hydrological infor-
+mation and insights into negotiation processes, parties,        METHODOLOGY: EXPERT INTERVIEW
+norms, and interests, contributing to the prevention, miti-
+gation, and resolution of transboundary water conflicts. The    Expert interview refers to the targeting and access to ‘ex-
+application of AI-related technologies and the development      pert’ participants as a data collection method (Littig 2009).
+of AI systems in the field influence how knowledge is           The method can be justified especially when the research
+produced, shared, and used in water diplomacy processes.        inquiry requires insight into policy processes by individuals
+The theoretical framework builds on objective, politicized,     who have intimate knowledge. Interviewing experts in the
+or socially produced natures of knowledge, which are            field of water diplomacy is a highly relevant method for
+further elaborated in the following.                            examining the propositions, as these experts hold relevant
+   Firstly, the neutrality and credibility of data and infor-   knowledge about specific gaps that AI may help address
+mation relevant to transboundary water disputes can be          and challenges it may exacerbate. Interviews of policy-
+influenced by the adaptation of AI tools in various stages of   makers and experts have been widely used in research into
+water diplomacy processes. By leveraging advanced algo-         environmental policy processes including in the water
+rithms and data analytics, AI systems hold promises for         sector (e.g. Tawfik 2019; Olive 2020). Water diplomacy is
+more accurate and comprehensive assessments of water            ultimately a policy process or a particular modus operandi
+
+
+                                                        www.kva.se/en                                             123
+862                                                                                                           Ambio 2026, 55:857–874
+
+
+for managing shared water resources (Keskinen et al.                     experts contacted by email, five declined the request, and
+2021). And the experts with relevant knowledge and                       four did not reply. The interviews were conducted online
+experiences can provide their assessments on how techni-                 during October–November 2023. The timing of the inter-
+cal tools have provided data and information to support                  views was an important consideration because people’s
+political processes and AI systems may contribute to the                 opinions on AI could be influenced by events and news
+field in the future. Expert opinions with empirical examples             happening around them.
+drawn from their experience and knowledge offer insights                     It is important to acknowledge the selection bias in the
+into the proposed research question.                                     interviewee sample, namely less representation of women.
+   Semi-structured interviews of 16 experts with a mini-                 4 women were interviewed out of 16 experts. The initial
+mum of 10 years of experience include five scholars and 11               list of 25 experts includes 10 women, but six of them
+practitioners (Table 1). Our sample includes twice as many               declined the request with reasons of their lack of AI
+practitioners as scholars, and as a result, the interviews               knowledge and availability. Their ‘lack of knowledge’ was
+more prominently reflect practitioners’ insights. The                    not a reason given by any men as the reason to decline the
+interviewed scholars who hold academic positions are                     request. The gender gap in confidence perpetuates in var-
+based in Europe (3), North America (1), and Asia (1).                    ious settings (Carlin et al. 2018), and this may be one
+Practitioners are based in Europe (4), Asia (3), North                   reason of the limited participation of women experts for
+America (3), and Africa (1). Two North America-based                     this research. Another reason may be that women have less
+practitioners focus on Asia and Africa in their respective               time for non-essential work due to their professional and
+work. Initially, the authors identified 25 ‘water diplomacy’             personal commitments (Barrett and Barrett 2011). Then,
+experts through the review of key scholarly works and                    there is a call for greater participation of women in water
+policy documents. Some of these experts have been                        diplomacy, given their underrepresentation in this field
+involved in commissioning studies using advanced mod-                    (Sehring et al. 2023).
+eling including machine learning and exploring the use of                    The interview sample does not equally represent the
+AI tools in their research and work. Practitioners include               Global South perspectives. It’s also worth noting that most
+former government officials who were mediators and                       experts—except for four—were based in the Global North,
+negotiators, former and current members of River Basin                   predominantly in Europe and the US. This geographical
+Organizations (RBOs), and experts in think tanks. Not all                bias suggests that the empirical data may not fully capture
+interviewed experts work closely with a RBO, but most of                 perspectives from the Global South. Consequently, the
+them have worked with RBOs with relatively high tech-                    insights presented in this study may primarily reflect male
+nical and financial capacity (Schmeier 2012). Among 25                   and Western viewpoints, which poses a limitation on the
+
+Table 1 A list of Interviews. P: Practitioner; S: Scholar
+           Employment                      Geographical                  Capacity of           Years of        Gender      Date
+                                           expertise                     transboundary         experience
+                                                                         basin organizations
+
+P-1        Government                      Europe                        High                  20–25 years     M           03-Oct-23
+P-2        NGO                             South Asia                    n/a                   10–15 years     M           04-Oct-23
+S-1        University                      Africa                        High                  10–15 years     M           12-Oct-23
+P-3        Former diplomat                 Global                        n/a                   15–20 years     M           13-Oct-23
+P-4        Former diplomat                 Global, Africa                High                  25–30 years     M           16-Oct-23
+P-5        River Basin Organization        Southeast Asia                High                  10–15 years     M           16-Oct-23
+P-6        NGO                             Africa                        High                  30–35 years     M           19-Oct-23
+P-7        NGO                             Central Asia                  Low                   10–15 years     F           20-Oct-23
+S-2        University                      Asia                          High                  10–15 years     M           24-Oct-23
+P-8        NGO                             Central Asia                  Low                   20–25 years     F           25-Oct-23
+P-9        Research institute              Middle East, Africa           Medium, high          10–15 years     F           25-Oct-23
+S-3        University                      Global, Middle East           n/a, medium           30–35 years     M           25-Oct-23
+S-4        University                      Europe, Southeast Asia        High, high            20–25 years     M           26-Oct-23
+P-10       NGO                             Asia, Southeast Asia          High, high            15–20 years     M           27-Oct-23
+P-11       NGO                             Global                        n/a                   10–15 years     M           30-Oct-23
+S-5        University                      Global, Southeast Asia,       n/a, high             15–20 years     F           10-Nov-23
+
+
+
+
+123                                                              www.kva.se/en
+Ambio 2026, 55:857–874                                                                                                      863
+
+
+generalizability of the findings. These sampling biases          and Gerlak 2021). In particular, machine learning tech-
+underscore the pressing need for decolonization within the       niques, using continuous input data to build a system that
+field of water research.                                         can carry out complex tasks and improve its performance
+   Expert interviews carry risks of subjectivity and a lack      over time, are frequently mentioned in describing the
+of validation, and such risks can be mitigated by systematic     opportunities for generating better hydrological data. Two
+approaches to these problems (Berry 2002). The interview         main outcomes mentioned in ‘new’ knowledge produced
+protocol for this research includes a structured question-       by AI-assisted systems are forecasting water trends and
+naire (Appendix S1). The interview transcripts were              transboundary early warning of disasters. Eventually how
+inductively coded. First, the main points raised during the      these tools can inform negotiators and transboundary water
+interviews were thematically coded using a qualitative text      managers about evidence regarding water use and distri-
+analysis program. These themes were then further analyzed        bution disputes is still to be observed.
+and categorized according to the theoretical framework              Predictive modeling techniques and forecasting have
+outlined in ‘‘A theoretical framework: Knowledge in water        been mentioned by several interviewees as a potentially
+diplomacy’’ section. The results and discussion in the           positive contribution that machine learning-powered tools
+subsequent sections are based on the following interview         and models can make in mapping future water resources
+quotations (Tables 2, 3, 4, 5). This systematic approach         for enabling water agreements and other forms of cooper-
+maintains the structure and focus in presenting the data and     ation (Table 2, P-2, P-4, P-5, P-6, S-2). Machine learning
+the theoretically guided analysis.                               models can make predictions for hydrology and environ-
+                                                                 mental and socio-economic conditions based on historical
+                                                                 data. The ability to forecast trends is an asset in negotiation
+RESULTS                                                          settings, because it can reduce uncertainty about the future
+                                                                 and inform negotiators about their positions. Transbound-
+In this section, expert insights are analyzed for examining      ary flood risk assessments by the Mekong River Commis-
+theorized propositions. We focus on AI’s implications to         sion and flood warning on the downstream Red River in
+objective knowledge production, politicizing knowledge,          Vietnam have recently advanced due to machine learning-
+and knowledge for consensus building in international            powered predictions (Kittikhoun 2025; Motta and Koehler
+water dispute management.                                        2025, 7). These hazard warning tools may contribute to
+                                                                 reducing disaster risks, but these benefits are not yet
+Technical strides to objective and credible data                 directly contributing to reducing tensions among water-
+and information                                                  sharing countries (International Crisis Group 2024).
+                                                                 Negotiators can be more confident when they are informed
+The expert interviews emphasize the potential benefits of        about future water needs, which are better estimated with
+integrating AI technologies for new data that can facilitate     more precise, up-to-date, and accurate data (Table 2, P-2,
+water cooperation and negotiations. As we discussed ear-         S-2). Future water availability and variability have been a
+lier, water- and diplomacy-related data and information can      source of tension and barriers in negotiations and adjusting
+be limited in accuracy and credibility (Fröhlich 2012; ter      an existing transboundary water agreement (Rivera-Torres
+Horst et al. 2023b). Emerging narratives stress an oppor-        and Gerlak 2021; Shahbazbegian and Dinar 2023). There-
+tunity that AI’s superior computational power to drastically     fore reasonable forecast reports can reduce uncertainty and
+enhance the measurement, speed, and accuracy of data             boost confidence in commitments for further cooperation
+production and promote information transparency.                 and agreements.
+                                                                    AI tools can aid to enhance existing transboundary early
+Hydrological forecast and transboundary early warning            warning and monitoring systems, enabling faster updates.
+powered by AI                                                    One expert stated, ‘‘[I]f we can teach a machine to do what
+                                                                 people do by hand, we can speed up the process and move
+Data collection and exchange is a crucial element for water      into faster updates and ideally again into early warning
+diplomacy as efforts to prevent, mitigate, and resolve           where are the tensions going to be…’’ (Table 2, S-3). Amid
+water-related disputes, as one scholar puts it: ‘‘All is about   climate change exacerbating the frequency and intensity of
+data’’ (S-2, Table 2). Interviewed experts expressed their       hazards and water scarcity, transboundary water risk
+hopes that AI can be used to unpack future uncertainties of      management is a key concern of countries relying on
+climate change and impacts of water infrastructure and           shared waters, and it is increasingly becoming an important
+environmental degradations, which have emerged as a              area of cooperation (Kåresdotter et al. 2025). When
+more prominent concern in water negotiations and trans-          the frequency and quality of data one riparian country
+boundary water governance arrangements (Rivera-Torres            receives from another riparian country is insufficient for
+
+
+                                                         www.kva.se/en                                               123
+864                                                                                                                      Ambio 2026, 55:857–874
+
+
+Table 2 Technical strides for objective knowledge making
+Interview Quotation
+
+P-2       If we have access to quality data good for example models which can actually predict how much water will be coming to the system in
+             the next one year, two years, five years or 10 years. How much drains we need to have. How much capacity of water storage we
+             need to have to store that water and use it as an opportunity…I think that the brightest side of artificial intelligence, is that we can
+             actually foresee the future…We can think about the world 100 years later
+P-4       [E]specially if we start building automated responses into how governments and parties respond to each other, then things are going to
+            move so fast that I don’t think we as human beings are going to be able to keep up with that and be able to think through some of
+            those things
+P-5       [R]einvigorating our data system makes sure that it is up to date, accurate, fast, for example, in terms of flood and drought forecasting.
+            This is something to do with life and death of the community who are living downstream of development project hydropower, so
+            this is one part, also the update of our decision support system that are vital to providing scientific evidence or information to
+            decision maker
+P-6       [S]o that sharing is a real issue when it comes to transboundary water management. Now with remote sensing people trying to
+            improve things and there is advancement, huge advancement but not yet fully providing all kinds of data sets. I guess that’s the kind
+            of core of the disputes about protecting their consumptive use because the downstream countries also are protected by the
+            international law at least to maintain this flow
+P-9       [A]lso, the screening and verification process will also require some sort of either human detective work that will take a long time to
+            find something or it also can be done with the automated AI detection for generative text and images
+P-10      [W]e [think tank] work along a theory of change where the provision of evidence and data can increase accountability and build trust
+            among water diplomacy actors…you guys are giving us hourly data updates once a day on your river gauges. It’s publicly available
+            information, but we need it twice a day. So [Country X] changed its behaviour and is now releasing its river gauge data, hourly
+            data, twice a day, once every 12 h. And that’s helped us also provide more timely warnings to the downstream also. So, that’s
+            Transboundary Impact or Transboundary outcome. I go and look at the reservoir and say what’s the current level and if it looks to
+            be high then I send them a note saying hey you know this is the time to watch, but that can be that all can be incorporated into a
+            workflow that all can be automated and scaled up
+P-11      [I]n the hard cases, it’s often not the actual information[, and] that’s the problem, it’s the trust around between the parties. So, they
+             don’t trust each other and may not trust the data, may not trust the intentions that they think might be hidden in some in some data
+             point, but they haven’t been able to find out. So, and I think that part is one that’s really hard where I don’t really see how this can
+             be easily addressed through AI because I mean it’s a black box too…It’s really hard to say and I think in the fundamental sense, I’m
+             sceptical because if indeed the issue is one of trust, then I don’t see how AI strengthened this trust
+S-2       All is about data. While the major issues related to transboundary water raise the issue of data… with all these tools available like
+            super computing power, we’ll be able to have high-quality data…and these predictive AI models, we can predict much better when
+            there’s the accuracy. In terms of potential influence, the impacts of extreme events like and shifting water flows and availabilities
+            can be better understood
+S-3       [E]arly warning systems can be greatly improved with AI, enabling real-time monitoring and better assessment of the physical
+            changes in a system and institutional capacity…If we can teach a machine to do what people do by hand, we can speed up the
+            process and move into faster updates and ideally again into early warning where are the tensions going to be…Once upon a time,
+            India or Israel or China could consider water data as a state secret, those days are gone. Now everybody has access to satellite
+            information. So, you lose the information advantage of your hegemony and presumably now with AI that should democratize it
+            even more. Now it’s not just governments with access to the information, but anybody with access to Internet
+
+
+
+generating transboundary early warning reports, AI-as-                      equitable and reasonable use and significant harms in
+sisted systems can fill the gap (Table 2, S-3). Such con-                   transboundary water settings (Table 2, P-10). Transparency
+tribution of data can reduce international tensions around                  in water data is, in this sense, a crucial for addressing
+water use and allocation. How enhanced remote sensing                       concerns and accountability in water governance. One
+capacity due to AI can foster transparency and cooperation                  practitioner explained, ‘‘the provision of evidence and data
+is detailed in the subsequent section.                                      can increase accountability and build trust among water
+                                                                            diplomacy actors’’ (Table 2, P-10). When parties have
+AI for data transparency and water cooperation                              difficulties to establish mutually agreed information,
+                                                                            remote-sensing tools provide credible data. Satellite image
+Water data sharing is not universal and absent in many                      monitoring tools can detect changes in river flow, for
+transboundary contexts. Even if data are shared, the fre-                   example, and they help understand how human interven-
+quency and quality of data may not be sufficient for other                  tions like dams impact transboundary rivers (Stimson
+water-sharing countries to have a shared understanding of                   Center 2024).
+the basin (Gerlak et al. 2011). The absence of credible and                    AI, more specifically machine learning techniques, has a
+mutually accepted data is a problem to determine                            critical contribution to enhance the speed of satellite
+
+
+123                                                              www.kva.se/en
+Ambio 2026, 55:857–874                                                                                                                            865
+
+
+Table 3 Deepening politicization due to distorted information and knowledge
+Risks of malicious use of AI and knowledge politicization
+P-1   The fear of deepfake technology and its potential impact on trust and reliability is a concern…Digital meetings have become more
+        frequent due to the pandemic but may face challenges if AI becomes more advanced in creating realistic avatars
+P-4   I worry about AI’s role in mis-and disinformation in general…Using artificial intelligence tools, that allows anybody to pretend that
+        they’re a lawyer, pretend that they’re a diplomat, pretend that they’re able to go out and negotiate, that’s kind of dangerous because it
+        will make people feel empowered, that they can do things, that there are other skills involved that they don’t have…And then of course,
+        I worry about mis- and disinformation and the ability to fake things. With AI obviously it is going to increase. And a lot of times as
+        diplomats, we’re trying to counter that mythology and bring people down to more of a fact based or evidence-based viewpoint of what’s
+        going on in the basin. And I suspect that artificial intelligence will expand our ability to strengthen those myths to our advantage. And
+        so, I think that that creates a real problem…And I do think there’s a huge issue around becoming intellectual hazards with the support of
+        something like artificial intelligence
+P-7   [A]nd if for example, now we know that there are tools that you can very easily record someone, you can already do it. But if you can, for
+        example, disguise something or and then you can misinterpret it, you know you can use it for deepfakes…That can really affect people’s
+        willingness to be part of these kind of processes… it’s a lot about trust and we don’t want to have a situation when we will search people
+        and ask them to hand in their phones and other devices. But I think these tools can be easily abused and if you for example want to their
+        parties that would benefit from the railing process
+P-9   AI amplifies disinformation campaigns, lowering the cost and enabling new actors. It spreads faster, impacting conflict narratives. …
+        Deepfakes could undermine peace efforts, and sentiment analysis can tailor messages for specific audiences…Deepfakes could
+        undermine trust, especially in areas with a history of conflict. The amplification and speed of disinformation campaigns through AI may
+        erode truth further…It tailors content to specific audiences, potentially influencing support for policies. While not malicious, it raises
+        concerns about the erosion of truth and the value of truth
+P-  [I]t isn’t actually about the information, but about the trust, and the political narratives that are attached to…water conflict problems are
+ 11    much harder to resolve, because anything can be harnessed for disinformation jeopardising the process
+S-1 If AI now, it can be used to generate what can be called fake news or things that look plausible, both in terms of scientific studies or in
+       terms of news videos. You can have photos of the Ethiopian dam, which is completely filled. And so then the question is how those
+       images, those stories, those narrative are used and by whom. So of course I think being more and more intelligent and powerful, those
+       technologies and be used, I mean can empower people. But in the end for me is the is the goal and how people are using it for which
+       purpose that remain what we can what we should scrutinize
+S-3   [T]here is no controlling this [malicious use]…both the promise and the peril is once everybody has access to everything, and everybody
+        can manipulate everything, if everybody can fudge data or put out false information…I think the genie’s out of the bottle and we just
+        have to do our best to hope that the that the like every technology that the forces of good prevail…if you want to sabotage an agreement,
+        can you also be monitoring social media and couch something in precisely a way that would inflame tensions between the two sides?
+S-5   [T]hey [AI systems] are of course prone to manipulation, and I’m not sure if we should base decisions and negotiations on which so many
+        people then depend for, for example, drinking water or food security on something that a computer-generated [report] that we don’t
+        understand anymore
+Unequal AI capabilities to reinforce knowledge politicization
+P-2   [T]he exclusion of the for example, parties or stakeholders that are not technologically advanced. If we say if there is a water diplomacy
+        between Germany and the Netherland over the Rhine river, then we can imagine that both countries are equal in terms of technological
+        adoption. But if we compare the water diplomacy between the Central Asian states or Pakistan, Afghanistan or Pakistan, India, then
+        there are challenges of data tempering, data manipulation, exclusion of one group and inclusion of another group because India is
+        technologically stronger than Pakistan and then Pakistan is technologically stronger than Afghanistan
+P-2   [Country A] don’t have the capacity. [Country B] is a big country that has the institutional capacity, and they can manipulate the
+        data…That’s why [Country A] refuses the system. [Country A] doesn’t need it
+P-4   [A]gain, those countries that are already ahead, they’re going to more rapidly be able to utilize artificial intelligence to advance their own
+        interests and will that then exacerbate some of the inequalities that we see between within these negotiations over some of these water
+        issues…And whoever controls the pen controls the, you know, controls the conversation
+P-7   It also means who has access to these technologies. In certain basins, one country might have much more capacity to absorb these new
+         challenges. So, it’s even widening the gap. I think that here, our ability to, for example, understand how much water we have now and
+         how much water we will have in the future, that’s the due to new technology
+P-  [M]y assumption would be that the AI capabilities would be also fairly unequal in terms of how easily people can work with this and how
+ 11   easily they can perhaps manipulate or be perceived to manipulate that it will reinforce some of the sort of unhelpful dynamics…Well,
+      the weaker countries didn’t trust the data which was stored in the in the one of the stronger countries because that was where it had
+      always been and where the expertise were
+S-5   Because I think in a way as I said, they [AI] can leverage the playing field a bit. But I think they also come with a lot of risks because it
+        might still be the more powerful in terms of technical and financial capacity countries that could use them…So, for [example
+        programme], that’s all open. I mean it’s paid for by [financial donor] and they use it, but it’s also open and anyone can use it. And even
+        it’s not only the results that are open but also the entire coding behind it is all available and the other countries don’t make it available.
+        And how many countries are there that can develop something like this in the first place at all? It’s maybe 10, 15 countries around the
+        world. So, what about the others? And what if a country that can do this would be negotiating over water with a country that can’t? It’s
+        basically like this old debate about inequality over data…I think that’s just next level now, same problem at much, much bigger level
+
+
+
+                                                                  www.kva.se/en                                                          123
+866                                                                                                                      Ambio 2026, 55:857–874
+
+
+Table 4 AI’s potential for social learning and consensus building
+Interview Quotation
+
+P-7        [I]n some basins, for example, the negotiating language is English, even though it’s not the language of the region…And we know
+              now that you can use AI or translations…And so, this could immensely help different negotiators. We see it often that some
+              countries who negotiate, they actually have to rely on English and neither side is very strong in English. And you can also have a lot
+              of misunderstandings…So maybe it’s AI if you can use it as a tool to improve language understanding that can also help different
+              processes to move forward…And it’s sad that some people don’t have ability to fully contribute to the negotiations because they
+              just have hard time expressing themselves…But I think the technology that is out there, we can see it in the future
+S-2        AI might also aid in communication, facilitating multi-stakeholder dialogues through translation tools
+S-3        Water diplomacy involves both water-related data and the art of negotiation. AI can contribute not only to information but also to
+            strategies and problem-solving, potentially facilitating collaborative governance…As technology progresses, the information
+            advantage of hydro-hegemons diminishes. Initially, those with access to data or satellite information had an upper hand, but with AI
+            and widespread internet access, that advantage diminishes further, potentially equalizing negotiating positions…transparency and
+            access to information will help balance power dynamics
+
+
+
+
+Table 5 AI bias and governance risks
+P-1   The transparency of AI tools is crucial for gaining trust among users…Convincing people to use AI will be challenging if it’s considered a
+        black box
+P-2   So my indigenous knowledge is much more effective than the artificial intelligence. And if artificial intelligence replaces my indigenous
+        knowledge, then…but there won’t be any emotions, any feelings. So, in that case you need emotions, you need feelings to allocate more
+        water so that you can actually remove the poverty…India is a big country that have the institutional capacity and they can manipulate
+        the data…That’s why we refuse this system
+P-3   [H]owever, trust is paramount. Technology developers must recognise their role as partners, ensuring transparency and adapting to human
+        conditions…Transparency is key, irrespective of the developers. Trust is built through an open approach. The EU’s data access initiative
+        highlights the importance of data for individuals globally. Developers must consider trust, transparency, and adjustability to human
+        conditions…Diplomats need to be open minded, and technology developers must start from scratch, building trust through transparent
+        processes. The aim is not a solution but a partnership in navigating the complexity of global challenges. Trust is a gradual process that
+        technology must respect
+P-4   [T]here are governments that would create a doomsday scenario within their own AI systems so that even if they are no longer capable of
+        responding or controlling, those systems would take over and execute whatever functions that they wanted to have happen including
+        their water sector
+P-5   So, if you have to move to that new West technology, I think we still cannot abandon these traditional technologies yet, because this has
+        already been built for so many years
+P-8   [A]nd my point was, but probably we should not expect completely new decisions in in diplomacy practice or insights that the artificial
+        intelligence can suggest. So, it’s not cancelling the human creativity and we should not expect that they will be providing all solutions
+        for everything. It’s just some tools that we can use to you know to substitute the lack of information or experience from somewhere else
+        and to build on this our own practice and experience
+P-11 [I]n the hard cases, it’s often not the actual information[, and] that’s the problem, it’s the trust around between the parties. So, they don’t
+        trust each other and may not trust the data, may not trust the intentions that they think might be hidden in some in some data point, but
+        they haven’t been able to find out. So, and I think that part is one that’s really hard where I don’t really see how this can be easily
+        addressed through AI because I mean it’s a black box too…It’s really hard to say and I think in the fundamental sense, I’m sceptical
+        because if indeed the issue is one of trust, then I don’t see how AI strengthened this trust
+S-1   We as a human and we are still in charge and perhaps better equipped than artificial intelligence, I think. But of course, we are also using
+       information knowledge generated through artificial intelligence and to manage and decide or trying to influence those relations
+S-2   It is the effect but then we don’t really know what to trust…there are so many different AI models, and we really have no idea what AI is
+         capable of
+S-5   [H]ow do we know that this is the best decision? And if it wasn’t, who takes responsibility for it later? kind of also releases decision
+        makers from responsibility in a way…I think yes, of course it’s always the decision maker that is responsible in the end…And then this
+        completely fails because it was not a good strategy and effects people’s access to water. The decision maker can always say, oh, but AI
+        told me to do this, I’m out, you know… And if we feed [data] into AI, and AI identifies patterns… by looking for the strongest patterns
+        you can get this kind of reinforcement. And then maybe the recommendation that comes out of let’s say a negotiation modelling could
+        be a more conflictive option than if a human had chosen it. So, I see it as a risk
+
+
+
+
+123                                                               www.kva.se/en
+Ambio 2026, 55:857–874                                                                                                 867
+
+
+imagery processing by enabling automatic sorting and data      were not in agreement on how the use of AI will influence
+curation. And this can promote openness in highly secre-       trust on data (Table 2, P-6). Some mentioned that AI-as-
+tive water-related data (Hasan et al. 2023; ter Horst et al.   sisted models and data collected through AI can only be
+2023a). The advances made in open-access satellite ima-        trusted if a neutral and credible third party is responsible
+gery and radar technology are the enabler for more trans-      (S-3), while others raised the fundamental problems of
+parency and accountability in the water sector including the   impartiality and biases in models (S-5). Disparity in tech-
+monitoring of invisible groundwater (Collignon 2020;           nical capacities among water-sharing countries amplifies
+Kamali Maskooni et al. 2020). Automated data collection        such concerns about distrust (Table 3), leading to the
+and curation can enable near real-time tracking of impacts,    refusal of certain knowledge platforms (Table 2, P-2). The
+which can facilitate the timely identification of hydrolog-    lack of transparency in the development of AI tools for
+ical patterns and hazards, thereby improving strategies for    water management poses a risk of deepening mistrust
+addressing both climate-related and infrastructure-related     among water-sharing countries, if one country proposes to
+water risks (Table 2, P-10, S-3). Automated monitoring and     develop such a tool. In the following section, how AI
+real-time analysis can contribute to a timely workflow,        would exacerbate politicization of information by produc-
+paving the way for scale-up of monitoring processes            ing and spreading distorted outputs is outlined.
+(Table 2, P-10).
+   To this day, no case has been reported on water-sharing     Deepening politicization due to distorted
+countries to deploy an AI-enabled remote sensing system        information and knowledge
+for joint data collection for transboundary water manage-
+ment. To what extent such use of AI is possible or desired     Water has been politicized through the deliberate produc-
+is still to be surveyed, but some countries and actors have    tion of certain knowledge, with parties able to determine
+more appetite for such use than others. Despite such           what is researched or left unknown (Zeitoun et al. 2011).
+uncertainty, some interviewed experts shared an optimistic     There is political influence over data generation, informa-
+view that advanced monitoring tools can help establish         tion sharing, and knowledge production, but the emergence
+mechanisms that promote accountability and transparency        of AI exacerbates the concerns about contested use of data
+in transboundary water governance (Table 2, P-9, S-3).         and information. Manipulated and biased water data has
+Facilitating discussions on AI-powered monitoring tools        long been a point of tension in water diplomacy, because
+may become part of water diplomacy efforts in the future.      riparian countries inevitably fear flawed data to be used
+   The interviews have emphasized their hopes for              against them. Such fear undermines the trust of water-
+automation by AI for expediting, scaling up, and stream-       sharing countries and complicates political processes.
+lining water diplomacy processes. For instance, the auto-      Experts expressed their concerns about AI to exacerbate
+mated communication between governments and water              the risk by being used to spread misinformation and dis-
+diplomacy actors can speed up the negotiation processes. In    information about water usage and its impacts among
+addition, water diplomacy information such as diplomatic       neighboring countries, further politicizing water. The fol-
+protocols, relevant national, and international laws, and      lowing section outlines the results related to AI’s role in
+socio-hydrological data can feed into training an AI system    amplifying the politicization of water disputes through
+that can provide timely inputs during negotiations. Such       knowledge manipulation and contestation.
+systems can enhance the negotiators’ ability to identify
+opportunities for further collaboration during water diplo-    AI to produce mis- and disinformation about water
+macy processes (Table 2, P-4). AI tools can be used to
+detect certain text and images in screening and verification   Systematic (re)production of false information by using
+processes during water negotiations (Table 2, P-9). AI has     generative AI is a serious concern (Future of Life Institute
+the potential to enhance resource and time efficiency and      2024). In the context of water diplomacy, the manipulated
+to inform decision-making in both long-term and short-         or false information about water scarcity and water
+term (Table 2, P-4, P-9, P-10). This acceleration can enable   infrastructure has unraveled trust and relationships (Klimes
+water authorities, diplomats, and policymakers to respond      et al. 2023). The risk of spreading misinformation can be
+more swiftly to emerging water-related challenges, such as     done unknowingly. For instance, individuals who lack the
+transboundary flood and drought risks (Table 2, P-2, P-5,      necessary expertise can claim to be experts using open-
+P-10, S-3).                                                    access AI tools or present AI-generated content as factual
+   Despite the technological advances, AI systems are          knowledge without proper verification (Table 3, P-4). Such
+prone to manipulation and bias (Debnath et al. 2023).          risks of skipping verification on AI-generated content
+Concerns about the impartiality of water data have been a      similarly apply to the use of AI tools by water diplomacy
+perennial issue in water dispute management, and experts       actors.
+
+
+                                                       www.kva.se/en                                            123
+868                                                                                                   Ambio 2026, 55:857–874
+
+
+   The misuse of AI-generated fake news, scientific stud-       transboundary river basins such as the Nile and the
+ies, and manipulated images or videos related to water          Mekong (Gao et al. 2022; Hayat et al. 2022; Table 3, P-4,
+disputes is a significant concern mentioned by several          P-11). Developing AI systems would require substantial
+experts (Table 3, P-1, P-7, P-9). Deepfakes, which combine      financial resources and technical capabilities that are
+deep learning with fake content, are ‘‘hyper-realistic videos   unevenly distributed among water-sharing countries
+digitally manipulated to depict people saying and doing         (Table 3, P-10). Countries with more advanced technical
+things that never actually happened’’ and ‘‘rely on neural      capabilities are better positioned in the negotiations as
+networks that analyze large sets of data samples to learn to    hegemons, and the power dynamics influence the interac-
+mimic a person’s facial expressions, mannerisms, voice,         tions over shared waters (Zeitoun et al. 2017). When a
+and inflections’’ (Westerlund 2019, 39). Political actors can   technologically advanced party can gather data remotely
+strategically produce deepfakes, and their involvement in       without the consent of a weaker counterpart, the techni-
+escalating tension over water is concerning (Klimes et al.      cally powerful party can effectively undermine the latter’s
+2023). This technology could be employed to fabricate           ability to resist the data collection (Zeitoun et al. 2011).
+evidence or narratives to serve specific agendas, under-        The more unilateral data collection is done by using AI
+mining trust and reliability in information related to water    tools, less trust and consensus building is likely among
+management (Table 3, P-1, P-4, P-7, P-9, P-11, S-3, S-5).       water-sharing countries (Table 3, S-5). Moreover, the
+   While disinformation campaigns are not new, the rise of      ability to manipulate data or disseminate misinformation
+generative AI is expected to amplify and accelerate such        through AI-powered tools raises concerns about the esca-
+campaigns, especially in regions with a history of conflict     lation of tensions and mistrust among riparian states
+(Table 3, P-9). The regulation of malicious AI use in water     (Table 3, P-2, P-2, P-11). Such strategic interventions can
+dispute management remains unclear, though mitigation           hinder knowledge to be further shared for the common
+measures such as physical meetings and rigorous screening       good, complicating cooperation over transboundary water.
+tools are available for verification (Table 3, P-1, P-9).           Not all AI-assisted data collection aims to manipulate
+However, a lack of effective oversight and accountability       data and knowledge to serve self-interest of powerful
+mechanisms poses questions about the impact of spread of        countries, but this is a legitimate concern (Table 3, S-5).
+misinformation and the erosion of trust in diplomatic pro-      The countries with more technical capacities are more
+cesses. Contestation over the truthfulness of knowledge         likely to adopt AI technologies and thus benefit, leading to
+may deepen further in the AI era.                               ‘‘even widening the gap’’ in negotiations (Table 3, P-4, P-7,
+   Digital technologies and platforms can also become           S-5). Particularly those conflict-affected and fragile coun-
+spaces where individuals express strong emotions regard-        tries will face additional challenges in developing capaci-
+ing transboundary water concerns (Deka et al. 2023; Seide       ties and accessing AI technologies (Table 3, P-7).
+and Fantini 2023). AI-generated images and information              AI can amplify existing power asymmetries in trans-
+can be used to spark emotions, as generative AI tools have      boundary water interactions and deepen the politicization
+already influenced public opinion on sensitive issues           of knowledge and disputes (Mirumachi 2020). A tool is
+(Kreps and Kriner 2023), The risk of AI’s malicious use is      only as good as the person who uses it, and AI is also a tool
+difficult to mitigate when parties have varying degrees of      that can be used for either contestation or collaboration.
+technical capacities to verify such information. The fol-       Some experts expressed that AI can be used for consensus
+lowing section elaborates how unequal AI capabilities           building in water diplomacy by serving as a platform for
+further exacerbate politicization of water disputes.            cooperation and addressing capacity inequalities, as is
+                                                                discussed in the following section examining the third
+Unequal AI capabilities amplify inequality                      proposition.
+among conflicting parties
+                                                                Consensus building through social learning and co-
+Uneven technological capacities between parties con-            production
+tribute to power imbalances, and AI is likely to deepen
+power asymmetry in water disputes. The availability and         Water diplomacy’s ultimate aims include preventing, mit-
+affordability of advanced AI technologies, such as radar        igating and resolving water disputes, and seeking consen-
+and satellite imagery and machine learning algorithms,          sus building involves a process encouraging good-faith
+vary significantly among nations (Galaz et al. 2021). The       engagement and seek a unanimous agreement. Experts
+disparity in AI capacity can amplify existing inequality        highlighted a potential equalizing effect of open-source AI
+among water-sharing countries (Table 3). Currently, the         tools in uneven playing fields, mitigating power imbalances
+capacity for hydrological modeling and infrastructure           and promoting equitable collaboration among actors
+development significantly vary among countries in major         involved in water dispute resolution (Table 4, P-7, S-2).
+
+
+123                                                     www.kva.se/en
+Ambio 2026, 55:857–874                                                                                                     869
+
+
+Open-source AI systems that are freely available to use,         DISCUSSION
+study, modify, and share can inform countries with weak
+institutional knowledge and hydrological information dur-        The evaluation of three propositions of AI’s implications to
+ing negotiations. Having stated the risk of ‘misinformation’     international water disputes reveals a degree of uncertain-
+generated by AI in 4.2, such use of AI should be cautioned       ties, but also several underpinning dynamics that could
+with a degree of verification efforts by individual users        influence the potential impacts of this emerging technol-
+(Maleki et al. 2024). If used adequately, open-source AI         ogy. First, there is limited evidence that AI tools generate
+systems can provide timely information, which is particu-        more neutral and credible data, or that the new knowledge
+larly useful to countries with less resources and weaker         they produce facilitates greater cooperation among water-
+technical capacity. This leveling field effect can encourage     sharing parties. While various pilot projects and explora-
+more meaningful participation in negotiations and reassure       tory research have tested the use of machine learning in
+their commitments.                                               hydrological modeling, risk assessment, and monitoring
+   Open-source AI can also facilitate capacity building for      systems, the results remain inconclusive. For example,
+strengthening water diplomats’ competence, especially            transboundary flood warning systems in the Mekong and
+authorities from fragile- and conflict-affected states as well   Red rivers demonstrate some of the clear benefits of AI’s
+as countries with limited resources (Table 4, P-7). For          forecasting capabilities. However, how responsible gov-
+instance, AI-powered translation tools can serve as a            ernments and authorities act upon these new warnings
+communication aid that enables broader participation and         remains unclear. So far, no water-sharing parties have
+collaboration in diplomatic negotiation (Table 4, P-7, S-2).     attempted to initiate new negotiations based on this
+The language barrier is a disadvantage to parties with           knowledge.
+insufficient human and technical capacities by inhibiting           Then, experts have raised cautions toward the increased
+them from actively participating in informal talks and           tensions over transboundary waters due to the malicious
+building relationships with their counterparts (Table 4,         use of AI to generate disinformation that can politicize and
+P-7). The use of natural language processing model for           emotionalize water disputes, and unequal power distribu-
+simultaneous translation may fill this gap in the future,        tions would worsen this risk (also see Klimes et al. 2023).
+while state-of-the-art machine translation is yet to be per-     The second perspective of AI to exacerbate politicization
+fected for diplomatic settings.                                  has the most spelled out and concrete examples and con-
+   If government officials, negotiators, and civil society       cerns, based on experts’ experience and knowledge of the
+actors can equally benefit from open-access AI tools,            evolving field. A series of research works on the dam
+technology can contribute to strengthening the capacity of       dispute in the Nile River basin illustrate how the social
+technologically disadvantaged actors. A range of afford-         media campaigns and public emotions form critical inputs
+able AI subscription services is now available to support        in water negotiations, which suggests the risk of AI-gen-
+various capacities including research, text and image gen-       erated mis-and disinformation on a politically sensitive
+eration and editing, and analysis. These AI generated            context.
+contents may not be as credible and relevant as reports             Technological uncertainties innate to AI such as its
+produced by human researchers and analysts, but, at least,       ‘black box’-like nature and algorithmic opaqueness
+policy makers can quickly gain basic information and             undermine the quest for unbiased data and transparency in
+overview. This type of AI use has a potentially equalizing       water governance and negotiations (Rudin 2019). The
+effect in negotiations by bringing balance of power to a         black box like nature of AI is a general problem in
+degree (Table 4, S-3). AI tools can enhance processing and       understanding the outputs generated by AI systems for
+analysis of the remote sensing data (see the discussion in       policy relevance (Table 5, P-1, S-5). This transparency
+4.2), and this additional information may reduce the             issue is also closely linked to the accountability question of
+information disparity and foster cooperation (Table 4, S-3).     using knowledge generated through AI tools for high-stake
+   AI and related technologies can lower the barriers to         policy making. The stakes are high if the accuracy of AI-
+participate in water diplomacy processes. Active partici-        generated intelligence determines how much water should
+pation and meaningful engagement can promote collabo-            be available for a country, a region, or a community
+rative learning, which is essential for producing a shared       (Table 5, S-5). The question on accountability for decisions
+understanding and knowledge and seeking solutions for            made based on AI-generated intelligence is critical, as the
+transboundary water disputes (Sadoff and Grey 2002). The         involvement of AI can release decision-makers from
+exact prospects for such use of AI still need to be explored     responsibility (Table 5, S-5). Ultimately, the use and pur-
+and tested, as experts suggest, but there is certainly a         pose of AI-generated knowledge is a political responsibil-
+possibility to enhance social learning aspects in water          ity (Table 5, S-1).
+diplomacy by using AI.
+
+
+                                                         www.kva.se/en                                              123
+870                                                                                                       Ambio 2026, 55:857–874
+
+
+    There is a call for improving AI data pipelines, because         Finally, lessons from existing initiatives supporting
+how data are collected, curated, and used to build AI sys-        consensus building and social learning in transboundary
+tems fundamentally determine the quality of AI systems            water governance highlight potential entry points for open-
+that are built as results (Liang et al. 2022). The truthfulness   source AI tools. Parties can be reluctant or even reject new
+of data and information may become even more contested            data if they resist the power asymmetry embedded in
+in the future because of the increasing fear of data              knowledge production (Table 5, P-2, S-5). Enhancements
+manipulation and hidden bias in AI systems (Qamar et al.          in data and analytics alone cannot solve complex and long-
+2019). This seems to be closely linked with the expressed         running water disputes. In fact, advanced technologies and
+distrust and concerns, whether policymakers should con-           tools may worsen tensions due to perceived biases
+sider intelligence from such systems (Table 5, P-1, P-11).        (Table 5, P-8). In addition, the general risk of AI systems
+These issues have been addressed in regards to socio-             can lead to unknown risks, especially since these systems
+economic, security, public health and sustainability              are developed without sufficient human supervision and
+impacts of AI (Galaz and Mouazen 2017; Francisco and              consideration for human emotions (Table 5, P-2). These
+Linnér 2023; Kim and Boulanin 2023). What an algorith-           developments can undermine universal values and morality
+mic transparency and explainability would influence water         in water allocation, which are developed through decades
+negotiations and dispute management between countries             of interactions that result in norms (Grech-Madin et al.
+needs further research (see Leichtmann et al. 2023 for            2018).
+various efforts in making AI models and outcomes more
+explainable). The question on how AI-assisted tools can
+overcome distrust and biases remains critical to achieving        CONCLUSION
+mutually accepted knowledge contributing to peaceful
+management of shared waters.                                      The article focuses on the intersection of AI and water
+    Timely discussions on the governance of AI in water           diplomacy by examining the expert narratives on the risks
+diplomacy are warranted since there is a notion of                and opportunities. As our findings suggest, positive impacts
+inevitability of AI. Several experts mentioned that they          of AI technologies are still to be seen in international water
+would eventually need to use AI tools (Table 5, P-5, P-8).        dispute management efforts including water diplomacy.
+This indicates a degree of the passive acceptance of AI           These future AI tools need to more actively acknowledge
+among practitioners working on water diplomacy, while             the political nature of knowledge production and the
+various industries and public sectors actively adopt AI           unavoidable political undertones within seemingly purely
+tools (Kelly et al. 2023). Several respondents provided           technical efforts (Wheeler et al. 2023). With the rise of AI,
+examples of how AI is used in data collection and                 technical capacities may have an even greater impact in
+improving language in policy deliberations (Table 5, P-1,         transboundary water governance (Mirumachi 2020; Vij
+P-7, S-1). The absence of internationally agreed guidelines       et al. 2020; Döring et al. 2024). How such impact would
+and policies on the development and use of AI systems in          influence sustainability and peace linked to water is a
+water diplomacy may pose a risk in the future.                    further question that should be answered through empirical
+    The need for institutional arrangements to govern AI          studies.
+tools in water dispute management is further emphasized              The described risks related to knowledge production and
+by the profound concerns by experts regarding AI-gener-           the politicization of knowledge suggest that care must be
+ated disinformation and disruption. Global AI governance          taken when incorporating AI into international water dis-
+is still emerging, and international water management and         pute management. Offering training for water conflict
+governance practitioners and scholars have not engaged in         mediators and water management authorities is one way to
+discussing necessary guidelines and principles in the             strengthen their capacity to understand and potentially
+application of AI in this field. Despite the alarming risks,      utilize these tools peacefully. If such activities are carefully
+AI technologies have been slowly applied in knowledge             designed and involve well-chosen participants, they can
+production, informing controversial water dispute dis-            help reduce disparities in technical capacity among water-
+courses such as those in the Nile Basin (ter Horst et al.         sharing parties. The findings also emphasize the impor-
+2023b). There is a growing need to closely observe how            tance of maintaining human control in water diplomacy
+these technologies are perceived by negotiators and utilized      processes. Physical, in-person meetings and human inter-
+by various actors in the complex chains of water diplo-           actions remain indispensable for resolving international
+macy, which future research can further explore. This             water disputes, even when relevant data can be accessed
+negative side of AI in water diplomacy may hinder con-            remotely through sensing technologies. Additional training
+flict parties as well as relevant third parties from exploring    and capacity building in science communication are
+the use of AI in various activities.                              increasingly necessary to ensure these AI tools are properly
+
+
+123                                                       www.kva.se/en
+Ambio 2026, 55:857–874                                                                                                                        871
+
+
+understood when deployed. Furthermore, future research                     Anghileri, D., M. Pastori, P. Marcos-Garcia, G. Umlauf, E. Crestaz,
+should contribute to the development of clear guidelines                        R. Seliger, A. Iervolino, E. Cordano, et al. 2024. Global Water
+                                                                                Challenges in Sub-Saharan Africa and how to strengthen
+for the responsible design and use of AI systems in water                       science-policy dialogues on transboundary governance and
+diplomacy. This effort should be part of a broader, col-                        cooperation. Journal of Environmental Management 365:
+laborative process that brings together diverse stakeholders                    121417. https://doi.org/10.1016/j.jenvman.2024.121417.
+to ensure AI tools support equitable and informed decision-                Bakker, K. 2022. Smart Oceans: Artificial intelligence and marine
+                                                                                protected area governance. Earth System Governance 13:
+making in transboundary water governance.                                       100141. https://doi.org/10.1016/j.esg.2022.100141.
+                                                                           Barrett, L., and P. Barrett. 2011. Women and academic workloads:
+Acknowledgements We sincerely thank all interviewees for sharing                Career slow lane or cul-de-sac? Higher Education 61: 141–155.
+their valuable insights and perspectives and the two anonymous                  https://doi.org/10.1007/s10734-010-9329-3.
+reviewers for their constructive feedback. We also wish to thank our       Barua, A., and S. Vij. 2018. Treaties can be a non-starter: A multi-
+colleagues at the Stockholm International Peace Research Institute for          track and multilateral dialogue approach for Brahmaputra Basin.
+their support throughout the course of this project.                            Water Policy 20: 1027–1041. https://doi.org/10.2166/wp.2018.
+                                                                                140.
+Author     contributions Kyungmee       Kim:    Conceptualization,         Berkes, F. 2009. Evolution of co-management: Role of knowledge
+Methodology, Investigation, Data curation, Supervision, Validation,             generation, bridging organizations and social learning. Journal
+Writing. Abeer S. Ahmad: Investigation, Data curation, Writing.                 of Environmental Management 90: 1692–1702. https://doi.org/
+                                                                                10.1016/j.jenvman.2008.12.001.
+Funding Open access funding provided by Uppsala University. This           Berry, J. M. 2002. Validity and Reliability Issues In Elite Interview-
+paper is a deliverable of Mistra Geopolitics, which is funded by the            ing. Political Science & Politics 35: 679–682. https://doi.org/10.
+Swedish Foundation for Strategic Environmental Research (Mistra).               1017/S1049096502001166.
+                                                                           Bhatia, U., D. Kumar, E. Kodra, and A. R. Ganguly. 2017. Water
+Data availability Data used in this research is confidential and not            complexity and physics-guided data mining. In Water Diplo-
+made available. All interviews were conducted under conditions of               macy in Action: Contingent Approaches to Managing Complex
+anonymity, and participants did not provide consent for the publica-            Water Problems, ed. S. Islam and K. Madani, 155–178. Anthem
+tion of interview transcripts. Given the sensitive nature of water              Press. https://doi.org/10.2307/j.ctt1jktqgh.
+diplomacy and the potential for identifying participants through their     Borines, A., P. Teckle, and Abeba N. Turi. 2025. Exploring
+responses, making the data publicly available would compromise                  the Current AI Landscape in Global South Economies: A Sys-
+participant confidentiality and violate the ethical terms under which           tematic Literature Review and Research Agenda. In Tech
+the research was conducted.                                                     Transformation and AI Readiness: Pioneering Paths for the
+                                                                                Global South. Future of Business and Finance, ed. A. N. Turi
+                                                                                and P. Teckle. Cham: Springer. https://doi.org/10.1007/978-3-
+Declarations
+                                                                                031-73639-1.
+                                                                           Carlin, B. A., B. D. Gelb, J. K. Belinne, and L. Ramchand. 2018.
+Conflict of interest The authors have no relevant financial or non-
+                                                                                Bridging the gender gap in confidence. Business Horizons 61:
+financial interests to disclose.
+                                                                                765–774. https://doi.org/10.1016/j.bushor.2018.05.006.
+                                                                           Collignon, B. 2020. A new tool for the remote sensing of groundwater
+Open Access This article is licensed under a Creative Commons                   tables: Satellite images of pastoral wells. Open Geospatial Data,
+Attribution 4.0 International License, which permits use, sharing,              Software and Standards 5: 4. https://doi.org/10.1186/s40965-
+adaptation, distribution and reproduction in any medium or format, as           020-00077-3.
+long as you give appropriate credit to the original author(s) and the      Dauvergne, P. 2021. The globalization of artificial intelligence:
+source, provide a link to the Creative Commons licence, and indicate            Consequences for the politics of environmentalism. Globaliza-
+if changes were made. The images or other third party material in this          tions 18: 285–299. https://doi.org/10.1080/14747731.2020.
+article are included in the article’s Creative Commons licence, unless          1785670.
+indicated otherwise in a credit line to the material. If material is not   Debnath, R., F. Creutzig, B. K. Sovacool, and E. Shuckburgh. 2023.
+included in the article’s Creative Commons licence and your intended            Harnessing human and machine intelligence for planetary-level
+use is not permitted by statutory regulation or exceeds the permitted           climate action. Npj Climate Action 2: 1–11. https://doi.org/10.
+use, you will need to obtain permission directly from the copyright             1038/s44168-023-00056-3.
+holder. To view a copy of this licence, visit http://creativecommons.      Deka, A., N. Hazarika, S. Vij, A. Barua, and E. Fantini. 2023. Media
+org/licenses/by/4.0/.                                                           reporting on conflicts and cooperation: What does it mean for the
+                                                                                Brahmaputra basin? International Journal of Water Resources
+                                                                                Development 39: 819–845. https://doi.org/10.1080/07900627.
+REFERENCES                                                                      2022.2163478.
+                                                                           Dickerson, J. E. 2022. Data, information, knowledge, wisdom, and
+                                                                                understanding. Anaesthesia & Intensive Care Medicine 23:
+Ahmed, G., A. Cattapan, A. Omer, and Y. Mohamed. 2025. A hybrid
+                                                                                737–739. https://doi.org/10.1016/j.mpaic.2022.08.012.
+    approach to evaluate sedimentation in large dams: Case study of
+                                                                           Döring, S., K. Kim, and A. Swain. 2024. Integrating socio-hydrology,
+    the Grand Ethiopian Renaissance Dam and Roseires Dam across
+                                                                                and peace and conflict research. Journal of Hydrology 633:
+    the Blue Nile. Journal of Hydrology: Regional Studies 60:
+                                                                                131000. https://doi.org/10.1016/j.jhydrol.2024.131000.
+    102585. https://doi.org/10.1016/j.ejrh.2025.102585.
+                                                                           Faizullaev, A. 2024. Diplomatic Essentials and Negotiating in
+Al-Saidi, M., and A. Hefny. 2018. Institutional arrangements for
+                                                                                Diplomacy. International Negotiation. 1: 1–31. https://doi.org/
+    beneficial regional cooperation on water, energy and food
+                                                                                10.1163/15718069-bja10098.
+    priority issues in the Eastern Nile Basin. Journal of Hydrology
+                                                                           Francisco, M., and B.-O. Linnér. 2023. AI and the governance of
+    562: 821–831. https://doi.org/10.1016/j.jhydrol.2018.05.009.
+                                                                                sustainable development. An idea analysis of the European
+
+
+
+                                                                  www.kva.se/en                                                       123
+872                                                                                                                     Ambio 2026, 55:857–874
+
+     Union, the United Nations, and the World Economic Forum.              Karvonen, A., and R. Brand. 2009. Technical expertise, sustainability,
+     Environmental Science & Policy 150: 103590. https://doi.org/10.             and the politics of specialized knowledge 1. Environmental
+     1016/j.envsci.2023.103590.                                                  Governance: Routledge.
+Fröhlich, C. J. 2012. Water : Reason for Conflict or Catalyst for         Kelly, S., S.-A. Kaye, and O. Oviedo-Trespalacios. 2023. What
+     Peace? The Case of the Middle East. L’europe En Formation                   factors contribute to the acceptance of artificial intelligence?
+     365: 139–161. https://doi.org/10.3917/eufor.365.0139.                       A Systematic Review. Telematics and Informatics 77: 101925.
+Future of Life Institute. 2024. Pause Giant AI Experiments: An Open              https://doi.org/10.1016/j.tele.2022.101925.
+     Letter. Future of Life Institute.                                     Keskinen, M., E. Salminen, and J. Haapala. 2021. Water diplomacy
+Galaz, V., and A. M. Mouazen. 2017. ‘New Wilderness’ Requires                    paths – An approach to recognise water diplomacy actions in
+     Algorithmic Transparency: A Response to Cantrell et al Trends               shared waters. Journal of Hydrology 602: 126737. https://doi.
+     in Ecology & Evolution 32: 628–629. https://doi.org/10.1016/j.              org/10.1016/j.jhydrol.2021.126737.
+     tree.2017.06.013.                                                     Keskinen, M., E. Häkkinen, J. Haapala, and B. Sharipova. 2023. Trust
+Galaz, V., M. A. Centeno, P. W. Callahan, A. Causevic, T. Patterson,             in Transboundary Waters: Identifying Trust-Building in Water
+     I. Brass, S. Baum, D. Farber, et al. 2021. Artificial intelligence,         Diplomacy Literature. Water Alternatives 16: 949–977.
+     systemic risks, and sustainability. Technology in Society 67:         Kim, K. 2025. The promise and peril of deploying artificial
+     101741. https://doi.org/10.1016/j.techsoc.2021.101741.                      intelligence for climate security. Peace and Sustainability 1:
+Gao, J., A. Castelletti, P. Burlado, H. Wang, and J. Zhao. 2022. Soft-           100002. https://doi.org/10.1016/j.nerpsj.2025.100002.
+     cooperation via data sharing eases transboundary conflicts in the     Kim, K., and V. Boulanin. 2023. Artificial Intelligence for Climate
+     Lancang-Mekong River Basin. Journal of Hydrology 606:                       Security: Possibilities and Challenges. Stockholm: SIPRI.
+     127464. https://doi.org/10.1016/j.jhydrol.2022.127464.                      https://doi.org/10.55163/QDSE8934.
+Gebremichael, M., Y.-C. Tien, and V. Nourani. 2025. Comprehensive          Kittikhoun, A. 2025. AI forecasts: Can Southeast Asia rise above the
+     evaluation of seasonal forecasts from NMME and statistical                  Mekong floods? – Mekong River Commission. Mekong River
+     models over the Blue Nile Basin and the Grand Ethiopian                     Commission.
+     Renaissance Dam (GERD) watershed. Journal of Hydrology:               Klimes, M., K. Goldie-Ryder, K. Shyrokykh, J. B. Abumba, and B.
+     Regional Studies 57: 102162. https://doi.org/10.1016/j.ejrh.2024.           Neupane. 2023. The Battle for Truth on Water, Climate and the
+     102162.                                                                     Environment: The Impact of Information Influencing Campaigns.
+Gerlak, A. K., J. Lautze, and M. Giordano. 2011. Water resources                 SIPRI.
+     data and information exchange in transboundary water treaties.        Kloppenburg, S., A. Gupta, S. R. L. Kruk, S. Makris, R. Bergsvik, P.
+     International Environmental Agreements: Politics, Law and                   Korenhof, H. Solman, and H. M. Toonen. 2022. Scrutinizing
+     Economics 11: 179–199. https://doi.org/10.1007/s10784-010-                  environmental governance in a digital age: New ways of seeing,
+     9144-4.                                                                     participating, and intervening. One Earth 5: 232–241. https://doi.
+Grech-Madin, C., S. Döring, K. Kim, and A. Swain. 2018. Negoti-                 org/10.1016/j.oneear.2022.02.004.
+     ating water across levels: A peace and conflict ‘‘Toolbox’’ for       Koff, H., C. Maganda, and E. Kauffer. 2020. Transboundary water
+     water diplomacy. Journal of Hydrology 559: 100–109. https://                diplomacy among small states: A giant dilemma for Central
+     doi.org/10.1016/j.jhydrol.2018.02.008.                                      American regionalism. Water International 45: 275–291. https://
+Hasan, Q., S. G. Salar, D. Raman, S. Campbell, and I. Qasim Palani.              doi.org/10.1080/02508060.2020.1734758.
+     2023. When the law is unclear: Challenges and opportunities for       Kreps, S., and D. Kriner. 2023. How AI Threatens Democracy.
+     data and information exchange in the Tigris-Euphrates and Indus             Journal of Democracy 34: 122–131. https://doi.org/10.1353/jod.
+     river basins. Water Policy 25: 780–796. https://doi.org/10.2166/            2023.a907693.
+     wp.2023.261.                                                          Leichtmann, B., C. Humer, A. Hinterreiter, M. Streit, and M. Mara.
+Hassan, M. A., M. F. Hassan, Y. A. Mohamed, and W. A. Awad.                      2023. Effects of Explainable Artificial Intelligence on trust and
+     2023. Dam operation using satellite data and hydrological                   human behavior in a high-risk decision task. Computers in
+     models: The case of Roseires dam and Grand Ethiopian                        Human Behavior 139: 107539. https://doi.org/10.1016/j.chb.
+     Renaissance Dam in the Blue Nile River. Water International                 2022.107539.
+     48: 975–999. https://doi.org/10.1080/02508060.2023.2286412.           Li, P., J. Yang, M. A. Islam, and S. Ren. 2025. Making AI Less
+Hayat, S., J. Gupta, C. Vegelin, and H. Jamali. 2022. A review of                ‘‘Thirsty.’’ Communications of the ACM 68: 54–61. https://doi.
+     hydro-hegemony and transboundary water governance. Water                    org/10.1145/3724499.
+     Policy 24: 1723–1740. https://doi.org/10.2166/wp.2022.256.            Liang, W., G. A. Tadesse, D. Ho, L. Fei-Fei, M. Zaharia, C. Zhang,
+International Crisis Group. 2024. Dammed in the Mekong: Averting                 and J. Zou. 2022. Advances, challenges and opportunities in
+     an Environmental Catastrophe | International Crisis Group.                  creating data for trustworthy AI. Nature Machine Intelligence 4:
+     Brussels: International Crisis Group.                                       669–677. https://doi.org/10.1038/s42256-022-00516-1.
+Jeon, D. J., S. J. Ki, Y. Cha, Y. Park, and J. H. Kim. 2018. New           Linton, J., and J. Budds. 2014. The hydrosocial cycle: Defining and
+     methodology of evaluation of best management practices                      mobilizing a relational-dialectical approach to water. Geoforum
+     performances for an agricultural watershed according to the                 57: 170–180. https://doi.org/10.1016/j.geoforum.2013.10.008.
+     climate change scenarios: A hybrid use of deterministic and           Littig, B. 2009. Interviewing the Elite—Interviewing Experts: Is
+     decision support models. Ecological Engineering 119: 73–83.                 There a Difference? In Interviewing Experts. Research Methods
+     https://doi.org/10.1016/j.ecoleng.2018.05.006.                              Series, ed. A. Bogner, B. Littig, and W. Menz, 98–113. London:
+Kamali Maskooni, E., S. A. Naghibi, H. Hashemi, and R. Berndtsson.               Palgrave        Macmillan        UK.      https://doi.org/10.1057/
+     2020. Application of Advanced Machine Learning Algorithms to                9780230244276_5.
+     Assess Groundwater Potential Using Remote Sensing-Derived             Machen, R., and E. Nost. 2021. Thinking algorithmically: The
+     Data. Remote Sensing 12: 2742. https://doi.org/10.3390/                     making of hegemonic knowledge in climate governance. Trans-
+     rs12172742.                                                                 actions of the Institute of British Geographers 46: 555–569.
+Kåresdotter, E., G. Destouni, R. B. Lammers, M. Keskinen, H. Pan,               https://doi.org/10.1111/tran.12441.
+     and Z. Kalantari. 2025. Water conflicts under climate change:         Maleki, N., B. Padmanabhan, and K. Dutta. 2024. AI Hallucinations:
+     Research gaps and priorities. Ambio 54: 618–631. https://doi.org/           A Misnomer Worth Clarifying. In 2024 IEEE Conference on
+     10.1007/s13280-024-02111-7.
+
+
+123                                                               www.kva.se/en
+Ambio 2026, 55:857–874                                                                                                                        873
+
+     Artificial Intelligence (CAI), 133–138. https://doi.org/10.1109/            approach for real-time flow measurements – water distributions
+     CAI59869.2024.00033.                                                        at outlets, in Punjab province Pakistan. Water Policy 26:
+Mianabadi, A., K. Davary, H. Mianabadi, and P. Karimi. 2020.                     558–576. https://doi.org/10.2166/wp.2024.265.
+     International Environmental Conflict Management in Trans-              Schmeier, S. 2012. Governing international watercourses: River
+     boundary River Basins. Water Resources Management 34:                       basin organizations and the sustainable governance of interna-
+     3445–3464. https://doi.org/10.1007/s11269-020-02576-7.                      tionally shared rivers and lakes. Routledge.
+Milman, A., A. K. Gerlak, T. Albrecht, M. Colosimo, K. Conca, A.            Sehring, J., S. Schmeier, R. ter Horst, A. Offutt, and B. Sharipova.
+     Kittikhoun, P. Kovács, R. Moy, et al. 2020. Addressing                     2022. Diving into Water Diplomacy: Exploring the Emergence
+     knowledge gaps for transboundary environmental governance.                  of a Concept. Diplomatica 4: 200–221. https://doi.org/10.1163/
+     Global Environmental Change 64: 102162. https://doi.org/10.                 25891774-bja10082.
+     1016/j.gloenvcha.2020.102162.                                          Sehring, J., R. ter Horst, and A. Said. 2023. Water diplomacy: A
+Mirumachi, N. 2020. Informal water diplomacy and power: A case of                man’s world? Insights from the Nile, Rhine and Chu-Talas
+     seeking water security in the Mekong River basin. Environmen-               basins. Journal of Hydrology X 20: 100152. https://doi.org/10.
+     tal Science & Policy 114: 86–95. https://doi.org/10.1016/j.                 1016/j.hydroa.2023.100152.
+     envsci.2020.07.021.                                                    Seide, W. M., and E. Fantini. 2023. Emotions in Water Diplomacy:
+Morovati, K., F. Tian, M. Kummu, L. Shi, M. Tudaji, P. Nakhaei, and              Negotiations on the Grand Ethiopian Renaissance Dam. Water
+     M. A. Olivares. 2023. Contributions from climate variation and              Alternatives 16: 912–929.
+     human activities to flow regime change of Tonle Sap Lake from          Shahbazbegian, M., and A. Dinar. 2023. Painted Water—A Concept
+     2001 to 2020. Journal of Hydrology 616: 128800. https://doi.org/            to Shape Water Negotiation Strategies in Shared River Basins.
+     10.1016/j.jhydrol.2022.128800.                                              Water 15: 3343. https://doi.org/10.3390/w15193343.
+Motta, S., and J. Koehler. 2025. Fractured hegemony and Vietnamese          Sharipova, B. 2023. Trust in Transboundary Water Cooperation: A
+     pragmatism in the Red River basin. Geoforum 161: 104269.                    Social Constructivist Approach. In Theorizing Transboundary
+     https://doi.org/10.1016/j.geoforum.2025.104269.                             Waters in International Relations, ed. K. Szálkai and M. Szalai,
+Mukuyu, P., J. Lautze, A. Rieu-Clarke, D. Saruchera, and M.                      51–65. Cham: Springer. https://doi.org/10.1007/978-3-031-
+     McCartney. 2020. The devil’s in the details: Data exchange in               43376-4_4.
+     transboundary waters. Water International 45: 884–900. https://        Stimson Center. 2024. Mekong Dam Monitor. Stimson Center. https://
+     doi.org/10.1080/02508060.2020.1850026.                                      www.stimson.org/project/mekong-dam-monitor/.            Accessed
+Olive, A. 2020. The politics of water security in southern                       September 17.
+     Saskatchewan. Canadian Geographies / Ge´ographies Canadi-              Tawfik, R. 2019. Beyond the river: Elite perceptions and regional
+     ennes 64: 266–279. https://doi.org/10.1111/cag.12583.                       cooperation in the Eastern Nile. Water Alternatives 12: 655–675.
+Pahl-Wostl, C., M. Craps, A. Dewulf, E. Mostert, D. Tabara, and T.          ter Horst, R., C. I. Michailovsky, and E. Salvadore. 2023a. Does data
+     Taillieu. 2007. Social Learning and Water Resources Manage-                 lead to cooperation? Lessons from Water Accounting Plus in the
+     ment. Ecology and Society 12.                                               Cauvery basin, India. Water International 48: 1025–1045.
+Palmate, S. S. 2025. Machine learning-based estimation of blue water             https://doi.org/10.1080/02508060.2024.2303783.
+     footprints for transboundary water management in the Rio               ter Horst, R., V. Srinivasan, K. G. Wheeler, J. Timmerman, and P. van
+     Grande River watershed. In Water Footprints, 19–31. Elsevier.               der Zaag. 2023b. Exploring the use of data and models in
+     https://doi.org/10.1016/B978-0-443-30054-7.00007-0.                         transboundary water governance. Water International 48:
+Qamar, M. U., M. Azmat, and P. Claps. 2019. Pitfalls in transbound-              909–914. https://doi.org/10.1080/02508060.2024.2304975.
+     ary Indus Water Treaty: A perspective to prevent unattended            Thu, H. N., and U. Wehn. 2016. Data sharing in international
+     threats to the global security. Npj Clean Water 2: 1–9. https://doi.        transboundary contexts: The Vietnamese perspective on data
+     org/10.1038/s41545-019-0046-x.                                              sharing in the Lower Mekong Basin. Journal of Hydrology 536:
+Rajasekaram, V., S. P. Simonovic, and K. D. W. Nandalal. 2003.                   351–364. https://doi.org/10.1016/j.jhydrol.2016.02.035.
+     Computer Support for Implementation of a Systemic Approach             Tran, T.-N.-D., S. K. Do, B. Q. Nguyen, V. N. Tran, M. Grodzka-
+     to Water Conflict Resolution. Water International 28: 454–466.              Łukaszewska, G. Sinicyn, and V. Lakshmi. 2024. Investigating
+     https://doi.org/10.1080/02508060308691723.                                  the Future Flood and Drought Shifts in the Transboundary
+Rietig, K. 2014. ‘Neutral’ experts? How input of scientific expertise            Srepok River Basin Using CMIP6 Projections. IEEE Journal of
+     matters in international environmental negotiations. Policy                 Selected Topics in Applied Earth Observations and Remote
+     Sciences 47: 141–160. https://doi.org/10.1007/s11077-013-                   Sensing 17: 7516–7529. https://doi.org/10.1109/JSTARS.2024.
+     9188-8.                                                                     3380514.
+Rivera-Torres, M., and A. K. Gerlak. 2021. Evolving together:               Turgul, A., M. McCracken, S. Schmeier, Z. H. Rosenblum, L. de
+     Transboundary water governance in the Colorado River Basin.                 Silva, and A. T. Wolf. 2024. Reflections on transboundary water
+     International Environmental Agreements: Politics, Law and                   conflict and cooperation trends. Water International 49: 1–15.
+     Economics 21: 553–574. https://doi.org/10.1007/s10784-021-                  https://doi.org/10.1080/02508060.2024.2321727.
+     09538-3.                                                               Usman, H., B. Nawaz, and S. Naseer. 2023. The Future of State
+Rudin, C. 2019. Stop explaining black box machine learning models                Sovereignty in the Age of Artificial Intelligence. Journal of Law
+     for high stakes decisions and use interpretable models instead.             & Social Studies 5: 142–152. https://doi.org/10.52279/jlss.05.02.
+     Nature Machine Intelligence 1: 206–215. https://doi.org/10.                 142152.
+     1038/s42256-019-0048-x.                                                Usón, T. J., C. Henrı́quez, and J. Dame. 2017. Disputed water:
+Sadoff, C. W., and D. Grey. 2002. Beyond the river: The benefits of              Competing knowledge and power asymmetries in the Yali Alto
+     cooperation on international rivers. Water Policy 4: 389–403.               basin, Chile. Geoforum 85: 247–258. https://doi.org/10.1016/j.
+Salhi, A., and S. Benabdelouahab. 2023. The downstream impact of                 geoforum.2017.07.029.
+     the first and second filling of the Grand Ethiopian Renaissance        Vij, S., J. Warner, and A. Barua. 2020. Power in water diplomacy.
+     Dam. Sustainable Water Resources Management 9: 14. https://                 Water International 45: 249–253. https://doi.org/10.1080/
+     doi.org/10.1007/s40899-022-00800-3.                                         02508060.2020.1778833.
+Sattar, J., M. U. Qamar, I. Kisekka, M. Arshad, and M. Anwar-ul-            van der Vlist, F., A. Helmond, and F. Ferrari. 2024. Big AI: Cloud
+     Haq. 2024. Artificial intelligence (AI) inspired an innovative              infrastructure dependence and the industrialisation of artificial
+
+
+
+                                                                   www.kva.se/en                                                      123
+874                                                                                                                   Ambio 2026, 55:857–874
+
+     intelligence. Big Data & Society 11: 20539517241232630.              Zhong, Y., F. Tian, H. Hu, D. Grey, and M. Gilmont. 2016. Rivers
+     https://doi.org/10.1177/20539517241232630.                                and reciprocity: Perceptions and policy on international water-
+Vu, T.-M., and T. Nguyen. 2024. The evolution of Vietnam’s water               courses. Water Policy 18: 803–825. https://doi.org/10.2166/wp.
+     diplomacy in Mekong River Basin. In The Mekong River Basin,               2016.229.
+     273–307. Elsevier. https://doi.org/10.1016/B978-0-323-90814-6.       Zielinski, L., M. McClain, W. Ojwang, C. Joseph, D. Tickner, G.
+     00020-6.                                                                  Mumbo, A. S. Matano, J. Nobert, et al. 2023. Using data
+Westerlund, M. 2019. The Emergence of Deepfake Technology: A                   collection to build trust and ownership in transboundary water
+     Review. Technology Innovation Management Review 9: 40–53.                 allocation planning: A case study from the Mara River Basin.
+     https://doi.org/10.22215/timreview/1282.                                  Water International 48: 1014–1024. https://doi.org/10.1080/
+Wheeler, K. G., C. J. Robinson, and R. H. Bark. 2018. Modelling to             02508060.2023.2291241.
+     bridge many boundaries: The Colorado and Murray-Darling
+     River basins. Regional Environmental Change 18: 1607–1619.           Publisher’s Note Springer Nature remains neutral with regard to
+     https://doi.org/10.1007/s10113-018-1304-z.                           jurisdictional claims in published maps and institutional affiliations.
+Wheeler, K. G., T. Fulp, and R. F. Salmon-Castelo. 2023. Basin-wide
+     knowledge exchange for the sustainable management of the
+     Colorado River. Water International 48: 1068–1080. https://doi.
+     org/10.1080/02508060.2023.2291239.                                   AUTHOR BIOGRAPHIES
+Wolf, A. T. 2009. A Long Term View of Water and International             Kyungmee Kim (&) (Ph.D., Uppsala University, 2021) is an
+     Security1. Journal of Contemporary Water Research & Educa-           Associate Senior Lecturer of Political Science at the Swedish Defense
+     tion 142: 67–75. https://doi.org/10.1111/j.1936-704X.2009.           University and an affiliated researcher with Research School for
+     00056.x.                                                             International Water Cooperation at the Department of Peace and
+Yalew, S. G., P. van der Zaag, B. N. Tran, C. I. B. Michailovsky, E.      Conflict Research at Uppsala University. Her research interests in-
+     Salvadore, E. Borgomeo, P. Karimi, S. Pareeth, et al. 2023.          clude climate and environmental security, water and geopolitics, and
+     Open-access remote sensing data for cooperation in transbound-       technological tools in policy making.
+     ary water management. Water International 48: 955–974. https://      Address: Department of Political Science, Swedish Defence Univer-
+     doi.org/10.1080/02508060.2023.2263226.                               sity, Stockholm, Sweden.
+Yasuda, Y., D. Hill, D. Aich, P. Huntjens, and A. Swain. 2018. Multi-     Address: Climate Change and Risk Programme, Stockholm Interna-
+     track water diplomacy: Current and potential future cooperation      tional Peace Research Institute, Stockholm, Sweden.
+     over the Brahmaputra River Basin. Water International 43:            Address: International Institute of Social Studies, Erasmus University
+     642–664. https://doi.org/10.1080/02508060.2018.1503446.              Rotterdam, The Hague, The Netherlands.
+Zeitoun, M., N. Mirumachi, and J. Warner. 2011. Transboundary             Address: Department of Peace and Conflict Research, Uppsala
+     water interaction II: The influence of ‘soft’ power. International   University, Uppsala, Sweden.
+     Environmental Agreements: Politics, Law and Economics 11:            e-mail: kyungmee.kim@pcr.uu.se
+     159–178. https://doi.org/10.1007/s10784-010-9134-6.
+Zeitoun, M., A. E. Cascão, J. Warner, N. Mirumachi, N. Matthews, F.      Abeer S. Ahmad (M.Sc., Uppsala University, 2020) is a Researcher
+     Menga, and R. Farnum. 2017. Transboundary water interaction          at the Stockholm International Peace Research Institute (SIPRI). Her
+     III: Contest and compliance. International Environmental             research focuses on climate security and nexus approaches to
+     Agreements: Politics, Law and Economics 17: 271–294.                 addressing interlinked challenges in conflict-affected areas, including
+     https://doi.org/10.1007/s10784-016-9325-x.                           the intersection of climate and health resilience.
+Zhang, L., and H. Zhang. 2021. Water Diplomacy and China’s Bid for        Address: Climate Change and Risk Programme, Stockholm Interna-
+     Soft Power in the Mekong. China Review 21: 39–75.                    tional Peace Research Institute, Stockholm, Sweden.
+
+
+
+
+123                                                              www.kva.se/en
+

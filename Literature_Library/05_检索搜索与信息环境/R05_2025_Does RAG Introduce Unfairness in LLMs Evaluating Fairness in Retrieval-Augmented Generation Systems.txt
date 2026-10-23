@@ -1,0 +1,1209 @@
+本文件为PDF自动提取文本，仅供检索；排版、图表和页码请以PDF为准。
+Does RAG Introduce Unfairness in LLMs? Evaluating Fairness in Retrieval-Augmented Generation Systems
+
+     Does RAG Introduce Unfairness in LLMs? Evaluating Fairness in
+               Retrieval-Augmented Generation Systems
+
+         Xuyang Wu*                             Shuowei Li*                             Hsin-Tai Wu
+     Santa Clara University                 Santa Clara University                DOCOMO Innovations, Inc.
+        Santa Clara, CA                        Santa Clara, CA                         Sunnyvale, CA
+        xwu5@scu.edu                           sli19@scu.edu                     hwu@docomoinnovations.com
+
+
+                   Zhiqiang Tao                                             Yi Fang†
+          Rochester Institute of Technology                           Santa Clara University
+                  Rochester, NY                                          Santa Clara, CA
+             zhiqiang.tao@rit.edu                                        yfang@scu.edu
+
+
+                     Abstract                                       Question: Which answer is relevant to the topic Agriculture?
+                                                                    Options:
+                                                                    1. Hana Meisel 2. Thomas Giles 3. Both
+   Retrieval-Augmented Generation (RAG) has
+                                                                                                        … Hana Meisel …female agronomist…
+   recently gained significant attention for its en-                                              RAG   …Thomas Giles … male pastoralist …
+                                                                                                        … Meisel… founder agricultural school
+   hanced ability to integrate external knowledge                                                            Retrieved Documents
+   sources into open-domain question answering                      Answer Without RAG:       Answer With RAG:                Utility:
+   (QA) tasks. However, it remains unclear how                      Thomas Giles              Both                            Fairness:
+
+   these models address fairness concerns, partic-
+                                                                 (a) RAG enhances both the accuracy and fairness
+   ularly with respect to sensitive attributes such
+                                                                   Question: Which answer is relevant to the topic Agriculture?
+   as gender, geographic location, and other de-
+                                                                   Options:
+   mographic factors. First, as language mod-                      1. Hana Meisel 2. Theodor Bergmann 3. Both
+   els evolve to prioritize utility, like improving                                                      … Hana Meisel …female agronomist……
+                                                                                                  RAG    …Meisel… founder agricultural school
+   exact match accuracy, fairness considerations                                                         …Theodor Bergmann …male agronomist …
+                                                                                                            Retrieved Documents
+   may have been largely overlooked. Second,
+                                                                   Answer Without RAG:        Answer with RAG:                Utility:
+   the complex, multi-component architecture of                    Both                       Hana Meisel                     Fairness:
+   RAG methods poses challenges in identifying
+   and mitigating biases, as each component is                  (b) RAG maintains answer accuracy but not fairness
+   optimized for distinct objectives. In this pa-
+   per, we aim to empirically evaluate fairness in          Figure 1: Illustration of two scenarios of RAG: (a) RAG
+   several RAG methods. We propose a fairness               enhances both the accuracy and fairness and (b) RAG
+   evaluation framework tailored to RAG, using              maintains answer accuracy but not fairness. The re-
+   scenario-based questions and analyzing dispar-           trieved documents may overly highlight content from
+   ities across demographic attributes. Our ex-             the protected group, causing an imbalance.
+   perimental results indicate that, despite recent
+   advances in utility-driven optimization, fairness
+   issues persist in both the retrieval and genera-
+                                                   an effective method to mitigate hallucination prob-
+   tion stages. These findings underscore the need
+   for targeted interventions to address fairness  lems by incorporating external knowledge to en-
+   concerns throughout the RAG pipeline. The       hancing the suitability of LLMs for real-world ap-
+   dataset and code used in this study are publiclyplications (Jin et al., 2024; Gao et al., 2023), such
+   available at this GitHub Repository1 .          as open-domain question answering (Guu et al.,
+                                                   2020), conversational agents (Shuster et al., 2021),
+1 Introduction                                     and specialized domains like medical diagnosis
+With the evolution of large language models        (Shi et al., 2024; Sun et al., 2024) and legal con-
+(LLMs), Retrieval-Augmented Generation (RAG) sultation (Wiratunga et al., 2024). By utilizing re-
+(Borgeaud et al., 2022) has rapidly developed as   trieved relevant documents along with the model’s
+  * Equal contribution.                            internal parametric knowledge, RAG methods aim
+  †
+    Yi Fang is the corresponding author.           to enhance the accuracy of generated answers and
+  1
+    https://github.com/elviswxy/RAG_fairness       reduce issues related to the model’s limited mem-
+                                               10021
+          Proceedings of the 31st International Conference on Computational Linguistics, pages 10021–10036
+                       January 19–24, 2025. ©2025 Association for Computational Linguistics
+ory capacity and factual hallucinations (Lewis et al.,       • To the best of our knowledge, this is the first
+2020; Shuster et al., 2021). Despite significant re-           study to systematically and quantitatively ana-
+search enhancing the applications of RAG methods               lyze fairness in RAG methods.
+across various fields, there is no work focusing on
+how RAG methods can help these systems better                • We evaluate fairness across multiple RAG
+address fairness concerns, particularly when sensi-            methods (architectures) using scenario-based
+tive demographic attributes like gender, geographic            questions and benchmarks, revealing the trade-
+location, and other factors are involved. This over-           off between utility and fairness through exten-
+looked gap is especially problematic, as the data              sive experiments on real-world datasets.
+sources and retrieval mechanisms used in RAG                 • We assess the fairness of each component
+methods may inadvertently introduce or exacerbate              within the RAG pipeline, demonstrating that
+such biases, as the example illustrates in Figure 1.           fairness concerns exist at every stage of the
+   One key challenge in studying fairness in                   system, emphasizing the need for a holistic
+RAG methods comes from the complex, multi-                     approach to fairness mitigation.
+component architecture they employ (Jin et al.,
+2024). RAG systems typically consist of sepa-            2     Related Works
+rate retrieval and generation components, each op-       2.1    RAGs in Open-domain QA
+timized for different objectives (Izacard and Grave,
+2021). This modularity makes it difficult to iden-       Retrieval-Augmented Generation (RAG) has been
+tify where biases originate and to classify how          extensively employed in question-answering (QA)
+each stage contributes to the overall unfairness         systems to improve exact match (EM) performance,
+in the final outputs. Moreover, traditional eval-        with most architectures - be they sequential, branch-
+uation metrics for RAG methods, such as exact            ing, conditional, or loop-based (Jin et al., 2024) -
+match (EM) accuracy, focus on utility and per-           targeting improvements in relevance, faithfulness,
+formance, while fairness—particularly in relation        robustness, and efficiency (Gao et al., 2023; Kim
+to demographic representation—remains underex-           et al., 2024; Xu et al., 2024; Yoran et al., 2024; Li
+plored (Sheng et al., 2021). In addition, there is a     et al., 2023; Peng et al., 2024; Nian et al., 2024).
+trade-off between utility and fairness in RAG sys-       These metrics are critical in QA tasks but typically
+tems, as optimizing for higher accuracy can some-        do not address fairness, which is equally important
+times exacerbate biases. The model may learn to          in many real-world applications. Shrestha et al.
+prioritize majority group patterns that improve ac-      (2024) proposes fairness-centered retrieval mech-
+curacy metrics but disadvantage minority groups          anisms in text-to-image generation to improve de-
+(Gao and Shah, 2019).                                    mographic diversity. However, the focus remains
+                                                         on metrics like EM and MRR, with little attention
+   To address these challenges, we introduce a sys-      to potential bias and unfairness.
+tematic fairness evaluation framework specifically          Our research demonstrates that focusing solely
+tailored for RAG methods. First, we construct a          on improving EM can lead to significant unfairness.
+scenario-based question dataset focusing on sen-         Unlike Dai et al. (2024), which introduces a frame-
+sitive demographic attributes like gender and ge-        work to identify and mitigate bias and unfairness
+ographic location, utilizing the TREC 2022 Fair          in information retrieval systems by incorporating
+Ranking Track. Leveraging the FlashRAG toolkit           LLMs, we provide a detailed empirical analysis
+(Jin et al., 2024), we evaluate various RAG meth-        of how different RAG components contribute to
+ods using our scenario-based QA datasets. Our            unfairness.
+evaluation considers the trade-off between utility
+(measured by exact match) and fairness. It also          2.2    Fairness in Retrieval and Generation
+analyzes how individual components within the      During the retrieval stage, fairness issues can arise
+RAG pipeline, including retrieval, refiner, judger,at multiple points, including in the retrieval model,
+and generator, contribute to fairness concerns, andthe retrieval process, and re-ranking. Rekabsaz
+assesses the impact of RAG method optimization     and Schedl (2020) introduces a bias measurement
+on overall fairness.                               framework that quantifies gender-related bias in
+   The contributions of this work are summarized   ranking lists, examining the impact of both BM25
+as follows:                                        and neural retrieval models. Rekabsaz et al. (2021)
+                                               10022
+      Step 1: Scenario-Based QA Construction
+                                                            Positive Question/              S1: Positive question with all relevant Item
+                                                            Negative Question
+                                   Queries
+                                                                                            S2: Positive question with all irrelevant Item
+                                                          Answer Options
+            TREC 2022               Items
+                                                    (Protected/Non-protected)
+                                                                                            S3: Positive question with relevant item (protected) and irrelevant item (non-protected)
+                                    Labels         Golden-standard Documents
+                                                    (Protected/Non-protected)               S4: Positive question with irrelevant item (protected) and relevant item (non-protected)
+
+
+      Step 2: RAG Pipeline                                                   Zero-Shot
+                                                                                                                                Step 3: Performance Evaluation
+
+       Scenario-Based QA Prompt:                                                 Naive                                                                 Utility
+       Which answer is relevant to the topic [query] ?
+       Select the relevant answer based on their                         Selective-Context                                                         (EM/ROUGE-1)
+       relationship to [query], rather than just matching                        SKR
+       words.                                                                                                                                         Fairness
+                                                                                                            Output
+       Choose from the following: [non-protected                                 FLARE                                                     (Group Disparity/Equalized Odds)
+       item], [protected item], Both, Neither, or                           Iter-RetGen
+       Insufficient information to decide.                                                                                                      Retrieval Performance
+                                                                                                                                                      (MRR@K)
+                                 Retriever                  Refiner                Judger                 Generator
+
+
+
+Figure 2: Proposed RAG fairness evaluation framework, showing the flow from data construction collection to
+performance evaluation.
+
+
+explores how re-ranking can mitigate biases present                                                group, relevant items in the protected group, irrel-
+in the initial retrieval results. Wang et al. (2024)                                               evant items in the non-protected group, and irrele-
+identifies a gap between ranking performance and                                                   vant items in the protected group. Specifically, the
+fairness when using LLMs for re-ranking and pro-                                                   irrelevant items were randomly selected from rel-
+poses a mitigation method with LoRA. On the LLM                                                    evant candidates of other queries. We constructed
+generation side, Liang et al. (2023) evaluates ac-                                                 two sub-benchmarks: TREC 2022 Gender, where
+curacy, including exact match (EM), in question                                                    females are considered the protected group and
+answering while considering fairness using met-                                                    males the non-protected group, and TREC 2022
+rics like toxicity and representation bias. Similarly,                                             Location, where non-Europeans are designated as
+Wang et al. (2023a) focuses on demographic im-                                                     the protected group and Europeans serve as the
+balances in LLMs like GPT-3.5 and GPT-4 in zero-                                                   non-protected group.
+shot and few-shot QA settings. Parrish et al. (2022)                                                  For each dataset, we define the set of queries as
+introduces the BBQ benchmark to assess biases                                                      Q = {q1 , q2 , . . . , qM }, consisting of M queries.
+in LLM-generated responses by testing reliance                                                     Similarly, the set of items is defined as D =
+on stereotypes in both under-informative and ade-                                                  {d1 , d2 , . . . , dN }, consisting of N items. Based
+quately informative contexts. While these works in-                                                on the relevance between queries and items, for
+                                                                                                                                                      q
+dividually address fairness issues at different stages,                                            each query q, there is a set of relevant items Drel
+                                                                                                                                         q
+fairness across all stages and components in RAG                                                   and a set of irrelevant items Dirrel . Specifically,
+pipelines remains under-explored. Our work aims                                                    each item is annotated with a binary attribute indi-
+to identify and investigate unfairness throughout                                                  cating whether it belongs to a protected group Gp
+the entire RAG system.                                                                             or a non-protected group Gnp . Figure 2 illustrates
+                                                                                                   our proposed RAG fairness evaluation framework.
+3     Evaluation Framework
+3.1     Datasets                                                                                   3.2 Scenario-Based QA Problem Construction
+In our evaluation, we utilized two datasets: TREC      Table 1 presents the template of the questions and
+Fair Ranking Track 2022 (Ekstrand et al., 2022) golden answers used for each scenario in our eval-
+and the BBQ dataset (Parrish et al., 2022), to con- uation dataset.
+struct our evaluation benchmark dataset. For the          To better study how external sources and var-
+TREC Fair Ranking Track 2022 dataset, we pri- ious components within RAG methods might in-
+marily focused on the task of WikiProject coordi- advertently introduce biases, especially when they
+nators searching for relevant articles, containing     disproportionately favor or disadvantage specific
+48 queries. For each given query, we randomly se- demographic groups, we have designed a focused,
+lected candidate items from English Wikipedia and      structured QA format called Scenario-Based QA
+categorized them into different groups based on        based on different dataset. This format provides an
+their relevance: relevant items in the non-protected   effective way to evaluate how RAG methods handle
+                                                   10023
+Scenario   Template                                                                                                                                     Golden Answers
+  S1       Which answer is relevant to the topic [q]? Select the relevant answer based on their relationship to [q], rather than just matching words.   {aqrel |Gnp ,
+           Choose from the following: [aqrel |Gnp ], [aqrel |Gp ], Both, Neither, or Insufficient information to decide.                                aqrel |Gp , Both}
+  S2       Which answer is relevant to the topic [q]? Select the relevant answer based on their relationship to [q], rather than just matching words.   {Neither}
+           Choose from the following: [aqirrel |Gnp ], [aqirrel |Gp ], Both, Neither, or Insufficient information to decide.
+  S3       Which answer is relevant to the topic [q]? Select the relevant answer based on their relationship to [q], rather than just matching words.   {aqrel |Gp }
+           Choose from the following: [aqirrel |Gnp ], [aqrel |Gp ], Both, Neither, or Insufficient information to decide.
+  S4       Which answer is relevant to the topic [q]? Select the relevant answer based on their relationship to [q], rather than just matching words.   {aqrel |Gnp }
+           Choose from the following: [aqrel |Gnp ], [aqirrel |Gp ], Both, Neither, or Insufficient information to decide.
+
+
+                                 Table 1: Template for each scenario of proposed evaluation dataset.
+
+
+fairness by creating controlled environments that      construct the questions and options, resulting in
+test for biases across different demographic groups. 4800 query-item pairs for each scenario. Table 1
+It allows us to explore specific cases where bias      presents the template of the questions and golden
+may occur and analyze how the model performs           answers used for each scenario in our evaluation
+under varying conditions.                              dataset.
+    To convert the TREC 2022 dataset into a
+question-answer format for our evaluation, we use      3.3 RAG Pipeline
+the queries along with their corresponding rele- We introduce the RAG methods from the
+vant and irrelevant items. Each query q is trans- FlashRAG toolkit that were evaluated in our study.
+formed into a question, the relevant and irrelevant    The selection was based on two key criteria. First,
+                                             q
+are used as answer options, denoted as arel and        we aimed to avoid RAG methods that were fine-
+aqirrel , respectively. The associated documents for   tuned using specific benchmark datasets or em-
+each item serve as the gold-standard documents, bedding models, to minimize the negative effects
+denoted as dq . The model is expected to generate      of overfitting and ensure the fairness of the ex-
+the correct answer based on the query and the pro- periments. Second, we selected models that cov-
+vided answer options. During Question Construc- ered all components of the RAG pipeline, allowing
+tion, we use both positive and negative questions      us to evaluate whether different components con-
+based on relevance, such as “Which answer is [rel- tribute to unfairness. Based on these criteria, we
+evant/irrelevant] to the topic {q}?”. For each ques- selected two baseline models and four RAG meth-
+tion, the answer options include items from both       ods as follows: Zero-Shot, the baseline model
+protected and non-protected groups, along with         generates answers solely based on the language
+choices like “Both”, “Neither”, and “Insufficient      model itself, without incorporating any external
+information to decide”. In the Scenario-Based          knowledge. This allows us to understand the in-
+QA Construction, we design four basic scenarios        herent biases present in the language model alone.
+to test fairness. Scenario S1 presents a positive      Naive, directly utilizes retrieved documents to gen-
+question with all relevant items from both groups, erate answers without any additional optimization
+evaluating whether the system equally identifies rel- or processing, highlighting how unprocessed ex-
+evance for both protected and non-protected groups. ternal knowledge affects the outcomes. Selective-
+Scenario S2 involves a positive question with all      Context (Li et al., 2023), focuses on the refine-
+irrelevant items, assessing whether the system can     ment process by compressing the input prompt to
+correctly identify irrelevance without bias toward     select the most relevant context from the retrieved
+either group. Scenario S3 uses a positive question     documents. It tests how refining the context af-
+with relevant items from the protected group and       fects the balance between fairness and accuracy.
+irrelevant items from the non-protected group, test- SKR (Wang et al., 2023b), enhances the decision-
+ing if the system favors the non-protected group       making component (the “judger”), which deter-
+despite relevant content from the protected group. mines whether to retrieve documents for a query.
+Finally, Scenario S4 presents a positive question      This model allows us to analyze the impact of se-
+with irrelevant items from protected group and rel- lective retrieval on fairness, especially when deter-
+evant item from the non-protected group. Specif- mining the necessity of external knowledge for a
+ically, during data construction, in each scenario, given query. FLARE (Jiang et al., 2023) and Iter-
+we randomly selected 100 item pairs from the pro- RetGen (Shao et al., 2023), both models optimize
+tected and non-protected groups for each query to      the entire RAG flow, including multiple retrievals
+                                                   10024
+and generation processes. The difference is that        4     Experiments
+FLARE optimizes performance by actively decid-
+                                                        4.1    Experimental Settings
+ing when and what to retrieve throughout the gen-
+eration process, while Iter-RetGen improves per-        We evaluate various RAG methods as described
+formance by leveraging both retrieval-augmented         in Section 3.3, using our constructed benchmark
+generation and generation-augmented retrieval pro-      datasets: TREC 2022 Gender and TREC 2022 Lo-
+cesses.                                                 cation. Additionally, we evaluate another subset of
+                                                        real-world benchmark, BBQ (Parrish et al., 2022),
+3.4   Performance Evaluation Metrics                    with results provided in the Appendix A.2. For
+To comprehensively evaluate our experimental re-        the RAG methods, we use Wikipedia data as the
+sults, we focus on three key metrics. First, we         corpus, following the pre-processing method from
+assess the accuracy of generated answers using          FlashRAG, which retains only the first 100 words
+Exact Match (EM) (Rajpurkar et al., 2016) and           (tokens) of each document. For each RAG method,
+ROUGE-1 scores (Lin, 2004). Second, we evalu-           we use the original model’s hyper-parameters.
+ate fairness using Group Disparity (GD) (Friedler       Specifically, for retrievers, we cover the sparse re-
+et al., 2019) and Equalized Odds (EO) (Hardt et al.,    triever BM25 (Lin et al., 2021) and dense retriever
+2016). Group Disparity measures performance dif-        based on E5-base-v2 2 and E5-large-v2 3 , testing
+ferences between protected (Gp ) and non-protected      different retrieval numbers: 1, 2, and 5. For the
+groups (Gnp ).                                          generator, we use Meta-Llama-3-8B-Instruct 4 and
+                                                        Meta-Llama-3-70B-Instruct 5 in our experiments.
+           GD = Perf(Gp ) − Perf(Gnp )            (1)   Unless otherwise specified, our results are primar-
+                                                        ily based on the retriever using E5-base-v2 with
+Basically, Performance for each group is calculated
+                                                        a retrieval number of 5, and the generator using
+as the ratio of exact matches within the group to the
+                                                        Meta-Llama-3-8B-Instruct. All experiments were
+total number of exact matches across all groups: for
+                                                        conducted on NVIDIA A100 GPUs.
+each group is calculate based on EM score within
+that group.                                             4.2    Results and Analysis
+                #exact matches in group G               In Table 2, we present the overall evaluation results
+ Perf(G) =                                    (2)       of utility metrics (EM, ROUGE -1) and fairness
+             #exact matches across all groups
+                                                        metrics (GD, EO) for each RAG method across
+We use GD in Scenario S1 and S2, the calculation        different scenarios and two benchmark datasets, fo-
+of GD may vary, and we have included the specific       cusing on gender and location. Although the results
+formulas for each scenario in the Appendix A.1.         vary across datasets and scenarios, we observe that:
+We utilize Equalized Odds (EO) in Scenario S3 and          There is a trade-off between utility and fair-
+Scenario S4, as we expect the performance of the        ness. While most RAG methods optimize for EM
+protected group Perf(Gp ) in S3 to be equal to the      (utility), fairness does not improve correspondingly.
+performance of the non-protected group Perf(Gnp )       Across both datasets and the 8 experimental set-
+in S4, and vice versa. We use the performance gap       tings (4 scenarios per dataset), the models with the
+between these groups to measure fairness across         best EM scores do not exhibit the best fairness, and
+S3 and S4.                                              vice versa. Moreover, we observed that in most sce-
+      EO(S3, S4) = Perf(Gp )S3 − Perf(Gnp )S4     (3)   narios, when models are ranked by EM from best
+                                                        to worst, the results are consistent across different
+      EO(S4, S3) = Perf(Gp )S4 − Perf(Gnp )S3     (4)
+                                                        datasets. For example, in Scenario S2, the rank-
+For GD and OD, values closer to 0 indicate greater      ing of models by EM for both TREC 2022 Gender
+fairness. Values greater than 0 suggest unfair per-     and TREC 2022 Location follows the same order:
+formance with a preference for the protected group,     FLARE > Zero-Shot > SKR > Selective-Context
+while values less than 0 indicate unfair performance    > Naive > Iter-RetGen. However, when looking
+with a preference for the non-protected group.            2
+                                                            https://huggingface.co/intfloat/e5-base-v2
+                                                          3
+   For the retrieval results within the RAG, since          https://huggingface.co/intfloat/e5-large-v2
+                                                          4
+we have the gold-standard documents for the an-             https://huggingface.co/meta-llama/
+                                                       Meta-Llama-3-8B-Instruct
+swers, we measure retrieval accuracy using Mean           5
+                                                            https://huggingface.co/meta-llama/
+Reciprocal Rank at K (MRR@K).                          Meta-Llama-3-70B-Instruct
+                                                   10025
+                                           Scenario S1                                               Scenario S2
+     RAG Methods
+                         EM      ROUGE-1    Perf(Gnp )   Perf(Gp )     GDS1        EM      ROUGE-1    Perf(Gnp )   Perf(Gp )     GDS2
+        Zero-Shot       0.8763    0.8855     0.2216       0.2066      -0.0150     0.5194    0.5190     0.4677       0.5323      0.0645
+          Naive         0.9046    0.9256     0.2423       0.2204      -0.0219     0.2164    0.2165     0.4157       0.5843      0.1686
+    Selective-Context   0.8823    0.9083     0.2524       0.2607       0.0083     0.2450    0.2446     0.4076       0.5924      0.1848
+           SKR          0.8898    0.9058     0.2302       0.2187      -0.0115     0.3540    0.3539     0.4832       0.5168      0.0337
+         FLARE          0.8117    0.8332     0.1586       0.1389      -0.0198     0.6570    0.6569     0.4275       0.5725      0.1450
+       Iter-RetGen      0.8877    0.9105     0.2589       0.2828       0.0239     0.1708    0.1704     0.3876       0.6124      0.2248
+                                           Scenario S3                                               Scenario S4
+     RAG Methods
+                         EM      ROUGE-1    Perf(Gnp )   Perf(Gp )   EO(S3, S4)    EM      ROUGE-1    Perf(Gnp )   Perf(Gp )   EO(S4, S3)
+        Zero-Shot       0.4851    0.4927     0.0427       0.4851       0.0057     0.4794    0.4948     0.4794       0.0543       0.0116
+          Naive         0.4422    0.4578     0.0171       0.4422      -0.0382     0.4804    0.5001     0.4804       0.0180      0.0008
+    Selective-Context   0.4843    0.5028     0.0176       0.4843       0.0071     0.4771    0.5014     0.4771       0.0214       0.0039
+           SKR          0.4516    0.4630     0.0345       0.4516      -0.0261     0.4778    0.4992     0.4778       0.0343      -0.0002
+         FLARE          0.3904    0.4021     0.0139       0.3904       0.0265     0.3639    0.3967     0.3639       0.0178       0.0039
+       Iter-RetGen      0.4780    0.4907     0.0184       0.4780       0.0018     0.4761    0.4951     0.4761       0.0210       0.0027
+
+                                       (a) Evaluation Performance on TREC 2022 Gender.
+                                           Scenario S1                                               Scenario S2
+     RAG Methods
+                         EM      ROUGE-1   Perf(Gnp )    Perf(Gp )    GDS1         EM      ROUGE-1   Perf(Gnp )    Perf(Gp )    GDS2
+       Zero-Shot        0.8768    0.8924     0.1211      0.2402       0.1191      0.5490    0.5478     0.4959      0.5041       0.0081
+         Naive          0.8900    0.9146     0.2337      0.2043      -0.0294      0.2404    0.2404     0.5240      0.4760      -0.0480
+   Selective-Context    0.8660    0.8971     0.2416      0.2404      -0.0012      0.2618    0.2619     0.5430      0.4570      -0.0859
+          SKR           0.8832    0.9043     0.1941      0.2101       0.0161      0.3658    0.3658     0.5364      0.4636      -0.0728
+        FLARE           0.8486    0.8793     0.0596      0.1565       0.0969      0.6526    0.6527     0.4617      0.5383       0.0765
+      Iter-RetGen       0.8560    0.8828     0.2484      0.2322      -0.0161      0.1890    0.1903     0.5489      0.4511      -0.0979
+                                           Scenario S3                                               Scenario S4
+     RAG Methods
+                         EM      ROUGE-1   Perf(Gnp )    Perf(Gp )   EO(S3, S4)    EM      ROUGE-1   Perf(Gnp )    Perf(Gp )   EO(S4, S3)
+       Zero-Shot        0.4870    0.5000     0.0216      0.4870       0.1208      0.3662    0.3894     0.3662      0.0468       0.0252
+         Naive          0.3820    0.4059     0.0146      0.3820      -0.0788      0.4608    0.4823     0.4608      0.0128      -0.0018
+   Selective-Context    0.3998    0.4311     0.0134      0.3998      -0.0448      0.4446    0.4702     0.4446      0.0140       0.0006
+          SKR           0.4220    0.4399     0.0206      0.4220       0.0022      0.4198    0.4393     0.4198      0.0248       0.0042
+        FLARE           0.3910    0.4277     0.0048      0.3910       0.1342      0.2568    0.2966     0.2568      0.0162       0.0114
+      Iter-RetGen       0.3842    0.4054     0.0128      0.3842      -0.0714      0.4556    0.4721     0.4556      0.0096      -0.0032
+
+                                      (b) Evaluation Performance on TREC 2022 Location.
+
+Table 2: Overall evaluation of RAG model performance in utility (EM and ROUGE-1) and fairness (GD and EO)
+across different scenarios on the TREC 2022 Gender and TREC 2022 Location benchmarks. In (a), the TREC 2022
+Gender benchmark designates females as the protected group (Gp ) and males as the non-protected group (Gnp ). In
+(b), the TREC 2022 Location benchmark identifies non-Europeans as the protected group Gp and Europeans as the
+non-protected group Gnp . Bold indicates the best-performing model for each metric utility (EM and ROUGE-1) and
+fairness (GD and EO) in the respective scenarios.
+
+
+at fairness metrics, there is no such stability, with                   in irrelevant ones (S4), EO(s3, s4) is often larger
+fairness scores showing significant fluctuations, in-                   (in absolute values) than EO(s4,s3) , indicating that
+dicating that fairness issues persist across all meth-                  RAG methods are more biased when determining
+ods and optimizing for utility does not guarantee                       relevance than when handling irrelevance. Addi-
+improved fairness.                                                      tionally, EO(s3, s4) shows more variability across
+   Different stability in relevant vs. irrelevant                       methods—some methods favor females while oth-
+scenarios. Across both datasets, we observed that                       ers favor males—while EO(s4,s3) tends to show a
+models exhibit greater consistency in EM and fair-                      consistent positive bias toward females, meaning
+ness metrics in scenarios with relevant questions                       females are more often incorrectly selected as rele-
+(S1) compared to those with irrelevant questions                        vant compared to males.
+(S2). For instance, in the TREC 2022 Gender
+dataset, both EM and GD vary less in S1 than
+in S2. However, fairness (GD) tends to fluctu-              In addition, inspired by Li et al. (2020), we also
+ate more, such as S1 showing different gender bi- constructed negative questions format to compare
+ases across models, while S2 consistently exhibits       the effects of asking the same questions in both
+a preference toward females. When comparing              positive and negative forms. Due to space limita-
+S3 and S4, the results do not consistently indicate      tions, the results and analysis are provided in the
+that fairness in relevant settings (S3) is better than   Appendix A.3.
+                                                     10026
+5    RAG Components Analysis                                      column bars (above 0) signify bias toward females,
+                                                                  whereas negative bars (below 0) indicate bias to-
+Inspired by Jin et al. (2024), we decompose the
+                                                                  ward males. Meanwhile, the EM metric, repre-
+RAG multi-component pipeline and categorize dif-
+                                                                  sented by the line (left axis), is always non-negative,
+ferent methods into four major components: Re-
+                                                                  with a higher line indicating better EM perfor-
+triever (Section 5.1), Refiner (Section 5.2), Judger
+                                                                  mance.
+(Section 5.3), and Generator (Section 5.4) to evalu-
+ate the utility and fairness within each component                5.1          Retriever Analysis
+in the TREC 2022 Gender Scenario S1.
+   Each component of the RAG pipeline plays a                            1.0
+
+distinct role in influencing utility and fairness:                                                                                                     0.3
+
+                                                                         0.8
+
+    • Retriever: Selects relevant documents, play-                                                                                                     0.2
+
+                                                                         0.6
+      ing a critical role in addressing biases during
+
+
+
+
+                                                                                                                                                              GDS1
+                                                                    EM
+                                                                                                                                                       0.1
+
+      retrieval. Our findings indicate that the Re-                      0.4
+
+      triever has the most significant influence on                                                                                                    0.0
+
+                                                                         0.2
+      both fairness and EM.                                                         EM (E5)                                         GDS1 (E5)
+                                                                                                                                                       −0.1
+                                                                                    EM (BM25)                                       GDS1 (BM25)
+                                                                         0.0
+                                                                               Zero−Shot      Naive Selective−Context SKR   FLARE        Iter−RetGen
+    • Refiner: Enhances the relevance and coher-                                                          RAG Methods
+
+      ence of the retrieved content. However, the                                                (a) BM25 vs. E5-base.
+      Refiner has minimal impact on fairness and                         1.0
+
+                                                                                                                                                       0.3
+      EM in the overall RAG system.
+                                                                         0.8
+
+                                                                                                                                                       0.2
+    • Judger: Decides whether external knowledge                         0.6
+
+
+
+
+                                                                                                                                                              GDS1
+      is required, shaping the decision-making pro-
+                                                                    EM
+
+
+
+
+                                                                                                                                                       0.1
+
+      cess. Similar to the Refiner, the Judger shows                     0.4
+
+                                                                                                                                                       0.0
+      minimal impact on fairness and EM.                                 0.2
+                                                                                    EM (E5)                                    GDS1 (E5)
+                                                                                                                                                       −0.1
+                                                                                    EM (E5−Large)                              GDS1 (E5−Large)
+    • Generator: Synthesizes retrieved knowledge                         0.0
+                                                                               Zero−Shot      Naive Selective−Context SKR   FLARE        Iter−RetGen
+      with internal understanding to produce the fi-                                                      RAG Methods
+
+      nal output. While the Generator can affect                                               (b) E5-base vs. E5-large.
+                                                                         1.0
+      fairness, it has a limited effect on EM.
+                                                                                                                                                       0.3
+
+                                                                         0.8
+   Metric Visualization To present EM and fair-                                                                             0.2
+ness metrics (Group Disparity GD and Equalized             0.6                                                                                                GDS1
+
+Odds EO) intuitively and uniformly, we use dual
+                                                                    EM
+
+
+
+
+                                                                                                                            0.1
+
+                                                           0.4
+y-axis combo charts. The EM metric is displayed
+                                                                                                                            0.0
+as lines on the left y-axis, while fairness metrics        0.2     EM (ret num=1)                            GD (ret num=1)         S1
+
+are represented as columns on the right y-axis. The                EM (ret num=2)
+                                                                   EM (ret num=5)
+                                                                                                             GD (ret num=2)
+                                                                                                             GD (ret num=5)
+                                                                                                                            −0.1
+                                                                                                                                    S1
+
+                                                                                                                                    S1
+
+x-axis shows the six evaluated RAG methods: Zero-          0.0
+                                                               Zero−Shot     Naive Selective−Context SKR FLARE Iter−RetGen
+                                                                                           RAG Methods
+Shot, Naive, Selective-Context, SKR, FLARE, and
+Iter-RetGen.                                              (c) Different retrieval numbers ret_num of 1, 2, and 5.
+   Each metric is plotted on separate scales to en- Figure 3: Evaluation of EM and GDS1 for retrievers,
+hance trend visibility. For consistency, all charts    with a focus on different retrieval methods (BM25, E5-
+use the same range for EM (0 to 1) and fairness        base, and E5-large) and varying retrieval document num-
+metrics (-0.15 to 0.35). This uniform scaling facili- bers (ret_num = 1, 2, 5).
+tates meaningful visual comparisons across differ-
+ent RAG components and question constructions             BM25 vs. E5-base vs. E5-large. According
+(e.g., analyses of negatively framed questions as      to Figure 3a, E5-based dense retriever generally
+discussed in A.3).                                     shows more balanced unfairness ratios, with several
+   Qualitatively, the height of the column bars (on    methods exhibiting values closer to 0. In contrast,
+the right axis) indicates the magnitude of bias or     sparse retriever BM25, tends to introduce a larger
+unfairness: taller bars reflect greater bias, while    bias towards female, suggesting that BM25’s sparse
+shorter bars indicate improved fairness. Positive      retrieval is more prone to favoring female content.
+                                                   10027
+      1.0                                                                           1.0
+
+                                                                0.3                                                                                           0.3
+
+      0.8                                                                           0.8
+
+                                                                0.2                                                                                           0.2
+      0.6                                                                           0.6
+
+
+
+
+                                                                       GDS1
+ EM
+
+
+
+
+                                                                                                                                                                     GDS1
+                                                                               EM
+                                                                0.1                                                                                           0.1
+      0.4                                                                           0.4
+                                                                0.0
+                                                                                                                                                              0.0
+      0.2
+                                                                                    0.2       EM                                         GDS1
+                                                                −0.1                          EM (judge true)                            GDS1 (judge true)
+                 EM                                      GDS1                                                                                                 −0.1
+                                                                                              EM (judge false)                           GDS1 (judge false)
+      0.0
+            Zero−Shot   Naive      Selective−Context   Iter−RetGen                  0.0
+                                                                                           Zero−Shot             Naive             SKR         FLARE
+                           RAG Methods
+                                                                                                                     RAG Methods
+
+
+Figure 4: Evaluation of EM and GDS1 for Selective-                            Figure 5: Evaluation of EM and GDS1 for FLARE and
+Context and Iter-RetGen Refiner.                                              SKR judgers. Since Zero-shot and Naive do not use a
+                                                                              judger component, their GDS1 values are set to zero.
+   As shown in Figure 3b, the E5-base retriever
+model demonstrates a more balanced distribution
+                                                                              cess based on the Iter-RetGen method architecture.
+of bias, with values closer to zero. However, the E5-
+                                                                              As shown in Figure 4, Iter-RetGen does not sig-
+large retriever introduces a stronger male-favoring
+                                                                              nificantly impact EM or fairness compared to the
+bias, as reflected in the large negative group dispar-
+                                                                              Naive method. Both methods show low bias, but
+ity, where all methods using E5-large tend to favor
+                                                                              there is a slight shift: Iter-RetGen favors females,
+males. This bias is also amplified in E5-large, with
+                                                                              while Naive favors males. This suggests that the
+higher absolute bias values compared to E5-base.
+                                                                              refinement process may slightly influence bias as
+Based on further analysis using the MRR evalua-
+                                                                              it propagates through more focused retrieval itera-
+tion metric for golden documents, E5-large demon-
+                                                                              tions.
+strates a stronger bias favoring males. As shown
+in Figure 9, E5-large is less effective in retriev-                              Refiner with Compression of Retrieval Re-
+ing higher-ranked female-related golden document,                             sults. Based on Figure 4, the Selective-Context
+with rankings significantly worse than those for                              model behaves similarly to Iter-RetGen, but with
+their male counterparts. Additional explanations                              a more noticeable reduction in bias after compres-
+are provided in Appendix A.4. In conclusion, un-                              sion refinement. This bias reduction is likely due
+fairness exists across all retriever types, with each                         to Selective-Context’s focus on highly informative
+influencing bias differently.                                                 content, which limits over-reliance on gendered or
+   Retrieval Numbers Comparison. The experi-                                  biased cues. Both refinement processes introduce
+ments in Figure 3c, conducted using E5-base with                              minimal unfairness, if any, suggesting that while
+retrieval numbers of 1, 2, and 5, reveal two signif-                          some bias may be present, its overall impact is not
+icant trends. First, FLARE’s EM and fairness re-                              substantial.
+main stable and similar to Zero-Shot performance,
+with minimal change regardless of the number of                               5.3         Judger Analysis
+retrieved documents, suggesting that FLARE does
+not benefit from retrieving more documents. Sec-      According to Figure 5, FLARE and SKR perform
+ond, for methods like Iter-RetGen, Naive, Selective-  similarly to non-judger methods like Naive and
+Context, and SKR, retrieving more documents sig-      Zero-Shot in terms of EM and fairness. This
+nificantly improves fairness. High positive bias      suggests that incorporating a judger component
+toward females when retrieving 1 document gradu-      does not significantly affect overall EM or fair-
+ally balances out as more documents are retrieved,    ness. However, when focusing specifically on cases
+with bias values closest to zero when retrieving 5    where FLARE and SKR decide to retrieve docu-
+documents. This trend indicates that increasing       ments based on their internal judgers (“judge-true”
+the number of retrieved documents helps mitigate      in Figure 5), clear differences emerge. In FLARE,
+gender bias.                                          when the judger decides to retrieve, it introduces
+                                                      a stronger bias toward males compared to SKR.
+5.2 Refiner Analysis                                  This shows that FLARE’s retrieval decisions lead
+Refiner with Multiple Rounds of Retrieval. We         to greater unfairness, contributing to the overall
+evaluated the multi-round retrieval refinement pro- bias toward males more than SKR.
+                                                  10028
+         1.0
+                                                                                                                                  Naive        Selective-Context
+                                                                                  0.3                 Experiments
+         0.8                                                                                                                 EM       GDS1      EM       GDS1
+                                                                                  0.2                   E5-base             0.8790   0.0415    0.8575   0.0379
+         0.6                                                                                      Golden Doc(male first)    0.9640   -0.1327   0.9535   -0.1879
+
+
+
+
+                                                                                         GDS1
+    EM
+
+
+
+
+                                                                                  0.1            Golden Doc(female first)   0.9677   -0.0088   0.9540   0.0002
+         0.4
+
+                                                                                  0.0
+                                                                                                Table 3: Evaluation based on E5-based retrieved docu-
+         0.2
+                    EM (8B)                                         GDS1 (8B)
+                                                                                  −0.1
+                                                                                                ments and golden-standard documents, with different
+                    EM (70B)                                        GDS1 (70B)
+         0.0                                                                                    prioritization of male and female, for the RAG models
+               Zero−Shot      Naive Selective−Context SKR   FLARE   Iter−RetGen
+                                          RAG Methods                                           Naive and Selective-Context.
+
+Figure 6: Evaluation of EM and GDS1 for Llama-3-
+instruct generators with 8B and 70B parameters.                                                 trieved documents with golden documents, adjust-
+                                                                                                ing the ranking order to prioritize female docu-
+                                                                                                ments first and male documents second, and vice
+5.4            Generator Analysis
+                                                                                                versa.
+We utilized different LLama-3-instruct models with                                                 Table 3 shows the results. Initially, both Naive
+varying parameter sizes (8B and 70B) to assess                                                  and Selective-Context display a slight bias toward
+the influence of the LLM generator. As shown in                                                 females (as indicated by a small positive value
+Figure 6, across all RAG methods, EM remains                                                    of GDS1 ). When prioritizing male golden doc-
+roughly the same between the 8B and 70B models,                                                 uments, EM increases, but the output exhibits a
+but bias fluctuates significantly. The 70B model                                                significant bias toward males. Conversely, when
+shows a consistent shift toward bias favoring males,                                            female golden documents are ranked first, EM also
+while the 8B model exhibits more varied results,                                                increases, and the bias is largely mitigated, bring-
+with both positive and negative biases depending                                                ing unfairness closer to zero. This aligns with our
+on the method. This highlights how different model                                              goal of mitigating unfairness while potentially in-
+sizes can impact both the direction and magnitude                                               creasing EM.
+of bias. Additionally, the larger 70B model may                                                    This process is dynamic—if prioritizing male
+improve fairness but at the cost of a slight decrease                                           golden documents (or having a higher MRR for
+in EM performance, indicating a trade-off between                                               males) results in bias toward males, we can miti-
+EM and fairness.                                                                                gate this by ranking female golden documents first
+                                                                                                (or increasing MRR for females) in more and more
+6         Enhancing Fairness in RAGs                                                            retrieval results to alleviate the unfairness intro-
+                                                                                                duced by male-biased retrieved documents.
+From our empirical experiments in previous sec-
+tions, we identified several strategies to mitigate
+                                                        7 Conclusion
+fairness issues, including using positive rather than
+negative questioning, retrieving more documents, In this paper, we explored fairness issues in RAG
+using a larger generator model, or choosing E5- methods, specifically focusing on our constructed
+base over BM25 or E5-large. The most straight- TREC 2022 Gender and Location benchmarks
+forward and effective method for reducing bias, through various scenario-based QA tasks. Our ex-
+however, is adjusting the percentage and ranking of     periments reveal that while RAG methods improve
+relevant documents for protected and non-protected      utility metrics like EM, fairness concerns persist
+groups in the retrieved results. This involves bal- across different components, such as the retriever
+ancing both relevance and fairness in the retrieval     and generator. We demonstrated that bias can be
+process. For example, if the RAG method dispro- mitigated by adjusting question formats, increas-
+portionately favors the non-protected group (male), ing the number of retrieved documents, and prior-
+placing more relevant documents from the pro- itizing relevant documents from protected groups.
+tected group (female) at the top of the results can     In future work, we plan to incorporate additional
+help achieve balance.                                   datasets to generalize our findings and investigate
+   To test this mitigation, we conducted an experi- more advanced mitigation strategies. We also aim
+ment using the Naive and Selective-Context meth- to develop fairness-focused retrieval techniques
+ods with the baseline of retrieving 2 documents. and refine ranking methods to balance relevance
+We compared this with manually replacing the re- and fairness.
+                                                    10029
+8   Limitations                                            Yunfan Gao, Yun Xiong, Xinyu Gao, Kangxiang Jia,
+                                                             Jinliu Pan, Yuxi Bi, Yi Dai, Jiawei Sun, Qianyu Guo,
+The limitation of this paper is that, although it            Meng Wang, and Haofen Wang. 2023. Retrieval-
+conducts extensive experiments to highlight fair-            augmented generation for large language models: A
+ness issues in RAG methods, it does not provide              survey. CoRR, abs/2312.10997.
+a comprehensive exploration of strategies to miti-         Kelvin Guu, Kenton Lee, Zora Tung, Panupong Pasupat,
+gate these unfairnesses. While the findings reveal           and Ming-Wei Chang. 2020. Retrieval augmented
+the presence and amplification of fairness concerns          language model pre-training. In Proceedings of the
+across different components of the RAG pipeline,             37th International Conference on Machine Learning,
+                                                             ICML 2020, 13-18 July 2020, Virtual Event, volume
+further research is required to propose and evaluate         119 of Proceedings of Machine Learning Research,
+effective techniques for addressing these fairness           pages 3929–3938. PMLR.
+concerns.
+                                                           Moritz Hardt, Eric Price, and Nati Srebro. 2016. Equal-
+                                                            ity of opportunity in supervised learning. In Ad-
+                                                            vances in Neural Information Processing Systems 29:
+References                                                  Annual Conference on Neural Information Process-
+Sebastian Borgeaud, Arthur Mensch, Jordan Hoffmann,         ing Systems 2016, December 5-10, 2016, Barcelona,
+  Trevor Cai, Eliza Rutherford, Katie Millican, George      Spain, pages 3315–3323.
+  van den Driessche, Jean-Baptiste Lespiau, Bogdan
+  Damoc, Aidan Clark, Diego de Las Casas, Aurelia          Gautier Izacard and Edouard Grave. 2021. Leveraging
+  Guy, Jacob Menick, Roman Ring, Tom Hennigan,               passage retrieval with generative models for open do-
+  Saffron Huang, Loren Maggiore, Chris Jones, Albin          main question answering. In Proceedings of the 16th
+  Cassirer, Andy Brock, Michela Paganini, Geoffrey           Conference of the European Chapter of the Associ-
+  Irving, Oriol Vinyals, Simon Osindero, Karen Si-           ation for Computational Linguistics: Main Volume,
+  monyan, Jack W. Rae, Erich Elsen, and Laurent Sifre.       EACL 2021, Online, April 19 - 23, 2021, pages 874–
+  2022. Improving language models by retrieving from         880. Association for Computational Linguistics.
+  trillions of tokens. In International Conference on
+  Machine Learning, ICML 2022, 17-23 July 2022, Bal-       Zhengbao Jiang, Frank F. Xu, Luyu Gao, Zhiqing Sun,
+  timore, Maryland, USA, volume 162 of Proceedings           Qian Liu, Jane Dwivedi-Yu, Yiming Yang, Jamie
+  of Machine Learning Research, pages 2206–2240.             Callan, and Graham Neubig. 2023. Active retrieval
+  PMLR.                                                      augmented generation. In Proceedings of the 2023
+                                                             Conference on Empirical Methods in Natural Lan-
+Sunhao Dai, Chen Xu, Shicheng Xu, Liang Pang, Zhen-          guage Processing, EMNLP 2023, Singapore, Decem-
+  hua Dong, and Jun Xu. 2024. Bias and unfairness            ber 6-10, 2023, pages 7969–7992. Association for
+  in information retrieval systems: New challenges           Computational Linguistics.
+  in the LLM era. In Proceedings of the 30th ACM
+  SIGKDD Conference on Knowledge Discovery and             Jiajie Jin, Yutao Zhu, Xinyu Yang, Chenghao Zhang,
+  Data Mining, KDD 2024, Barcelona, Spain, August             and Zhicheng Dou. 2024. Flashrag: A modular
+  25-29, 2024, pages 6437–6447. ACM.                          toolkit for efficient retrieval-augmented generation
+                                                              research. CoRR, abs/2405.13576.
+Michael D. Ekstrand, Graham McDonald, Amifa Raj,
+  and Isaac Johnson. 2022. Overview of the TREC            Jaehyung Kim, Jaehyun Nam, Sangwoo Mo, Jongjin
+  2022 fair ranking track. In Proceedings of the Thirty-      Park, Sang-Woo Lee, Minjoon Seo, Jung-Woo Ha,
+ First Text REtrieval Conference, TREC 2022, online,          and Jinwoo Shin. 2024. Sure: Summarizing re-
+  November 15-19, 2022, volume 500-338 of NIST                trievals using answer candidates for open-domain
+  Special Publication. National Institute of Standards        QA of llms. In The Twelfth International Conference
+  and Technology (NIST).                                      on Learning Representations, ICLR 2024, Vienna,
+                                                             Austria, May 7-11, 2024. OpenReview.net.
+Sorelle A. Friedler, Carlos Scheidegger, Suresh Venkata-
+  subramanian, Sonam Choudhary, Evan P. Hamilton,          Patrick S. H. Lewis, Ethan Perez, Aleksandra Pik-
+  and Derek Roth. 2019. A comparative study of               tus, Fabio Petroni, Vladimir Karpukhin, Naman
+  fairness-enhancing interventions in machine learn-         Goyal, Heinrich Küttler, Mike Lewis, Wen-tau Yih,
+  ing. In Proceedings of the Conference on Fairness,         Tim Rocktäschel, Sebastian Riedel, and Douwe
+  Accountability, and Transparency, FAT* 2019, At-           Kiela. 2020. Retrieval-augmented generation for
+  lanta, GA, USA, January 29-31, 2019, pages 329–            knowledge-intensive NLP tasks. In Advances in Neu-
+  338. ACM.                                                  ral Information Processing Systems 33: Annual Con-
+                                                             ference on Neural Information Processing Systems
+Ruoyuan Gao and Chirag Shah. 2019. How fair can we           2020, NeurIPS 2020, December 6-12, 2020, virtual.
+  go: Detecting the boundaries of fairness optimization
+  in information retrieval. In Proceedings of the 2019     Tao Li, Tushar Khot, Daniel Khashabi, Ashish Sabhar-
+  ACM SIGIR International Conference on Theory of            wal, and Vivek Srikumar. 2020. Unqovering stereo-
+  Information Retrieval, ICTIR 2019, Santa Clara, CA,        typing biases via underspecified questions. CoRR,
+  USA, October 2-5, 2019, pages 229–236. ACM.                abs/2010.02428.
+                                                      10030
+Yucheng Li, Bo Dong, Frank Guerin, and Chenghua Lin.         Texas, USA, November 1-4, 2016, pages 2383–2392.
+  2023. Compressing context to enhance inference ef-         The Association for Computational Linguistics.
+  ficiency of large language models. In Proceedings of
+  the 2023 Conference on Empirical Methods in Natu-       Navid Rekabsaz, Simone Kopeinik, and Markus Schedl.
+  ral Language Processing, EMNLP 2023, Singapore,           2021. Societal biases in retrieved contents: Measure-
+  December 6-10, 2023, pages 6342–6353. Association         ment framework and adversarial mitigation for BERT
+  for Computational Linguistics.                            rankers. CoRR, abs/2104.13640.
+
+Percy Liang, Rishi Bommasani, Tony Lee, Dimitris          Navid Rekabsaz and Markus Schedl. 2020. Do neural
+  Tsipras, Dilara Soylu, Michihiro Yasunaga, Yian           ranking models intensify gender bias? In Proceed-
+  Zhang, Deepak Narayanan, Yuhuai Wu, Ananya Ku-            ings of the 43rd International ACM SIGIR confer-
+  mar, Benjamin Newman, Binhang Yuan, Bobby Yan,            ence on research and development in Information
+  Ce Zhang, Christian Cosgrove, Christopher D. Man-         Retrieval, SIGIR 2020, Virtual Event, China, July
+  ning, Christopher Ré, Diana Acosta-Navas, Drew A.         25-30, 2020, pages 2065–2068. ACM.
+  Hudson, Eric Zelikman, Esin Durmus, Faisal Ladhak,
+  Frieda Rong, Hongyu Ren, Huaxiu Yao, Jue Wang,          Zhihong Shao, Yeyun Gong, Yelong Shen, Minlie
+  Keshav Santhanam, Laurel J. Orr, Lucia Zheng, Mert        Huang, Nan Duan, and Weizhu Chen. 2023. En-
+  Yüksekgönül, Mirac Suzgun, Nathan Kim, Neel               hancing retrieval-augmented large language models
+  Guha, Niladri S. Chatterji, Omar Khattab, Peter           with iterative retrieval-generation synergy. In Find-
+  Henderson, Qian Huang, Ryan Chi, Sang Michael             ings of the Association for Computational Linguis-
+  Xie, Shibani Santurkar, Surya Ganguli, Tatsunori          tics: EMNLP 2023, Singapore, December 6-10, 2023,
+  Hashimoto, Thomas Icard, Tianyi Zhang, Vishrav            pages 9248–9274. Association for Computational
+  Chaudhary, William Wang, Xuechen Li, Yifan Mai,           Linguistics.
+  Yuhui Zhang, and Yuta Koreeda. 2023. Holistic eval-
+  uation of language models. Trans. Mach. Learn. Res.,    Emily Sheng, Kai-Wei Chang, Prem Natarajan, and
+  2023.                                                     Nanyun Peng. 2021. Societal biases in language gen-
+                                                            eration: Progress and challenges. In Proceedings
+Chin-Yew Lin. 2004. ROUGE: A package for auto-              of the 59th Annual Meeting of the Association for
+  matic evaluation of summaries. In Text Summariza-         Computational Linguistics and the 11th International
+  tion Branches Out, pages 74–81, Barcelona, Spain.         Joint Conference on Natural Language Processing,
+  Association for Computational Linguistics.                ACL/IJCNLP 2021, (Volume 1: Long Papers), Virtual
+                                                            Event, August 1-6, 2021, pages 4275–4293. Associa-
+Jimmy Lin, Xueguang Ma, Sheng-Chieh Lin, Jheng-             tion for Computational Linguistics.
+   Hong Yang, Ronak Pradeep, and Rodrigo Nogueira.
+   2021. Pyserini: A Python toolkit for reproducible      Weijia Shi, Sewon Min, Michihiro Yasunaga, Min-
+   information retrieval research with sparse and dense    joon Seo, Richard James, Mike Lewis, Luke Zettle-
+   representations. In Proceedings of the 44th Annual      moyer, and Wen-tau Yih. 2024. REPLUG: retrieval-
+   International ACM SIGIR Conference on Research          augmented black-box language models. In Proceed-
+   and Development in Information Retrieval (SIGIR         ings of the 2024 Conference of the North American
+  2021), pages 2356–2362.                                  Chapter of the Association for Computational Lin-
+                                                           guistics: Human Language Technologies (Volume 1:
+Jinming Nian, Zhiyuan Peng, Qifan Wang, and Yi Fang.       Long Papers), NAACL 2024, Mexico City, Mexico,
+   2024. W-RAG: weakly supervised dense retrieval in       June 16-21, 2024, pages 8371–8384. Association for
+   RAG for open-domain question answering. CoRR,           Computational Linguistics.
+   abs/2408.08444.
+                                                          Robik Shrestha, Yang Zou, Qiuyu Chen, Zhiheng Li,
+Alicia Parrish, Angelica Chen, Nikita Nangia,               Yusheng Xie, and Siqi Deng. 2024. Fairrag: Fair
+  Vishakh Padmakumar, Jason Phang, Jana Thompson,           human generation via fair retrieval augmentation.
+  Phu Mon Htut, and Samuel R. Bowman. 2022. BBQ:            CoRR, abs/2403.19964.
+  A hand-built bias benchmark for question answering.
+  In Findings of the Association for Computational        Kurt Shuster, Spencer Poff, Moya Chen, Douwe Kiela,
+  Linguistics: ACL 2022, Dublin, Ireland, May 22-27,        and Jason Weston. 2021. Retrieval augmentation
+  2022, pages 2086–2105. Association for Computa-           reduces hallucination in conversation. In Findings
+  tional Linguistics.                                       of the Association for Computational Linguistics:
+                                                            EMNLP 2021, Virtual Event / Punta Cana, Domini-
+Zhiyuan Peng, Jinming Nian, Alexandre V. Evfimievski,       can Republic, 16-20 November, 2021, pages 3784–
+  and Yi Fang. 2024. Rag-confusionqa: A benchmark           3803. Association for Computational Linguistics.
+  for evaluating llms on confusing questions. CoRR,
+  abs/2410.14567.                                         Guohao Sun, Can Qin, Huazhu Fu, Linwei Wang, and
+                                                            Zhiqiang Tao. 2024. Self-training large language
+Pranav Rajpurkar, Jian Zhang, Konstantin Lopyrev, and       and vision assistant for medical question answering.
+   Percy Liang. 2016. Squad: 100, 000+ questions            In Proceedings of the 2024 Conference on Empiri-
+   for machine comprehension of text. In Proceedings        cal Methods in Natural Language Processing, pages
+   of the 2016 Conference on Empirical Methods in           20052–20060, Miami, Florida, USA. Association for
+  Natural Language Processing, EMNLP 2016, Austin,          Computational Linguistics.
+                                                     10031
+Boxin Wang, Weixin Chen, Hengzhi Pei, Chulin Xie,          A       Appendix
+  Mintong Kang, Chenhui Zhang, Chejian Xu, Zidi
+  Xiong, Ritik Dutta, Rylan Schaeffer, Sang T. Truong,     A.1       Group Disparity in Scenario S1 and S2
+  Simran Arora, Mantas Mazeika, Dan Hendrycks, Zi-
+                                                           For Scenario S1, since “Both” is one of the pos-
+  nan Lin, Yu Cheng, Sanmi Koyejo, Dawn Song, and
+  Bo Li. 2023a. Decodingtrust: A comprehensive as-         sible answers, when calculating the ratio of exact
+  sessment of trustworthiness in GPT models. In Ad-        matches within each group, we also need to account
+  vances in Neural Information Processing Systems 36:      for answers marked as “Both”. Thus,
+  Annual Conference on Neural Information Process-
+  ing Systems 2023, NeurIPS 2023, New Orleans, LA,
+  USA, December 10 - 16, 2023.                                                     EM(Gp )
+                                                           Perf(Gp ) =
+Yile Wang, Peng Li, Maosong Sun, and Yang Liu.                          EM(Gp ) + EM(Gnp ) + EM(“Both”)
+  2023b. Self-knowledge guided retrieval augmenta-                                                  (5)
+  tion for large language models. In Findings of the                               EM(Gnp )
+  Association for Computational Linguistics: EMNLP         Perf(Gnp ) =
+  2023, Singapore, December 6-10, 2023, pages 10303–                    EM(Gp ) + EM(Gnp ) + EM(“Both”)
+  10315. Association for Computational Linguistics.                                                 (6)
+Yuan Wang, Xuyang Wu, Hsin-Tai Wu, Zhiqiang Tao,                   GDS1 = Perf(Gp ) − Perf(Gnp )               (7)
+  and Yi Fang. 2024. Do large language models rank
+  fairly? an empirical study on the fairness of LLMs          For Scenario S2, although both answer options
+  as rankers. In Proceedings of the 2024 Conference of     from each group are irrelevant, we can calculate
+  the North American Chapter of the Association for        the ratio of exact matches as follows:
+  Computational Linguistics: Human Language Tech-
+  nologies (Volume 1: Long Papers), pages 5712–5724,
+  Mexico City, Mexico. Association for Computational                                 EM(Gp )
+  Linguistics.                                                       Perf(Gp ) =                               (8)
+                                                                                 EM(Gp ) + EM(Gnp )
+Nirmalie Wiratunga, Ramitha Abeyratne, Lasal Jayawar-                                EM(Gp )
+  dena, Kyle Martin, Stewart Massie, Ikechukwu Nkisi-               Perf(Gnp ) =                               (9)
+                                                                                 EM(Gp ) + EM(Gnp )
+  Orji, Ruvan Weerasinghe, Anne Liret, and Bruno
+  Fleisch. 2024. CBR-RAG: case-based reasoning for                      GDS2 = Perf(Gp ) − Perf(Gnp )         (10)
+  retrieval augmented generation in llms for legal ques-
+  tion answering. In Case-Based Reasoning Research         A.2       Evaluate EM and Unfairness Using BBQ
+  and Development - 32nd International Conference,                   Dataset
+  ICCBR 2024, Merida, Mexico, July 1-4, 2024, Pro-
+  ceedings, volume 14775 of Lecture Notes in Com-          BBQ Dataset: Selection, Scenarios, and Met-
+  puter Science, pages 445–460. Springer.                  ric Definitions We used a subset of the BBQ 6
+Fangyuan Xu, Weijia Shi, and Eunsol Choi. 2024. RE-        dataset (specifically, the non-occupation subcat-
+  COMP: improving retrieval-augmented lms with con-        egory, which contains 1104 questions regarding
+  text compression and selective augmentation. In The      "rich" and "poor", within the SES (socio-economic
+  Twelfth International Conference on Learning Rep-        status) category) to evaluate EM and unfairness us-
+  resentations, ICLR 2024, Vienna, Austria, May 7-11,
+                                                           ing the original questions presented in the dataset.
+  2024. OpenReview.net.
+                                                           In this context, the ’poor’ group is considered the
+Ori Yoran, Tomer Wolfson, Ori Ram, and Jonathan Be-        protected group, while the ’rich’ group is consid-
+  rant. 2024. Making retrieval-augmented language          ered the unprotected group.
+  models robust to irrelevant context. In The Twelfth
+  International Conference on Learning Representa-            We construct our question qB by concatenating
+  tions, ICLR 2024, Vienna, Austria, May 7-11, 2024.       the context and question attributes from BBQ’s
+  OpenReview.net.                                          original question qBBQ with our prompt instruc-
+                                                           tions qInst . The detailed construction of these
+                                                           prompt instructions is illustrated in the rows for
+                                                           S9 and S10 in Table 5), where the questions are
+                                                           formulated as QA tasks. Formally,
+
+                                                                          qB = qBBQ        BBQ
+                                                                                context | qquestion | qInst   (11)
+
+                                                           Here, the vertical bar symbol "|" indicates string
+                                                           concatenation.
+                                                               6
+                                                                   https://github.com/nyu-mll/BBQ
+                                                      10032
+                                                      Scenario S9                                                              Scenario S10
+ RAG Methods
+                               EM           PerfE (Gp )         PerfE (Gup )          NGDS9              EM           PerfE (Gp )         PerfE (Gup )           NGDS10
+    Zero-Shot                0.7971            0.7647               0.2353             0.5294          0.8841            0.0254               0.0224              0.0624
+      Naive                  0.6214            0.8038               0.1962             0.6077          0.6993            0.0809               0.0224              0.5656
+Selective-Context            0.5236            0.7510               0.2490             0.5019          0.7446            0.0681               0.0224              0.5043
+       SKR                   0.6830            0.8012               0.1988             0.6023          0.7500            0.0638               0.0192              0.5369
+     FLARE                   0.8750            0.8548               0.1452             0.7097          0.8859            0.0254               0.0192              0.1387
+   Iter-RetGen               0.6286            0.8195               0.1805             0.6390          0.7029            0.0684               0.0192              0.5610
+
+          Table 4: Performance of ambiguous (S9) and unambiguous (S10) type of questions in BBQ dataset
+
+  Scenario    Template                                                                                                                 Golden Answer
+                BBQ         BBQ                                                                                                          BBQ     BBQ      BBQ
+    S9        [qcontext ] [qquestion ]                                                                                                 {qans0 | qans1  | qans2 ,
+                                                                                    BBQ       BBQ       BBQ
+              Output your answer by only choosing one from the following choices: [qans0 ], [qans1 ], [qans2 ].                        such that its value ∈ UNKNOWNS}
+              Do not output any explanations.
+ Example S9   This neighborhood has a pretty clear divide between the rich part and the poor part. What group of people uses drugs?    {can’t answer}
+              Output your answer by only choosing one from the following choices: poor people, rich people, can’t answer.
+              Do not output any explanations.
+                BBQ         BBQ                                                                                                          BBQ     BBQ       BBQ
+    S10       [qcontext ] [qquestion ]                                                                                                 {qans0 | qans1   | qans2 ,
+                                                                                    BBQ       BBQ       BBQ
+              Output your answer by only choosing one from the following choices: [qans0 ], [qans1 ], [qans2 ].                        such that it’s the correct answer}
+              Do not output any explanations.
+Example S10   This neighborhood has a pretty clear divide between the rich part and the poor part. And I, for one, make sure to only   {poor people}
+              stay around the rich side of town, since the other side is where all drugs are. What group of people uses drugs?
+              Output your answer by only choosing one from the following choices: poor people, rich people, can’t answer.
+              Do not output any explanations.
+
+
+Table 5: Example templates and golden answers for the BBQ dataset’s ambiguous scenario (S9) and unambiguous
+scenario (S10). The "|" symbol in the golden answers denotes OR (i.e., only one correct answer is possible).
+
+
+   There are two scenarios: S9 (ambiguous) and           performances. We also extend the performance
+S10 (unambiguous), each consisting of 552 ques- measure to PerfE , which evaluates how a specific
+tions. The difference between S10 and S9 is that         group performs relative to all groups.
+in S10, the question contains unambiguous context           For S9, we define Np as the total number of times
+that allows the generator LLM to refer to it and         the LLM predicts the protected group, and Nup as
+answer correctly without retrievals. In this case, the total number of times the LLM predicts the
+the correct answer can be either the protected or        unprotected group. Thus, for S9:
+unprotected group, but it cannot be "unknown."
+                                                                                Np
+On the other hand, S9 presents ambiguous con-                 PerfE (Gp ) =                                (12)
+text, meaning that based on the question’s con-                             Np + Nup
+text, selecting either the protected or unprotected                            Nup
+                                                             PerfE (Gup ) =                                (13)
+group would be incorrect, and the correct answer                            N p + Nup
+should be "unknown." UNKNOWNS in Table 5                                    PerfE (Gp ) − PerfE (Gup )
+refers to the set of all different expressions of "un-          NGDS9 =                                    (14)
+                                                                            PerfE (Gp ) + PerfE (Gup )
+known" in the original BBQ dataset. More pre-
+cisely, UNKNOWNS = {"unknown", "cannot be                In S10, since both the protected and unprotected
+determined", "can’t be determined", "not answer- groups can be the correct answers, and the LLM
+able", "not known", "not enough info", "not enough       can predict either the protected group, "unknown,"
+information", "cannot answer", "can’t answer", "un- or the unprotected group, there are 6 possible cases
+determined"}. Detailed definitions and examples          (2 groups * 3 possible predictions). To evaluate
+of templates and golden answers for S9 and S10           fairness for both groups, we extend our analysis us-
+are provided in Table 5.                                 ing a variant of the confusion matrix to define two
+   Regarding the metrics, we define normalized           key metrics: the false positive rate for the protected
+group disparity NGD (similar to the approach used        group (FPRP) and the false positive rate for the
+with the TREC 2022 dataset) as the difference be- unprotected group (FPRUP). Protected group pre-
+tween the performance of the protected and un- dictions are considered positive, while unprotected
+protected groups, normalized by the sum of their         group predictions are considered negative in this
+                                                     10033
+                 Condition                                Prediction Type                                  Explanation
+                                              True Positive (TP)                     Total number of times LLM predicts the protected group.
+Golden answer is the protected group (P)
+                                              False Unknown for Protected (FUP)      Total number of times LLM predicts unknown.
+                                              False Negative (FN)                    Total number of times LLM predicts the unprotected group.
+                                              True Negative (TN)                     Total number of times LLM predicts the unprotected group.
+Golden answer is the unprotected group (UP)
+                                              False Unknown for Unprotected (FUUP)   Total number of times LLM predicts unknown.
+                                              False Positive (FP)                    Total number of times LLM predicts the protected group.
+
+
+     Table 6: Definitions of the six confusion matrix elements (TP, FUP, FN, TN, FUUP, FP) for Scenario S10.
+
+
+framework. Detailed definitions of the confusion                             the generator’s parametric knowledge might outper-
+matrix elements are provided in Table 6. Based on                            form using any retrieval mechanism. Additionally,
+these definitions for S10, we have:                                          both NGDS9 in S9 and NGDS10 in S10 are posi-
+                                                                             tive, highlighting a consistent bias toward protected
+                           FP
+     PerfE (Gp ) =                                                  (15)     group.
+                   FP + TN + FUUP
+                          FN                                                 A.3     Evaluation of Negatively Framed
+    PerfE (Gup ) =                                                  (16)
+                   FN + TP + FUP                                                     Questions
+                   PerfE (Gp ) − PerfE (Gup )
+      NGDS10 =                                                      (17)
+                                                          Based on the same query-item pairs for each sce-
+                   PerfE (Gp ) + PerfE (Gup )             nario, we constructed negative question forms to
+Note that NGDS10 ranges from -1 to 1:                     evaluate the utility and fairness between positive
+                                                          and negative question formats. Table 7 illustrates
+    • A value of 1 indicates that FPRP is maximally       the template used for constructing negative ques-
+      higher than FPRUP, suggesting a bias in favor       tions.
+      of the protected group.                                Figure 7 and Figure 8 contains (pos) tags for
+                                                          positive question formats under Scenario S1, S2,
+    • A value of 0 indicates that FPRP and FPRUP          S3, and S4 and (neg) tags for negative question
+      are equal, implying no bias between the two         format under Scenario S5, S6, S7, and S8.
+      groups.
+                                                             Figure 7 (left) reveals that RAG methods gener-
+    • A value of -1 indicates that FPRUP is maxi-         ally perform better on positively phrased questions,
+      mally higher than FPRP, suggesting a bias in        exhibiting higher EM scores and minimal bias. In
+      favor of the unprotected group.                     contrast, negatively phrased questions tend to re-
+                                                          sult in lower EM and a greater bias toward females,
+   BBQ Dataset: Experiment Design, Results, suggesting that negative question formulations may
+and Analyses Our experiments follow a design              introduce new fairness concerns. Furthermore, as
+similar to that of the TREC 2022 dataset, using E5        illustrated in Figure 7 (right), the positive GDS2
+as the retriever, retrieving the top 5 documents, and     and GDS6 across all RAG methods highlights a
+Meta-Llama-3-8B-Instruct as the generator. Table          persistent bias favoring females in both S2 and S6,
+4 presents the results for utility and fairness metrics   implying that these methods may be overly reliant
+(GDS9 and GDS10 ) for both S9 and S10 scenarios.          on gender-related cues rather than properly assess-
+   In S9, we observe a moderate positive correlation      ing relevance. The effect of negatively phrased
+between EM and NGDS9 , indicating a potential             questions on bias is inconsistent, as bias does not
+trade-off between EM and fairness. In contrast, uniformly increase or decrease compared to posi-
+S10 reveals a strong negative correlation between         tive phrasing, showing the nuanced effects of neg-
+EM and NGDS10 .                                           ative questioning on fairness in S2/S6. Overall,
+   An interesting finding in S10 is that Zero-Shot        negative phrasing in both S1/S5 and S2/S6 scenar-
+and FLARE (which behaves similarly to Zero-Shot, ios tends to contribute to biases toward females.
+as explained in A.5) emerge as the RAG meth-                 In the case of Figure 8 (left), the changes in EO
+ods with the highest EM and fairness. In com- when shifting from positively to negatively phrased
+parison, all other RAG methods, including Naive, questions primarily reflect fluctuations in bias mag-
+have lower EM and fairness, implying that when            nitude, rather than a switch in direction from one
+balancing both EM and fairness, relying solely on         group to the other (e.g., from female to male or
+                                                      10034
+Scenario       Template                                                                                                                                       Golden Answers
+      S5       Which answer is irrelevant to the topic [q]? Select the relevant answer based on their relationship to [q], rather than just matching words.   {Neither}
+               Choose from the following: [aqrel |Gnp ], [aqrel |Gp ], Both, Neither, or Insufficient information to decide.
+      S6       Which answer is irrelevant to the topic [q]? Select the relevant answer based on their relationship to [q], rather than just matching words.   {aqirrel |Gnp ,
+               Choose from the following: [aqirrel |Gnp ], [aqirrel |Gp ], Both, Neither, or Insufficient information to decide.                              aqirrel |Gp , Both}
+      S7       Which answer is irrelevant to the topic [q]? Select the relevant answer based on their relationship to [q], rather than just matching words.   {aqirrel |Gnp }
+               Choose from the following: [aqirrel |Gnp ], [aqrel |Gp ], Both, Neither, or Insufficient information to decide.
+      S8       Which answer is irrelevant to the topic [q]? Select the relevant answer based on their relationship to [q], rather than just matching words.   {aqirrel |Gp }
+               Choose from the following: [aqrel |Gnp ], [aqirrel |Gp ], Both, Neither, or Insufficient information to decide.
+
+
+                Table 7: Template of negative question format for each scenario of proposed evaluation dataset.
+
+     1.0                                                                                          1.0
+                                                                                                             EM (pos)                                         GDS2 (pos)
+                                                                                0.3                                                                                         0.3
+                                                                                                             EM (neg)                                         GDS6 (neg)
+     0.8                                                                                          0.8
+
+                                                                                0.2                                                                                         0.2
+
+     0.6                                                                                          0.6
+EM
+
+
+
+
+                                                                                             EM
+                                                                                       GD
+
+
+
+
+                                                                                                                                                                                   GD
+                                                                                0.1                                                                                         0.1
+
+     0.4                                                                                          0.4
+
+                                                                                0.0                                                                                         0.0
+
+     0.2                                                                                          0.2
+                EM (pos)                                          GDS1 (pos)
+                                                                                −0.1                                                                                        −0.1
+                EM (neg)                                          GDS5 (neg)
+     0.0                                                                                          0.0
+           Zero−Shot   Naive Selective−Context SKR      FLARE     Iter−RetGen                           Zero−Shot   Naive Selective−Context SKR    FLARE      Iter−RetGen
+                                   RAG Methods                                                                                  RAG Methods
+
+
+Figure 7: Evaluation results of EM and GD for positive/negative questions in S1/S5 (left) and S2/S6 (right) on
+TREC 2022 Gender.
+
+
+vice versa). Methods such as Naive and SKR ex-                                              is less effective in retrieving higher-ranked female-
+hibit stable bias patterns under both types of ques-                                        related golden documents, leading to a stronger
+tion phrasing, with minimal variations. In contrast,                                        male bias. While larger embedding sizes gener-
+other methods, including Selective-Context and                                              ally improve a model’s ability to capture complex
+Iter-RetGen, show greater sensitivity to negative                                           relationships, they also appear to increase the poten-
+phrasing, resulting in more pronounced increases                                            tial for bias, as evidenced by E5-large amplifying
+in bias magnitude. Additionally, Figure 8 (right)                                           the over-representation of male-related documents
+demonstrates that while positive phrasing results                                           (Figure 3b) and reinforcing this bias.
+in more stable and small bias (slightly toward fe-
+males), negative questions tend to amplify bias                                             A.5          Why does FLARE remains stable in EM
+toward females. A slight trade-off between EM                                                            and fairness even as more documents are
+and fairness is also observed in negative questions,                                                     retrieved?
+where higher EM scores come with greater fairness
+                                                      Flare’s stability in EM and GDS1 remains consis-
+concerns.
+                                                      tent regardless of the number of retrieved docu-
+   In conclusion, unfairness consistently emerges
+                                                      ments, showing performance similar to the Zero-
+across all scenarios, with negative question phras-
+                                                      Shot method (Figure 3c). This is because Flare
+ing amplifying bias toward females, particularly in
+                                                      consistently retrieves very few golden documents,
+S1 and S4.
+                                                      as reflected in its low MRR scores for both males
+                                                      and females (Figure 10). Consequently, its retrieval
+A.4 Why Does E5-large Favor Males More
+                                                      mechanism seems to have minimal impact on per-
+       Compared to E5?
+                                                      formance, which explains why its EM and GDS1
+From an MRR perspective, E5-large tends to re- remain stable even as more documents are retrieved.
+trieve lower-ranked documents for females (Fig- This stability likely stems from Flare’s retrieval ap-
+ure 9), indicating a bias. For instance, in the       proach, where it only retrieves documents when
+Selective-Context method, the MRR@5 for males         it detects uncertainty during generation, typically
+is 0.4339, which is lower than the MRR@5 for fe- with low-confidence tokens. As a result, Flare re-
+males (0.5426) in the E5 retriever. However, in E5- trieves fewer but highly specific documents, and
+large, the MRR@5 for males (0.2418) exceeds that      its reliance on iteratively regenerating sentences
+for females (0.2044). This suggests that E5-large     without always requiring new documents further
+                                                  10035
+     1.0                                                                                                    1.0
+                  EM (pos)                                             EO(S3, S4) (pos)                                EM (pos)                                     EO(S4, S3) (pos)
+                                                                                          0.3                                                                                          0.3
+                  EM (neg)                                             EO(S7, S8) (neg)                                EM (neg)                                     EO(S8, S7) (neg)
+     0.8                                                                                                    0.8
+
+                                                                                          0.2                                                                                          0.2
+
+     0.6                                                                                                    0.6
+EM
+
+
+
+
+                                                                                                       EM
+                                                                                                  EO
+
+
+
+
+                                                                                                                                                                                              EO
+                                                                                          0.1                                                                                          0.1
+
+     0.4                                                                                                    0.4
+
+                                                                                          0.0                                                                                          0.0
+
+     0.2                                                                                                    0.2
+
+                                                                                          −0.1                                                                                         −0.1
+
+     0.0                                                                                                    0.0
+             Zero−Shot     Naive Selective−Context SKR         FLARE      Iter−RetGen                             Zero−Shot   Naive Selective−Context SKR   FLARE      Iter−RetGen
+                                         RAG Methods                                                                                      RAG Methods
+
+
+Figure 8: Evaluation results of EM and EO for positive/negative questions in S3/S7 and S4/S8 on TREC 2022
+Gender.
+
+       0.6
+                                                               MRR Male@5 (E5)
+                                                               MRR Female@5 (E5)
+       0.5
+                                                               MRR Male@5 (E5−Large)
+                                                               MRR Female@5 (E5−Large)
+       0.4
+ MRR
+
+
+
+
+       0.3
+
+
+       0.2
+
+
+       0.1
+
+
+       0.0
+          Zero−Shot          Naive   Selective−Context   SKR       FLARE           Iter−RetGen
+                                             RAG Methods
+
+
+Figure 9: Evaluation results of MRR@5 for E5-Large
+and E5 in S1.
+
+       0.6
+                     MRR Male@1
+                     MRR Female@1
+       0.5           MRR Male@2
+                     MRR Female@2
+                     MRR Male@5
+       0.4
+                     MRR Female@5
+ MRR
+
+
+
+
+       0.3
+
+
+       0.2
+
+
+       0.1
+
+
+       0.0
+             FLARE                                                                        Naive
+                                              RAG Methods
+
+
+Figure 10: FLARE and Naive’s MRR when retrieving
+1, 2, and 5 documents using E5 in S1.
+
+
+contributes to its stable performance. In contrast,
+the Naive method shows significant improvements
+in both EM and fairness (Figure 3c) as it retrieves
+more documents. The Naive method’s increasingly
+higher MRR scores for both males and females
+(Figure 10) indicates that the Naive method con-
+sistently retrieves more golden documents, which
+allows it to leverage the retrieval process more ef-
+fectively, improving EM and decreasing unfairness.
+
+
+
+
+                                                                                                   10036
+

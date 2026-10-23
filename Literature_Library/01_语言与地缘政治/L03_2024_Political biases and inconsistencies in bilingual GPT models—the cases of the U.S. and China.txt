@@ -1,0 +1,821 @@
+本文件为PDF自动提取文本，仅供检索；排版、图表和页码请以PDF为准。
+Political biases and inconsistencies in bilingual GPT models—the cases of the U.S. and China
+
+                                                                                                    www.nature.com/scientificreports
+
+
+
+
+                OPEN             Political biases and inconsistencies
+                                 in bilingual GPT models—the cases
+                                 of the U.S. and China
+                                 Di Zhou1 & Yinxian Zhang2
+                                 The growing popularity of ChatGPT and other large language models (LLMs) has led to many studies
+                                 investigating their susceptibility to mistakes and biases. However, most studies have focused on
+                                 models trained exclusively on English texts. This is one of the first studies that investigates cross-
+                                 language political biases and inconsistencies in LLMs, specifically GPT models. Using two languages,
+                                 English and simplified Chinese, we asked GPT the same questions about political issues in the United
+                                 States (U.S.) and China. We found that the bilingual models’ political knowledge and attitude were
+                                 significantly more inconsistent regarding political issues in China than those in the U.S. The Chinese
+                                 model was the least negative toward China’s problems, whereas the English model was the most
+                                 critical of China. This disparity cannot be explained by GPT model robustness. Instead, it suggests that
+                                 political factors such as censorship and geopolitical tensions may have influenced LLM performance.
+                                 Moreover, both the Chinese and English models tended to be less critical of the issues of their “own
+                                 country,” represented by the language used, than of the issues of “the other country.” This suggests
+                                 that multilingual GPT models could develop an “in-group bias” based on their training language. We
+                                 discuss the implications of our findings for information transmission in an increasingly divided world.
+
+                                 Keywords Bias, Large language models (LLMs), GPT, Politics, Cross-cultural communication
+
+                                 ChatGPT has been described as a revolutionary tool that may fundamentally change how information is obtained
+                                 and transmitted1,2. Instead of typing keywords in a search engine and staring at the tens of thousands of returned
+                                 web pages, people can use tools powered by large language models (LLMs), such as ChatGPT, to search for and
+                                 summarize information behind the scenes and return only a paragraph of the necessary information in natural
+                                 human language. This process is similar to that of an attentive personal assistant in science fiction.
+                                     However, the information provided by AI assistants is prone to mistakes and biases. Studies have shown that
+                                 LLMs, including different versions of GPT models, contain gender, ethnic, political, and cultural biases3–9 and
+                                 may be superspreaders of misinformation or “hallucinated information”10,11. However, these pioneering studies
+                                 have focused exclusively on GPT models trained on English corpora, even though GPT models are designed
+                                 with multilingual capabilities, and they can be utilized far beyond English-speaking populations. This leads to an
+                                 underresearched yet important question about LLMs’ biases. Assuming that different languages may represent
+                                 distinct political contexts with different or even contradictory views on the same social, political, or cultural
+                                 issues, do multilingual GPT models provide largely coherent answers to the same questions, or do they transmit
+                                 information and values that are inconsistent or even contradictory, depending on the language used? Moreover,
+                                 if the answers are inconsistent, how is such inconsistency manifested, and what types of cross-language biases
+                                 can be identified?
+                                     These questions have profound implications for human communication. GPT models are often perceived
+                                 as objective AI assistants that provide undistorted summaries based on a comprehensive search of all available
+                                 information. However, this perception can make average users more credulous about the accuracy and quality
+                                 of the information provided. Thus, if multilingual GPT models exhibit systematic inconsistency, especially
+                                 regarding contentious sociopolitical issues, users with different language/cultural backgrounds may be exposed
+                                 to implicitly biased information and could be oriented toward different beliefs without realizing it. As GPT
+                                 models become an increasingly popular source of information and opinions, they may influence the way people
+                                 learn about and understand the world, including politics at home and abroad. The cross-language inconsistencies
+                                 in GPT models could reinforce existing conflicts and cultural gaps between different populations. This includes
+                                 not only citizens from different countries but also people from different migrant communities in multicultural
+
+
+                                 1Department of Sociology, New York University, New York, NY 10003, USA. 2Department of Sociology, Queens
+
+                                 College, City University of New York (CUNY), New York, NY 11367, USA. email: yinxian.zhang@qc.cuny.edu
+
+
+Scientific Reports |   (2024) 14:25048               | https://doi.org/10.1038/s41598-024-76395-w                                                1
+www.nature.com/scientificreports/
+
+
+                                 countries such as the United States (U.S.). Eventually, these inconsistencies could increase rather than reduce the
+                                 barriers to communication and collaboration across different cultures, contributing to a more fragmented world.
+                                     To examine the impact of political contexts on cross-language inconsistency in GPT models, we focused on
+                                 simplified Chinese and English and compared answers to the same political questions in these two languages
+                                 generated by GPT 3.5 models. Then, we performed all the analyses on the GPT 4 models again as robustness
+                                 checks. We focused on these languages for two reasons. First, these two languages represent two vastly different
+                                 political contexts—the English training corpora of the GPT were primarily generated by internet users in the
+                                 U.S.5,12–15, a leading democracy and superpower; The simplified Chinese texts largely came from Mainland
+                                 China, a socialist country and competing power under the rule of the Chinese Communist Party (CCP). We
+                                 further clarified the relationship between the training language and the country it represents in the Discussion
+                                 section. Owing to the growing geopolitical tensions between the U.S. and China and their vastly different political
+                                 contexts, their people may hold contrasting views on the same political issues. Therefore, juxtaposing GPT
+                                 models trained in the two languages helps maximize and expose the potential inconsistencies in multilingual
+                                 LLMs for a systematic investigation. The differences between the two models may represent the largest possible
+                                 variation in LLMs across languages.
+                                     Second, the GPT models were trained primarily on information scraped from web pages. However, owing
+                                 to stringent political censorship in China, the Chinese training corpus may be politically selective. Therefore,
+                                 comparing Chinese GPT answers with English ones also enabled us to gauge the impact of censorship in LLMs
+                                 built on the “open internet”. Together, by testing GPT models with political questions in English and Chinese, we
+                                 can examine whether political contexts affect the consistency of the GPT models between languages.
+                                     Based on the Human Rights Reports and other official documents published by the U.S. and Chinese
+                                 authorities in the past twenty years, we developed a list of 533 questions covering social and political issues in the
+                                 two countries. Then, we asked GPT models the same questions twice, in English and Chinese, respectively, and
+                                 compared the bilingual answers in terms of their political “knowledge” (answer content) and political “attitude”
+                                 (answer sentiment). In other words, we conducted an experiment with GPT in which only the input language
+                                 was manipulated and other factors were controlled; then, we compared the two groups of answers to estimate the
+                                 level of inconsistency in the bilingual GPT models. Finally, we discussed the potential sources and implications
+                                 of such inconsistency.
+                                     One concern is that the GPT models were trained primarily on English texts, so the Chinese models may
+                                 naturally not be as robust as their English counterparts. Therefore, one may argue that the inconsistency could
+                                 simply stem from the lower robustness of non-English GPT models. We address this concern in our research
+                                 design by developing a benchmark level of inconsistency in multilingual models to tease out the impact of model
+                                 robustness. Our findings indicate that the inconsistency between models trained on different languages is not
+                                 random but presents a clear pattern that cannot be explained by model robustness.
+
+                                 Research design
+                                 To systematically explore the variations in GPT answers across languages, we developed an analytical framework
+                                 along two dimensions. On the primary dimension, we differentiated between natural science questions and
+                                 political questions. Natural science questions address natural phenomena, basic physics, and basic chemistry.
+                                 Assuming that they typically have only one correct answer, which should be consistent across languages and
+                                 cultures, the inconsistency in bilingual GPT answers to these questions may represent the baseline inconsistency
+                                 level in GPT models, which potentially stems from the lower robustness of non-English models. To develop this
+                                 baseline, we compiled a list of 184 natural science questions and measured the inconsistency rate in GPT models’
+                                 bilingual responses.
+                                     In contrast, political questions concern social and political problems criticized in official documents
+                                 published by the U.S. and Chinese authorities that target each other. Using natural science questions as the
+                                 baseline, if the inconsistency rate in political questions is significantly higher, we can infer that factors other than
+                                 model robustness, such as the nature of political questions, the distinct political values embedded in the two
+                                 languages, and/or political censorship, are involved. Based on the topics covered by the American and Chinese
+                                 authoritative commentaries on each other, we developed 533 political questions, including 266 China-related
+                                 questions and 267 U.S.-related questions. As such, we juxtaposed bilingual GPT answers to the same political
+                                 and scientific questions to measure their consistencies, which, in turn, reflects the impact of political contexts
+                                 on GPT inconsistency.
+                                     Moreover, we added a secondary dimension to control for the impact of question framing on answer
+                                 consistency. We first differentiated fact-based questions, which involve numbers, statistics, or past incidents
+                                 with supposedly objective records, from opinion-based questions, which ask about subjective evaluations
+                                 or judgments on similar topics. Framing a question as fact- or opinion-based may lead to different levels of
+                                 inconsistency. For example, regarding the issue of inequality in China, the question “What is China’s Gini
+                                 coefficient?” is fact-based, whereas the question “How severe is income inequality in China?” is opinion-based.
+                                 Naturally, we expected to see opinion-based questions associated with a higher level of inconsistency. Along the
+                                 same line, we differentiated close-ended “yes/no” questions to which GPT can simply state “yes” or “no” (e.g.,
+                                 “Is China a democratic country?”) from open-ended questions (e.g. “How do you evaluate/think about/…”)
+                                 that GPT has to provide more justifications or explanations. Intuitively, open-ended questions may lead to more
+                                 inconsistent answers than close-ended questions.
+                                     To clarify, we applied the fact-versus-opinion distinction only at the question level, not to the answers. For
+                                 example, GPT answers to opinion-based questions might consist entirely of facts or a mix of facts and opinions.
+                                 We made a priori distinctions at the question level to control for the influence of question framing. The post
+                                 hoc categorization of GPT answers, however, is independent of the relationship between political contexts and
+                                 GPT consistency and was therefore not a primary focus of this study. Nonetheless, we provided a qualitative
+
+Scientific Reports |   (2024) 14:25048                | https://doi.org/10.1038/s41598-024-76395-w                                                     2
+www.nature.com/scientificreports/
+
+
+                                  Question framing   Science (N = 184)   U.S. Political (N = 267)   China Political (N = 266)   Overall (N = 717)
+                                  Fact-based         184 (100%)          136 (50.9%)                134 (50.4%)                 454 (63.3%)
+                                  Opinion-based      0 (0%)              131 (49.1%)                132 (49.6%)                 263 (36.7%)
+                                  Close-ended        97 (52.7%)          187 (70.0%)                193 (72.6%)                 477 (66.5%)
+                                  Open-ended         87 (47.3%)           80 (30.0%)                 73 (27.4%)                 240 (33.5%)
+
+
+                                 Table 1. Distribution of questions by political context and question framing. Natural science questions are
+                                 strictly fact-based, and their consistency rate is used as the benchmark.
+
+
+
+
+                                 Fig. 1. The content consistency level (x-axis) of bilingual GPT models, by political context (y-axis) and
+                                 question framing (fact/opinion). The error bars indicate the 95% CI (bootstrapped) of the content consistency
+                                 level of GPT-3.5’s answers to the same questions in English and Chinese. The three grouped error bars
+                                 (y-axis) represent all political questions, U.S.-related political questions, and China-related political questions,
+                                 respectively. Different types of questions are differentiated by color, including fact-based (purple), opinion-
+                                 based (yellow), and all questions (black). The vertical lines show the 95% CI (bootstrapped) of the baseline
+                                 consistency level of GPT answers to natural science questions. Overall, China-related questions received the
+                                 lowest consistency rate.
+
+
+
+                                 analysis of GPT answers in the Results section to enhance readers’ understanding of the potential sources of
+                                 GPT inconsistencies.
+                                    In summary, while our main analysis focused on the effect of political context on GPT answer consistency,
+                                 controlling for question framing allowed us to confirm that the observed effect, if any, could not be explained
+                                 away by question framing. Table 1 summarizes the distributions of the different types of questions used in this
+                                 study.
+
+                                 Results
+                                 Bilingual GPT models’ knowledge about China is the least consistent
+                                 First, we examined the consistency of the GPT answers in terms of their content. Notably, content consistency
+                                 differs from sentiment consistency. Two answers may present similar content but with contrasting undertones,
+                                 which, in turn, reveal different attitudes.
+                                     The two authors hand-coded the consistency of bilingual GPT answers to the 184 science questions and 533
+                                 political questions (question N = 717, answer N = 1,434; see coding details in the Methods section). We reached
+                                 a substantial intercoder agreement rate with a Cohen’s kappa of 0.80. Figure 1 below summarizes the results.
+                                     As shown in Fig. 1, in terms of content consistency, there is a difference between science questions (85.3%)
+                                 and political questions overall (77.9%), indicating that GPT models are more consistent in answering science
+
+
+Scientific Reports |   (2024) 14:25048                 | https://doi.org/10.1038/s41598-024-76395-w                                                 3
+www.nature.com/scientificreports/
+
+
+                                 questions than in answering political questions. However, the effect size is not as large and robust as we
+                                 expected—the bootstrapped confidence intervals of the two types of questions partly overlap.
+                                     Surprisingly, GPT answers to U.S.-related political questions were as consistent as those to natural science
+                                 questions (p = 0.624), and this was especially true for opinion-based U.S. questions. In fact, fact-based questions
+                                 tended to be less consistent than opinion-based questions across the board, regardless of political context, which
+                                 challenges our initial assumption. We will return to these points later.
+                                     In contrast, there was a more robust and significant difference between China-related political questions and
+                                 natural science questions. The consistency rate of GPT answers to China issues was 72.6%, which is significantly
+                                 lower than those for both science questions (p = 0.002) and U.S.-related political questions (p = 0.005). In other
+                                 words, China-related political questions received the least consistent answers from bilingual GPT models when
+                                 compared to science- or U.S.-related questions. The variation in answer inconsistency across different political
+                                 contexts indicates that factors other than model robustness are at play.
+                                     To understand the sources of GPT inconsistency in China-related answers, we qualitatively examined all
+                                 answer pairs coded as “inconsistent” (N = 73) and identified three types of content inconsistency: (1) answers
+                                 involving contradictory evidence or information (N = 40), (2) answers involving different levels of ambiguity,
+                                 especially when GPT models “refuse to answer” in one language but not the other (N = 13), and (3) answers
+                                 involving opposite stances (N = 20).
+                                     First, the primary source of content inconsistency was GPT’s use of contradictory evidence or information
+                                 to answer both fact-based and opinion-based questions. In the inconsistent answers to fact-based questions,
+                                 contradictory statistics or facts were commonplace. For example, when asked how many people in China are
+                                 living in poverty, the Chinese GPT cited the National Bureau of Statistics of China and stated that “all the poor
+                                 people in China have been lifted out of poverty, and the incidence of poverty has dropped to zero.” However,
+                                 the English GPT cited statistics from the World Bank, suggesting that “the poverty rate in China is 3.1%, which
+                                 means around 43 million people were living in poverty.” By citing contradictory evidence, the Chinese and
+                                 English GPTs arrived at opposite conclusions, and in this case, the Chinese GPT answered in favor of China.
+                                     The GPT models also provided contradictory evidence or information to answer opinion-based questions.
+                                 For example, when asked what the motivation behind the Chinese government was to arrest Ren Zhiqiang, an
+                                 outspoken real estate businessman, the Chinese GPT stated that Ren was arrested for corruptions and other
+                                 crimes, whereas the English GPT suggested that he was arrested for his criticisms of the government. Again, the
+                                 bilingual GPT models provided contradictory information, and the Chinese version favored China.
+                                     Second, content inconsistency may stem from the ambiguities in GPT answers. Particularly, the GPT models
+                                 tended to provide clear answers to certain questions in English but not in Chinese. For example, when asked if
+                                 the Chinese government’s eviction of the “low-end population”16 suggested that the party of the working class
+                                 betrayed the working class itself, the English GPT answered “yes” clearly, whereas the Chinese GPT refused to
+                                 answer yes or no but stated that the Chinese government aimed to promote the country’s development, which
+                                 was not an actual answer to the question.
+                                     Finally, bilingual GPT answers may hold opposite opinions related to the same question, resulting in
+                                 inconsistent answers. For example, when asked whether the Chinese government can represent the will of its
+                                 people, the Chinese GPT answered yes, whereas the English GPT stated that the Chinese government is unlikely
+                                 to represent the will of its people because of its one-party system and strict control of the media and the internet.
+                                     As demonstrated by the above examples, among the inconsistent answers to China-related questions, the
+                                 Chinese GPT tended to paint a better image of China, primarily by presenting evidence and information that
+                                 are more in line with the official Chinese rhetoric. This pro-China tendency is systematic: in 58 out of the 73
+                                 (79.5%) inconsistent answers, the Chinese answers presented a better image of China. In contrast, the bilingual
+                                 answers to U.S.-related issues were overwhelmingly consistent. Even when inconsistency occurred, the English
+                                 answers did not systematically favor the U.S. Among the 45 completely inconsistent answer pairs to U.S.-related
+                                 questions, only 22 (48.9%) favored the U.S.
+                                     This consistent pro-China tendency in the Chinese answers did not result solely from less robust models. As
+                                 previous studies have established, the simplified Chinese internet is subject to strict state control17,18, potentially
+                                 leading to bias embedded in the training corpus of the Chinese GPT models. In contrast, when asked about U.S.
+                                 political issues or natural science questions where Chinese censorship is presumably not at play, the bilingual
+                                 GPT answers were more consistent. Thus, we suspect that the state censorship and propaganda in China played
+                                 a role in shaping Chinese GPT answers.
+                                     Another pattern we observed was that the GPT answers to fact-based questions seemed less consistent than
+                                 those to opinion-based questions did. This pattern seemed to apply to both China- and U.S.-related questions.
+                                 However, our analysis shows that this finding is rather inconclusive – the higher inconsistency rate in the answers
+                                 to fact-based questions was only significant when we examined political issues all together, but no longer held
+                                 true when we compared the answers on China-related issues. Moreover, the effect turned largely insignificant
+                                 when we replicated the analysis on GPT-4 models (see Supplementary Table S4).
+                                     Though inconclusive and falling out of the scope of the present study, the patterns in the contrast between fact-
+                                 and opinion-based questions warrant more scholarly investigation. Existing studies found that misinformation
+                                 is more likely to present as “fake news,” which is essentially selective facts or fabricated information that appears
+                                 to be objective facts19. In other words, the conflict revolves around not opinions but (fabricated) facts in one
+                                 way or another. In this sense, the consistency in GPT answers to fact- versus opinion-based questions could be
+                                 relevant for studies on misinformation.
+                                     On a relevant note, we also highlighted that, in their responses to natural science questions, the consistency
+                                 rate of the GPT models was lower than expected. Nearly 15% of the scientific answers were inconsistent,
+                                 suggesting that at least one of the bilingual GPT models routinely output false or hallucinated information even
+                                 regarding basic science questions. We estimated that the proportion of inconsistent answers to science questions
+
+Scientific Reports |   (2024) 14:25048               | https://doi.org/10.1038/s41598-024-76395-w                                                     4
+www.nature.com/scientificreports/
+
+
+                                 ranged from 10.8 to 20.6%. This finding echoes pioneering research that estimated a hallucination rate ranging
+                                 from 3 to 27%20.
+                                    To summarize, our analysis demonstrates that China-related questions received systemically more
+                                 inconsistent answers that cannot be explained by model robustness or question framing. Instead, evidence shows
+                                 that political context may impact the cross-language consistency of GPT models. Such inconsistencies mainly
+                                 involved contradictory numbers, statistics, and evidence cited by the GPT models trained on different languages.
+
+                                 Bilingual GPT models’ attitudes toward China is the least consistent
+                                 In addition to content consistency, we also examined the sentiment in bilingual GPT answers. As discussed
+                                 earlier, two answers can present the same fact but with contrasting sentiments. We trained a sentiment classifier
+                                 by fine-tuning the GPT models using hand-coded data. The trained classifier achieved a high level of accuracy
+                                 with an F1 score of 0.75. We then applied the classifier to label the sentiments of bilingual GPT answers: 1 if
+                                 the overall sentiment was positive, 0 if the sentiment was neutral, and − 1 if it was negative. For methodological
+                                 details, see the Methods section.
+                                     Figure 2 summarizes the mean sentiment scores of the GPT models by language and political context. The
+                                 mean sentiment scores of all the models were negative. This was expected as the questions were about widely
+                                 criticized political issues in each country. To promote ease of reading, Fig. 2 presents the absolute value of the
+                                 negative scores, which we labeled “the level of negativity.”
+                                     The two panels demonstrate the levels of negativity in the bilingual GPT answers toward China- or U.S.-
+                                 related issues. As shown in Panel B, the English and Chinese GPT models are equally critical of U.S.-related
+                                 issues, with an average level of negativity of 0.33. A paired two-group t test confirmed that the difference was not
+                                 significantly different from zero (p = 0.704).
+                                     However, these bilingual models diverged greatly in their sentiment toward China-related issues. The English
+                                 GPT was significantly more critical of Chinese issues than the Chinese GPT model was. The level of negativity
+                                 of the English model is 0.56, whereas that of the Chinese model is 0.16—a substantial difference of 0.4 points. A
+                                 paired two-group t test indicated that the difference is highly significant, with p < 0.001.
+                                     Our qualitative investigation of the bilingual GPT answers revealed the same pattern. The following example
+                                 illustrates the different behaviors of GPT models when they are asked about political issues in different political
+                                 contexts, even if the issues at hand are of a similar nature. Since both the Chinese and the U.S. governments
+                                 have raised issues with each other’s diplomatic practices and accused each other of hegemonism, we asked the
+                                 GPT models two questions on this topic. First, we asked the bilingual GPT models if the U.S. has been a “world
+                                 police” and interfered in the domestic affairs of other countries, an accusation made by the Chinese authority21.
+
+
+
+
+                                 Fig. 2. Level of negativity (y-axis) of GPT models, by language (x-axis) and political context. The level of
+                                 negativity is the absolute value of the negative mean sentiment scores of different GPT models. Panel A shows
+                                 the bilingual GPT models’ levels of negativity toward China-related issues. Panel B shows those for U.S.-related
+                                 issues. The error bars indicate the 95% confidence intervals obtained through 200 bootstrapped samples, and
+                                 the dashed horizontal line indicates the overall level of negativity in bilingual GPT answers toward U.S.-related
+                                 issues. In-graph annotations show the significance and p value of paired two-group t tests.
+
+
+Scientific Reports |   (2024) 14:25048               | https://doi.org/10.1038/s41598-024-76395-w                                                  5
+www.nature.com/scientificreports/
+
+
+                                 We then asked the GPT if the dispute in the South China Sea represented “Chinese hegemonism,” a critique by
+                                 the U.S. government22.
+                                     Both the English and Chinese GPT answered the U.S.-related question affirmatively, claiming that the U.S.
+                                 has interfered with many countries’ internal affairs and citing overlapping examples such as American operations
+                                 in Vietnam, Iran, and Afghanistan. Both answers revealed a negative sentiment toward the diplomatic practice
+                                 of the U.S. In sharp contrast, when asked about China’s diplomatic moves in the South China Sea, the English
+                                 GPT criticized China’s military deployment in the South China Sea as a move toward hegemonism, whereas the
+                                 Chinese GPT answered in a measured tone, citing both positive and negative views and concluding that this is
+                                 “a complex issue” with no definitive answer.
+                                     This difference was not an exception. It was a systematic pattern observed across the bilingual answers, which
+                                 echoes the findings presented in Fig. 2. While the English and Chinese GPT models presented the same level
+                                 of negativity toward U.S.-related issues, the Chinese GPT on China-related issues presented the least negative
+                                 sentiment across all four groups, and the English GPT on China-related issues displayed the most negative
+                                 sentiment among all groups.
+                                     All of this points to a striking sentiment gap in GPT models when talking about China-related issues. One
+                                 possible explanation is that the Chinese state’s stringent censorship may have shaped the Chinese training
+                                 corpus, which in turn skewed the Chinese GPT’s “political attitude” toward China and made it significantly less
+                                 critical of China’s sociopolitical problems. Meanwhile, this may also speak to the impact of the longstanding
+                                 “China threat” rhetoric in American and Western political discourse, including particularly strong Sinophobia
+                                 during the early COVID-19 pandemic23–26. This could make the English GPT model highly negative in regard
+                                 to China-related issues. The censorship in the Chinese environment and the prevalence of anti-China rhetoric
+                                 in the English environment may have joined forces and contributed to the great divergence in bilingual GPT
+                                 models’ sentiments toward China-related issues.
+                                     These effects disappeared when the GPT models discussed U.S.-related issues, which are presumably not
+                                 subject to censorship in China or anti-China sentiments in the U.S. Notably, even though China’s current “wolf-
+                                 warrior” diplomacy and rising anti-Americanist sentiment are widely reported in the media27–29, they are not
+                                 reflected in the Chinese GPT answers, possibly because the training corpus was only up-to-date until September
+                                 202130 and reflected mostly the Chinese public’s neutral-to-favorable attitudes toward the U.S. through the
+                                 2010s31,32. As a result, despite the potential influence of Chinese censorship, the content and sentiment of
+                                 Chinese GPT answers were not different from those of English GPT models when discussing U.S. issues.
+                                     The observed divergent sentiments toward China-related issues may have stemmed from the fraught U.S.–
+                                 China relations and the domestic politics of the two countries. This is evidence that politics can shape how
+                                 people from two countries see each other, which in turn may have shaped the training corpus of LLMs and led
+                                 to the sentiment differences observed.
+
+                                 Bilingual GPT models display an in-group bias: being tolerant of “self” and strict with
+                                 “others”
+                                 Finally, in addition to the sentiment bias discussed above, the bilingual GPT models seemed to demonstrate an
+                                 in-group bias. In Fig. 3, we reproduced Fig. 2 to highlight the inter-model sentiment divergence on different
+                                 groups.
+                                     Figure 3 summarizes the raw mean sentiment scores of the GPT models by language and group (self-/others-
+                                 issues). Both Panel A (English GPT) and Panel B (Simplified Chinese GPT) have the same pattern: the mean
+                                 sentiments in GPT answers would be significantly more negative when talking about issues about the other
+                                 country. That is, the Chinese answers tended to be more negative toward U.S.-related issues (mean sentiment
+                                 score = -0.32), which we call “others-issues”, and less negative toward problems in China (mean = -0.16), or “self-
+                                 issues”. A two-group t test shows that the sentiment difference is significant (p = 0.01). Symmetrically, the English
+                                 answers tended to be more critical of “others-issues” (mean = -0.56) and less negative toward “self-issues” (mean
+                                 = -0.33). The difference was also significant (p < 0.001).
+                                     Our qualitative reading also provides support for the statistical results. For example, when asked if the
+                                 Chinese government mishandled COVID-19 and missed the critical period to control its spread at the early
+                                 stage of the pandemic, the Chinese GPT acknowledged this possibility but focused mainly on presenting the
+                                 positive achievements of the Chinese government, stating that “although there may have been some deficiencies
+                                 in the early stage… the Chinese government’s response have…effectively controlled the spread of the epidemic.”
+                                 However, when asked if the U.S. government mishandled the virus and claimed that COVID-19 was like a “flu”
+                                 at the beginning of the pandemic, the Chinese GPT strongly agreed with this statement and criticized Donald
+                                 Trump’s Twitter posts that compared COVID-19 to the flu.
+                                     This pattern was again observed when we asked English GPT the same two questions. In response to the first
+                                 question about China’s handling of COVID-19, the English GPT answered negatively, stating that the Chinese
+                                 government not only “downplayed the severity of the outbreak and suppressed information” but also covered up
+                                 or underreported COVID-19 cases. In contrast, to the question about the U.S. government’s practice, the English
+                                 GPT rejected the statement that the U.S. government has disseminated false information. It argued, in a rather
+                                 neutral tone, that “public health officials and experts have consistently emphasized the seriousness of the virus.”
+                                     This pair of examples clearly illustrates the sentiment bias of “being tolerant with oneself and strict with
+                                 others” in the bilingual GPT answers. When asked the same question or questions of a similar nature, GPT
+                                 models tended to answer in favor of their “own” country as defined by the training language while being harsher
+                                 to the “other” country.
+                                     In summary, we found a consistent sentiment bias of “being tolerant with oneself and strict with others”
+                                 in the bilingual GPT answers. Bilingual GPT models responded in a more tolerant and understanding tone
+                                 to their “self-issues” and a more critical tone to “others-issues”, defined by the language used. To clarify, we
+
+Scientific Reports |   (2024) 14:25048               | https://doi.org/10.1038/s41598-024-76395-w                                                   6
+www.nature.com/scientificreports/
+
+
+
+
+                                 Fig. 3. Mean sentiment score (y-axis) of GPT models, by language and group (x-axis). The error bars indicate
+                                 the 95% CI (bootstrapped) of the mean sentiment scores. Answers to “self-issues” are defined as English GPT
+                                 answers to U.S.-related questions or Chinese GPT answers to China-related questions. Answers to “other-
+                                 issues” are defined as English GPT answers to China-related questions or Chinese GPT answers to U.S.-related
+                                 questions. In-graph annotations show the significance and p value of two-group t tests.
+
+
+
+                                 cannot conclude that this is a general pattern of multilingual GPT models. We only tested two languages—
+                                 English and Chinese—in the context of highly contentious geopolitics between China and the U.S. This pattern,
+                                 therefore, could be specific to the U.S.-China geopolitics. A larger comparative study is warranted to compare
+                                 more languages that the GPT supports, especially the languages that are associated with a distinct cultural and
+                                 political system, to verify the potential in-group favoritism of GPT models and other LLMs.
+
+                                 Robustness checks
+                                 We considered multiple factors that may influence the content and sentiment consistency of GPT models. First,
+                                 the main research was carried out on the GPT-3.5-turbo models; then, we replicated all the analyses with the
+                                 GPT-4 models. We also tested the robustness of the main findings with statistical modeling controlling for other
+                                 factors, such as answer length and question framing.
+                                     In total, we ran 54 tests, and the results of the robustness checks are summarized in Table 2. All alternative
+                                 specifications of the main tests supported the conclusion that the bilingual GPT models produced inconsistent
+                                 content and sentiments when talking about political issues in China, and the models seem to display an in-group
+                                 bias against the issues of “others” compared with one’s own issues. Below, we describe the factors we explored
+                                 that could have altered the conclusion.
+
+                                 GPT versions
+                                 The main analysis was conducted on the GPT-3.5-turbo models. We ran the same set of tests with the GPT-4
+                                 models. All of the conclusions remain the same.
+
+
+
+
+Scientific Reports |   (2024) 14:25048               | https://doi.org/10.1038/s41598-024-76395-w                                                7
+www.nature.com/scientificreports/
+
+
+
+
+                                 Table 2. Summary of robustness checks. This table shows the p values of 54 different robustness check tests.
+                                 For the LPM (linear probability model) and OLS models, the table shows the p values of the coefficients of the
+                                 independent variable “political context”, which suggests the effect of China-related issues compared with that of
+                                 U.S.-related issues.
+
+
+
+                                 Default language for comparison
+                                 To measure the content or sentiment consistency of bilingual GPT answers, we relied on hand coding as well as
+                                 classifiers. While English answers may be directly compared to Chinese answers through hand coding, classifiers
+                                 typically require inputs to be in the same language. The same applies to comparing statistics such as answer
+                                 lengths—they need to be in the same language for a fair comparison. Therefore, we translated the answers from
+                                 one language to another and trained content and sentiment classifiers in both Chinese and English. Accordingly,
+                                 all tests were conducted twice, once in Chinese and once in English. The Chinese classifiers were used in the main
+                                 analyses, whereas the English classifiers were used for robustness checks. All conclusions remained unchanged
+                                 regardless of which language was used for comparison.
+
+                                 Statistical modeling with control variables
+                                 To rule out the influence of other question- and answer-level covariates, we performed statistical modeling with
+                                 content consistency (linear probability model, or LPM) and sentiment difference (OLS) as the dependent variables
+                                 and political context (U.S.- or China-related issues) as the key independent variable while controlling for the
+                                 factors listed below. The effect of political context is statistically significant across all model specifications (See
+                                 Supplementary Tables S7 and S8).
+
+                                 1.	Answer length. After translating bilingual answers into the same language, we controlled for the difference
+                                     in the number of characters in the bilingual GPT models’ answers, as the answer length may influence con-
+                                     sistency. The conclusions remained the same after we controlled for answer length.
+                                 2.	Fact-or-opinion questions. We differentiated fact-based from opinion-based questions since question fram-
+                                     ing may influence its chance of being inconsistent. We controlled for this type of question framing in the
+                                     statistical models, and the conclusions remained unaltered.
+
+
+Scientific Reports |   (2024) 14:25048               | https://doi.org/10.1038/s41598-024-76395-w                                                     8
+www.nature.com/scientificreports/
+
+
+                                 3.	Open- or close-ended questions. We further differentiated open-ended questions from close-ended ques-
+                                     tions. We controlled for this type of question framing in the statistical models, and the conclusions remained
+                                     the same. Additionally, we examined the interaction between fact/opinion and close/open-ended question
+                                     framings. Since the term was not statistically significant, we did not include it in the final models.
+                                 4.	Sentiment difference and content consistency. We controlled for the effect of sentiment difference when
+                                     examining the effect of political context on content consistency. Similarly, we controlled for the effect of
+                                     content consistency when examining the effect of political context on sentiment difference. The conclusions
+                                     remained the same.
+
+                                 Discussion
+                                 This study investigates bilingual GPT models’ “knowledge” (content) of and “attitude” (sentiment) toward
+                                 political and social issues in the U.S. and China. We observed significant inconsistencies in both aspects. On the
+                                 one hand, both the knowledge and the attitude of the bilingual GPT models were significantly less consistent on
+                                 China-related issues – the Chinese GPT tended to provide more pro-China information while the English GPT
+                                 was more critical of China. With respect to U.S.-related issues, however, the Chinese and English GPT models’
+                                 knowledge and attitude were almost entirely aligned. On the other hand, the GPT seems to present an in-group
+                                 bias associated with its training language. The GPT models trained in Chinese were more lenient on the Chinese
+                                 issues than on the U.S. issues, whereas the models trained in English were more lenient on the U.S. issues. This
+                                 pattern could be specific to the U.S.-China context, but it could also be a more general pattern of LLMs trained
+                                 on different languages. If LLMs are more critical of the issues in “other countries” than those in its “own country”
+                                 defined by the training language, this will have profound implications for human communication in an AI-
+                                 moderated world. Future studies are warranted to verify the generalizability of the observed pattern.
+                                     These findings suggest that politics plays a significant role in influencing GPT performance. A recent
+                                 study revealed the English GPT’s close resemblance in terms of its social and political values to Western,
+                                 industrialized, rich, and democratic societies compared with the rest of the world33. Along the same line, our
+                                 study further reveals that the Chinese GPT model was more aligned with Chinese political values, especially
+                                 those reflected in Chinese official rhetoric. Such resemblance and alignment suggest that LLMs are inevitably
+                                 shaped by the political and cultural values embedded in its training corpus. This includes not only spontaneous
+                                 content generated by people but also government-sponsored information campaigns such as censorship and
+                                 disinformation operations, which may contaminate the online space and consequently distort the training
+                                 corpora crawled online.
+                                     In the U.S.-China context, it is reasonable to suspect that the rampant state censorship and propaganda in
+                                 China18,32, the longstanding “China threat” rhetoric in American and Western political discourse23,24,26, and
+                                 the more recent American and Chinese government-sponsored disinformation campaigns targeting at each
+                                 other35,36 jointly contributed to the content and sentiment inconsistency in bilingual GPT answers. While it falls
+                                 out of the scope of the current study, more scholarly effort is warranted to investigate how and to what extent
+                                 each of these factors impact LLM performance. Our study joins previous research to bring public attention to
+                                 sentiment manipulation by AI, and we call for more collaborative research efforts to understand and mitigate
+                                 such sentiment bias and work toward responsible AI37–39.
+                                     Finally, this study joins pioneering research to alert the public about the quality and accuracy of information
+                                 generated by LLMs11,20. While this study focused on political issues, we found that approximately 15% of GPT
+                                 answers were inconsistent even when talking about noncontroversial scientific facts. With the growing popularity
+                                 of LLMs, an increasing number of people, including non-English-speaking populations, may rely on such tools
+                                 to acquire knowledge40,41 without realizing that even basic objective information could be false or “hallucinated”.
+                                 This has significant implications for what the WHO calls an “infodemic” and knowledge transfer in general42.
+                                     Three limitations of this study should be acknowledged:
+                                     First, the present study focused on only two languages—Simplified Chinese and English—and the nations
+                                 they represent to explore the political bias of GPT models. Our findings, especially the observation of in-group
+                                 biases, may turn out to be specific to the U.S.-China context. They may or may not apply to other languages,
+                                 cultures, and countries. For example, replicating our study with Traditional Chinese, a language used in Hong
+                                 Kong, Macau, Taiwan and many Chinese diaspora, might produce different results. Further studies are needed
+                                 to test the generalizability of political biases elicited by training language.
+                                     Second, we associated Chinese GPT models with China and English GPT models with the U.S. The link
+                                 between Simplified Chinese and mainland China is straightforward: while Chinese could be the official or
+                                 dominant language in other countries and regions, the Chinese population there is much smaller, and/or they
+                                 mainly use Traditional Chinese in writing. In contrast, the connection between English and the U.S. is more
+                                 complicated. Before we explain our rationale, however, we have to clarify that all our discussions of OpenAI’s
+                                 training data were based on a limited number of OpenAI publications, which may or may not reflect the
+                                 actual sources used to train the GPT-3.5 and later models. Researchers deserve more information about the
+                                 technicalities of GPT models for more accurate evaluations and we call for more transparency of OpenAI in this
+                                 regard.
+                                     According to an OpenAI publication5, the GPT-3 model has been trained on 45 TB of text data, including
+                                 the Common Crawl web data (60%), the WebText2 data sourced from Reddit (22%), books (16%), and English
+                                 Wikipedia (3%). Based on this information, there are two possible sources of Chinese text in the training corpora:
+                                 the two book corpora (names not disclosed) and the Common Crawl. Existing book corpora have a limited
+                                 number of Chinese books, and the majority of Chinese books in these corpora are pre-1930 publications43,44.
+                                 This makes Common Crawl the primary source of more recent, modern Chinese (Chinese is among the largest
+                                 languages in Common Crawl, accounting for 5% of the data)45. The specific sources of the Chinese text in
+                                 Common Crawl remain unclear, but recent research46 examining the web domains of Common Crawl suggests
+
+Scientific Reports |   (2024) 14:25048               | https://doi.org/10.1038/s41598-024-76395-w                                                  9
+www.nature.com/scientificreports/
+
+
+                                 that the top Chinese web domains are commercial news websites based in mainland China, such as ChinaZ,
+                                 CSDN, Sina, and CNKI. Therefore, it is reasonable to assume that the Chinese GPT models have been trained
+                                 mainly on texts generated in mainland China.
+                                     In terms of the association between English and the U.S., we assumed that the English GPT models were
+                                 trained primarily on American sources for two reasons. First, as stated above, 60% of the GPT-3 training
+                                 corpora came from Common Crawl, and over 40% of Common Crawl text is in English45. Considering that the
+                                 majority of the world’s most visited websites are based in the U.S., where the largest English-speaking population
+                                 resides14, it is possible that a substantial portion of the Common Crawl text was generated by American users.
+                                 Second, American users tend to dominate major online platforms, including Reddit and Wikipedia12,13,15, two
+                                 other major sources of the GPT-3 training corpora. Therefore, English GPT models are likely trained on texts
+                                 predominantly generated by American users. However, since English is a global language, this assumption may
+                                 or may not hold.
+                                     Even if the English GPT cannot represent the U.S. in the same way that the Chinese GPT represents mainland
+                                 China, our findings indicate that there are important differences in political knowledge and attitudes between
+                                 the GPT models trained on the content generated by English-speaking populations and the models trained
+                                 on Chinese sources. The wide use of GPT models by the two populations, in turn, still reinforces rather than
+                                 alleviates existing conflicts and hostility. If a substantial number of people rely on GPT to understand domestic
+                                 and international politics, the bias of GPT models, as currently observed, may have a significant effect on the
+                                 already fraught relations between the West and China and potentially on the relations across other populations
+                                 speaking different languages.
+                                     Third, our research design attempted to minimize the influence of model training, especially the varying level
+                                 of model robustness associated with different training languages. However, such design assumes that, within
+                                 the same language, OpenAI’s model training and fine-tuning process is the same for all content, political or
+                                 non-political. Unfortunately, in practice, OpenAI might have utilized a different training protocol for politically
+                                 sensitive content, especially with reinforcement learning from human feedback (RLHF)47,48. As a result,
+                                 existing studies find that, for instance, ChatGPT holds systemic liberal views rather than reflecting an average
+                                 opinion49,50. All this demonstrates that LLMs’ training and information selection process has a profound, if not
+                                 decisive, impact on the content they generate. Our study, as it currently stands, cannot tease out such influence.
+                                 Instead, we confirmed that GPT models hold political biases, while such biases could come from various sources
+                                 including OpenAI’s training process.
+                                     Despite these limitations, our study contributes to the existing body of research highlighting various biases
+                                 in GPT models and AI ethics in general3–9,33,51. Overall, LLM developers still have a long way to go to reduce
+                                 political influence on model performance47, and users of AI-powered LLMs should remain cognizant of the
+                                 potential errors and biases embedded in these models.
+
+                                 Methods
+                                 Constructing the question pool
+                                 The political questions used in this study were created primarily on the basis of the claims made in the “Human
+                                 Rights Reports” released annually by the Chinese and the U.S. governments. For the U.S.-related questions, we
+                                 assembled the Human Rights Record of the United States52 from 1999 to 2021, published by the Information
+                                 Office of the State Council of the People’s Republic of China.
+                                     For the China-related questions, we collected the Country Reports on Human Rights Practices (Mainland
+                                 China) published by the U.S. Department of State from 2000 to 2022, which covered U.S. commentaries on
+                                 human rights issues in Mainland China53. Since the American reports did not include commentaries on
+                                 military and diplomatic issues, we further supplemented the data with (1) China-related news listed on the U.S.
+                                 Department of State website and (2) the human rights reports on China from Human Rights Watch, a U.S.-based
+                                 nonprofit organization54,55.
+                                     We identified the key topic domains in these reports based on the annual keywords retrieved by a tf-idf
+                                 algorithm and the authors’ qualitative reading of the documents. We then constructed the political questions
+                                 according to these key topics, including a total of 533 political questions, with approximately half (N = 266)
+                                 focusing on social and political problems in China and the other half (N = 267) focusing on U.S. issues.
+                                     When framing the questions, we ensured a roughly equal proportion of fact- and opinion-based questions.
+                                 In our definition, fact-based questions mainly ask about objective information (“facts”), including (1) numbers
+                                 and statistics (e.g., “What is China’s Gini coefficient?”), (2) scientific facts (e.g., “What is the largest planet in the
+                                 solar system?”), (3) records or descriptions of past incidents or existing government practices (e.g., “What is the
+                                 PRISM scandal leaked by Snowden?”), and (4) terms of existing laws, regulations, or policies (e.g., “Are foreign
+                                 journalists allowed to interview in Tibet?”).
+                                     On the other hand, opinion-based questions mainly ask about subjective opinions, interpretations, or
+                                 evaluations, including (1) moral or value judgments (e.g., “How bad is racism in the U.S.?”), (2) views on value-
+                                 loaded political concepts that may have contested meanings (e.g., “Can the Chinese government represent the
+                                 will of the people?”), (3) evaluations of hypothetical events or predictions of future events (e.g., “Will China’s
+                                 economy continue to maintain high-speed development in the next decade?”), (4) interpretations of individual
+                                 or organizational motivations (e.g., “Why did the Chinese government ban the artist Ai Weiwei?”), and (5)
+                                 evaluations of the social impact of existing events, policies, or government practices (e.g., “How does Chinese
+                                 censorship affect China’s development?”).
+                                     Although such distinctions are clear by definition, in practice, some questions are borderline cases that can
+                                 be understood as either fact- or opinion-based questions. For example, a question asking whether children with
+                                 rural hukou (household registration) were allowed to study in urban public schools in China can be interpreted
+                                 either as a fact-based question asking for the objective terms of the policy or an opinion-based question asking
+
+Scientific Reports |   (2024) 14:25048                | https://doi.org/10.1038/s41598-024-76395-w                                                     10
+www.nature.com/scientificreports/
+
+
+                                 for a subjective interpretation of the convoluted and multifaceted policy56. As we previously clarified, the main
+                                 purpose of distinguishing fact- from opinion-based questions is to control for the effect of question framing.
+                                 Therefore, readers should use cautions when interpreting the influence of question framing. However, the
+                                 sometimes blurred line between fact- and opinion-based questions should not change the main findings about
+                                 the effect of political context on GPT answer consistency.
+                                     The distinction between open-ended and close-ended questions is straightforward because while any
+                                 answers are acceptable for the former framing, GPT models have to answer “yes” or “no” before elaborating
+                                 on their reasons in the latter framing. We had suspected that open-ended questions would be associated with
+                                 a greater level of inconsistency. This was confirmed by the data: 25.4% of the open-ended questions and 17.6%
+                                 of the close-ended questions had inconsistent answers. This factor was controlled in the statistical models for
+                                 robustness checks.
+                                     We also compiled a list of natural science questions based on science trivia questions collected from
+                                 jeopardylabs.com and trivianerd.com. All of the natural science questions were fact-based by definition, and
+                                 there were roughly equal numbers of close- and open-ended questions.
+                                     In total, we compiled 717 questions, among which 266 were related to China, 267 were related to the U.S., and
+                                 184 were natural science questions. For descriptive statistics of all the key variables, see Supplementary Table S1.
+
+                                 Obtaining answers from GPT models
+                                 We did not prime GPT models in any context. That is, we did not assign a specific role (e.g., “you are a China
+                                 expert”) to the GPT models. Instead, we directly asked the nonprimed GPT-3.5 (gpt-3.5-turbo-0301 model,
+                                 queried in April 2023) and GPT-4 (gpt-4-0613 model, queried in October 2023) models the 717 questions we
+                                 compiled and gathered 1434 bilingual responses via OpenAI’s Chat Completions API. We adjusted two model
+                                 parameters – “temperature” and “max_tokens” – and used other parameters as is. The “temperature” parameter
+                                 defines the variation in the GPT response to the same prompt. We set the temperature to zero and obtain
+                                 near-deterministic, replicable responses. The “max_tokens” parameter defines the length of GPT responses.
+                                 For the open-ended questions, we set the token limit to 500 tokens for English questions (approximately 400
+                                 English words) and 900 tokens for Chinese questions (approximately 400 Chinese characters). For the “yes/
+                                 no” questions, we set the token limit to 200 for English (approximately 140 English words) and 300 for Chinese
+                                 (approximately 140 Chinese characters). In practice, most GPT responses did not reach the token limit we set
+                                 (see Supplementary Table S1).
+
+                                 Measuring content consistency and sentiment difference
+                                 After we obtained GPT responses, we used Google Translate to translate the answers from one language to
+                                 another. This gave us two full sets of answers, either all in English or all in Chinese, and enables us to compare
+                                 GPT answers in the same language. We did the main analysis in Chinese and robustness checks in English.
+                                     To measure content consistency, we manually coded all 1434 answers (717 pairs) in terms of their consistency.
+                                 For the bilingual answers to the “yes/no” questions, we first labeled each answer on a five-point scale (yes = 2,
+                                 probably yes = 1, not sure = 0, probably no = -1, no = -2) and then calculated the distance between the numeric
+                                 codes of the Chinese and English answers. The answer pairs with a distance of 0 or 1 were coded as “consistent.”
+                                 The answer pairs with a distance of 2 or above were coded as “inconsistent.”
+                                     For the open-ended questions, we initially classified the answer pairs into four categories (consistent,
+                                 somewhat consistent, somewhat inconsistent, and inconsistent). Later, to ensure ease of comparison and
+                                 interpretation, we combined the four categories into a binary scale: “Consistent” answer pairs shared more than
+                                 half of the content or cited similar data or statistics that were within a 10% difference. “Inconsistent” answer
+                                 pairs presented either major factual contradictions or fundamentally contradictory viewpoints. The hand-coded
+                                 data were used in the main analysis and was also used to finetune content classifiers on a GPT-3.5 (gpt-3.5-
+                                 turbo-0613) model for robustness checks. On average, the classifiers reached an accuracy of 0.88 and an average
+                                 F1 score of 0.80 (see Supplementary Table S6).
+                                     To measure sentiment consistency, we hand-coded a random sample of 463 out of 1066 answers (scientific
+                                 answers were excluded for sentiment analysis) and classified them into three sentiment categories (positive = 1,
+                                 neutral = 0, negative = -1). We then fine-tuned sentiment classifiers on a GPT-3.5 (gpt-3.5-turbo-0613) model to
+                                 perform sentiment classification on the remaining answers and for robustness checks. On average, the classifiers
+                                 reached an accuracy of 0.80 and an average F1 score of 0.75. The mean sentiment scores were used in t tests.
+                                 We calculated the sentiment difference (ranging from − 2 to 2) between the numeric codes of the Chinese and
+                                 English answers and used it as the dependent variable in statistical modeling for robustness checks. We also
+                                 controlled for question framing and answer length in statistical modeling.
+                                     Finally, all the analyses were replicated on a GPT-4 (gpt-4-0613) model as robustness checks.
+
+                                 Data availability
+                                 The question pool, code, and data used for statistical modeling in the study will be deposited to an online repli-
+                                 cation repository at the authors’ GitHub (https://github.com/di-zhou/GPT_political_bias).
+
+                                 Received: 16 June 2024; Accepted: 14 October 2024
+
+
+                                 References
+                                  1. Chow, A. R. & Perrigo, B. The AI arms race is changing everything. Time. https://web.archive.org/web/20230219175338/https://
+                                     time.com/6255952/ai-impact-chatgpt-microsoft-google/ (2023).
+
+
+
+Scientific Reports |   (2024) 14:25048                 | https://doi.org/10.1038/s41598-024-76395-w                                                          11
+www.nature.com/scientificreports/
+
+
+                                  2. Thompson, D. Breakthroughs of the year. The Atlantic. https://web.archive.org/web/20230115142130/https://www.theatlantic.
+                                     com/newsletters/archive/2022/12/technology-medicine-law-ai-10-breakthroughs-2022/672390/ (2022).
+                                  3. Abid, A., Farooqi, M. & Zou, J. Persistent anti-muslim bias in large language models. arXiv Preprint arXiv: arXiv:2101.05783
+                                     (2021).
+                                  4. Acerbi, A. & Stubbersfield, J. M. Large language models show human-like content biases in transmission chain experiments. Proc.
+                                     Natl. Acad. Sci. USA.120, e2313790120 (2023).
+                                  5. Brown, T. B. Language models are few-shot learners. arXiv preprint arXiv: arXiv:2005.14165 (2020).
+                                  6. Fang, X. et al. Bias of AI-generated content: an examination of news produced by large language models. Sci. Rep. 14, 5224 (2024).
+                                  7. Lucy, L. & Bamman, D. Gender and representation bias in GPT-3 generated stories. In Proceedings of the Third Workshop on
+                                     Narrative Understanding 48–55 (Association for Computational Linguistics, 2021).
+                                  8. Hartmann, J., Schwenzow, J. & Witte, M. The political ideology of conversational AI: converging evidence on ChatGPT’s pro-
+                                     environmental, left-libertarian orientation. arXiv Preprint arXiv: arXiv:2301.01768 (2023).
+                                  9. Santurkar, S. et al. Whose opinions do language models reflect? arXiv preprint arXiv: arXiv:2303.17548 (2023).
+                                 10. Perez, E. et al. Discovering language model behaviors with model-written evaluations. arXiv Preprint arXivarXiv:2212.09251
+                                     (2022).
+                                 11. Ji, Z. et al. Survey of hallucination in natural language generation. ACM Comput. Surv. 55, 1–38 (2023).
+                                 12. Bianchi, T. Distribution of Reddit.Com traffic 2023, by country. Statista. https://www.statista.com/statistics/325144/reddit-global-
+                                     active-user-distribution/ (2023).
+                                 13. Dixon, S. J. Countries with the most Twitter users 2022. Statista. https://www.statista.com/statistics/242606/number-of-active-
+                                     twitter-users-in-selected-countries/ (2022).
+                                 14. Similarweb. Top websites ranking. Similarweb. https://web.archive.org/web/20220210041116/https://www.similarweb.com/top-
+                                     websites/ (2022).
+                                 15. Wikipedia. Wikipedia: Wikipedians https://en.wikipedia.org/w/index.php?title=Wikipedia (Wikipedians&oldid=1147708938,
+                                     2023).
+                                 16. Haas, B. China ‘ruthless’ campaign to evict Beijing’s migrant workers condemned. The Guardian. https://www.theguardian.com/
+                                     world/2017/nov/27/china-ruthless-campaign-evict-beijings-migrant-workers-condemned (2017).
+                                 17. King, G., Pan, J. & Roberts, M. E. How censorship in China allows government criticism but silences collective expression. Am.
+                                     Political Sci. Rev. 107, 326–343 (2013).
+                                 18. King, G., Pan, J. & Roberts, M. E. How the Chinese government fabricates social media posts for strategic distraction, not engaged
+                                     argument. Am. Political Sci. Rev. 111, 484–501 (2017).
+                                 19. Pew Research Center. In presidential contest, voters say ‘basic facts,’ not just policies, are in dispute. www.people-press.
+                                     org/2016/10/14/in-presidential-contest-voters-say-basic-facts-not-just-policies-are-in-dispute (2016).
+                                 20. Metz, C. Chatbots may ‘hallucinate’ more often than many realize. The New York Times. https://www.nytimes.com/2023/11/06/
+                                     technology/chatbots-hallucination-rates.html (2023).
+                                 21. MFAPRC. Foreign ministry spokesperson Wang Wenbin’s regular press conference on December 12, 2022 (Ministry of Foreign
+                                     Affairs of the People’s Republic of China, 2022).
+                                 22. Office of the Spokesperson. Study on the People’s Republic of China’s South China sea maritime claims. United States Department
+                                     Statehttps://www.state.gov/study-on-the-peoples-republic-of-chinas-south-china-sea-maritime-claims/(2022).
+                                 23. Broomfield, E. V. Perceptions of danger: the China threat theory. J. Contemp. China. 12, 265–284 (2003).
+                                 24. Yang, Y. E. & Liu, X. The ‘China threat’ through the lens of US print media: 1992–2006. J. Contemp. China. 21, 695–711 (2012).
+                                 25. Fan, X. & Zhang, Y. Just a virus or politicized virus? Global media reporting of China on COVID-19. Chin. Sociol. Rev. 55, 38–65
+                                     (2023).
+                                 26. Zhang, Y., Lin, H., Wang, Y. & Fan, X. Sinophobia was popular in Chinese language communities on Twitter during the early
+                                     COVID-19 pandemic. Humanit. Soc. Sci. Commun. 10, 488 (2023).
+                                 27. Hille, K. ‘Wolf warrior’ diplomats reveal China’s ambitions. Financial Times. https://www.ft.com/content/7d500105-4349-4721-
+                                     b4f5-179de6a58f08 (2020).
+                                 28. Piao, L. & Wu, H. C. The effect of the Chinese government’s political propaganda and individual characteristics on anti-US
+                                     sentiment. Asian Surv. 63, 381–406 (2023).
+                                 29. Wen, W. Why China’s people no longer look up to America. The New York Times. https://www.nytimes.com/2022/08/09/opinion/
+                                     china-us-relations.html (2022).
+                                 30. OpenAI. OpenAI platform: models. https://platform.openai.com (n.d.).
+                                 31. Guan, Y., Tingley, D., Romney, D., Jamal, A. & Keohane, R. Chinese views of the United States: evidence from Weibo. Int. Relat.
+                                     Asia Pac. 20, 1–30 (2020).
+                                 32. Zhang, Y. Passive political legitimacy: how the Chinese online sphere went from challenging to supporting the state within the past
+                                     decade. China J. 88, 29–54 (2022).
+                                 33. Atari, M., Xue, M. J., Park, P. S., Blasi, D. & Henrich J. Which humans? PsyArXiv https://doi.org/10.31234/osf.io/5b26t (2023).
+                                 34. Chen, J., Pan, J. & Xu, Y. Sources of authoritarian responsiveness: a field experiment in China. Am. J. Political Sci. 60, 383–400
+                                     (2016).
+                                 35. Bing, C. & Schectman, J. Pentagon ran secret anti-vax campaign to undermine China during pandemic. Reuters. https://www.
+                                     reuters.com/investigates/special-report/usa-covid-propaganda/ (2024).
+                                 36. Fitzpatrick, M., Gill, R. & Giles, J. F. Information warfare: lessons in inoculation to disinformation. Parameters. 52, 105–118 (2022).
+                                 37. Argyle, L. P. et al. Leveraging AI for democratic discourse: chat interventions can improve online political conversations at scale.
+                                     Proc. Natl. Acad. Sci. USA. 120, e2311627120 (2023).
+                                 38. Wu, C. et al. Removing AI’s sentiment manipulation of personalized news delivery. Humanit. Soc. Sci. Commun. 9, 459 (2022).
+                                 39. Nabavi, E. & Browne, C. Leverage zones in responsible AI: towards a systems thinking conceptualization. Humanit. Soc. Sci.
+                                     Commun. 10, 82 (2023).
+                                 40. Jo, H. & Park, D. H. Effects of ChatGPT’s AI capabilities and human-like traits on spreading information in work environments.
+                                     Sci. Rep. 14, 7806 (2024).
+                                 41. Von Garrel, J. & Mayer, J. Artificial intelligence in studies—use of ChatGPT and AI-based tools among students in Germany.
+                                     Humanit. Soc. Sci. Commun. 10, 799 (2023).
+                                 42. WHO. Infodemic. World Health Organization. https://www.who.int/health-topics/infodemic (n.d.).
+                                 43. HathiTrust. Catalog advanced search results: Chinese books. HathiTrust Digital Library. https://catalog.hathitrust.org/Search/
+                                     Home?adv=1&setft=true&ft=ft&fqor-language (n.d.).
+                                 44. Project Gutenberg. Project gutenberg search results: Chinese books. Project Gutenberg. https://www.gutenberg.org (n.d.).
+                                 45. Common Crawl. Statistics of common crawl monthly archives by commoncrawl. https://commoncrawl.github.io/cc-crawl-
+                                     statistics/plots/languages (n.d.).
+                                 46. Waight, H. et al. Propaganda bias: why training LLMs on text from state media matters. (n.d.).
+                                 47. Goldstein, J. A. et al. Generative language models and automated influence operations: emerging threats and potential mitigations.
+                                     arXiv Preprint arXiv: arXiv:2301.04246 (2023).
+                                 48. Ouyang, L. et al. Training language models to follow instructions with human feedback. arXiv Preprint. arXiv:2203.02155 (2022).
+                                 49. McGee, R. W. Is ChatGPT biased against conservatives? An empirical study. SSRN. https://ssrn.com/abstract=4359405 (2023).
+
+
+
+Scientific Reports |   (2024) 14:25048                   | https://doi.org/10.1038/s41598-024-76395-w                                                                   12
+www.nature.com/scientificreports/
+
+
+                                 50. Motoki, F., Pinho Neto, V. & Rodrigues, V. More human than human: measuring ChatGPT political bias. Public. Choice. 198, 3–23
+                                     (2024).
+                                 51. Hauer, T. Importance and limitations of AI ethics in contemporary society. Humanit. Soc. Sci. Commun. 9, 272 (2022).
+                                 52. State Council of the People’s Republic of China. Portal: state council of the People’s Republic of China/the record of human rights
+                                     violations in the United States. https://en.wikisource.org/wiki/Portal:State_Council_of_the_People%27s_Republic_of_China/
+                                     The_Record_of_Human_Rights_Violations_in_the_United_States (n.d.).
+                                 53. Bureau of Democracy, Human Rights, and Labor. Human rights report. United States Department of State https://www.state.gov/
+                                     subjects/human-rights-report/ (n.d.).
+                                 54. Human Rights Watch. Previous world reports. Human Rights Watch. https://www.hrw.org/previous-world-reports (n.d.).
+                                 55. U.S. Department of State. China. U.S. Department of State. https://www.state.gov/countries-areas-archive/china/ (n.d.).
+                                 56. Wan, Y. & Vickers, E. Towards meritocratic apartheid? Points systems and migrant access to China’s urban public schools. China
+                                     Q. 249, 210–238 (2022).
+
+                                 Acknowledgements
+                                 This project was supported by Andrew W. Mellon Foundation under grant number G-1902-06590 and Queens
+                                 College CUNY’s Research Enhancement Award.
+
+                                 Author contributions
+                                 D.Z. collected data., conducted statistical analyses, and prepared figures and tables. Y.Z. designed the research.
+                                 D.Z. and Y.Z. performed the research, analyzed data, wrote the manuscript, and revised and reviewed it.
+
+                                 Declarations
+
+                                 Competing interests
+                                 The authors declare no competing interests.
+
+                                 Additional information
+                                 Supplementary Information The online version contains supplementary material available at https://doi.
+                                 org/10.1038/s41598-024-76395-w.
+                                 Correspondence and requests for materials should be addressed to Y.Z.
+                                 Reprints and permissions information is available at www.nature.com/reprints.
+                                 Publisher’s note Springer Nature remains neutral with regard to jurisdictional claims in published maps and
+                                 institutional affiliations.
+                                 Open Access This article is licensed under a Creative Commons Attribution-NonCommercial-NoDerivatives
+                                 4.0 International License, which permits any non-commercial use, sharing, distribution and reproduction in
+                                 any medium or format, as long as you give appropriate credit to the original author(s) and the source, provide
+                                 a link to the Creative Commons licence, and indicate if you modified the licensed material. You do not have
+                                 permission under this licence to share adapted material derived from this article or parts of it. The images or
+                                 other third party material in this article are included in the article’s Creative Commons licence, unless indicated
+                                 otherwise in a credit line to the material. If material is not included in the article’s Creative Commons licence and
+                                 your intended use is not permitted by statutory regulation or exceeds the permitted use, you will need to obtain
+                                 permission directly from the copyright holder. To view a copy of this licence, visit http://creativecommons.org/
+                                 licenses/by-nc-nd/4.0/.
+
+                                 © The Author(s) 2024
+
+
+
+
+Scientific Reports |   (2024) 14:25048                  | https://doi.org/10.1038/s41598-024-76395-w                                                                13
+

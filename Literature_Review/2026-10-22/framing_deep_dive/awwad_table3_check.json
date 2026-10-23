@@ -1,0 +1,22 @@
+{
+  "input_source": "Awwad et al. Table 3, PDF page 5 / printed page 214",
+  "counts": [
+    [
+      276,
+      74,
+      18,
+      32
+    ],
+    [
+      190,
+      97,
+      41,
+      72
+    ]
+  ],
+  "chi_square_pearson": 43.31552896618576,
+  "degrees_of_freedom": 3,
+  "p_value": 2.1091836066763946e-09,
+  "cramers_v": 0.23268951675512198,
+  "note": "Recalculation from published aggregate table, not a reproduction from response-level data."
+}

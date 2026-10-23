@@ -1,0 +1,103 @@
+[
+  {
+    "id": "F01",
+    "results": [
+      {
+        "id": "41202130",
+        "source": "MED",
+        "pmcid": "PMC13142764",
+        "doi": "10.1126/sciadv.adz2924",
+        "title": "Source framing triggers systematic bias in large language models.",
+        "isOpenAccess": "Y",
+        "hasPDF": "Y",
+        "hasBook": "N"
+      }
+    ]
+  },
+  {
+    "id": "I07",
+    "results": [
+      {
+        "id": "39977313",
+        "source": "MED",
+        "pmcid": "PMC11874501",
+        "doi": "10.1073/pnas.2416228122",
+        "title": "Explicitly unbiased large language models still form biased associations.",
+        "isOpenAccess": "Y",
+        "hasPDF": "Y",
+        "hasBook": "N"
+      }
+    ]
+  },
+  {
+    "id": "H01",
+    "results": [
+      {
+        "id": "39418380",
+        "source": "MED",
+        "doi": "10.1126/science.adq2852",
+        "title": "AI can help humans find common ground in democratic deliberation.",
+        "isOpenAccess": "N",
+        "hasPDF": "N",
+        "hasBook": "N"
+      }
+    ]
+  },
+  {
+    "id": "H03",
+    "results": [
+      {
+        "id": "41886588",
+        "source": "MED",
+        "doi": "10.1126/science.aec8352",
+        "title": "Sycophantic AI decreases prosocial intentions and promotes dependence.",
+        "isOpenAccess": "N",
+        "hasPDF": "N",
+        "hasBook": "N"
+      }
+    ]
+  },
+  {
+    "id": "H04",
+    "results": [
+      {
+        "id": "41343633",
+        "source": "MED",
+        "doi": "10.1126/science.aea3884",
+        "title": "The levers of political persuasion with conversational artificial intelligence.",
+        "isOpenAccess": "N",
+        "hasPDF": "N",
+        "hasBook": "N"
+      }
+    ]
+  },
+  {
+    "id": "H05",
+    "results": [
+      {
+        "id": "39264999",
+        "source": "MED",
+        "doi": "10.1126/science.adq1814",
+        "title": "Durably reducing conspiracy beliefs through dialogues with AI.",
+        "isOpenAccess": "N",
+        "hasPDF": "N",
+        "hasBook": "N"
+      }
+    ]
+  },
+  {
+    "id": "L12",
+    "results": [
+      {
+        "id": "39290441",
+        "source": "MED",
+        "pmcid": "PMC11407280",
+        "doi": "10.1093/pnasnexus/pgae346",
+        "title": "Cultural bias and cultural alignment of large language models.",
+        "isOpenAccess": "Y",
+        "hasPDF": "Y",
+        "hasBook": "N"
+      }
+    ]
+  }
+]

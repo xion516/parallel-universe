@@ -1,0 +1,1236 @@
+本文件为PDF自动提取文本，仅供检索；排版、图表和页码请以PDF为准。
+Answer Bubbles: Information Exposure in AI-Mediated Search
+
+                                                     Answer Bubbles: Information Exposure in AI-Mediated Search
+
+                                                      Michelle Huang‡ , Agam Goyal‡ , Koustuv Saha, Eshwar Chandrasekharan
+                                                                     Siebel School of Computing and Data Science
+                                                               University of Illinois Urbana-Champaign, Urbana, IL, USA
+                                                                 {mh106, agamg2, ksaha2, eshwar}@illinois.edu
+
+
+
+
+                                                                    Abstract
+                                                 Generative search systems are increasingly re-
+arXiv:2603.16138v2 [cs.IR] 28 Aug 2026
+
+
+
+
+                                                 placing link-based retrieval with AI-generated
+                                                 summaries, yet little is known about how these
+                                                 systems differ in sources, language, and fidelity
+                                                 to cited material. We examine responses to
+                                                 11,000 real search queries across five systems—
+                                                 vanilla GPT, Search GPT, Perplexity Search
+                                                 with Grok, Google AI Overviews, and tradi-
+                                                 tional Google Search—at three levels: source
+                                                 diversity, linguistic characterization of the gen-
+                                                 erated summary, and source-summary fidelity.           Figure 1: Paper Overview. Traditional search returns a
+                                                 We find that generative search systems exhibit         ranked list of links for users to evaluate, while genera-
+                                                 significant source-selection biases in their ci-       tive search produces an answer bubble containing AI-
+                                                 tations, favoring certain sources over others.         generated summaries synthesized from multiple sources.
+                                                 Incorporating search also selectively attenuates       We study these answer bubbles along three dimensions:
+                                                 epistemic markers, reducing hedging by up to           the sources they cite (RQ1), the linguistic and epistemic
+                                                 60% while preserving confidence language in            qualities of their summaries (RQ2), and how faithfully
+                                                 the AI-generated summaries. At the same time,          those summaries represent cited content (RQ3).
+                                                 AI summaries further compound the citation
+                                                 biases: Wikipedia and longer sources are dis-
+                                                 proportionately overrepresented, whereas cited
+                                                                                                        synthesize, and cite sources on users’ behalf (Gao
+                                                 social media content and negatively framed
+                                                 sources are substantially underrepresented. Our
+                                                                                                        et al., 2023; Li et al., 2024b). Rather than returning
+                                                 findings highlight the potential for answer bub-       ranked lists of links for users to evaluate them-
+                                                 bles, in which identical queries yield struc-          selves, these AI systems collapse the search pro-
+                                                 turally different information realities across sys-    cess into a single synthesized output that implicitly
+                                                 tems, with implications for user trust, source         determines what information the users receive, how
+                                                 visibility, and the transparency of AI-mediated        it is framed, and which sources are attributed.
+                                                 information access.1
+                                                                                                           Recent evidence suggests that this shift is already
+                                         1       Introduction                                           reshaping user behavior at scale. A Pew Research
+                                                                                                        study found that when Google’s AI Overview ap-
+                                         “Google users are less likely to click on a link when they     peared in search results, users clicked on tradi-
+                                         encounter search pages with AI summaries.”
+                                                                                                        tional result links at roughly half the rate compared
+                                         —Pew Research Center, July 2025 (Chapekis and Lieb, 2025)
+                                                                                                        to searches without a summary, and clicked on
+                                            Generative search systems are increasingly medi-            sources cited within the AI summary itself in only
+                                         ating how users search for and access information,             1% of visits (Chapekis and Lieb, 2025). As users
+                                         shifting the landscape from “traditional” link-based           increasingly rely on these synthesized overviews
+                                         search toward AI-generated overviews that select,              rather than navigating to original sources, the de-
+                                                                                                        sign choices embedded in generative search sys-
+                                             ‡
+                                               Both authors contributed equally. Author order decided   tems, i.e., which sources they retrieve, how they
+                                         by Nintendo Super Smash Bros.
+                                             1
+                                               Code for replicating our experiments can be found in     synthesize them, and what language they use, can
+                                         https://github.com/scuba-illinois/answer-bubbles-audit         have great impact on how they shape public infor-
+mation exposure (Sharma et al., 2024).                   cluding social media. Second, search grounding
+   Despite this growing influence, systematic em-        systematically reshapes the epistemic character of
+pirical evaluations across generative search sys-        responses, reducing hedging language by up to
+tems remain limited. Prior work has examined in-         60% while preserving confidence markers, with
+formational accuracy in individual large language        effects varying significantly by topic. Third, bi-
+model (LLM)-based systems (Vu et al., 2024), but         ases in source selection compound during synthe-
+how different systems utilize various types of cited     sis: Wikipedia is both the most-cited and most
+sources, incorporate epistemic attributes in outputs,    over-represented source, whereas social media and
+and maintain fidelity to the original cited informa-     discussion forums, despite being cited, are substan-
+tion remains understudied. This gap is consequen-        tively under-used by up to 22 percentage points.
+tial: just as filter bubbles describe how personalized
+algorithms restrict the diversity of content users       2   Related Work
+encounter (Pariser, 2011), generative search sys-
+tems risk creating what we term “answer bubbles”:        Auditing Generative Search Systems: The shift
+self-contained, system-specific information reali-       from link-based retrieval to LLM-synthesized
+ties in which the same query issued to different         search responses has prompted growing scrutiny
+search platforms could yield structurally different      of how these systems access and present informa-
+answers, without the user’s knowledge or ability to      tion. Liu et al. (2023) audited citation verifiability
+compare across systems.                                  across four generative search engines, finding that
+   Furthermore, information-seeking is also influ-       only 51.5% of generated statements were fully sup-
+enced by how it is presented. Affective and epis-        ported by their citations, and Narayanan Venkit
+temic cues in language can signal trustworthi-           et al. (2025) similarly identified 16 recurring lim-
+ness, curiosity, or authority (Vogl et al., 2020;        itations, including frequent hallucination and in-
+Krakowska, 2020). When synthesizing text, these          accurate citation through a combination of a user
+attributes are no longer properties of the origi-        study and automated evaluation. Li and Sinnamon
+nal sources alone, but of the system’s own voice.        (2024) conducted a smaller-scale audit of ChatGPT,
+Whether and how these attributes vary across sys-        Bing Chat, and Perplexity, documenting sentiment
+tems remains an open question with direct implica-       and source-authority biases across public-interest
+tions for user trust and information quality.            topics. Domain-specific audits have surfaced con-
+   In this paper, we present the first comparative       crete downstream harms: Hu et al. (2026) found
+study of generative and traditional search systems.      that Google’s AI Overviews and Featured Snippets
+We query 11,000 real user search queries across 11       disagree with each other on 33% of baby care and
+topics through five systems—vanilla GPT, Search          pregnancy queries and rarely include medical safe-
+GPT, Perplexity Search with Grok, Google AI              guards. At larger scale, Xu et al. (2026) measured
+Overviews, and traditional Google Search—and             AI Overview activation, source quality, and claim
+ask three research questions (RQs):                      fidelity across 55,393 trending queries, finding that
+                                                         activation is highly sensitive to query phrasing and
+RQ1: How do the sources cited by generative
+                                                         that nearly 30% of AIO-cited domains never appear
+search systems differ from each other and from
+                                                         among the corresponding organic results, suggest-
+traditional search in terms of diversity, concentra-
+                                                         ing AIO draws from a source pool distinct from
+tion, and domain composition?
+                                                         traditional ranking. Vu et al. (2024) showed that
+RQ2: How do the epistemic, psycholinguistic, and         augmenting LLMs with search improves factual
+stylistic qualities of generative search responses       accuracy on time-sensitive queries, and Li et al.
+vary across systems and topics?                          (2024b) surveyed LLM-powered search and rec-
+RQ3: How selectively do generative search sum-           ommendations. However, these studies focus on
+maries represent information from their sources?         individual system properties or a single platform—
+Summary of Findings: Our analysis yields three           accuracy, verifiability, bias, or one product’s activa-
+key findings. First, generative search systems draw      tion behavior—rather than systematically compar-
+from fundamentally different source pools, with          ing user-relevant properties across systems. Our
+Search GPT’s top-100 domains overlapping only            work fills this gap with a large-scale cross-system
+24–25% with traditional Google Search, favoring          study spanning source selection, linguistic charac-
+encyclopedic and news sources while nearly ex-           terization, and source-summary coverage.
+Source Bias in Retrieval and Generation: Search        real user search queries issued to Google with
+engines have long shaped source visibility through     an information-seeking intent (Kwiatkowski et al.,
+ranking concentration (Trielli and Diakopoulos,        2019). From this corpus, we randomly sampled
+2019). Generative search deepens this dynamic,         50,000 queries and classified each into one of 11
+as systems now actively select which sources to        topical categories using GPT-4o-mini in a few-shot
+incorporate and suppress (Dai et al., 2024b). Prior    setting with temperature 0. The 11 topics (listed in
+work has shown that dense retrievers exhibit sys-      Table A1) were adapted from prior work (Huynh
+tematic biases toward short, surface-level docu-       et al., 2025) through a combination of zero-shot
+ments (Coelho et al., 2024; Fayyaz et al., 2025).      topic modeling using BERTopic (Grootendorst,
+This selectivity extends beyond document length:       2022) and manual inspection of queries categories.
+Samuel et al. (2026) found that equipping rerankers    To validate the automated classification by GPT-
+with explicit reasoning neither improves nor wors-     4o-mini, two authors independently labeled a ran-
+ens demographic fairness relative to non-reasoning     dom subset of 120 queries, achieving 90.00% and
+rerankers, with geographic fairness gaps persist-      90.83% agreement with GPT-4o-mini with an inter-
+ing regardless of architecture, Jang et al. (2026)     annotator κ = 0.9910 between the two human
+showed that adaptive retrieval-augmented genera-       raters. To construct the final dataset, we randomly
+tion pipelines are highly sensitive to semantically-   sampled 1,000 queries per topic, yielding a bal-
+equivalent rephrasings of the same query, changing     anced set of 11,000 queries. See §A for descriptive
+retrieval decisions and answer quality even when       statistics and details on key terms in each topic.
+user intent is unchanged, and Goyal et al. (2026b)
+showing that these biases may not be mitigated         Response Collection: We collected responses
+even with advanced query enhancement techniques.       to each of the 11,000 queries from three sources,
+Our work extends these findings beyond the re-         yielding 44,000 query–response pairs:
+trieval stage, showing that source-selection biases    (1) Vanilla GPT: We queried GPT-4o-mini via the
+compound during synthesis. We operationalize this      OpenAI API without web search. These responses
+using Equal Coverage and Coverage Parity metrics       reflect the model’s parametric knowledge alone.
+adapted from Li et al. (2025), quantifying source-
+                                                       (2) Search GPT: We queried GPT-4o-mini with
+summary coverage as a measurable property of
+                                                       the “web_search” tool call, which retrieves and
+generative search.
+                                                       cites web sources in its generated responses. These
+Epistemic and Psycholinguistic Dimensions: Psy-        responses represent search-grounded LLM output.
+cholinguistic factors and epistemic emotions
+shape how users seek and evaluate informa-             (3) Google AI Overview (Google AIO): We pro-
+tion (Krakowska, 2020; Vogl et al., 2020), while       grammatically issued each query to Google Search
+linguistic register influences trust (Zhao and Liu,    via SerpAPI and extracted the AI Overview (a gen-
+2021; Choo, 2023). Furthermore, behavioral             erative summary powered by a Gemini model) if
+evidence shows users increasingly rely on AI           produced. SerpAPI has been used extensively by
+summaries over original sources (Chapekis and          prior work for scraping Google search results (Li
+Lieb, 2025), amplifying the influence of system-       et al., 2024a; Vu et al., 2024; Sun et al., 2025).
+generated language. Research on human-AI in-              The temperature for GPT generation was set to
+teraction further suggests users tend to over-rely     0, and the location for querying SerpAPI was a
+on AI outputs lacking explicit uncertainty sig-        fixed location in Urbana, Illinois, United States.
+nals (Buçinca et al., 2021). We operationalize these   See §A.2 for response-generation prompts.
+constructs through LIWC-based analyses, show-
+ing that search grounding selectively suppresses          To assess external validity beyond OpenAI and
+hedging while preserving confidence markers.           Google, we additionally collected responses to
+                                                       the same 11,000 queries from Perplexity Search
+3   Data & Response Collection                         (https://docs.perplexity.ai/docs/search/quickstart)
+                                                       using model xai/grok-4-1-fast-non-reasoning
+We now outline our process for curation of the         (SpaceXAI, 2025) as the underlying LLM, fol-
+query dataset and subsequent response collection.      lowing the same querying protocol. Since this
+Query Dataset: We drew queries from Google’s           comparison reinforces our main findings rather
+Natural Questions (NQ) corpus, a collection of         than altering them, we report it separately in §A.1.
+4   RQ1: Where Do Various Search                       losophy: while Search GPT seems to favor au-
+    Systems Get Their Information?                     thoritative, editorially-curated content, both of
+                                                       Google’s systems surface a broader range of user-
+In this section, we analyze what types of sources      and community-driven sources.
+generative and traditional search systems synthe-
+                                                       Topic-level source distributions: Domain prefer-
+size information from to answer user queries.
+                                                       ences are strongly topic-dependent (Figure 2). Cer-
+Across query topics, we aggregate and compare
+                                                       tain domains concentrate almost exclusively in spe-
+counts of domains and specific websites that were
+                                                       cific topics. For example, IMDB dominates enter-
+cited by GPT and Google AIO.
+                                                       tainment queries (61% Organic, 23% AI Overview,
+Citation volume, coverage, and overlap: The
+                                                       7% Search GPT), ESPN dominates sports (43%
+three systems differ in the number of sources cited.
+                                                       Organic, 8% Search GPT), and Spotify (40%) and
+Google Organic returns a near-constant 9–10 re-
+                                                       Genius (35%) appear almost exclusively in mu-
+sults per query (the first page of Google search).
+                                                       sic queries within Organic results. Search GPT
+Search GPT cites a median of 3 sources, with 97%
+                                                       shows distinctive topic-specific information sourc-
+of queries containing at least one citation. Google
+                                                       ing patterns, with Reuters and AP News concen-
+AIO, however, has the most variable coverage,
+                                                       trated in sports and politics/news (20% and 12%
+with only 57.8% of queries triggering a generative
+                                                       respectively), while google.com appears in 25%
+overview with a mean of 7.0 references. See Ta-
+                                                       of travel queries (likely Google Maps/Travel con-
+ble A2 for more details. We also find that coverage
+                                                       tent). Google AIO surfaces more educational plat-
+varies by topic: business (84%), history (81%), and
+                                                       forms for factual topics—study.com (11% educa-
+education (74%) most frequently produce AIOs,
+                                                       tion), brainly.com (11% science), and quizlet.com
+while sports (34%), technology (32%), and travel
+                                                       (8% science)—while Quora reaches 21% for reli-
+(32%) rarely do. To quantify overlap, we computed
+                                                       gion queries. Wikipedia itself varies substantially
+Jaccard similarity on each pair’s top-100 most-cited
+                                                       by topic, ranging from 65% (technology) to 93%
+domains. While Google AIO and Organic share
+                                                       (history/sports) in Organic results and from 35%
+68% of their top-100 domains, Search GPT’s top-
+                                                       (business) to 74% (music) in Search GPT.
+100 overlaps only 24% with AIO and 25% with
+Organic Google Search, indicating that it retrieves    5   RQ2: Linguistic Characterization of
+from a largely distinct set of sources.                    Generative Responses
+Domain-level source patterns: Wikipedia is the
+most cited domain across all systems: Organic          Having established where generative search sys-
+Google Search (81% of queries), Google AIO             tems obtain their information (RQ1), we now exam-
+(28%), and Search GPT (49%). Search GPT                ine how they present it. To characterize the linguis-
+also surfaces other encyclopedic and news-wire         tic qualities of the 33,000 generated responses, we
+sources including Britannica (9%), Reuters (5%),       computed a range of lexical, stylistic, and model-
+and AP News (4%). In contrast, Google AIO and          based features spanning three categories:
+Organic prominently feature user-generated plat-       (1) LIWC categories: We scored each response on
+forms: Facebook (10% and 36%), Quora (8% and           73 Linguistic Inquiry and Word Count (LIWC) cate-
+24%), and Reddit (7% and 42%).                         gories (Pennebaker et al., 2015). We focus on three
+   Grouping domains into categories, we observe        conceptual groupings: Affect (positive and negative
+the largest contrast between social media and fo-      emotion), Cognition (insight, tentative, compara-
+rums. First, Search GPT draws almost none of           tive, and overall cognitive process language), and
+its citations from social platforms (0.1%), while      Analytical (causal, certainty, discrepancy, and dif-
+Google AIO (8.5%) and Organic (13.4%) rely             ferentiation language). Scores are expressed as
+on them substantially more. Conversely, Search         proportions of total word count.
+GPT draws disproportionately from encyclope-           (2) Verbosity and readability: We measured
+dic and reference sources (27.3% vs. ∼10% for          word count, average sentence length, average word
+both Google systems) and from news/media out-          length, and type-token ratio (TTR), which is the ra-
+lets (7.2% vs. 2.4% and 1.7%). Government              tio of unique word types to total tokens, indicating
+and institutional sources are roughly comparable       lexical diversity. We assessed readability through
+across all three (∼7–9%). These patterns indi-         the Coleman-Liau index (Ward et al., 2026).
+cate fundamentally different source-selection phi-     (3) Model-based scores: We computed four
+            Organic Google Search                                                Google AI Overview                                                    Search GPT
+Wikipedia 67 76 85 93 89 85 79 69 93 65 88                        Wikipedia 31 32 37 44 33 27 34 19 19 16 18                        Wikipedia 35 46 57 54 74 50 53 38 48 41 48
+    Reddit 29 38 63 35 56 19 50 24 54 53 37                         YouTube 10 14 12 12 17 9 19 16 5 13 6                            YouTube 9 12 19 13 28 8 15 14 17 17 9
+ Facebook 18 30 56 39 60 16 46 23 49 19 41                         Facebook 6 9 17 17 21 3 19 4 7 4 7                              Britannica 4 8 2 23 2 9 15 14 2 2 13          70
+                                                                                                               40
+    Quora 16 27 16 29 17 18 47 27 14 33 23    80                       Quora 7 12 5 14 6 4 21 9 2 6 5                                 Reuters 11        2    11     1 20     3
+                                                                                                               35                                                                60
+  YouTube 16 15 37 20 49 13 19 19 29 24 21                            Reddit 6 8 13 8 10 2 10 5 3 6 4                                AP News 7       2 3 2 12 4 2 10         4
+Britannica 5 10 2 34 2 13 15 9 8 2 22         60                  Britannica 3 5 1 17 2 5 8 5 3            5   30                      Google 2 5 1 1            3     2    25   50
+
+
+
+
+                                                  % of queries
+
+
+
+
+                                                                                                                   % of queries
+
+
+
+
+                                                                                                                                                                                     % of queries
+   Quizlet 16 11 13 4 11 4 27 12 3                                Study.com 3 10      9     3 5 5          1
+                                                                                                               25                        Time 2 1 2 2 2 7 2 1 4 2 1
+                                                                                                                                                                                 40
+     IMDB      3 61     8                                            EBSCO 3 6       12     5 5 3          1                             Axios 3              4     1 3      2
+                                              40                                                               20
+   Brainly 10 6     10 2 8 3 18        6 4                            Brainly 6 5     6 1 3      11                               History.com           9     1                  30
+   EBSCO 4 7        14    10 4 6 1 1 2                                Quizlet 6 5     5 1 2 1 8                15                 Apple Music             14
+                                                                                                                                                                                 20
+     ESPN                          42         20                       IMDB     1 23     3                     10                    Guinness                          6     1
+Instagram 3 4 9 2 6 3 2             5     6                      History.com         14     2 2
+                                                                                                               5                        IMDB         7     2                     10
+   Spotify             40                                           Fiveable 3 3      6     3 2 3                                       ESPN                           8
+                                              0                                                                0                                                                 0
+Study.com 3 8        6     3 7 6          4                         Testbook 3 3      4     3     3                                 Le Monde 2                2        1
+    Genius             35                                        Gauthmath 3 2        3     2 1 2                                 Cornell Law 2               5
+           M ory
+
+
+
+
+                                                                             M ory
+
+
+
+
+                                                                                                                                               M ory
+        tai ati s
+
+
+          Po usic
+         Scligio s
+           n on
+
+
+
+
+            i n
+      Te Spence
+           no ts
+
+                 el
+
+
+
+
+                                                                          tai ati s
+
+
+
+
+                                                                           Scligio s
+                                                                             n on
+
+                                                                            Po usic
+
+                                                                              i n
+                                                                        Te Spence
+                                                                             no ts
+
+                                                                                   el
+
+
+
+
+                                                                                                                                            tai ati s
+
+
+
+
+                                                                                                                                             Scligio s
+             st t
+
+
+
+
+           Trlogy
+
+
+
+
+                                                                               st t
+
+
+
+
+                                                                             Trlogy
+
+
+
+
+                                                                                                                                               n on
+
+                                                                                                                                              Po usic
+
+                                                                                                                                                i n
+                                                                                                                                          Te Spence
+                                                                                                                                               no ts
+
+                                                                                                                                                     el
+                                                                                                                                                 st t
+
+
+
+
+                                                                                                                                               Trlogy
+          Himen
+
+
+
+
+                                                                            Himen
+
+
+
+
+                                                                                                                                              Himen
+     ter uc es
+
+
+
+         Re litic
+
+
+
+
+                                                                       ter uc es
+
+
+
+                                                                           Re litic
+
+
+
+
+                                                                                                                                         ter uc es
+
+
+
+                                                                                                                                             Re litic
+        ch or
+
+              av
+
+
+
+
+                                                                          ch or
+
+                                                                                av
+
+
+
+
+                                                                                                                                            ch or
+
+                                                                                                                                                  av
+   En Edusin
+
+
+
+
+                                                                     En Edusin
+
+
+
+
+                                                                                                                                       En Edusin
+        B
+
+
+
+
+                                                                          B
+
+
+
+
+                                                                                                                                            B
+Figure 2: Top-15 cited domains by query topic for each source (% of queries citing each domain). Cell values ≥1%
+are shown. Domain preferences are strongly topic-dependent: IMDB dominates entertainment, ESPN dominates
+sports, and Spotify/Genius dominate music, but only in Google’s systems and not Search GPT.
+
+feature-based scores using transformer-based mod-                                             the two search-grounded systems: as compared
+els. Politeness was measured with a fine-tuned                                                to Google AIO, Search GPT responses are 69%
+XLM-RoBERTa classifier (Srinivasan and Choi,                                                  longer (M = 140 vs. 83 words; d = 0.64), use
+2022), outputting the probability of a text being                                             longer words (d = 1.31), are substantially more
+polite (0–1). Formality was measured with a fine-                                             formal (d = 0.99), and infer a higher reading
+tuned RoBERTa classifier (Babakov et al., 2023),                                              level (Coleman-Liau: M = 12.8 vs. 11.7 grade
+outputting a score from 0 (informal) to 1 (formal).                                           level; d = 0.27). In contrast, Google AIO fa-
+Polarity quantifies sentiment from −1 (negative)                                              vors shorter sentences (M = 11.4 vs. 18.0 words;
+to +1 (positive), via TextBlob (Loria et al., 2026).                                          d = 0.59), simpler vocabulary, and higher lexical
+Subjectivity measures the extent to which text re-                                            diversity (d = 0.65). These differences suggest
+flects personal opinion (0–1), also via TextBlob.                                             completely different design philosophies. While
+   These linguistic measures have been used widely                                            Search GPT produces elaborate, paragraph-style
+by prior research on auditing outputs of genera-                                              information, Google AIO produces compressed,
+tive models (Saha et al., 2026; Goel et al., 2026)                                            content-heavy information optimized for quick con-
+and analysis of content arising from online inter-                                            sumption within a search interface. Vanilla GPT
+actions (Pal et al., 2026b; Goyal et al., 2026a).                                             falls between the two on verbosity (M = 87 words),
+To compare the three response sources (GPT-                                                   shares Search GPT’s syntactic complexity and for-
+Vanilla, GPT-Search, and Google AIO), we used                                                 mality, and has TTR comparable to Google AIO
+Kruskal-Wallis H tests for each feature, followed                                             (d = −0.14) but much higher than Search GPT
+by pairwise Mann-Whitney U tests with Benjamini-                                              (d = 0.73). Therefore, Vanilla GPT achieves con-
+Hochberg correction (Benjamini and Hochberg,                                                  ciseness through vocabulary variety rather than
+1995) to determine statistical significance. Effect                                           structural compression.
+sizes are reported as Cohen’s d.                                                              Epistemic and emotional attenuation: The sys-
+   In comparing linguistic characteristics of the gen-                                        tems exhibit significant epistemic differences.
+erative responses, the key design variable is search                                             (1) Hedging and uncertainty: Tentative lan-
+grounding: Vanilla GPT generates from parametric                                              guage (“maybe,” “perhaps”), the primary marker
+knowledge alone, whereas Search GPT and Google                                                of epistemic caution, drops by 40% from Vanilla
+AIO both retrieve web content before generation.                                              GPT to Search GPT (0.025 → 0.015; d = 0.43)
+Table 1 reports all features across these systems.                                            and by 60% from Vanilla GPT to Google AIO
+Three major patterns emerge:                                                                  (0.025 → 0.010; d = 0.63). Overall cognitive
+Structural divergence: Despite all being LLM-                                                 process language also drops by 23% and 49%, re-
+based, the three systems produce characteristically                                           spectively, indicating that hedging is reduced at a
+different responses. The largest contrast is between                                          faster rate than other types of cognitive language.
+                                        Mean                                             Cohen’s d
+       Feature                GPTV     GPTS    GoogleAI   GPTV vs GPTS   GPTV vs GoogleAI     GPTS vs GoogleAI
+       Verbosity & readability
+       Word Count                 87    140          83     −0.65 ***         0.05 ***                0.64 ***
+       Avg. Sent. Length        16.3    18.0       11.4     −0.17 ***         0.58 ***                0.59 ***
+       Avg. Word Length         5.07    5.25       4.17     −0.34 ***         1.06 ***                1.31 ***
+       Coleman-Liau Index       11.5    12.8       11.7     −0.32 ***        −0.06 **                 0.27 ***
+       Type-Token Ratio         0.73    0.64       0.75      0.73 ***        −0.14 n.s.              −0.65 ***
+       Affect
+       affect                  0.054   0.053      0.031      0.03 n.s.        0.57 ***                0.58 ***
+       posemo                  0.045   0.044      0.025      0.04 n.s.        0.61 ***                0.61 ***
+       negemo                  0.008   0.009      0.006     −0.02 ***         0.14 ***                0.17 ***
+       Cognition
+       cogproc                 0.087   0.067      0.044       0.39 ***        0.77 ***                0.48 ***
+       insight                 0.021   0.018      0.010       0.15 ***        0.55 ***                0.44 ***
+       tentat                  0.025   0.015      0.010       0.43 ***        0.63 ***                0.27 ***
+       compare                 0.028   0.023      0.016       0.19 ***        0.51 ***                0.39 ***
+       Analytical
+       cause                   0.018   0.018      0.011       0.02 ***        0.34 ***                0.35 ***
+       certain                 0.010   0.007      0.005       0.21 ***        0.41 ***                0.24 ***
+       discrep                 0.006   0.003      0.002       0.26 ***        0.37 ***                0.14 ***
+       differ                  0.021   0.013      0.011       0.36 ***        0.45 ***                0.13 ***
+       Feature-based model scores
+       Politeness               0.52    0.45       0.41      0.39 ***         0.65 ***                0.30 ***
+       Formality                0.93    0.95       0.84     −0.16 ***         0.80 ***                0.99 ***
+       Polarity                 0.10    0.09       0.09      0.05 n.s.        0.09 ***                0.05 ***
+       Subjectivity             0.39    0.39       0.40      0.00 *          −0.05 n.s.              −0.06 ***
+
+Table 1: Psycholinguistic and lexico-semantic differences across response sources (Benjamini-Hochberg corrected).
+KW: Kruskal-Wallis test. Pairwise significances determined by Mann-Whitney U . ***p < .001, **p < .01, *p < .05.
+
+    (2) Reasoning depth: Insight language (“think,”          form across topics. Technology and travel/geograp-
+“know”) is halved from Vanilla GPT to Google AIO             hy show the largest divergence (mean |d| > 1.0),
+ (0.021 → 0.010; d = 0.55), and comparative lan-             with Google AIO reducing 64% of hedging and
+ guage (“versus,” “rather”) follows a similar pat-           74% of positive emotion relative to Search GPT
+ tern (d = 0.51). Analytically, causal language (“be-        (d = 1.37 for cogproc, d = 1.30 for posemo) in
+ cause,” “therefore”) and certainty markers (“al-            technology queries. Notably, these two topics also
+ ways,” “never”) also decline, though with smaller           least frequently generated AIOs (32% availability
+ effects (d = 0.34 and d = 0.41, respectively). No-          per RQ1). At the other extreme, education, history,
+ tably, certainty drops slower than hedging, where           and business/finance show near-zero epistemic di-
+ the ratio of certainty-to-tentative language (which         vergence (d = −0.03 to 0.12 for hedging and cog-
+ measures assertiveness) rises from 0.39 in Vanilla          proc), indicating that the two search-grounded sys-
+ GPT to 0.49 in both search systems. Therefore,              tems produce effectively indistinguishable output
+ search grounding does not just compress all epis-           for these high AI-overview-availability topics (74–
+ temic language equally, but rather selectively re-          84%). Interestingly, for politeness, politics/news
+ moves the markers of deliberation while preserving          and religion show nearly no differences across
+ markers of confidence.                                      search systems (d = 0.02 and d = 0.00), mean-
+    (3) Emotional flattening: Positive emotion               ing Google AIO matches Search GPT’s courtesy
+ drops by 44% from Vanilla GPT to Google AIO                 for more socially sensitive queries. This contrasts
+ (0.045 → 0.025; d = 0.61), while negative emo-              with technology (d = 0.84) and sports (d = 0.94),
+ tion drops by only 25% (d = 0.14). This asymmetry           where AIOs tend to adopt a much terser tone. For-
+ means Google AIO’s affect is not just reduced, but          mality, in contrast, remains high across nearly all
+ shifted to a lower positive-to-negative emotion ra-         topics (d = 0.82–1.76), suggesting very low topical
+ tio. The ML-based polarity and subjectivity scores,         sensitivity. See Table A6 in §A for detailed results.
+ by contrast, show negligible differences (d ≤ 0.09),
+ indicating that the emotional flattening operates at         6    RQ3: Source-Summary Coverage
+ the lexical level, rather than the semantic level, by       We now shift focus from how generative search sys-
+ using fewer emotion words. Google AIO’s polite-             tems cite sources (RQ1) and express information
+ ness is also markedly lower than Vanilla GPT’s              (RQ2) to how selectively they synthesize cited con-
+ (d = 0.65), suggesting a more impersonal style.             tent. Specifically, we examine whether generative
+Topic-wise variation: These effects are not uni-             summaries draw evenly from sources or systemati-
+cally favor certain sources over others. Our goal is    cally over- or under-represented across the corpus:
+descriptive: these metrics characterize which cited
+                                                                 1 X
+sources are reflected in a summary, but they do          CP =            |Eq [p(q, k) − p̄(q) | attr(k) = a]|
+                                                                |A|
+not determine whether an under-covered source is                     a∈A
+lower quality, redundant, or less relevant.                                                                (2)
+Methods. We adapt the coverage-based fairness           Lower CP values indicate less systematic bias. We
+framework of Li et al. (2025) to the generative         adapt CP to the generative search setting by us-
+search setting. The pipeline consists of three steps:   ing attribute schemes that capture structural, topi-
+(1) Atomic Content Unit (ACU) decomposi-                cal, and linguistic properties of cited sources. We
+tion: Each generative response is decomposed into       assess statistical significance via bootstrap resam-
+ACUs (single, self-contained factual statements)        pling (1,000 iterations) and use the Mann-Whitney
+using GPT-4o-mini with few-shot prompting. We           U test for cross-source comparison.
+generated ACUs for 1,100 queries per source (100        Findings. Table 2 reports per-topic EC and cov-
+per topic), producing 17,644 ACUs for Search GPT        erage probability, and Table 3 reports CP across
+(mean 16.0 per summary) and 16,898 for Google           attribute schemes.
+AIO (mean 15.4). See §A.2 for ACU prompts.              Google AIO covers sources less evenly than
+(2) Extract source context: For each query, we          Search GPT: Google AIO exhibits significantly
+scraped the full textual content of every cited         higher EC than Search GPT (M = 0.177 ± 0.091
+URL using trafilatura (Barbaresi, 2021) and             vs. 0.164 ± 0.113; p < .001), indicating that it dis-
+BeautifulSoup4, filtering for core article content      tributes attention across cited sources less evenly.
+excluding ads and boilerplate. Each source docu-        Google AIO also achieves lower overall coverage
+ment is chunked into overlapping blocks of approx-      (0.447 vs. 0.500; p < .001), meaning its summaries
+imately 100 words, following Li et al. (2025).          capture less of the total content in cited sources de-
+(3) Entailment probability: We compute entail-          spite citing nearly twice as many (mean=5.0 vs.
+ment probabilities P (chunk entails ACU) for all        2.7). This suggests a trade-off: Google AIO cites
+(source chunk, ACU) pairs using RoBERTa-large           more sources but synthesizes each one less thor-
+fine-tuned on MNLI (Liu et al., 2019). ACUs with        oughly. Topic-wise, for Search GPT, music shows
+mutual probability > 0.95 are deduplicated via          the highest coverage inequality (EC=0.236) and
+connected-component clustering (Li et al., 2025).       technology the lowest (0.131). For Google AIO,
+For each source and deduplicated ACU group, we          entertainment shows the highest inequality (0.217)
+take the maximum entailment probability over that       while science shows the lowest (0.149).
+source’s chunks, then average across covered ACU           Since Google AIO triggers for a different subset
+groups to obtain the source-level coverage proba-       of queries than Search GPT, we also restrict the
+bility p(q, k). This max-over-chunks aggregation        comparison to the 338 queries where both systems
+asks whether any part of a source supports a sum-       produced a valid, scoreable EC. On this matched
+mary claim; we discuss its length sensitivity in the    subset, the EC gap narrows (0.159 vs. 0.166) and
+Limitations. We compute two coverage metrics:           is no longer significant (Wilcoxon signed-rank
+   (i) Equal Coverage (EC): For a single query,         p = 0.31), indicating that part of the aggregate EC
+EC measures whether the summary draws evenly            gap reflects which queries elicit an AI Overview
+from all K cited sources:                               rather than a stable per-query fidelity difference.
+                                                        The coverage gap, however, remains large and
+                       K
+                   1 X                                  significant on the same matched subset (0.500 vs.
+         EC(q) =       |p(q, k) − p̄(q)|         (1)
+                   K                                    0.440; p < .001), so Search GPT’s higher extrac-
+                      k=1
+                                                        tion of cited content is not explained by query se-
+where p(q, k) is the source-level coverage probabil-    lection alone.
+ity for source k after max-over-chunks aggregation      Longer sources are the most over-
+and averaging
+            P across covered ACU groups, and            represented: The largest CP effect for both
+p̄(q) = K1 k p(q, k) is the overall mean across         systems is for source document length (Search
+sources. EC = 0 indicates perfectly even coverage,      GPT=0.058; Google AIO=0.079). Short sources
+with higher values indicating selective reliance.       are strongly under-represented (Search GPT:
+   (ii) Coverage Parity (CP): CP tests whether          −13.4pp; Google AIO: −17.7pp; both p < .001),
+sources with a particular attribute a are systemati-    while long sources are over-represented (3.9pp
+                           Search GPT         Google AIO                                Search GPT           Google AIO
+   Topic                  EC     Coverage    EC     Coverage                            Mean Diff (pp)      Mean Diff (pp)
+
+   Business/Fin./Econ.   0.162    0.500     0.162    0.431         Document Length
+   Education/Lit.        0.189    0.481     0.175    0.465           Short (<200 words)   −0.134 ***         −0.177 ***
+   Entertainment         0.185    0.480     0.217    0.459           Medium (200–800)     +0.000             +0.015 **
+   History               0.160    0.460     0.169    0.445           Long (>800 words)    +0.039 ***         +0.046 ***
+   Music                 0.236    0.449     0.177    0.407         Source Sentiment
+   Politics/News         0.152    0.506     0.168    0.444           Positive             +0.004             +0.011 **
+   Religion              0.138    0.523     0.165    0.465
+   Science               0.141    0.543     0.149    0.453
+                                                                     Neutral              −0.008             −0.010
+   Sports                0.164    0.542     0.204    0.455           Negative             −0.037             −0.138 ***
+   Technology            0.131    0.535     0.189    0.433         Domain Category
+   Travel/Geography      0.162    0.477     0.177    0.421           Encyclopedia         +0.022 ***         +0.050 ***
+   Overall               0.164    0.500     0.177    0.447
+                                                                     Government           −0.042 *           −0.035 **
+                                                                     Social/Forum             –              −0.221 ***
+                                                                     Other                −0.015 *           +0.001
+Table 2: Equal Coverage (EC) and mean coverage prob-               Wiki vs. Non-Wiki
+                                                                     Wikipedia            +0.026 ***         +0.054 ***
+ability (Coverage) by topic. EC measures how unevenly                Non-Wikipedia        −0.017 **          −0.009 **
+a summary draws from its cited sources (lower = more               Citation Position
+even). Coverage indicates the fraction of source content             Position 0 (first)   +0.015 *           +0.032 ***
+                                                                     Position 1           +0.001             +0.020 *
+entailed by summary ACUs.                                            Position 2           −0.021 *           +0.012
+                                                                   Source Subjectivity
+and 4.6pp). This suggests that these systems                         High subjectivity    −0.023 *           −0.032 ***
+                                                                     Low subjectivity     +0.004             +0.008 **
+place more emphasis on the amount of extractable                   *** p < .001, ** p < .01, * p < .05.
+text than on relevance or quality, exhibiting a                    Positive = over-represented; negative = under-represented.
+
+length bias that parallels brevity biases in dense
+                                                               Table 3: Coverage Parity (CP) analysis across attribute
+retrievers (Fayyaz et al., 2025).                              schemes. Higher CP values indicate more systematic
+Wikipedia/encyclopedia/government sources: En-                 bias. Significance via bootstrap resampling (n=1,000).
+cyclopedic sources are over-represented in both                95% bootstrap confidence intervals for these estimates
+Search GPT (+2.2pp) and Google AIO (+5.0pp).                   are reported in Table A4.
+For Wikipedia specifically (Search GPT: +2.6pp;
+                                                               diff = −0.221, p < .001) and Khan Academy
+Google AIO: +5.4pp; both p < .001), we find a
+                                                               (n = 21, diff = −0.311, p < .001) are the most
+significant compounding effect where it is not only
+                                                               under-covered in the synthesized summaries.
+cited most often (RQ1), but its content also receives
+disproportionate weight in summaries. In contrast,             Sources with epistemic markers receive more
+government sources are under-represented in both               coverage: Source-level LIWC analysis reveals
+systems (−4.2pp and −3.5pp, respectively).                     that sources containing causal language (“because,”
+                                                               “therefore”) and certainty markers (“always,” “def-
+Negative emotion and social media forums are
+                                                               initely”) are systematically over-covered in both
+under-represented:        Source sentiment shows
+                                                               systems. Causal language shows CP=0.071 (Search
+markedly different patterns across systems. Senti-
+                                                               GPT) and 0.070 (Google AIO). Conversely, highly
+ment effects are non-significant for Search GPT
+                                                               subjective sources are under-covered in both sys-
+(CP = 0.016) but large and significant for
+                                                               tems (-2.3pp and -3.2pp). Together, these patterns
+Google AIO (CP = 0.053): negative-sentiment
+                                                               suggest that the models favor sources with assertive,
+sources are under-covered by 13.8pp (p < .001),
+                                                               explanatory prose that is easier to extract factual
+while positive-sentiment sources are slightly over-
+                                                               claims from.
+represented (+1.1pp, p < .001). This asymmetry
+suggests that Google AIO’s synthesis implicitly                7     Discussion
+filters against negative content.
+    Domain-category analysis further shows that so-            Our study reveals that generative search systems
+cial media and forum sources (Reddit, Quora) are               do not simply retrieve and present information, but
+under-covered by 22.1pp in Google AIO (p <                     they actively reconstruct it through source selection,
+.001), suggesting that when Google AIO draws                   linguistic transformation, and selective synthesis.
+far less content from Reddit when cited alongside              We organize our discussion around three intercon-
+other sources. Combined with our finding from                  nected themes that emerge from our findings.
+RQ1 that Google AIO does cite social platforms                 The Compounding Effect From Citation to Syn-
+(8.5% of domains), this highlights a gap between               thesis: A central finding of this work is that bi-
+citation and synthesis: the model lists user-driven            ases in source selection (RQ1) are amplified rather
+sources in its references but draws disproportion-             than mitigated during synthesis (RQ3). For ex-
+ately little content from them. Reddit (n = 149,               ample, Wikipedia is not only the most frequently
+cited domain across all systems, but its content is       could miscalibrate the trust-reliance association in
+disproportionately over-represented in generated          educational settings (Pal et al., 2026a).
+summaries. Conversely, social media and forum             Implications and Future Directions: Our findings
+sources present an inverse pattern: Google AIO            surface important implications for different stake-
+cites Reddit and Quora in 7–8% of queries, yet            holders. For NLP researchers, we offer a reusable
+draws 22.1% less content from social platforms            framework for auditing source-summary fidelity in
+than from other sources. This creates a citation-         any retrieval-augmented generation system. Our
+synthesis gap: the model references user-generated        finding that document length is the strongest pre-
+sources lending an appearance of source diversity,        dictor of over-representation parallels recent work
+while relying on a narrower set of encyclopedic or        on brevity biases in dense retrievers (Fayyaz et al.,
+authoritative texts. This compounding dynamic res-        2025) and suggests that length bias may persist
+onates with concerns raised by Dai et al. (2024a,b)       through the full RAG pipeline. Future work should
+about systematic biases in how models prioritize          investigate whether debiasing at the retrieval stage
+sources, and extends them by showing that the bias        propagates to more equitable synthesis, or whether
+operates not only at the retrieval stage but deepens      generation introduces its own independent biases.
+during generation. With the rise of agentic dis-          Another open question is whether these dynamics
+course on the internet (Goyal et al., 2026c; Feng         generalize to platform-native generative search sys-
+et al., 2026), compounded effects of biased retrieval     tems, where retrieval is based on community dis-
+towards agent-generated content (Dai et al., 2024b)       course rather than the open web, making source
+with the citation-synthesis gap we found can lead         selection consequential for which contributions
+to drastic outcomes. For users, this gap is largely       within a community are amplified. For system
+invisible, and the cited sources in an AI Overview        designers, the divergence between Search GPT
+may suggest breadth that the synthesized text does        and Google AIO demonstrates that these systems
+not reflect. This also has implications for source        have fundamentally different design choices about
+visibility and the economic viability of smaller pub-     what constitutes a good search response. Making
+lishers and community-driven platforms.                   these design philosophies more transparent to users
+                                                          through source diversity indicators or confidence
+Epistemic Reshaping of Summaries from Uncer-              signals could help users make more informed judg-
+tain Sources: Our linguistic analysis (RQ2) re-           ments about the information they receive. For users
+veals that search grounding does not uniformly            and policymakers, the key takeaway is that the
+compress language but selectively reshapes its epis-      same query yields different “answer bubbles” that
+temic character. The ratio of certainty-to-tentative      the end user is unaware of. We propose that gen-
+language rises from 0.39 in Vanilla GPT to 0.49 in        erative search systems should be subject to trans-
+both search-grounded systems, connecting directly         parency requirements analogous to those for algo-
+to observations from RQ3 findings that sources            rithmic recommendation systems (Kowald, 2024).
+containing causal and certainty language are sys-
+tematically over-covered, while highly subjective         8   Conclusion
+sources are under-covered. Together, these results
+suggest that generative search systems preferen-          We presented a large-scale comparative study of
+tially extract from assertive, explanatory prose and      generative and traditional search systems across
+then present the resulting synthesis in a style that is   11,000 real user queries, showing that the same
+more assertive and less hedged than the underlying        query can produce structurally different source sets,
+sources warrant. This epistemic flattening is par-        summaries, and linguistic framings depending on
+ticularly concerning as it could potentially present      the system used. Generative search systems di-
+uncertain information to users with unwarranted           verge sharply in which sources they cite, how they
+confidence. This aligns with broader concerns in          linguistically frame responses, and how selectively
+information-seeking literature about how linguistic       they synthesize cited material, with biases in source
+style influences perceived credibility (Zhao and Liu,     selection compounding during generation. As these
+2021; Choo, 2023) and how epistemic emotions              systems increasingly mediate public information
+shape knowledge exploration (Vogl et al., 2020). If       access, our findings underscore the need for greater
+users interpret the absence of hedging as a signal of     transparency in how AI-generated search responses
+factual reliability, the epistemic reshaping we find      are constructed and the sources they prioritize.
+Limitations                                             EC and CP also measure selective coverage rather
+                                                        than normative source quality: they do not adjudi-
+Our study has limitations that outline interesting
+                                                        cate whether a source deserved more or less rep-
+directions for future work.
+                                                        resentation, whether uncovered material was re-
+Temporal and geographic scope: Our audit cap-           dundant, or whether a source was higher or lower
+tures behavior of generative search systems at a        quality.
+single point in time from a single location. Gen-
+                                                        No user-study, ideology, or causal claims: While
+erative search systems are updated frequently, and
+                                                        we provide detailed characterization of outputs,
+source selection strategies, linguistic patterns, and
+                                                        we do not measure user perception or behavior.
+synthesis behaviors may shift with model updates
+                                                        Therefore, we cannot make claims about whether
+or policy changes. Similarly, Google search results
+                                                        users would notice or be affected by the epistemic
+and AI Overview availability vary by geography,
+                                                        and source-diversity differences we find. We also
+language, and user profile. Longitudinal and cross-
+                                                        do not directly measure ideological skew, political
+regional studies are needed to determine how stable
+                                                        worldview effects, or personalization; our “answer
+the answer bubble patterns we find are.
+                                                        bubble” framing refers to system-level differences
+Query representativeness: Our queries are drawn         in source exposure and synthesis. Controlled user
+from Google’s Natural Questions (NQ) corpus,            studies measuring how answer bubbles influence
+which is primarily focused on information-seeking       trust calibration and downstream decision-making,
+intent and was originally collected around 2018.        as well as targeted audits of politically charged
+Other types of queries may elicit different source      queries with stance-annotated sources, would di-
+selection and linguistic behaviors. Furthermore,        rectly extend this work. Moreover, our study is
+our 11-topic list might collapse heterogeneous          correlational, drawing associations between search
+subtopics into single categories (e.g., “Science”       grounding and linguistic attenuation. We therefore
+spans biology, physics, and healthcare). Finer-         cannot establish causal mechanisms or disentangle
+grained topic analysis and more diverse query types     the contributions of model architecture, training
+could reveal additional insights that our current de-   data, and retrieval pipeline on the effects we find.
+sign did not capture.
+                                                        System coverage and confounds: We audit five
+Methodological proxies: Our RQ3 pipeline relies         systems, but the generative search landscape in-
+on GPT-4o-mini for atomic content unit decompo-         cludes many other systems and open-source search-
+sition and RoBERTa-large for entailment scoring,        augmented models that may show different results.
+both of which may introduce noise and domain-           Additionally, we treat Google AIO as a black box
+specific errors. Since we utilized the work of Li       without access to its specific model version, re-
+et al. (2025), we did not conduct additional hu-        trieval pipeline, or post-processing steps, limiting
+man validation of ACU quality or entailment ac-         mechanistic interpretation of our findings. Future
+curacy. Additionally, not all cited URLs were suc-      work incorporating a broader set of systems would
+cessfully scraped (e.g., paywalled content), poten-     strengthen the generalizability of our findings.
+tially biasing coverage estimates if non-scrapable
+sources differ systematically from scrapable ones.      Acknowledgments
+The max-over-chunks aggregation used to compute
+source-level coverage also carries a mechanical         This work used the Delta system at the National
+component, where on a stratified subsample (up to       Center for Supercomputing Applications through
+30 queries/topic), replacing max- with mean-over-       allocation #240481 from the Advanced Cyberin-
+chunks substantially shrinks the length-diff pattern    frastructure Coordination Ecosystem: Services &
+in Table 3 for all three systems (short-source under-   Support (ACCESS) program, which is supported
+representation moves from −0.148 to +0.018 for          by National Science Foundation grants #2138259,
+Search GPT, −0.217 to −0.011 for Google AIO,            #2138286, #2138307, #2137603, and #2138296.
+and −0.145 to +0.007 for Perplexity), so part of
+                                                        AI Involvement Disclosure
+the reported length bias reflects the pooling oper-
+ator rather than length alone. Aggregate EC and         The research conducted in our work used artifi-
+CP are comparatively stable across chunk sizes          cial intelligence tools (e.g., Grammarly, ChatGPT)
+(60/80/120 words), so this sensitivity is specific to   solely for improving the grammar and readabil-
+the pooling choice rather than the chunking scheme.     ity of certain sections of the manuscript, and for
+partial development of the codebase for the evalua-       João Coelho, Bruno Martins, Joao Magalhaes, Jamie
+tions conducted through Claude Code, Codex, and             Callan, and Chenyan Xiong. 2024. Dwell in the
+                                                            beginning: How language models embed long docu-
+Cursor. All scientific content, interpretations, and
+                                                            ments for dense retrieval. In Proceedings of the 62nd
+decisions reflect the original work, judgment and           Annual Meeting of the Association for Computational
+intellectual contributions of the research team.            Linguistics (Volume 2: Short Papers), pages 370–377,
+                                                            Bangkok, Thailand. Association for Computational
+Ethical Considerations                                      Linguistics.
+
+Our study analyzes system-generated outputs from          Sunhao Dai, Chen Xu, Shicheng Xu, Liang Pang, Zhen-
+publicly accessible search platforms and does not           hua Dong, and Jun Xu. 2024a. Bias and unfairness in
+                                                            information retrieval systems: New challenges in the
+involve human subjects, personal data, or user in-
+                                                            llm era. In Proceedings of the 30th ACM SIGKDD
+teraction. All queries are drawn from the publicly          conference on knowledge discovery and data mining,
+available Natural Questions (NQ) corpus. We fol-            pages 6437–6447.
+lowed the terms of service and standard usage poli-
+cies for both SerpAPI and OpenAI API.                     Sunhao Dai, Yuqi Zhou, Liang Pang, Weihao Liu, Xi-
+                                                            aolin Hu, Yong Liu, Xiao Zhang, Gang Wang, and
+   We also want to highlight that we do not intend          Jun Xu. 2024b. Neural retrievers are biased towards
+to single out any particular system with our find-          llm-generated content. In Proceedings of the 30th
+ings, but aim to characterize broad patterns across         ACM SIGKDD Conference on Knowledge Discovery
+the generative search landscape that have impli-            and Data Mining, pages 526–537.
+cations for information access. We believe that           Mohsen Fayyaz, Ali Modarressi, Hinrich Schuetze, and
+transparent, independent auditing of AI-mediated           Nanyun Peng. 2025. Collapse of dense retrievers:
+search systems serves the public interest.                 Short, early, and literal biases outranking factual evi-
+                                                           dence. In Proceedings of the 63rd Annual Meeting of
+                                                           the Association for Computational Linguistics (Vol-
+References                                                 ume 1: Long Papers), pages 9136–9152, Vienna,
+                                                           Austria. Association for Computational Linguistics.
+Nikolay Babakov, David Dale, Ilya Gusev, Irina Kro-
+  tova, and Alexander Panchenko. 2023. Don’t lose         Yi Feng, Chen Huang, Zhibo Man, Ryner Tan, Long P.
+  the message while paraphrasing: A study on con-            Hoang, Shaoyang Xu, and Wenxuan Zhang. 2026.
+  tent preserving style transfer. In Natural Language        Moltnet: Understanding social behavior of AI agents
+  Processing and Information Systems, pages 47–61,           in the agent-native moltbook. In Third Conference
+  Cham. Springer Nature Switzerland.                         on Language Modeling.
+Adrien Barbaresi. 2021. Trafilatura: A web scraping       Yunfan Gao, Yun Xiong, Xinyu Gao, Kangxiang Jia,
+  library and command-line tool for text discovery and      Jinliu Pan, Yuxi Bi, Yixin Dai, Jiawei Sun, Haofen
+  extraction. In Proceedings of the 59th Annual Meet-       Wang, Haofen Wang, and 1 others. 2023. Retrieval-
+  ing of the Association for Computational Linguistics      augmented generation for large language models: A
+  and the 11th International Joint Conference on Nat-       survey. arXiv preprint arXiv:2312.10997, 2(1):32.
+  ural Language Processing: System Demonstrations,
+  pages 122–131, Online. Association for Computa-         Drishti Goel, Agam Goyal, Veda Duddu, Olivia Pal,
+  tional Linguistics.                                       Jeongah Lee, Qiuyue Joy Zhong, Violeta J Rodriguez,
+                                                            Daniel S Brown, Dong Whi Yoo, Ravi Karkar, and
+Yoav Benjamini and Yosef Hochberg. 1995. Control-           1 others. 2026. Inform, coach, relate, listen: Au-
+  ling the false discovery rate: a practical and pow-       diting llm caregiving support roles. arXiv preprint
+  erful approach to multiple testing. Journal of the        arXiv:2605.29473.
+  Royal statistical society: series B (Methodological),
+  57(1):289–300.                                          Agam Goyal, Charlotte Lambert, and Eshwar Chan-
+Zana Buçinca, Maja Barbara Malaya, and Krzysztof Z          drasekharan. 2026a. The language of approval: Iden-
+  Gajos. 2021. To trust or to think: cognitive forc-        tifying the drivers of positive feedback online. In
+  ing functions can reduce overreliance on ai in ai-        Proceedings of the 2026 CHI Conference on Human
+  assisted decision-making. Proceedings of the ACM          Factors in Computing Systems, pages 1–23.
+  on Human-computer Interaction, 5(CSCW1):1–21.
+                                                          Agam Goyal, Koyel Mukherjee, Apoorv Saxena,
+Athena Chapekis and Anna Lieb. 2025. Google users           Anirudh Phukan, Eshwar Chandrasekharan, and Hari
+  are less likely to click on links when an ai summary      Sundaram. 2026b. Masking or mitigating? decon-
+  appears in the results.                                   structing the impact of query rewriting on retriever
+                                                            biases in RAG. In Findings of the Association for
+Chun Wei Choo. 2023. Climate change information             Computational Linguistics: ACL 2026, pages 8517–
+  seeking. Journal of the Association for Information       8530, San Diego, California, United States. Associa-
+  Science and Technology, 74(9):1086–1099.                  tion for Computational Linguistics.
+Agam Goyal, Olivia Pal, Hari Sundaram, Eshwar Chan-        Xinyi Li, Yongfeng Zhang, and Edward C Malthouse.
+  drasekharan, and Koustuv Saha. 2026c. Social simu-         2024a. Large language model agent for fake news
+  lacra in the wild: Ai agent communities on moltbook.       detection. arXiv preprint arXiv:2405.01593.
+  arXiv preprint arXiv:2603.16128.
+                                                           Yongqi Li, Xinyu Lin, Wenjie Wang, Fuli Feng, Liang
+Maarten Grootendorst. 2022. Bertopic: Neural topic           Pang, Wenjie Li, Liqiang Nie, Xiangnan He, and Tat-
+ modeling with a class-based tf-idf procedure. arXiv         Seng Chua. 2024b. A survey of generative search and
+ preprint arXiv:2203.05794.                                  recommendation in the era of large language models.
+                                                             arXiv preprint arXiv:2404.16924.
+Desheng Hu, Joachim Baumann, Aleksandra Urman,             Nelson Liu, Tianyi Zhang, and Percy Liang. 2023. Eval-
+  Elsa Lichtenegger, Robin Forsberg, Aniko Hannak,           uating verifiability in generative search engines. In
+  and Christo Wilson. 2026. Auditing google’s ai             Findings of the Association for Computational Lin-
+  overviews and featured snippets: A case study on           guistics: EMNLP 2023, pages 7001–7025, Singapore.
+  baby care and pregnancy. In Proceedings of the Inter-      Association for Computational Linguistics.
+  national AAAI Conference on Web and Social Media,
+  volume 20, pages 1044–1062.                              Yinhan Liu, Myle Ott, Naman Goyal, Jingfei Du, Man-
+                                                             dar Joshi, Danqi Chen, Omer Levy, Mike Lewis,
+Tuan-Luc Huynh, Thuy-Trang Vu, Weiqing Wang, Yin-            Luke Zettlemoyer, and Veselin Stoyanov. 2019.
+  wei Wei, Trung Le, Dragan Gasevic, Yuan-Fang Li,           Roberta: A robustly optimized bert pretraining ap-
+  and Thanh-Toan Do. 2025. Promptdsi: Prompt-based           proach. arXiv preprint arXiv:1907.11692.
+  rehearsal-free continual learning for document re-
+  trieval. In Joint European Conference on Machine         Steven Loria, pre-commit-ci[bot], dependabot[bot],
+  Learning and Knowledge Discovery in Databases,              dependabot-preview[bot], dependabot-support, Ro-
+  pages 383–401. Springer.                                    man Yankovsky, Jeff Schnurr, pyup.io bot, Jamie
+                                                              Moschella, Emmy Zero, John Franey, Evan
+Yunah Jang, Megha Sundriyal, Kyomin Jung, and Meey-           Dempsey, Jeff Kolb, Daniel Ong, Jhon Eslava, Ro-
+  oung Cha. 2026. How you ask matters! adaptive               main Casati, Wesley Childs, Tim Gates, Robin
+  rag robustness to query variations. arXiv preprint          Bürgi, and 11 others. 2026.         sloria/TextBlob.
+  arXiv:2604.10745.                                           https://github.com/sloria/TextBlob.
+                                                           Pranav Narayanan Venkit, Philippe Laban, Yilun Zhou,
+Dominik Kowald. 2024.     Transparency, privacy,
+                                                             Yixin Mao, and Chien-Sheng Wu. 2025. Search en-
+  and fairness in recommender systems. ArXiv,
+                                                             gines in the ai era: a qualitative understanding to the
+  abs/2406.11323.
+                                                             false promise of factual and verifiable source-cited
+                                                             responses in llm-based search. In Proceedings of the
+Monika Krakowska. 2020. Affective factors in hu-
+                                                             2025 ACM Conference on Fairness, Accountability,
+ man information behavior: a conceptual analysis of
+                                                             and Transparency, pages 1325–1340.
+ interdisciplinary research on information behavior.
+ Zagadnienia Informacji Naukowej–Studia Informa-           Olivia Pal, Veda Duddu, Agam Goyal, Drishti Goel, and
+ cyjne, 58(1A (115A)):75–95.                                 Koustuv Saha. 2026a. Do we know what they know
+                                                             we know? calibrating student trust in ai and human
+Tom Kwiatkowski, Jennimaria Palomaki, Olivia Red-            responses through mutual theory of mind. In Pro-
+  field, Michael Collins, Ankur Parikh, Chris Alberti,       ceedings of the Extended Abstracts of the 2026 CHI
+  Danielle Epstein, Illia Polosukhin, Jacob Devlin, Ken-     Conference on Human Factors in Computing Systems,
+  ton Lee, Kristina Toutanova, Llion Jones, Matthew          CHI EA ’26, New York, NY, USA. Association for
+  Kelcey, Ming-Wei Chang, Andrew M. Dai, Jakob               Computing Machinery.
+  Uszkoreit, Quoc Le, and Slav Petrov. 2019. Natu-
+  ral questions: A benchmark for question answering        Olivia Pal, Agam Goyal, Eshwar Chandrasekharan, and
+  research. Transactions of the Association for Compu-       Koustuv Saha. 2026b. The hidden toll of social me-
+  tational Linguistics, 7:452–466.                           dia news: Causal effects on psychosocial wellbeing.
+                                                             In Proceedings of the 2026 Conference on Empirical
+Alice Li and Luanne Sinnamon. 2024. Generative ai            Methods in Natural Language Processing (EMNLP).
+  search engines as arbiters of public knowledge: An
+  audit of bias and authority. Proceedings of the As-      Eli Pariser. 2011. The filter bubble: How the new per-
+  sociation for Information Science and Technology,           sonalized web is changing what we read and how we
+  61(1):205–217.                                              think. Penguin.
+                                                           James W Pennebaker, Ryan L Boyd, Kayla Jordan, and
+Haoyuan Li, Yusen Zhang, Rui Zhang, and Snigdha              Kate Blackburn. 2015. The development and psycho-
+  Chaturvedi. 2025. Coverage-based fairness in multi-        metric properties of liwc2015.
+  document summarization. In Proceedings of the
+  2025 Conference of the Nations of the Americas           Koustuv Saha, Yoshee Jain, Chunyu Liu, Sidharth Kali-
+  Chapter of the Association for Computational Lin-          appan, and Ravi Karkar. 2026. Ai vs. humans for
+  guistics: Human Language Technologies (Volume 1:           online support: Comparing the language of responses
+  Long Papers), pages 9801–9819, Albuquerque, New            from llms and online communities of alzheimer’s dis-
+  Mexico. Association for Computational Linguistics.         ease. ACM Trans. Comput. Healthcare, 7(3).
+Saron Samuel, Benjamin Van Durme, and Eugene                A     Appendix
+  Yang. 2026. Does reasoning make search more fair?
+  comparing fairness in reasoning and non-reasoning         In this section we extend the description of the
+  rerankers. In European Conference on Information          query dataset by providing simple descriptive statis-
+  Retrieval, pages 305–318. Springer.
+                                                            tics and highlighting key terms across topics.
+Nikhil Sharma, Q Vera Liao, and Ziang Xiao. 2024.              The queries have a mean length of 9.32 ± 1.91
+  Generative echo chamber? effect of llm-powered            words. The majority of queries are phrased as ques-
+  search systems on diverse information seeking. In         tions (78%), with the remainder being declarative
+  Proceedings of the 2024 CHI Conference on Human
+  Factors in Computing Systems, pages 1–17.                 statements or keyword fragments. The five most
+                                                            frequent key terms across all queries are world
+SpaceXAI. 2025. Grok 4.1 — x.ai. https://x.ai/              (377), India (346), name (338), time (327), and
+  news/grok-4-1.                                            United States (249). Table A1 presents the top key
+Anirudh Srinivasan and Eunsol Choi. 2022. TyDiP: A          terms per topic, computed after lemmatization and
+  dataset for politeness classification in nine typolog-    aggregating counts across morphological variants.
+  ically diverse languages. In Findings of the Associ-         Table A2 reports extended description of our
+  ation for Computational Linguistics: EMNLP 2022,          findings from RQ1, including Perplexity (see §A.1
+  pages 5723–5738, Abu Dhabi, United Arab Emirates.
+  Association for Computational Linguistics.                for the full Perplexity + Grok experiments).
+
+Hao Sun, Zile Qiao, Jiayan Guo, Xuanbo Fan, Yingyan         A.1    Perplexity + Grok: A Cross-System
+  Hou, Yong Jiang, Pengjun Xie, Yan Zhang, Fei                     Robustness Check
+  Huang, and Jingren Zhou. 2025. Zerosearch: Incen-
+  tivize the search capability of llms without searching.   To assess external validity beyond OpenAI
+  arXiv preprint arXiv:2505.04588.                          and Google, we replicate our full RQ1–
+                                                            RQ3 pipeline on a third-party generative
+Daniel Trielli and Nicholas Diakopoulos. 2019. Search
+  as news curator: The role of google in shaping at-        search system: Perplexity Search paired with
+  tention to news information. In Proceedings of the        xai/grok-4-1-fast-non-reasoning as the
+  2019 CHI Conference on human factors in computing         underlying LLM, queried on the same 11,000-
+  systems, pages 1–15.                                      query benchmark. We summarize results below.
+Elisabeth Vogl, Reinhard Pekrun, Kou Murayama,              Overall, Perplexity reinforces the same directional
+   and Kristina Loderer. 2020. Surprised–curious–           findings as our main analysis, corroborating the
+   confused: Epistemic emotions and knowledge ex-           answer-bubbles framing across a third model
+   ploration. Emotion, 20(4):625.                           family and platform.
+Tu Vu, Mohit Iyyer, Xuezhi Wang, Noah Constant, Jerry       RQ1: Source selection. Perplexity shows 74.5%
+  Wei, Jason Wei, Chris Tar, Yun-Hsuan Sung, Denny          query coverage with at least one citation (mean
+  Zhou, Quoc Le, and Thang Luong. 2024. Fresh-
+                                                            5.7 citations/query, median 6), placing it between
+  LLMs: Refreshing large language models with search
+  engine augmentation. In Findings of the Association       Search GPT (97.0%, mean 3.2) and Google AIO
+  for Computational Linguistics: ACL 2024, pages            (57.8%, mean 4.0), and below Organic Google’s
+  13697–13720, Bangkok, Thailand. Association for           near-fixed first-page behavior (99.8%, mean 9.3);
+  Computational Linguistics.                                see Table A2 for the full comparison. Its most-cited
+Alex Ward, Sean Hastings, LKirst, Shivam Bansal,            domains are dominated by reference and video
+  Lukas Schoebel, Alonso Cisneros, Christian Clauss,        sources (Wikipedia: 58.0% of queries; YouTube:
+  Guillem García Subies, John Giorgi, massvoice,            38.1%), and its domain-category profile remains
+  Caleb, MKaras, Hugo van Kemenade, Takeshi                 low in social/forum sourcing (0.0%) compared
+  Kishiyama, Rinaldo Rex, Andrew McNutt, Aether,
+  Gérard Laras, Lane Clark, and 11 others. 2026. text-      with Google AIO (8.5%) and Organic Google
+  stat/textstat. https://github.com/textstat/textstat.      (13.4%). Top-100 domain overlap is moderate with
+                                                            Google’s systems (Jaccard: 0.351 with AIO, 0.379
+Haofei Xu, Umar Iqbal, and Jacob M Montgomery.
+                                                            with Organic), indicating partial convergence but
+  2026. Measuring google ai overviews: Activation,
+  source quality, claim fidelity, and publisher impact.     not collapse into Google’s retrieval profile. Fig-
+  arXiv preprint arXiv:2605.14021.                          ure A1 shows Perplexity’s top cited domains by
+                                                            topic, in the same format as Figure 2: it is es-
+Shuguang Zhao and Yiming Liu. 2021. The more insuf-
+  ficient, the more avoidance? cognitive and affective
+                                                            pecially Wikipedia- and YouTube-heavy in high-
+  factors that relates to information behaviours in acute   fact-density topics such as music (73% Wikipedia,
+  risks. Frontiers in Psychology, 12:730068.                71% YouTube) and sports (80% Wikipedia, 53%
+  Topic                                            # Queries           Top 5 Key Terms
+  Business, Finance, & Economy                            1,000        company (53), India (51), United States (48), world (43), bank (43)
+  Education & Literature                                  1,000        book (107), wrote (95), school (77), name (50), summary (40)
+  Entertainment                                           1,000        play (193), movie (116), season (110), episode (90), film (56)
+  Geography & Travel                                      1,000        locate (148), map (90), world (69), state (61), river (60)
+  History                                                 1,000        war (92), name (58), India (58), world (38), United States (34)
+  Music                                                   1,000        song (239), sing (216), write (88), love (72), lyrics (47)
+  Politics & News                                         1,000        state (147), India (90), court (68), president (65), united (61)
+  Religion                                                1,000        Bible (235), book (90), church (81), God (70), catholic (45)
+  Science                                                 1,000        earth (33), locate (32), cell (24), function (23), name (23)
+  Sports                                                  1,000        time (142), world cup (95), game (75), team (73), NBA (54)
+  Technology                                              1,000        use (111), difference (55), computer (53), Xbox (42), Windows (40)
+  All Queries                                            11,000        world (377), India (346), name (338), time (327), United States (249)
+
+Table A1: Query Dataset Summary. Table representing all 11 topics and the number of queries per topic in our
+final dataset. We also report the top 5 most frequently appearing key terms per topic with frequencies in parentheses.
+
+                              Search GPT     Google AIO     Perplexity       Organic
+ Queries w/ ≥1 citation         97.0%           57.8%         74.5%          99.8%
+                                                                                                   with readability close to Search GPT (Coleman-
+ Mean citations/query             3.2             4.0           5.7            9.3
+ Median citations/query            3               4             6             10                  Liau 12.85 vs. 12.84) but shorter sentences (14.2
+ Unique domains                 7,606           14,279        22,562         26,891
+ Domain category (% of cited domains)                                                              vs. 18.0 words), suggesting a style that combines
+  Encyclopedia/Reference        27.3%           10.3%         13.1%          11.0%
+  News/Media                     7.2%            2.4%          0.4%           1.7%                 long responses with shorter clause-level units. Epis-
+  Gov./Institutional             7.0%            8.5%          9.1%           7.9%
+  Social Media/Forums            0.1%            8.5%          0.0%          13.4%                 temically, Perplexity sits within the same broad
+  Video/Streaming                6.9%            3.7%          8.7%           3.3%
+  Organization (.org)            8.4%           11.9%         12.6%          10.9%                 search-grounded pattern of attenuated hedging rel-
+  Other                         43.0%           54.0%         55.8%          51.0%
+                                                                                                   ative to Vanilla GPT, but is less attenuated than
+Table A2: Source summary. Domain categories show                                                   the other two search systems: cognitive-process
+each category’s share of all cited domains.                                                        language remains high (cogproc=0.082 vs. 0.087
+                                                                                                   Vanilla, 0.067 Search GPT, 0.044 AIO) and ten-
+YouTube), while topic-specific domains still sur-                                                  tative language is likewise higher than the other
+face (Spotify in music, ESPN in sports, Rotten                                                     search systems (tentat=0.0218 vs. 0.025 Vanilla,
+Tomatoes in entertainment).                                                                        0.015 Search GPT, 0.010 AIO). Affect markers
+                                                                                                   show the same search-grounded shift toward lower
+                                            Perplexity                                             positive and comparatively higher negative emo-
+          en.wikipedia.org 55 46 68 70 73 66 45 38 80 37 59
+              youtube.com 30 25 50 38 71 32 33 31 53 32 24                                         tion as the GPT-only systems (posemo=0.034;
+           britannica.com 3 5 1 18 2 8 7 5 7 1 9                                                   negemo=0.0108, the highest among the four sys-
+          open.spotify.com              1      42
+                  espn.com                                      40
+                                                                                70                 tems).
+                 ebsco.com 2 3              8       4 2 3 1              1      60
+                                                                                50
+                                                                                    % of queries
+
+
+
+
+     pmc.ncbi.nlm.nih.gov 2 3               2       1      15                                       Feature              GPTV    GPTS    GoogleAI   Perplexity
+             testbook.com 2 3               3       6       2 2          3      40                  Word Count              87     140         83         190
+                scribd.com 3 5              2       1 1 2            3 1        30                  Avg. Sent. Length     16.3    18.0       11.4        14.2
+                 study.com 2 2              5       1 3 3                2                          Coleman-Liau Index    11.5    12.8       11.7        12.8
+                                                                                20                  Type-Token Ratio      0.73    0.64       0.75        0.68
+      rottentomatoes.com               16
+                                                                                10                  cogproc              0.087   0.067      0.044       0.082
+             statmuse.com                                       17                                  tentat               0.025   0.015      0.010       0.022
+                                                                                0
+               statista.com 5                       2            4       3                          posemo               0.045   0.044      0.025       0.034
+worldpopulationreview.com 4                         2 1                  7                          negemo               0.008   0.009      0.006       0.011
+           goodreads.com            12 1
+                             ess ion ent ory sic ics ion ce rts gy vel                             Table A3: Descriptive comparison of Perplexity against
+                          sin at m ist Mu PolitRelig Scien Spo hnolo Tra
+                        Bu Educertain H                    Tec                                     the systems in Table 1 on the subset of features com-
+                            Ent
+                                                                                                   puted for all four systems. Values are means; Perplexity
+Figure A1: Top-15 cited domains by query topic for                                                 is interpreted descriptively rather than via inferential
+Perplexity (% of queries citing each domain), in the                                               tests.
+same format as Figure 2. Cell values ≥1% are shown.
+                                                                                                   RQ3: Source-summary coverage. Table A5 and
+RQ2: Linguistic characterization. We ran Per-                                                      Table A4 extend Table 2 and Table 3 with Perplex-
+plexity outputs through the same LIWC and read-                                                    ity. Perplexity does not improve source balancing
+ability/verbosity feature pipeline as Table 1 and                                                  relative to the other systems: its EC is nearly iden-
+compare descriptively in Table A3. Perplexity is                                                   tical to Google AIO and higher (worse, i.e. less
+the most verbose system we study (mean 190 words                                                   even) than Search GPT (0.178 vs. 0.177 AIO and
+vs. 140 for Search GPT and 87 for Vanilla GPT),                                                    0.164 Search GPT), while its overall coverage is
+                                                 Search GPT                         Google AIO                            Perplexity
+                                             Mean Diff (pp) [95% CI]            Mean Diff (pp) [95% CI]              Mean Diff (pp) [95% CI]
+                Document Length
+                                            ∗∗∗                                        ∗∗∗                                      ∗∗∗
+                  Short (<200 words)−0.134      [−0.16, −0.11]                  −0.177    [−0.19, −0.16]             −0.144     [−0.16, −0.13]
+                                                                                       ∗∗
+                  Medium (200–800)      +0.000 [−0.01, +0.02]                    +0.014 [+0.01, +0.02]                 +0.003 [−0.01, +0.01]
+                                            ∗∗∗                                       ∗∗∗                                  ∗∗∗
+                  Long (>800 words) +0.039      [+0.03, +0.05]                  +0.046    [+0.04, +0.05]             +0.050    [+0.04, +0.06]
+                Source Sentiment
+                                                                                        ∗∗                                            ∗
+                  Positive              +0.004 [−0.01, +0.02]                    +0.010 [+0.00, +0.02]                +0.007 [+0.00, +0.01]
+                  Neutral               −0.008 [−0.03, +0.01]                     −0.010 [−0.02, +0.00]                −0.005 [−0.02, +0.01]
+                                                                                       ∗∗∗                                  ∗∗∗
+                  Negative              −0.037 [−0.10, +0.03]                   −0.138     [−0.17, −0.11]            −0.101     [−0.13, −0.07]
+                Domain Category
+                                             ∗∗                                        ∗∗∗                                      ∗∗∗
+                  Encyclopedia        +0.022 [+0.01, +0.03]                     +0.050    [+0.04, +0.06]             +0.088      [+0.08, +0.10]
+                                              ∗                                        ∗∗                                   ∗∗∗
+                  Government           −0.042 [−0.08, +0.00]                     −0.034 [−0.06, −0.01]               −0.046      [−0.06, −0.03]
+                                                                                      ∗∗∗
+                  Social/Forum                   –                              −0.221    [−0.25, −0.20]                          –
+                                              ∗                                                                            ∗∗∗
+                  Other                −0.015 [−0.03, −0.00]                      +0.001 [−0.01, +0.01]              −0.019     [−0.03, −0.01]
+                Wiki vs. Non-Wiki
+                                            ∗∗∗                                        ∗∗∗                                      ∗∗∗
+                  Wikipedia          +0.026     [+0.01, +0.04]                  +0.054    [+0.04, +0.07]             +0.096      [+0.08, +0.11]
+                                             ∗∗                                        ∗∗                                   ∗∗∗
+                  Non-Wikipedia       −0.017 [−0.03, −0.00]                      −0.009 [−0.02, −0.00]               −0.022     [−0.03, −0.02]
+                Citation Position
+                                              ∗                                        ∗∗∗                                      ∗∗∗
+                  Position 0 (first)   +0.015 [−0.00, +0.03]                    +0.032   [+0.02, +0.05]              +0.128    [+0.11, +0.14]
+                                                                                       ∗                                   ∗∗∗
+                  Position 1            +0.001 [−0.02, +0.02]                    +0.020 [+0.00, +0.04]               +0.053    [+0.04, +0.07]
+                                              ∗
+                  Position 2           −0.021 [−0.04, −0.00]                      +0.012 [−0.01, +0.03]                +0.010 [−0.00, +0.02]
+                Source Subjectivity
+                                              ∗                                        ∗∗∗                                      ∗∗∗
+                  High subjectivity    −0.023 [−0.05, +0.00]                    −0.032    [−0.05, −0.02]             −0.038    [−0.05, −0.02]
+                                                                                       ∗∗                                   ∗∗
+                  Low subjectivity      +0.004 [−0.01, +0.01]                    +0.008 [+0.00, +0.01]               +0.008 [+0.00, +0.01]
+                *** p < .001, ** p < .01, * p < .05. Brackets are 95% percentile bootstrap CIs (n=1,000).
+                Positive = over-represented; negative = under-represented.
+
+Table A4: Coverage Parity (CP) analysis across attribute schemes with 95% bootstrap confidence intervals, extending
+Table 3 with Perplexity and interval estimates.
+
+                         Search GPT         Google AIO          Perplexity                   Topic                 cogproc   tentat       posemo   formality   politeness
+
+ Topic                  EC     Coverage    EC     Coverage    EC     Coverage                Technology             1.37      0.69         1.30      1.19         0.84
+                                                                                             Travel/Geography       0.88     0.64          1.01      1.76         0.79
+ Business/Fin./Econ.   0.162    0.500     0.162    0.447     0.166    0.293                  Sports                 0.78      0.40         0.85      0.95         0.94
+                                                                                             Science                0.75     0.43          0.82      1.28         0.38
+ Education/Lit.        0.189    0.481     0.175    0.445     0.169    0.316
+                                                                                             Politics/News          0.56      0.37         0.76      1.21         0.02
+ Entertainment         0.185    0.480     0.217    0.439     0.245    0.384                  Music                  0.40     0.17          0.62      1.26         0.34
+ History               0.160    0.460     0.169    0.414     0.151    0.315                  Religion               0.41      0.18         0.51      1.00         0.00
+ Music                 0.236    0.449     0.177    0.472     0.213    0.448                  Entertainment          0.28     0.16          0.32      0.82        −0.06
+ Politics/News         0.152    0.506     0.168    0.438     0.169    0.313                  Education/Lit.         0.11     −0.03         0.37      0.86         0.04
+ Religion              0.138    0.523     0.165    0.449     0.144    0.353                  History                0.20     0.07          0.29      0.76         0.09
+                                                                                             Business/Fin./Econ.    0.12      0.03         0.39      0.68         0.11
+ Science               0.141    0.543     0.149    0.450     0.151    0.302
+ Sports                0.164    0.542     0.204    0.494     0.211    0.337                  Overall                0.48     0.27          0.61      0.99        0.30
+ Technology            0.131    0.535     0.189    0.436     0.175    0.315
+ Travel/Geography      0.162    0.477     0.177    0.437     0.178    0.307
+ Overall               0.164    0.500     0.177    0.447     0.178    0.332         Table A6: Cohen’s d for Search GPT vs. Google AIO
+                                                                                    by topic. Positive d indicates higher values in Search
+Table A5: Equal Coverage (EC) and mean coverage                                     GPT. Bold := large effect (|d| ≥ 0.8). Topics are sorted
+probability (Coverage) by topic, extending Table 2 with                             by mean |d| across the five features.
+Perplexity.
+                                                                                    row only for Search GPT and Google AIO.
+the lowest of the three (0.332 vs. 0.447 AIO and                                       Overall, our findings reinforce that generative
+0.500 Search GPT). CP patterns match our main                                       search systems differ systematically from vanilla
+findings: short sources are strongly under-weighted                                 LLM output and from traditional organic search
+and long sources over-weighted across all three                                     along all three axes we study, and Perplexity re-
+systems; Wikipedia and encyclopedic sources are                                     inforces the same directional findings while ex-
+over-represented (Wikipedia: +9.6pp for Perplex-                                    tending the external validity of our audit beyond
+ity, the largest of the three systems); and govern-                                 OpenAI and Google.
+ment sources are under-represented in all three.
+                                                                                    A.2      Prompts and Generation Settings
+Negative-sentiment sources are also under-covered
+in Perplexity (−10.1pp, p < .001), consistent with                                  We include the main prompts used for response
+the pattern already observed for Google AIO. Be-                                    collection and ACU extraction to support repro-
+cause Perplexity’s retained EC sample contains too                                  ducibility. For Vanilla GPT and Search GPT, we
+few social/forum citations for a stable CP estimate                                 used GPT-4o-mini with temperature 0. Google AI
+(consistent with RQ1’s near-zero social-source cita-                                Overview was collected through SerpAPI and is
+tion rate for Perplexity), we report the social/forum                               a black-box system for which we do not control
+the underlying prompt, model version, or decoding             execution speed, and use cases. Python uses dy-
+parameters.                                                   namic typing and is known for readability, while
+                                                              Java uses static typing and compiles to bytecode
+Vanilla GPT response collection: The system                   for the JVM. Python is widely used in data science
+message was:                                                  and machine learning, whereas Java dominates en-
+                                                              terprise applications and Android development.
+     You are a helpful assistant that                         Extracted Atomic Content Units: (1) Python is
+     provides accurate and concise answers                    a popular programming language. (2) Java is a
+     to questions.                                            popular programming language. (3) They differ
+                                                              in syntax. (4) They differ in execution speed. (5)
+The user message was the raw search query.                    They differ in use cases. (6) Python uses dynamic
+                                                              typing. (7) Python is known for readability. (8)
+Search-enabled response collection: For Search                Java uses static typing. (9) Java compiles to byte-
+GPT and the Perplexity + Grok experiments, the                code for the JVM. (10) Python is widely used in
+system message differed from the Vanilla GPT                  data science. (11) Python is widely used in ma-
+                                                              chine learning. (12) Java dominates enterprise
+prompt only in informing the model it had access              applications. (13) Java dominates Android devel-
+to web search:                                                opment.
+                                                              Now extract atomic content units for the following
+     You are a helpful assistant that                         summary. Follow the same numbered format.
+     provides accurate and concise answers
+     to questions. You have access to the                     Summary: {summary}
+     web_search tool for making web searches.                 Extracted Atomic Content Units:
+
+The user message was the raw search query. Web            B   Compute Resources
+search was enabled through the corresponding
+search tool for each provider, and URL citation           All experiments on open-source models were run
+annotations returned by the APIs were retained for        on internal organization CPU and GPU servers
+analysis.                                                 equipped with 3xNVIDIA A40.
+ACU extraction: For ACU extraction, the system
+prompt was:
+     You are a helpful assistant that extracts
+     atomic content units from text.
+
+The user prompt used the following template:
+     An atomic content unit (ACU) is a single, self-
+     contained factual statement extracted from a sum-
+     mary. Each ACU should describe exactly one
+     fact and not need further splitting. If a sentence
+     contains compound subjects or objects, extract
+     a separate ACU for each. Different ACUs may
+     share overlapping content. Do not use reported
+     speech. Number each ACU.
+     Below are examples.
+     Summary: The Great Wall of China was built
+     over many centuries, with the most well-known
+     sections constructed during the Ming Dynasty
+     (1368–1644). It stretches approximately 13,171
+     miles and was primarily built to protect against
+     invasions from northern tribes. The wall is a UN-
+     ESCO World Heritage Site and one of the most
+     visited tourist attractions in the world.
+     Extracted Atomic Content Units: (1) The Great
+     Wall of China was built over many centuries. (2)
+     The most well-known sections were constructed
+     during the Ming Dynasty (1368–1644). (3) It
+     stretches approximately 13,171 miles. (4) It was
+     primarily built to protect against invasions from
+     northern tribes. (5) The wall is a UNESCO World
+     Heritage Site. (6) It is one of the most visited
+     tourist attractions in the world.
+     Summary: Python and Java are both popular pro-
+     gramming languages, but they differ in syntax,
+

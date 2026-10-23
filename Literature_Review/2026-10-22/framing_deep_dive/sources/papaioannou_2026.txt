@@ -1,0 +1,293 @@
+Language and the framing of historical narrative in large language models: the case of Asia minor (1922) | AI and Ethics | Springer Nature Link
+Skip to main content
+Advertisement
+Log in
+Menu
+Find a journal
+Publish with us
+Track your research
+Search
+Saved research
+Cart
+Home
+AI and Ethics
+Article
+Language and the framing of historical narrative in large language models: the case of Asia minor (1922)
+Research
+Open access
+Published: 22 April 2026
+Volume 6, article number 262 (2026)
+Cite this article
+You have full access to this open access article
+Download PDF
+Save article
+View saved research
+AI and Ethics
+Aims and scope
+Submit manuscript
+Language and the framing of historical narrative in large language models: the case of Asia minor (1922)
+Download PDF
+Christos Papaioannou1,2
+1654 Accesses
+Explore all metrics
+Abstract
+This study examines linguistically dependent bias in the generation of historical narratives by Large Language Models (LLMs) and its ethical and societal implications. Through a qualitative comparative case study focusing on the events of 1922 in Asia Minor, the research analyzes how the language of the prompt is associated with terminology, attribution of responsibility, and historiographical framing in outputs produced by GPT-4o and Claude 3.5. The findings suggest that LLMs do not generate neutral historical accounts; rather, they exhibit algorithmic mirroring, aligning the structure and meaning of historical content according to linguistic input. This process results in divergent emotional receptions and interpretations of the past. Particular emphasis is placed on the ethical significance of restricted pluralism, as language-dependent narrative framing may constrain exposure to alternative historical perspectives through mechanisms of selective omission. The study underscores that language functions as a crucial framing mechanism in the construction of historical knowledge in the age of Artificial Intelligence, raising critical ethical questions regarding epistemic responsibility, historical mediation, and the role of LLMs in shaping collective memory. It concludes by highlighting the need for critical digital literacy and the responsible design and use of generative AI systems in knowledge-sensitive domains.
+Similar content being viewed by others
+How LLMs Handle Cultural Bias: Reactions to Asian Minority Historical Narratives
+Chapter
+© 2026
+Exploring the occupational biases and stereotypes of Chinese large language models
+Article
+Open access
+29 May 2025
+Colonialism in code: linguistic hegemony and epistemic exclusion in large language models
+Article
+12 August 2026
+Explore related subjects
+Discover the latest articles, books and news in related subjects, suggested using machine learning.
+Historical Linguistics
+Historiography and Method
+Language History
+Digital Humanities
+Narratology
+Philology
+Natural Language Processing Techniques for Sentiment Analysis
+Tittle:
+1 Introduction
+Technologies are not neutral tools; as they become embedded in everyday life, they tend to reshape users’ practices and cognitive frameworks, carrying inherent political properties [1]. This dynamic is particularly critical in fields such as history, where knowledge is not limited to the mere presentation of facts but is constituted through narratives, interpretations, and evaluative hierarchies. As Kansteiner argues, digital technology increasingly functions as a form of “digital doping” for historical production, fundamentally transforming our relationship with the past [2]. When Large Language Models (LLMs) are prompted to answer historical questions, they do not simply reproduce information; rather, they assemble narratives that embed specific cultural and historiographical frameworks. In doing so, they actively participate in shaping digitally mediated memory [3] and the public understanding of the past.
+Contemporary scholarship on algorithmic bias has primarily focused on issues of gender, race, and social inequality, highlighting how Artificial Intelligence systems can reproduce or amplify existing social discriminations. Numerous studies have demonstrated gender stereotypes in linguistic representations and natural language processing models [4, 5], as well as racial and intersectional performance disparities in algorithmic systems, especially in applications related to facial recognition and classification [6, 7]. At the same time, research on the social dimensions of algorithmic governance has revealed the role of digital technologies in the systematic surveillance, marginalization, and disciplining of socially vulnerable groups [8, 9].
+Within this context, discussions of algorithmic bias have contributed decisively to understanding the ethical and social risks arising from the widespread adoption of Artificial Intelligence [10]. However, a new and critical line of inquiry is now emerging. Researchers such as Makhortykh et al. have shown how Generative AI can be instrumentalized or can distort the memory of conflicts and genocides [11], while Ruhil warns of the risk of a “great forgetting,” in which algorithms influence what is worth preserving and what is allowed to fade into oblivion [12]. Although the technical performance of language models in multilingual environments has been extensively studied [13,14,15], the role of language as a mediating factor in shaping historical memory remains insufficiently explored. Language is not a neutral medium of communication; it carries historical, emotional, and cultural weight, which influences how narratives generated by LLMs are structured, hierarchized, and received.
+Against this backdrop, this study examines how the language of interaction with LLMs shapes the generation of historical narratives, using the contested events of 1922 in Asia Minor as a qualitative case study. By comparing Greek- and English-language prompts, the article investigates how linguistic input is associated with distinct narrative framing, attribution of responsibility, and historiographical pluralism, with direct implications for ethical debates on epistemic responsibility and collective memory in AI-mediated knowledge systems.
+2 Theoretical background
+2.1 Large language models, training data, and linguistic representation
+LLMs are trained on vast aggregations of textual data, predominantly derived from web scrapes, digital archives, and open-source corpora. Although contemporary LLMs are frequently marketed as inherently multilingual systems, the relevant scholarly literature has substantially documented that the distribution of training data remains profoundly unequal across languages, with English dominating both quantitatively and institutionally [13, 14, 16]. This structural imbalance has been conceptualized as a form of Anglo-centric structural bias, producing a self-reinforcing “bias loop” [17], as numerous languages—and the distinct cultural narratives they encapsulate—are systematically underrepresented within the natural language processing (NLP) ecosystem.
+Technical research in multilingual NLP has primarily focused on optimizing cross-lingual transfer, improving semantic alignment, and enhancing model performance across diverse linguistic inputs [13, 14]. However, it has become increasingly evident that unequal linguistic representation is not merely a technical constraint; rather, it is inextricably linked to broader issues of linguistic visibility, cultural power, and epistemic prioritization [16, 17]. As highlighted in the critical literature, the selection of languages for study and inclusion in these models constitutes a normative act with significant political and cultural consequences. Despite recent methodological approaches attempting to mitigate the technical challenges associated with multilingual language use, the evaluation of LLMs continues to rely heavily on metrics of performance and generalization, often neglecting the deeper social and cultural implications of linguistic differentiation [15]. Viewed through this lens, language functions not merely as a passive carrier of semantic content, but as an active mechanism for the framing and hierarchizing of knowledge.
+2.2 Collective memory, social identity, and contested pasts
+The concept of collective memory refers to the complex processes through which societies constitute and maintain representations of the past via narratives, symbolic practices, and institutional frameworks. As Halbwachs posited, memory does not function as an individual repository of isolated facts, but rather as a socially structured process formed within specific groups and historical contexts [18]. The distinction between communicative and cultural memory, as subsequently developed, further elucidates the critical role of cultural media and narrative forms in the long-term preservation of historical meaning [19].
+Of particular salience are contested pasts, domains where multiple and often antagonistic narratives regarding the same events coexist. In such instances, historiography operates as an arena for the negotiation of power, where the selection of events to be highlighted—as well as the voices to be silenced—reflects underlying political and cultural hierarchies [20]. As has been noted, the production of history is inextricably bound to mechanisms of silence, exclusion, and the ethical evaluation of the past. Language plays a central role in this process, as it carries specific emotional weights, symbolic references, and evaluative hierarchies that condition how historical events are conceptualized.
+To fully grasp the dynamics of these contested narratives, the framework of collective memory can be complemented by social psychological theories of intergroup relations, particularly Social Identity Theory [21]. From this perspective, historical narratives function not merely as records of events but also as resources through which groups negotiate social identity and group distinctiveness. Language, in this context, operates as a salient marker of group affiliation. When an LLM is prompted in a national language (e.g., Greek), it may be more likely to reproduce narrative patterns that resemble an in-group perspective, foregrounding collective suffering or victimhood—an interpretive dynamic discussed in intergroup psychology as collective victimhood [22]. By contrast, prompts in a global or international language (e.g., English) may be associated with more distanced, observer-oriented framings that foreground geopolitical or structural explanations over affective engagement.
+Recent scholarship in memory studies emphasizes that the digital environment does not merely provide new channels for remembering, but actively reshapes the ontology and practices of collective memory. Rather than signaling the end of collective memory, the digital turn reconfigures it as a dynamic, processual, and distributed phenomenon, performed through the entanglement of human and non-human agents across multiple media forms [23]. In this context, memory is increasingly enacted through databases, platforms, and algorithmic systems that mediate access to the past while simultaneously reorganizing its visibility and relevance.
+This transformation is particularly evident in what has been described as the “memory of the multitude,” wherein collective remembrance emerges through participatory, networked, and continuously edited practices rather than stable, canonized narratives [3]. Such forms of memory are inherently fluid and unstable, challenging traditional assumptions about coherence, durability, and shared temporal horizons. While this multiplicity enables the coexistence of alternative and marginalized narratives, it also raises questions about fragmentation, ephemerality, and the loss of common mnemonic reference points.
+At the same time, the growing reliance on digital platforms and cloud-based infrastructures introduces new asymmetries in the governance of memory. As Wiederhold argues, contemporary collective recall is increasingly outsourced to opaque technological systems that curate, surface, and suppress memories according to algorithmic logics largely beyond human control [24]. This shift problematizes questions of ownership, agency, and responsibility in relation to the past, as platforms and AI-driven systems assume an editorial role in shaping what is remembered, forgotten, or reactivated.
+The emergence of LLMs as sources of historical information further intensifies these dynamics by introducing an algorithmic agent capable not only of retrieving but also of synthesizing historical narratives. In multilingual contexts, this raises additional concerns regarding whose histories are rendered legible, which interpretations are normalized, and how contested pasts are narratively stabilized or reconfigured. Nevertheless, the theoretical integration of multilingual LLMs into existing frameworks of collective memory and historiography remains underdeveloped within the current AI literature, pointing to a critical gap that this study seeks to address.
+2.3 The “stochastic parrot” argument and narrative reconstruction
+The seminal work of Bender et al. regarding “stochastic parrots” marked a paradigm shift in the discourse surrounding the capabilities and risks of Large Language Models [25]. According to this argument, LLMs do not generate discourse grounded in genuine comprehension; instead, they synthesize linguistic patterns based on probabilistic correlations derived from their training data. Consequently, the generated texts inevitably mirror the dominant narrative structures, biases, and cultural norms inherent in the underlying linguistic corpora.
+Critical scholarship within NLP has underscored that language technology is never neutral; rather, it embeds and reproduces existing power relations and cultural hierarchies [26]. Within this perspective, LLMs may function as mechanisms of narrative reproduction, reinforcing prevailing historiographical conventions within specific linguistic communities while simultaneously constraining user exposure to alternative interpretive frameworks.
+This observation acquires particular urgency when LLMs are employed to generate historical narratives. The stochastic nature of linguistic generation implies that responses to historical inquiries may diverge significantly as a function of the input language—not only in terms of factual content but also regarding the distribution of responsibility, the prioritization of causal factors, and the emotional tone. Investigating this linguistically differentiated narrative reconstruction is a critical step toward comprehending the ethical and social implications of deploying LLMs in domains deeply connected to memory, identity, and public historical consciousness.
+3 Methodology
+3.1 Research design and case selection
+The research adopted a qualitative comparative case study approach to examine how the input language is associated with variations in the historical narrative generated by Artificial Intelligence systems. This design was selected as particularly suitable for investigating narrative structure, interpretive framing, and omissions, which are not readily captured through quantitative metrics alone. While the sample size (N = 2) precludes broad statistical generalization to the entire population of LLMs, this case-study approach allows for an in-depth interpretive analysis of narrative patterns observed in state-of-the-art models. The events of 1922 in Asia Minor were selected not at random, but as a critical case study [27] for examining language-dependent forms of algorithmic bias. This historical moment is characterized by a pronounced historiographical divergence: within Greek national memory it is commonly framed as a trauma-laden “Catastrophe” [28], whereas international historiography predominantly refers to the same events as the “Greco-Turkish War” [29]. This divergence provides a theoretically rich context in which competing narratives, emotional registers, and interpretive hierarchies coexist, making it possible to examine how different linguistic contexts are linked to distinct narrative framings in LLM-generated outputs, rather than to isolate causal linguistic variables.
+The limitation of the study to two languages—Greek and English—was intentional and theoretically motivated. English represents a global, high-resource language that dominates the training corpora of contemporary LLMs, while Greek constitutes a culturally specific, medium-resource language with a distinct national historiographical tradition. This juxtaposition enables the examination of what is conceptualized in this study as algorithmic mirroring, namely the tendency of language models to align their outputs with the dominant epistemic communities and historiographical conventions associated with the language of the prompt.
+3.2 Data collection and experimental setup
+To conduct the experiment, two distinct LLMs were utilized: GPT-4o (OpenAI) and Claude 3.5 Haiku (Anthropic). Data collection was conducted in December 2025. The inclusion of two different models aimed to ensure that the observed findings were not attributable to the idiosyncrasies of a single architecture, but instead reflected broader tendencies within contemporary generative AI systems.
+A critical methodological consideration was the preservation of neutrality and the minimization of personalization bias. To this end, all interactions were conducted in private browsing mode via the DuckDuckGo AI Chat interface, which does not require user authentication and limits user-level contextualization. This approach reduced the influence of prior interactions or personalized system memory, allowing for the generation of comparable and isolated response sessions across models and languages.
+The data collection process employed mirrored prompts, designed to control for semantic content while varying only the language of the input. A tripartite set of questions was formulated and translated by the author with conceptual precision, targeting three distinct levels of historical analysis: descriptive, causal, and meta-historiographical (see Table 1). Each prompt was issued once per model and language, resulting in a total of twelve generated responses.
+Table 1 Mirrored prompts used across languages and levels of historical analysis
+Full size table
+3.3 Data analysis
+The generated responses were analyzed comparatively using qualitative content analysis. An inductive coding approach was adopted, allowing analytical patterns to emerge from the data rather than being imposed a priori. The analysis examined how historical narratives were constructed across responses, focusing on the identification of key historical actors, the attribution of responsibility, and the prioritization and sequencing of causal explanations.
+Particular attention was paid to the emotional framing of the narratives and to their dominant interpretive focus, specifically whether emphasis was placed on human suffering, displacement, and trauma, or on geopolitical strategy, military operations, and technocratic explanations. In parallel, systematic attention was given to narrative omissions, especially with regard to the inclusion or exclusion of the perspective of the “other side,” depending on the language of inquiry.
+Divergences between Greek- and English-language outputs were documented through close comparative reading and interpreted as indicators of linguistically dependent narrative bias. This analytic framework enabled the identification of language-driven shifts in historical narration, with direct implications for historical understanding, collective memory, and the ethical use of LLMs in knowledge-mediating contexts.
+4 Results
+The results of the comparative analysis indicate that LLMs do not produce a single, neutral historical narrative; rather, they consistently across the sampled outputs shape their outputs according to the language of the inquiry. This differentiation is not limited to stylistic or translational discrepancies, but constitutes a structural divergence in how historical events are reconstructed, prioritized, and interpreted depending on the linguistic input.
+Although both GPT-4o and Claude 3.5 exhibited similar language-dependent shifts in historical narrative, qualitative differences were observed in the expression and organization of their responses. Claude more frequently presented structured comparisons and, in some instances, tabulated formats; however, in several Greek-language responses, the absence of opposing historiographical perspectives was noted. Conversely, GPT-4o tended to emphasize internal political responsibility in its Greek-language outputs, while adopting a more standardized and internationalized narrative framework in English. These distinctions do not undermine the common patterns identified across models; rather, they reinforce the conclusion that linguistically dependent framing constitutes a broader, architecture-independent tendency in contemporary LLMs. The comparative analysis identified three primary mechanisms associated with how language shapes the historical narratives generated by these systems (see Table 2).
+Table 2 Comparative analysis of narrative divergence in LLM outputs
+Full size table
+4.1 Terminology and emotional framing
+The first mechanism concerns the choice of terminology and the emotional register it activates. In the Greek-language outputs, the events are predominantly framed through trauma-laden terms such as “Catastrophe,” which foreground collective suffering, loss, and historical injustice. By contrast, in the English-language outputs, a more geopolitically oriented and emotionally detached terminology prevails, such as “Greco-Turkish War,” situating the same events within a broader framework of interstate conflict and population reconfiguration. This divergence may lead to distinct emotional receptions of the past, fostering empathy and identification in domestic contexts while encouraging analytical distance in international ones.
+To substantiate the qualitative analysis of terminology and emotional framing, a targeted frequency analysis was conducted focusing on selected emotionally and historiographically salient terms identified during the coding process. Table 3 reports aggregate frequencies of selected terms across all generated outputs per language (Greek n = 6; English n = 6). Counts are based on exact-term matching with manual verification and are intended as an illustrative complement to the qualitative analysis. The resulting frequency patterns are summarized below for descriptive purposes and visually represented in Fig. 1.
+Table 3 Frequency of selected historical terms across greek and english LLM outputs
+Full size table
+Fig. 1
+Full size image
+Comparative frequency of selected historical terms in greek and english llm outputs (based on data from Table 3). The visualization illustrates contrasting patterns in terminological emphasis across languages
+4.2 Attribution of responsibility and causal interpretation
+The second mechanism relates to the attribution of responsibility and the causal interpretation of defeat. In the Greek-language outputs, causality is frequently linked to political and institutional factors, most notably the National Schism, thereby emphasizing internal political conflict alongside external diplomatic pressures. In contrast, the English-language outputs primarily interpret defeat through technocratic and military explanations, including overextended supply lines, logistical shortcomings, and the operational effectiveness of opposing forces. This contrast constitutes an observable shift in responsibility attribution, with implications for how narratives of collective identity and historical self-understanding are constructed.
+4.3 Historiographical structure and narrative omission
+The most salient divergence emerged from the meta-historiographical question. In the Greek-language outputs, the narrative structure is typically binary, juxtaposing a Greek perspective with a generalized “international” interpretation, while the perspective of the other directly involved party is frequently absent. By contrast, the English-language outputs more often adopt a tri-partite structure in which Greek, Turkish, and international historiographical approaches coexist. This asymmetry constrains pluralism in the Greek-language responses, as users are exposed to a more internally coherent and less confrontational representation of the past.
+5 Discussion: algorithmic historiography and the ethics of collective memory
+The findings of this study suggest that LLMs do not function as neutral archivists of the past, but rather act as participants in the mediation of historical narratives embedded in their training data. The structural divergence observed between Greek- and English-language outputs is consistent with the concept of algorithmic mirroring: the tendency of AI systems to reflect and reinforce the dominant epistemic frameworks associated with the language of the prompt. This phenomenon carries significant ethical and societal implications, particularly concerning the fragmentation of historical understanding and the emergence of linguistically mediated memory silos.
+5.1 The mechanism of divergence: cultural contexts in training corpora
+The observed divergence across languages implies that the input language functions less as an independent causal variable and more as a retrieval cue through which models draw on specific subsets of their training data. As noted in the critique of multilingual models [16], the results likely reflect the distinct discourse specific to the cultural contexts embedded within the training corpora rather than the language itself acting as a mechanical determinant. When prompted in English, language models draw upon this high-resource corpus, producing narratives that emphasize geopolitical strategy, diplomatic processes, and an appearance of analytical neutrality. By contrast, when prompted in Greek, the models operate within a more limited and culturally specific linguistic corpus, in which national trauma and internal political polarization—such as the National Schism—are statistically more salient. This behavior is consistent with the “stochastic parrot” framework articulated by Bender et al. [25]: the system does not possess historical understanding, but rather generates outputs by predicting the most probable continuation of a given linguistic sequence. In this sense, the same historical event is reconstructed through different probabilistic pathways depending on the language of access. While each narrative may be internally coherent and factually grounded, this mechanism creates conditions that resemble a form of relativist historiography, in which historical “truth” becomes contingent upon the linguistic interface through which it is queried.
+5.2 Epistemic bubbles and the erosion of shared historical reality
+The most ethically consequential implication of these findings emerges from the systematic omission of opposing perspectives in the Greek-language outputs. The prevalence of binary framing—juxtaposing a Greek perspective with a generalized “international” interpretation while excluding the Turkish nationalist narrative—limits exposure to historiographical plurality. From a social identity perspective [21], this omission can be interpreted as aligning with patterns of “in-group bias”, whereby competing “out-group” narratives are structurally marginalized. Rather than facilitating critical engagement with competing interpretations of the past, the models may reinforce pre-existing national narratives through selective representation.
+This pattern may create the conditions for what Nguyen describes as epistemic bubbles [30]: informational environments in which alternative viewpoints are excluded not through overt misinformation, but through omission and structural filtering. As a result, users from different linguistic communities may be exposed to fundamentally divergent emotional and causal frameworks when engaging with the same historical event. A Greek user is primarily invited to mourn a national trauma, whereas an international user is encouraged to analyze a failed military campaign. Such divergence complicates the possibility of a shared historical reality and may actively deepen cultural and interpretive fragmentation rather than promoting mutual understanding.
+5.3 Toward critical AI literacy and ethical design
+As Pereira (2025) argues, addressing the ethical challenges posed by AI systems requires a framework grounded in critical digital literacy and shared responsibility across users, developers, and institutions [31]. In the context of historical knowledge, this entails recognizing that LLM-generated narratives should not be treated as encyclopedic facts, but as culturally situated and probabilistically constructed artifacts. Taken together, these concerns necessitate the cultivation of what Long and Magerko define as “AI literacy”: a set of competencies that enables individuals not only to use AI tools, but also to critically evaluate their underlying logic, limitations, and ethical implications [32]. Users must therefore be equipped with the critical capacity to interrogate algorithmic outputs, understanding that apparent neutrality often reflects the statistical dominance of particular linguistic and cultural hegemonies rather than an objective representation of the past.
+For developers and policymakers, these findings suggest that ethical mitigation strategies must extend beyond an exclusive reliance on safety filters or content moderation mechanisms. Instead, there is a need to explore the design of polyvocal systems—models that actively surface multiple historiographical perspectives and resist the flattening of historical complexity, even in the absence of explicit user prompts. Without such interventions, LLMs risk contributing to the fragmentation of collective memory, automating the reproduction of parallel historical narratives rather than fostering epistemic pluralism and democratic historical dialogue.
+5.4 Limitations and future research
+This study is subject to certain limitations that should be considered when interpreting the findings. First, the research design adopted a qualitative case-study approach with a small sample of models (GPT-4o and Claude 3.5). While this allowed for an in-depth narrative analysis, the findings reflect the behaviors of these specific high-performing systems and cannot be statistically generalized to the entire population of Large Language Models. Second, as with all proprietary LLMs, the exact composition of the training data remains opaque. Consequently, our analysis relies on inferring the relationship between linguistic input and narrative output, rather than directly observing the underlying training distribution. Finally, the study focuses on a single, highly contested historical event (Asia Minor, 1922). While this served as a critical case for highlighting historiographical divergence, future research should examine whether similar patterns of linguistic framing emerge in other disputed historical contexts or across a broader range of languages. Despite these limitations, the study offers valuable exploratory insights into the mechanisms of algorithmic historiography and the role of language in shaping digital memory.
+6 Conclusion
+This study examined the role of input language in the historical narratives generated by LLMs, using the events of 1922 in Asia Minor as a critical case study. The findings demonstrate that the examined models do not produce a single, linguistically neutral version of the past. Instead, they reconstruct historical narratives in ways that are associated with the input language, being linked to distinct emotional tones, causal hierarchies, and historiographical structures depending on the language of the prompt.
+Through a comparative analysis of Greek and English language responses produced by two contemporary LLMs, the study suggests that language functions not merely as a medium of expression, but as a contextual framing mechanism in algorithmically mediated historical knowledge. Greek-language prompts tend to elicit trauma-centered narratives characterized by heightened political charge and binary historiographical structures, whereas English-language prompts more frequently generate geopolitically oriented narratives that incorporate a broader range of perspectives. These patterns were observed across the examined models, and are presented as exploratory associations rather than evidence of a universal or causal mechanism.
+The implications of these findings extend beyond technical issues of multilingual performance. They point to a deeper ethical and social concern: as LLMs increasingly mediate access to historical knowledge, they may reinforce pre-existing national narratives and contribute to the fragmentation of collective memory along linguistic lines. Rather than functioning as neutral bridges between divergent historical memories, such systems risk reproducing parallel and internally coherent versions of the past, shaped by the statistical and cultural properties of their training data.
+In conclusion, recognizing language as a constitutive element of algorithmic knowledge mediation, rather than an independent causal force, is a necessary step toward more responsible and reflexive uses of generative artificial intelligence. As these technologies become deeply embedded in the infrastructure of public memory, the question is no longer whether they influence historical understanding, but how they do so. Addressing the ethical implications of algorithmic historiography requires not only technical refinement, but also the cultivation of critical AI literacy and a conscious commitment to epistemic pluralism. Only by acknowledging the role of language in shaping algorithmic narratives can society leverage these technologies in ways that enrich—rather than fragment—collective understandings of the past.
+Data availability
+The data generated during the current study consist of AI-generated textual outputs produced through controlled prompt-based interactions with Large Language Models. These data are qualitative in nature and were analysed within the study. The materials can be made available by the author upon reasonable request.
+References
+Winner, L.: Do Artifacts Have Politics? Daedalus. 109, 121–136 (1980)
+Google Scholar
+Kansteiner, W.: Digital Doping for Historians: Can History, Memory, and Historical Theory Be Rendered Artificially Intelligent? Hist. Theory. 61, 119–133 (2022). https://doi.org/10.1111/hith.12282
+Article
+Google Scholar
+Hoskins, A.: Memory of the multitude: the end of collective memory? In: Hoskins, A. (ed.) Digital Memory Studies: Media Pasts in Transition, pp. 85–109. Routledge, New York (2018)
+Google Scholar
+Bolukbasi, T., Chang, K.-W., Zou, J., Saligrama, V., Kalai, A.: Man is to Computer Programmer as Woman is to Homemaker? Debiasing Word Embeddings. In: Adv. Neural. Inf. Process. Syst. 29 (2016)
+Caliskan, A., Bryson, J.J., Narayanan, A.: Semantics derived automatically from language corpora contain human-like biases. Science. 356, 183–186 (2017). https://doi.org/10.1126/science.aal4230
+Article
+Google Scholar
+Buolamwini, J., Gebru, T.: Gender Shades: Intersectional Accuracy Disparities in Commercial Gender Classification. In: Proceedings of the Conference on Fairness, Accountability, and Transparency. pp. 77–91 (2018)
+Benjamin, R.: Race After Technology: Abolitionist Tools for the New Jim Code. Polity, Cambridge (2019)
+Google Scholar
+Noble, S.U.: Algorithms of Oppression: How Search Engines Reinforce Racism. NYU, New York (2018)
+Book
+Google Scholar
+Eubanks, V.: Automating Inequality: How High-Tech Tools Profile, Police, and Punish the Poor. St. Martin’s, New York (2018)
+Google Scholar
+Hovy, D., Spruit, S.L.: The Social Impact of Natural Language Processing. In: Proceedings of the 54th Annual Meeting of the Association for Computational Linguistics. pp. 591–598 (2016). https://doi.org/10.18653/v1/P16-2096
+Makhortykh, M., Zucker, E.M., Simon, D.J., Bultmann, D., Ulloa, R.: Shall androids dream of genocides? How generative AI can change the future of memorialization of mass atrocities. Discov Artif. Intell. 3, 28 (2023). https://doi.org/10.1007/s44163-023-00072-6
+Article
+Google Scholar
+Ruhil, O.: The Great Forgetting: When AI Decides What We Do Not Need to Know. AI Soc. (2025). https://doi.org/10.1007/s00146-025-02524-2
+Article
+Google Scholar
+Pires, T., Schlinger, E., Garrette, D.: How Multilingual is Multilingual BERT? In: Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics. pp. 4996–5001 (2019). https://doi.org/10.18653/v1/P19-1493
+Conneau, A., Khandelwal, K., Goyal, N., et al.: Unsupervised Cross-lingual Representation Learning at Scale. In: Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics. pp. 8440–8451 (2020). https://doi.org/10.18653/v1/2020.acl-main.747
+Hershcovich, D., Frank, S., Lent, H., et al.: Challenges and Strategies in Cross-Cultural NLP. In: Proceedings of the 60th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers). pp. 6997–7013 (2022). https://doi.org/10.18653/v1/2022.acl-long.482
+Joshi, P., Santy, S., Budhiraja, A., Bali, K., Choudhury, M.: The State and Fate of Linguistic Diversity and Inclusion in the NLP World. In: Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics. pp. 6282–6293 (2020). https://doi.org/10.18653/v1/2020.acl-main.560
+Foka, A., Griffin, G., Ortiz Pablo, D., Rajkowska, P., Badri, S.: Tracing the bias loop: AI, cultural heritage and bias-mitigating in practice. AI Soc. 40, 5835–5847 (2025). https://doi.org/10.1007/s00146-025-02349-z
+Article
+Google Scholar
+Halbwachs, M.: On Collective Memory. University of Chicago Press, Chicago (1992)
+Book
+Google Scholar
+Assmann, J.: Cultural Memory and Early Civilization. Cambridge University Press, Cambridge (2011)
+Book
+Google Scholar
+Trouillot, M.-R.: Silencing the Past: Power and the Production of History. Beacon Press, Boston (1995)
+Google Scholar
+Tajfel, H., Turner, J.C.: An integrative theory of intergroup conflict. In: Austin, W.G., Worchel, S. (eds.) The Social Psychology of Intergroup Relations, pp. 33–37. Brooks/Cole, Monterey (1979)
+Google Scholar
+Bar-Tal, D., Chernyak-Hai, L., Schori, N., Gundar, A.: A sense of self-perceived collective victimhood in intractable conflicts. Int. Rev. Red Cross. 91(874), 229–258 (2009). https://doi.org/10.1017/S1816383109990221
+Article
+Google Scholar
+Mandolessi, S.: The digital turn in memory studies. Mem. Stud. 16, 1513–1528 (2023). https://doi.org/10.1177/17506980231204201
+Article
+Google Scholar
+Wiederhold, B.K.: Who owns memory now? Collective recall in the age of the cloud. Cyberpsychol Behav. Soc. Netw. 28, 603–604 (2025). https://doi.org/10.1177/21522715251369352
+Article
+Google Scholar
+Bender, E.M., Gebru, T., McMillan-Major, A., Shmitchell, S.: On the Dangers of Stochastic Parrots: Can Language Models Be Too Big? In: Proceedings of the 2021 ACM Conference on Fairness, Accountability, and Transparency. pp. 610–623 (2021). https://doi.org/10.1145/3442188.3445922
+Blodgett, S.L., Barocas, S., Daumé, H. III, Wallach, H.M.: Language (Technology) Is Power: A Critical Survey of Bias in NLP. In: Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics. pp. 5454–5476 (2020). https://doi.org/10.18653/v1/2020.acl-main.485
+Yin, R.K.: Case Study Research: Design and Methods. Sage, Thousand Oaks (2009)
+Google Scholar
+Hirschon, R.: Heirs of the Greek Catastrophe: The Social Life of Asia Minor Refugees in Piraeus. Berghahn Books, Oxford (1998)
+Google Scholar
+Llewellyn Smith, M.: Ionian Vision: Greece in Asia Minor, 1919–1922. Hurst & Company, London (1998)
+Google Scholar
+Nguyen, C.T.: Echo chambers and epistemic bubbles. Episteme. 17, 141–161 (2020). https://doi.org/10.1017/epi.2018.32
+Article
+Google Scholar
+Pereira, A.C.: Data, AI systems, and society: ethical dilemmas in the digital age. AI Ethics. 5, 6007–6016 (2025). https://doi.org/10.1007/s43681-025-00834-1
+Article
+Google Scholar
+Long, D., Magerko, B.: What is AI Literacy? Competencies and Design Considerations. In: Proceedings of the 2020 CHI Conference on Human Factors in Computing Systems. pp. 1–16. Association for Computing Machinery, New York (2020). https://doi.org/10.1145/3313831.3376727
+Download references
+Funding
+Open access funding provided by HEAL-Link Greece. Open access funding provided by HEAL-Link.
+Author information
+Authors and Affiliations
+Department of Balkan, Slavic and Oriental Studies, University of Macedonia, Thessaloniki, Greece
+Christos Papaioannou
+Department of Informatics, Ionian University, Corfu, Greece
+Christos Papaioannou
+Authors
+Christos Papaioannou
+View author publications
+Search author on:PubMed Google Scholar
+Contributions
+I am the only author of this manuscript. I am responsible for the research mentioned and for writing the manuscript.
+Corresponding author
+Correspondence to
+Christos Papaioannou.
+Ethics declarations
+Conflict of interest
+The author declares no competing interests.
+Human and animals participants
+This research does not involve human participants or animals.
+Informed consent
+Informed consent was not required as no human participants were involved in this study.
+Additional information
+Publisher’s note
+Springer Nature remains neutral with regard to jurisdictional claims in published maps and institutional affiliations.
+Rights and permissions
+Open Access This article is licensed under a Creative Commons Attribution 4.0 International License, which permits use, sharing, adaptation, distribution and reproduction in any medium or format, as long as you give appropriate credit to the original author(s) and the source, provide a link to the Creative Commons licence, and indicate if changes were made. The images or other third party material in this article are included in the article’s Creative Commons licence, unless indicated otherwise in a credit line to the material. If material is not included in the article’s Creative Commons licence and your intended use is not permitted by statutory regulation or exceeds the permitted use, you will need to obtain permission directly from the copyright holder. To view a copy of this licence, visit http://creativecommons.org/licenses/by/4.0/.
+Reprints and permissions
+About this article
+Cite this article
+Papaioannou, C. Language and the framing of historical narrative in large language models: the case of Asia minor (1922).
+AI Ethics 6, 262 (2026). https://doi.org/10.1007/s43681-026-01138-8
+Download citation
+Received: 29 December 2025
+Accepted: 09 April 2026
+Published: 22 April 2026
+Version of record: 22 April 2026
+DOI: https://doi.org/10.1007/s43681-026-01138-8
+Share this article
+Anyone you share the following link with will be able to read this content:
+Get shareable link
+Sorry, a shareable link is not currently available for this article.
+Copy shareable link to clipboard
+Provided by the Springer Nature SharedIt content-sharing initiative
+Keywords
+Large language models
+Algorithmic bias
+Collective memory
+Social identity
+Historical narratives
+Natural language processing
+Profiles
+Christos Papaioannou
+View author profile
+Advertisement
+Search
+Search by keyword or author
+Search
+Navigation
+Find a journal
+Publish with us
+Track your research
+Footer Navigation
+Discover content
+Journals A-Z
+Books A-Z
+Subjects A-Z
+Publish with us
+Journal finder
+Publish your research
+Language editing
+Open access publishing
+Products and services
+Our products
+Librarians
+Societies
+Partners and advertisers
+Our brands
+Springer
+Nature Portfolio
+BMC
+Palgrave Macmillan
+Apress
+Discover
+Corporate Navigation
+Your privacy choices/Manage cookies
+Your US state privacy rights
+Accessibility statement
+Terms and conditions
+Privacy policy
+Help and support
+Legal notice
+Cancel contracts here
+82.152.91.221
+Not affiliated
+© 2026 Springer Nature

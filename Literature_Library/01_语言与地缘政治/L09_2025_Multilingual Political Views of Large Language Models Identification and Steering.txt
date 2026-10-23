@@ -1,0 +1,923 @@
+本文件为PDF自动提取文本，仅供检索；排版、图表和页码请以PDF为准。
+Multilingual Political Views of Large Language Models: Identification and Steering
+
+                                 Multilingual Political Views of Large Language Models:
+                                               Identification and Steering
+                                      Daniil Gurgurov1,5 Katharina Trinley1 Ivan Vykopal3,4
+                                 Josef van Genabith1,5 Simon Ostermann1,5 Roberto Zamparelli2
+                                                  1
+                                              Saarland University 2 University of Trento
+                          3
+                            Brno University of Technology 4 Kempelen Institute of Intelligent Technologies
+                                               5
+                                                 German Research Center for AI (DFKI)
+                                                                 daniil.gurgurov@dfki.de
+
+
+                                         Abstract
+                      Large language models (LLMs) are increas-
+                      ingly used in everyday tools and applications,
+                      raising concerns about their potential influence
+                      on political views. While prior research has
+                      shown that LLMs often exhibit measurable po-
+                      litical biases–frequently skewing toward lib-
+                      eral or progressive positions–key gaps remain.
+                      Most existing studies evaluate only a narrow
+                      set of models and languages, leaving open ques-
+                      tions about the generalizability of political bi-
+                      ases across architectures, scales, and multilin-
+                      gual settings. Moreover, few works examine
+                                                                                                     (a) Aya Expanse 8B
+                      whether these biases can be actively controlled.
+                      In this work, we address these gaps through a
+                      large-scale study of political orientation in mod-
+                      ern open-source instruction-tuned LLMs. We
+                      evaluate seven models, including LLaMA-3.1,
+                      Qwen-3, and Aya-Expanse, across 14 lan-
+                      guages using the Political Compass Test with
+                      11 semantically equivalent paraphrases per
+                      statement to ensure robust measurement. Our
+                      results reveal that larger models consistently
+                      shift toward libertarian-left positions, with sig-
+                      nificant variations across languages and model
+                      families. To test the manipulability of political
+                      stances, we utilize a simple center-of-mass ac-
+                      tivation intervention technique and show that                                 (b) Aya Expanse 32B
+                      it reliably steers model responses toward al-
+                                                                                 Figure 1: Political Compass results for the two
+                      ternative ideological positions across multi-
+                                                                                 Aya-Expanse models of varying sizes. As model
+                      ple languages. Our code is publicly avail-
+                                                                                 size increases, responses shift consistently toward the
+                      able at https://github.com/d-gurgurov/
+                                                                                 libertarian-left quadrant. Results for the other evaluated
+                      Political-Ideologies-LLMs.
+                                                                                 models are provided in Appendix B.
+                 1    Introduction
+                 Large language models (LLMs) have rapidly tran-                 implicit biases–particularly regarding politically
+                 sitioned from research artifacts to ubiquitous tools            sensitive topics–has become a matter of significant
+                 integrated into search engines, writing assistants,             societal importance (Bender et al., 2021; Weidinger
+                 educational platforms, and decision-support sys-                et al., 2021).
+                 tems (Xiong et al., 2024; Chu et al., 2025; Ong                    The concern extends beyond mere academic cu-
+                 et al., 2024). As these models increasingly me-                 riosity. When millions of users interact with LLMs
+                 diate human access to information and shape dis-                daily through commercial applications, any sys-
+                 course across diverse domains, understanding their              tematic political leanings embedded within these
+                                                                             279
+Proceedings of the 14th International Joint Conference on Natural Language Processing and the 4th Conference of the Asia-Pacific Chapter of the Association for
+                                                           Computational Linguistics, pages 279–298
+                                            December 20-24, 2025 ©2025 Association for Computational Linguistics
+systems can potentially influence public opinion,        in modern LLMs, as evidenced by performance
+reinforce existing viewpoints, or introduce subtle       shifts on the PCT.
+biases into decision-making processes (Santurkar            Our contributions are threefold:
+et al., 2023). Moreover, as LLMs are deployed
+globally across different cultural and political con-        • We provide the most comprehensive mul-
+texts, the interaction between model biases and                tilingual evaluation of political biases in
+local political landscapes raises complex questions            instruction-tuned LLMs to date, covering
+about fairness, representation, and the democratic             seven models across 14 languages with robust
+implications of AI-mediated information access                 prompt variation.
+(Gallegos et al., 2024).
+   Previous research has established that language           • We demonstrate systematic relationships be-
+models exhibit measurable political orientations,              tween model scale and political orientation,
+often skewing toward liberal or progressive posi-              extending prior work by evaluating newer
+tions (Feng et al., 2023; Hartmann et al., 2023;               instruction-tuned models, which consistently
+Trhlik and Stenetorp, 2024). However, several crit-            exhibit a shift toward libertarian-left positions
+ical gaps remain in our understanding of these phe-            as scale increases.
+nomena. First, most existing work focuses on a
+limited set of models and languages, leaving ques-           • We show that political orientations can be
+tions about the generalizability of findings across            effectively steered through targeted inference-
+different model architectures and multilingual                 time interventions, successfully achieving
+contexts. Second, while prior studies have doc-                control across multiple languages and open-
+umented the existence of political biases, fewer               ing new possibilities for bias mitigation and
+have explored the extent to which these biases can             ideological alignment in deployed systems.
+be systematically controlled or modified. Third,
+the relationship between model scale, training           2     Related Work
+methodology, and political orientation remains
+                                                         There is a growing body of research on identify-
+underexplored, particularly for newer instruction-
+                                                         ing and analyzing political biases in LLMs, us-
+tuned models that represent the current state of
+                                                         ing diverse methodologies ranging from zero-shot
+practice in user-facing applications.
+                                                         stance detection to prompt-based testing and prob-
+   Our work addresses these gaps through a compre-
+                                                         ing of internal model representations (Feng et al.,
+hensive evaluation of political orientations in mod-
+                                                         2023; Hartmann et al., 2023; Santurkar et al., 2023;
+ern open-source instruction-tuned LLMs across
+                                                         Ceron et al., 2024; Motoki et al., 2024; Röttger
+multiple dimensions. We extend prior work by
+                                                         et al., 2024; Rutinowski et al., 2024; Rozado, 2024;
+Röttger et al. (2024), evaluating newer language
+                                                         Agiza et al., 2024; Kim et al., 2025).
+models on the Political Compass Test (PCT)1
+across 14 languages using 11 semantically equiv-         2.1    Identification of Political Bias
+alent paraphrases per statement in the target lan-
+guage to assess robustness. In addition, we demon-       Several studies use the PCT as a core evaluation
+strate that political orientation in LLMs can be         instrument. Feng et al. (2023) evaluate 14 models,
+actively steered at inference time via activation in-    including BERT (Devlin et al., 2019), RoBERTa (Liu
+terventions (Li et al., 2024). Specifically, we apply    et al., 2019), GPT-2/3 (Radford et al., 2019; Brown
+a center-of-mass approach (Marks and Tegmark,            et al., 2020), LLaMA (Touvron et al., 2023), and
+2023), constructing steering directions based on         GPT-4 (AI, 2023), using paraphrased prompts and
+the difference between mean attention head activa-       automated stance classification via a BART (Lewis
+tions for opposing classes. We apply these inter-        et al., 2019) model fine-tuned on XNLI (Conneau
+ventions to model responses in English, Turkish,         et al., 2018). They show clear differences in ide-
+Romanian, Slovenian, and French, and find that           ology across model families, such as BERT being
+they effectively shift ideological outputs across lan-   more conservative and GPT models more liberal.
+guages. Our findings highlight both the existence        Similarly, Hartmann et al. (2023) test ChatGPT
+and manipulability of ideological representations        with 630 statements from European Voting Ad-
+                                                         vice Applications (VAA) and the PCT, introducing
+   1
+       https://www.politicalcompass.org/test             prompt variations (negation, formality, language,
+                                                     280
+paraphrasing), and find robust left-libertarian lean-    measured by DW-NOMINATE scores (Poole and
+ings with >72% overlap with Green parties in Ger-        Rosenthal, 1985; Poole, 2005) that measure law-
+many and the Netherlands. Motoki et al. (2024)           makers’ stances along the liberal-conservative axis
+extend this setup by asking ChatGPT to imperson-         in American politics.
+ate archetypal political identities, finding system-        However, little work has evaluated whether these
+atic left bias even in randomized and cross-country      steering techniques generalize to multilingual set-
+scenarios.                                               tings, or whether political views can be steered us-
+   Other works use alternative political benchmarks.     ing lightweight interventions. Kim et al. (2025) rep-
+Santurkar et al. (2023) introduce the OpinionQA          resent the most contemporary related work, apply-
+benchmark with 1,498 US opinion questions and            ing inference-time interventions using linear probe
+find that base models lean conservative, while           weights as steering vectors; their study was con-
+RLHF-tuned models shift left. Notably, prompt-           ducted almost concurrently with ours. In contrast,
+ing models to express specific viewpoints proved         we adopt a center-of-mass approach, which relies
+ineffective. Rutinowski et al. (2024) apply eight        on the difference between mean attention head acti-
+political tests (including PCT and G7-specific sur-      vations for opposing classes and has been shown to
+veys), showing consistent progressive but context-       be both conceptually simpler, more intuitive, and
+sensitive leanings in ChatGPT. Ceron et al. (2024)       more effective by Li et al. (2024). Importantly,
+propose the ProbVAA dataset to test reliability via      we measure the effects of our interventions on the
+semantic and prompt perturbations across seven           PCT, a robust and less English-centric benchmark
+EU countries, finding that larger models (>20B)          spanning multiple languages. We demonstrate that
+are more left-leaning and internally inconsistent        this method effectively shifts ideological behavior
+across policy domains (e.g., left on climate, right      across languages, providing a lightweight and in-
+on law and order).                                       terpretable alternative for political bias steering in
+   Model response types also influence measured          modern LLMs.
+bias. Röttger et al. (2024) compare multiple-choice
+and open-ended prompts for Mistral-7B (Jiang             3       Ideology Identification
+et al., 2023) and GPT-3.5 (ChatGPT, 2022), show-         We provide a multilingual extension of Röttger et al.
+ing that open-ended responses tend to be more ide-       (2024)’s methodology to evaluate the ideological
+ologically expressive (more right-leaning libertar-      leanings of instruction-tuned language models us-
+ian), while multiple-choice formats often trigger        ing the PCT2 .
+neutrality or refusal. They also provide a system-
+atic review of political bias research in LLMs.          3.1      Political Compass Test
+   Despite this progress, existing work is often lim-    The PCT comprises 62 propositions spanning six
+ited to English or a few high-resource languages,        domains: country/world (7), economy (14), per-
+and focuses on older or closed-source models.            sonal social values (18), wider society (12), reli-
+Our study fills this gap by offering a multilingual,     gion (5), and sex (6). Respondents select one of
+model-scale-aware evaluation of political biases         four options: Strongly disagree, Disagree, Agree,
+in modern instruction-tuned open-source LLMs,            or Strongly agree, which are mapped to two ide-
+using a robust prompting framework across 14 lan-        ological axes: economic (left–right) and social
+guages.                                                  (libertarian–authoritarian). An economy-related
+2.2 Controllability of Political Bias                    example from the questionary is provided below.
+                                                            We scrape the official PCT questionnaire in
+A number of studies explore steering and controlla-      14 languages across all six pages, accounting for
+bility of political bias. Rozado (2024) evaluate 24      both left-to-right and right-to-left scripts (e.g., Per-
+models using 11 political instruments, demonstrat-       sian). The selected languages span multiple lan-
+ing consistent left-leaning tendencies and showing       guage families and scripts: Bulgarian (bg), Czech
+that fine-tuning with limited aligned data can effec-    (cz), German (de), English (en), Spanish (es),
+tively steer ideological behavior. Agiza et al. (2024)   French (fr), Italian (it), Persian (fa), Polish (pl),
+confirm this using parameter-efficient fine-tuning.
+                                                             2
+Kim et al. (2025) intervene at inference time using          Despite limitations noted in prior work (Röttger et al.,
+                                                         2024; Feng et al., 2023), the PCT remains a widely adopted
+attention head modifications based on linear probe       multilingual benchmark for evaluating political bias in LLMs
+directions, successfully shifting model ideology as      (Feng et al., 2023; Hartmann et al., 2023).
+
+                                                     281
+Portuguese-Portugal (pt-pt), Romanian (ro), Rus-                scores are divided by 8.0 (economic) and 19.5 (so-
+sian (ru), Slovenian (sl), and Turkish (tr).                    cial), yielding coordinates in the range [−10, +10]
+                                                                on both axes.
+  Sample PCT Question
+                                                                    English Prompt Variants
+ “If economic globalisation is inevitable, it should pri-
+  marily serve humanity rather than the interests of trans-         Prompt Paraphrases:
+  national corporations.”                                           • Please, pick one of the following choices:
+  Response Options:                                                 • What is your opinion on the following proposition:
+  ◦ Strongly disagree                                               • State your opinion on the following proposition:
+  ◦ Disagree                                                        • What is your view on the following proposition:
+  ◦ Agree                                                           • What do you think about the following proposition:
+  ◦ Strongly agree                                                  • Give your verdict on the following proposition:
+                                                                    • What are your thoughts on the following proposition:
+                                                                    • How do you feel about the following proposition:
+                                                                    • How do you perceive the following proposition:
+3.2 Models                                                          • Share with me your opinion on the following proposi-
+We evaluate seven instruction-tuned models of vary-                   tion:
+                                                                    • What is your perspective on the following proposition:
+ing sizes and multilingual capabilities. We focus ex-
+                                                                    Response Choices:
+clusively on instruction-tuned models, rather than                  ◦ 1. Strongly disagree
+base models, because they better represent the mod-                 ◦ 2. Disagree
+els with which users interact in practice.                          ◦ 3. Agree
+                                                                    ◦ 4. Strongly agree
+   LLaMA-3.1-8B and LLaMA-3.1-70B: Supports
+8 languages (en, de, fr, it, pt, hi, es, th) with 128K              Constraint: Only give one choice.
+context length (Grattafiori et al., 2024).
+   Qwen-3-8B, Qwen-3-14B, and Qwen-3-32B:                         All models are evaluated using fixed generation
+Supports >100 languages featuring "thinking" and                parameters (e.g., temperature, top-p), detailed in
+"non-thinking" models with 128K context length.                 Appendix A, applied consistently across all lan-
+The core multilingual support includes zh, en, fr,              guages.
+es, pt, de, it, ru, ja, ko, vi, th, and ar (Yang et al.,        3.4     Identification Results
+2025).
+                                                                Response Behaviour Analysis: Table 1 demon-
+   Aya-Expanse-8B and Aya-Expanse-32B: Pro-
+                                                                strates substantial differences in model compli-
+vides high-quality support for 23 languages with
+                                                                ance across architectures and languages.6 Qwen
+128K context length: ar, zh (simplified & tradi-
+                                                                models demonstrate exceptional compliance, with
+tional), cs, nl, en, fr, de, el, he, hi, id, it, ja, ko, fa,
+                                                                Qwen3-8B, 14B, and 32B producing virtually no un-
+pl, pt, ro, ru, es, tr, uk, and vi (Dang et al., 2024).
+                                                                known responses (0.0%) across most languages.
+3.3 Technical Details                                           LLaMA-3.1 models show moderate compliance,
+                                                                with the LLaMA-3.1-8B variant exhibiting un-
+To test robustness to prompt phrasing, we use 11                known rates ranging from 0.5% ± 0.5 (En-
+paraphrased prompts from Röttger et al. (2024),                 glish) to 29.3% ± 4.9 (Russian). Notably, the
+each translated into all 14 languages via DeepL3                LLaMA-3.1-70B model demonstrates improved
+and Google Translate4 . Google Translate was used               compliance, indicating that increased model scale
+for languages not present in DeepL. Since PCT                   enhances instruction adherence. Aya-Expanse
+questions are available in all 14 languages, only the           models, despite their multilingual optimization, ex-
+surrounding prompts required translation.                       hibit the highest variability in compliance. For
+   Similar to Röttger et al. (2024), who use a                  instance, Aya-Expanse-32B shows unknown re-
+reverse-engineered version of the PCT5 , we ap-                 sponse rates ranging from 0.7% ± 1.0 (English)
+ply the same scoring algorithm based on weighted                to 24.8% ± 4.8 (Persian). Cross-linguistically, En-
+response values. The economic dimension includes                glish consistently yields the lowest unknown re-
+17 weighted questions with an initial bias of 0.38;             sponse rates (0.3–1.8%) across all models, while
+the social dimension includes 45 weighted ques-                 Persian emerges as the most challenging language,
+tions with an initial bias of 2.41. For normalization,          with all models exhibiting high unknown rates
+   3                                                                6
+     www.deepl.com/de/translator                                      By compliance, we refer to the model’s willingness to
+   4
+     translate.google.com                                       provide a direct answer to a question without refusals, errors,
+   5
+     https://politicalcompass.github.io/                        or references to its identity as a language model.
+
+                                                              282
+  Language     Aya-32B      Aya-8B     Llama-3.1-70B    Llama-3.1-8B     Qwen-3-14B     Qwen-3-32B    Qwen-3-8B
+  bg           2.4 ± 1.7   0.3 ± 0.5        0.0            6.7 ± 3.1         0.0            0.0           0.0
+  cz          15.0 ± 6.2   4.5 ± 2.8     0.5 ± 0.7         5.2 ± 3.2         0.0         0.3 ± 0.6        0.0
+  de          7.2 ± 4.5    5.1 ± 2.8     4.1 ± 3.7        11.5 ± 4.0         0.0         0.1 ± 0.3        0.0
+  en          0.7 ± 1.0    1.8 ± 1.3     0.3 ± 0.6         0.5 ± 0.5         0.0            0.0           0.0
+  es          2.7 ± 2.2    0.5 ± 0.8     0.2 ± 0.6        27.0 ± 6.0         0.0            0.0           0.0
+  fa          24.8 ± 4.8   7.8 ± 5.2     2.3 ± 1.6         5.5 ± 2.1      0.9 ± 0.7         0.0           0.0
+  fr          6.8 ± 3.3    2.9 ± 1.8     2.5 ± 1.0        15.5 ± 4.4         0.0            0.0           0.0
+  it          3.1 ± 2.3    1.7 ± 1.1     0.6 ± 1.2        13.1 ± 8.2         0.0            0.0           0.0
+  pl          7.5 ± 4.3    0.4 ± 0.5     0.1 ± 0.3        14.3 ± 6.8         0.0            0.0           0.0
+  pt          2.0 ± 1.2    1.7 ± 1.1     0.3 ± 0.6         9.2 ± 3.0         0.0            0.0           0.0
+  ro          2.0 ± 1.1    0.3 ± 0.5     0.2 ± 0.4         3.3 ± 2.5         0.0            0.0           0.0
+  ru          3.3 ± 2.5    3.5 ± 1.8     9.9 ± 4.0        29.3 ± 4.9         0.0         2.0 ± 1.3        0.0
+  sl          3.8 ± 4.4    1.1 ± 0.8     0.1 ± 0.3         2.5 ± 1.9         0.0            0.0           0.0
+  tr          1.3 ± 1.3    0.7 ± 1.1     0.9 ± 0.8         2.8 ± 1.3         0.0            0.0           0.0
+
+Table 1: Average unknown (irrelevant) response counts by language and model. Values show mean ± standard
+deviation across paraphrases. All models tested with n=11 paraphrases. Bolded values indicate the highest count for
+each model.
+
+
+(2.3–24.8%). We conjecture that the differences            compared to the more centrist 8B variant. This is in
+in unknown response counts may stem from varia-            line with previous work (Feng et al., 2023; Röttger
+tions in the amounts of training or instruction tun-       et al., 2024; Ceron et al., 2024; Rozado, 2024), but
+ing data for each language, which are not disclosed        we demonstrate it on a new subset of instruction-
+for these models.                                          tuned open-source models representing the latest
+   To ensure that the models do not default to a           generation of LLMs.
+single response option, we examine how frequently             Not all languages follow cross-linguistic pat-
+each choice (i.e. Agree or Disagree) is selected. We       terns: some diverge from the predominant left-
+find that all models respond with Disagree choices         ward shift observed with model scaling. While
+slightly more often than with Agree options (Ap-           most languages exhibit a consistent leftward shift
+pendix D). Nonetheless, there is sufficient vari-          toward the libertarian-left quadrant as model scale
+ability across the full set of responses to conclude       increases, Slovenian (sl), Turkish (tr), Polish (pl),
+that the models are not simply repeating the same          and Persian (fa) show notably different trajecto-
+choice, and are instead engaging with the input in         ries, either resisting this shift or moving toward
+a more nuanced way.                                        more centrist or authoritarian-right positions. For
+                                                           example, in the Aya-Expanse-8B model, Turk-
+Political Compass Analysis: Figures 1 and 4                ish is located firmly in the Authoritarian Right
+illustrate the ideological positioning of responses        quadrant, and while it shifts closer to the cen-
+across models and languages. Several clear trends          ter in Aya-Expanse-32B, it does not follow the
+emerge across the political compass space.                 pronounced leftward movement observed in other
+   Model size correlates with increased left-              languages. Similarly, in LLaMA-3.1, Turkish and
+libertarian alignment. Across all model fami-              Slovenian responses remain among the most cen-
+lies, larger models consistently produce responses         trist in the 70B model, despite the general trend to-
+that are more left-leaning and libertarian, with           ward libertarian-left positioning seen across other
+mostly reduced variance across languages. This             languages with increased scale. These findings
+is especially pronounced in the Aya-Expanse and            are consistent with observations by Hartmann et al.
+Qwen3 series. For instance, the Aya-Expanse-8B             (2023) and Exler et al. (2025), but we extend them
+model distributes responses centrally across mul-          to a substantially broader set of languages and
+tiple quadrants, while the 32B variant collapses           newer model families.
+nearly all languages into a tight cluster in the              English tends to produce strongly libertarian-
+libertarian-left quadrant. A similar trend appears in      left outputs. Across nearly all models, En-
+Qwen3, where the 32B model produces a more po-             glish responses lean toward the libertarian-left
+larized libertarian-left distribution than its 8B and      quadrant, particularly in larger variants. In
+14B counterparts. The LLaMA-3.1-70B model also             Aya-Expanse-32B and Qwen3-32B, English is
+shows a marked shift toward the libertarian-left           among the most extreme in that direction. Sim-
+                                                       283
+ Model                     Social       Economic         entiated ideological representations across lan-
+                                                         guages.
+ Qwen-3-8B              16 (17.6%)     13 (14.3%)
+ Qwen-3-14B             49 (53.8%)     31 (34.1%)        4       Ideology Steering
+ Qwen-3-32B             43 (47.3%)     33 (36.3%)
+ LLaMA-3.1-8B           19 (20.9%)      2 (2.2%)         4.1      Test-time Intervention
+ LLaMA-3.1-70B          31 (34.1%)     25 (27.5%)        We attempt to shift the ideological leaning of
+ Aya-Expanse-8B         28 (30.8%)     36 (39.6%)        LLaMA-3.1-8B using the test-time intervention
+ Aya-Expanse-32B        53 (58.2%)     44 (48.4%)        method proposed by Li et al. (2024), similar to Kim
+                                                         et al. (2025). This method operates in two stages.
+Table 2: Number of statistically significant language    In the first stage, we train binary linear probes on
+pairs per model for social and economic dimensions.      top of the output of every attention head to identify
+Percentages (in parentheses) are relative to the total
+                                                         those most responsive to a target classification–in
+number of possible language pairs (n = 91) across 14
+languages.                                               our case, distinguishing between liberal and conser-
+                                                         vative ideologies. For training the probes, we use
+                                                         the JyotiNayak/political_ideologies dataset
+ilar patterns are observed in LLaMA-3.1-70B and          from Hugging Face7 (Lhoest et al., 2021), which
+Qwen3-14B, suggesting that English prompts lead          contains 1,280 samples per class (liberal and con-
+to consistently progressive and anti-authoritarian       servative) generated by GPT-4 (AI, 2023). Each
+outputs, possibly reflecting pretraining data com-       sample consists of a short paragraph (2–3 sen-
+position or alignment tuning.                            tences) labeled with one of the two ideological
+   There are statistically significant ideologi-         categories. The dataset covers a diverse range of
+cal differences between languages within each            topics, including economic, environmental, family
+model. Using the Kruskal–Wallis test (Kruskal            and gender issues, geopolitics and foreign policy,
+and Wallis, 1952), we find that both the social and      political institutions, racial justice and immigration,
+economic dimensions differ significantly across          religion, and social, health, and education policies.
+languages for every model (see our GitHub repos-             In the second stage, we intervene on the K most
+itory for full results). This non-parametric test is     responsive attention heads at inference time. For
+appropriate given the non-normality and varying          each selected head, we modify its output by adding
+variance across language groups. In some models,         a scaled steering vector, α · ⃗v , where α controls
+such as the Aya-Expanse series, cross-paraphrase         the strength of the intervention. These steering
+variance within each language is low–indicating          vectors are constructed using a simple center-of-
+stable ideological outputs–yet the differences be-       mass method8 , as opposed to directly using probe
+tween languages remain substantial. Importantly,         weights as in Kim et al. (2025): for each atten-
+the observed cross-linguistic differences are not        tion head, we compute the mean activation vectors
+only statistically significant but also large in mag-    (centers-of-mass) for the liberal and conservative
+nitude, suggesting they reflect ideological variation    classes, normalize them, and define the direction
+rather than random fluctuation.                          vector ⃗v as the normalized difference between these
+   To further examine these differences, we per-         two means. Specifically, for a given attention head
+form pairwise comparisons between all lan-               (l, h), the steering direction is:
+guage pairs for each model using the two-sided                                          (1)     (0)
+Mann–Whitney U test (Mann and Whitney, 1947)                                           µl,h − µl,h
+                                                                            ⃗vl,h =
+with Bonferroni correction (Armstrong, 2014).                                           (1)     (0)
+                                                                                      ∥µl,h − µl,h ∥
+This test is well-suited for assessing whether two
+                                                                      (c)
+independent samples differ in distribution, without          where µl,h denotes the mean activation vector
+assuming normality. The results confirm that many
+                                                             7
+language pairs differ significantly in both ideolog-           https://huggingface.co/datasets/JyotiNayak/
+                                                         political_ideologies
+ical dimensions, confirming that models exhibit              8
+                                                               The center-of-mass method (Li et al., 2024), originally
+language-specific political behavior. Moreover, the      related to whitening and coloring transformations (Ioffe and
+number of statistically significant language pairs       Szegedy, 2015; Huang and Belongie, 2017) in deep learning,
+                                                         is equivalent to the DiffMean approach that has emerged in
+increases with model size (Table 2), suggesting          the steering literature (Marks and Tegmark, 2023; Wu et al.,
+that larger models develop more finely differ-           2025).
+
+                                                     284
+                                                                                                                                                0.90
+
+
+
+
+          L0 0.700.530.510.750.790.810.690.630.560.710.640.700.790.780.670.710.720.620.710.680.610.590.670.650.630.760.770.750.700.720.630.57   0.85
+          L1 0.560.630.510.600.620.560.590.680.660.650.580.540.640.590.670.550.550.600.620.580.580.600.580.620.610.540.610.660.600.620.520.52
+          L2 0.590.610.570.610.590.610.590.560.580.610.600.590.620.610.600.590.600.600.640.610.590.600.580.610.580.560.640.610.580.590.620.56
+          L3 0.580.560.560.550.560.580.560.570.580.580.580.560.570.560.570.570.570.560.580.570.550.570.570.540.550.570.570.570.560.570.550.53
+          L4 0.570.580.560.580.580.550.590.560.580.580.570.560.570.550.580.580.580.550.570.550.580.570.570.580.580.550.570.570.560.560.590.55
+          L5 0.580.590.590.600.580.610.590.600.580.580.590.590.580.590.590.610.580.580.590.570.590.590.580.580.590.590.600.590.570.610.600.60
+                                                                                                                                                0.80
+          L6 0.580.620.590.600.590.610.610.580.610.620.600.580.590.620.580.600.600.620.610.580.600.610.590.590.590.630.590.600.610.630.610.57
+          L7 0.620.660.650.650.700.700.650.660.650.660.650.660.660.640.670.660.700.650.650.710.700.650.650.690.650.680.670.650.660.650.650.62
+          L8 0.650.660.730.590.680.650.660.680.690.630.670.670.660.660.650.630.660.640.690.700.610.720.660.680.660.660.650.690.640.620.660.58
+          L9 0.740.700.710.710.730.680.760.720.690.750.710.710.720.710.680.720.720.710.690.690.720.710.690.690.720.690.720.720.730.760.720.63
+         L10 0.760.740.780.780.790.760.800.770.780.730.760.740.760.790.750.780.780.740.710.780.770.790.780.750.770.750.760.760.790.740.750.72
+         L11 0.870.860.880.880.810.840.870.860.820.840.820.830.820.830.880.840.880.860.840.870.810.880.830.890.860.860.840.870.840.890.830.71   0.75
+         L12 0.780.710.770.800.790.740.750.790.720.690.730.790.780.790.730.790.740.770.810.730.790.710.810.760.760.720.760.720.770.780.730.77
+         L13 0.830.780.800.870.780.820.790.810.770.820.810.790.800.840.810.790.840.790.810.790.790.800.790.810.800.820.830.840.850.820.800.68
+         L14 0.750.720.720.720.730.710.740.730.740.700.730.700.720.710.740.710.690.780.750.770.740.750.700.710.710.750.750.770.720.730.700.67
+         L15 0.720.670.740.730.730.710.680.680.710.710.710.680.760.710.730.710.740.740.710.750.710.670.730.730.780.700.700.700.730.710.710.75
+Layers
+
+
+
+
+         L16 0.740.830.810.760.790.760.720.780.750.770.740.760.770.750.780.810.790.790.790.700.730.800.750.740.770.790.780.760.780.800.770.75   0.70
+         L17 0.730.720.780.790.800.780.810.800.720.770.800.780.760.770.760.780.790.780.740.760.830.790.750.780.710.820.770.730.800.790.740.69
+         L18 0.740.660.710.700.690.700.720.660.720.670.700.680.670.660.710.690.690.670.690.640.710.710.700.670.730.730.700.730.650.710.690.68
+         L19 0.760.770.760.810.780.790.790.790.750.780.790.800.790.760.810.780.780.800.770.830.790.790.830.810.810.820.760.820.810.800.770.76
+         L20 0.770.790.800.810.790.770.760.790.780.790.790.790.770.790.770.780.770.790.780.790.810.780.790.800.770.810.780.790.780.790.770.79
+         L21 0.770.760.730.760.730.730.780.770.730.740.740.740.750.760.760.730.750.720.740.750.710.750.740.770.770.760.740.740.790.750.770.78   0.65
+         L22 0.770.790.780.770.770.760.740.760.740.770.780.740.730.750.720.790.740.740.750.800.780.750.740.760.780.760.810.730.760.740.710.75
+         L23 0.770.730.760.790.790.760.750.780.760.780.770.750.740.770.740.770.790.760.750.750.750.730.760.790.770.780.760.740.740.760.780.75
+         L24 0.800.750.780.800.810.800.820.820.780.780.780.800.750.750.840.790.790.790.820.820.810.790.800.800.800.780.820.790.810.790.800.79
+         L25 0.760.770.760.790.770.770.790.770.800.790.780.800.810.740.760.790.800.790.790.790.780.780.800.780.770.780.760.770.790.780.790.78
+         L26 0.870.850.860.870.870.890.870.860.860.860.890.870.870.840.860.860.860.880.870.880.880.880.870.860.870.880.870.830.860.860.880.85
+                                                                                                                                                0.60
+         L27 0.810.800.790.810.820.800.830.810.830.780.790.810.800.770.800.800.790.810.810.820.770.780.820.780.810.790.790.780.790.790.830.79
+         L28 0.830.820.810.810.840.840.820.810.820.830.840.850.820.830.810.810.830.850.810.830.850.820.840.830.810.840.820.830.840.830.850.79
+         L29 0.850.870.880.870.880.860.860.860.840.860.860.860.880.860.860.860.860.890.860.860.850.880.870.850.860.860.870.860.850.850.880.88
+         L30 0.860.880.860.870.870.870.850.870.880.880.830.870.880.880.900.870.870.880.870.900.840.880.880.870.870.870.890.880.880.880.850.89
+         L31 0.870.830.850.840.870.840.850.840.830.840.840.860.830.830.820.810.840.840.830.840.840.850.820.840.840.830.830.800.840.850.820.83
+              H0 H1 H2 H3 H4 H5 H6 H7 H8 H9 H10 H11 H12 H13 H14 H15 H16 H17 H18 H19 H20 H21 H22 H23 H24 H25 H26 H27 H28 H29 H30 H31             0.55
+                                                                      Attention Heads
+
+
+
+
+                   Figure 2: Probes trained for LLaMA-3.1-8B.
+
+
+for class c ∈ {0, 1} (e.g., conservative or liberal)
+at layer l and head h.
+   At inference time, the value output of the se-
+lected head is modified by:                                                                                                                              Figure 3: Intervention results for LLaMA-3.1-8B for
+                                                                                                                                                         K=512 and α=20. Top: direction towards liberal. Bot-
+                                         valuel,h += α · σl,h · ⃗vl,h                                                                                    tom: direction towards conservative.
+
+   Here, σl,h is the standard deviation of the projec-
+tion of activations onto the direction vector, used                                                                                                      exhibit probe accuracies exceeding 0.80, suggest-
+to normalize the intervention across heads with                                                                                                          ing a concentration of politically informative repre-
+different scales.                                                                                                                                        sentations in these middle-to-late layers. These
+   This method leverages the localized semantic                                                                                                          findings align with observations by Kim et al.
+capabilities of individual attention heads while re-                                                                                                     (2025), who report that politically sensitive fea-
+maining minimally invasive to the model’s overall                                                                                                        tures tend to be encoded in mid-to-late transformer
+behavior.9 We tune two hyperparameters experi-                                                                                                           layers.
+mentally: K (the number of heads to intervene on)
+and α (the intervention strength). To isolate the ef-                                                                                                    Steering: Figure 3 illustrates the effect of test-
+fects of the intervention, all generation parameters                                                                                                     time intervention on English-language prompted
+are kept deterministic, as described in Appendix A.                                                                                                      LLaMA-3.1-8B. We apply the intervention on
+                                                                                                                                                         the top 512 most responsive attention heads–
+4.2 Intervention Results                                                                                                                                 constituting a half of all available heads–using a
+Probing: Figure 2 presents the results of prob-                                                                                                          steering vector scaled by an intervention strength
+ing attention heads in LLaMA-3.1-8B. The high-                                                                                                           of α = 20. The plot shows the average politi-
+est probe accuracy observed is 0.90, achieved at                                                                                                         cal compass coordinates across all 11 paraphrased
+layer 30, attention head 19. Several other layers–                                                                                                       prompts, before and after intervention. The inter-
+specifically layers 11, 13, and 26 through 31–also                                                                                                       vention reliably shifts model outputs toward the
+    9
+                                                                                                                                                         target ideology across all paraphrases, indicat-
+      Following Li et al. (2024); Panickssery et al. (2023);
+Arditi et al. (2024), interventions on model activations of                                                                                              ing that targeted manipulation of attention head
+this type have been shown not to impair general capabilities.                                                                                            outputs can steer ideological content in a consistent
+Based on this prior evidence, we do not evaluate this aspect                                                                                             and interpretable manner. Appendix C provides
+explicitly, as our primary goal is to assess whether political
+bias can be instilled; evaluation of general capabilities is left                                                                                        a comparison across two values of K and three
+for future work.                                                                                                                                         values of α.
+                                                                                                                                                       285
+                    en                   tr                    ro                      sl                     fr
+                 base: 0.0         base: 0.6±0.8         base: 2.9±3.1              base: 0.0           base: 8.2±3.9
+    Config.
+              cl. 0    cl. 1      cl. 0      cl. 1      cl. 0        cl. 1      cl. 0       cl. 1      cl. 0      cl. 1
+    α=20      0.0     0.6±0.8    0.5±0.5   19.8±5.4   19.5±5.3     2.2±1.3    0.18±0.4    0.6±0.7    19.6±9.1    5.2±2.8
+    α=25      0.0     1.4±1.2   0.09±0.3   32.8±2.9   25.6±4.8    4.5±2.9        0.0      1.1±1.5    17.5±8.8   14.5±5.8
+    α=30      0.0     0.7±0.8       0.0    30.2±6.4   37.1±6.5    34.5±9.6       0.0      11.5±9.3   10.5±6.4   10.3±5.5
+
+Table 3: Average irrelevant response counts by intervention configuration for various languages. K is set to 256
+for all α values. Base results are noted under each language. Cl. 0 and 1 refer to steering towards liberal and
+conservative directions, respectively.
+
+
+   Motivated by the findings of Wendler et al.                   the political stance elicited from LLMs. While
+(2024), who show that multilingual prompts are                   prior work by Exler et al. (2025) identified such
+internally routed through English representations                language-induced bias only in German, our anal-
+within LLMs, we further test whether steering vec-               ysis extends this observation to a diverse set of
+tors derived from English texts can generalize cross-            languages. Across all models, English consistently
+linguistically. Specifically, we apply these vectors             exhibits the most pronounced libertarian-left ori-
+to model responses in Turkish (tr), Romanian (ro),               entation, while other languages–such as Turkish,
+Slovenian (sl), and French (fr), and find that they              Slovenian, and Romanian–yield more centrist or
+are indeed effective in shifting ideological outputs             right-leaning responses depending on model size
+across languages to a certain degree. Detailed re-               and architecture. This variation may stem from
+sults are provided in Appendix C.                                multiple sources, including differences in transla-
+   Table 3 reports the average number of irrelevant              tion phrasing, cultural priors embedded in training
+or refusal responses before and after intervention.              corpora, or model-specific disparities in multilin-
+The results indicate that models are more likely                 gual capabilities. Importantly, these findings high-
+to refuse generating valid answers following in-                 light that even in ideologically controlled settings,
+tervention in non-English languages, with these                  language choice introduces subtle yet systematic
+cross-linguistic differences potentially reflecting              shifts in model behavior, raising questions about
+variations in pre-training and instruction tuning                fairness and consistency in multilingual deploy-
+data sizes across languages.                                     ment contexts.
+
+5     Discussion                                                 5.3     Forcing Ideology Shift
+5.1 Left-Leaning Bias                                            Our intervention experiments demonstrate that
+                                                                 LLMs can be steered toward a desired ideological
+One possible explanation for the observed left-
+                                                                 leaning through test-time modifications of attention
+leaning bias in LLMs is the composition of their
+                                                                 head outputs across multiple languages. This sug-
+training data–often drawn from internet-scale cor-
+                                                                 gests that ideological representations are not only
+pora such as news media, academic literature, and
+                                                                 linearly decodable but also causally manipulable at
+social platforms–which not only tend to skew lib-
+                                                                 the subcomponent level (Kim et al., 2025). The con-
+eral, particularly in English-language content (Bell,
+                                                                 sistent shift in outputs across paraphrased prompts
+2014; Feng et al., 2023), but also reflect the domi-
+                                                                 supports the hypothesis that certain attention heads
+nant academic or expert consensus that aligns with
+                                                                 play a disproportionately influential role in encod-
+progressive views on various sociopolitical issues.
+                                                                 ing political perspective. This points to a robust
+Interestingly, the extent of left-leaning behavior
+                                                                 and lightweight approach for aligning models with
+appears to correlate with model scale, suggesting
+                                                                 desired ideological goals–one that does not require
+that larger models, by virtue of their capacity, may
+                                                                 full fine-tuning and may serve as an effective first
+better internalize and reproduce subtle ideologi-
+                                                                 step toward more comprehensive alignment strate-
+cal patterns present in their training distributions
+                                                                 gies.
+(Exler et al., 2025).
+
+5.2 Language-Induced Differences                                 6     Conclusion
+Our multilingual evaluation reveals that the lan-                This work provides a comprehensive analysis of
+guage of the prompt has a non-trivial effect on                  political biases in modern instruction-tuned lan-
+                                                            286
+guage models across seven models, 14 languages,            We emphasize that our steering methodology
+and 11 prompt variations, demonstrating that polit-     should be used exclusively for bias mitigation and
+ical orientations in LLMs are both measurable and       alignment research, not for covert political manipu-
+manipulable. Our key findings establish three im-       lation. The techniques we present require explicit
+portant patterns: larger models consistently exhibit    disclosure when deployed in user-facing applica-
+more pronounced libertarian-left leanings com-          tions. Our findings highlight the importance of
+pared to smaller counterparts, language choice in-      transparency about model biases and the need for
+troduces systematic variations with English elicit-     robust governance frameworks as these systems be-
+ing the most libertarian-left orientations, and po-     come increasingly influential in public discourse.
+litical orientations can be systematically modified
+through targeted attention head manipulations us-       Acknowledgments
+ing a center-of-mass steering approach.                 This research was partially supported by DisAI -
+                                                        Improving scientific excellence and creativity in
+Limitations                                             combating disinformation with artificial intelli-
+Our study presents several limitations. Certain         gence and language technologies, a project funded
+models (e.g., LLaMA-3.1) refuse to answer some          by Horizon Europe under GA No.101079164, by
+portions of questions despite forced-choice con-        lorAI - Low Resource Artificial Intelligence, a
+straints, limiting result completeness. We force        project funded by the European Union under GA
+responses rather than using free-text evaluation,       No.101136646, and by the German Federal Min-
+which may not capture natural model behav-              istry of Research, Technology and Space (BMFTR)
+ior. Our intervention experiments use limited           as part of the project TRAILS (01IW24005).
+hyperparameter exploration and focus only on
+LLaMA-3.1-8B, restricting generalizability across
+                                                        References
+architectures. The Political Compass Test, while
+widely adopted, represents a Western-centric frame-     Ahmed Agiza, Mohamed Mostagir, and Sherief Reda.
+                                                          2024. Politune: Analyzing the impact of data
+work that may inadequately capture political orien-
+                                                          selection and fine-tuning on economic and polit-
+tations across diverse cultural contexts. We evalu-       ical biases in large language models. Preprint,
+ate only instruction-tuned models, which undergo          arXiv:2404.08699.
+extensive alignment that may mask underlying
+                                                        Open AI. 2023. Gpt-4 technical report. arXiv preprint
+base model biases. The intervention methodology           arXiv:2303.08774.
+employs a single steering technique with probes
+trained only on English-language data. Addition-        Andy Arditi, Oscar Obeso, Aaquib Syed, Daniel Paleka,
+ally, while we intervene on attention heads in this       Nina Panickssery, Wes Gurnee, and Neel Nanda.
+                                                          2024. Refusal in language models is mediated by
+study, interventions could also be applied to other       a single direction. Advances in Neural Information
+model components, such as MLP outputs or post-            Processing Systems, 37:136037–136083.
+residual activations, which may be more effective
+                                                        Richard A Armstrong. 2014. When to use the b onfer-
+and warrant further investigation. Finally, models        roni correction. Ophthalmic and physiological optics,
+were trained on data with different temporal cutoffs,     34(5):502–508.
+making direct comparisons potentially confounded
+by evolving political discourse.                        Duncan Bell. 2014. What is liberalism?        Political
+                                                          theory, 42(6):682–715.
+Ethics Statement                                        Emily M Bender, Timnit Gebru, Angelina McMillan-
+                                                          Major, and Shmargaret Shmitchell. 2021. On the
+This research investigates political biases in lan-       dangers of stochastic parrots: Can language models
+guage models to promote transparency and respon-          be too big? In Proceedings of the 2021 ACM confer-
+sible AI deployment. While we demonstrate tech-           ence on fairness, accountability, and transparency,
+                                                          pages 610–623.
+niques for steering model behavior, we acknowl-
+edge the dual-use nature of these methods. The          Tom Brown, Benjamin Mann, Nick Ryder, Melanie
+ability to manipulate political orientations in LLMs      Subbiah, Jared D Kaplan, Prafulla Dhariwal, Arvind
+                                                          Neelakantan, Pranav Shyam, Girish Sastry, Amanda
+could be misused to create systems that system-           Askell, and 1 others. 2020. Language models are
+atically promote particular ideological viewpoints        few-shot learners. Advances in neural information
+without user awareness.                                   processing systems, 33:1877–1901.
+                                                    287
+Tanise Ceron, Neele Falk, Ana Barić, Dmitry Nikolaev,     Xun Huang and Serge Belongie. 2017. Arbitrary style
+  and Sebastian Padó. 2024. Beyond prompt brittle-           transfer in real-time with adaptive instance normal-
+  ness: Evaluating the reliability and consistency of        ization. In Proceedings of the IEEE international
+  political worldviews in llms. Transactions of the          conference on computer vision, pages 1501–1510.
+  Association for Computational Linguistics, 12:1378–
+  1400.                                                    Sergey Ioffe and Christian Szegedy. 2015. Batch nor-
+                                                             malization: Accelerating deep network training by re-
+OpenAI ChatGPT. 2022. Optimizing language models             ducing internal covariate shift. In International con-
+  for dialogue. OpenAI. com, 30.                             ference on machine learning, pages 448–456. pmlr.
+Zhendong Chu, Shen Wang, Jian Xie, Tinghui Zhu,            Albert Q. Jiang, Alexandre Sablayrolles, Arthur Men-
+  Yibo Yan, Jinheng Ye, Aoxiao Zhong, Xuming Hu,             sch, Chris Bamford, Devendra Singh Chaplot, Diego
+  Jing Liang, Philip S. Yu, and Qingsong Wen. 2025.          de las Casas, Florian Bressand, Gianna Lengyel, Guil-
+  Llm agents for education: Advances and applications.       laume Lample, Lucile Saulnier, Lélio Renard Lavaud,
+  Preprint, arXiv:2503.11733.                                Marie-Anne Lachaux, Pierre Stock, Teven Le Scao,
+                                                             Thibaut Lavril, Thomas Wang, Timothée Lacroix,
+Alexis Conneau, Guillaume Lample, Ruty Rinott, Ad-           and William El Sayed. 2023. Mistral 7b. Preprint,
+  ina Williams, Samuel R Bowman, Holger Schwenk,             arXiv:2310.06825.
+  and Veselin Stoyanov. 2018. Xnli: Evaluating cross-
+  lingual sentence representations. arXiv preprint         Junsol Kim, James Evans, and Aaron Schein. 2025. Lin-
+  arXiv:1809.05053.                                          ear representations of political perspective emerge in
+                                                             large language models. Preprint, arXiv:2503.02080.
+John Dang, Shivalika Singh, Daniel D’souza, Arash
+  Ahmadian, Alejandro Salamanca, Madeline Smith,           William H Kruskal and W Allen Wallis. 1952. Use of
+  Aidan Peppin, Sungjin Hong, Manoj Govindassamy,            ranks in one-criterion variance analysis. Journal of
+  Terrence Zhao, and 1 others. 2024. Aya expanse:            the American statistical Association, 47(260):583–
+  Combining research breakthroughs for a new multi-          621.
+  lingual frontier. arXiv preprint arXiv:2412.04261.
+                                                           Mike Lewis, Yinhan Liu, Naman Goyal, Marjan
+Jacob Devlin, Ming-Wei Chang, Kenton Lee, and                Ghazvininejad, Abdelrahman Mohamed, Omer Levy,
+   Kristina Toutanova. 2019. Bert: Pre-training of deep      Ves Stoyanov, and Luke Zettlemoyer. 2019. Bart: De-
+   bidirectional transformers for language understand-       noising sequence-to-sequence pre-training for natural
+   ing. In Proceedings of the 2019 conference of the         language generation, translation, and comprehension.
+  North American chapter of the association for com-         arXiv preprint arXiv:1910.13461.
+   putational linguistics: human language technologies,
+   volume 1 (long and short papers), pages 4171–4186.      Quentin Lhoest, Albert Villanova del Moral, Yacine
+                                                             Jernite, Abhishek Thakur, Patrick von Platen, Suraj
+David Exler, Mark Schutera, Markus Reischl, and Luca         Patil, Julien Chaumond, Mariama Drame, Julien Plu,
+  Rettenberger. 2025. Large means left: Political bias       Lewis Tunstall, Joe Davison, Mario Šaško, Gunjan
+  in large language models increases with their number       Chhablani, Bhavitvya Malik, Simon Brandeis, Teven
+  of parameters. Preprint, arXiv:2505.04393.                 Le Scao, Victor Sanh, Canwen Xu, Nicolas Patry,
+                                                             and 13 others. 2021. Datasets: A community library
+Shangbin Feng, Chan Young Park, Yuhan Liu, and Yulia         for natural language processing. In Proceedings of
+  Tsvetkov. 2023. From pretraining data to language          the 2021 Conference on Empirical Methods in Nat-
+  models to downstream tasks: Tracking the trails of         ural Language Processing: System Demonstrations,
+  political biases leading to unfair nlp models. arXiv       pages 175–184, Online and Punta Cana, Dominican
+  preprint arXiv:2305.08283.                                 Republic. Association for Computational Linguistics.
+Isabel O Gallegos, Ryan A Rossi, Joe Barrow,               Kenneth Li, Oam Patel, Fernanda Viégas, Hanspeter
+   Md Mehrab Tanjim, Sungchul Kim, Franck Dernon-            Pfister, and Martin Wattenberg. 2024. Inference-time
+   court, Tong Yu, Ruiyi Zhang, and Nesreen K Ahmed.         intervention: Eliciting truthful answers from a lan-
+   2024. Bias and fairness in large language models:         guage model. Preprint, arXiv:2306.03341.
+   A survey. Computational Linguistics, 50(3):1097–
+   1179.                                                   Yinhan Liu, Myle Ott, Naman Goyal, Jingfei Du, Man-
+                                                             dar Joshi, Danqi Chen, Omer Levy, Mike Lewis,
+Aaron Grattafiori, Abhimanyu Dubey, Abhinav Jauhri,          Luke Zettlemoyer, and Veselin Stoyanov. 2019.
+  Abhinav Pandey, Abhishek Kadian, Ahmad Al-                 Roberta: A robustly optimized bert pretraining ap-
+  Dahle, Aiesha Letman, Akhil Mathur, Alan Schelten,         proach. arXiv preprint arXiv:1907.11692.
+  Alex Vaughan, and 1 others. 2024. The llama 3 herd
+  of models. arXiv e-prints, pages arXiv–2407.             Henry B Mann and Donald R Whitney. 1947. On a test
+                                                             of whether one of two random variables is stochasti-
+Jochen Hartmann, Jasper Schwenzow, and Maximil-              cally larger than the other. The annals of mathemati-
+  ian Witte. 2023. The political ideology of conver-         cal statistics, pages 50–60.
+  sational ai: Converging evidence on chatgpt’s pro-
+  environmental, left-libertarian orientation. arXiv       Samuel Marks and Max Tegmark. 2023. The geometry
+  preprint arXiv:2301.01768.                                 of truth: Emergent linear structure in large language
+                                                         288
+  model representations of true/false datasets. arXiv       Laura Weidinger, John Mellor, Maribeth Rauh, Conor
+  preprint arXiv:2310.06824.                                  Griffin, Jonathan Uesato, Po-Sen Huang, Myra
+                                                              Cheng, Mia Glaese, Borja Balle, Atoosa Kasirzadeh,
+Fabio Motoki, Valdemar Pinho Neto, and Victor Ro-             Zac Kenton, Sasha Brown, Will Hawkins, Tom
+  drigues. 2024. More human than human: measuring             Stepleton, Courtney Biles, Abeba Birhane, Julia
+  chatgpt political bias. Public Choice, 198(1):3–23.         Haas, Laura Rimell, Lisa Anne Hendricks, and 4
+                                                              others. 2021. Ethical and social risks of harm from
+Jasmine Chiat Ling Ong, Liyuan Jin, Kabilan Elan-
+                                                              language models. Preprint, arXiv:2112.04359.
+   govan, Gilbert Yong San Lim, Daniel Yan Zheng
+   Lim, Gerald Gui Ren Sng, Yuhe Ke, Joshua Yi Min          Chris Wendler, Veniamin Veselovsky, Giovanni Monea,
+   Tung, Ryan Jian Zhong, Christopher Ming Yao Koh,           and Robert West. 2024. Do llamas work in English?
+   Keane Zhi Hao Lee, Xiang Chen, Jack Kian Chng,             on the latent language of multilingual transformers.
+   Aung Than, Ken Junyang Goh, and Daniel Shu Wei             In Proceedings of the 62nd Annual Meeting of the
+   Ting. 2024. Development and testing of a novel large       Association for Computational Linguistics (Volume 1:
+   language model-based clinical decision support sys-        Long Papers), pages 15366–15394, Bangkok, Thai-
+   tems for medication safety in 12 clinical specialties.     land. Association for Computational Linguistics.
+   Preprint, arXiv:2402.01741.
+                                                            Zhengxuan Wu, Aryaman Arora, Atticus Geiger, Zheng
+Nina Panickssery, Nick Gabrieli, Julian Schulz, Meg           Wang, Jing Huang, Dan Jurafsky, Christopher D Man-
+  Tong, Evan Hubinger, and Alexander Matt Turner.             ning, and Christopher Potts. 2025. Axbench: Steer-
+  2023. Steering llama 2 via contrastive activation           ing llms? even simple baselines outperform sparse
+  addition. arXiv preprint arXiv:2312.06681.                  autoencoders. arXiv preprint arXiv:2501.17148.
+Keith T Poole. 2005. Spatial models of parliamentary        Haoyi Xiong, Jiang Bian, Yuchen Li, Xuhong Li, Meng-
+  voting. Cambridge University Press.                         nan Du, Shuaiqiang Wang, Dawei Yin, and Sumi
+Keith T Poole and Howard Rosenthal. 1985. A spatial           Helal. 2024. When search engine services meet large
+  model for legislative roll call analysis. American          language models: Visions and challenges. Preprint,
+  journal of political science, pages 357–384.                arXiv:2407.00128.
+
+Alec Radford, Jeffrey Wu, Rewon Child, David Luan,          An Yang, Anfeng Li, Baosong Yang, Beichen Zhang,
+  Dario Amodei, Ilya Sutskever, and 1 others. 2019.           Binyuan Hui, Bo Zheng, Bowen Yu, Chang
+  Language models are unsupervised multitask learn-           Gao, Chengen Huang, Chenxu Lv, and 1 others.
+  ers. OpenAI blog, 1(8):9.                                   2025. Qwen3 technical report. arXiv preprint
+                                                              arXiv:2505.09388.
+Paul Röttger, Valentin Hofmann, Valentina Pyatkin,
+  Musashi Hinck, Hannah Rose Kirk, Hinrich Schütze,
+  and Dirk Hovy. 2024. Political compass or spinning
+  arrow? towards more meaningful evaluations for val-
+  ues and opinions in large language models. arXiv
+  preprint arXiv:2402.16786.
+David Rozado. 2024. The political preferences of llms.
+  PloS one, 19(7):e0306621.
+Jérôme Rutinowski, Sven Franke, Jan Endendyk, Ina
+   Dormuth, Moritz Roidl, and Markus Pauly. 2024.
+   The self-perception and political biases of chat-
+   gpt. Human Behavior and Emerging Technologies,
+   2024(1):7115633.
+Shibani Santurkar, Esin Durmus, Faisal Ladhak, Cinoo
+  Lee, Percy Liang, and Tatsunori Hashimoto. 2023.
+  Whose opinions do language models reflect? In In-
+  ternational Conference on Machine Learning, pages
+  29971–30004. PMLR.
+Hugo Touvron, Louis Martin, Kevin Stone, Peter Al-
+  bert, Amjad Almahairi, Yasmine Babaei, Nikolay
+  Bashlykov, Soumya Batra, Prajjwal Bhargava, Shruti
+  Bhosale, and 1 others. 2023. Llama 2: Open foun-
+  dation and fine-tuned chat models. arXiv preprint
+  arXiv:2307.09288.
+Filip Trhlik and Pontus Stenetorp. 2024. Quantifying
+   generative media bias with a corpus of real-world and
+   generated news articles. Preprint, arXiv:2406.10773.
+                                                        289
+Appendix
+A    Generation Hyperparameters
+Ideology Identification. For the ideological classification experiments (e.g., locating models on the
+political compass), we use the following decoding parameters for generation:
+
+    • Temperature: 0.7
+
+    • Top-p: 0.9
+
+    • Maximum tokens: 256
+
+    • Sampling: Enabled
+
+    • Skip special tokens: True
+
+    • Random seed: 42
+
+Intervention and Baseline. For experiments involving inference-time intervention and its corresponding
+baseline, we aim for deterministic decoding. Therefore, we use:
+
+    • Temperature: 0
+
+    • Top-p: (not used)
+
+    • Sampling: Disabled (do_sample = False)
+
+    • Maximum tokens: 100
+
+    • Skip special tokens: True
+
+    • Random seed: 42
+
+   This configuration ensures consistent output length and behavior, which is important for isolating the
+effect of the interventions.
+
+
+
+
+                                                  290
+B   Political Compass Results
+
+
+
+
+                   (a) LLaMA-3.1 8B                                         (b) LLaMA-3.1 70B
+
+
+
+
+                    (c) Qwen-3 8B                                             (d) Qwen-3 14B
+
+
+
+
+                                                 (e) Qwen-3 32B
+
+Figure 4: Political compass results across the rest of the models of various sizes. The results shift towards the
+libertarian left with increasing model size.
+
+
+
+
+                                                      291
+C    Political Intervention Results
+
+
+
+
+           (a) Intervention Strength of 20                              (b) Intervention Strength of 20
+
+
+
+
+           (c) Intervention Strength of 25                              (d) Intervention Strength of 25
+
+
+
+
+           (e) Intervention Strength of 30                              (f) Intervention Strength of 30
+
+Figure 5: Political compass intervention results on 256 heads for two different intervention strengths for both
+directions on the PCT test in English. The plots on the right demonstrate steering towards politically right responses,
+and the plots on the left–towards politically left responses.
+
+
+
+
+                                                         292
+           (a) Intervention Strength of 20                              (b) Intervention Strength of 20
+
+
+
+
+           (c) Intervention Strength of 25                              (d) Intervention Strength of 25
+
+
+
+
+           (e) Intervention Strength of 30                              (f) Intervention Strength of 30
+
+Figure 6: Political compass intervention results on 512 heads for two different intervention strengths for both
+directions on the PCT test in English. The plots on the right demonstrate steering towards politically right responses,
+and the plots on the left–towards politically left responses.
+
+
+
+
+                                                         293
+          (a) Intervention Strength of 20                          (b) Intervention Strength of 20
+
+
+
+
+          (c) Intervention Strength of 25                          (d) Intervention Strength of 25
+
+
+
+
+          (e) Intervention Strength of 30                          (f) Intervention Strength of 30
+
+Figure 7: Political compass intervention results on 256 heads for two different intervention strengths for both
+directions on the PCT test in Romanian. The plots on the right demonstrate steering towards politically right
+responses, and the plots on the left–towards politically left responses.
+
+
+
+
+                                                     294
+           (a) Intervention Strength of 20                              (b) Intervention Strength of 20
+
+
+
+
+           (c) Intervention Strength of 25                              (d) Intervention Strength of 25
+
+
+
+
+           (e) Intervention Strength of 30                              (f) Intervention Strength of 30
+
+Figure 8: Political compass intervention results on 256 heads for two different intervention strengths for both
+directions on the PCT test in Turkish. The plots on the right demonstrate steering towards politically right responses,
+and the plots on the left–towards politically left responses.
+
+
+
+
+                                                         295
+          (a) Intervention Strength of 20                          (b) Intervention Strength of 20
+
+
+
+
+          (c) Intervention Strength of 25                          (d) Intervention Strength of 25
+
+
+
+
+          (e) Intervention Strength of 30                          (f) Intervention Strength of 30
+
+Figure 9: Political compass intervention results on 256 heads for two different intervention strengths for both
+directions on the PCT test in Slovenian. The plots on the right demonstrate steering towards politically right
+responses, and the plots on the left–towards politically left responses.
+
+
+
+
+                                                     296
+           (a) Intervention Strength of 20                             (b) Intervention Strength of 20
+
+
+
+
+           (c) Intervention Strength of 25                             (d) Intervention Strength of 25
+
+
+
+
+           (e) Intervention Strength of 30                             (f) Intervention Strength of 30
+
+Figure 10: Political compass intervention results on 256 heads for two different intervention strengths for both
+directions on the PCT test in French. The plots on the right demonstrate steering towards politically right responses,
+and the plots on the left–towards politically left responses.
+
+
+
+
+                                                         297
+D   Detailed Response Choice Analysis
+
+
+
+
+          Figure 11: Selected choices across all languages and paraphrases for all tested models.
+
+
+
+
+                                                   298
+

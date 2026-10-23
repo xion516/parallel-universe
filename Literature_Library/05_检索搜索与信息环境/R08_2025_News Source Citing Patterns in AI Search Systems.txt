@@ -1,0 +1,1041 @@
+本文件为PDF自动提取文本，仅供检索；排版、图表和页码请以PDF为准。
+News Source Citing Patterns in AI Search Systems
+
+                                                                   News Source Citing Patterns in AI Search Systems
+
+                                                                                                    Kai-Cheng Yang
+                                                                                       Northeastern University, Boston, MA, USA
+                                                                                                 yang3kc@gmail.com
+
+
+
+
+                                                                    Abstract                                  Shoemaker and Vos 2009). Originally applied to human ed-
+                                                                                                              itors and journalists, this concept has been extended to algo-
+arXiv:2507.05301v1 [cs.IR] 7 Jul 2025
+
+
+
+
+                                          AI-powered search systems are emerging as new information           rithmic systems that filter and prioritize information flows at
+                                          gatekeepers, fundamentally transforming how users access            scale (Van Dalen 2023). AI search engines represent a new
+                                          news and information. Despite their growing influence, the
+                                                                                                              evolution of this phenomenon: rather than simply retrieving
+                                          citation patterns of these systems remain poorly understood.
+                                          We address this gap by analyzing data from the AI Search            documents, they actively synthesize information and fore-
+                                          Arena, a head-to-head evaluation platform for AI search sys-        ground specific sources. As these systems increasingly serve
+                                          tems. The dataset comprises over 24,000 conversations and           as primary gateways to information, they exercise unprece-
+                                          65,000 responses from models across three major providers:          dented control over which outlets reach users, effectively
+                                          OpenAI, Perplexity, and Google. Among the over 366,000              functioning as the new gatekeepers of the digital informa-
+                                          citations embedded in these responses, 9% reference news            tion ecosystem (Kuai et al. 2025).
+                                          sources. We find that while models from different providers            However, this gatekeeping role raises critical questions
+                                          cite distinct news sources, they exhibit shared patterns in ci-     about which sources these systems prioritize and how their
+                                          tation behavior. News citations concentrate heavily among a
+                                          small number of outlets and display a pronounced liberal bias,
+                                                                                                              citation patterns shape public discourse (Memon and West
+                                          though low-credibility sources are rarely cited. User prefer-       2024). These concerns are not new since audits of traditional
+                                          ence analysis reveals that neither the political leaning nor the    search engines and news aggregators have shown that cited
+                                          quality of cited news sources significantly influences user sat-    news sources concentrate among a relatively small number
+                                          isfaction. These findings reveal significant challenges in cur-     of popular outlets and exhibit liberal bias (Trielli and Di-
+                                          rent AI search systems and have important implications for          akopoulos 2019; Fischer, Jaidka, and Lelkes 2020). Built
+                                          their design and governance.                                        upon traditional information retrieval systems, AI search
+                                                                                                              systems may amplify these issues through their complex
+                                        Code — https://github.com/yang3kc/ai search arena                     and opaque mechanisms that can embed systematic biases
+                                                                                                              in source selection (Yang and Menczer 2025).
+                                                                                                                 Recent audits of popular AI search engines confirm these
+                                                                Introduction                                  concerns. Using simulated user queries, researchers have
+                                        AI-powered search systems are transforming how users ac-              shown that tools like Microsoft Copilot tend to favor main-
+                                        cess and consume information online. Unlike traditional               stream news outlets (Brantner, Karlsson, and Kuai 2025).
+                                        web search engines that return ranked lists of web pages,             These systems have also been found to surface more low-
+                                        AI search systems synthesize information from multiple                credibility sources than Google News and demonstrate left-
+                                        sources and present coherent, conversational responses aug-           leaning bias (Li and Sinnamon 2024; Jaidka and Furniture-
+                                        mented with citations to supporting evidence (Xiong et al.            wala 2025). Given the contentious nature of the contempo-
+                                        2024). Studies suggest that these systems lower the infor-            rary media landscape, AI systems’ tendency to favor sources
+                                        mation access barrier (Wu et al. 2020) and enable users               with particular characteristics could contribute to informa-
+                                        to perform complex tasks more quickly (Spatharioti et al.             tion bubbles and exacerbate information disparities.
+                                        2023; Suri et al. 2024). Products such as ChatGPT with web               While this emerging evidence provides valuable insights,
+                                        search, Perplexity AI, and Google’s AI search features have           critical gaps remain. First, previous audits of AI search sys-
+                                        gained millions of users, demonstrating the potential of AI           tems rely primarily on simulated user queries, which may
+                                        search systems to become mainstream.                                  not accurately reflect real-world usage patterns. Second,
+                                           Scholars have long conceptualized gatekeeping as the               these audits typically examine only one or a few AI search
+                                        process of selecting and highlighting certain information             systems, limiting their representativeness and preventing the
+                                        while filtering out other content (Barzilai-Nahon 2008;               identification of cross-model patterns. Third, these studies
+                                                                                                              lack user preference data, making it difficult to determine
+                                        Copyright © 2025, Association for the Advancement of Artificial       which factors drive user satisfaction with search results.
+                                        Intelligence (www.aaai.org). All rights reserved.                        To address these gaps, we conduct a large-scale empirical
+analysis of news citation patterns in AI search systems us-       with different degrees of political tendencies (Robertson
+ing the AI Search Arena dataset. The dataset contains over        et al. 2018; Tong 2025). In this study, we examine whether
+366,000 citations from conversations between users and 12         similar patterns emerge in AI search systems.
+AI search models from three major providers: OpenAI, Per-
+plexity, and Google. The dataset is collected through a head-     Sources Cited by AI Search Systems
+to-head evaluation setup where users are presented with re-
+sponses from different AI search models for the same query        The rise of AI search systems has drawn significant attention
+and asked to choose the better response. This dataset en-         from the academic community, with many auditing studies
+ables us to examine the citation patterns of AI search sys-       emerging in recent years. A common approach involves cre-
+tems in real-world usage scenarios. Specifically, we focus        ating queries covering various topics and then examining re-
+on two key research questions:                                    sponses from different AI search tools.
+                                                                     For instance, Brantner, Karlsson, and Kuai (2025) focus
+ • RQ1: Do different AI search systems exhibit systematic         on Microsoft Copilot during the run-up to Taiwan’s 2024
+   patterns in their news citation behavior, and if so, what      presidential election to examine what content it surfaces
+   factors are associated with these patterns?                    and how accurately it cites sources. The authors also test
+ • RQ2: How do the characteristics of cited news sources          the same queries in different languages to assess how the
+   relate to user preferences for AI search responses?            model responds across linguistic contexts. Their results sug-
+                                                                  gest that Copilot relies heavily on professional news out-
+   Our analysis reveals the following key findings. First, AI
+                                                                  lets and skews heavily toward UK- and US-based English
+search models from the same provider exhibit similar cita-
+                                                                  sources across all languages. While deliberate disinforma-
+tion patterns, while differences between providers are more
+                                                                  tion is rare, they find that many professional news citations
+pronounced. Second, all models demonstrate significant ci-
+                                                                  are mis-summarized or misattributed, and Bing links are of-
+tation concentration, with a small number of news outlets
+                                                                  ten broken, making misinformation a byproduct of summary
+accounting for a disproportionate share of citations. Third,
+                                                                  and technical errors.
+we observe consistent left-leaning political bias across all
+AI search systems, despite their general preference for high-        Similarly, Li and Sinnamon (2024) audit three AI search
+quality sources. Notably, however, user preferences for AI        systems—ChatGPT, Bing Chat, and Perplexity—by collect-
+search responses show no significant association with either      ing over 1,000 answers to 48 public-interest queries. The
+the political orientation or quality of cited news sources.       authors analyze the cited sources and show that they are
+   Our findings confirm the gatekeeping role of AI search         dominated by US commercial and news sites with scant aca-
+systems and reveal potential issues in their news-citing be-      demic or governmental material. They warn that these pat-
+haviors. These findings have important implications for the       terns may amplify confirmation bias and commercial/geo-
+design of AI search systems and their role in shaping public      graphic skew, recommending stricter source-quality filters
+access to information.                                            and greater transparency in generative AI search.
+                                                                     Jaidka and Furniturewala (2025) adopt a comparative
+                                                                  approach by sending queries to an AI search tool and
+                      Related Work                                Google News. The authors use over 80,000 queries across
+Sources Cited by Traditional Search Engines                       11 election-year countries covering various topics. Unlike
+AI search systems are typically implemented as a combi-           other studies, the AI search tool being tested combines Ope-
+nation of large language models (LLMs) and web search             nAI’s GPT-4o model with a news API, giving the authors
+engines (Xiong et al. 2024). Therefore, audits of tradi-          better control over the underlying mechanisms. They show
+tional search engines and news aggregators are particularly       that the AI search tool surfaces significantly less relevant
+relevant to our study. Previous research reveals a consis-        and more low-quality content while being only slightly less
+tent pattern: cited news concentrates heavily on a relatively     left-leaning overall than Google News, with the quality gap
+small number of popular outlets in traditional search en-         widest for right-party queries and deeper result pages.
+gines (Trielli and Diakopoulos 2019; Fischer, Jaidka, and            In their qualitative study, Narayanan Venkit et al. (2025)
+Lelkes 2020). This concentration persists regardless of user      recruit 21 expert users to compare AI search systems to
+identities and personalization settings (Trielli and Diakopou-    traditional search engines. The experts commonly identify
+los 2022). While low-credibility sources do appear in search      problems in the AI search systems, such as misattribution
+results, they remain relatively rare (Robertson et al. 2023).     and misrepresentation of cited sources, missing citations for
+   Regarding political bias, research from organizations like     certain claims, and a lack of transparency in source selec-
+AllSides1 and academic studies (Robertson et al. 2018,            tion. In particular, these experts express general distrust to-
+2023) suggest that Google tends to display more left-leaning      ward certain sources cited by AI search systems, especially
+sources in search results and top stories. This tendency ap-      forums, blogs, and opinion pieces.
+pears consistent across users with different political leanings      These studies provide valuable insights into the citation
+and personalization settings. However, user queries them-         patterns of AI search systems. In this study, we contribute
+selves vary in their political orientation, leading to results    to this line of research by examining a large-scale dataset
+                                                                  from real-world interactions between users and AI search
+   1                                                              systems and covering a wide range of AI search models from
+     https://www.allsides.com/blog/google-news-shows-strong-
+political-bias-allsides-analysis                                  different providers.
+                   Data and Methods                                by Republican users. The authors validated this metric by
+AI Search Arena Dataset                                            comparing it with existing datasets from academic studies,
+                                                                   such as Bakshy, Messing, and Adamic (2015), Eady et al.
+Our analysis is based on the AI Search Arena
+                                                                   (2025), Buntain et al. (2023), and organizations, such as
+dataset (Miroyan et al. 2025), which contains 24,069
+                                                                   MBFC and AllSides, finding high levels of agreement.
+conversations between users and AI search systems.2 These
+                                                                      Merging the ratings from the DomainDemo dataset with
+conversations were collected from March to May 2025,
+                                                                   our analytical sample, we obtain political leaning scores for
+spanning seven weeks. The dataset captures real-world
+                                                                   1,646 (91.7%) unique domains, which account for 98.6%
+usage patterns through a platform where users can interact
+                                                                   of all news citations. We use thresholds of -0.33 and 0.33 to
+with different AI search models and compare their responses
+                                                                   classify news domains as “left-leaning,” “center,” and “right-
+in head-to-head evaluations. Each conversation includes
+                                                                   leaning.” Domains without political leaning scores are la-
+the user’s query and responses from two AI models. Some
+                                                                   beled as “unknown political leaning.”
+conversations include multiple turns of interaction. Approx-
+imately half of the conversations are rated by users, who
+select a winner or declare a tie. Some conversations also          News Outlet Quality
+include information about the language of the conversation         We adopt the news source quality ratings generated by Lin
+and the country of the user.                                       et al. (2023). These ratings are compiled from multiple
+   We extracted 366,087 citations (URLs) from responses            sources, including NewsGuard, MBFC, Iffy index of un-
+generated by 12 AI search models from three providers:             reliable sources,7 and two lists generated by professional
+OpenAI, Perplexity, and Google. The models analyzed in-            fact-checkers and researchers (Pennycook and Rand 2019;
+clude variations with different capabilities and settings. For     Lasser et al. 2022). The authors aggregate these ratings
+each citation, we extract the domain (e.g., nytimes.com for        to produce a comprehensive list covering 11,520 websites.
+The New York Times) for further analysis. Summary statis-          The final ratings are obtained through principal component
+tics of the dataset are provided in the Appendix.                  (PCA) analysis, and the scores are normalized to range from
+                                                                   0 to 1, with higher scores indicating higher quality.
+News Outlet Identification                                            Merging the ratings from Lin et al. (2023) with our an-
+The 366,087 citations link to 83,533 unique domains. To un-        alytical sample leads to quality ratings for 1,283 (71.5%)
+derstand the news citation patterns, we identify the news out-     unique domains, which account for 80.8% of all news cita-
+lets leveraging a comprehensive list of news domains (Yang         tions. We use a threshold of 0.5 to classify news domains as
+2025). This list is compiled from multiple sources, including      either “high-quality” or “low-quality.” News domains with-
+NewsGuard,3 MBFC (Media Bias/Fact Check),4 ABYZ,5                  out quality rating scores are labeled as “unknown quality.”
+and Media Cloud.6 The list also incorporates news domains
+from datasets curated by academics, including Robertson            Citation Concentration Measure
+et al. (2018), Cronin et al. (2023), Le Quéré, Chiang, and
+                                                                   To measure the concentration of citations across unique do-
+Naaman (2022), Fischer, Jaidka, and Lelkes (2020), and
+                                                                   mains, we use the Gini index G, which is calculated as:
+Horne et al. (2022). We identify 1,795 (2.1%) unique do-
+mains as news outlets, which account for 32,865 (9.0%) of                                              U   U
+                                                                                                1 XX
+all citations. In the Appendix, we also provide the percent-                          G=                      |xi − xj |,    (1)
+age of citations for other domain types, such as social media                                 2U 2 x̄ i=1 j=1
+and technology, to provide additional context.
+                                                                   where U is the number of unique domains, xi is the num-
+News Outlet Political Leaning                                                                                    PU
+                                                                   ber of citations to the i-th domain, and x̄ = i=1 xi /U is
+We leverage the DomainDemo dataset to obtain political             the average number of citations per domain. The Gini index
+leaning scores for news outlets (Yang et al. 2025). This           ranges from 0 to 1, where 0 indicates perfect equality, and 1
+dataset is derived from a panel of over 1.5 million Twitter        indicates perfect inequality.
+users whose accounts are matched to their voter registra-
+tion records, linking users’ source-sharing behaviors to their     User Question Characteristics
+political affiliations. Based on this information, the authors
+                                                                   To understand the association between news citation pat-
+generate an audience-based metric that quantifies the politi-
+                                                                   terns and user questions, we extract rich linguistic features
+cal leaning of news outlets for over 129,000 domains.
+                                                                   from the user questions. We calculate sentence embeddings
+   The resulting political leaning scores range from -1 to +1,
+                                                                   using SentenceTransformers with the “all-MiniLM-L6-v2”
+with -1 indicating sources predominantly shared by Demo-
+                                                                   model (Reimers and Gurevych 2019), which capture the se-
+cratic users and +1 indicating sources predominantly shared
+                                                                   mantic characteristics of the questions.
+    2
+      The       dataset      can     be       downloaded      at      Since embedding vectors are cryptic, we also include
+https://huggingface.co/datasets/lmarena-ai/search-arena-24k        more interpretable features. First, we classify the questions
+    3
+      https://www.newsguardtech.com                                by their intent. The intent taxonomy is provided by Miroyan
+    4
+      https://mediabiasfactcheck.com                               et al. (2025) and includes the following categories: “factual
+    5
+      http://www.abyznewslinks.com
+    6                                                                 7
+      https://mediacloud.org                                              https://iffy.news
+lookup,” “information synthesis,” “analysis,” “recommenda-                 OpenAI                                     19.1%
+tion,” “explanation,” “creative generation,” “guidance,” “text
+processing,” and “other.”                                                  Google                7.9%
+   Second, we perform topic modeling on the questions
+using BERTopic (Grootendorst 2022). We follow recom-                     Perplexity              7.7%
+mended best practices by using the “all-MiniLM-L6-v2”                             0%      5%       10%      15%        20%
+model to generate sentence embeddings, UMAP to reduce                                     Percentage of news citations
+dimensions, and HDBSCAN to cluster topics. This pro-                Figure 1: News citation rates among all citations across
+cedure yields 10 topics, and we manually generate labels            model families.
+such as “AI models and technology,” “news updates,” and
+“sports and entertainment” for them. Since individual ques-
+tions might be associated with multiple topics, we calculate
+the topic distribution for each question as its topic features.
+                                                                    User Preference Analysis
+This distribution captures the similarity of the question to        To understand the relationship between news citation pat-
+each topic. The full list of representative keywords of each        terns and user preferences, we focus on conversations where
+topic and their labels are provided in the Appendix.                both responses cite at least one news source. We also exclude
+                                                                    conversations with no user judgment or with a tie, leading to
+                                                                    1,534 head-to-head comparisons.
+Regression Analysis                                                    We employ the Bradley-Terry model to estimate the asso-
+To understand the factors associated with news citation             ciation between different features and user choices (Bradley
+patterns, we conduct regression analyses using each user            and Terry 1952; Chiang et al. 2024). The model assumes that
+question-AI response pair as the unit of analysis. We focus         the probability of preferring response A over B depends on
+on a subset of the dataset that meets two criteria. First, we in-   the difference in their latent quality scores, which are mod-
+clude only questions labeled as English to ensure consistent        eled as linear combinations of observed features. We esti-
+linguistic feature extraction. Second, we restrict our analy-       mate coefficients using maximum likelihood estimation and
+sis to responses containing at least one news citation, as our      assess 95% confidence intervals and statistical significance
+primary interest lies in understanding news citation patterns.      through bootstrap resampling with 1,000 replications.
+These criteria yield 9,098 observations.                               We calculate the proportion of news citations among all
+                                                                    citations as the control variable. We then calculate the pro-
+   The dependent variables for our linear regression mod-
+                                                                    portions of left-leaning, center, and right-leaning news ci-
+els are the percentages of left-leaning, right-leaning, high-
+                                                                    tations, and the proportions of high-quality and low-quality
+quality, and low-quality news citations among all news ci-
+                                                                    news citations among news citations to test their association
+tations in each response (rather than among all citations).
+                                                                    with user preferences. To control for additional confounding
+This approach allows us to examine the composition of news
+                                                                    factors, we include response word count and total citation
+sources when AI models choose to cite news outlets.
+                                                                    count, both of which have been identified as key determi-
+   Our regression models include the following independent          nants of user preferences (Miroyan et al. 2025). Since user
+variables. At the conversation level, we include the total          judgments are provided at the conversation level, we average
+number of conversation turns and the country/region of the          all response-level variables across turns when a conversa-
+client. We create dummy variables for the 10 most frequent          tion involves multiple rounds of exchanges to produce final
+countries/regions in the dataset and code all other coun-           conversation-level variables. The difference in style features
+tries/regions as “other.” Conversations with missing coun-          between the two AI models is transformed into Z-scores be-
+try/region information are coded as “unknown.” The US               fore being fed into the Bradley-Terry model.
+serves as the reference category.
+   At the response level, we include model family dummy                                       Results
+variables, with Perplexity as the reference category. We also
+include the turn number for each response, the number of            Basic News Citations Characteristics
+citations, and the percentage of news citations among all ci-       Our analysis reveals that models within the same family ex-
+tations. Additionally, we include the word count of the re-         hibit similar citation patterns. Specifically, models from the
+sponse, which is log-transformed and converted to Z-scores          same family tend to cite similar proportions of news sources
+to address distributional skewness.                                 among all citations. A detailed breakdown by individual
+   At the question level, we include the word count of              model is provided in the Appendix, whereas Figure 1 dis-
+each question, which is log-transformed and converted to            plays the news citation rates across model families. We find
+Z-scores. We apply PCA to reduce the aforementioned sen-            that OpenAI models consistently cite news sources at higher
+tence embedding with 384 dimensions to 10 principal com-            rates than their counterparts, while Google and Perplexity
+ponents and include them in the regression models as control        models show comparable citation frequencies.
+variables. Intent features are encoded as dummy variables              The similarity extends beyond citation rates to the spe-
+with “recommendation” serving as the reference category.            cific news domains cited. Our cosine similarity analysis of
+Topic distribution features are standardized to Z-scores and        news citations (detailed in the Appendix) shows that mod-
+incorporated into the regression models.                            els within the same family achieve similarity scores ranging
+                                               100%                                                          14.5% 85.2%   0.3%         3.8%    96.2%
+     Cumulative percentage of news citations
+
+
+
+
+                                                                                               OpenAI
+                                               80%
+                                                                                                            (a)                   (d)
+                                               60%                                                           23.6% 75.2%   1.2%         7.8%    92.2%
+
+
+
+
+                                                                                               Perplexity
+                                               40%
+                                                                                                            (b)                   (e)
+                                               20%                    OpenAI (G=0.83)                        26.3% 72.8%   0.8%         10.3%   89.7%
+                                                                      Perplexity (G=0.77)
+
+
+
+
+                                                                                               Google
+                                                                      Google (G=0.69)
+                                                0%
+                                                  0% 20% 40% 60% 80% 100%
+                                                   Cumulative percentage of unique domains              (c)                      (f)
+                                                                                                       -1 -0.5 0 0.5 1 0 0.2 0.4 0.6 0.8 1.0
+Figure 2: News citation Lorenz curves across model fami-                                                 Political leaning score     Quality score
+lies. The diagonal line represents perfect equality. The Gini
+coefficients are annotated in the legend.                                                    Figure 3: Distribution of political leaning and quality scores
+                                                                                             of news sources across model families. The dashed lines in-
+                                                                                             dicate the thresholds for political leaning and quality scores
+from 0.82 to 0.99. In contrast, cross-family similarities are                                described in the main text. The percentages of sources in dif-
+substantially lower (ranging from 0.11 to 0.58). These find-                                 ferent categories are annotated in the figure.
+ings support our decision to aggregate subsequent analyses
+at the model family level, focusing on inter-family differ-
+ences rather than intra-family variations.                                                      Comparing the results in Table 1 with the Gini coefficients
+                                                                                             reveals an apparent inconsistency. While Google models
+Frequent News Sources and Concentration                                                      show higher concentration among their top 20 news sources
+                                                                                             than Perplexity models (31.9% vs. 28.5%), Perplexity mod-
+Table 1 presents the top 20 most frequently cited news
+                                                                                             els exhibit higher overall inequality (G=0.77) than Google
+sources by model family, illustrating the distinct citation
+                                                                                             models (G=0.69). This pattern suggests that Google mod-
+preferences across different AI systems. Each model family
+                                                                                             els’ concentration is driven by heavy reliance on their most
+exhibits clear preferences for specific domains. For instance,
+                                                                                             frequently cited sources, whereas Perplexity models display
+OpenAI models most frequently cite reuters.com, Google
+                                                                                             more dispersed citation patterns across a broader range of
+models favor indiatimes.com, and Perplexity models pre-
+                                                                                             domains. A key contributing factor is that Perplexity models
+fer bbc.com. While some domains like apnews.com appear
+                                                                                             cite substantially more unique news sources (1,430) com-
+across multiple families, the overall patterns align with our
+                                                                                             pared to Google (881) and OpenAI (707) models. This long
+similarity analysis showing strong inter-family differences.
+                                                                                             tail of domains cited only once or twice contributes to the
+To further characterize these differences, we apply the log-
+                                                                                             higher Gini coefficients observed for Perplexity models, de-
+odds ratio informative Dirichlet prior method (Monroe, Co-
+                                                                                             spite their lower concentration among top sources.
+laresi, and Quinn 2008) in the Appendix to identify overrep-
+resented news sources for each model family. This approach
+down-weights commonly cited domains and isolates sources                                     Political Leaning and Quality of News Sources
+that are uniquely preferred by each model family.                                            To assess the political leaning of news sources cited by
+   Table 1 also reveals a highly concentrated citation pat-                                  different model families, we examine the distribution of
+tern. For example, OpenAI models cite reuters.com and ap-                                    source political leaning scores in Figure 3. Kolmogorov-
+news.com at rates of 22.8% and 12.2% of all citations, re-                                   Smirnov tests reveal that all pairwise distributions differ sig-
+spectively. Consequently, the top 20 most frequent news                                      nificantly (p < 0.001) even after correcting for multiple
+sources account for 67.3% of all citations for OpenAI mod-                                   comparisons. Applying the -0.33 and 0.33 thresholds, we
+els. While Google and Perplexity models show less severe                                     classify the news domains in the citations into three cate-
+concentration, their top 20 sources still represent 31.9% and                                gories: left-leaning, center, and right-leaning. We find that
+28.5% of all citations, respectively.                                                        OpenAI models demonstrate the highest proportion of cen-
+   To characterize the concentration of news citations across                                ter sources (85.2%), compared to Google (75.2%) and Per-
+all news domains, we plot the Lorenz curves of the news                                      plexity (72.8%) models. For left-leaning sources, Google
+citation rates across model families in Figure 2. We also cal-                               models show the highest citation rate at 26.3%, followed by
+culate the Gini coefficients for each model family. We can                                   Perplexity models at 23.6% and OpenAI models at 14.5%.
+see that OpenAI models have the highest level of inequality                                  Right-leaning sources represent a minimal fraction across
+(G=0.83) in their citation patterns, followed by Perplexity                                  all model families: 1.2% for Perplexity, 0.8% for Google,
+models (G=0.77) and Google models (G=0.69).                                                  and 0.3% for OpenAI models. Despite these variations, all
+Table 1: Top 20 most frequent news sources by the model family with political leaning and quality. Political leaning
+(columns “L”): L=left-leaning, C=center, R=right-leaning, U=unknown. Quality (columns “Q”): H=high-quality, L=low-
+quality, U=unknown.
+
+  OpenAI                                      Google                                   Perplexity
+  Domain                       %    L    Q    Domain                    %     L   Q    Domain                     %    L    Q
+  reuters.com               22.8    C    H    indiatimes.com           4.3    C   L    bbc.com                   3.2   C    H
+  apnews.com                12.2    C    H    forbes.com               2.5    C   H    yahoo.com                 2.7   C    H
+  ft.com                     7.0    C    H    aljazeera.com            2.5    L   H    163.com                   2.0   C    U
+  axios.com                  6.7    C    H    cbsnews.com              2.0    C   H    sohu.com                  2.0   C    L
+  time.com                   3.9    C    H    apnews.com               2.0    C   H    nytimes.com               1.7   C    H
+  elpais.com                 2.5    L    H    techradar.com            1.9    C   H    cnn.com                   1.6   C    H
+  as.com                     2.4    C    U    healthline.com           1.7    C   H    reuters.com               1.5   C    H
+  theatlantic.com            1.5    L    H    163.com                  1.5    C   U    sina.com.cn               1.5   L    U
+  techradar.com              1.1    C    H    cbr.com                  1.4    C   U    espn.com                  1.4   C    H
+  lemonde.fr                 0.8    L    H    yahoo.com                1.3    C   H    forbes.com                1.3   C    H
+  sohu.com                   0.8    C    L    screenrant.com           1.3    C   U    rbc.ru                    1.3   L    U
+  bbc.com                    0.8    C    H    zdnet.com                1.2    C   H    cbsnews.com               1.2   C    H
+  knowyourmeme.com           0.7    L    H    sina.com.cn              1.1    L   U    indiatimes.com            1.0   C    L
+  indiatimes.com             0.7    C    L    pcmag.com                1.1    C   H    apnews.com                0.9   C    H
+  theguardian.com            0.6    C    H    hindustantimes.com       1.1    C   H    techradar.com             0.9   C    H
+  forbes.com                 0.6    C    H    medicalnewstoday.com     1.0    C   H    screenrant.com            0.9   C    U
+  rbc.ru                     0.6    L    U    livemint.com             1.0    C   U    techcrunch.com            0.9   C    H
+  healthline.com             0.5    C    H    pbs.org                  1.0    L   H    businessinsider.com       0.9   C    H
+  usnews.com                 0.5    C    H    thehindu.com             1.0    L   H    pbs.org                   0.8   L    H
+  businessinsider.com        0.4    C    H    cnet.com                 0.9    C   H    cnbc.com                  0.8   C    H
+  Total                     67.3              Total                   31.9             Total                   28.5
+
+
+three model families exhibit a pronounced left-leaning bias        dependent variables are percentages, the coefficients repre-
+in their news source citations.                                    sent the percentage point change in the dependent variable
+   Similarly, we show the distribution of source quality           for a one-unit increase in the independent variable.
+scores in Figure 3 as well. Kolmogorov-Smirnov tests reveal           The intercepts in the figures represent the baseline per-
+that all pairwise distributions differ significantly (p < 0.001)   centages of different types of news citations when all other
+even after correcting for multiple comparisons. Applying           variables are set to zero. The intercept for left-leaning news
+a threshold of 0.5, OpenAI models demonstrate the high-            citations is 18.5%, substantially higher than the 2.5% for
+est proportion of high-quality sources (96.2%), followed by        right-leaning news, confirming the persistent left-leaning
+Google models (92.2%) and Perplexity models (89.7%).               tendency in news citations. Similarly, the intercept for high-
+   Table 1 also displays the quality and political leaning cat-    quality news citations (69.9%) far exceeds that for low-
+egories for the top 20 most frequently cited news sources by       quality news (5.7%), demonstrating a clear preference for
+model family. These domains are predominantly center and           high-quality news sources.
+left-leaning sources and are overwhelmingly high-quality,             Examining model family differences, we find that com-
+consistent with the findings in Figure 3. The same pattern is      pared to Perplexity models, Google models cite significantly
+observed for the overrepresented news sources as well (see         more left-leaning and low-quality news sources while citing
+the Appendix for details).                                         fewer right-leaning and high-quality sources. Conversely,
+                                                                   OpenAI models cite fewer left-leaning sources but more
+Regression Analysis                                                high-quality sources relative to Perplexity. These regression
+The patterns observed in Figure 3 may be confounded by             results confirm the patterns observed in Figure 3, demon-
+various factors, such as the nature of users’ questions. To        strating that the inter-family differences persist even after
+isolate the effects of different factors, we conduct linear        controlling for potential confounding factors. Moreover, the
+regression analyses. As described in the Data and Meth-            coefficients for the model family variables are relatively
+ods section, we regress the percentage of left-leaning, right-     small compared to the intercepts, suggesting that the ten-
+leaning, high-quality, and low-quality news citations among        dency to cite left-leaning and high-quality sources is consis-
+all news citations in each response on various conversation-       tent across all model families.
+level, question-level, and response-level variables. Figure 4         Regarding question intent, questions in the “guidance”
+presents the regression coefficients for selected variables,       category are associated with decreased citations to both
+with complete results available in the Appendix. Since the         left-leaning and high-quality news sources. Additionally,
+                                          % left-leaning news     % right-leaning news    % high-quality news       % low-quality news
+                               Intercept (a)                     (b)                     (c)                      (d)
+                   Model family: Google
+                   Model family: Openai
+                         Intent: analysis
+           Intent: creative generation
+                     Intent: explanation
+                  Intent: factual lookup
+                        Intent: guidance
+                   Intent: info synthesis
+                             Intent: other
+                 Intent: text processing
+     Topic: AI models and technology
+        Topic: stock prices and market
+     Topic: diet, nutrients, and health
+                    Topic: news updates
+      Topic: sports and entertainment
+Topic: biography and personal stories
+       Topic: fictional character battle
+       Topic: online content and book
+                 Topic: music and lyrics
+              Topic: comics and games
+                                             -10   0   10   20    -5       0       5     -20 0 20 40 60 80-10 -5             0    5    10
+                                                                       Coefficient
+Figure 4: Coefficients for news source citation patterns in linear regression models. Each subfigure corresponds to a different
+dependent variable. Only coefficients for selected variables (intercepts, model family, question intent, and question topic) are
+displayed. Solid dots represent coefficients that are statistically significant at the 0.05 level, while hollow dots represent non-
+significant coefficients. Error bars indicate 95% confidence intervals. Coefficients represent the percentage point change in the
+dependent variable for a one-unit increase in the independent variable. The model family and intent variables are binary indica-
+tors, with Perplexity and “recommendation” serving as reference categories. The topic variables represent the topic distribution
+of each question and are standardized to Z-scores.
+
+
+“creative generation” questions show decreased citations to                 The base model (Figure 5(a)) includes only control vari-
+right-leaning news sources, while “text processing” ques-                ables: response word count and citation count. Previous
+tions exhibit increased citations to right-leaning sources.              studies have identified these as the most important factors
+   The patterns for the question topics are more complex.                driving user satisfaction (Miroyan et al. 2025). When esti-
+It is worth noting that these variables represent the topic              mated on the complete dataset, both coefficients are positive
+distribution converted to Z-scores, so the unit of change is             and significant, confirming prior findings. However, in our
+one standard deviation. We see no statistically significant              focused analysis of conversations where both AI models cite
+associations of these variables with left-leaning and low-               at least one news source in each response, the significance of
+quality news citations. However, for right-leaning news cita-            the citation count disappears, as shown in the figure.
+tions and high-quality news citations, there are some signifi-              We then add the proportion of news citations to the base
+cant associations. For instance, the topic “online content and           model (Figure 5(b)). The coefficient for this variable is not
+book” is associated with decreased citations to right-leaning            statistically significant, indicating that users do not exhibit a
+news but increased citations to high-quality news.                       strong preference for the proportion of news citations after
+   For clarity, we omit coefficients for several variables from          controlling for response length and citation count. Finally,
+the figures, as they fall outside our primary focus or are dif-          we add various news citation features in terms of political
+ficult to interpret. Nevertheless, some of these omitted vari-           leaning and quality to the base model (Figure 5(c)). None of
+ables remain statistically significant. For example, certain             the coefficients are statistically significant, suggesting that
+client country/region variables show significant associations            users do not have strong preferences for news citations based
+with specific news citation patterns. Complete regression re-            on political leaning or quality ratings. The primary factors
+sults are available in the Appendix.                                     associated with user preference remain response length.
+
+User Preference Analysis                                                                          Discussion
+To assess the user preference for different news citation fea-           News Citation Patterns and User Preference
+tures, we show the Bradley-Terry model coefficients in Fig-              Our analysis provides a comprehensive overview of news
+ure 5. We estimate different model specifications by gradu-              citation patterns across AI search models from three major
+ally adding news citation features to the base model.                    providers using real-world user interactions. Our findings
+             Response word count                                   patterns by controlling for various confounding factors. The
+                   Citation count                         (a)      coefficients for different question categories reveal that AI
+                                                                   search systems adapt their news citation behavior to question
+             Response word count                                   types, mirroring patterns observed in traditional search en-
+                   Citation count                                  gines (Robertson et al. 2018, 2023). Surprisingly, however,
+                 News proportion                          (b)      the results contradict our expectation that AI search systems
+                                                                   would cite more politically charged sources when address-
+             Response word count                                   ing politics-related questions. Most user questions in our
+                      Citation count                               dataset focus on topics that are not inherently political, such
+                                                                   as AI and technology or sports and entertainment. While the
+       Proportion left-leaning news                                “news updates” category represents the most likely context
+     Proportion right-leaning news                                 for political news citations, its coefficient lacks statistical
+   Proportion center-leaning news                                  significance. These findings suggest that the observed cita-
+      Proportion high-quality news                                 tion patterns stem primarily from the intrinsic characteristics
+                                                                   of the AI systems themselves rather than from the nature of
+       Proportion low-quality news                        (c)      user questions.
+                                       -0.2 0 0.2 0.4 0.6 0.8         Our analysis on the user preference addresses our RQ2
+                                             Coefficient           and confirms findings from previous studies showing that
+                                                                   users tend to prefer longer responses in AI search sys-
+Figure 5: Bradley-Terry model coefficients for user prefer-
+                                                                   tems (Li and Aral 2025). However, neither the proportion of
+ence analysis. (a) The base model with only the control vari-
+                                                                   news citations nor the characteristics of cited news sources
+ables. (b) The model with control variables and proportion
+                                                                   are associated with user preference with statistical signifi-
+of news citations. (c) The model with control variables and
+                                                                   cance. This finding aligns with the human subject experi-
+various news citation features. The dots indicate the point
+                                                                   ment by Li and Aral (2025), which demonstrates that adding
+estimates and the error bars indicate the 95% confidence in-
+                                                                   citations increases users’ trust in responses regardless of ci-
+tervals. The solid dots indicate statistically significant coef-
+                                                                   tation validity or relevance.
+ficients at the 0.05 level, while the hollow dots indicate non-
+significant coefficients.                                          Implications
+                                                                   Our results confirm that AI search systems already func-
+                                                                   tion as powerful algorithmic gatekeepers, with a small num-
+contribute to the growing literature on AI search systems’
+                                                                   ber of news outlets capturing the lion’s share of citations.
+potentially disruptive impact on the news ecosystem (Hagar
+                                                                   The extreme inequality we observe, particularly for Ope-
+and Diakopoulos 2025).
+                                                                   nAI models, reveals a winner-take-all dynamic where es-
+   We reveal rich and varied citation behaviors that address       tablished brands secure ever-greater visibility while smaller
+our RQ1. We find that models within the same family tend           or marginalized outlets struggle to reach audiences through
+to cite similar news sources, even with different configura-       AI-mediated channels, echoing concerns about knowledge
+tions. At the same time, inter-family differences are more         sealing in AI search systems (Lindemann 2024). Since our
+pronounced, with different model families relying on sub-          Bradley-Terry analysis demonstrates that users prioritize re-
+stantially different news sources. Despite these differences,      sponse length over the specific outlets cited, the gatekeep-
+consistent citation patterns emerge across all model families.     ing power of these systems remains largely unchallenged by
+   We show that news citations are highly concentrated             end-users.
+among a small number of well-established outlets—a pat-               From a democratic perspective, source concentration un-
+tern consistent with previous audits of traditional search en-     dermines the diversity of ideas and perspectives available
+gines (Trielli and Diakopoulos 2019; Fischer, Jaidka, and          through AI search as gatekeepers (Shoemaker and Vos
+Lelkes 2020). This concentration is most pronounced in             2009). This problem is compounded by our finding that con-
+OpenAI models, where the top 20 news sources account for           centration occurs alongside significant political bias, mean-
+67.3% of all citations, while Google and Perplexity models         ing users encounter not only fewer sources but sources that
+show less severe but still substantial concentration.              lean heavily in one political direction. The systematic nature
+   Another striking finding is the pronounced liberal bias in      of both concentration and political bias is particularly trou-
+news citations, with left-leaning and center sources compris-      bling, as these patterns appear consistently across all three
+ing over 98% of all citations across model families. This pat-     AI search providers examined. This consistency suggests the
+tern aligns with findings from audits of traditional search en-    issue transcends individual system architectures and likely
+gines (Robertson et al. 2018, 2023). Regarding source qual-        reflects broader patterns in training data, retrieval mecha-
+ity, all model families demonstrate a clear preference for         nisms, or optimization objectives.
+high-quality outlets, though with notable disparities across          The variation in concentration patterns and source quality
+providers. In particular, OpenAI models cite high-quality          across model families creates a situation where users’ access
+sources at a rate of 96.2%, compared to 92.2% for Google           to information depends heavily on their choice of AI sys-
+models and 89.7% for Perplexity models.                            tem. For instance, while OpenAI users benefit from citations
+   Our regression analysis confirms the robustness of these        to higher-quality news sources, they also encounter much
+greater source concentration compared to users of Google         search should, therefore, examine citation patterns across all
+or Perplexity systems. This disparity may create a new form      source types to develop a comprehensive understanding of
+of digital divide, where the breadth and quality of informa-     how AI search systems curate and prioritize information.
+tion access becomes contingent on platform choice or the            Our findings also raise fundamental questions about the
+ability to afford more expensive products.                       design and governance of AI search systems. Given the dif-
+   Our findings on user preference suggest that users may not    ficulty of quantifying output quality in AI search systems,
+closely examine the specific sources cited in responses, pro-    how can we design evaluation metrics that satisfy both user
+vided that citations are present. These results reinforce con-   preferences and the public interest? This challenge is partic-
+cerns that AI search systems, by delivering pre-summarized       ularly acute given our finding that these two objectives might
+responses, may diminish users’ motivation and capacity           not be aligned. The remedy may require novel approaches
+to explore the broader context surrounding answers and           to training, retrieval, and ranking that explicitly account for
+to critically assess the credibility and relevance of cited      political diversity and source credibility. Regulatory frame-
+sources (Shah and Bender 2022; Lindemann 2024).                  works may also be needed to ensure that AI search systems
+                                                                 serve the public interest by providing balanced and reliable
+Future Research                                                  information access.
+Like many other studies on AI search systems, our study
+faces some limitations, and the findings should be inter-                                References
+preted accordingly. Nevertheless, these limitations indicate     Bakshy, E.; Messing, S.; and Adamic, L. A. 2015. Expo-
+critical directions for future research.                         sure to ideologically diverse news and opinion on Facebook.
+   First, as an observational study of these complex black-      Science, 348(6239): 1130–1132.
+box systems, we cannot pinpoint the exact causes of the          Barzilai-Nahon, K. 2008. Toward a theory of network gate-
+observed news citation patterns. AI search systems typi-         keeping: A framework for exploring information control.
+cally comprise multiple components, including large lan-         Journal of the American Society for Information Science and
+guage models and information retrieval systems (Xiong            Technology, 59(9): 1493–1512.
+et al. 2024). The mechanisms by which LLMs interpret
+                                                                 Bradley, R. A.; and Terry, M. E. 1952. Rank analysis of
+user queries, retrieve relevant information, and select ci-
+                                                                 incomplete block designs: I. The method of paired compar-
+tation sources could all contribute to the citation patterns.
+                                                                 isons. Biometrika, 39(3/4): 324–345.
+Therefore, further research is needed to decompose these
+system components and understand how they individually           Brantner, C.; Karlsson, M.; and Kuai, J. 2025. Sourcing be-
+and collectively influence the final outputs. We also call for   havior and the role of news media in AI-powered search en-
+greater industry transparency regarding system architectures     gines in the digital media ecosystem: Comparing political
+and component interactions, as this is essential for enabling    news retrieval across five languages. Telecommunications
+public understanding and evaluation of these systems.            Policy, 49(5): 102952.
+   Second, our findings underscore the need for a more sys-      Buntain, C.; Bonneau, R.; Nagler, J.; and Tucker, J. A.
+tematic analysis of AI search systems as they rapidly evolve.    2023. Measuring the Ideology of Audiences for Web Links
+The present study represents a snapshot from a specific time     and Domains Using Differentially Private Engagement Data.
+period (March-May 2025) and may not reflect future system        Proceedings of the International AAAI Conference on Web
+performance. Longitudinal studies tracking changes in ci-        and Social Media, 17(1): 72–83.
+tation patterns over time would help determine whether ob-       Chiang, W.-L.; Zheng, L.; Sheng, Y.; Angelopoulos, A. N.;
+served biases remain stable or shift with system updates. Our    Li, T.; Li, D.; Zhu, B.; Zhang, H.; Jordan, M. I.; Gonzalez,
+finding that different platforms exhibit drastically different   J. E.; and Stoica, I. 2024. Chatbot arena: an open platform
+news citation patterns highlights the importance of includ-      for evaluating LLMs by human preference. In Proceedings
+ing additional providers in future analyses. It would also be    of the 41st International Conference on Machine Learning,
+valuable to examine how citation patterns vary across differ-    ICML’24. JMLR.org.
+ent query types, languages, and contexts beyond our current      Cronin, J.; Clemm von Hohenberg, B.; Gonçalves, J. F. F.;
+scope. Such systematic analysis would not only deepen our        Menchen-Trevino, E.; and Wojcieszak, M. 2023. The (null)
+understanding of AI search systems’ behavior but also en-        over-time effects of exposure to local news websites: Evi-
+able users to make more informed decisions when selecting        dence from trace data. Journal of Information Technology &
+among these systems.                                             Politics, 1–15.
+   Third, our analysis focuses exclusively on news citations,
+which represent only 9% of all citations in the dataset. The     Eady, G.; Bonneau, R.; Tucker, J. A.; and Nagler, J. 2025.
+remaining 91% of citations deserve equal scrutiny in future      News Sharing on Social Media: Mapping the Ideology of
+research. For instance, 10% of citations point to social me-     News Media, Politicians, and the Mass Public. Political
+dia platforms. Unlike traditional news, this user-generated      Analysis, 33(2): 73–90.
+content presents greater regulatory challenges and creates       Fischer, S.; Jaidka, K.; and Lelkes, Y. 2020. Auditing local
+significant difficulties for both human evaluators and AI sys-   news presence on Google News. Nature Human Behaviour,
+tems attempting to assess credibility. Therefore, social me-     4(12): 1236–1244.
+dia may serve as particularly problematic vectors for parti-     Grootendorst, M. 2020. KeyBERT: Minimal keyword ex-
+san or low-quality information (Shu et al. 2017). Future re-     traction with BERT.
+Grootendorst, M. 2022. BERTopic: Neural topic modeling            NY, USA: Association for Computing Machinery. ISBN
+with a class-based TF-IDF procedure. arXiv:2203.05794.            9798400714825.
+Hagar, N.; and Diakopoulos, N. 2025. AI Overviews, Chat-          Pennycook, G.; and Rand, D. G. 2019. Fighting misinfor-
+bots, and News Traffic: The Story So Far. https://generative-     mation on social media using crowdsourced judgments of
+ai-newsroom.com/ai-overviews-chatbots-and-news-traffic-           news source quality. Proceedings of the National Academy
+the-story-so-far-c010b3bf53cb (Accessed: 2025-07-01).             of Sciences, 116(7): 2521–2526.
+Horne, B. D.; Gruppi, M.; Joseph, K.; Green, J.; Wihbey,          Reimers, N.; and Gurevych, I. 2019. Sentence-BERT:
+J. P.; and Adalı, S. 2022. NELA-Local: A Dataset of US            Sentence Embeddings using Siamese BERT-Networks.
+Local News Articles for the Study of County-Level News            arXiv:1908.10084.
+Ecosystems. In Proceedings of the International AAAI Con-         Robertson, R. E.; Green, J.; Ruck, D. J.; Ognyanova, K.;
+ference on Web and Social Media, volume 16, 1275–1284.            Wilson, C.; and Lazer, D. 2023. Users choose to engage
+Jaidka, K.; and Furniturewala, S. 2025. The News with Chat-       with more partisan news than they are exposed to on Google
+GPT: An Audit and Survey Experiment on the Effects of             Search. Nature, 618(7964): 342–348.
+GPT-Enabled News Search on User Attitudes.                        Robertson, R. E.; Jiang, S.; Joseph, K.; Friedland, L.; Lazer,
+Kuai, J.; Brantner, C.; Karlsson, M.; Couvering, E. V.; and       D.; and Wilson, C. 2018. Auditing Partisan Audience Bias
+Romano, S. 2025. AI chatbot accountability in the age of al-      within Google Search. Proceedings of the ACM on Human-
+gorithmic gatekeeping: Comparing generative search engine         Computer Interaction, 2(CSCW).
+political information retrieval across five languages. New
+                                                                  Shah, C.; and Bender, E. M. 2022. Situating Search. In
+Media & Society, 0(0): 14614448251321162.
+                                                                  Proceedings of the 2022 Conference on Human Information
+Lasser, J.; Aroyehun, S. T.; Simchon, A.; Carrella, F.; Gar-      Interaction and Retrieval, CHIIR ’22, 221–232. New York,
+cia, D.; and Lewandowsky, S. 2022. Social media sharing           NY, USA: Association for Computing Machinery. ISBN
+by political elites: An asymmetric American exceptionalism.       9781450391863.
+arXiv:2207.06313.
+                                                                  Shoemaker, P. J.; and Vos, T. 2009. Gatekeeping theory.
+Le Quéré, M. A.; Chiang, T.-W.; and Naaman, M. 2022. Un-        Routledge.
+derstanding Local News Social Coverage and Engagement
+at Scale during the COVID-19 Pandemic. In Proceedings of          Shu, K.; Sliva, A.; Wang, S.; Tang, J.; and Liu, H. 2017.
+the International AAAI Conference on Web and Social Me-           Fake News Detection on Social Media: A Data Mining Per-
+dia, volume 16, 560–572.                                          spective. SIGKDD Explor. Newsl., 19(1): 22–36.
+Li, A.; and Sinnamon, L. 2024. Generative AI Search En-           Spatharioti, S. E.; Rothschild, D. M.; Goldstein, D. G.; and
+gines as Arbiters of Public Knowledge: An Audit of Bias           Hofman, J. M. 2023. Comparing Traditional and LLM-
+and Authority. Proceedings of the Association for Informa-        based Search for Consumer Choice: A Randomized Experi-
+tion Science and Technology, 61(1): 205–217.                      ment. arXiv:2307.03744.
+Li, H.; and Aral, S. 2025. Human Trust in AI Search: A            Suri, S.; Counts, S.; Wang, L.; Chen, C.; Wan, M.; Safavi, T.;
+Large-Scale Experiment. arXiv:2504.06435.                         Neville, J.; Shah, C.; White, R. W.; Andersen, R.; Buscher,
+Lin, H.; Lasser, J.; Lewandowsky, S.; Cole, R.; Gully, A.;        G.; Manivannan, S.; Rangan, N.; and Yang, L. 2024. The
+Rand, D. G.; and Pennycook, G. 2023. High level of corre-         Use of Generative Search Engines for Knowledge Work and
+spondence across different news domain quality rating sets.       Complex Tasks. arXiv:2404.04268.
+PNAS nexus, 2(9): pgad286.                                        Tong, C. 2025. Unite or divide? Biased search queries and
+Lindemann, N. F. 2024. Chatbots, search engines, and the          Google Search results in polarized politics. In Proceedings
+sealing of knowledges. AI & SOCIETY, 1–14.                        of the 17th ACM Web Science Conference 2025, Websci ’25,
+Memon, S. A.; and West, J. D. 2024. Search Engines Post-          158–168. New York, NY, USA: Association for Computing
+ChatGPT: How Generative Artificial Intelligence Could             Machinery. ISBN 9798400714832.
+Make Search Less Reliable. arXiv:2402.11707.                      Trielli, D.; and Diakopoulos, N. 2019. Search as News Cu-
+Miroyan, M.; Wu, T.-H.; King, L.; Li, T.; Pan, J.; Hu, X.;        rator: The Role of Google in Shaping Attention to News
+Chiang, W.-L.; Angelopoulos, A. N.; Darrell, T.; Norouzi,         Information. In Proceedings of the 2019 CHI Conference
+N.; and Gonzalez, J. E. 2025. Search Arena: Analyzing             on Human Factors in Computing Systems, CHI ’19, 1–15.
+Search-Augmented LLMs. arXiv:2506.05334.                          New York, NY, USA: Association for Computing Machin-
+                                                                  ery. ISBN 9781450359702.
+Monroe, B. L.; Colaresi, M. P.; and Quinn, K. M. 2008.
+Fightin’words: Lexical feature selection and evaluation for       Trielli, D.; and Diakopoulos, N. 2022. Partisan search be-
+identifying the content of political conflict. Political Analy-   havior and Google results in the 2018 U.S. midterm elec-
+sis, 16(4): 372–403.                                              tions. Information, Communication & Society, 25(1): 145–
+                                                                  161.
+Narayanan Venkit, P.; Laban, P.; Zhou, Y.; Mao, Y.; and Wu,
+C.-S. 2025. Search Engines in the AI Era: A Qualitative Un-       Van Dalen, A. 2023. Algorithmic gatekeeping for profes-
+derstanding to the False Promise of Factual and Verifiable        sional communicators: Power, trust, and legitimacy. Taylor
+Source-Cited Responses in LLM-based Search. In Proceed-           & Francis.
+ings of the 2025 ACM Conference on Fairness, Accountabil-         Wu, Z.; Sanderson, M.; Cambazoglu, B. B.; Croft, W. B.;
+ity, and Transparency, FAccT ’25, 1325–1340. New York,            and Scholer, F. 2020. Providing Direct Answers in Search
+Results: A Study of User Behavior. In Proceedings of                                     Appendix
+the 29th ACM International Conference on Information          Summary Statistics
+& Knowledge Management, CIKM ’20, 1635–1644. New
+York, NY, USA: Association for Computing Machinery.
+ISBN 9781450368599.
+                                                                         Social media                                           10.0%
+Xiong, H.; Bian, J.; Li, Y.; Li, X.; Du, M.; Wang, S.; Yin,
+D.; and Helal, S. 2024. When Search Engine Services Meet                        News                                        9.0%
+Large Language Models: Visions and Challenges. IEEE                      Encyclopedia                      4.8%
+Transactions on Services Computing, 17(6): 4558–4577.
+Yang, K.-C. 2025. A list of news domains. Zenodo.              Government & education                   4.2%
+Yang, K.-C.; Goel, P.; Quintana-Mathé, A.; Horgan, L.;                         Other               3.4%
+McCabe, S. D.; Grinberg, N.; Joseph, K.; and Lazer, D.                     Technology              3.2%
+2025. DomainDemo: a dataset of domain-sharing ac-
+tivities among different demographic groups on Twitter.                     Academic       1.7%
+arXiv:2501.09035.                                                      Search engines     1.4%
+Yang, K.-C.; and Menczer, F. 2025. Accuracy and Political            Community blogs      1.3%
+Bias of News Source Credibility Ratings by Large Language
+Models. In Proceedings of the 17th ACM Web Science Con-                             0%    2%         4%       6%        8%     10%
+ference, Websci ’25, 127–137. New York, NY, USA: Asso-                                           Percentage of total citations
+ciation for Computing Machinery.
+                                                              Figure 6: Distribution of citations across domain types. The
+                                                              “Unclassified” category is excluded from the figure but ac-
+                                                              counts for 60.1% of all citations.
+
+                                                              In addition to news domains, we also identify other domain
+                                                              types from the dataset. We identify government and edu-
+                                                              cational domains based on their domain suffixes and clas-
+                                                              sify them as “government & education.” We also manually
+                                                              identify domains of academic journals (e.g., science.org)
+                                                              and research repositories (e.g., arxiv.org), classifying them
+                                                              as “academic.” Finally, we manually classify the 200 most
+                                                              frequently cited domains into the following categories: “so-
+                                                              cial media,” “encyclopedia,” “technology,” “search engines,”
+                                                              “community blogs,” and “other.” These 200 domains ac-
+                                                              count for 32.6% of all citations. All remaining domains are
+                                                              labeled as “unclassified.” In Figure 6, we visualize the dis-
+                                                              tribution of citations across domain types.
+                                                                 In Table 2, we report the summary statistics for the models
+                                                              in our dataset. Note that the model gemini-2.5-pro-exp-03-
+                                                              25-wo-search is not a search model. Although it is included
+                                                              in the raw dataset, we exclude it from our analysis.
+                                                                 Some models in the table may share the same base LLM
+                                                              but differ in configuration parameters. For instance, gpt-4o-
+                                                              search-preview and gpt-4o-search-preview-high both use the
+                                                              gpt-4o base model, with the latter configured for a higher
+                                                              search context size. Since models within the same family
+                                                              exhibit similar patterns in our analysis, we aggregate their
+                                                              statistics for most reported results. For detailed model spec-
+                                                              ifications and configurations, see Miroyan et al. (2025).
+                                                                 In Table 2, we also show the news citation rates across
+                                                              models. We can see that the news citation rates are simi-
+                                                              lar across models within the same family. However, OpenAI
+                                                              models tend to cite more news sources in their responses.
+
+                                                              Model News Citation Similarity
+                                                              Figure 7 presents a cosine similarity heatmap of cited news
+                                                              domains across models. The heatmap reveals strong intra-
+                                                              family clustering, with models within each provider family
+Table 2: Summary statistics of different models in our dataset. The table presents the provider, model name, number of re-
+sponses, total citations, news citations, and the percentage of news citations among all citations in the raw dataset. The model
+marked with an asterisk is not a search model and so we exclude it from our analysis.
+
+       Provider      Model                                         Responses         Citations   News Citations          News %
+       OpenAI        gpt-4o-mini-search-preview                         3,945           7,126                    1,374    19.3%
+       OpenAI        gpt-4o-search-preview                              5,789           9,775                    1,985    20.3%
+       OpenAI        gpt-4o-search-preview-high                         5,747          10,782                    1,996    18.5%
+       OpenAI        gpt-4o-search-preview-high-loc                     6,995          12,354                    2,288    18.5%
+       Perplexity    sonar                                              4,513          38,266                    2,794     7.3%
+       Perplexity    sonar-pro                                          3,911          37,016                    2,602     7.0%
+       Perplexity    sonar-pro-high                                     6,768          72,644                    5,167     7.1%
+       Perplexity    sonar-reasoning-pro-high                           6,455          62,235                    5,662     9.1%
+       Perplexity    sonar-reasoning                                    5,941          47,497                    3,601     7.6%
+       Google        gemini-2.0-flash-grounding                         5,185          17,060                    1,324     7.8%
+       Google        gemini-2.5-flash-preview-04-17-grounding           3,359          23,886                    1,583     6.6%
+       Google        gemini-2.5-pro-exp-03-25-grounding                 5,920          27,446                    2,489     9.1%
+       Google        gemini-2.5-pro-exp-03-25-wo-search*                1,240               0                        0     0.0%
+       Total                                                           65,768        366,087                32,865         9.0%
+
+
+exhibiting highly similar news domain citation patterns. Ex-          The variance and Z-score of δdα−β can be estimated as
+amining inter-family differences, we observe that OpenAI
+models demonstrate distinct citation patterns compared to
+                                                                                         1              1                   δ α−β
+Google and Perplexity models, with average cosine similar-          σ 2 (δdα−β ) ≈               +               ,Zdα−β = q d         .
+ity scores below 0.33. In contrast, Google and Perplexity                            nα    b
+                                                                                      d + nd         nβd + nbd                   α−β)
+                                                                                                                           σ 2 (δd
+models show moderate similarity to each other, achieving
+                                                                                                                                    (4)
+average cosine similarity scores of around 0.53.
+
+                                                                   Positive values of Zdα−β means domain d is over-represented
+Overrepresented News Domains                                       in the cited domains of model family α when compared to
+                                                                   model family β, and the threshold 1.96 can be used to esti-
+To identify overrepresented domains for a given model fam-
+                                                                   mate statistical significance with p < 0.05.
+ily when compared to other model families, we leverage the
+log-odds ratio informative Dirichlet prior method, originally         For each model family, we compare its citation patterns
+developed to compare text corpora (Monroe, Colaresi, and           against the combined patterns of the other two families. We
+Quinn 2008). This Bayesian framework assumes the fre-              use the aggregated news domain citation frequencies across
+quencies of different news domains follow certain multino-         all three model families as the background corpus. Table 3
+mial distributions and incorporates the background informa-        presents the top 20 overrepresented news domains for each
+tion of the typical frequency of each news domain into the         model family, along with their corresponding log-odds ra-
+model through Dirichlet priors.                                    tio Z-scores. All reported Z-scores exceed 1.96, indicating
+                                                                   statistical significance.
+   The log-odds ratio δdα−β of domain d between model fam-
+ily α and model family β can be estimated by:                         When comparing these overrepresented domains with the
+                                                                   most frequently cited sources from the main analysis, we
+                                                                   observe that domains commonly cited by multiple model
+                        
+                               nα      b
+                                                                  families are filtered out, revealing more distinctive prefer-
+                                 d + nd
+      δdα−β =       log                            −      (2)      ences for each model family. We find that some most fre-
+                         N α + N b − (nα     b
+                                        d + nd )                   quently cited domains also exhibit high log-odds ratio Z-
+                                                   !
+                                nβd + nbd                          scores. For example, OpenAI models disproportionately cite
+                     log                            ,     (3)      reuters.com and apnews.com, Google models show a strong
+                          N β + N b − (nβd + nbd )                 preference for indiatimes.com, and Perplexity models favor
+                                                                   bbc.com.
+               β
+where nα  d (nd ) is the number of citations to domain d in           We also include the political leaning and quality cate-
+model family α (β), nbd is the number of citations to domain       gories of the news domains in the table. We can see that
+d in the background corpus, N α (N β ) is the total number of      these overrepresented domains are still overwhelmingly left-
+citations in model family α (β), and N b is the total number       leaning and high-quality, comfirming the robustness of our
+of citations in the background corpus.                             main findings.
+Table 3: Top 20 overrepresented news sources by model family, ranked by their log-odds ratio Z-scores. Political lean-
+ing (columns “L”): L=left-leaning, C=center, R=right-leaning, U=unknown. Quality (columns “Q”): H=high-quality, L=low-
+quality, U=unknown.
+
+ OpenAI                                      Google                                        Perplexity
+ Domain                 Z-score    L    Q    Domain                 Z-score    L   Q       Domain                 Z-score    L     Q
+ reuters.com              34.09    C    H    indiatimes.com            8.38    C   L       bbc.com                   9.67    C     H
+ apnews.com               22.22    C    H    livemint.com              6.62    C   U       nytimes.com               8.41    C     H
+ ft.com                   19.73    C    H    aljazeera.com             6.51    L   H       yahoo.com                 7.70    C     H
+ axios.com                18.43    C    H    thehindu.com              6.17    L   H       espn.com                  6.47    C     H
+ time.com                 11.43    C    H    dailymail.co.uk           5.31    C   L       cnn.com                   6.07    C     H
+ as.com                   10.63    C    U    independent.co.uk         3.79    C   H       cnbc.com                  5.83    C     H
+ theatlantic.com           8.64    L    H    history.com               3.58    C   H       sohu.com                  5.80    C     L
+ elpais.com                7.67    L    H    ndtv.com                  3.58    C   H       163.com                   5.77    C     U
+ theguardian.com           6.03    C    H    hindustantimes.com        3.49    C   H       economictimes.com         5.53    C     U
+ biomedcentral.com         4.64    L    H    forbes.com                3.45    C   H       techcrunch.com            5.42    C     H
+ lemonde.fr                4.59    L    H    healthline.com            3.37    C   H       nbcnews.com               5.15    C     H
+ asahi.com                 2.66    L    H    cbr.com                   3.20    C   U       usatoday.com              4.91    C     H
+ knowyourmeme.com          2.58    L    H    medicalnewstoda...        2.86    C   H       rbc.ru                    4.79    L     U
+ ipsnews.net               2.58    L    U    cbsnews.com               2.78    C   H       accuweather.com           4.71    C     H
+ makeuseof.com             2.49    C    H    reliefweb.int             2.71    L   U       globo.com                 4.70    L     U
+ scrippsnews.com           2.38    U    U    infobae.com               2.70    C   H       npr.org                   4.69    C     H
+ windowscentral.com        2.36    C    U    fool.com                  2.63    C   H       dw.com                    4.55    C     H
+ pitchfork.com             2.11    L    U    timesofisrael.com         2.60    C   H       wsj.com                   4.36    C     H
+ abc.net.au                2.11    C    H    dexerto.com               2.59    C   U       euronews.com              4.10    C     H
+ bizjournals.com           2.07    C    H    techradar.com             2.59    C   H       sina.com.cn               3.82    L     U
+
+
+
+
+Table 4: User question topics discovered through topic modeling by BERTopic. Keywords represent the most relevant terms
+extracted using the KeyBERT algorithm. Topic labels provide human-readable descriptions of the discovered topics.
+
+     Topic   Keywords                                                                        Label
+       0     ai, ai model, models, model, google, API, search, web, data, code               AI models and technology
+       1     stock price, stock market, stock, stocks, market, investor, markets, in-        stock prices and market
+             vest, trading, investment
+       2     healthy, fat, diabetes, supplements, vegan, foods, health, eat, diseases,       diet, nutrients, and health
+             disease
+       3     news latest, latest news, news today, today news, news, world news,             news updates
+             latest, tell latest, recent, today
+       4     matches, final, tournament, South America, teams, won, match, win-              sports and entertainment
+             ners, champions, continent
+       5     software engineer, engineer, graduated, career, actor, Bucharest, con-          biography and personal stories
+             tact, mastodon, software, university
+       6     battle, battles, combat, strongest, vs, abilities, weapon, characters,          fictional character battle analysis
+             weapons, main
+       7     book, chapter, chapters, summary, summary latest, authors, wrote, read,         online content and book
+             old testament, testament
+       8     lyrics, song, testimony, plead, songs, son, minor, rap, artist, tune            music and lyrics
+       9     tails, sonic, villain, spider, murderer, killed, evil, chaos, tyrant, nick-     comics and games
+             name
+                                                                                                      1.0
+                              gpt-4o-mini-search-preview
+                                   gpt-4o-search-preview
+                              gpt-4o-search-preview-high                                              0.8
+                         gpt-4o-search-preview-high-loc
+                                                    sonar                                             0.6
+                                                sonar-pro
+                                           sonar-pro-high
+                                         sonar-reasoning                                              0.4
+                                sonar-reasoning-pro-high
+                              gemini-2.0-flash-grounding                                              0.2
+               gemini-2.5-flash-preview-04-17-grounding
+                    gemini-2.5-pro-exp-03-25-grounding
+                                                                                                      0.0
+
+
+
+
+                                                                              on on nar
+                                                                         -pr re rev w
+                                                                               iew w- w
+                                                                                    -hi high
+                                                                                              c
+                                                     mi sh in ea ar ro ro
+                                                          2.5 ev .0- nin as gh
+                                                                  o-e -0 h- ro- ng
+
+
+
+                                                                                           ing
+                                                                         -03 7-g un h
+                                                                                 -gr nd g
+                                                                                     ou ing
+                                                                                          -lo
+
+
+
+
+                                                                      xp 4-1 gro hig
+                                                                            -25 rou din
+                                                                     rch h-p h-p vie
+                                                                            ev vie ie
+
+
+
+                                                 ge -fla em r-r son ar-p r-p
+                                                       ni- -pr i-2 so -re -hi
+                                                              -pr iew flas g-p oni
+
+
+
+                                                                                       nd
+                                                                                         o
+                                                                                       gh
+                                                                                       s
+                                                                  ea arc arc pre
+
+
+
+
+                                                                                       a
+                                                             o-s -se se h-
+
+
+
+
+                                                                                   s
+                                                          t-4 4o o- arc
+                                                        gp pt- pt-4ni-se
+
+
+
+
+                                                                            s
+                                                                       i
+                                                                   o-m
+
+
+
+
+                                                                    a
+                                                                  g
+
+
+
+
+                                                                 on
+                                        t-4
+
+
+
+
+                                                               s
+                                      gp
+
+
+
+
+                                                            g
+                                                           g
+
+
+
+
+                                                    2.5
+                                                ni-
+                                             mi
+                                          ge
+
+
+
+
+                           Figure 7: Cosine similarity heatmap of cited news domains across models.
+
+
+Question Topics
+In Table 4, we present the full list of question topics discov-
+ered through topic modeling and their corresponding key-
+words and labels. The keywords are identified using Key-
+BERT algorithm (Grootendorst 2020).
+
+Regression Analysis Results
+In Table 5, we present the full linear regression analysis re-
+sults.
+Table 5: Regression coefficients for news source citation patterns. Coefficients show the relationship between features and news
+source citation patterns. Statistical significance: *** p < 0.001, ** p < 0.01, * p < 0.05. Sample size: 9,098 observations.
+
+ Feature                                      % left-leaning news   % right-leaning news   % high quality news   % low quality news
+ Intercept                                              18.53***                2.46***              69.93***              5.69***
+ Model family: Google                                    3.95***                -0.92**              -4.97***              2.26***
+ Model family: Openai                                    -2.76**                   -0.37                 2.31*                -0.73
+ Number of citations                                       -0.19*                  -0.04                  0.04                -0.08
+ News sources percentage                                -0.06***               -0.02***               0.16***             -0.03***
+ Response length (words, log Z-score)                       -0.23               0.75***                   1.41                 0.13
+ Total turns                                                -0.07                  -0.02                 -0.18                 0.10
+ Turn number                                              0.98**                   -0.05                  0.47                -0.11
+ Question length (words, log Z-score)                       -0.42                   0.23                 -0.10                 0.32
+ Client country/region: BR                                  -0.08                  2.30*                -6.89*                -1.03
+ Client country/region: CA                                  3.36*                  -1.07                 3.71*                -1.02
+ Client country/region: CN                                  7.53*                   1.61                 -0.29                3.29*
+ Client country/region: DE                                   3.05                  -0.28                 4.25*                -0.62
+ Client country/region: GB                                   0.12                  -0.04                  1.96                -0.18
+ Client country/region: HK                                  -4.25                  -1.02                 7.08*                -0.25
+ Client country/region: IN                                   1.40                  -0.56             -6.65***              9.78***
+ Client country/region: MX                              10.29***                5.54***                  5.58*                 1.05
+ Client country/region: other                                1.73                  -0.52                 -0.11                -0.29
+ Client country/region: RU                              10.21***                   -0.89                 -0.46                 0.27
+ Client country/region: unknown                          6.15***                    0.32                -2.37*                -0.43
+ Embedding: PC 0                                        -5.69***               -0.70***               2.25***             -0.90***
+ Embedding: PC 1                                             0.80                   0.10              4.91***              0.83***
+ Embedding: PC 10                                         1.07**               -0.41***              -3.60***                 0.40*
+ Embedding: PC 11                                           -0.08                  -0.11              1.81***                 -0.13
+ Embedding: PC 12                                            0.08                0.40**                  0.82*                 0.14
+ Embedding: PC 13                                           -0.61                  0.30*                -0.89*              0.50**
+ Embedding: PC 14                                        2.60***                    0.12                  0.55                -0.04
+ Embedding: PC 15                                         1.00**                   -0.08                  0.41            -0.63***
+ Embedding: PC 16                                            0.26                0.34**                   0.36                -0.08
+ Embedding: PC 17                                            0.07               0.58***              -2.09***             -0.82***
+ Embedding: PC 18                                            0.02                   0.20                  0.24               -0.35*
+ Embedding: PC 19                                           0.73*              -1.40***               1.71***             -0.61***
+ Embedding: PC 2                                        -1.89***                   -0.02             -2.37***                 -0.07
+ Embedding: PC 3                                        -5.16***               -0.54***              -2.54***                  0.10
+ Embedding: PC 4                                            -0.74                  -0.09             -3.45***             -0.81***
+ Embedding: PC 5                                          1.05**                  -0.25*                 0.93*                -0.02
+ Embedding: PC 6                                            0.80*                0.32**              -4.05***                  0.01
+ Embedding: PC 7                                           -0.76*                 -0.31*                  0.67            -0.72***
+ Embedding: PC 8                                            -0.47                   0.21              -1.11**              -0.54**
+ Embedding: PC 9                                        -1.68***                -0.40**                   0.50                 0.24
+ Intent: analysis                                           -1.99                   0.58                 -1.08                -0.39
+ Intent: creative generation                                -0.02              -2.26***                  -1.75                -1.80
+ Intent: explanation                                        -0.27                  -0.35                 -1.39                 0.16
+ Intent: factual lookup                                      0.69                   0.20                 -2.85                -0.61
+ Intent: guidance                                       -6.49***                   -1.07              -6.42**                 -1.30
+ Intent: info synthesis                                     -1.70                   0.89                 -2.37                -1.41
+ Intent: other                                              -1.24                   0.22                  2.84                -1.17
+ Intent: text processing                                    -0.77                3.68**                  -0.56                -2.13
+ Topic: AI models and technology                            -0.58                   0.02              2.42***                 -0.34
+ Topic: stock prices and market                              0.37                   0.11             -1.21***                  0.15
+ Topic: diet, nutrients, and health                          0.11                   0.04                 0.90*                -0.09
+ Topic: news updates                                        -0.43                  -0.14                 -0.06                -0.16
+ Topic: sports and entertainment                            -0.30                   0.17                 -0.05                 0.26
+ Topic: biography and personal stories                       0.14                  0.22*                  0.01                 0.24
+ Topic: fictional character battle analysis                  0.23                  -0.12             -2.17***                  0.00
+ Topic: online content and book                              0.38              -0.78***               1.64***                 -0.42
+ Topic: music and lyrics                                     0.05                   0.27             -1.82***                  0.02
+ Topic: comics and games                                     0.04                  -0.20                 -0.47                 0.20
+ R2                                                         0.12                   0.06                  0.13                 0.05
+

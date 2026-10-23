@@ -1,0 +1,706 @@
+本文件为PDF自动提取文本，仅供检索；排版、图表和页码请以PDF为准。
+The Tower of Babel Meets Web 2.0: User-Generated Content and Its Applications in a Multilingual Context
+
+        The Tower of Babel Meets Web 2.0: User-Generated
+       Content and Its Applications in a Multilingual Context
+                                      Brent Hecht* and Darren Gergle*†
+                                            Northwestern University
+          *
+            Dept. of Electrical Engineering and Computer Science, † Dept. of Communication Studies
+                             brent@u.northwestern.edu, dgergle@northwestern.edu
+ABSTRACT                                                                       the goal of this research to illustrate the splintering effect of
+This study explores language’s fragmenting effect on user-                     this “Web 2.0 Tower of Babel”1 and to explicate the
+generated content by examining the diversity of knowledge                      positive and negative implications for HCI and AI-based
+representations across 25 different Wikipedia language                         applications that interact with or use Wikipedia data.
+editions. This diversity is measured at two levels: the
+concepts that are included in each edition and the ways in                     We begin by suggesting that current technologies and
+which these concepts are described. We demonstrate that                        applications that rely upon Wikipedia data structures
+the diversity present is greater than has been presumed in                     implicitly or explicitly espouse a global consensus
+the literature and has a significant influence on applications                 hypothesis with respect to the world’s encyclopedic
+that use Wikipedia as a source of world knowledge. We                          knowledge. In other words, they make the assumption that
+close by explicating how knowledge diversity can be                            encyclopedic world knowledge is largely consistent across
+beneficially leveraged to create “culturally-aware                             cultures and languages. To the social scientist this notion
+applications” and “hyperlingual applications”.                                 will undoubtedly seem problematic, as centuries of work
+                                                                               have demonstrated the critical role culture and context play
+Author Keywords                                                                in establishing knowledge diversity (although no work has
+Wikipedia, knowledge diversity, multilingual, hyperlingual,                    yet measured this effect in Web 2.0 user-generated content
+Explicit Semantic Analysis, semantic relatedness                               (UGC) on a large scale). Yet in practice, many of the
+ACM Classification Keywords                                                    technologies and applications that rely upon Wikipedia data
+H.5.3. [Information Interfaces and Presentation]: Group and                    structures adopt this view. In doing so, they make many
+Organization Interfaces – collaborative computing,                             incorrect assumptions and miss out on numerous
+computer-supported cooperative work                                            technological design opportunities.
+General Terms                                                                  To demonstrate the pitfalls of the global consensus
+Human Factors                                                                  hypothesis – and to provide the first large-scale census of
+                                                                               the effect of language in UGC repositories – we present a
+INTRODUCTION
+                                                                               novel methodology for assessing the degree of world
+A founding principle of Wikipedia was to encourage
+                                                                               knowledge diversity across 25 different Wikipedia language
+consensus around a single neutral point of view [18]. For
+                                                                               editions. Our empirical results suggest that the common
+instance, its creators did not want U.S. Democrats and U.S.
+                                                                               encyclopedic core is a minuscule number of concepts
+Republicans to have separate pages on concepts like
+                                                                               (around one-tenth of one percent) and that sub-conceptual
+“Barack Obama”. However, this single-page principle
+                                                                               knowledge diversity is much greater than one might
+broke down in the face of one daunting obstacle: language.
+                                                                               initially think—drawing a stark contrast with the global
+Language has recently been described as “the biggest                           consensus hypothesis.
+barrier to intercultural collaboration” [29], and facilitating
+                                                                               In the latter half of this paper, we show how this knowledge
+consensus formation across speakers of all the world’s
+                                                                               diversity can affect core technologies such as information
+languages is, of course, a monumental hurdle. Consensus
+                                                                               retrieval systems that rely upon Wikipedia-based semantic
+building around a single neutral point of view has been
+                                                                               relatedness measures. We do this by demonstrating
+fractured as a result of the Wikipedia Foundation setting up
+                                                                               knowledge diversity’s influence on the well-known
+over 250 separate language editions as of this writing. It is
+                                                                               technology of Explicit Semantic Analysis (ESA).
+Permission to make digital or hard copies of all or part of this work for      In this paper, our contribution is four-fold. First, we show
+personal or classroom use is granted without fee provided that copies are
+not made or distributed for profit or commercial advantage and that copies     that the quantity of the world knowledge diversity in
+bear this notice and the full citation on the first page. To copy otherwise,   Wikipedia is much greater than has been assumed in the
+or republish, to post on servers or to redistribute to lists, requires prior   literature. Second, we demonstrate the effect this diversity
+specific permission and/or a fee.
+CHI 2010, April 10–15, 2010, Atlanta, Georgia, USA.
+Copyright 2010 ACM 978-1-60558-929-9/10/04....$10.00.                          1
+                                                                                   See [18] for original use of the analogy.
+can have on important technologies that use Wikipedia as a        language edition that is missing it, which, if not qualified, is
+source of world knowledge. Third, this work is the first          a strong case of the global consensus hypothesis. We argue
+large-scale and large-number-of-language study to describe        that although this “information arbitrage” model in many
+some of the effects of language on user-generated content.        cases provides risk-free informational profit, it does not
+Finally, we conclude by describing how a more realistic           always do so. In fact, if such an approach is applied
+perspective on knowledge diversity can open up a whole            heedlessly it runs the risk of tempering cultural diversity in
+new area of applications: culturally aware applications, and      knowledge representations or introducing culturally
+its important sub-area, hyperlingual applications.                irrelevant/culturally false information. Our results can be
+                                                                  used in tandem with approaches such as information
+BACKGROUND
+Wikipedia has in recent years earned a prominent place in         arbitrage to provide a framework for separating “helpful”
+the literature of HCI, CSCW, and AI. It has served as a           arbitrage, which can have huge benefits, from “injurious”
+laboratory for understanding many aspects of collaborative        arbitrage, which has negative qualities.
+work [6, 16, 17, 23, 26] and has also become a game-              Evidence Against the Global Consensus Hypothesis
+changing source for encyclopedic world knowledge in               While fewer in number, some recent papers have focused
+many AI research projects [11, 20, 28, 30]. Yet the vast          on studying the differences between language editions.
+majority of this work has focused on a single language            These papers fall more in line with social science positions
+edition of Wikipedia, nearly always English. Only recently        regarding the nature of knowledge diversity. Our prior work
+has the multilingual character of Wikipedia begun to be           [14] demonstrated that each language edition of Wikipedia
+leveraged in the research community, ushering in a                focuses content on the geographic culture hearth of its
+potential second wave of Wikipedia-related research.              language, a phenomenon called the “self-focus” of user-
+                                                                  generated content. In a similar vein, Callahan and Herring
+This new work has been hailed as having great potential for
+                                                                  [7] examined a sample of articles on famous persons in the
+solving language- and culture-related HCI problems [14].
+                                                                  English and Polish Wikipedia and found that cultural
+Unfortunately, while pioneering, most of this research has
+                                                                  differences are evident in the content.
+proceeded without a full understanding of the multilingual
+nature of Wikipedia. In the applied area, Adafre and de           OUR APPROACH
+Rijke [1] developed a system to find similar sentences            In order to question the veracity of the global consensus
+between the English and Dutch Wikipedias. Potthast and            hypothesis, quantify the degree of knowledge diversity, and
+colleagues [25] extended ESA [11, 12] for multilingual            demonstrate the importance of this knowledge diversity, a
+information retrieval. Hassan and Mihalcea [13] used an           large number of detailed analyses are necessary. The
+ESA-based method to calculate semantic relatedness                following provides an overview of the various stages of our
+measurements between terms in two different languages.            study.
+Adar and colleagues [2] built Ziggurat, a system that             Step One (“Data Preparation and Concept Alignment”):
+propagates structured information from a Wikipedia in one         First, we develop a methodology similar to previous
+language into that of another in a process they call              literature [2, 13, 25] that allows us to study knowledge
+“information arbitrage”. A few papers [22, 27] attempted to       diversity. This methodology – highlighted by a simple
+add more interlanguage links between Wikipedias, a topic          algorithm we call CONCEPTUALIGN – aligns concepts across
+we cover in detail below.                                         different language editions, allowing us to formally
+The Global Consensus of World Knowledge                           understand that “World War II” (English), “Zweiter
+Though innovative, much of the previous work implicitly or        Weltkrieg”     (German),     and   “Andre       verdenskrig”
+even explicitly adopts a position consistent with the global      (Norwegian) all describe the same concept. Since the
+consensus hypothesis. The global consensus hypothesis             methodology leverages user-contributed information, we
+posits that every language’s encyclopedic world knowledge         also provide an evaluation to demonstrate its effectiveness.
+representation should cover roughly the same set of
+                                                                  Step Two (“World Knowledge Diversity in Wikipedia”):
+concepts, and do so in nearly the same way. Any large
+                                                                  After describing the concept alignment process, we can
+differences between language editions are treated as bugs
+                                                                  analyze the extent of diversity of knowledge representations
+that need to be fixed, discrepancies that will go away in
+                                                                  in different language editions of Wikipedia. These analyses
+time (and possibly need help doing so), or a problem that
+                                                                  take place at both the conceptual (article) level and the sub-
+should simply be ignored. For example, Sorg and Cimiano
+                                                                  conceptual (content) level, and serve two purposes: (1) they
+[27] state that since English does not cover a large majority
+                                                                  show that the global consensus hypothesis is false, and (2)
+of German’s concepts, there is “clearly” something wrong
+                                                                  they provide the first empirically derived quantitative
+with the links.
+                                                                  descriptions of the extent of knowledge diversity across
+“Information arbitrage”, and applications designed to             numerous Wikipedia language editions.
+support it [2], provides an especially interesting case. Innate
+                                                                  Step Three (“The Effect of Diversity on Technologies”):
+to the approach is the assumption that the information in
+                                                                  Next, we provide evidence that knowledge diversity across
+one language edition is inherently useful to any other
+                                                                  language editions actually affects important technologies
+that use Wikipedia as a source of world knowledge. Our            same concept in another language edition. For example, an
+test case is Explicit Semantic Analysis [11], a technology        ILL exists that links the English article “Computer Science”
+that has been widely applied in fields ranging from HCI to        to the Catalan article on the same topic, “Informàtica”. On
+AI to NLP.                                                        the live Wikipedia site, ILLs included in an article can be
+                                                                  viewed and clicked on under the “languages” (or “en otros
+Step Four (“Implications for Design”): Finally, we
+                                                                  idiomas”, “In anderen Sprachen”, etc.) heading at the
+conclude with a discussion of the implications for design
+                                                                  bottom of the left sidebar that accompanies each article.
+that result from each of the previous analyses. We highlight
+the importance of considering language and culture in             In the 25 languages used in our study, we parsed out around
+application building, and introduce two ideas: culturally-        52 million separate ILLs. These links are partially
+aware applications and hyperlingual applications.                 generated by a group of bots that can, for example, add a
+                                                                  German ! English ILL when it finds that an English !
+DATA PREPARATION AND CONCEPT ALIGNMENT
+A large data preparation process preceded the studies             German ILL has been manually added. However, it is
+described in this paper, all of which were executed using an      crucial to our study that we have an accurate collection of
+extension of our open-source WikAPIdia software.                  interlanguage links in order to ascertain the degree of
+WikAPIdia is a MySQL-based Java API to the database               knowledge diversity present. While the bots propagate these
+dumps made available by the Wikimedia Foundation. While           links across the various Wikipedia language editions, their
+support for any existing language edition can easily be           lack of formality means that we cannot be sure that they are
+added to WikAPIdia, our current implementation uses the           exhaustive. To address this lack of formality and help
+                                                                  maximize the information value from the user-generated
+25 different language editions in Table 1 (the 25 largest
+                                                                  ILLs, we implemented an algorithm, CONCEPTUALIGN,
+language editions in Wikipedia as of mid-20092, when the
+database dumps were downloaded).                                  which formally categorizes every article in every language
+                                                                  into a single concept group.
+Parsing
+For each language edition database dump, WikAPIdia                ILLs are typically viewed as pairwise dictionary-like
+parses out article metadata (title, id, etc.), links from one     entities, e.g. as done in [9]. However, the ILL dataset can
+article to another, interlanguage links between articles of       also be viewed as a set of directional edges (ILLs) and
+different language editions, disambiguation pages                 nodes (articles) that form an enormous number of
+(polysemy), and redirects (synonymy).                             individual connected components in a graph containing all
+                                                                  the articles in our study (see Figure 1). Each connected
+    Language                      # Articles      # Outlinks      component represents a concept that is described in the
+    Catalan                         191,770        5,354,217      articles in the component. CONCEPTUALIGN was designed
+    Chinese                         257,257        7,100,654
+    Dutch                           552,783       11,251,251      for this graph-based view of interlanguage links. The
+    English (Largest in Study)    3,003,868       91,133,413      algorithm picks a node at random and does a breadth-first
+    French                          839,774       25,964,178      search, ignoring edge direction, until it finds all connected
+    German                          956,571       25,663,974      nodes in the component. It then labels all those nodes as
+    Hebrew (Smallest in Study)       96,197        3,498,739      belonging to the same concept. Next, it picks another node
+    Italian                         607,890       18,224,304
+                                                                  (from a different connected component), and continues the
+    Japanese                        612,450       25,461,189
+    Norwegian                       225,370        4,589,390      process until all nodes have been labeled with a concept.
+    Russian                         420,256       10,813,981
+                                                                  CONCEPTUALIGN effectively adds to the ILL dataset new
+    Spanish                         509,145       14,974,843
+    …                                     …               …       ILLs that make each separate component fully connected;
+    TOTAL                        11,066,552      304,030,822      all articles in a concept group are connected to all other
+                                                                  articles in the group with an ILL following the operation of
+Table 1 – A brief overview of the size of some of the 25          the algorithm. In this way, CONCEPTUALIGN maximizes the
+language editions in our study. Other languages included are:
+                                                                  information content derived from the user-generated ILL
+Czech, Danish, Finnish, Hungarian, Indonesian, Korean,
+Polish, Portuguese, Romanian, Slovak, Swedish, Turkish, and
+                                                                  dataset. In other words, there need not be a large number of
+Ukrainian. The median number of articles was 225,370.             Wikipedians proficient in both Korean and Slovak.
+                                                                  CONCEPTUALIGN only requires is that there be a large
+Interlanguage Links and the CONCEPTUALIGN Algorithm               number of Wikipedians proficient in Korean and English,
+The basis for our concept alignment process is the                and Slovak and English (for example). This is an approach
+enormous number of interlanguage links (ILLs) manually            much more suited to the real-life patterns of bilingualism.
+entered or propagated by bots in Wikipedia. ILLs serve to
+link an article in one language edition to an article on the      Evaluation of CONCEPTUALIGN
+                                                                  Like all Wikipedia data used in research, ILLs are subject
+                                                                  to concerns regarding the quality of user-generated content.
+2
+                                                                  The concern in the context of this work is that of the
+  The Arabic Wikipedia would have been included, but it has a     “missing ILL”. A missing ILL could prevent
+few alternative encoding norms that would have invalidated some
+                                                                  CONCEPTUALIGN       from     correctly    “merging”     two
+of our results.
+conceptually identical disconnected components in cases                Human Evaluation Study: Despite the effectiveness of
+where no other ILL serves the same role. Therefore, we                 CONCEPTUALIGN relative to the state of the art in missing
+evaluate in two different ways the combined effectiveness              ILL detection, in order to determine the degree of world
+of the ILL dataset and CONCEPTUALIGN. The first approach               knowledge diversity across Wikipedia language editions it
+is based on the algorithm’s nature as a “missing link finder”          is important to get an accurate estimate of the number of
+and places it in the context of state-of-the-art machine               ILLs that are likely missing after running the algorithm.
+learning techniques that have been developed to accomplish             While it would be impractical to evaluate the coverage of
+the same task [22, 27]. In the second evaluation, we                   our dataset for all 25*24 = 600 language pairs in our study
+examine the effectiveness of the algorithm using bilingual             by hand, we did perform this evaluation on three pairs of
+human coders.                                                          languages: English paired with Spanish, Japanese, and
+                                                                       Italian. Large-Wikipedia languages were used because they
+                                                                       have the biggest impact on the results we present in the
+            AES                        BES
+                      Concept
+                        A
+                                                Concept
+                                                  B
+                                                                       latter part of this paper. Moreover, due to patterns of
+                                                                       bilingualism around the world, these languages are most
+                                                                       likely to play an important role in connecting concept
+                         AEN                        BEN
+            ADE                        BDE                             components in the ILL graph.
+                                                                       After CONCEPUALIGN was run on our entire dataset, six
+                                                                       human coders (two for each language) were recruited, each
+Figure 1: A simplified ILL graph. Interlanguage links are
+                                                                       highly proficient in both languages L1 and L2. Each coder
+represented as edges, and articles as nodes. For example, the
+article on concept A in English (AEN) has an interlanguage link        was given 75 primary Monolingual (L1|L2) articles and 75
+to the article on concept A in Spanish (AES). CONCEPTUALIGN            secondary Monolingual(L2|L1) articles, as identified by
+simply finds all the nodes (articles) in a connected component         CONCEPTUALIGN. Monolingual(LX|LY) articles are Lx articles
+(e.g. A), identifies them all as belonging to a single concept,        representing concepts that CONCEPTUALIGN has indicated
+and moves to the next component (e.g. B). Importantly, note            do not have articles in LY. For each article, coders were
+that even though BEN and BES have zero interlanguage links to          instructed to attempt to find a conceptual equivalent in the
+each other, they are still identified as part of the same concept.     other language of the language pair. They were told to use
+The same is true for AES and ADE.                                      any tool or information they wished to accomplish this task,
+Algorithm Evaluation Study: The first step in examining                but were limited to five minutes per article. Coders were
+CONCEPTUALIGN’s effectiveness in finding missing ILLs is               also given a list of 25 Bilingual(L1, L2) articles to evaluate
+to compare its performance to existing state of the art                the precision of CONCEPTUALIGN (and the ILL graph as a
+techniques in missing ILL detection. Sorg and Cimiano [27]             whole). For these articles, coders were instructed to
+published a dataset of the missing German ! English ILLs               determine whether or not each bilingual article pair covered
+found by their machine learning approach that makes use of             the same concept. For each language pair, we used the
+a support vector machine (SVM) on a subset of German                   union of the coders’ results. Any disagreements between
+articles. CONCEPTUALIGN found ILLs for 95.8% of the                    coders were resolved by discussion. Finally, coders were
+German/English “missing ILLs” in the dataset.                          told to ignore any disambiguation pages in the sample.
+Interestingly, 91.8% of these links had been added
+manually into Wikipedia since the time of Sorg and                     Language Pair         P(missing link)   P(incorrect link)
+                                                                       Italian / English               0.08         0.00 (none)
+Cimiano’s study. The remaining 4.0% of ILLs were
+                                                                       Japanese / English              0.02         0.00 (none)
+discovered by CONCEPTUALIGN.                                           Spanish / English               0.06         0.00 (none)
+The precision of the SVM that generated the missing links              Table 2: Results from our evaluation of CONCEPTUALIGN
+is far from perfect3 and some found links are to articles not          and the interlanguage links that power it.
+included in our study (Wikipedia project pages, etc). This
+leads us to conclude that CONCEPTUALIGN (and its                       As shown in Table 2, the probability of a missing link is
+underlying data) is at least as effective as the SVM. We               low, especially in the case of Japanese/English. In addition,
+write “at least” because we have no idea how many                      the precision of the ILL graph appears to be good, as not a
+additional missing links CONCEPTUALIGN would have found                single incorrect link was found. The results from both
+on the same sample of articles on which Sorg and Cimiano               evaluations together provide evidence supporting the
+tested their SVM.                                                      relatively high quality of concept alignment, and also
+                                                                       provide us with a reasonable estimate of the amount of error
+                                                                       we are likely to find as a result of missing ILLs.
+                                                                       WORLD KNOWLEDGE DIVERSITY IN WIKIPEDIA
+3
+ Exact precision figures are not available due to the fact that 7.6%   In this section of the paper, we demonstrate the extensive
+of the dataset was not comparable due to changes in Wikipedia          diversity of world knowledge found in our 25-language
+article structure and Sorg and Cimiano’s inclusion of Wikipedia        dataset. First, we examine the global consensus hypothesis
+project pages (which were not included in our evaluation).             at a concept level. The notion underlying the hypothesis in
+this context is that every language’s encyclopedic world           of the less developed Wikipedias, poor concept overlap –
+knowledge representation should cover roughly the same              and thus great conceptual diversity – would still exist.
+set of concepts. Given the differential in article quantity in
+                                                                   To further support this last point, we ran the same
+Table 1, this assumption is most often instantiated in the
+                                                                   experiment using only the three largest Wikipedias
+corollary that the English Wikipedia, given its massive size,
+                                                                   (English, German, and French) and the largest six
+is a near-complete superset of all the other Wikipedias.
+                                                                   Wikipedias (all of which have 600,000 or more articles). In
+Every other language edition thus is supposed to cover
+                                                                   the first case, around 80 percent of concepts remained
+some subset of the English editions’ articles.
+                                                                   single-language, while only 7 percent were in all three. In
+Second, we explore the global consensus hypothesis at the          the second case, 77 percent of concepts were single-
+sub-conceptual level. Here the hypothesis posits that two          language, while only 1.5 percent are in were in all six.
+articles about the same concept in two different languages
+                                                                   Our 25-language analysis also revealed the extremely small
+will describe that concept roughly identically. For instance,
+                                                                   number of concepts that are covered in all 25 language
+all articles on “Psychology” would describe “Psychology”
+                                                                   editions: 6,966 concepts (0.12 percent of all concepts).
+in close to exactly the same fashion.
+                                                                   While small in number, these concepts are revealing and
+Before continuing with our analyses, it is important to            could be considered “globally relevant”. Table 4 lists a few
+briefly discuss in more detail the two information levels          of these concepts and their corresponding articles in
+investigated. At the higher conceptual level, the topic of the     English, Japanese, Slovak, and Dutch.
+article matters and the way that topic is defined is
+unimportant. The exploration of the global hypothesis at the
+sub-conceptual level is predicated on the higher-level
+assumptions being true.
+Concept Diversity
+Method
+Conceptual diversity is measured by the degree of concept
+coverage overlap across different language editions of
+Wikipedia. Concept coverage overlap is determined as
+follows: if one or more articles exist on a concept C in a
+language L1’s Wikipedia, then C can be considered to be
+covered by L1’s Wikipedia world knowledge representation.          Figure 2: The amount of concept overlap in our 25-language
+As such, if an article on C exists in both languages L1 and        Wikipedia data set. The CDF (black line) represents the
+L2, C can be considered to be covered by the shared world          cumulative proportion of concepts that are shared by the
+knowledge of L1 and L2. One can examine the conceptual             number of languages on the x-axis.
+overlap between n languages using the same method, but             It is important to note that we have not yet taken into
+including only concepts that are covered by the knowledge          account the small number of missing ILLs that may remain
+intersection of all n languages. For instance, we can              after CONCEPTUALIGN is run. While it is impossible to
+approximate shared “global knowledge”, or the                      predict exactly how missing ILLs would effect the
+“encyclopedic core”, with n = 25.                                  distribution in Figure 2, our earlier studies allow us to
+Results                                                            establish a realistic range. A conservative estimate would
+Our results (Figure 2, Table 3) demonstrate that a                 be to assume a “best case scenario” for the global consensus
+surprisingly small amount of concept overlap exists                hypothesis: that all of the missing ILLs would link single-
+between languages of Wikipedia, refuting the global                language concepts to articles in other languages, that no
+consensus assumption at the concept level. Over 74 percent         missing ILL is a reflexive “duplicate” of another, and that
+of concepts are described in only one language. Moreover,          the Italian performance rate (the worst we found) occurs
+more than 95.5 percent of concepts appear in six or fewer          across the entire dataset. Even in this “best case scenario”
+languages, indicating that even if we were to cut out some         for the global consensus assumption, 68.2 percent of
+Table 3: Pairwise conceptual coverage overlap. Each cell represents the ratio of concepts in the column’s language edition covered
+by the row’s language edition.
+               Cata   Chinese     Czech     Dan    Dutch    Engl    Finn    Fren     German      Hebr     Hun     Indo      Ital
+ German        0.38       0.36      0.57    0.55    0.41    0.16     0.53   0.35                 0.58     0.48     0.43    0.38
+ English       0.58       0.56      0.66    0.66    0.65             0.70   0.60        0.51     0.75     0.66     0.57    0.65
+ French        0.45       0.36      0.51    0.51    0.43    0.17     0.52               0.31     0.58     0.48     0.45    0.44
+             Japan.    Korean      Norw      Pol   Portu    Rom     Russ     Slov    Spanish    Swed      Turk      Ukr
+ German        0.24       0.45      0.46    0.34    0.33    0.46     0.39    0.48       0.36     0.46     0.39     0.32
+ English       0.41       0.61      0.64    0.62    0.66    0.64     0.57    0.59       0.63     0.62     0.51     0.40
+ French        0.25       0.45      0.44    0.36    0.41    0.37     0.36    0.38       0.43     0.43     0.38     0.32
+concepts remain unique to a single language. This still        clarity equal to 1.0 indicates perfect clarity, or exactly one
+represents a great deal of conceptual diversity.               article per language in the concept. Fortunately, perfect
+                                                               clarity is by far the norm in our dataset, with only rare
+In addition to examining the global properties of the
+                                                               instances of very low clarity. In fact, only about 2,700
+concept overlap among all languages, we can perform a
+                                                               concepts in total have a clarity of less than 0.5, which can
+more detailed examination of the pairwise diversity across
+                                                               still be reasonable in some cases. These statistics are
+languages. As shown in Table 3, the English-As-Superset
+                                                               bolstered by the precision results from our coders. Further
+corollary to the global consensus hypothesis does not hold.
+                                                               analysis of the rare cases of low clarity can be found in [4].
+Despite its massively larger size, the English Wikipedia
+(row 2) covers no more than approximately three-quarters       Sub-Concept Diversity
+of any other Wikipedia in our study. The case of overlap       Even when two language editions cover the same concept
+between German and English – two very mature language          (with perfect clarity), they may describe that concept
+editions – is quite illustrative. English is more than three   differently. If a significant phenomenon, this sub-concept
+times the size of German, but only covers slightly more        diversity would add extensively to the overall diversity of
+than 50 percent of its concepts.                               world knowledge representations present in Wikipedia. In
+                                                               this sub-section, we show that sub-concept diversity is a
+ English             Japanese           Slovak       Dutch
+                                                               prominent force, although similarities do exist on average
+ Auguste Rodin    !ー"#$%・&             Auguste      Auguste
+                                         Rodin        Rodin    between articles on the same topic. As a result, while false
+                         '(
+ Sarah Palin                            Sarah        Sarah
+                                                               overall, the global consensus hypothesis does have some
+                   )*・+,-(
+                                      Palinová        Palin    truth at the sub-concept scale.
+ Turing           .#ー-(/01            Turingov       Turing    Method
+ Machine                  (                stroj   maschine
+                                                               Our experiment on sub-concept diversity borrows from [1]
+ August 25            82253                25.           25    the idea of using outlinks, or links in one article pointing to
+                                        august     augustus
+                                                               another article, as a “highly focused entity-based
+ Chelsea F.C.        .451ーFC           Chelsea      Chelsea
+                                            FC           FC    representation of [natural language].” In other words,
+                                                               outlinks4 provide a decent structured, canonical/ language-
+Table 4: Example “global” concepts (n = 25). Others include    independent summary of raw text.
+“Britney Spears”, “Periodic Table”, and “Milk”.
+                                                               Operating under this assumption, we compared the outlinks
+At first glance, many of these statistics may appear rather    of each of the “global concepts” to determine the degree to
+remarkable. However, any dedicated Wikipedian could            which the articles covered the same content. If two articles
+provide ample anecdotal support. For instance, the entry on    on the same concept (e.g. “Sarah Palin”) in two languages
+Prinzipalmarkt, a key commercial district in the mid-sized     define the concept in a nearly identical fashion, they should
+city of Münster, Germany, remains German-only, despite         link to articles on nearly all the same concepts (e.g. “John
+the district’s local significance. Similarly, the American     McCain”, “Fox News”, etc.). If, on the other hand, there is
+country music duo Big and Rich, who have sold millions of      great sub-concept diversity, these articles would link to
+records in the United States, have an English-only article.    very few articles about the same concepts. If links in two
+                                                               different languages are pointed at the same concept, the
+Even seemingly “major” concepts in a culture, say minor
+                                                               destination of both links would be articles belonging to the
+league baseball, are not pervasively included across all
+                                                               same ILL graph component.
+Wikipedias in our study. In fact, only 40 percent of
+languages in our study have an article on minor league         Our metric in this experiment was the Overlap Coefficient
+baseball. Of course, to the global sports fan, this makes      (OC), first used in the UGC domain in [21] and calculated
+sense. Why would the Poles, Finns, Russians, etc. spend        as follows:
+their time writing about minor league baseball when most
+                                                                                            Outlinks(CL1 ) " Outlinks(CL 2 )
+of them do not even care about the sport of baseball in                 OC(CL1,CL 2 ) =
+general? (Of course there will be individual exceptions.)                                 min( Outlinks(CL1 ), Outlinks(CL 2 ) )
+The overlap gets even smaller when one takes a step down       where CL1 and CL2 are articles about concept C in languages
+the specificity hierarchy and considers minor league           L1 and L2, respectively.
+baseball teams. For instance, the Lansing Lugnuts, a Class     !
+A minor league team, have an English-only article.             OC is the size of intersection of the two sets of links
+                                                               divided by the size of the smaller of the two sets. In other
+Important Sidenote: Semantic Drift
+                                                               words, OC describes the percentage of the links of the
+In a small number of cases, more than one article per
+                                                               shorter of the Wikipedia articles about concept C also
+language belongs to a single concept. If prominent across
+our dataset, this could have unpredictable effects on our
+results. We measured the average number of languages per       4
+                                                                Outlinks are not the same as interlanguage links. Outlinks link to
+article in a concept (a connected component of the ILL         articles within the same language edition and appear as blue
+graph), a ratio we call conceptual clarity. A concept with     hyperlinks in the live version of Wikipedia.
+contained in the longer of the articles on C. OC is an ideal      but one contains a hyperlink and the other does not. For
+metric as it controls for the systematic differences in article   instance, in the example of “Psychology”, the Spanish
+length and some of the systematic differences in linking          article links to “Biología” (Biology) but the German one
+behavior. In this way, OC provides the “best case” scenario       does not, even though both discuss biology. The last major
+for the global consensus assumption in terms of these             factor is seemingly random differences in descriptions.
+systematic differences.                                           While some of these could be less obviously or indirectly
+                                                                  cultural differences, it is not unreasonable to think that two
+Calculation of the OC was straightforward with one
+                                                                  people of the same culture with access to the same
+exception relating to links to time-related concepts. Because
+                                                                  information would describe a concept differently.
+the norm about linking to these concepts is different in each
+                                                                  Examining this phenomenon represents an important area
+of the Wikipedias studied, we used WikAPIdia’s
+                                                                  of future work.
+spatiotemporal package to filter out all links to years, dates,
+and months in our analyses. In languages where time-              THE EFFECT OF DIVERSITY ON TECHNOLOGIES
+related links occur, these form a substantial percentage of       In this section, we explore the effect that the large diversity
+outlinks on many pages, creating a signal that needed to be       of representations established above has on technologies
+neutralized in order to explore more general sub-concept          that use Wikipedia as a source of world knowledge. As a
+diversity.                                                        case study, we use one of the most generally applicable and
+                                                                  popular technologies developed around Wikipedia, the
+For this study, we used a sample of concepts in the global        semantic relatedness measure Explicit Semantic Analysis
+concepts list, filtered for perfect clarity. We also required     (ESA). ESA was first introduced by Gabrilovich and
+that each article have at least three outlinks, in order to       Markovitch [11], and has been shown to mimic human
+make our experiment non-trivial, and three inlinks, to            judgments on standard datasets better than any other
+ensure that each article was relatively integrated into its       semantic relatedness (SR) measure.
+Wikipedia. For each concept, we calculated the OC for
+every L1, L2 pair, leading to 600 pairs per concept. Our final    The semantic relatedness between two concepts can be
+sample consisted of over 217,000 of these pairs.                  defined as some measure of the number and strength of
+                                                                  relationships between the concepts. Semantic similarity,
+Results
+                                                                  perhaps more familiar to some readers, is a subset of
+The mean overlap coefficient for our sample was only 0.41
+                                                                  semantic relatedness in which the only relations considered
+(SD=0.2). This means that, on average, the longer of two
+                                                                  are hypernymy/hyponymy [5]. In addition to their implicit
+articles on the same concept contains only 41 percent of the
+                                                                  import as a model of human judgments, semantic
+outlinks in the shorter of the articles5. Adding in the
+                                                                  relatedness measures play an essential role in a variety of
+assumption in [1], a longer article on a concept C only
+                                                                  technologies including information visualization [3, 15],
+covers 41 percent of the content of a shorter article on C.
+                                                                  information retrieval, word sense disambiguation, text
+While the main driving force behind the concept-level             summarization and annotation, determining the structure of
+diversity seemed to be cultural (“self-focus” in particular),     texts, and lexical selection [5].
+the causes in the sub-concept context, on the other hand,
+                                                                  Our goal here is to determine if the diversity in world
+seem to be more mixed in nature. Certainly, cultural forces
+                                                                  knowledge representations described in the previous study
+are very prominent. In the case of the concept that is called
+                                                                  causes significantly different ESA scores for any two
+“Psychology” in English, for example, the Spanish article
+                                                                  concepts C1 and C2. This is an effect that could greatly
+(“Psicología”) contains many outlinks to Latin American
+                                                                  influence end-user applications (e.g. [3]).
+countries not contained in the German article
+(“Psychologie”). These links come from a section in the           Method
+“Psicología” page about Latin America’s contribution to           We built an ESA implementation based on the descriptions
+psychology. While many of these culture-specific instances        in [8, 11, 25]. ESA models concepts as vectors of their
+of sub-concept diversity are evident in links to articles on      abstract (bag-of-words-based) relationships with a set of
+geographic entities (as is suggested in the results of [14]),     other concepts. These “other concepts” are ESA’s world
+this is by no means always the case. The article on “Paz”         knowledge representation, and are defined using Wikipedia
+(Peace) in Spanish contains links to Christian concepts in a      articles. ESA compares the vectors of two input concepts C1
+discussion on peace in the Bible, links that are not in the       and C2 and the more similar the vectors, the higher the ESA
+English Wikipedia’s article on “Peace”.                           value (SR). A full description can be found in [11, 12].
+However, two other factors also seem to be at play. The           In implementing ESA for a large number of languages, we
+first is linking behavior. There are some cases in which          were forced to make several changes to the original
+articles in two languages describe the exact same content,        implementation. Due to the unavailability of standardized
+                                                                  tools for certain languages in this study (e.g. a Snowball
+                                                                  stemmer, a stop word list), we could only make fair
+5
+  We use “longer” here to mean having more outlinks in order to   comparisons between ESA implementations based on the
+simplify the discussion.                                          following ten languages: Spanish, Hungarian, Norwegian,
+Portuguese, Romanian, English, German, French, Italian,         generates very different semantic relatedness values
+and Danish.                                                     depending on the culture whose world knowledge is used.
+                                                                Had this not been the case, the correlations would have
+To validate our implementation, we tested our English
+                                                                been much closer to 1.0.
+version against a canonical human gold standard dataset in
+semantic relatedness (Miller and Charles 30 [19]) and                             Spanish     English     German      French
+achieved correlations that were comparable to the original       English             0.16        1.00        0.11        0.09
+ESA implementations (rs = 0.71). Since in our experiment         French              0.17        0.09        0.09        1.00
+                                                                 German              0.11        0.11        1.00        0.09
+we would be comparing between many named entity pairs,           Romanian            0.33        0.14        0.16        0.15
+we also evaluated our implementation against the only
+named entity SR dataset available (to our knowledge) [24],      Table 5: Correlation coefficients between SR values generated
+which comes from the bioinformatics domain. Interestingly,      by ESA systems based on different languages. This is a subset
+                                                                of the 10x10 matrix generated by the study.
+our English ESA (rs = 0.79) performed comparably to
+Pedersen et al.’s [24] SR measure (rs = 0.84) even though       Because of the differentiation in content, pairs that may
+Pedersen et al.’s was based on large amounts of expert          appear very related according to one ESA may not be
+knowledge.                                                      considered related according to another. Consider, for
+                                                                example, the concept pair “Germany” / “Saxony-Anhalt”.
+ESA is optimal as it allows us to change the concepts that
+                                                                In most of the languages, this pair receives high ESA
+are used for modeling. In other words, we can plug in world
+                                                                scores, but in Italian and Danish, ESA perceives no relation
+knowledge that varies in language and content relatively
+                                                                at all. This is because in Italian and Danish, the articles that
+easily. Using this flexibility, we performed two experiments
+                                                                make up the world knowledge do not mention “Germany”
+with ESA. In the first, we used as world knowledge the
+                                                                and “Saxony-Anhalt” together (or do not mention one or
+8,264 perfect clarity concepts (with |inlinks| and |outlinks|
+                                                                both at all) whereas the other languages do. Likewise, the
+>= 3) that existed in the intersection between the 10
+                                                                “Triumphal Arch” article in English mentions both an arch
+languages in the study (or rather, the specific article
+                                                                in Thessaloniki and in Iraq, whereas the German article
+instances of these concepts in each language). This models
+                                                                only mentions the Thessaloniki arch. Since “Triumphal
+the pure effect of sub-concept diversity on ESA without any
+                                                                Arch” is one of the ten-language concepts, this leads to
+concept-level effect. If C1 = “Argentina” and C2 =
+                                                                “Thessaloniki” / “Iraq” having a much higher SR value in
+“Sigmund Freud”, how much will ESASPANISH(C1, C2) differ
+                                                                English than in German. That is not to say there was not
+from ESAGERMAN(C1, C2) due to the sub-concept diversity in
+                                                                widespread “agreement” amongst all ESAs on certain
+the “Psychology” article?
+                                                                concept pairs. For instance, when C1 = “1945” and C2 =
+In the second experiment, we used as world knowledge            “1947”, all the ESAs returned relatively high values.
+10,000 randomly selected articles from each language (each      Obviously, these words occur frequently together in
+article was required to have five outlinks to ensure            Wikipedia articles, regardless of the language. Similarly,
+sufficient content). This is done to model another way in       many pairs such as “DVD” / “Djibouti” are not related in
+which ESA is typically implemented and because it               any language.
+includes concept-level diversity as well as sub-concept
+                                                                The results of the second experiment show similar trends to
+level diversity. To understand the possible effect of
+                                                                the first: mean r = 0.16 (0.18 without C1 = C2 pairs). In this
+concept-level diversity on ESA results, consider C1 =
+                                                                experiment, there are two forces behind the low
+“Country Music” and C2 = “Duo”. If the “Big and Rich”
+                                                                correlations: concept differences and language differences.
+article appeared in the ESAENGLISH 10,000 concepts,
+                                                                To tease out the effect of the language difference, we
+ESAENGLISH would understand a relationship between C1
+                                                                compared the values from the multilingual experiment to
+and C2 that none of the other ESAs would be able to
+                                                                those from an identical experiment using 16 random
+understand, increasing the resultant SR value relative to the
+                                                                English-only 10,000-article sets as world knowledge. The
+other ESA values.
+                                                                mean of the English-only simulation (rENG16 =.77 or .42
+For both experiments, we tested on 2,000 C1,C2 concept          without the C1 = C2 pairs) was significantly higher (p <
+pairs randomly selected from the list of global concepts        0.001) than the mean r in the multilingual experiment
+discussed above. For each language, C1 and C2 were set to       (rMULT = .16 or .18 without the C1 = C2 pairs). In other
+the title of the article of the concept in each language. We    words, given two ESA implementations, no matter which
+only used concepts that have single-word titles in all ten      two 10,000-article sets are used as world knowledge, if
+languages. Two pairs where C1 = C2 were included, and this      those sets are from the same language they will lead to
+is in line with typical SR human gold standard datasets such    more similar SR scores than if the sets are from different
+as WordSim353 [10].                                             languages (on average).
+Results                                                         DISCUSSION
+The effect of sub-concept diversity on the output values of     Throughout this paper we aimed to examine the veracity of
+ESA was extensive. The mean correlation coefficient r was       the global consensus hypothesis, quantify the degree of
+only 0.13 (0.16 without C1 = C2 pairs). In other words, ESA     knowledge diversity present across various Wikipedia
+language editions, and demonstrate the influence this              as context demands. For instance, if a system needs to
+knowledge diversity may have on technology.                        calculate the semantic relatedness between two entities for a
+                                                                   group of Romanian immigrants to the United States, the
+For researchers in HCI, AI and NLP, the rejection of the
+                                                                   Romanian Wikipedia could be swapped in and the English
+global consensus hypothesis has important implications for
+                                                                   Wikipedia swapped out.
+technologies that operate on Wikipedia directly. At the
+concept level, this work places an important boundary              Another important and exciting subset of culturally-aware
+condition on the utility of ideas like “information arbitrage”     applications is hyperlingual applications, which consider
+[2], which seeks to “leverage articles in one or more              world knowledge from multiple languages simultaneously.
+languages to improve content in another”. For instance, a          For instance, the work of Bergstrom and Karahalios could
+running example in [2] is articles on the concept “Jerry           be extended hyperlingually if a weighted combination of
+Seinfeld”, a concept that does not exist in eight of the           the native languages of the participants were considered.
+languages explored in this study. It is likely that for at least
+                                                                   A hyperlingual approach can provide enormous benefits in
+some of these eight language groups, Jerry Seinfeld has
+                                                                   terms of access to new world knowledge not available in
+insufficient cultural import to warrant and maintain an
+                                                                   any particular language edition (including English).
+article. More generally, it is possible that information
+                                                                   Researchers have not yet taken advantage of the articles
+arbitrage would be of little utility for a portion of the
+                                                                   lying outside the concept intersection between languages,
+Wikipedia articles that only exist in a single language.
+                                                                   despite the fact that these articles far outnumber articles in
+Ideas such as information arbitrage are also affected by sub-      the intersection. In other words, by donning a hyperlingual
+concept diversity. The wide-ranging extent of sub-concept          lens, technologists can utilize the diversity in knowledge
+diversity captures a great deal of culture-specific content        representations as well as the similarities.
+and researchers must be aware that sub-concept diversity
+                                                                   Future Directions
+does not simply represent information “inefficiencies” that        We are currently working on two hyperlingual applications
+need to be fixed. Propagating culture-specific information         that leverage the concept and sub-concept diversity findings
+such as that found in the “Psicología” article to other            in this paper. The first is effectively a “cultural reading
+Wikipedia language editions, for example, would likely be          level” application that will help people writing for an
+detrimental to end-users. Readers of the Danish Wikipedia          international audience to identify parochial or region-
+likely would not consider a section on psychology in Latin         specific references, as well as suggest appropriate
+America to be very relevant in the Danish “Psykologi”              alternatives. Secondly, we are building a system to help
+article. The research challenge ahead is learning to               foster the understanding of concept and sub-concept
+automatically separate culture-specific information – such
+                                                                   diversity in Wikipedia. The system will allow users to view
+as geographically focused examples – from information that
+                                                                   the intersection and union of world knowledge on a
+is largely globally relevant, like dates of birth, etc. This       particular concept. Importantly, it will also highlight the
+challenge plays an important role in future work.                  difference between the union and intersection for the user.
+The lack of global consensus also has large indirect effects       We used a text-only nascent implementation of this system
+on the larger class of Wikipedia-based applications. These         to identify some of the examples in this paper.
+are applications that use Wikipedia as a source of world           CONCLUSION
+knowledge to do non-Wikipedia actions. This directly               In this paper, we have provided four key contributions: (1)
+impacts end-user applications that implement ESA. For              we have shown that knowledge diversity across Wikipedias
+example, Bergstrom and Karahalios’s recent research [3]            is large and defined its extent, (2) we have demonstrated
+on the clustering of conversation topics on a shared display       that this diversity has a significant effect on technologies,
+relied upon an English Wikipedia-based ESA metric.                 (3) the first census of the effect of language on UGC
+However, if the group conversing is a multinational team of        repositories was executed, and (4) we have discussed
+scientists, our results suggest that clustering will be biased     design implications of these findings while introducing the
+toward any native English speakers in the group, as it             ideas of culturally-aware applications and hyperlingual
+would be their world knowledge used for the clustering.            applications. Moving forward, we hope this work will
+The results for a conversation that involved Thessaloniki          inform and inspire a new generation of multilingual
+and Iraq would be different than if the German Wikipedia           Wikipedia applications.
+were used.
+                                                                   ACKNOWLEDGEMENTS
+Implications for Design                                            We would like to thank Dr. Martin Raubal for his valuable
+While knowledge diversity can create problems in existing          insight and our labmates for their feedback. This work was
+technologies, it opens up opportunities for developing new         supported in part by National Science Foundation grant
+approaches to technology design. In particular, the potential      #0705901 and the Robert and Kaye Hiatt fund.
+for culturally-aware applications is enormous.
+                                                                   REFERENCES
+A culturally-aware application is an application that can          1. Adafre, S.F. and de Rijke, M. (2006). Finding Similar
+swap between different representations of world knowledge             Sentences Across Multiple Languages in Wikipedia.
+   EACL 2006 Workshop on New Text, Wikis and Blogs              17. Kittur, A. and Kraut, R. (2008). Harnessing the Wisdom
+   and Other Dynamic Text Sources. 62-69.                           of Crowds in Wikipedia: Quality Through Coordination.
+2. Adar, E., Skinner, M. and Weld, D.S. (2009).                     CSCW '08, 37-46.
+   Information Arbitrage Across Multi-lingual Wikipedia.        18. Lih, A. The Wikipedia Revolution: How a Bunch of
+   WSDM '09, 94-103.                                                Nobodies Created the World's Greatest Encyclopedia.
+3. Bergstrom, T. and Karahalios, K. (2009). Conversation            Hyperion, 2009.
+   clusters: grouping conversation topics through human-        19. Miller, G.A. and Charles, W.G. (1991). Contextual
+   computer dialog. CHI '09, 2349-2352.                            correlates of semantic similarity. Language and
+4. Bolikowski, ". (2009) Scale-free topology of the                Cognitive Processes, 6 (1). 1-28.
+   interlanguage links in Wikipedia.                            20. Milne, D. and Witten, I.H. (2008). Learning to Link
+   http://arxiv.org/abs/0904.0564.                                  with Wikipedia. CIKM '08, 1046-1055.
+5. Budanitsky, A. and Hirst, G. (2006). Evaluating              21. Muller, M.J. (2007). Comparing tagging vocabularies
+   WordNet-based Measures of Lexical Semantic                       among four enterprise tag-based services. GROUP '07,
+   Relatedness. Computational Linguistics, 32 (1). 13-47.           341-350.
+6. Burke, M. and Kraut, R. (2008). Mopping Up: Modeling         22. Oh, J.-H., Kawahara, D., Uchimoto, K., Kazama, J.i.
+   Wikipedia Promotion Decisions. CSCW '08, 27-36.                  and Torisawa, K. (2008). Enriching Multilingual
+7. Callahan, E. and Herring, S.C. (2009). Cultural Bias in          Language Resources by Discovering Missing Cross-
+   Wikipedia Content on Famous Persons. AoIR 10.0.                  Language Links in Wikipedia. WI-IAT 2008, 322-328.
+
+8. Cimiano, P., Schultz, A., Sizov, S., Sorg, P. and Staab,     23. Ortega, F., Gonzalez-Barahona, J.M. and Robles, G.
+   S., (2009). Explicit Versus Latent Concept Models for            (2008). On The Inequality of Contributions to
+   Cross-Language Information Retrieval. IJCAI '09,                 Wikipedia. HICSS '08, 304-311.
+   1513-1518.                                                   24. Pedersen, T., Pakhomov, S.V.S., Patwardhand, S. and
+9. Erdmann, M., Nakayama, K., Hara, T. and Nishio, S.               Chute, C.G. (2007). Meaures of semantic similarity and
+   (2008). A Bilingual Dictionary Extracted from the                relatedness in the biomedical domain. Journal of
+   Wikipedia Link Structure. DASFAA ‘08, 686 – 689.                 Biomedical Informatics, 2007 (40). 288-299.
+10. Finkelstein, L., Gabrilovich, E., Matias, Y., Rivlin, E.,   25. Potthast, M., Stein, B. and Anderka, M. (2008). A
+   Solan, Z., Wolfman, G. and Ruppin, E. (2002). Placing            Wikipedia-Based Multilingual Retrieval Model. ECIR
+   Seach in Context: The Concept Revisited. ACM                     '08, 522-530.
+   Transactions on Information Systems, 20 (1). 116-131.        26. Priedhorsky, R., Chen, J., Lam, S.T., Panciera, K.,
+11. Gabrilovich, E. and Markovitch, S. (2007). Computing            Terveen, L.G. and Riedl, J. (2007). Creating,
+   Semantic Relatedness using Wikipedia-based Explicit              Destroying, and Restoring Value in Wikipedia. GROUP
+   Semantic Analysis. IJCAI '07, 1606-1611.                         2007.
+12. Gabrilovich, E. and Markovitch, S. (2009). Wikipedia-       27. Sorg, P. and Cimiano, P. (2008). Enriching the
+   based Semantic Interpretation for Natural Language               Crosslingual Link Structure of Wikipedia - A
+   Processing. Journal of Artificial Intelligence Research          Classification-based Approach. WIKI-AI '08.
+   (JAIR), 34. 443-498.                                         28. Weld, D.S., Wu, F., Adar, E., Amershi, S., Fogarty, J.,
+13. Hassan, S. and Mihalcea, R. (2009). Cross-lingual               Hoffman, R., Patel, K. and Skinner, M. (2008).
+    Semantic Relatedness Using Encyclopedic Knowledge.              Intelligence in Wikipedia. AAAI '08.
+    EMNLP’09, 1192-1201.                                        29. Yamashita, N., Inaba, R., Kuzuoka, H. and Ishida, T.
+14. Hecht, B. and Gergle, D. (2009). Measuring Self-Focus           (2009). Difficulties in establishing common ground in
+    Bias in Community-Maintained Knowledge                          multiparty groups using machine translation. CHI' 09,
+    Repositories. Communities & Technologies 2009, 11-              679-688.
+    21.                                                         30. Zesch, T., Müller, C. and Gurevych, I. (2008).
+15. Hecht, B. and Raubal, M. (2008). GeoSR:                         Extracting Lexical Semantic Knowledge from
+    Geographically explore semantic relations in world              Wikipedia and Wiktionary. LREC '08, 1646-1652.
+    knowledge. AGILE '08: International Conference on
+    Geographic Information Science, 95 - 114.
+16. Kittur, A., Chi, E., Pendleton, B.A., Suh, B. and
+    Mytkowicz, T. (2007). Power of the Few vs. Wisdom of
+    the Crowd: Wikipedia and the Rise of the Bourgeoisie.
+    CHI '07, 1-9.
+

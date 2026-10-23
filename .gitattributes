@@ -1,0 +1,6 @@
+# Preserve source and archived evidence bytes without line-ending conversion.
+* -text
+
+*.pdf binary
+*.pptx binary
+*.png binary

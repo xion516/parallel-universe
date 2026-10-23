@@ -1,0 +1,48 @@
+{
+  "yoo_2025": {
+    "articles": 150,
+    "results": {
+      "aggregate": {
+        "n_units": 150,
+        "fleiss_kappa": 0.9834728955486998
+      },
+      "headline": {
+        "n_units": 149,
+        "fleiss_kappa": 0.9631017631909131
+      },
+      "conclusion": {
+        "n_units": 150,
+        "fleiss_kappa": 1.0
+      },
+      "quotation": {
+        "n_units": 314,
+        "fleiss_kappa": 0.9941782134160663
+      }
+    },
+    "scope": "Recomputed from authors public annotation labels; not independent recoding or a rerun of the judge."
+  },
+  "awwad_2026": {
+    "counts": [
+      [
+        276,
+        74,
+        18,
+        32
+      ],
+      [
+        190,
+        97,
+        41,
+        72
+      ]
+    ],
+    "chi2": 43.31552896618576,
+    "df": 3,
+    "p": 2.1091836066763946e-09,
+    "cramers_v": 0.23268951675512198,
+    "english_security_pct": 69.0,
+    "arabic_security_pct": 47.5,
+    "total_variation_distance": 0.21499999999999997,
+    "scope": "Recomputed from published pooled table; not response-level reproduction."
+  }
+}

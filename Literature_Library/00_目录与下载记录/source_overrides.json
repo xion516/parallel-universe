@@ -1,0 +1,79 @@
+{
+  "L12": [
+    "https://arxiv.org/pdf/2311.14096"
+  ],
+  "L13": [
+    "https://arxiv.org/pdf/2306.16388"
+  ],
+  "I03": [
+    "https://ojs.aaai.org/index.php/AIES/article/download/36552/38690/40627",
+    "https://arxiv.org/pdf/2407.18008"
+  ],
+  "I04": [
+    "https://arxiv.org/pdf/2509.12517"
+  ],
+  "I07": [
+    "https://cocosci.princeton.edu/papers/bai2025.pdf",
+    "https://knowledge.uchicago.edu/records/tjf2c-2fn86"
+  ],
+  "F01": [
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC13142764/pdf/sciadv.adz2924.pdf",
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC13142764/"
+  ],
+  "R01": [
+    "https://www.ziangxiao.com/pdf/%5Bp%5DSharma_Generative_echo_chamber_Effect_of_LLM-powered_search_systems_on_diverse_information_seeking.pdf",
+    "https://arxiv.org/pdf/2402.05880"
+  ],
+  "R03": [
+    "https://researchportal.tuni.fi/files/164620547/ReFaRAG_Re-ranking_for_Bias_Mitigation_in_Retrieval-Augmented_Generation.pdf",
+    "https://homepages.tuni.fi/konstantinos.stefanidis/docs/FEHDA2025.pdf"
+  ],
+  "R04": [
+    "https://841.io/doc/fairrag.pdf",
+    "https://arxiv.org/pdf/2409.11598"
+  ],
+  "M12": [
+    "https://faculty.wcas.northwestern.edu/jnd260/pub/Chong%20Druckman%20Annual%20Review%202007.pdf",
+    "https://sites.socsci.uci.edu/~lpearl/courses/readings/ChongDruckman2007_FramingTheory.pdf"
+  ],
+  "M13": [
+    "https://stanford.edu/class/psych205/papers/Tversky-Kahneman-1981.pdf"
+  ],
+  "M14": [
+    "https://web.stanford.edu/~gentzkow/research/biasmeas.pdf"
+  ],
+  "M15": [
+    "https://brenthecht.com/papers/bhecht_chi2010_towerofbabel.pdf",
+    "https://arxiv.org/pdf/1904.01689"
+  ],
+  "M18": [
+    "https://objectionable.net/wp-content/uploads/2018/09/nguyen-echo-chambers-and-epistemic-bubbles.pdf",
+    "https://philpapers.org/archive/NGUECA.pdf"
+  ],
+  "M11": [
+    "https://fbaum.unc.edu/teaching/articles/J-Communication-1993-Entman.pdf",
+    "https://is.muni.cz/el/fss/jaro2017/POL510/um/68100463/Entman_1993.pdf"
+  ],
+  "H01": [
+    "https://www.zhangzhaowei.me/tutorials/AI_for_helping_people_to_find_consensus.pdf",
+    "https://www.rivista.ai/wp-content/uploads/2024/10/science.adq2852.pdf"
+  ],
+  "H03": [
+    "https://s3.amazonaws.com/media.mediapost.com/uploads/science.aec8352.pdf",
+    "https://arxiv.org/pdf/2510.01395"
+  ],
+  "H04": [
+    "https://researchonline.lse.ac.uk/id/eprint/130605/1/combined_file_002_.pdf",
+    "https://arxiv.org/pdf/2507.13919"
+  ],
+  "H05": [
+    "https://marketing.wharton.upenn.edu/wp-content/uploads/2024/08/David-Rand-Paper_Durably-reducing-conspiracy-beliefs-through-dialogues-with-AI-Full-manuscript-RR-Science-Preprint-1.pdf"
+  ],
+  "R12": [
+    "https://run.unl.pt/server/api/core/bitstreams/61f33dc6-222f-46ff-a1c2-743d6f60ba98/content"
+  ],
+  "R02": [
+    "https://dl.acm.org/doi/pdf/10.1145/3805712.3809651",
+    "https://dl.acm.org/doi/10.1145/3805712.3809651"
+  ]
+}

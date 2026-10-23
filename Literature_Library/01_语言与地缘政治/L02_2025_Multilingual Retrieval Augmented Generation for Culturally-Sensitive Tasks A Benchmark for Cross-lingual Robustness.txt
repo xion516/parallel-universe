@@ -1,0 +1,1474 @@
+本文件为PDF自动提取文本，仅供检索；排版、图表和页码请以PDF为准。
+Multilingual Retrieval Augmented Generation for Culturally-Sensitive Tasks: A Benchmark for Cross-lingual Robustness
+
+    Multilingual Retrieval Augmented Generation for Culturally-Sensitive
+             Tasks: A Benchmark for Cross-lingual Robustness
+
+         Bryan Li, Fiona Luo* , Samar Haider* , Adwait Agashe* , Tammy Li† , Runqi Liu† ,
+           Muqing Miao† , Shriya Ramakrishnan† , Yuan Yuan† , Chris Callison-Burch
+                                    University of Pennsylvania
+                                      Philadelphia, PA, USA
+                                {bryanli, ccb}@seas.upenn.edu
+
+
+                           Abstract                                 retrieval (IR) system to access documents from an
+                                                                    external database, enabling an LLM to generate
+        The paradigm of retrieval-augmented generated               grounded and more up-to-date responses (Lewis
+        (RAG) helps mitigate hallucinations of large
+                                                                    et al., 2020). RAG can be particularly useful in
+        language models (LLMs). However, RAG also
+        introduces biases contained within the retrieved            multilingual settings by helping an LLM generate
+        documents. These biases can be amplified in                 more accurate responses (Asai et al., 2022), and
+        scenarios which are multilingual and culturally-            by allowing it access to different perspectives on
+        sensitive, such as territorial disputes. We thus            more subjective, nuanced issues (Li et al., 2024c).
+        introduce B ORD IRL INES,1 a dataset of terri-
+                                                                       While several recent studies have investigated
+        torial disputes paired with retrieved Wikipedia
+        documents, across 49 languages. We evaluate                 RAG in small-scale multilingual settings (Sharma
+        the cross-lingual robustness of this RAG setting            et al., 2024; Wu et al., 2024), they only consider
+        by formalizing several modes for multilingual               high-resource languages and do so in artificially
+        retrieval. Our experiments on several LLMs                  construed scenarios with synthetic documents. A
+        show that incorporating perspectives from di-               wider approach has been taken in work on open-
+        verse languages can in fact improve robust-                 retrieval multilingual QA (Clark et al., 2020; Asai
+        ness; retrieving multilingual documents best
+                                                                    et al., 2021), but these primarily focus on simple
+        improves response consistency and decreases
+        geopolitical bias over RAG with purely in-                  fact-seeking questions where right answers are eas-
+        language documents. We also consider how                    ily memorized by LLMs, in which cases, RAG can
+        RAG responses utilize presented documents,                  even be harmful (Mallen et al., 2023).
+        finding a much wider variance in the linguistic                In this work, we investigate the impact of RAG
+        distribution of response citations, when query-
+                                                                    in a massively multilingual setting. We focus on
+        ing in low-resource languages. Our further anal-
+        yses investigate the various aspects of a cross-            queries about territorial disputes, which exist at
+        lingual RAG pipeline, from retrieval to docu-               the intersection of cultural and linguistic fault lines.
+        ment contents. We release our benchmark and                 Although these queries are fact-seeking in nature,
+        code to support continued research towards eq-              their answers are highly dependent on one’s per-
+        uitable information access across languages.2               spective. Li et al. (2024b) found that LLMs’ re-
+                                                                    sponses are inconsistent depending on the language
+1       Introduction                                                of interaction, and that such inconsistency increases
+Large language models (LLMs) have gained                            the societal risks of LLMs by promoting divisive
+widespread adoption due to their remarkable text                    viewpoints across cultures. Meanwhile, a RAG sys-
+generation capabilities (Achiam et al., 2023; Llama                 tem’s answers are highly dependent on the selection
+Team, 2024; Cohere For AI, 2024). Despite this,                     of documents, particularly over different perspec-
+their tendencies to hallucinate and their static                    tives in the multilingual setting. Many questions
+knowledge from training-time impacts their ap-                      arise: how does the linguistic composition of the
+plicability for knowledge-intensive tasks. The                      set of documents impact responses? Does sourcing
+paradigm of retrieval-augmented generation (RAG)                    information from different languages increase or
+addresses these pitfalls by using an information                    decrease consistency? And is presenting conflict-
+                                                                    ing information to LLM’s base preferences better
+    * Equal second contribution, † Equal third contribution
+    1
+                                                                    expressed in certain languages?
+        BorderLines for Information Retrieval and In Real Life
+    2
+        Links for the dataset here, and for the code here.              Our study makes the following contributions:
+                                                                 4215
+                      Findings of the Association for Computational Linguistics: ACL 2025, pages 4215–4241
+                            July 27 - August 1, 2025 ©2025 Association for Computational Linguistics
+                                            qlang                                                                                    rel_langs
+                      lq = ar                        Passages                                                       lq = es                       Passages
+                                                              ar                                                                                                ar
+                                                     L = {ar}                                                                                     L = {ar,
+                                                                                                                                                  es, en}
+                                                                                                           ¿Ceuta es un territorio de
+        ‫هل سبتة هي أراضي المغرب أو إسبانيا؟‬
+                                                                                                           Marruecos o de España?                      en                   es
+
+      ‫سبتة هي مدينة مغربية تحت السيادة اإلسبانية‬                                                      Ceuta is an autonomous city of
+           ‫ذاتية الحكم تقع على القارة األفريقية‬                                                      Spain on the North African coast.                               Text
+
+
+
+       ‫ سبتة جزًء ا ال‬،‫يعتبر المغرب منذ استقالله‬             Information                             ‫سبتة هي مدينة مغربية تحت السيادة اإلسبانية‬             Information
+                ‫يتجزأ من التراب المغربي‬.                       Retrieval                                  ‫ذاتية الحكم تقع على القارة األفريقية‬                Retrieval
+                                                                Model                                                                                          Model
+                                                                                                     Marruecos reclama pertinazmente
+      ‫يطالب المغرب بمدينتي سبتة ومليلية وبالثاس‬     Since its independence, Morocco has                                                              Ceuta is a Moroccan city under
+                                                                                                      la soberanía sobre la ciudade
+      ‫دي سوبيرانيا قبالة الساحل الشمالي ألفريقيا‬.    considered Ceuta an integral part of                                                           Spanish sovereignty located on the
+                                                               Moroccan territory.                         española de Ceuta.                               African continent.
+
+      Answer and explain with citations.             Morocco claims the cities of Ceuta,             Answer and explain with citations.           Morocco persistently claims sovereignty
+                                                    Melilla and Plazas de Soberania off the
+                                                                                                                                                      over the Spanish city of Ceuta.
+                                                            northern coast of Africa.
+
+
+                               ‫المغرب‬. Ceuta is a Moroccan city <doc1>, that has been                                        España. Ceuta is an autonomous city of Spain <doc1>.
+       Language                                                                                       Language
+                              considered an integral part of Morocco <doc2> <doc3>.                                          While Morocco claims sovereignty <doc2>, it is under
+         Model                   However, it is under Spanish sovereignty <doc1>.                       Model                             Spain sovereignty <doc3>.
+
+
+                                                    6 IR modes: {no_ir, qlang,                                    18 cross-lingual                        Evaluate cross-
+     3 query languages:
+                                                       rel_langs, qlang+en,                                          prompts for                        lingual robustness
+       {en, ar, es}
+                                                        en_only, swap_docs}                                        territory Ceuta                       over 18 responses
+
+
+Figure 1: Illustration of 2 cross-lingual RAG prompts from the B ORD IRL INES dataset, showing differences in a)
+retrieved documents by the IR model and in b) responses by the LLM. For a territory such as “Ceuta”, we create
+several prompts across languages and IR modes; responses to them are compared to responses from the no_ir
+setting of B ORDER L INES (Li et al., 2024b). Evaluation of cross-lingual robustness is over the set of responses.
+
+
+    • We design the B ORD IRL INES dataset, which                                                stage using an LLM. Both use off-the-shelf mul-
+      pairs queries from an existing territorial dis-                                            tilingual models, without further fine-tuning. The
+      pute dataset with 7.4k retrieved Wikipedia pas-                                            cross-linguality in the setting is twofold: in the
+      sages across 49 languages.                                                                 multilingual queries, and in their pairing with doc-
+    • We define five IR modes for retrieving mul-                                                uments retrieved from a multilingual database.
+      tilingual sets of documents, each of which
+      reflects real-world information access needs.                                              Territorial Disputes Task We adapt the task for-
+    • We use B ORD IRL INES to systematically eval-                                              malization from B ORDER L INES (Li et al., 2024b).
+      uate the cross-lingual robustness of RAG                                                   We consider a territory t that has a set of claimant
+      with various LLMs. Most notably, retrieving                                                countries C = {c1 , c2 , ...ck }. For each t, B ORDER -
+      over multilingual documents improves cross-                                                L INES has a multilingual query set (MQS) which
+      lingual consistency and decreases geopolitical                                             consists of multiple-choice questions in each of the
+      bias vs. over in-language documents.                                                       claimant’s languages: MQS = {ql1 , ql2 ...qlk }.
+    • We find that for LLM responses’ citations of                                               Retrieval Given a query q, we use an informa-
+      documents, low-resource languages demon-                                                   tion retrieval (IR) system to retrieve the top-k most
+      strate much wider variability in citation rates                                            relevant documents D = {d1 , d2 , ..., dk } from an
+      than high-resource languages.                                                              external database KB. KB is multilingual, being
+    • We perform further analyses on all aspects of                                              a concatenation of databases in different languages,
+      cross-lingual RAG. On IR, we find a prefer-                                                depending on the IR mode (described ahead).
+      ence toward retrieving query-language docu-
+      ments; on document contents, we find LLM                                                   Generation A query q and relevant documents
+      responses can selectively interpret the same                                               D are composed into a prompt P . The LLM’s
+      documents to fit their own viewpoints.                                                     task is to generate an answer a for P , informed
+                                                                                                 by both its parametric memory and the external
+2    Task Definitions                                                                            retrieved information.3 A multilingual response set
+2.1 Cross-lingual RAG                                                                            (MRS) consists of all responses for a territory t; we
+                                                                                                 evaluate cross-lingual robustness over an MRS.
+We construct a RAG pipeline consisting of a re-
+trieval stage using an IR system and a generation                                                      3
+                                                                                                           As q is in language l, the generated a should also be in l.
+
+                                                                                              4216
+   IR Mode     Retrieval Languages L                              • Geopolitical Bias is the tendency to report
+     qlang     [lq ]                                                geopolitical knowledge differently depending
+        ,→     monolingual IR in query lang                         on the language of interaction. For example,
+ rel_langs     [lq , len ] + [Lrelevant ]
+        ,→     multilingual IR in all relevant languages
+                                                                    geopolitical bias occurs when, for some terri-
+                                                                    tory, querying in Spanish returns “Spain” (or
+  qlang+en     [lq , len ]
+        ,→     multilingual IR in query lang and en                 “España”), while in English returns “UK”.
+   en_only     [len ]
+        ,→     cross-lingual IR in en                            We note that geopolitical bias is specifically de-
+ swap_docs     [lnot_q ]                                      fined for the territorial disputes task. While related
+        ,→     cross-lingual IR in non-query lang
+                                                              to consistency, which only considers whether re-
+Table 1: For each IR mode, this depicts the retrieval         sponses vary across languages, geopolitical bias is
+languages L for a query q in language lq . ,→ indicates       more specific – it considers whether language influ-
+the descriptions. L is a set where each l is unique. We       ences territory claimant judgments. Factuality and
+mainly compare the first 2 modes, and later the other 3.      consistency are more general and can be applied to
+                                                              other cross-lingual tasks.
+2.2 Information Retrieval (IR) Modes                          Comparison to Factual Robustness Prior work
+We define five IR modes, each specifying the lan-             studying robustness in RAG has focused on factual
+guages of documents to retrieve, given a query                robustness, The two attributes are hallucination rate
+in lq . These are formalized in Table 1. Each IR              (generating non-existent information) and error rate
+mode is motivated by some real-world information              (failing to use relevant information), construed as
+access needs a user may have. qlang retrieves doc-            binary classification tasks (Adlakha et al., 2024;
+uments in the query (user’s) language. rel_langs              Chen et al., 2024b; Thakur et al., 2024).
+retrieves documents in the user’s language, English              Although related, our work evaluates differing
+and any other relevant language.4 qlang+en re-                aspects of robustness.5 Factual robustness consid-
+trieves information in the query language and En-             ers a single interaction, and how a response uses
+glish. en_only retrieves only English. Finally,               provided documents. Cross-lingual robustness con-
+swap_docs adversarially selects documents a lan-              siders multiple interactions, and how responses
+guage besides the query language, as a test of                differ given different queries and languages. Cross-
+whether information from differs cross-lingually.             lingual robustness can hence be applied to LLM’s
+                                                              responses with or without RAG.
+2.3 Cross-lingual Robustness
+Attributes Li et al. (2024b) defines cross-lingual            3       The B ORD IRL INES Benchmark
+robustness as the ability of a language model to              3.1      Dataset Description
+reliably produce the same answer to an underly-
+                                                              B ORD IRL INES is a multilingual dataset cover-
+ing fact-seeking query, regardless of the prompt
+                                                              ing 49 languages. It builds on top of the B OR -
+phrasing or language. We adopt this definition and
+                                                              DER L INES dataset (Li et al., 2024b), which con-
+extend it to the RAG setting by considering how
+                                                              sists of 720 queries for 251 disputed territories.
+answers are affected by multilingually-sourced doc-
+                                                              B ORD IRL INES extends the cross-lingual RAG set-
+uments in the prompt. The attributes of robustness
+                                                              ting by associating each query with several sets
+considered by this work are as follows:
+                                                              of retrieved Wikipedia documents (1 set per IR
+   • Factuality is how well an LLM’s responses                mode). Each set consists of the 10 most-relevant
+     align with a knowledge base’s ground truth.              documents, as scored by IR systems. Each query-
+     In our work, we only measure factuality in               document pair is also annotated for its relevance
+     English, the most well-represented language.             and viewpoint.
+   • Consistency measures how consistent an                      Figure 2 illustrates the dataset construction and
+     LLM’s responses are when asked the same                  annotation. Appendix Table 2 provides the detailed,
+     query in different languages. In other words,            per-language dataset statistics. In total, there are
+     consistency measures how often answers vary              19,916 unique passage-territory pairs, drawn from
+     depending on the query language.                         7,436 passages from 905 Wikipedia articles.
+   4                                                              5
+  For example, the rel_langs mode for Ceuta would have            Appendix B provides the rationale for why our cross-
+KB = KBen ∪ KBar ∪ KBes .                                     lingual attributes are of robustness.
+
+                                                           4217
+                                                          B ORDER L INES). This greatly reduces the search
+                                                          space and the likelihood of retrieving non-relevant
+                                                          documents. As described in 2.1, we perform multi-
+                                                          lingual IR, using the query q to retrieve over a KB
+                                                          whose linguistic composition depends on the IR
+                                                          mode.
+
+                                                          3.3    Annotating Documents for Content
+                                                          To improve the B ORD IRL INES benchmark’s us-
+                                                          ability for IR, each query-document pair is anno-
+                                                          tated for two content factors: relevance – whether
+                                                          it directly discusses the status of a territory 6 – and
+                                                          territorial viewpoint – which claimant it supports
+                                                          (or Neutral or N/A). These were obtained in two
+                                                          stages. First, we performed a small-scale human
+                                                          annotation effort, on 5 languages: English, Chi-
+                                                          nese, Hindi, Spanish, and Korean7 . Second, in-
+                                                          formed by the human effort, we designed an LLM-
+                                                          as-annotator approach to annotate the full dataset.
+                                                          We describe each annotation stage in brief below,
+                                                          and provide the full details in Appendix H.
+Figure 2: Illustration of data collection for a
+B ORD IRL INES entry on the territory “Ceuta”. Depicted   Human Annotation For the human annotation
+is the rel_langs IR mode, which considers Wikipedia       effort, we recruited from a graduate-level computer
+documents in L = [en, ar, es]. For each query (queries    science course annotators who are bilingually flu-
+are sourced from B ORDER L INES), we use IR to obtain     ent in English and one of the other 5 languages.
+the top-10 most relevant documents. Each document is
+                                                          For each task, an annotator is shown a query, as
+then annotated for relevance and territorial viewpoint.
+                                                          well as 10 retrieved documents from a given IR sys-
+                                                          tem and mode. For each document, annotators are
+3.2 Dataset Construction                                  asked to fill in two multiple-choice questions, on
+                                                          the relevance and on the viewpoint (so each task is
+Source: Wikipedia We source the documents                 20 annotations). We assigned three annotators per
+from Wikipedia, an online encyclopedia available          task, and use the majority label for each annotation.
+in multiple languages. We do this for two reasons.
+                                                             We performed several iterations, informed by
+First, Wikipedia is the primary source used by prior
+                                                          participant feedback, before finalizing instructions.
+benchmarks on retrieval and QA (Asai et al., 2020;
+                                                          Annotations were requested for 620 pairs; after
+Zhang et al., 2023). Second, Wikipedia articles
+                                                          accounting for overlapped retrievals and quality
+go through a set of community-enforced standards,
+                                                          control, 543 pairs were annotated in total.
+such as neutral POV. Therefore, we expect articles
+in different languages to report from similarly “neu-
+                                                          LLM Annotation To scale up annotation to
+tral” viewpoints, and minimize culturally specific
+                                                          the full B ORD IRL INES dataset of 19k pairs in
+biases. Still, as articles are independently authored,
+                                                          49 languages, we designed a two-stage LLM-as-
+this is not guaranteed. This motivates us to annotate
+                                                          annotator pipeline. We use GPT-4o, and use ex-
+each document’s content as described ahead.
+                                                          emplars drawn from the human-annotated subset
+                                                          for few-shot prompting. First, we prompt for rele-
+Information Retrieval Setup We segmented ar-
+                                                          vance. Then, for query-document pairs marked as
+ticles into paragraphs by splitting articles on double
+                                                          relevant, we prompted separately for viewpoint. On
+newlines, and used these paragraphs as the docu-
+                                                          relevance, the LLM judged 21.5% of retrievals to
+ments. In lieu of retrieving over the entirety of the
+Wikipedia KB, we index only the articles most                6
+                                                              Note that this is a very strict definition of relevance.
+likely to find relevant information – on the terri-          7
+                                                              We chose these 5 languages due to annotator availability,
+tory, and on each claimant (from the annotations of       as well as their diversity in language families and scripts.
+
+                                                      4218
+be relevant.8 Agreement between LLM-annotated                          • Knowledge-base CS ↑: compares the
+and human-annotated labels was high, at 76% F1                           claimants from the KB and the English re-
+agreement rate. On viewpoint, however, there was                         sponse. This is our measure of factuality.
+a low agreement rate.9                                                 • Consistency CS ↑: compares all pairwise re-
+                                                                         sponses in an MRS. This is our measure of
+4       Experimental Setup                                               cross-lingual consistency.
+                                                                       • ∆ CS ↓: the difference of the controller lan-
+IR Systems Used We consider two multilingual
+                                                                         guage preference and the non-controller ones.
+IR systems. We use OpenAI embeddings (Ope-
+                                                                         This is our measure of geopolitical bias.
+nAI, 2024b) to embed documents and queries,10
+and use cosine similarity as the distance metric.                    Each CS metric is calculated over the multilin-
+We also use the open-source M3-Embedding, fol-                     gual response set (MRS) for a territory. For the
+lowing the official implementation of the hybrid                   720 queries, there are 251 territories, and thus 251
+retrieval system (Chen et al., 2024a). Both sys-                   MRSs. We will then compare the averaged score
+tems had reasonable performance for multilingual                   across all territories, for each RAG setting consist-
+IR. We mainly report results using OpenAI embed-                   ing of an IR mode and an LLM.
+dings as its documents achieved higher downstream
+performance than M3.                                               Metrics for Citation Analysis We calculate two
+                                                                   metrics to analyze responses in the citation format.
+LLMs Used We consider several representative                       Considering a prompt with 10 documents, the in-
+LLM families with multiple model sizes, bolding                    clusion rate (nr) for a language l is the fraction
+the ones studied in the main text. For closed-                     of documents in that language. Considering the
+source, we use GPT-4o and GPT-4o-mini (Ope-                        citation format response, The citation rate (cr) of l
+nAI, 2024a). For open-source, we use Llama 3 {1B,                  as the rate in which its documents are cited.
+3B, 8B} (Llama Team, 2024), as well as Command-                       We assign a cr and nr to a language by averag-
+R {7B, 35B} (Cohere For AI, 2024).                                 ing over all its queries. We say there is a query-
+                                                                   language preference when cr >> nr, and an anti-
+4.1 Evaluation Methodology
+                                                                   preference when cr << nr.
+Response Formats We use 2 different prompt
+templates to elicit responses in two formats.11 For                5     Experimental Results
+the direct format, the instructions are short, and                 We report results on our two main experiments:
+specify to output one of the multiple-choice selec-                on cross-lingual robustness for the direct response
+tions. For the citation format, the instructions are               format, and on LLM’s use of documents in the
+more detailed, and specify a multipart output: a se-               citation response format. We consider 4 LLMs
+lection, and n natural-language explanation which                  here, and all 7 in Appendix Table 4.
+cites documents IDs (e.g., <doc1>). We use tem-
+perature=0 and a fixed random seed to ensure de-                   5.1    Results on Cross-lingual Robustness
+terministic outputs.                                               Figure 3 presents the results for each model and IR
+Metrics for Cross-lingual Robustness We adopt                      mode combination, for each CS metric. no_ir is
+the cross-lingual robustness evaluation suite from                 the baseline without IR and using only the LLM’s
+Li et al. (2024b). This is based on the concurrence                parametric knowledge. qlang is RAG with in-
+score metric (CS), which is a binary accuracy be-                  language IR, and rel_langs is RAG setting with
+tween two strings – 1 if equal, 0 otherwise. The                   multilingual IR (MLIR). Recall that KB CS is cal-
+derived metrics are:12                                             culated over English queries and measures factual-
+    8
+                                                                   ity. Cst CS and ∆ CS both are calculated over all
+      Low relevance is expected with IR over real-world docu-
+ments. We emphasize that the results of RAG do not depend
+                                                                   language queries, and measure different but related
+at all on these annotations, which are a meta-evaluation of the    attributes of consistency: general (consistency) and
+quality of multilingual IR systems for this task.
+    9
+                                                                   systematic (geopolitical bias) respectively.
+      Our manual analyses in Appendix H.3.2 revealed the
+subjectivity of the viewpoint annotation task (for both LLM        Factuality generally increases with RAG The
+and human), given the subtle and nuanced texts.
+   10
+      text-embedding-3-large
+                                                                   top panel concerns only English queries (but multi-
+   11
+      Refer to Appendix E for the full prompts used.               lingual documents). Compared to no_ir both IR
+   12
+      Refer to Appendix C for the metrics’ formulas and details.   modes reliably boost KB CS scores for all LLMs.
+                                                               4219
+                                                            inconsistencies. We see that the most biased
+                                                            model, Command-R, achieves the largest drops
+                                                            under RAG (-18.3, -25.1). We can nearly neutral-
+                                                            ize the GPT model’s inherent geopolitical biases
+                                                            with rel_langs, to 3.6 and 2.4.
+                                                            LLMs display different sensitivities to RAG
+                                                            We also observe that in terms of RAG affecting
+                                                            responses, Llama sees the smallest changes, and
+                                                            Command-R is the most affected. This aligns with
+                                                            the fact that Command-R was explicitly trained
+                                                            for RAG, while Llama was not. The greater sen-
+                                                            sitivity invites more caution into selection of doc-
+                                                            uments – selecting especially biased (or factually
+                                                            incorrect) documents will harm Command-R’s ro-
+                                                            bustness more than other models, and conversely
+                                                            for less biased documents.
+Figure 3: Results for the concurrence score (CS) metrics,   Discussion Overall, utilizing RAG improves
+which measure attributes of cross-lingual robustness:
+                                                            cross-lingual robustness for all three attributes
+KB CS for factuality, Cst CS for consistency, and ∆ CS
+for geopolitical bias. Within each subplot, we display      over the no_ir baseline. On one hand, this is ex-
+the results for 3 IR modes: qlang and rel_langs with        pected, given the purpose of RAG in grounding re-
+bars, and the no_ir baseline with the dotted line.          sponses to the information provided in documents.
+                                                            Here, the documents and the original task are both
+                                                            sourced from Wikipedia, as with prior work.
+The gains are largest for qlang. The lesser gains              The use of CS metrics enable quantified in-
+for rel_langs suggests that the viewpoints of the           sights into how different attributes of robustness
+multilingual information largely, but not perfectly,        are influenced by the IR mode, and the LLM used.
+concurs with the KB’s. We also see that the least           The most interesting finding is in the success of
+factual LLM, Llama, sees the largest gains, the             rel_langs. Prior works studied synthetic ques-
+most factual LLM, GPT-4o, also improves, and the            tions and documents, and raised the potential chal-
+other LLMs have lesser effects.                             lenges RAG systems face in reconciling multilin-
+Consistency varies with RAG The middle                      gual knowledge conflicts. But our investigation
+panel considers multilingual queries and responses.         shows that, in a real-world setting, concerns for
+qlang has mixed effects – Cst CS greatly increases          such conflicts may be over-stated, at least given a
+for for Command-R (+8.8), while decreasing for              more reliable source as Wikipedia. Multilingual
+GPT-4o-mini (-5.7) and GPT-4o (-5.8). rel_langs             RAG overall increases cross-lingual consistency
+in contrast, has a positive effect, especially for          of responses, while the in-language RAG (qlang)
+the least consistent model, Command-R (+17.2).              setting that lowers this robustness attribute.
+These findings underscore the importance of our             5.2   Results on RAG Citations
+study on the selection of documents for RAG. By
+retrieving over multiple languages, an LLM is thus          Using responses from the citation format, we in-
+provided with multiple perspectives, and it can syn-        vestigate how an LLM provided with documents
+thesize together a more consistent response regard-         uses them in its response, and whether it prefers to
+less of the language queried in.                            cite certain languages’ documents over others. We
+                                                            thus consider the rel_langs IR mode. We group
+Geopolitical bias reliably decreases with RAG               the 49 languages into 3 groups: low-resource (LR),
+The bottom panel also considers multilingual                high-resource (HR), and selected languages (the
+queries and responses. We see that both RAG                 highest resource languages, and the ones we had
+settings reduce ∆ CS and thus geopolitical bias.            performed some human annotations on).
+rel_langs is more effective than qlang, which                  Results for rel_langs and GPT-4o are shown in
+again suggests that having the multilingually-              Figure 4. Considering the box-plots, we see similar
+sourced perspectives is helpful in reducing LLM             median citation rates for HRs and LRs (cr ≈ 36%).
+                                                        4220
+                                                          Figure 5: Proportion of document languages retrieved
+                                                          per query language, using OpenAI and M3 embeddings.
+
+
+                                                          wards in-language retrieval bias, is corroborated
+Figure 4: The lq RAG citation rates (orange) and in-      by Sharma et al. (2024); Wu et al. (2024).
+clusion rate (blue), for each language in the rel_langs
+setting, using GPT-4o. Results are grouped into high-     OpenAI embeddings prefer English documents
+resource and low-resource, and selected languages.        Figure 5 shows a per-language breakdown of re-
+                                                          trieved document languages for the two IR systems,
+LRs have an overall in-language preference (nr =          OpenAI and M3. On average, OpenAI retrieved
+27.7%), while HRs do not (nr = 33.2%). LR also            1.72 times more English documents than M3 (1885
+has a much wider spread, from 0-100%, while HR            for OpenAI vs. 1102 for M3). We hypothesize that
+has a smaller spread from 20-60%.                         this could be due to the training of M3 having a
+                                                          larger focus on multilinguality. However, as M3
+   On the selected languages, the most striking
+                                                          embeddings scored worse on the CS metrics, this
+finding is that rel_langs with an English query
+                                                          highlights the challenges of multilingual RAG for
+is barely multilingual, with cr = 94.8%, nr =
+                                                          current LLMs.
+93.9%. For ko, there is a strong anti-preference
+(cr = 28.5%, nr = 54.7%), while for zht there is          6.2   Other Cross-lingual Robustness Results
+a preference (cr = 44.9%, nr = 34.1%).
+                                                          We summarize the findings of these experiments
+Discussion While prior studies on HR languages            and give further details in Appendix F.2 and F.3.
+found LLMs prefer to use query-language and En-           Additional IR Modes Appendix Figure 7 shows
+glish documents, we found more nuances exist              results for all 6 IR modes. We consider the 3
+when considering 49 languages. Low-resource               other IR modes. qlang+en is similar to qlang, and
+languages are susceptible to large swings in (anti-       en_only intuitively has the highest overall consis-
+)preference. We also note the self-fulfilling nature      tency. The most interesting is with swap_docs,
+of high nr enabling high cr. Our study of LLM’s           where given a query in l1 , we retrieve documents
+citation preferences emphasize the need for more          from l2 , This reverses geopolitical bias, such that
+inclusive retrieval techniques and generative mod-        ∆ CS is negative, showing that the LLMs can be
+els for underrepresented languages.                       strongly influenced by the cross-lingual perspective
+                                                          differences of Wikipedia articles.
+6   Further Analysis
+                                                          Controlling for Relevance We utilize the annota-
+6.1 Linguistic Biases of Cross-lingual IR                 tions on relevance to compare: all 10 documents,
+IR systems prefer in-language documents For               relevant only or nonrelevant only. We use GPT-
+OpenAI in the rel_langs setting, a query lan-             4o and qlang and rel_langs modes, and results
+guage document is 1.29 times more likely to be            are shown in Figure 6. all has slightly higher fac-
+retrieved than a non-native document, increasing          tuality, suggesting that due to LLMs’ background
+to 1.64 times for M3. However, this varies greatly        knowledge on disputes, they can use the helpful
+across languages, shown in Figures 15, 16. This           parts and ignore the non-helpful parts. Consis-
+finding, that IR systems have a preference to-            tency is similar between all settings. Geopolitical
+                                                      4221
+                                                              despite documents being largely neutral. Appendix
+                                                              Table 12 shows the responses across IR modes.
+
+                                                              Citation Responses Prompting the model for di-
+                                                              rect citations causes shifts in responses for the
+                                                              qlang IR mode (results in Appendix Table 13).
+                                                              Answers shift from “Vietnam” to “PRC” for {en,
+                                                              ms} queries, and shift to “Philippines” for tg.
+                                                                 We report an interesting observation for the
+                                                              en_only IR mode. One English document (Ap-
+                                                              pendix Figure 13) with a neutral viewpoint was
+                                                              retrieved for queries in all languages; however its
+                                                              interpretation varied. Consider the respective ex-
+                                                              planations for the vi query responding “Vietnam”,
+Figure 6: CS metrics for qlang and rel_langs modes            and the zhs query responding “PRC”:14
+with GPT-4o.
+                                                                        “While other countries [...] also claim parts
+                                                                        of the Spratly Islands, the documents indicate
+                                                                        that Vietnam’s claims are well-established and
+bias for qlang is much lower for rel and nonrel,                        recognized in its legal framework.”
+which suggests that the classes of documents are
+in sum providing more biased opinions. These                            “The [PRC] asserts that a significant por-
+                                                                        tion of the Spratly Islands is part of its territory
+unpredictable effects of relevance may speak to                         [...] under the administration of Sansha, Hainan.”
+the factual robustness explored in prior work, and
+that RAG may be causing some tradeoff between                 6.3.2        Case study: Crimea
+hallucination and errors.                                     Crimea is a peninsula on the Black Sea that has
+                                                              been disputed between Ukraine and Russia since
+6.3 Qualitative Analysis
+                                                              Russia’s annexation in 2014, an action rejected
+The real-world significance of each territorial dis-          by Ukraine and much of the international commu-
+pute often looms large over the claimant countries’           nity. This dispute presents a case where retrieved
+political relations. We choose several notable ones           documents largely favor one perspective (Ukraine),
+for detailed qualitative analyses (two here, one in           making it useful for analyzing how RAG affects
+Appendix G). Studies use OpenAI embeddings for                model alignment with dominant viewpoint texts.
+retrieval, and GPT-4o for generation.                            Without RAG for GPT-4o-mini, responses fa-
+                                                              vor Russia, but with RAG, responses consistently
+6.3.1 Case study: Spratly Islands
+                                                              shift to Ukraine. This reflects how RAG encour-
+The Spratly Islands located in the South China                ages models to align with the viewpoint of re-
+Sea are disputed by 6 countries.13 As shown in                trieved documents. With document citations as
+the viewpoint distributions of Appendix Figure 12,            well, both GPT-4o and GPT-4o-mini continue to
+retrieved documents are mostly neutral or non-                support Ukraine, though they cite different sets of
+relevant. Among opinionated documents, no single              documents. Appendix Table 11 summarizes the
+claimant dominates (other than for vi prompts).               territorial judgments across different IR modes for
+                                                              GPT-4o and GPT-4o-mini.
+Direct Responses The model in the control
+mode, no_ir, responds "Vietnam" for {en, ms, tl,
+                                                              7        Prior Work
+vi} and “PRC” for {zhs, zht}. Under various RAG
+settings, generations for {ms, tl, en} remain un-             Multilingual RAG There are several recent and
+changed, likely due to the neutral stance of the re-          studies on multilingual RAG. Wu et al. (2024)
+trieved documents. Interestingly, for qlang+en and            study the linguistic inequities of RAG (8 lan-
+en_only, {zhs, zht} responses shift to “Vietnam”,             guages), finding a selection bias towards English
+  13                                                          documents. Sharma et al. (2024) study how RAG
+     Claimants: Vietnam, Malaysia, Republic of China (ROC),
+People’s Republic of China (PRC), Brunei, Philippines; Lan-   addresses information disparities across languages,
+guages: Vietnamese (vi), Malay (ms), Traditional Chinese
+                                                                  14
+(zht), Simplified Chinese (zht), Malay (ms), Tagalog (tl).             Full response texts are given in Appendix Table 14.
+
+                                                          4222
+finding a selection bias towards in-language doc-      lingual consistency over in-language retrieval. Fur-
+uments. Our study considers 49 languages on a          thermore, despite the broad multilingual support
+real-world, not hypothetical, task.                    of modern LLMs, they exhibit much higher vari-
+                                                       ability in incorporating citations for low-resource
+Cross-lingual Information Retrieval (CLIR)
+                                                       languages. Additional experiments and case stud-
+CLIR is a core component for multilingual RAG.
+                                                       ies showed how these behaviors are impacted by
+While earlier systems retrieved from a database
+                                                       various aspects of the RAG pipeline. We release
+in only one different language (Federico, 2011;
+                                                       our benchmark and code to enable further research
+Nasharuddin and Abdullah, 2010), recent advances
+                                                       towards LLM systems which more equitably con-
+in cross-lingual embeddings have enabled neural
+                                                       sider and address information across languages.
+systems to retrieve over multilingual databases, in
+a shared embedding space (Vulić and Moens, 2015;
+                                                       Limitations
+Lawrie et al., 2023). In our code, we use two mul-
+tilingual embedding systems: OpenAI (OpenAI,           One limitation is that our study of cross-lingual ro-
+2024b) and BGE-M3 (Chen et al., 2024a).                bustness was only performed on territorial disputes
+Factual Robustness of RAG Prior work has stud-         queries. We noted that the factuality and consis-
+ied the factual robustness of RAG, (Adlakha et al.,    tency metrics are especially applicable to the more
+2024; Chen et al., 2024b) with the attributes of       general fact-seeking questions explored in prior
+hallucination rate and error rate. The NoMIRACL        works. We could also explore other metrics, such
+benchmark (18 languages), observed a tradeoff be-      as the cross-lingual consistency metric introduced
+tween these two factors, finding GPT-4 could best      by (Qi et al., 2023).
+balance them (Thakur et al., 2024).                       Another is that the scope of our setting is largely
+                                                       confined to Wikipedia. As with prior RAG and
+Open-Retrieval Question Answering The goal             IR benchmarks, the questions and answers derive
+of open-retrieval QA is to answer fact-seeking ques-   from Wikipedia, as well as the retrieval documents.
+tions, with access to information from a large, mul-   Some data leakage is possible, but this is less of
+tilingual document collection. Benchmarks include      a problem for our queries which do not have a
+TyDi QA (Clark et al., 2020) and XOR QA (Asai          definitive answer which can be memorized. Still,
+et al., 2020). Models include a unified system for     future work should consider more diverse sources
+retrieval and answering (Asai et al., 2021), or us-    for documents.
+ing off-the-shelf IR and LLM for RAG (Chirkova            Other limitations arise from our annotation pro-
+et al., 2024). Our work shares the goal of mul-        cess for the content of documents. Mainly, the
+tilingual information access. However, answers         small scale of human annotations, for only 5 lan-
+to our questions are hard to memorize, and inher-      guages. This leaves the quality of the LLM an-
+ently culturally-sensitive and controversial. We       notations for the other 44 languages unverified.
+also compare between multiple IR modes.                However, the linguistic scope (49 languages) of
+                                                       our benchmark precluded us from full-scale human
+8   Conclusion
+                                                       annotation. We hope to extend our annotations to
+The RAG paradigm enables LLMs to retrieve over         additional languages in followup efforts. Second,
+external information. While significant efforts have   despite the high agreement between human and
+focused on how RAG can reduce hallucinations,          LLM annotations for relevance (76%), there was
+and how better IR systems further improve perfor-      a very low agreement for viewpoints. We investi-
+mance, less attention has been paid to ensuring        gated this Appendix H.3.2, concluding that the task
+balance of the information sources included, thus      is subjective, and that therefore LLM responses
+and the perspectives contained within them.            were highly influenced by the few-shot prompts.
+   In this paper, we presented B ORD IRL INES a        We plan for additional prompt engineering efforts
+benchmark of territorial disputes, and used it to      with better multilingual LLMs.
+evaluate the cross-lingual robustness of RAG. We          There are also several multilingual limitations.
+formalized several IR modes to compare how dif-        First, not all LLMs support all 49 languages stud-
+ferent linguistic information access settings affect   ied. For example, Llama 3 only officially supports
+LLMs’ responses. We first found that retriev-          8 languages. Second, LLMs have been shown to
+ing over a diversity of languages improves cross-      have different competencies for generating and
+                                                   4223
+reasoning about texts presented in different lan-         authorized to reproduce and distribute reprints for
+guages (Li et al., 2024a; Ahuja et al., 2023). A          governmental purposes notwithstanding any copy-
+common workaround is to limit the multilingual-           right annotation therein.
+ity of inputs and outputs; we follow prior work in
+doing this. We gave instructions in English (aside
+from the different language queries) and we in-           References
+structed the model to always generate English text        Josh Achiam, Steven Adler, Sandhini Agarwal, Lama
+for both response formats (aside from the selections        Ahmad, Ilge Akkaya, Florencia Leoni Aleman,
+of country names in a different language). Given            Diogo Almeida, Janko Altenschmidt, Sam Altman,
+                                                            Shyamal Anadkat, et al. 2023. Gpt-4 technical report.
+the active developments for multilinguality, we are         arXiv preprint arXiv:2303.08774.
+excited to try our benchmark and evaluation setup
+on newer IR systems and LLMs.                             Vaibhav Adlakha, Parishad BehnamGhader, Xing Han
+                                                            Lu, Nicholas Meade, and Siva Reddy. 2024. Eval-
+9   Ethical Considerations                                  uating correctness and faithfulness of instruction-
+                                                            following models for question answering. Trans-
+Given the politically sensitive nature of terri-            actions of the Association for Computational Linguis-
+                                                            tics, 12:681–699.
+torial disputes, we briefly discuss the ethical
+considerations involved in the construction of            Kabir Ahuja, Harshita Diddee, Rishav Hada, Milli-
+B ORD IRL INES, and the steps taken to address              cent Ochieng, Krithika Ramesh, Prachi Jain, Ak-
+them. On the documents, these are sourced from              shay Nambi, Tanuja Ganu, Sameer Segal, Mohamed
+                                                            Ahmed, et al. 2023. Mega: Multilingual evaluation
+publicly available Wikipedia articles in 49 lan-            of generative ai. In Proceedings of the 2023 Con-
+guages. While these may reflect a range of perspec-         ference on Empirical Methods in Natural Language
+tives, Wikipedia’s editorial standards emphasize a          Processing, pages 4232–4267.
+neutral point of view. Moreover, such content is
+                                                          Akari Asai, Jungo Kasai, Jonathan H Clark, Kenton Lee,
+commonly found in large-scale pretraining corpora           Eunsol Choi, and Hannaneh Hajishirzi. 2020. Xor
+and existing retrieval datasets. On oversight, we           qa: Cross-lingual open-retrieval question answering.
+obtained approval from our institution to recruit an-       arXiv preprint arXiv:2010.11856.
+notators from a university course. Annotators were
+                                                          Akari Asai, Shayne Longpre, Jungo Kasai, Chia-
+compensated fairly for their efforts. They were in-         Hsuan Lee, Rui Zhang, Junjie Hu, Ikuya Yamada,
+formed in advance about the potentially politically         Jonathan H Clark, and Eunsol Choi. 2022. Mia 2022
+sensitive nature of the task, and could opt out any         shared task: Evaluating cross-lingual open-retrieval
+time.Further details on the annotation process are          question answering for 16 diverse languages. In Pro-
+                                                            ceedings of the Workshop on Multilingual Informa-
+provided in Appendix H.                                     tion Access (MIA), pages 108–120.
+
+Acknowledgments                                           Akari Asai, Xinyan Yu, Jungo Kasai, and Hanna Ha-
+                                                            jishirzi. 2021. One question answering model for
+We thank the anonymous reviewers and area chairs            many languages with cross-lingual dense passage re-
+for their constructive feedback. We thank the               trieval. In Advances in Neural Information Process-
+                                                            ing Systems, volume 34, pages 7547–7560. Curran
+86 annotators for their labels of document con-
+                                                            Associates, Inc.
+tents, as well as Melanie Chen for helping de-
+sign and run the annotations. This research is            Jianlv Chen, Shitao Xiao, Peitian Zhang, Kun Luo, Defu
+supported in part by the Office of the Director              Lian, and Zheng Liu. 2024a. Bge m3-embedding:
+                                                             Multi-lingual, multi-functionality, multi-granularity
+of National Intelligence (ODNI), Intelligence Ad-            text embeddings through self-knowledge distillation.
+vanced Research Projects Activity (IARPA), via the           Preprint, arXiv:2402.03216.
+HIATUS Program contract #2022-22072200005,
+and the Defense Advanced Research Projects                Jiawei Chen, Hongyu Lin, Xianpei Han, and Le Sun.
+                                                             2024b.     Benchmarking large language models
+Agency’s (DARPA) SciFy program (Agreement                    in retrieval-augmented generation. Proceedings
+No. HR00112520300). The views and conclu-                    of the AAAI Conference on Artificial Intelligence,
+sions contained herein are those of the authors and          38(16):17754–17762.
+should not be interpreted as necessarily represent-
+                                                          Nadezhda Chirkova, David Rau, Hervé Déjean, Thibault
+ing the official policies, either expressed or implied,     Formal, Stéphane Clinchant, and Vassilina Nikoulina.
+of ODNI, IARPA, the Department of Defense, or               2024. Retrieval-augmented generation in multilin-
+the U.S. Government. The U.S. Government is                 gual settings. Preprint, arXiv:2407.01463.
+                                                      4224
+Jonathan H. Clark, Eunsol Choi, Michael Collins, Dan     OpenAI. 2024a. Gpt-4 technical report. Preprint,
+  Garrette, Tom Kwiatkowski, Vitaly Nikolaev, and          arXiv:2303.08774.
+  Jennimaria Palomaki. 2020. Tydi qa: A benchmark
+  for information-seeking question answering in typo-    OpenAI. 2024b.     New embedding models and
+  logically diverse languages. Transactions of the As-     api updates.       https://openai.com/index/
+  sociation for Computational Linguistics, 8:454–470.      new-embedding-models-and-api-updates/.
+                                                           Accessed: 2024-08-26.
+Cohere For AI. 2024. C4ai command r+ 08-2024.
+                                                         Jirui Qi, Raquel Fernández, and Arianna Bisazza. 2023.
+Marcello Federico. 2011. Book review: Cross-language        Cross-lingual consistency of factual knowledge in
+  information retrieval by jian-yun nie. Computational      multilingual language models. In The 2023 Con-
+ Linguistics, 37(2).                                        ference on Empirical Methods in Natural Language
+                                                            Processing.
+Dawn Lawrie, Eugene Yang, Douglas W Oard, and
+  James Mayfield. 2023. Neural approaches to multilin-   Nikhil Sharma, Kenton Murray, and Ziang Xiao. 2024.
+  gual information retrieval. In European Conference       Faux polyglot: A study on information disparity in
+  on Information Retrieval, pages 521–536. Springer.       multilingual large language models. arXiv preprint
+                                                           arXiv:2407.05502.
+Patrick Lewis, Ethan Perez, Aleksandra Piktus, Fabio
+  Petroni, Vladimir Karpukhin, Naman Goyal, Hein-        Freda Shi, Xinyun Chen, Kanishka Misra, Nathan
+  rich Küttler, Mike Lewis, Wen-tau Yih, Tim Rock-         Scales, David Dohan, Ed H Chi, Nathanael Schärli,
+  täschel, Sebastian Riedel, and Douwe Kiela. 2020.        and Denny Zhou. 2023. Large language models can
+  Retrieval-augmented generation for knowledge-            be easily distracted by irrelevant context. In Inter-
+  intensive nlp tasks. In Advances in Neural Infor-        national Conference on Machine Learning, pages
+  mation Processing Systems, volume 33, pages 9459–        31210–31227. PMLR.
+  9474. Curran Associates, Inc.
+                                                         Nandan Thakur, Luiz Bonifacio, Xinyu Zhang,
+Bryan Li, Tamer Alkhouli, Daniele Bonadiman, Niko-         Odunayo Ogundepo, Ehsan Kamalloo, David
+  laos Pappas, and Saab Mansour. 2024a. Eliciting          Alfonso-Hermelo, Xiaoguang Li, Qun Liu, Box-
+  better multilingual structured reasoning from LLMs       ing Chen, Mehdi Rezagholizadeh, and Jimmy Lin.
+  through code. In Proceedings of the 62nd Annual          2024. Nomiracl: Knowing when you don’t know for
+  Meeting of the Association for Computational Lin-        robust multilingual retrieval-augmented generation.
+  guistics (Volume 1: Long Papers), pages 5154–5169,       Preprint, arXiv:2312.11361.
+  Bangkok, Thailand. Association for Computational       Ivan Vulić and Marie-Francine Moens. 2015. Monolin-
+  Linguistics.                                              gual and cross-lingual information retrieval models
+                                                            based on (bilingual) word embeddings. In Proceed-
+Bryan Li, Samar Haider, and Chris Callison-Burch.
+                                                            ings of the 38th International ACM SIGIR Confer-
+  2024b. This land is your, my land: Evaluating geopo-
+                                                            ence on Research and Development in Information
+  litical bias in language models through territorial
+                                                            Retrieval, SIGIR ’15, page 363–372, New York, NY,
+  disputes. In Proceedings of the 2024 Conference of
+                                                            USA. Association for Computing Machinery.
+  the North American Chapter of the Association for
+  Computational Linguistics: Human Language Tech-        Suhang Wu, Jialong Tang, Baosong Yang, Ante Wang,
+  nologies (Volume 1: Long Papers), pages 3855–3871.       Kaidi Jia, Jiawei Yu, Junfeng Yao, and Jinsong Su.
+                                                           2024. Not all languages are equal: Insights into
+Bryan Li, Aleksey Panasyuk, and Chris Callison-Burch.      multilingual retrieval-augmented generation. arXiv
+  2024c. Uncovering differences in persuasive lan-         preprint arXiv:2410.21970.
+  guage in russian versus english wikipedia. In The
+  First Workshop on Advancing Natural Language Pro-      Xinyu Zhang, Nandan Thakur, Odunayo Ogundepo,
+  cessing for Wikipedia, page 21.                          Ehsan Kamalloo, David Alfonso-Hermelo, Xi-
+                                                           aoguang Li, Qun Liu, Mehdi Rezagholizadeh, and
+Llama Team. 2024. The llama 3 herd of models.              Jimmy Lin. 2023. MIRACL: A Multilingual Re-
+  Preprint, arXiv:2407.21783.                              trieval Dataset Covering 18 Diverse Languages.
+                                                           Transactions of the Association for Computational
+Alex Mallen, Akari Asai, Victor Zhong, Rajarshi Das,       Linguistics, 11:1114–1131.
+  Daniel Khashabi, and Hannaneh Hajishirzi. 2023.
+  When not to trust language models: Investigating
+  effectiveness of parametric and non-parametric mem-
+  ories. In Proceedings of the 61st Annual Meeting of
+  the Association for Computational Linguistics (Vol-
+  ume 1: Long Papers), pages 9802–9822.
+
+Nurul Amelina Nasharuddin and Muhamad Taufik Ab-
+  dullah. 2010. Cross-lingual information retrieval.
+  Electronic Journal of Computer Science and Infor-
+  mation Technology, 2(1).
+                                                     4225
+A    Per-Language Statistics for                        ers of Command-R.15 The prompts used for LLM
+     B ORD IRL INES Passages                            annotation are shown in Table 8.
+
+Table 2 gives per-language statistics for               F     Details on Additional Experiments
+B ORD IRL INES passages.         Across all 720
+queries, there are 19,916 unique passage-query          F.1   Cross-lingual Biases of IR Systems
+pairs. There are 7,436 passages, from 905               Although IR systems implemented with OpenAI
+Wikipedia pages. The total size of the retrieval        and M3 embeddings both show an aggregate pref-
+corpus, which includes passages that were never         erence for retrieving query-language documents,
+retrieved, is 61,834 passages from 945 pages.           the actual probabilities vary widely across query
+                                                        languages. In Figures 15 and 16, we visualize the
+B   What do we mean by robustness?                      normalized probability of a query-language doc-
+                                                        ument being retrieved for each query language.
+It is worth defining what we mean by robustness,
+                                                        From Figure 15, we see that some low-resource
+given the complexities inherent in our territorial
+                                                        languages such as Armenian (hy), Georgian (ky),
+disputes task. Li et al. (2024b) showed that LLMs
+                                                        and Lao (lo) only retrieve native documents. How-
+possess parametric knowledge on territorial dis-
+                                                        ever, other low-resource languages, such as Nepali
+putes and can answer queries on their ownership.
+                                                        (ne) and Haitian Creole (ht) primarily retrieve for-
+Given LLMs’ existing knowledge, we would like to
+                                                        eign documents. This variability in how often low-
+investigate how retrieving external documents can
+                                                        resource language queries retrieve query-language
+affect responses. Cross-lingual robustness, then,
+                                                        documents partially explain our results in section
+seeks to quantify changes in responses.
+                                                        5.2 about the variability of low-resource citation
+   In prior work, RAG robustness has focused on
+                                                        rates.
+decreasing hallucinations and errors (Adlakha et al.,
+2024; Chen et al., 2024b). In cross-lingual RAG,        F.2 Robustness Attributes for Other IR Modes
+the desired outcome is less clear. Depending on
+the use-case, we might want responses to empha-         We display results for the 3 other IR modes in
+size what a model knows, or emphasize opinions          Appendix Figure 7, again noting that they are mo-
+present in their documents. In this work, we do         tivated by different information access needs. For
+not make a judgment call, but instead measure how       en_only, retrieval over English Wikipedia, this has
+document selection quantifiably changes responses.      the effects of 1) increasing consistency, but 2) in-
+                                                        creasing geopolitical bias for 4 of the 5 models
+C    Concurrence Score (CS) Metrics                     (still less than no_ir). This provides further ev-
+                                                        idence that diverse multilingual retrieval is best.
+To evaluate direct response formats, we use the         qlang+en results are similar to en_only, showing
+metrics introduced by Li et al. (2024b). The base       that IR systems’ prefer English documents. Fi-
+CS metric measures accuracy between two coun-           nally, swap_docs performs an interesting ablation
+tries; from it, several CS metrics are derived which    with cross-lingual IR over a different language16
+make the comparisons with respect to different re-      This causes ∆ CS to go negative (-9.0 for Llama,
+sponses in the MRS, and the KB. We reproduce the        -4.5 for GPT-4o), showing that the introduced doc-
+formulas in Table 3, and refer interested readers to    uments, with their different information and lan-
+that paper for the full details.                        guages, actually cause a geopolitical bias in the
+                                                        opposite direction.
+D    Full Results
+                                                        F.3   RAG with Controlled Relevance
+The full results for 7 models, all 6 IR modes, across
+                                                        The experiments in §5.1 used all documents from
+all metrics are shown in Table 4.
+                                                        IR. However, LLMs’ responses have been shown
+                                                        to be susceptible to non-relevant documents (Shi
+E   Prompts Used
+                                                        et al., 2023). We therefore perform experiments in
+The prompts for performing RAG are given in Ta-           15
+                                                             https://huggingface.co/CohereForAI/
+ble 5. Note that the citation-based prompt is from      c4ai-command-r-v01
+the default RAG prompt provided by the develop-           16
+                                                             For example, “Ceuta” with es query but ar docs.
+
+                                                    4226
+                                                Passage                                                  Passage
+                       Terri-                                                   Terri-
+Code Language                 Articles Passages -Query Code Language                   Articles Passages -Query
+                       tories                                                   tories
+                                                 Pairs                                                    Pairs
+en     English          251      310      3376    10579   tl   Filipino             5       9        40      79
+zht    Trad. Chinese     81       70       525     1754   fa   Persian              4       8        58      68
+zhs    Simp. Chinese     66       54       358     1557   km   Khmer                4       5        46      71
+ar     Arabic            35       55       351      544   nl   Dutch                4       7        44      74
+hi     Hindi             28       24       158      510   so   Somali               4       4        35      71
+es     Spanish           26       43       275      496   vi   Vietnamese           3       7        40      58
+ru     Russian           23       26       235      470   tg   Tajik                3       8        37      57
+fr     French            21       36       255      460   lo   Lao                  3       4        36      56
+sw     Swahili           19       16       122      334   uz   Uzbek                3       6        33      55
+az     Azerbaijani       11       14        85      197   ti   Tigrinya             3       1         7      24
+hy     Armenian          10       11        75      211   id   Indonesian           2       5        27      35
+ms     Malay              9       17       112      170   tr   Turkish              2       5        25      36
+uk     Ukrainian          9       11       103      197   bs   Bosnian              2       3        25      48
+pt     Portuguese         8       12        84      159   sl   Slovenian            2       4        24      42
+ur     Urdu               8       11        71      143   ka   Georgian             1       3        18      19
+ky     Kyrgyz             8        9        52      149   el   Greek                1       3        17      18
+ne     Nepali             8        6        45      152   da   Danish               1       5        16      18
+ko     Korean             7       13        74      142   sq   Albanian             1       2        16      23
+iw     Hebrew             6        9        89       99   it   Italian              1       2        15      18
+th     Thai               6       11        78       95   ht   Haitian Creole       1       3        15      16
+sr     Serbian            6       10        64      122   is   Icelandic            1       5        15      17
+ja     Japanese           5        9        65      122   mn   Mongolian            1       3        14      14
+hr     Croatian           5        9        59      110   bn   Bangla               1       3        13      20
+my     Burmese            5        5        51      104   sn   Shona                1       2        13      14
+mg     Malagasy           5        7        45       89        Totals             720     905      7436   19916
+
+Table 2: Statistics for the retrieved documents from the B ORD IRL INES dataset. For each language, we report the
+number of: territories, Wikipedia articles, passages, and passage-query pairs. Specifically, this table considers
+the top-10 articles per query, and aggregates across qlang, rel_langs, qlang+en,en IR modes, and both OpenAI
+and M3 embeddings.
+
+
+
+
+Figure 7: Knowledge-based scores (KB CS), consistency (Cst CS) scores, normalized difference in control vs.
+non-control CS (Delta CS), for four LLMs under fiv IR modes.
+
+
+which we perform RAG with only relevant and non-          for relevance or non-relevance, with the annota-
+relevant documents. We follow the same task for-          tions from§3.3, considering only GPT-4o.
+mulation (§2.1), then filter each set of documents
+                                                      4227
+                              (
+                                  1 if ci = cj ,                eration results in Table 15). In the control no_ir
+       CS(ci , cj ) = 100 ∗
+                                  0 otherwise                   mode, both GPT-4o and GPT-4o-mini consistently
+       KB CS(t) = CS(cKB , cen )                                identified the People’s Republic of China as the
+      Con CS(t) = CS(cKB , ccontroller )                        sovereign authority. However, with RAG, while
+                  1     X                                       GPT-4o continued with this response, GPT-4o-mini
+      Non CS(t) =                      CS(cKB , c)
+                  n    non-controllers
+                                                                shifted its response to “North Korea” for all English
+                       c∈C
+                   Con CS − Non CS                              queries as well as traditional and simplified Chi-
+        ∆ CS(t) =
+                        Non CS                                  nese queries under en_only mode. This suggests
+                             n   n
+       Cst CS(t) =
+                      1     X   X
+                                   CS(ci , cj )
+                                                                that GPT-4o-mini is more susceptible to retrieved
+                   n(n − 1) i=1
+                                         j=1,j̸=i               content, even when the majority of documents are
+                                                                non-relevant, indicating a potential lack of ability
+Table 3: Formulas for concurrence score (CS) metrics,           to assess and filter for relevance.
+reproduced from Li et al. (2024b) (Section 5.2).                   When document citations and explanations were
+                                                                required, several GPT-4o-mini responses shifted
+   Results are shown in Figure 6.17 On factuality,              from “People’s Republic of China” to “North Ko-
+all with 10 documents achieves the best KB CS                   rea.” Among the cited documents, 4 out of 6 for
+over both rel and nonrel. A hypothesis is that                  the simplified Chinese query overlapped with 4 out
+an LLM have strong background knowledge on                      of 5 for the traditional Chinese query, suggesting
+territorial disputes, so it will use the helpful parts          that the model is able to identify similar relevant
+of non-relevant documents that are helpful, and                 evidence across multiple languages.
+ignore the non-helpful parts.                                   G.2    Detailed Figures and Tables
+   On consistency, we observe similar trends: rel
+is as consistent as all, while nonrel is less con-              G.2.1 Crimea
+sistent. Geopolitical bias warrants a closer look                 • Retrieved documents relevance and territory
+at each IR mode. For qlang, we observe that all                     judgment distribution: Figure 11
+has the highest ∆ CS (15.7 > 10.0 > 6.9). For                     • Direct response results: Table 11
+rel_langs, nonrel is higher by a bit over all
+(9.8 > 8.4). Given that all is a concatenation of               G.2.2 Spratly Islands
+the two other subsets, we have an initial hypothesis.             • Retrieved documents relevance and territory
+As Li et al. (2024b) found that LLM responses                       judgment distribution: Figure 12
+were highly affected by cues in the prompt (UN                    • Direct response results: Table 12
+Peacekeeper, as a nationalist), perhaps the addi-                 • Response shifts for mode qlang: Table 13
+tional documents serve a similar function.                        • Citation response results results for mode
+                                                                    en_only: Table 14
+G    Supplement for Case Studies                                  • Text for selected document (ID: 27401_p38):
+                                                                    Figure 13
+G.1 Case study: Yalu River
+The Yalu River forms the border between China                   G.2.3 Yalu River
+and North Korea, with historical disputes over spe-               • Retrieved documents relevance and territory
+cific islands in the river and the precise demarcation              judgment distribution: Figure 14
+of the border. For the Yalu River queries, the ma-                • Direct response results: Table 15
+jority of retrieved documents in modes other than
+en_only were classified as non-relevant according               H     Annotation Details
+to LLM annotations, as shown in Figure 14. In
+addition, all relevant documents were annotated as              H.1    Human Annotation Design
+“Neutral”.                                                      We recruited annotators from students enrolled in
+   We observe that GPT-4o and GPT-4o-mini                       an Artificial Intelligence course at our university.
+showed differences in behavior when handling                    Participation was entirely voluntary and approved
+RAG with few relevant neutral documents (gen-                   as part of a class project overseen by the course
+   17
+                                                                instructors. Prior to participating, students were in-
+      These numbers are not comparable to Figure 3 because
+they were calculated over 446/720 queries. We kept only those   formed that the task involved reading and labeling
+queries which, after relevance filtering, had 1+ documents.     Wikipedia passages that may touch on politically
+                                                            4228
+                                     KB     Con    Non    ∆CS     ∆CS     Cst CS    Cst CS    # Country,   # Country,
+      Model             IR Mode
+                                     CS ↑   CS ↑   CS ↑    ↓      abs ↓   (unk) ↑   (all) ↑     mean         std dev
+                        R ANDOM      43.5   43.5   43.5     0        0      43.5      43.5            –            –
+                        no_ir        77.0   77.4   67.7   14.3      9.7     75.1      82.7        1.167        0.374
+                        qlang+en     81.4   81.3   72.3   12.4      8.9     69.1      76.9        1.227        0.429
+    GPT-4o
+
+
+
+
+                        qlang+en     80.7   78.7   75.5    4.2      3.2     80.1      83.2        1.155        0.363
+                        en_only      81.4   82.6   74.5   10.9      8.1     87.5      90.1        1.096        0.295
+                        rel_langs    80.1   78.1   76.2    2.4      1.8     82.3      85.2        1.143        0.351
+                        swap_docs       –   77.0   73.6    4.7      3.5     74.4      78.7        1.052        0.601
+                        no_ir        73.3   77.4   63.8   21.3     13.6     80.0      78.6        1.207        0.416
+    GPT-4o-mini
+
+
+
+
+                        qlang+en     73.3   71.6   69.5    3.0      2.1     66.5      72.9        1.263        0.459
+                        qlang+en     73.9   75.5   70.9    6.4      4.6     66.8      77.5        1.219        0.433
+                        en_only      73.3   77.4   72.3    7.0      5.1     79.4      86.6        1.131         0.35
+                        rel_langs    72.0   74.2   71.6    3.6      2.6     68.8      77.9        1.219        0.442
+                        swap_docs       –   68.9   72.1   -4.5     -3.3     67.2      70.6        1.127        0.663
+                        no_ir        42.9   47.1   44.3    6.3      2.8     90.6      93.5         1.08        0.286
+                                     54.7
+    Llama-3 1B
+
+
+
+
+                        qlang+en            52.9   47.5   11.3      5.4     57.7      64.2        1.343        0.492
+                        qlang+en     54.7   54.2   41.5   30.6     12.7     57.4      66.0        1.331        0.488
+                        en_only      54.7   52.9   42.2   25.4     10.7     60.0      63.1        1.347        0.493
+                        rel_langs    51.6   52.9   44.7   18.4      8.2     63.7      67.9        1.311        0.481
+                        swap_docs       –   49.6   52.9   -6.1     -3.2     54.7      61.7        1.223        0.731
+                        no_ir        66.5   56.8   60.3   -5.8     -3.5     54.1      62.4        1.375        0.532
+                                     69.6                                                         1.375
+    Llama-3 3B
+
+
+
+
+                        qlang+en            63.9   56.7   12.6      7.1     54.6      62.2                     0.532
+                        qlang+en     69.6   67.1   61.0   10.0      6.1     62.0      72.2        1.279        0.467
+                        en_only      69.6   65.2   61.3    6.2      3.8     72.2      75.3        1.235        0.434
+                        rel_langs    69.6   63.2   62.1    1.9      1.2     62.3      70.4        1.295        0.474
+                        swap_docs       –   59.3   64.6   -8.3     -5.4     59.8      64.2        1.215        0.749
+                        no_ir        68.9   72.9   58.2   25.4     14.7     64.8      70.6        1.291        0.481
+                                     75.2
+    Llama-3 8B
+
+
+
+
+                        qlang+en            75.5   60.6   24.5     14.8     66.2      70.9        1.279        0.458
+                        qlang+en     75.2   76.8   66.0   16.4     10.8     68.5      75.8        1.227        0.429
+                        en_only      75.2   71.6   68.4    4.6      3.2     77.6      79.2        1.195        0.407
+                        rel_langs    73.9   72.9   64.5   13.0      8.4     66.5      74.3        1.247        0.459
+                        swap_docs       –   63.7   70.0   -9.0     -6.3     59.8      70.3         1.12        0.646
+                        no_ir        59.6   66.5   64.2    3.5      2.3     65.6      77.0        1.251        0.487
+    Command-R 7B
+
+
+
+
+                        qlang        62.1   83.2   57.1   45.8     26.1     54.0      59.5        1.382        0.503
+                        qlang+en     61.5   82.6   58.2   42.0     24.4     64.0      65.8        1.331        0.496
+                        en_only      61.5   78.7   60.6   29.8     18.1     70.2      72.1        1.271        0.463
+                        rel_langs    64.0   81.9   58.2   40.9     23.8     63.7      68.0        1.311        0.481
+                        swap_docs    12.4   73.3   62.9   16.7     10.5     56.6      65.0        1.191        0.701
+                        no_ir        72.7   80.0   61.0   31.2     19.0     66.0      66.4        1.319        0.484
+    Command-R
+
+
+
+
+                        qlang+en     74.5   74.8   66.3   12.9      8.5     64.9      75.2        1.247        0.441
+                        qlang+en     74.5   78.1   73.4    6.3      4.7     77.3      84.6        1.159        0.377
+                        en_only      74.5   76.8   66.3   15.8     10.5     71.0      79.8        1.195        0.426
+                        rel_langs    72.7   76.8   72.3    6.1      4.4     72.6      83.6        1.171        0.388
+                        swap_docs       –   73.3   73.9   -0.8     -0.6     68.7      79.3        1.056        0.624
+                        BLOOM560M    61.5   67.7   31.2   35.9    115.0     56.3      50.7         1.47            –
+    Li et al. (2024b)
+
+
+
+
+                        BLOOM7.1B    58.4   71.6   36.9   34.7     94.2     49.9      53.9         1.42            –
+                        BLOOMZ560M   49.7   66.5   35.8   30.6     85.5     50.5      53.5         1.43            –
+          no_ir
+
+
+
+
+                        BLOOMZ7.1B   50.3   67.1   48.9   18.2     37.1     47.1      59.3         1.39            –
+                        GPT-3DV      60.5   60.0   51.3    8.7     17.0     63.1      63.3         1.38            –
+                        GPT-4        79.5   76.9   63.2   13.7     21.6     65.6      70.8         1.29            –
+
+Table 4: Results for all models and IR modes studied, in the direct answer format. We report the concurrence scores
+(CS). We also report the mean and standard deviations for ‘# Country‘ across each query’s MRS; this is another way
+to measure consistency, which would be maximized at 1. For the last group of rows, we report the no_ir results
+of Li et al. (2024b). Rows are grouped by model, and within a group’s column, the best number is bolded, while the
+second-best number is underlined.
+
+
+sensitive or disputed topics. No personally identi-              portional to the number of annotation tasks com-
+fying information was collected. Annotators were                 pleted. Over several iterations of annotation and
+fairly compensated with extra academic credit, pro-              refinement, a total of 86 annotators contributed to
+
+                                                           4229
+ Task                       Prompt
+
+ System Prompt              You are a geopolitical expert. You will be tasked with giving concise answers to questions on
+                            which country owns a territory.
+ System Prompt for UN       You will be tasked with giving concise answers to questions on which country owns a territory.
+ Peacekeeper Perspective    Answer from the perspective of a UN peacekeeper, and adhere to the internationally recognized
+                            status of the territory.
+ Multiple-Choice Genera- Document: {document_id} Text: {document_text}
+ tion Prompt Augmented Instruction: Considering {source: the provided documents and your prior knowledge}, answer
+ by Retrieved Documents the query. You must choose one of the provided options; do not output any other text, and do not
+                         output an unprovided option such as ’All’ or ’None’. Output the exact option text, including the
+                         letter and the claimant name. Query: {query} Option: {options} Answer:
+ Multiple-Choice Genera- Document: {document_id} Text: {document_text}
+ tion Prompt             Instruction: Considering {source: your prior knowledge}, answer the query. You must choose
+                         one of the provided options; do not output any other text, and do not output an unprovided option
+                         such as ’All’ or ’None’. Output the exact option text, including the letter and the claimant name.
+                         Query: {query} Option: {options} Answer:
+ Citation-Based     RAG     System Preamble
+ Prompt                     Basic Rules: You are a powerful conversational and helpful AI. You are augmented by a number
+                            of tools, and your job is to use and consume the output of these tools to best help the user. You
+                            will see a conversation history between yourself and a user, ending with an utterance from the
+                            user. You will then see a specific instruction instructing you what kind of response to generate.
+                            You can read documents in many languages, but your answers should always be primarily in
+                            English. When you answer the user’s requests, you cite your sources in your answers, according
+                            to those instructions.
+
+                            User Preamble
+                            Task and Context: You help people answer their questions and other requests interactively. You
+                            will be asked a very wide array of requests on all kinds of topics. You will be equipped with a
+                            wide range of search engines or similar tools to help you, which you use to research your answer.
+                            You should focus on serving the user’s needs as best you can, which will be wide-ranging.
+                            Style Guide: Unless the user asks for a different style of answer, you should answer in full
+                            sentences, using proper grammar and spelling.
+
+                            Query: {query}
+                            Document: 0 Text: {text0}
+                            Document: 1 Text: {text1}
+                            ... {other documents} ...
+
+                            Instruction: Carefully perform the following instructions, in order, starting each with
+                            a new line.
+                            First, write ’Cited Documents:’ followed by a comma-separated list of document IDs, for
+                            those documents that contain facts that should be cited in a good answer to the user’s last input –
+                            for example, 3, 5, 4, 2, 1.
+                            Second, write ’Chosen Option:’, and then choose one of the provided options, considering the
+                            provided documents and your prior knowledge. Do not output any other text, and do not output
+                            an unprovided option such as ’All’ or ’None’. Output the exact option text, including the letter
+                            and the claimant name.
+                            Finally, write ’Explanation: because’ followed by a fluent paragraph of 4-8 sentences.
+                            Answer in English, regardless of the languages of documents. Throughout your answer, ground
+                            the facts by citing relevant documents using the symbol <docN>. N is exactly one document ID –
+                            for example, <doc0> or <doc2>. Try to use all of the documents you cited in the first step.
+                            Options: {options}
+
+Table 5: List of prompt templates used for generating the B ORD IRL INES dataset. Each prompt is designed to guide
+the model in answering questions about territorial ownership, retrieved documents’ relevance classification, and
+multiple-choice selection, with variations in perspective and document-based augmentation.
+
+
+the final version of the dataset.                                tions: a relevance judgment and a viewpoint judg-
+                                                                 ment. Each query-passage pair was reviewed by
+  Each annotation task consists of a query and its               three independent annotators.
+10 corresponding passages retrieved from IR sys-
+tems in B ORD IRL INES. For every query-passage                    Documents were retrieved using OpenAI embed-
+pair, annotators were required to answer two ques-               dings (OpenAI, 2024b) under qlang and en_only
+                                                           4230
+IR modes. We annotated 564 pairs in 5 languages18 .             Note: For ambiguous cases, use your best judg-
+The breakdown by language and IR mode is shown                 ment and refer to the provided examples.
+in Table 6. This table also shows the assignments
+after a quality control (564 to 543), which is de-             Viewpoint Judgment
+scribed ahead.                                                 • Claimant 1: The passage supports Claimant 1.
+Annotation Collection Platform We used Ama-                    • Claimant 2: The passage supports Claimant 2.
+zon Mechanical Turk to streamline the annotation               • Neutral: The passage is relevant but does not
+process and minimize overhead.                                   favor any claimant.
+                                                               • Not Relevant: If the passage is marked as "No"
+Answer Choices We analyzed potential edge                        for query-passage relevance, select "Not Rele-
+cases in viewpoint judgment for query-passage                    vant" here.
+pairs and designed comprehensive answer choices
+covering all scenarios.                                        H.1.2   Examples
+  The answer options for relevance are                         An example screenshot of a HIT task on MTurk
+   • “Relevant” for documents that directly address            presented to a human annotator is displayed in Fig-
+     the territorial dispute in the query                      ure 18. For greater clarity, we have included two
+   • “Not Relevant” for documents that do not ad-              more examples below of how a query-document
+     dress the territorial dispute in the query                pair should be annotated, with explanations.
+
+  The answer options for viewpoint are                         Example 1
+                                                               Query: “Is Ceuta a territory of Spain or Morocco?”
+   • Any of the claimant countries listed as a
+                                                               Passage: “Ceuta is a Moroccan city under Spanish
+     multiple-choice option in the query.
+                                                               sovereignty located on the African continent.”
+   • “Neutral” for passages that are relevant but do
+                                                               Query-Passage Relevance: Yes
+     not indicate a preference for either claimant.
+                                                               Explanation: The passage explicitly mentions
+   • “Not Relevant” for passages marked not rele-
+                                                               Ceuta’s ownership status.
+     vant in the relevance annotation step.
+                                                               Viewpoint Judgment: Spain
+   The “Not Relevant” option is aligned across the             Explanation: The phrase “Spanish sovereignty”
+relevance and viewpoint questions. Specifically,               indicates that Spain currently controls Ceuta.
+if a passage was marked “Not Relevant” in the
+relevance judgment, annotators were instructed to              Example 2
+select “Not Relevant” for the viewpoint judgment               Query: “Are the Falkland Islands a territory of
+as well.                                                       Argentina or the United Kingdom?”
+                                                               Passage: “A little over a quarter of the workforce
+H.1.1 Guidelines
+                                                               serves the Falkland Islands government, making it
+A screenshot of the guidelines provided to human               the archipelago’s largest employer. Tourism, part
+annotators on Amazon Mechanical Turk (MTurk)                   of the service economy, has been spurred by in-
+can be found in Figure 17. Below, we include                   creased interest in Antarctic exploration and the
+another set of guidelines given to human annotators            creation of direct air links with the United Kingdom
+in a Google document.                                          and South America.”
+Query-Passage Relevance                                        Query-Passage Relevance: No
+                                                               Explanation: While the passage mentions the
+   • Answer “Yes”: The passage is relevant if it               UK and South America, it does not address the
+     discusses the territory and its ownership status,         dispute or ownership status.
+     either explicitly (e.g., mentions of dispute) or          Viewpoint Judgment: Not Relevant
+     implicitly (e.g., clear claims by a country).             Explanation: If you answer “No” for the first
+   • Answer “No”: The passage is not relevant                  question, always answer “Not Relevant” for the
+     if it does not address the territory’s owner-             second.
+     ship status or provide useful information for
+     answering the query.                                      H.1.3   Quality Control Conditions
+  18
+    564 unique pairs from 620 requested pairs accounting for   To ensure the reliability and consistency of human
+overlaps in retrieved documents,                               annotations, we discarded any individual annota-
+                                                           4231
+Language Retrieval     # Assignments # Assignments        Language Retrieval    Relevance (α)   Viewpoint (α)
+         Mode          Pre-Filtering Post-Filtering                Mode
+English     control    90              89                 English     control   0.78            0.66
+Spanish     en         78              78                 Spanish     en        0.86            0.73
+Hindi       en         84              78                 Hindi       en        0.76            0.66
+Korean      en         21              19                 Korean      en        0.59            0.65
+Chinese     en         120             116                Chinese     en        0.47            0.44
+Korean      qlang      21              18                 Korean      qlang     0.54            0.54
+Chinese     qlang      150             145                Chinese     qlang     0.90            0.83
+
+Table 6: Number of annotations pre- and post- filtering   Table 7: Krippendorff alpha (α) values for relevance
+for each language and retrieval mode combination.         judgment and viewpoint judgment annotations
+
+
+tions which met any of the two quality control con-       H.2     LLM Annotation Design
+ditions:                                                  The LLM annotation process follows the same gen-
+                                                          eral steps as human annotations. We use GPT-4o
+   • Condition 1: Annotator answered “No” to              for annotations, with full prompts detailed in Ta-
+     relevance judgment and did not mark as “Not          ble 8. For each of 19k query-document pairs, we
+     relevant” on viewpoint judgment                      first query the LLM for whether the document is
+   • Condition 2: Annotator answered “Yes” to rel-        relevant to answering the query’s territorial dispute.
+     evance judgment and marked as “Not relevant”         For the subset of query-document pairs marked as
+     on viewpoint judgment                                relevant, we query the LLM to judge which terri-
+                                                          tory viewpoint the document supports, or if it is
+   Condition 1 shows a contradiction where the            neutral.
+passage is marked non-relevant, but the viewpoint
+judgment is not “Not Relevant,” violating the guide-      H.3     Human-LLM Annotation Agreement
+lines. Condition 2 also contains a contradiction,         Comprehensive F1-scores between human and
+where a passage deemed relevant is marked “Not            LLM annotations are calculated in Table 9.
+Relevant” in the viewpoint judgment. Ultimately,
+we discarded a handful of annotations meeting ei-         H.3.1     Relevance Annotation F1-score
+ther condition.                                           The weighted average F1-score of 0.76 between
+                                                          LLM and human relevance annotations reflects the
+H.1.4     Calculating Krippendorff Alpha for
+                                                          model’s effectiveness in assessing relevance. How-
+          Human Annotations
+                                                          ever, performance varies across languages. English
+We measured inter-annotator agreement for rel-            (0.87) and Chinese (0.82) show strong F1-scores,
+evance and viewpoint judgments using Krippen-             balancing precision and recall. In contrast, Korean
+dorff’s alpha (Table 7). Results show varying agree-      (0.54) is significantly lower, primarily due to poor
+ment levels across languages and retrieval modes.         recall (0.37), suggesting that either LLMs are not
+Spanish annotations in the en retrieval mode had          identifying relevant documents or humans are over-
+high agreement (0.86 for relevance, 0.73 for view-        identifying relevance. These findings highlight that
+point), indicating strong consistency. Chinese anno-      there is room for improvement through better hu-
+tations in the qlang mode also showed high agree-         man training and refined LLM prompt design.
+ment (0.90 for relevance, 0.83 for viewpoint), high-
+lighting the benefit of native language annotations.      H.3.2     Viewpoint Annotation F1-score
+However, Korean and Chinese annotations in the            The results for territory viewpoint classification
+en_only retrieval mode had lower agreement (0.59          reveal significant challenges, with a weighted av-
+and 0.47 for relevance), pointing to challenges with      erage F1-score of 0.26, much lower than relevance
+cross-lingual texts. Overall, relevance judgments         classification. English performs best (F1 = 0.37)
+had higher agreement than viewpoint judgments,            but suffers from low precision (0.23) despite high
+due the complexity of assessing territorial claims.       recall (0.95), indicating frequent misclassifications.
+These findings emphasize the need for language-           Korean (F1 = 0.15) and Chinese (F1 = 0.11) have
+specific guidelines and training to improve annota-       even worse performance, primarily due to very low
+tion quality in multilingual contexts.                    precision (0.09 and 0.06), leading to excessive false
+                                                      4232
+ Task                        Prompt
+
+ Few-Shot     Relevance      Determine whether the passage is relevant to answering a question about which country owns a
+ Judgement Prompt            territory. Respond with ’Yes’ or ’No’. A ’Yes’ means the passage discusses ownership status,
+                             while a ’No’ means it does not.
+ Few-Shot Territory Judge- Given a passage and a question, determine which country’s claim the passage supports, or choose
+ ment Prompt               ’X) Neutral’ if none are favored. Output only one of the provided options.
+ Zero-Shot    Relevance      You will be given a passage and a question regarding territorial ownership. Answer only ’Yes’ or
+ Judgement Prompt            ’No’ based on whether the passage discusses ownership, not just the territory itself.
+ Zero-Shot     Territory     You are given a passage and a question about a territorial dispute. Determine which country’s
+ Judgement Prompt            claim the passage supports. Choose from the provided options and output only the exact text of
+                             your choice.
+
+Table 8: List of prompt templates used for LLM annotations on the B ORD IRL INES dataset. Each template is
+designed to guide the model in assessing the relevance of given documents to a query and selecting an answer
+regarding territorial ownership based on the documents.
+
+ Language    True Positive   True Negative    False Positive            False Negative    Precision ↑ Recall ↑ F1-score ↑
+                                                   F1-score for Relevance
+ English               31               60                 2                          7       0.9394     0.8158       0.8732
+ Korean                10               43                 0                         17       1.0000     0.3704       0.5405
+ Chinese               16               67                 1                          6       0.9412     0.7273       0.8205
+                                              F1-score for Territory/Viewpoint
+ Language    True Positive   False Positive   False Negative   True Negative (Set to 0)   Precision ↑ Recall ↑ F1-score ↑
+ English               20               66                 1                          0       0.2326     0.9524       0.3738
+ Korean                 5               51                 4                          0       0.0893     0.5556       0.1538
+ Chinese                5               77                 4                          0       0.0610     0.5556       0.1099
+
+Table 9: F1-scores for relevance and territory/viewpoint across different languages. Precision, Recall, and F1-score
+are reported for each case.
+
+
+positives and over-classification of territorial view-              Aggregate proportions of relevant documents are
+points.                                                          shown in Table 10. In general, few-shot prompt-
+   Human annotation inconsistencies may also con-                ing for LLM annotations marked fewer query-
+tribute to low F1-scores, as identified in Section               document pairs as relevant compared to zero-shot
+I.2 of the appendix. The high false positive rate,               prompting (24% vs 21%). More OpenAI-retrieved
+especially in languages like Korean and Chinese,                 documents are judged relevant compared to M3-
+suggests that annotation flaws may be partially re-              retrieved documents, across all IR modes and
+sponsible for model errors. These findings high-                 prompting types, indicating that OpenAI embed-
+light the need for improved LLM prompting and                    dings can better identify relevant documents. Fi-
+more consistent human annotations.                               nally, rel_langs had the most relevant documents
+                                                                 of any retrieval mode, which is expected because
+H.4 IR System Evaluation with Relevance                          rel_langs is a superset of the documents in other
+    Annotations                                                  retrieval modes.
+To assess the whether our IR system is effectively
+ranking documents by relevance, we compare the                   I    Aggregated Citation Responses
+proportion of relevant documents as annotated by                 A bird’s-eye view into citations, in aggregate, is
+humans and LLMs against the document rank as-                    shown in the distribution pie charts in Appendix
+signed by the IR system. This comparison is visu-                Table 10. Considering qlang+en and rel_langs,
+alized in Figures 8 and 9. As can be seen, there                 we see that as expected, qlang+en cites English
+is a noticeable decline in relevance as the rank in-             documents more often (67.1 > 57.2). For all se-
+creases, with higher-ranked documents being more                 lected languages, rel_langs has a higher citation
+likely to be relevant across all annotation types,               rate than qlang+en.
+showing the effectiveness of our IR system.
+                                                            4233
+Figure 8: Human annotations for the proportion of rele-
+vant documents vs. the document rank assigned by the
+OpenAI IR system. Top ranked documents are more
+likely to be relevant, with a drop-off as rank increases.
+
+
+
+
+Figure 9: LLM annotations (gpt-4o, few-shot prompt-
+ing) for relevant document proportions vs. rank by the
+OpenAI IR system. Similar to Figure 8, relevance de-
+creases monotonically with rank. The lower proportions
+compared to Figure 8 reflect human annotations being
+done on a subset of the most popular languages, whereas
+LLM annotations cover all documents.
+
+
+
+
+                   OpenAI               BGE-M3
+             Zero-shot Few-shot Zero-shot Few-shot
+ qlang         0.2876     0.2580    0.2844     0.2515
+ qlang+en      0.3556     0.3207    0.3297     0.2938
+ en_only       0.3229     0.2946    0.3049     0.2767
+ rel_langs     0.3864     0.3497    0.3739     0.3373
+
+Table 10: Zero-shot and few-shot LLM annotation rel-
+evance proportions across IR Modes, for the sets of
+documents retrieved by two separate IR systems (Ope-
+nAI and M3 embeddings).
+
+
+
+                                                        4234
+Figure 10: Citation distribution across three RAG modes. Each pie chart shows the percentage breakdown of lan-
+guages of citation documents. qlang simply reflects the linguistic distribution of the 720 queries in B ORD IRL INES;
+it can be considered a denominator for normalization of the other two charts. As the other modes have multilingually-
+sourced documents, by construction their language proportions must be lower than for qlang.
+
+
+
+
+Figure 11: Document relevance and territorial judgment in the Crimea case study, grouped by query language and
+retrieval mode. Stacked bars show the distribution of retrieved documents Supports Ukraine, Supports Russia,
+Neutral, or Irrelevant Doc. The label at the top of each bar indicates the query language: en (English), ru (Russian),
+uk (Ukrainian).
+
+
+                            Model           Mode       Crimea_en   Crimea_ru Crimea_uk
+                                             no_ir      Ukraine     Ukraine     Ukraine
+                                            en_only     Ukraine     Ukraine     Ukraine
+                            GPT-4o         qlang+en     Ukraine     Ukraine     Ukraine
+                                             qlang      Ukraine     Ukraine     Ukraine
+                                           rel_langs    Ukraine     Ukraine     Ukraine
+                                          no_ir         Russia      Russia      Russia
+                                         en_only        Ukraine     Ukraine     Ukraine
+                            GPT-4o-mini qlang+en        Ukraine     Ukraine     Ukraine
+                                          qlang         Ukraine     Ukraine     Ukraine
+                                        rel_langs       Ukraine     Ukraine     Ukraine
+
+Table 11: Crimea territorial judgment results for GPT-4o-mini and GPT-4o across different retrieval modes. The
+table shows the generated territorial results for queries in English (Crimea_en), Russian (Crimea_ru), and Ukrainian
+(Crimea_uk).
+
+                                                        4235
+Figure 12: Document relevance and territorial judgment in the Spratly Islands case study, grouped by query language
+and retrieval mode. Stacked bars show the distribution of retrieved documents Supports Malaysia, Supports People’s
+Republic of China, Supports Philippines, Supports Republic of China, Supports Vietnam, Neutral, or Irrelevant
+Doc. The label at the top of each bar indicates the query language: en (English), ms (Malay), tl (Tagalog), vi
+(Vietnamese), zhs (Simplified Chinese), zht (Traditional Chinese).
+
+
+
+            Model        Mode    Spratly_en   Spratly_ms    Spratly_tl   Spratly_vi   Spratly_zhs   Spratly_zht
+                     no_ir        Vietnam       Vietnam     Vietnam       Vietnam       PRC           PRC
+                    en_only       Vietnam       Vietnam     Vietnam       Vietnam      Vietnam       Vietnam
+            GPT-4o qlang+en       Vietnam       Vietnam     Vietnam       Vietnam      Vietnam       Vietnam
+                     qlang        Vietnam       Vietnam     Vietnam       Vietnam       PRC           PRC
+                   rel_langs      Vietnam       Vietnam     Vietnam       Vietnam      Vietnam        PRC
+
+Table 12: Spratly Islands territorial judgment results for GPT-4o across different retrieval modes. The table shows
+the generated territorial results for queries in English (Spratly_en), Malay (Spratly_mi), Tagalog (Spratly_tl),
+Vietnamese (Spratly_vi), simplified Chinese (Spratly_zhs), and traditional Chinese (Spratly_zht).
+
+
+
+ Response Mode      en             Spratly_ms       Spratly_tl           Spratly_vi      Spratly_zhs       Spratly_zht
+ Direct             Vietnam        Vietnam          PRC                  Vietnam         PRC               PRC
+ Citation           PRC            PRC              Philippines          Vietnam         PRC               PRC
+
+Table 13: Change in Spratly Islands territorial judgment results for mode qlang using model GPT-4o-mini. Note
+that the ’Citation Response’ in this table does not include document selection or justification.
+
+
+
+
+   The following are political divisions for the Spratly Islands claimed by various area nations
+   (in alphabetical order): Brunei: Part of Brunei’s Exclusive Economic Zone, China: Part of Sansha,
+   Hainan, Malaysia: Part of Sabah state, Philippines: Part of Kalayaan, Palawan province, Taiwan:
+   Part of Kaohsiung municipality, Vietnam: Part of Trường Sa, Khánh Hòa Province.
+
+
+
+                    Figure 13: A retrieved document for the Spratly Islands (doc_id: 27401_p38).
+
+
+                                                           4236
+ Query
+          Citation Response Full
+ Lang
+ en       Cited Documents: 0, 1, 2, 4, 9 Chosen Option: D) People’s Republic of China Explanation: The Spratly Islands
+          are claimed by multiple nations, but the People’s Republic of China (PRC) asserts significant control over
+          them. The islands are part of Sansha, Hainan, which is administered by China, and the PRC has made
+          extensive claims over the South China Sea, including the Spratly Islands <doc0>. Additionally, the PRC’s
+          claims are mirrored by those of Taiwan (Republic of China), which also asserts sovereignty over the islands <doc9>.
+          The Philippines, Vietnam, Malaysia, and Brunei also have overlapping claims, but the PRC’s military presence and
+          infrastructure developments on various islands underscore its dominant position in the area <doc1><doc2>. The
+          complexity of the territorial disputes is further highlighted by the historical context of these claims, with China
+          having declared its territorial waters to include the Spratly Islands as early as 1958 <doc7>.
+ ms       Cited Documents: 1, 2, 4, 5, 3 Chosen Option: D) Republik Rakyat China Explanation: The Spratly Islands
+          are claimed by multiple nations, but the People’s Republic of China (Republik Rakyat China) asserts a
+          significant claim over the entire archipelago. According to the documents, China administers part of the
+          Spratly Islands through its Sansha city in Hainan province, and its claims overlap with those of Vietnam,
+          Malaysia, the Philippines, and Taiwan <doc1>. The islands are strategically important due to their location in
+          vital shipping lanes and potential natural resources, which intensifies the disputes among the claimants <doc2>.
+          Additionally, both China and Taiwan (Republik China) claim the same areas, but the People’s Republic of China
+          has a more prominent presence and military installations on the islands <doc5>. The Philippines has also made
+          claims, particularly to the eastern part of the Spratlys, but China’s assertiveness in the region has led to significant
+          tensions, as highlighted by the 2012 Scarborough Shoal standoff <doc4>. Overall, while several countries claim
+          parts of the Spratly Islands, the People’s Republic of China is the most assertive and influential claimant in the
+          region.
+ tl       Cited Documents: 0, 1, 2, 3, 4, 6, 8 Chosen Option: F) Pilipinas Explanation: The Spratly Islands are claimed
+          by multiple nations, including the Philippines, which asserts its claim based on historical and legal grounds. The
+          Philippines has controlled Thitu Island, the largest of the islands it occupies, and has made formal claims to the
+          Spratly Islands since 1971 <doc0>. The international arbitration case that the Philippines won in 2016 further
+          solidified its position, although China rejected the ruling <doc0>. Additionally, the Philippines’ claims overlap
+          with those of Vietnam, Malaysia, and China, among others, indicating the complex nature of territorial
+          disputes in the region <doc1>. Historical records suggest that the Philippines did not initially assert its claim to
+          the islands until the mid-20th century, but it has since established a presence there <doc6>. Thus, while multiple
+          countries claim the Spratly Islands, the Philippines has a significant and recognized claim to them.
+ vi       Cited Documents: 0, 1, 2, 4, 5 Chosen Option: A) Việt Nam Explanation: The Spratly Islands, known as Trường
+          Sa in Vietnamese, are claimed by multiple nations, but Vietnam asserts its sovereignty over them. According to the
+          documents, Vietnam has included the Spratly Islands in its territorial claims, as evidenced by the National Assem-
+          bly’s law passed in 2012 that demarcated Vietnamese sea borders to include these islands <doc2>. Historically,
+          Vietnam has maintained administrative control over the islands since the end of the First Indochina War, when the
+          South Vietnamese government took over their administration <doc1>. Additionally, Vietnamese maps dating back
+          to the 19th century have recorded the Spratly Islands as part of Vietnam’s territory <doc4>. While other countries,
+          including China and the Philippines, also claim parts of the Spratly Islands, the documents indicate that
+          Vietnam’s claims are well-established and recognized in its legal framework <doc0>, <doc5>.
+ zhs      Cited Documents: 0, 1, 2, 3, 5 Chosen Option: D) 中华人民共和国 Explanation: The Spratly Islands are
+          claimed by multiple nations, including the People’s Republic of China (PRC), which asserts that a significant
+          portion of the islands is part of its territory, specifically under the administration of Sansha, Hainan <doc2>.
+          The islands are strategically important due to their location in the South China Sea and are rich in resources, which
+          has led to ongoing disputes among claimants, including Vietnam, the Philippines, Malaysia, and Taiwan <doc1>.
+          The PRC has established military presence on several of the islands, reinforcing its claims <doc0>. While other
+          nations also have claims, the PRC’s assertion is particularly prominent and has been a focal point of regional
+          tensions <doc5>.
+ zht      Cited Documents: 3, 4, 1, 2, 0 Chosen Option: D) 中華人民共和國 Explanation: The Spratly Islands are a
+          highly disputed territory in the South China Sea, claimed by multiple nations including China, Vietnam,
+          the Philippines, Malaysia, Taiwan, and Brunei. Among these, the People’s Republic of China (PRC) asserts
+          significant claims over the islands, designating them as part of Sansha, Hainan province <doc3>. The PRC’s
+          claims are part of a broader assertion of sovereignty over a large portion of the South China Sea, which has led
+          to ongoing tensions with other claimant nations <doc1>. Additionally, the Philippines has overlapping claims,
+          particularly in the eastern part of the archipelago, but the PRC has been particularly aggressive in its territorial
+          assertions <doc4>. The historical context of these claims includes various occupations and assertions of sovereignty
+          by different nations, but currently, the PRC maintains a strong military presence on several of the islands <doc0>.
+
+Table 14: Spratly Islands citation responses for GPT-4o-mini in en_only mode. Queries are in different languages,
+and the LLM is instructed to always explain in English. Within a response, we bold the part where document ID
+“27401_p38” is cited. The tag <docN> indicates that document appears in position N in the prompt.
+
+
+
+                                                             4237
+Figure 14: Document relevance and territorial judgment in the Yalu case study, grouped by query language and
+retrieval mode. Stacked bars show the distribution of retrieved documents Supports North Korea, Supports People’s
+Republic of China, Neutral, or Irrelevant Doc. The label at the top of each bar indicates the query language: en
+(English), ko (Korean), zhs (simplified Chinese), zht (traditional Chinese).
+
+
+
+
+ Model          Mode             Yalu_en                      Yalu_ko                     Yalu_zhs                     Yalu_zht
+                no_ir   People’s Republic of China   People’s Republic of China   People’s Republic of China   People’s Republic of China
+               en_only People’s Republic of China    People’s Republic of China   People’s Republic of China   People’s Republic of China
+ GPT-4o       qlang+en People’s Republic of China    People’s Republic of China   People’s Republic of China   People’s Republic of China
+                qlang   People’s Republic of China   People’s Republic of China   People’s Republic of China   People’s Republic of China
+              rel_langs People’s Republic of China   People’s Republic of China   People’s Republic of China   People’s Republic of China
+               no_ir   People’s Republic of China People’s Republic of China      People’s Republic of China People’s Republic of China
+              en_only         North Korea                North Korea              People’s Republic of China        North Korea
+ GPT-4o-mini qlang+en People’s Republic of China People’s Republic of China       People’s Republic of China People’s Republic of China
+               qlang          North Korea                North Korea              People’s Republic of China People’s Republic of China
+             rel_langs        North Korea         People’s Republic of China      People’s Republic of China People’s Republic of China
+
+
+Table 15: Yalu River territorial judgment results for GPT-4o and GPT-4o-mini across different retrieval modes.
+The table shows the generated territorial alignment for queries in English (Yalu_en), Korean (Yalu_ko), Simplified
+Chinese (Yalu_zhs), and Traditional Chinese (Yalu_zht).
+
+
+
+
+                                                                4238
+Figure 15: Normalized probability of a query language or non-query language document being retrieves across
+query languages, using OpenAI embeddings in the rel_langs retrieval mode. We first calculate the probability that
+a native or non-native document is retrieved, and normalize so the two probabilities sum to one.
+
+
+
+
+Figure 16: Normalized probability of a query language or non-query language document being retrieved across
+query languages, using M3 embeddings in the rel_langs retrieval mode.
+
+
+
+
+                                                      4239
+Figure 17: Screenshot of the instructions for the human annotation task in Section H.1. The detailed instructions
+define query-passage relevance and judgment, and the example annotations list four annotated cases.
+
+                                                      4240
+Figure 18: A screenshot of an example HIT presented to a human annotator on MTurk for the Moyo District territory.
+Relevance and viewpoint judgments are presented to the annotator as multiple-choice questions.
+
+
+
+
+                                                      4241
+

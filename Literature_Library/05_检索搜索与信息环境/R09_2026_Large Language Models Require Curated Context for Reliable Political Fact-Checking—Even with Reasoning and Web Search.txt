@@ -1,0 +1,1588 @@
+本文件为PDF自动提取文本，仅供检索；排版、图表和页码请以PDF为准。
+Large Language Models Require Curated Context for Reliable Political Fact-Checking—Even with Reasoning and Web Search
+
+    Large Language Models Require Curated Context for Reliable Political
+           Fact-Checking—Even with Reasoning and Web Search
+                   Matthew R. DeVerna                                       Kai-Cheng Yang
+                   Stanford University                                    Binghamton University
+
+                   Harry Yaojun Yan                                             Filippo Menczer
+                  Texas A&M University                                         Indiana University
+
+
+                       Abstract                                          PolitiFact.com
+                                                                                                            Summarize fact-checking articles
+                                                                               Article text
+     Large language models (LLMs) have raised
+     hopes for automated end-to-end fact-checking,                             Claim text
+                                                                                                         Query
+                                                                                                                                   Curated
+                                                                                                                                  database
+     but prior studies report mixed results. As
+     mainstream chatbots increasingly ship with
+     reasoning capabilities and web search tools—                         [ Fact-checking prompt ]
+                                                                                     +                  vs.
+                                                                                                                   [ Fact-checking prompt ]
+                                                                                                                              +
+     and millions of users already rely on them for                                [ Claim ]                               [ Claim ]
+     verification—rigorous evaluation is urgent. We                                                                            +
+
+     evaluate 15 recent LLMs from OpenAI, Google,                                  Baseline
+                                                                                                                   [ k curated summaries ]
+
+     Meta, and DeepSeek on more than 6,000 claims                                                                  With curated context
+     fact-checked by PolitiFact, comparing standard           PolitiFact verdict
+                                                                                                               Web search
+     models with reasoning- and web-search vari-
+                                                                                                         Reasoning
+     ants. Standard models perform poorly, reason-
+     ing offers minimal benefits, and web search pro-
+     vides only moderate gains, despite fact-checks
+     being available on the web. In contrast, a cu-                                                        Label
+     rated RAG system using PolitiFact summaries
+     improved macro F1 by 233% on average across                                               Evaluate model on claim veracity
+
+     model variants. These findings suggest that
+                                                             Figure 1: Data pipeline and study design. We collect
+     giving models access to curated high-quality
+                                                             PolitiFact claims, verdicts, article text, and metadata;
+     context is a promising path for automated fact-
+                                                             generate evidence-focused summaries of fact-checking
+     checking.
+                                                             articles; and build a curated evidence database. We
+                                                             then evaluate 15 LLMs from four major providers with
+1    Introduction                                            varying capabilities in two conditions, baseline (no re-
+                                                             trieval) and with k curated fact-checking article sum-
+Misinformation is a persistent and consequen-
+                                                             maries (k ∈ 3, 6, 9). Models predict claim veracity, and
+tial challenge in the digital age, distorting public         we compare their predictions to PolitiFact’s verdicts.
+opinion and eroding trust in democratic institu-
+tions (Ecker et al., 2024; World Economic Forum,
+2024). The rapid rise of large language models               2017), RumorEval (Gorrell et al., 2019), CLEF
+(LLMs) has intensified these concerns by mak-                CheckThat! (Nakov et al., 2022), and Claim-
+ing it easy to generate convincing but false con-            Buster (Hassan et al., 2017) spurred this line of
+tent at scale (Menczer et al., 2023). At the same            work. Transformer-based models such as BERT
+time, LLMs have been lauded for their potential to           produced major accuracy gains on these bench-
+counter misinformation, with growing interest in             marks (Soleimani et al., 2020; Nie et al., 2019;
+their use for information seeking (Chatterji et al.,         Zeng et al., 2021). The emergence of LLMs has
+2025) and fact-checking (Augenstein et al., 2024;            recently opened the door to effective end-to-end
+Chen and Shu, 2024).                                         fact-checking (Pan et al., 2023; Lee et al., 2020).
+   Early computational approaches to fact verifi-               Here, we focus on political fact-checking, specif-
+cation typically decomposed the task into sub-               ically on testing how well AI models can predict
+tasks such as claim detection, evidence retrieval,           the veracity labels ascribed to political claims by
+and veracity classification. Datasets and tools              professional fact-checkers. For example, Hoes et al.
+like FEVER (Thorne et al., 2018), LIAR (Wang,                (2023) evaluated GPT-3 on claims verified by Poli-
+                                                        29338
+                Findings of the Association for Computational Linguistics: ACL 2026, pages 29338–29360
+                             July 2-7, 2026 ©2026 Association for Computational Linguistics
+tiFact1 and reported nearly 70% accuracy when the        nAI, specifically three model categories: (1) stan-
+task was simplified to a binary true/false classifica-   dard LLMs without advanced reasoning or search;
+tion. For the same task, Quelle and Bovet (2024)         (2) reasoning models designed for enhanced infer-
+found that pairing models with a custom Google-          ence; and (3) web-search-enabled models that aug-
+search pipeline improved performance. However,           ment generation with live internet results. We test
+performance drops on PolitiFact’s original six-          these models on 18 years of claims fact-checked by
+point scale: Hoes et al. (2023) observed class ac-       PolitiFact, using a six-label veracity scale aligned
+curacies from 10% (True claims) to 47% (Mostly           with PolitiFact’s labeling system. To provide high-
+True claims). Quelle and Bovet (2024) likewise           quality context, we also introduce a curated RAG
+found low and inconsistent results (0–86%), even         pipeline built on GPT-3.5-generated summaries of
+with Google search access. More recently, using          PolitiFact fact-checking articles. This design is
+a small PolitiFact dataset (n = 228), Bombassei          explicitly intended to isolate and compare the con-
+De Bona et al. (2025) reported macro F1 scores           tributions of internal knowledge, reasoning, and
+of 0.09–0.48 across models such as Llama2-70B            web search, each with and without curated high-
+and Mixtral-8x7B. The LLM landscape has since            quality context.
+evolved rapidly, with newer, more capable models            In addition to fact-checking accuracy,
+and additional platforms now widely available.           LLMs have raised concerns about ideologi-
+   Many mainstream LLMs now ship with two key            cal bias (Rozado, 2024; Bang et al., 2024; Fulay
+features: built-in reasoning modes (Kavukcuoglu,         et al., 2024) and inaccurate citations (Jaźwińska
+2025; OpenAI, 2025) and an integrated retrieval-         and Chandrasekar, 2025; Byun et al., 2024; Liu
+augmented generation (RAG) system leveraging             et al., 2023). For the models with web-search
+web-search functionality (OpenAI, 2024; Mallick          capabilities, a related concern is the choice
+and Kilpatrick, 2024). RAG aims to improve               of cited sources (Yang, 2025b; Jaźwińska and
+factuality by incorporating relevant information         Chandrasekar, 2025). We therefore wish to analyze
+from retrieved documents (Jing et al., 2025; Jiang       the sources these models rely on, how reliable
+et al., 2023). It can be implemented via live            those sources are, and to what extent their selection
+web search, which enables flexible coverage of           might introduce unintended systematic biases.
+emerging topics (Augenstein et al., 2019), or via           Our study (Fig. 1) makes three contributions:
+a vector database, which offers speed and con-              1. We compare 15 recent LLMs from four ma-
+trol over source quality. However, RAG systems                 jor providers on a fact-checking task with six
+have yielded inconsistent improvements for politi-             labels aligned with PolitiFact’s veracity scale.
+cal fact-checking (Quelle and Bovet, 2024; Fontana             Our analysis includes both closed commercial
+et al., 2025).                                                 and open-weight LLMs of different sizes.
+   At the same time, professional organizations are         2. We systematically evaluate reasoning and
+testing LLMs for political fact-checking (Snopes,              web-search capabilities, both with and with-
+2025) despite little evidence of their reliability for         out a curated RAG system.
+such a demanding task. Others are integrating AI            3. We investigate citation practices in search-
+into fact-checking workflows (Nenno et al., 2025;              enabled models, analyzing their impact on
+De et al., 2025; Choi and Ferrara, 2024; Zhou et al.,          performance, alignment with original fact-
+2026). Yet experimental evidence shows that in-                checking articles, source reliability, and ideo-
+accurate or poorly justified fact-checks can impair            logical orientation.
+people’s ability to judge news headlines (DeVerna           Our findings reveal that standard mainstream
+et al., 2024).                                           models, even those with reasoning capabilities, per-
+   Given such concerns, this paper explores two          form poorly on the fact-checking task. While web
+concrete questions: Can mainstream LLMs with             search capabilities can moderately improve model
+reasoning and web-search capabilities reliably con-      performance, the cited sources exhibit a strong lib-
+duct political fact-checking? If not, can their ac-      eral bias. The models also struggle when there
+curacy be improved by providing carefully curated        is insufficient information to make a decision. In
+context? We answer these questions by evaluating         contrast, providing high-quality curated context
+15 LLMs from DeepSeek, Meta, Google, and Ope-            significantly improves performance, yielding F1
+                                                         score increases of 21–351% (mean: 233%) across
+   1
+       politifact.com                                    different settings.
+                                                    29339
+   These results call for caution in the use of current   2.2   Curated RAG System for Fact-Checking
+commercial AI chatbots for nuanced political fact-        A key part of our analysis relies on the construction
+checking by everyday users; fact-checking may not         of a Curated RAG system leveraging a database
+be a task that can be automatically resolved as the       of high-quality information, namely, summarized
+general intelligence and capabilities of LLMs im-         fact-checking articles. This system differs from
+prove. However, when provided with a curated              RAG systems that rely on web-search functional-
+fact-checking database, today’s models already per-       ity provided by off-the-shelf LLMs. Because the
+form well. Therefore, we argue that future efforts in     web-search and Curated RAG pipelines operate in-
+automated fact-checking should focus on improv-           dependently, models can draw information from
+ing web search by incorporating and prioritizing          either of them or both simultaneously, as demon-
+high-quality fact-checking context.                       strated in our experimental design (Fig. 1).
+                                                          Article Summarization Procedure. To create a
+2       Data and Methods                                  searchable knowledge base for the Curated RAG
+                                                          system, we summarized each fact-checking article
+2.1 Politifact Data                                       in our collection using OpenAI’s GPT-3.5 (gpt-3.5-
+We evaluate the political fact-checking capabili-         turbo-0125; system prompt in Appendix). This
+ties of large language models using the complete          procedure was designed to (1) extract key evidence
+archive of PolitiFact claims and fact-checks, cov-        supporting each verdict while minimizing model
+ering the period from its launch in 2007 through          bias, and (2) handle web scraping artifacts such as
+October 2024. We collected these data by system-          malformed or missing text. We formatted the sum-
+atically crawling the PolitiFact fact-check archive.2     maries as “<SUMMARY> (PolitiFact verdict:
+                                                          <VERDICT>).” This way, each prompt supplied
+   For each claim, we extracted seven fields: the
+                                                          both article text and PolitiFact verdict, guiding the
+statement, the PolitiFact Truth-O-Meter verdict
+                                                          model to identify the reasoning and evidence un-
+(six-point veracity labels “True,” “Mostly true,” ...,
+                                                          derlying the official conclusion.
+“Pants on Fire,”3 the claim source, the statement
+date, the publication date of the fact-check, the         Faithfulness of Article Summaries. We as-
+topic tags, and the article link (URL). We also re-       sessed the reliability of our summaries with es-
+trieved the full text of each fact-checking article       tablished methods (Chen et al., 2024). We focused
+using the Python package newspaper3k, as these            on summary faithfulness—the extent to which sum-
+articles provide the evidence and reasoning used by       maries accurately reflect source articles without in-
+professional fact-checkers to justify their verdicts.     troducing errors or hallucinations. One author and
+We refer to the fact-checking article associated with     a trained student coder independently compared
+a specific claim as the “matching” article.               100 randomly sampled summaries to their source
+   The crawl yielded 25,224 claims. To ensure             articles, assigning each to one of four categories:
+quality, we excluded 298 “Flip-o-meter” items             faithful, minor inaccuracies, major inaccuracies, or
+(which assess position changes rather than verac-         hallucinated content (definitions are provided in
+ity4 ), 55 Spanish-language fact-checks that could        the Appendix). Two annotators concurred on 97
+not be parsed reliably, and 260 claims for which          of 100 cases (97%). One labeled all as “Faithful,”
+we encountered article summarization issues (see          while the other labeled 97 as “Faithful” and three
+Fact-Checking Database Construction for details).         as “Minor Inaccuracies.” These results indicate the
+The final dataset contains 24,611 veracity-focused        summarization process yields reliable representa-
+claims, with 4,941 distinct topic tags and 4,759          tions of the original content.
+unique claim sources, ranging from individual             Fact-Checking Database Construction. Before
+speakers to social-media items (e.g., “Facebook           finalizing the database, we removed 260 claims
+post,” “Viral image”).                                    with unusable fact-checking articles. Of these, 148
+                                                          returned empty text, and 12 contained fewer than
+    2
+     politifact.com/factchecks/list                       200 characters, as identified during manual review.
+    3
+     politifact.com/article/2018/feb/12/principle         Additionally, 100 claims were not captured due to
+s-truth-o-meter-politifacts-methodology-i
+   4
+     politifact.com/article/2008/aug/05/introduci         data-collection errors. This left 24,451 high-quality
+ng-flip-o-meter                                           summaries, converted into sentence embeddings
+                                                     29340
+and stored in a Chroma vector database.5 Embed-          Table 1: List of tested LLMs, their providers, and capa-
+dings were generated using Sentence Transformers         bilities. A ✓in the j and Û columns indicates reason-
+                                                         ing and search capabilities, respectively. Model release
+and the all-MiniLM-L6-v2 model (Reimers and
+                                                         dates and knowledge cutoffs are provided in the Ap-
+Gurevych, 2019), enabling similarity search via          pendix.
+cosine distance.6
+   Although only part of the dataset is used in eval-       Provider   Model                                   j   Û
+uation (see § 2.4 for details), the database includes       DeepSeek   DeepSeek-V3
+all summaries. This requires the system to retrieve         DeepSeek   DeepSeek-R1                             ✓
+
+relevant items from a much larger pool of informa-          Meta       Llama-3.2-3B-Instruct-Turbo
+                                                            Meta       Llama-3.2-11B-Vision-Instruct-Turbo
+tion, reflecting likely deployment conditions.              Meta       Llama-3.2-90B-Vision-Instruct-Turbo
+                                                            Google     gemini-2.0-flash                            ✓
+Database Retrieval Accuracy. For each claim,                Google     gemini-2.0-flash-lite
+we queried the database with the text <STATEMENT            Google     gemini-2.0-flash-thinking-exp-01-21     ✓   ✓
+ORIGINATOR>        claimed      <STATEMENT> and             Google     gemini-2.0-pro-exp-02-05
+
+recorded the rank of the “matching summary,” i.e.,          OpenAI     gpt-4o-2024-11-20
+                                                            OpenAI     gpt-4o-mini-2024-07-18
+the fact-checking article summary associated with           OpenAI     gpt-4o-mini-search-preview-2025-03-11       ✓
+the tested claim. We queried the database for the           OpenAI     gpt-4o-search-preview-2025-03-11            ✓
+top k = 3, 6, or 9 most similar summaries, match-           OpenAI     o1-2024-12-17                           ✓
+                                                            OpenAI     o3-mini-2025-01-31                      ✓
+ing the settings used in our fact-checking analyses
+(§ 2.4). Performance was measured with top-k
+accuracy—the fraction of queries in which the cor-       they retrieved. In the Curated RAG setting, all mod-
+rect summary appeared within the top-k results           els were additionally provided with article sum-
+(also known as hit rate@k).                              maries from our retrieval system and instructed to
+                                                         evaluate claims using the most relevant summaries.
+2.3 Tested LLMs                                          By comparing these configurations, we can tease
+We evaluated 15 LLMs from four prominent lan-            out the effects of internal knowledge, web search,
+guage model providers: OpenAI, Google, Meta,             and curated retrieval on fact-checking performance.
+and DeepSeek (Table 1). This selection included             We augmented PolitiFact’s Truth-O-Meter scale
+models of varying sizes, from compact to large           (hereafter referred to as the Truth Scale) with a
+versions. In addition to the standard models, we in-     “Not Enough Information” label, enabling models
+cluded widely available models with reasoning and        to abstain from providing a veracity label rather
+web search functionality. For Google models, the         than forcing a potentially unreliable classification.
+search capability corresponds to their grounding         This design tests whether models can communicate
+feature,7 which allowed us to test these models with     useful uncertainty signals that may allow develop-
+and without search enabled. We accessed Google           ers to build safer, more effective fact-checking sys-
+and OpenAI models through their official APIs,           tems (Kotonya and Toni, 2020; Zhao, 2025). See
+while DeepSeek and Meta models were accessed             the Appendix for an analysis of performance across
+via the TogetherAI platform.8                            coarser veracity schemes (binary and ternary).
+2.4 Fact-Checking Analyses                                  Our protocol used system prompts that define
+                                                         the task and available labels, with claims presented
+Experimental Setup. We evaluated each model’s            as separate user prompts. Full prompt details are
+ability to predict PolitiFact’s veracity labels across   provided in the Appendix, along with a robustness
+multiple conditions (Fig. 1). In the zero-shot set-      analysis confirming that results hold under a sim-
+ting, models received only the claim and its orig-       pler prompt design. Each claim was tested inde-
+inator, mirroring typical usage scenarios; search-       pendently with no prior conversation history. We
+enabled systems could access their built-in web          set the temperature to 0 for all tests and used the
+search capabilities and rely on whatever evidence        default web search options.
+   5
+   6
+     trychroma.com                                          All analyses were executed on Extreme Science
+     docs.trychroma.com/docs/embeddings/embedding        and Engineering Discovery Environment (XSEDE)
+-functions#default-all-minilm-l6-v2
+   7
+     ai.google.dev/gemini-api/docs/google-search         Jetstream virtual machines (VMs) (Towns et al.,
+   8
+     together.ai                                         2014; Stewart et al., 2015).
+                                                    29341
+Data Preparation. To reduce computational                 of website used, the source’s reliability, and its
+costs, we created two stratified samples. From            political leanings.
+the full dataset, we randomly selected half of the
+claims from each year, yielding a set of 12,306           Source Type Classification. We classified cited
+claims (‘12k’) for evaluating standard models.            domains into seven categories (fact-checking, news,
+More computationally intensive reasoning and web-         government, Wikipedia, educational, research, and
+search models were tested on 6,153 claims (‘6k’),         other) using a rule-based system developed through
+drawn from the 12k set by again randomly selecting        manual review. The system combines curated third-
+half the claims from each year. We encountered re-        party datasets with pattern matching.
+peated API errors for a small set of claims, mostly          News domains were identified by matching
+with reasoning models. To ensure fair comparisons,        against a list of over 23,000 news organizations
+we calculated performance metrics based only on           compiled from multiple sources (Yang, 2025a), in-
+claims that returned valid outputs across all mod-        cluding NewsGuard,9 MBFC,10 ABYZ,11 and Me-
+els and tested scenarios, leaving 12,275 and 6,137        dia Cloud,12 as well as academic studies (Robert-
+claims in the 12k and 6k sets.                            son et al., 2018; Le Quéré et al., 2022; Fischer et al.,
+                                                          2020; Horne et al., 2022).
+Structured Responses and Response Cleaning.                  Other domain types were classified using string
+We used each API’s structured response features           patterns applied in priority order: fact-checking
+to standardize outputs, but some models occasion-         sites (e.g., “factcheck.org,” “snopes,” “politifact”);
+ally returned malformed JSON. Across six mod-             government domains (.gov, .mil, agency-specific
+els, these formatting errors produced 1,035 in-           patterns); educational institutions (.edu, university-
+valid responses: 675 from Llama-3.2-3B-Instruct-          related terms); and research organizations (think
+Turbo, 250 from Gemini-2.0-flash-thinking-exp-01-         tanks, policy institutes, international organizations).
+21, 61 from Llama-3.2-11B-Vision-Instruct-Turbo,          See Appendix for additional details.
+40 from Gemini-2.0-flash, 6 from Llama-3.2-90B-
+Vision-Instruct-Turbo, and 3 from DeepSeek-V3.            Source Reliability and Political Orientation.
+We employed GPT-4o-mini (gpt-4o-mini-2024-07-             Source reliability is defined at the domain level,
+18)—which did not exhibit these issues—to extract         based on the March 2025 snapshot of NewsGuard’s
+the original classifications and return them in struc-    Reliability Ratings database.13 NewsGuard assigns
+tured form (see Appendix). We validated this pro-         news domains reliability scores ranging from 0 to
+cess by manually reviewing a random sample of up          100, with higher values indicating greater credibil-
+to 25 problematic responses per model (109 total).        ity, based on independent evaluations by profes-
+The extracted labels matched the originals in all         sional journalists.
+cases (100% agreement).                                      For ideological orientation, we used the Do-
+                                                          mainDemo dataset, which profiles over 129,000
+Performance Metrics. We evaluated perfor-                 domains by the demographics of their Twitter au-
+mance using standard multi-class metrics: macro           diences (2011–2022) in line with established clas-
+precision, macro recall, and macro F1 across Truth        sifications (Yang et al., 2025). Political leaning
+Scale classes, weighting each class equally. We           scores range from −1 to +1 (exclusively shared by
+also calculated weighted F1 scores, but found             Democratic or Republican users, respectively).
+no meaningful differences between them and the
+macro version (see Appendix). The “Not Enough             3        Results
+Information” (NEI) label was excluded from macro
+calculations because no ground truth exists for this      Our analysis proceeds in two parts. First, we com-
+category; instead, we analyze NEI usage patterns          pare model performance in zero-shot and Curated
+directly in the Appendix.                                 RAG settings (§ 3.1). Second, we analyze citation
+                                                          practices of web search-enabled models (§ 3.2).
+2.5 Source Citation Patterns of Web                           9
+                                                                newsguardtech.com
+    Search-Enabled LLMs                                       10
+                                                                mediabiasfactcheck.com
+                                                             11
+                                                                abyznewslinks.com
+We analyzed the sources cited by web search-                 12
+                                                                mediacloud.org
+enabled LLMs along multiple dimensions: how                  13
+                                                                newsguardtech.com/solutions/news-reliability
+often they cited original PolitiFact articles, the type   -ratings
+
+                                                     29342
+3.1 Fact-Checking Performance                                                        k=0                  OpenAI
+                                                                                     k=3                  Google
+To balance coverage and cost, we used a two-stage                                    k=6                  Meta
+evaluation. First, we tested the less expensive stan-             (a)                k=9                  DeepSeek
+dard models across multiple Curated RAG config-                                                                         0.90
+urations (k = 3, 6, 9) on the full 12k set. Second,             GPT-4o
+                                                                                                    +0.63
+guided by those results, we evaluated the more                                                                       0.88
+costly reasoning and web search-enabled models              GPT-4o mini
+                                                                                                   +0.66
+on the 6k set with simplified configurations (only                                                               0.81
+                                                             Gemini 2.0
+k = 6). For comparability, we report macro F1                       Pro                           +0.55
+results on the 6k set. The Appendix reports full                                                                     0.88
+                                                             Gemini 2.0
+results on the 12k set, showing highly similar per-              Flash                               +0.57
+formance across both sets, as well as performance                                                                  0.86
+                                                             Gemini 2.0
+broken down by veracity verdict.                              Flash Lite                           +0.61
+                                                                                                                  0.84
+Standard Models and Curated RAG Accuracy.                Llama 3.2 90B
+                                                                                                  +0.64
+Figure 2(a) shows macro F1 fact-checking perfor-                                                          0.64
+mance for standard models across configurations.         Llama 3.2 11B
+                                                                                          +0.49
+In the zero-shot setting, where models rely solely                                         0.40
+on internal knowledge, performance is consistently         Llama 3.2 3B
+                                                                                 +0.26
+low (F1 ≈ 0.1–0.3).                                                                                                     0.89
+   Curated RAG context leads to substantial im-            DeepSeek-V3
+                                                                                                    +0.64
+provements across all models. F1 gains range from                       0.0    0.2     0.4     0.6   0.8                       1.0
++0.26 (Llama-3.2-3B) to +0.66 (GPT-4o mini),                                          macro F1 score
+with little variation across k values (SD = 0.002–             (b)
+0.037). The best configurations are GPT-4o at
+k = 9 (F1 = 0.90) and DeepSeek-V3 at k = 9
+(F1 = 0.89). These gains from Curated RAG                                  1         10          100     1000
+                                                                                          retrieval rank
+far exceed the differences in performance between
+                                                               (c) 9.0                                                          0.98
+models. Within the Llama-3.2 family, larger vari-                    6.0                                                        0.98
+                                                               k
+
+
+
+
+ants not only start from higher baselines but also                   3.0                                                       0.96
+achieve greater improvements from Curated RAG,                          0.0    0.2      0.4      0.6    0.8                    1.0
+suggesting that model capacity amplifies the ben-                                top-k retrieval accuracy
+efits of high-quality retrieval. Viewed as relative
+improvements, the largest gains within each model       Figure 2: Fact-checking performance of standard LLMs
+family are substantial: approximately +295% for         and retrieval performance of the Curated RAG system.
+GPT, +250% for Gemini, +351% for Llama, and             (a) Macro F1 scores in zero-shot (k = 0) and Curated
+                                                        RAG (k > 0) conditions. Shapes and colors denote Cu-
++259% for DeepSeek (see Appendix for details).          rated RAG settings and model providers. Vertical bars
+   Figure 2 also highlights retrieval effectiveness.    show average F1 scores across Curated RAG settings
+Performance is stable across k values, reflecting       (k = 3, 6, 9); horizontal annotations show improvement
+a retrieval system that reliably ranks the correct      over zero-shot. (b) Distribution of retrieval ranks for
+summary near the top: the median rank is 1 and          matching summaries across tested claims; the red square
+the mean rank is 3 (Fig. 2(b)). Top-k accuracy is       marks the median and the orange circle marks the mean.
+correspondingly high: 0.96 at k = 3 and 0.98 at         The y-axis displays random jitter for visualization clar-
+                                                        ity. (c) Top-k retrieval accuracy for each setting.
+k = 6 or 9 (Fig. 2(c)).
+
+Reasoning and Web Search-enhanced Models.               These results suggest that advanced reasoning ca-
+We next examine how reasoning and web search            pabilities provide limited benefit in the zero-shot
+affect macro F1 scores. Figure 3(a) shows that          setting. On the other hand, Curated RAG sum-
+reasoning models do not consistently outperform         maries deliver substantial improvements for rea-
+the baselines. When gains occur, they are mod-          soning models, mirroring patterns observed in the
+est (+0.06 on average), and performance can even        evaluation of the standard models.
+decline (−0.03 for Gemini 2.0 Flash Thinking).             Search-enhanced models exhibit provider-
+                                                   29343
+                                           baseline                OpenAI                    Table 2: Citation statistics for search-enabled LLM-
+                                           k=0                     Google                    generated fact-checks. Columns show model name,
+                                           k=6                     DeepSeek
+                                                                                             Curated RAG setting (k), and counts and percentages
+                (a)                 +0.001                                                   of fact-checks containing any URL or an exact match to
+                      o3-mini                               +0.63                            the original PolitiFact article.
+                                         +0.11
+                           o1
+  reasoning
+
+
+
+
+                                                                 +0.53
+                                                                                              Model                       k   Any URL (%)     Exact Match (%)
+                                         -0.03
+              Gemini 2.0 Flash                              +0.59                             Gemini 2.0 Flash            0          14 (0)              0 (0)
+                     Thinking                                                                 Gemini 2.0 Flash            6           0 (0)              0 (0)
+                                     +0.06
+                                                                                              Gemini 2.0 Flash Thinking   0           0 (0)              0 (0)
+                 DeepSeek-R1                                 +0.58                            Gemini 2.0 Flash Thinking   6           0 (0)              0 (0)
+                                                                                              GPT-4o mini Search          0      3,861 (63)         2,691 (44)
+                (b)                                      +0.50                                GPT-4o mini Search          6      3,638 (59)         2,780 (45)
+                       GPT-4o                                               +0.16             GPT-4o Search               0      3,932 (64)         2,814 (46)
+                       Search
+                                                                                              GPT-4o Search               6      4,448 (72)         3,646 (59)
+                                                 +0.35
+                  GPT-4o mini                                       +0.24
+                      Search
+search
+
+
+
+
+                                         -0.04                                               plain why search fails to improve their performance
+                   Gemini 2.0                              +0.60
+               Flash + Search
+                                     -0.04                                                   (Fig. 3(b)). However, search-enabled GPT mod-
+          Gemini 2.0 Flash                                 +0.64                             els cite URLs frequently: 59%–72% of responses
+         Thinking + Search
+                             0.0   0.2           0.4     0.6                0.8     1.0      include at least one citation, and 44%–59% link
+                                                  macro F1                                   directly to the original PolitiFact article.
+Figure 3: Fact-checking performance of LLMs with                                                To understand how citation behavior shapes fact-
+(a) reasoning and (b) web search capabilities. Triangles                                     checking performance, we focus on GPT models,
+show zero-shot performance of the corresponding stan-                                        as Gemini models seldom include any citations.
+dard models used as baselines: GPT-4o for o3-mini and                                        We calculate macro F1 scores for search-enabled
+o1; Gemini 2.0 Flash for Flash Thinking; DeepSeek-V3                                         GPT models across three conditions: responses in
+for R1; and the non-search equivalent for search-enabled                                     which any citation matches the correct PolitiFact
+models (e.g., GPT-4o for GPT-4o Search). Circles de-
+                                                                                             article, responses with one or more citations that
+note zero-shot performance (k = 0) of reasoning and
+search-enhanced models, respectively, in (a) and (b),
+                                                                                             do not match the original fact-checking article, and
+while diamonds show their Curated RAG-enhanced per-                                          responses with no URLs cited. We examine these
+formance at k = 6. Horizontal annotations indicate                                           patterns across both zero-shot(k = 0) and curated
+performance differences: zero-shot reasoning/search                                          RAG settings (k = 6). Figure 4 shows that per-
+variants compared with baselines (above symbols) and                                         formance is consistently highest when the correct
+with the Curated RAG setting (k = 6; below symbols).                                         article is cited, while citing other URLs is generally
+                                                                                             associated with the largest drop in macro F1 across
+specific differences (Fig. 3(b)). GPT search models                                          models and settings (see Appendix for details). No-
+substantially outperform their non-search versions,                                          tably, responses with no citations generally out-
+gaining +0.50 (GPT-4o) and +0.35 (GPT-4o mini).                                              perform those with other citations, suggesting that
+However, Gemini search models underperform rel-                                              retrieving and relying on irrelevant evidence can
+ative to their standard variants. This is likely due                                         hinder performance. This effect is substantially
+to difficulties in retrieving effective citations, as                                        moderated when a curated RAG context is provided
+discussed in § 3.2.                                                                          (k = 6).
+   Curated RAG summaries continue to provide                                                    To assess the sources that search-enhanced
+meaningful improvements: +0.24 for GPT-4o mini                                               LLMs rely on beyond PolitiFact itself, we focus
+Search and +0.16 for GPT-4o Search. Gemini                                                   on GPT models, as Gemini models seldom include
+models also show large gains in the Curated RAG                                              citations. We extract the top-level domains from all
+setting (+0.60 for Flash, +0.64 for Flash Think-                                             cited URLs (e.g., cnn.com for CNN) and present
+ing), though these partially reflect their weak zero-                                        the results in Figure 5.
+shot baselines.
+                                                                                                Using the classification approach described in
+                                                                                             § 2, we categorize cited sources by domain type.
+3.2 Citation Usage
+                                                                                             Figure 5(a) shows that both GPT models predom-
+To interpret web-search-enabled model perfor-                                                inantly cite fact-checking sites, followed by news
+mance, we examine citation patterns. Table 2 re-                                             outlets, government websites, and other sources.
+ports URL citation rates in generated fact-checks.                                           Citations to Wikipedia, educational, and research
+Gemini models rarely include URLs, helping ex-                                               websites are relatively infrequent.
+                                                                                          29344
+                 correct article URL         other URL     no URL                  (a)
+                                                                                           fact checking
+
+
+
+
+                                                                             domain type
+                                                                                                   news
+                     GPT-4o Search              GPT-4o mini Search                                 other
+           1.0                                                                              government
+                                                                                               wikipedia             GPT-4o mini Search
+                                                                                             educational             GPT-4o Search
+                                                                                                research
+           0.8
+                                                                                                             100          1,000
+                                                                                                           number of citations
+                                                                                   (b)
+macro F1
+
+
+
+
+           0.6                                                                                             GPT-4o mini Search
+                                                                               politifact.com
+                                                                                apnews.com
+                                                                               wikipedia.org
+           0.4                                                                 factcheck.org
+                                                                         washingtonpost.com
+                                                                                     cnn.com
+                                                                                 politico.com
+           0.2                                                                    senate.gov
+                                                                                   axios.com
+                                                                               cbsnews.com
+           0.0                                                                   reuters.com
+                                                                                      ajc.com
+                     k=0               k=6        k=0       k=6                  snopes.com
+                                                                                                             100           1,000
+                                                                                                           number of citations
+Figure 4: Macro F1 scores for web search-augmented                                 (c)                       GPT-4o Search
+models across three retrieval outcome categories: re-                          politifact.com
+                                                                                apnews.com
+sponses in which any citation matched the correct Poli-                          snopes.com
+tiFact article, responses with one or more citations that                      factcheck.org
+                                                                                     cnn.com
+did not match the original fact-checking article, and re-                      wikipedia.org
+                                                                               cbsnews.com
+sponses with no URLs cited.                                                      reuters.com
+                                                                                   axios.com
+                                                                         washingtonpost.com                                        k
+                                                                                      cdc.gov                                          0
+   Figures 5(b,c) highlight the sources cited most                        checkyourfact.com                                            6
+                                                                                 politico.com
+often. The top ten sources are consistent across                                                             100          1,000
+both GPT models. PolitiFact is the most cited                                                              number of citations
+source, with factcheck.org, snopes.com, and
+Wikipedia also appearing prominently. Mainstream                        Figure 5: Sources cited by search-enhanced GPT mod-
+                                                                        els. (a) Average number of citations by domain type.
+news outlets such as Associated Press and CNN
+                                                                        Error bars indicate standard deviation across k values.
+rank among the most cited sources, alongside gov-                       (b) Top 10 sources cited by GPT-4o mini Search for
+ernment websites like senate.gov and cdc.gov.                           k = 0 and k = 6. (c) Same as (b) for GPT-4o Search.
+   Finally, to evaluate the reliability and political
+orientation of cited sources, we assign NewsGuard                       limited to internal knowledge, with weak zero-shot
+reliability scores and DomainDemo political lean-                       results across providers. Reasoning-enhanced mod-
+ing scores (Yang et al., 2025), respectively, to the                    els yielded only small and inconsistent gains.
+extracted top-level domains of all cited URLs. Fig-
+                                                                           Web search helps in some cases. In particular,
+ure 6 shows the joint distribution of these metrics
+                                                                        GPT models improved substantially, often citing
+across all tested GPT scenarios, limited to domains
+                                                                        PolitiFact or other credible sources, whereas Gem-
+for which both scores are available. The distri-
+                                                                        ini models struggled to surface relevant citations.
+bution peaks at a NewsGuard score of 100 and a
+                                                                        Performance also varied substantially depending on
+political leaning score of −0.3, corresponding to
+                                                                        whether models retrieved the correct fact-checking
+politifact.com. In general, we observe a ten-
+                                                                        article, a different source, or no source at all. This
+dency to cite left-leaning sources with high credibil-
+                                                                        gap shows that “search” is not a uniform capability:
+ity ratings. These patterns persist when we remove
+                                                                        it depends on query formulation, source prioritiza-
+politifact.com from the dataset and when we re-
+                                                                        tion, and the integration of retrieved material into
+run the analysis using an alternative domain-quality
+                                                                        the model’s reasoning process.
+list (Lin et al., 2023) (see Appendix). They are also
+consistent with prior research related to AI news                          GPT models’ overall citation mix skewed left-
+citation patterns (Yang, 2025b).                                        ward, raising questions about ideological balance.
+                                                                        Whether this reflects model or search-pipeline bias,
+4          Discussion                                                   or structural features of the information ecosystem
+                                                                        (e.g., a correlation between accuracy and political
+Our study shows that despite rapid progress, major                      leaning (Fulay et al., 2024)), it may undermine trust
+LLMs still perform poorly at fact-checking when                         in systems that present themselves as arbiters of
+                                                                     29345
+                                                                     All data                  reduce direct traffic to fact-checking websites, un-
+                                                                     Excluding PolitiFact
+                                                                                               dermining the revenue models of the organizations
+                        98.7% (92.2%)                         1.3% (7.8%)                      whose work these pipelines depend on. Addressing
+                  100
+                                                                                               these challenges will require not only advances in
+                                                                  Generally                    how evidence is surfaced, but also careful attention
+                  80                                               Credible 99.3% (95.5%)      to the sustainability of the broader fact-checking
+                                                                  Credible                     ecosystem on which such systems depend.
+newsguard score
+
+
+
+
+                                                           with Exceptions 0.5% (3.2%)
+                  60
+                                                                   Proceed                     5         Limitations
+                                                              with Caution 0.1% (0.7%)
+                  40
+                                                                                               This study has several limitations. First, our eval-
+                                                                                               uation is limited to PolitiFact and may not gen-
+                  20
+                                                                                               eralize to other fact-checkers, platforms, or types
+                                                             Proceed with
+                                                         Maximum Caution 0.1% (0.6%)           of claims (Yu et al., 2023). Second, we do not
+                   0
+                        1.0        0.5          0.0         0.5           1.0                  address the “breaking news problem” (DeVerna
+                                     political leaning score                                   et al., 2024): most tested claims predate evaluation,
+                                  1     10     100
+                                              count
+                                                      1,000 10,000                             so performance on newly emerging claims may
+                                                                                               be worse; while web-search-enabled models could
+Figure 6: Joint distribution of NewsGuard reliabil-                                            fetch live evidence in principle, we did not test this.
+ity and political leaning scores for sources cited by                                          Future work should evaluate performance in break-
+search-enhanced GPT models. Marginal distributions                                             ing news settings with incomplete or rapidly evolv-
+are shown in the top and right panels for all citations                                        ing information. Third, results may not generalize
+(blue) and for citations excluding politifact.com                                              to other LLM models; reliance on vendor APIs
+(red). Black dashed lines separate NewsGuard group
+                                                                                               means results may change as providers update or
+labels, and annotated percentages indicate the share of
+sources falling in each group; values in parentheses re-                                       modify their models, limiting reproducibility over
+port the same percentages with PolitiFact excluded.                                            time. Fourth, results may not generalize across all
+                                                                                               prompting strategies; while our prompt robustness
+truth, especially in politically sensitive settings.                                           analysis (see Appendix) suggests that our results
+                                                                                               are not driven solely by our prompting strategy,
+   By supplying high-quality, claim-specific evi-
+                                                                                               more work is needed to understand how people ac-
+dence, the Curated RAG system improves macro
+                                                                                               tually use LLMs to fact-check information. Finally,
+F1 by 233% on average across models, demonstrat-
+                                                                                               we report system-level performance only and do
+ing that leading LLMs can map evidence to correct
+                                                                                               not measure downstream effects on beliefs, trust,
+labels when quality information is available. In
+                                                                                               or sharing behavior, which are critical for assessing
+other words, the key limitation of LLMs is not
+                                                                                               societal impact (Guay et al., 2023).
+how models reason over information, but whether
+they have access to the right information in the first                                         Code and data. Replication code and data are
+place.                                                                                         available on GitHub14 and Zenodo (DeVerna et al.,
+   Overall, these findings suggest a nuanced pic-                                              2025), respectively.
+ture. For everyday users, caution is warranted;                                                Acknowledgments. Funding was provided by
+standard LLMs remain unreliable fact-checkers,                                                 the Institute for Humane Studies and the Knight
+and web search—while helpful—does not ensure                                                   Foundation. We thank Eduardo Blanco for feed-
+the right information is found or interpreted cor-                                             back and Abhi Boda for assistance with the sum-
+rectly. For researchers and system designers, the                                              mary faithfulness analysis.
+lesson is that carefully curated retrieval pipelines
+are currently the most dependable foundation for                                               Author contributions. M.R.D. conceived the
+reliable fact-checking. Building such pipelines at                                             study; M.R.D., K.-C.Y., and H.Y.Y. designed the
+scale, however, is non-trivial: they must cover di-                                            research; M.R.D. collected/analyzed data and cre-
+verse domains, update continuously, and manage                                                 ated visualizations with feedback from all authors;
+conflicting or incomplete evidence. Moreover, the                                              M.R.D. wrote the original draft, reviewed and
+successful deployment of such a system creates a                                               edited by all authors; M.R.D. and F.M. acquired
+structural tension within the information ecosystem.                                           funding; F.M. supervised.
+Wide use of LLM-based fact-checking tools could                                                     14
+                                                                                                         github.com/osome-iu/fact_check_rag_osome
+
+                                                                                            29346
+References                                                 Eun Cheol Choi and Emilio Ferrara. 2024. Automated
+                                                             Claim Matching with Large Language Models: Em-
+Isabelle Augenstein, Timothy Baldwin, Meeyoung Cha,          powering Fact-Checkers in the Fight Against Misin-
+   Tanmoy Chakraborty, Giovanni Luca Ciampaglia,             formation. In Companion Proceedings of the ACM
+   David Corney, Renee DiResta, Emilio Ferrara, Scott        Web Conference 2024, WWW ’24, page 1441–1449.
+   Hale, Alon Halevy, Eduard Hovy, Heng Ji, Filippo          Association for Computing Machinery.
+   Menczer, Ruben Miguez, Preslav Nakov, Dietram
+   Scheufele, Shivam Sharma, and Giovanni Zagni.           Soham De, Michiel A. Bakker, Jay Baxter, and Martin
+   2024. Factuality challenges in the era of large lan-      Saveski. 2025. Supernotes: Driving consensus in
+   guage models and opportunities for fact-checking.         crowd-sourced fact-checking. In Proceedings of the
+   Nature Machine Intelligence, 6:852–863.                   ACM on Web Conference 2025, WWW ’25, page
+                                                             3751–3761, New York, NY, USA. Association for
+Isabelle Augenstein, Christina Lioma, Dongsheng              Computing Machinery.
+   Wang, Lucas Chaves Lima, Casper Hansen, Chris-
+   tian Hansen, and Jakob Grue Simonsen. 2019. Mul-        Matthew DeVerna, Kai-Cheng Yang, Harry Yaojun Yan,
+   tifc: A real-world multi-domain dataset for evidence-     and Filippo Menczer. 2025. Data: Large Language
+   based fact checking of claims. In Proceedings of          Models Require Curated Context for Reliable Politi-
+   the 2019 Conference on Empirical Methods in Natu-         cal Fact-Checking—Even with Reasoning and Web
+   ral Language Processing and the 9th International         Search.
+   Joint Conference on Natural Language Processing
+   (EMNLP-IJCNLP), page 4684–4696. Association for         Matthew R. DeVerna, Harry Yaojun Yan, Kai-Cheng
+   Computational Linguistics.                               Yang, and Filippo Menczer. 2024. Fact-checking
+                                                            information from large language models can decrease
+Yejin Bang, Delong Chen, Nayeon Lee, and Pascale            headline discernment. Proceedings of the National
+  Fung. 2024. Measuring Political Bias in Large Lan-        Academy of Sciences, 121(50):e2322823121.
+  guage Models: What Is Said and How It Is Said. In
+  Proceedings of the 62nd Annual Meeting of the As-        Ullrich Ecker, Jon Roozenbeek, Sander van der Linden,
+  sociation for Computational Linguistics (Volume 1:         Li Qian Tay, John Cook, Naomi Oreskes, and Stephan
+  Long Papers), pages 11142–11159. Association for           Lewandowsky. 2024. Misinformation poses a bigger
+  Computational Linguistics.                                 threat to democracy than you might think. Nature,
+                                                             630(8015):29–32.
+Francesco Bombassei De Bona, David La Barbera, Ste-
+  fano Mizzaro, and Kevin Roitero. 2025. A Compar-         Sean Fischer, Kokil Jaidka, and Yphtach Lelkes. 2020.
+  ative Analysis of Retrieval-Augmented Generation           Auditing local news presence on Google News. Na-
+  and Crowdsourcing for Fact-Checking. In Advances           ture Human Behaviour, 4(12):1236–1244.
+  in Information Retrieval, pages 446–454. Springer
+  Nature Switzerland.                                      Nicolo’ Fontana, Francesco Corso, Enrico Zuccolotto,
+                                                             and Francesco Pierri. 2025. Evaluating open-source
+                                                             large language models for automated fact-checking.
+Courtni Byun, Piper Vasicek, and Kevin Seppi. 2024.
+                                                             Preprint, arXiv:2503.05565.
+  This Reference Does Not Exist: An Exploration of
+  LLM Citation Accuracy and Relevance. In Proceed-         Suyash Fulay, William Brannon, Shrestha Mohanty,
+  ings of the Third Workshop on Bridging Human–              Cassandra Overney, Elinor Poole-Dayan, Deb Roy,
+  Computer Interaction and Natural Language Pro-             and Jad Kabbara. 2024. On the Relationship be-
+  cessing, pages 28–39. Association for Computational        tween Truth and Political Bias in Language Models.
+  Linguistics.                                               In Proceedings of the 2024 Conference on Empiri-
+                                                             cal Methods in Natural Language Processing, page
+Aaron Chatterji, Thomas Cunningham, David J Deming,          9004–9018. Association for Computational Linguis-
+  Zoe Hitzig, Christopher Ong, Carl Yan Shan, and            tics.
+  Kevin Wadman. 2025. How People Use ChatGPT.
+  Working Paper 34255, National Bureau of Economic         Genevieve Gorrell, Elena Kochkina, Maria Liakata, Ah-
+  Research.                                                  met Aker, Arkaitz Zubiaga, Kalina Bontcheva, and
+                                                             Leon Derczynski. 2019. SemEval-2019 Task 7: Ru-
+Canyu Chen and Kai Shu. 2024. Combating misinfor-            mourEval, Determining Rumour Veracity and Sup-
+  mation in the age of llms: Opportunities and chal-         port for Rumours. In Proceedings of the 13th Inter-
+  lenges. AI Magazine, 45(3):354–368.                        national Workshop on Semantic Evaluation, pages
+                                                             845–854. Association for Computational Linguistics.
+Jifan Chen, Grace Kim, Aniruddh Sriram, Greg Durrett,
+   and Eunsol Choi. 2024. Complex claim verification       Brandon Guay, Adam J. Berinsky, Gordon Pennycook,
+   with evidence retrieved in the wild. In Proceedings       and 1 others. 2023. How to think about whether
+   of the 2024 Conference of the North American Chap-        misinformation interventions work. Nature Human
+   ter of the Association for Computational Linguistics:     Behaviour, 7:1231–1233.
+   Human Language Technologies (Volume 1: Long
+   Papers), page 3569–3587. Association for Computa-       Naeemul Hassan, Gensheng Zhang, Fatma Arslan, Jo-
+   tional Linguistics.                                       sue Caraballo, Damian Jimenez, Siddhant Gawsane,
+                                                      29347
+  Shohedul Hasan, Minumol Joseph, Aaditya Kulka-          Nelson Liu, Tianyi Zhang, and Percy Liang. 2023. Eval-
+  rni, Anil Kumar Nayak, Vikas Sable, Chengkai Li,          uating Verifiability in Generative Search Engines. In
+  and Mark Tremayne. 2017. ClaimBuster: the first-          Findings of the Association for Computational Lin-
+  ever end-to-end fact-checking system. Proc. VLDB          guistics: EMNLP 2023, pages 7001–7025. Associa-
+  Endow., 10(12):1945–1948.                                 tion for Computational Linguistics.
+
+Emma Hoes, Sacha Altay, and Juan Bermeo. 2023.            Shrestha Basu Mallick and Logan Kilpatrick. 2024.
+  Leveraging ChatGPT for Efficient Fact-Checking.           Gemini API and Google AI Studio now offer Ground-
+  Preprint [PsyArXiv].                                      ing with Google Search. Google for Developers. Ac-
+                                                            cessed: 2025-08-15.
+Benjamin D Horne, Maurício Gruppi, Kenneth Joseph,        Filippo Menczer, David Crandall, Yong-Yeol Ahn, and
+  Jon Green, John P Wihbey, and Sibel Adalı. 2022.           Apu Kapadia. 2023. Addressing the Harms of AI-
+  Nela-local: A dataset of US local news articles for        Generated Inauthentic Content. Nature Machine In-
+  the study of county-level news ecosystems. In Pro-         telligence, 5:679–680.
+  ceedings of the International AAAI Conference on
+  Web and Social Media, volume 16, pages 1275–1284.       Preslav Nakov, Alberto Barrón-Cedeño, Giovanni
+                                                            da San Martino, Firoj Alam, Julia Maria Struß,
+Klaudia Jaźwińska and Aisvarya Chandrasekar. 2025.        Thomas Mandl, Rubén Míguez, Tommaso Caselli,
+  AI Search Has A Citation Problem. Columbia Jour-          Mucahid Kutlu, Wajdi Zaghouani, Chengkai Li,
+  nalism Review.                                            Shaden Shaar, Gautam Kishore Shahi, Hamdy
+                                                            Mubarak, Alex Nikolov, Nikolay Babulkov,
+Zhengbao Jiang, Frank Xu, Luyu Gao, Zhiqing Sun,            Yavuz Selim Kartal, Michael Wiegand, Melanie
+  Qian Liu, Jane Dwivedi-Yu, Yiming Yang, Jamie             Siegel, and Juliane Köhler. 2022. Overview of
+  Callan, and Graham Neubig. 2023. Active Retrieval         the CLEF–2022 CheckThat! Lab on Fighting the
+  Augmented Generation. In Proceedings of the 2023          COVID-19 Infodemic and Fake News Detection.
+  Conference on Empirical Methods in Natural Lan-           In Experimental IR Meets Multilinguality, Multi-
+  guage Processing, pages 7969–7992. Association for        modality, and Interaction, pages 495–520. Springer
+  Computational Linguistics.                                International Publishing.
+                                                          Sami Nenno, Cornelius Puschmann, Kamil Fuławka,
+Zhi Jing, Yongye Su, and Yikun Han. 2025. When              and Philipp Lorenz-Spreen. 2025. Content-based
+  Large Language Models Meet Vector Databases: A            detection of misinformation expands its scope across
+  Survey. In 2025 Conference on Artificial Intelligence     politicians and platforms. SocArXiv[PrePrint].
+  x Multimedia (AIxMM), pages 7–13.
+                                                          Yixin Nie, Haonan Chen, and Mohit Bansal. 2019.
+Koray Kavukcuoglu. 2025. Gemini 2.5: Our most intel-        Combining Fact Extraction and Verification with
+  ligent AI model. Google The Keyword. Accessed:            Neural Semantic Matching Networks. Proceedings
+  2025-08-15.                                               of the AAAI Conference on Artificial Intelligence,
+                                                            33(01):6859–6866.
+Neema Kotonya and Francesca Toni. 2020. Explain-
+                                                          OpenAI. 2024. Introducing ChatGPT Search. Product
+  able automated fact-checking: A survey. In Proceed-
+                                                            release. Accessed: 2025-08-15.
+  ings of the 28th International Conference on Compu-
+  tational Linguistics, page 5430–5443. International     OpenAI. 2025. Introducing OpenAI o3 and o4-mini.
+  Committee on Computational Linguistics.                   Product release. Accessed: 2025-08-15.
+
+Marianne Aubin Le Quéré, Ting-Wei Chiang, and Mor         Liangming Pan, Xiaobao Wu, Xinyuan Lu, Anh Tuan
+ Naaman. 2022. Understanding Local News So-                 Luu, William Yang Wang, Min-Yen Kan, and Preslav
+ cial Coverage and Engagement at Scale during the           Nakov. 2023. Fact-Checking Complex Claims with
+ COVID-19 Pandemic. In Proceedings of the Interna-          Program-Guided Reasoning. In Proceedings of the
+ tional AAAI Conference on Web and Social Media,            61st Annual Meeting of the Association for Compu-
+ volume 16, pages 560–572.                                  tational Linguistics (Volume 1: Long Papers), pages
+                                                            6981–7004. Association for Computational Linguis-
+Nayeon Lee, Belinda Z. Li, Sinong Wang, Wen-tau             tics.
+  Yih, Hao Ma, and Madian Khabsa. 2020. Language          Dorian Quelle and Alexandre Bovet. 2024. The perils
+  Models as Fact Checkers? In Proceedings of the            and promises of fact-checking with large language
+  Third Workshop on Fact Extraction and VERification        models. Frontiers in Artificial Intelligence, 7.
+  (FEVER), pages 36–41. Association for Computa-
+  tional Linguistics.                                     Nils Reimers and Iryna Gurevych. 2019. Sentence-bert:
+                                                            Sentence embeddings using siamese bert-networks.
+Hause Lin, Jana Lasser, Stephan Lewandowsky, Rocky          In Proceedings of the 2019 Conference on Empirical
+  Cole, Andrew Gully, David G. Rand, and Gordon             Methods in Natural Language Processing and the 9th
+  Pennycook. 2023. High level of correspondence             International Joint Conference on Natural Language
+  across different news domain quality rating sets.         Processing (EMNLP-IJCNLP), page 3980–3990. As-
+  PNAS Nexus, 2(9):pgad286.                                 sociation for Computational Linguistics.
+                                                     29348
+Ronald E. Robertson, Shan Jiang, Kenneth Joseph,           Xinyan Yu, Sewon Min, Luke Zettlemoyer, and Han-
+  Lisa Friedland, David Lazer, and Christo Wilson.           naneh Hajishirzi. 2023. CREPE: Open-Domain
+  2018. Auditing Partisan Audience Bias within               Question Answering with False Presuppositions. In
+  Google Search. Proceedings of the ACM on Human-            Proceedings of the 61st Annual Meeting of the As-
+  Computer Interaction, 2(CSCW).                             sociation for Computational Linguistics (Volume 1:
+                                                             Long Papers), pages 10457–10480. Association for
+David Rozado. 2024. The Political Preferences of             Computational Linguistics.
+  LLMs. PLOS ONE, 19(7):e0306621.
+                                                           Xia Zeng, Amani S. Abumansour, and Arkaitz Zubi-
+Snopes. 2025. Factbot by snopes. Web Dashboard.              aga. 2021. Automated Fact-Checking: A Survey.
+  Accessed: 2025-08-15.                                      Language and Linguistics Compass, 15(10):e12438.
+Amir Soleimani, Christof Monz, and Marcel Worring.         Celina Zhao. 2025. Ai hallucinates because it’s
+ 2020. BERT for Evidence Retrieval and Claim Veri-           trained to fake answers it doesn’t know. Science,
+ fication. In Advances in Information Retrieval, pages       390(6773):558–559.
+ 359–366. Springer International Publishing.
+                                                           Xinyi Zhou, Ashish Sharma, Amy X. Zhang, and Tim
+Craig A. Stewart, Timothy M. Cockerill, Ian Fos-
+                                                             Althoff. 2026. Correcting misinformation on so-
+  ter, David Hancock, Nirav Merchant, Edwin Skid-
+                                                             cial media with a large language model. Preprint,
+  more, Daniel Stanzione, James Taylor, Steven
+                                                             arXiv:2403.11169.
+  Tuecke, George Turner, Matthew Vaughn, and Niall I.
+  Gaffney. 2015. Jetstream: A self-provisioned, scal-
+  able science and engineering cloud environment. In
+  Proceedings of the XSEDE Conference: Scientific
+  Advancements Enabled by Enhanced Cyberinfras-
+  tructure, XSEDE ’15, pages 1–8. Association for
+  Computing Machinery.
+James Thorne,       Andreas Vlachos,        Christos
+  Christodoulopoulos, and Arpit Mittal. 2018.
+  FEVER: a Large-scale Dataset for Fact Extraction
+  and VERification. In Proceedings of the 2018
+  Conference of the North American Chapter of the
+  Association for Computational Linguistics: Human
+  Language Technologies, Volume 1 (Long Papers),
+  pages 809–819. Association for Computational
+  Linguistics.
+J. Towns, T. Cockerill, M. Dahan, I. Foster, K. Gaither,
+   A. Grimshaw, V. Hazlewood, S. Lathrop, D. Lifka,
+   G. D. Peterson, R. Roskies, J. R. Scott, and
+   N. Wilkins-Diehr. 2014. Xsede: Accelerating scien-
+   tific discovery. Computing in Science & Engineering,
+   16(5):62–74.
+William Yang Wang. 2017. “Liar, Liar Pants on Fire”:
+ A New Benchmark Dataset for Fake News Detection.
+  In Proceedings of the 55th Annual Meeting of the
+ Association for Computational Linguistics (Volume
+  2: Short Papers), pages 422–426. Association for
+  Computational Linguistics.
+World Economic Forum. 2024. Global risks report 2024.
+ Accessed: 2025-08-15.
+Kai-Cheng Yang. 2025a. A list of news domains. Zen-
+  odo.
+Kai-Cheng Yang. 2025b. News source citing patterns
+  in ai search systems. Preprint, arXiv:2507.05301.
+Kai-Cheng Yang, Pranav Goel, Alexi Quintana-Mathé,
+  Luke Horgan, Stefan D. McCabe, Nir Grinberg, Ken-
+  neth Joseph, and David Lazer. 2025. DomainDemo:
+  a dataset of domain-sharing activities among differ-
+  ent demographic groups on Twitter. Scientific Data,
+  12(1):1251.
+                                                      29349
+Appendix                                                             major inaccuracies, and hallucinated content. Ta-
+                                                                     ble A1 presents their definitions, which were used
+1      Article Summary Prompts                                       by the annotators to code the LLM-generated arti-
+We include here the prompts used to summa-                           cle summaries.
+rize the scraped PolitiFact fact-checking articles.
+In each case, we leverage both “system” and
+                                                                     3   Fact-Checking Prompts
+“user” prompts. System prompts provide high-level                    This section presents the prompts used in the zero-
+instructions, while user prompts contain claim-                      shot and Curated RAG fact-checking tests.
+specific content.
+                                                                      System prompt: Zero-shot
+System prompt                                                         As an AI fact checker, your task is to evaluate the
+As an AI assistant, your task is to summarize text                    accuracy of a CLAIM by assigning a label from the
+from a PolitiFact fact-checking article. The input                   ‘Truth Scale’ and providing a justification for that
+text may contain incomplete sentences, HTML tags,                     label. Each claim will include a ‘STATEMENT
+and non-textual elements. First, clean the text                       ORIGINATOR’ indicating the source of the claim
+by removing any irrelevant content or formatting                      to assist you.
+issues. Then, write a concise, neutral summary
+focusing on the article’s main conclusion and                        Truth Scale:
+supporting facts, covering who, what, when, where,                      • True - The statement is accurate and there’s
+and why.                                                                  nothing significant missing.
+                                                                        • Mostly true - The statement is accurate but
+ The summary should be one paragraph, free of ed-                         needs clarification or additional information.
+ itorializing or subjective interpretation. Provide                     • Half true - The statement is partially accu-
+ only the summary with no additional text or com-                         rate but leaves out important details or takes
+ ments. If no article text is provided, respond with                      things out of context.
+‘No article text provided.’ Follow these instructions                   • Mostly false - The statement contains an el-
+ strictly to ensure an accurate, unbiased summary.                        ement of truth but ignores critical facts that
+                                                                          would give a different impression.
+User prompt
+                                                                        • False - The statement is not accurate.
+Verdict: <POLITIFACT CLAIM VERDICT>
+                                                                        • Pants on fire - The statement is not accurate
+<POLITIFACT ARTICLE TEXT>
+                                                                          and makes a ridiculous claim.
+2      Summary Faithfulness                                             • Not enough information - There is not enough
+                                                                          information to reliably apply one of the other
+To assess the reliability of our summaries, we                            labels.
+followed the framework described in Chen et al.
+(2024). Specifically, the method defines four cate-                  Instructions:
+gories of faithfulness: faithful, minor inaccuracies,                  1. Evaluate the claim using the most relevant
+                                                                           information you have.
+Table A1: Labels and definitions used to evaluate article              2. If you do not have enough information, use
+summary faithfulness, taken from Chen et al. (2024).                       the ‘Not enough information’ label.
+                                                                       3. Consider nuances and subtle details that
+    Label                  Definition                                      could influence the claim’s accuracy.
+    Faithful               Accurately reflects the meaning and         4. Choose the most appropriate label from the
+                           details of the original article without        ‘Truth Scale’ and explain your reasoning con-
+                           any factual errors.
+                                                                           cisely.
+    Minor Inaccuracies     Contains slight factual inaccuracies
+                           that do not significantly alter the       User prompt: Zero shot
+                           main conclusion.
+                                                                     STATEMENT      ORIGINATOR:             <STATEMENT
+    Major Inaccuracies     Contains significant factual errors       ORIGINATOR>
+                           that distort the core meaning of the
+                           article.                                  CLAIM: <CLAIM>
+    Hallucinated Content   Introduces content not present in the     System prompt: Curated RAG fact-checking
+                           original article.
+                                                                     As an AI fact checker, your task is to evaluate the
+                                                               29350
+ accuracy of a CLAIM by assigning a label from the     Gemini reasoning or Google’s “grounding” (web
+‘Truth Scale’ and providing a justification for that   search) functionality, and the TogetherAI API like-
+ label. Each claim will include a ‘STATEMENT           wise did not support them for Llama or DeepSeek
+ ORIGINATOR’ indicating the source of the claim,       models. To address this limitation, we augmented
+ along with ‘FACT-CHECKING INFORMATION’                the fact-checking prompts with an additional in-
+ summarizing relevant PolitiFact fact-checks to        struction in the “Instructions” section of each
+ assist you.                                           system prompt. Specifically, we used the same
+                                                       prompts described above, adding the following
+Truth Scale:                                           item in both the zero-shot and Curated RAG set-
+   • True - The statement is accurate and there’s      tings:
+     nothing significant missing.                        5. Please provide your response in valid JSON
+   • Mostly true - The statement is accurate but             format in plain text, without enclosing it in
+     needs clarification or additional information.          backticks or any other formatting markers.
+   • Half true - The statement is partially accu-            The response should include exactly two keys:
+     rate but leaves out important details or takes         ‘label’ and ‘justification’. Do not add any ex-
+     things out of context.                                  tra characters before or after the JSON object.
+   • Mostly false - The statement contains an el-         Given these API constraints, the adjustment was
+     ement of truth but ignores critical facts that    applied to Gemini models with reasoning or search
+     would give a different impression.                enabled, as well as all Llama and DeepSeek mod-
+   • False - The statement is not accurate.            els. To assess its effectiveness, we calculated the
+   • Pants on fire - The statement is not accurate     malformed-JSON rate for these scenarios only.
+     and makes a ridiculous claim.                        The Llama variants (3B, 11B, and 90B) pro-
+   • Not enough information - There is not enough      duced 147,300 responses (12,275 claims × 4 k
+     information to reliably apply one of the other    settings × 3 models). Gemini Thinking and Gem-
+     labels.                                           ini 2.0 Flash with grounding produced 24,548 re-
+                                                       sponses (6,137 claims × 2 k settings × 2 mod-
+Instructions:                                          els). DeepSeek V3 contributed 49,100 responses
+  1. Evaluate the claim using the most rele-           (12,275 claims × 4 k settings), and DeepSeek
+      vant ‘FACT-CHECKING INFORMATION’                 R1 contributed 12,274 responses (6,137 claims
+      provided.                                        × 2 k settings). Altogether, these scenarios
+  2. If the provided ‘FACT-CHECKING INFOR-             yielded 233,222 responses, of which 1,035 were un-
+      MATION’ is not relevant to the statement, use    parsable, corresponding to a rate of 0.44%—fewer
+      the ‘Not enough information’ label.              than one in every 200 generations—indicating that
+  3. Consider nuances and subtle details that          our approach was highly effective.
+      could influence the claim’s accuracy.
+  4. Choose the most appropriate label from the        4   Cleaning Malformed JSON Prompt
+     ‘Truth Scale’ and explain your reasoning con-     As discussed in the Data and Methods section, we
+      cisely.                                          employ the OpenAI API to extract fact-checking la-
+User prompt: Curated RAG fact-checking                 bels from unparsable responses. We call the gpt-4o-
+STATEMENT      ORIGINATOR:      <STATEMENT             mini-2024-07-18 model with the following prompt.
+ORIGINATOR>
+                                                       System prompt: Label extraction
+                                                       Your task is to extract information from unstruc-
+CLAIM: <CLAIM>
+                                                       tured AI fact checks and provide it, unaltered, in
+                                                       valid JSON format. This output must have exactly
+FACT-CHECKING INFORMATION:
+                                                       two keys:
+    Summary 1: <RETRIEVED SUMMARY #1>
+                                                         1. ‘label’: the fact-checking label
+    Summary 2: <RETRIEVED SUMMARY #2>
+                                                         2. ‘justification’: the rationale or explanation for
+    ...
+                                                             that label
+    Summary k: <RETRIEVED SUMMARY #k>
+                                                       Instructions:
+Structured Responses. At the time of testing,            1. Read and understand the provided text, which
+structured response features were unavailable for            contains malformed JSON.
+                                                  29351
+    2. Extract the relevant information, preserving                                      = 0.998, p < 0.001
+                                                                          1.0
+       every piece of content exactly as it appeared
+       (no additions, removals, or modifications).
+    3. Produce valid JSON that contains only the                          0.8
+       keys ‘label’ and ‘justification’ as described
+       above.                                                             0.6
+
+
+
+
+                                                            weighted F1
+          - Do not alter the text of the label or the
+            justification in any way.
+                                                                          0.4
+          - Do not include any additional keys, text,
+            comments, or explanations.
+          - The final output must be strictly valid                       0.2
+            JSON and nothing else.
+                                                                          0.0
+User prompt: Label extraction                                                0.0   0.2      0.4    0.6    0.8   1.0
+                                                                                             macro F1
+<MALFORMED JSON>
+                                                        Figure A1: Comparison of macro and weighted fact-
+5     Performance Statistics                            checking F1 scores on the 6k set of claims on all tests.
+                                                        Each dot represents a specific test setting. The Spear-
+Table A2 reports full performance statistics for all    man’s correlation (ρ) and level of significance are in-
+tested models and settings, and Table A3 reports rel-   cluded above.
+ative improvements in macro F1 obtained with the
+Curated RAG system compared to baseline LLMs.
+Table A4 shows performance by PolitiFact label for      8        Performance by Veracity
+the best- and worst-performing models. We omit          Model performance was also analyzed at the level
+the complete by-label breakdown, which would re-        of individual veracity labels using the 6k set of
+quire 312 rows (52 tests × 6 labels), but provide       claims. We calculate the F1 score for claims in each
+aggregate performance in the Performance by Ve-         original PolitiFact verdict across all test conditions
+racity section, and detailed statistics in our public   reported in the main text. Figure A3 includes the
+repository.                                             average of these scores across all models and for
+                                                        each individual model family. On average, models
+6     Macro Versus Weighted F1                          perform worse on the Pants on Fire” label, a pattern
+                                                        that appears consistently across models and set-
+Aggregate performance in multi-label tasks can
+                                                        tings. This finding likely reflects two factors. First,
+be reported in different ways. In the main text,
+                                                        “Pants on Fire” represents an extreme category re-
+we use macro F1, which weights each PolitiFact
+                                                        quiring models to distinguish ordinary falsehoods
+label equally. An alternative is weighted F1, which
+                                                        from claims deemed absurd or egregiously mislead-
+weights each class’s contribution by the number of
+                                                        ing, where human judgment may also vary. Second,
+items it contains, giving more influence to larger
+                                                        as shown in Figure A4, retrieval for these claims
+classes. Figure A1 shows that macro and weighted
+                                                        appears slightly less reliable on average, increas-
+F1 are highly correlated and yield no meaningful
+                                                        ing uncertainty in cases that demand the strongest
+differences in reported performance.
+                                                        classification.
+7     Performance on Samples with Different             9        Assessing Model Awareness of Missing
+      Sizes                                                      Information
+The main text reports results on the 6k subset to       The introduction of “Not Enough Information”
+align with reasoning and web search–enhanced            (NEI) responses complicates the assessment of re-
+models. Standard LLMs were also evaluated on            sponse “correctness.” However, abstention is a crit-
+the 12k dataset. Figure A2 shows high consistency       ical component of responsible AI systems, and de-
+between macro F1 scores on both datasets across         velopers building fact-checking systems may prefer
+zero-shot and Curated RAG settings, confirming          predictable behavior, such as consistently abstain-
+that the 6k subset is representative of performance     ing when retrieval fails to return relevant evidence.
+on the full dataset.                                    This perspective informs our evaluation framework.
+                                                   29352
+Table A2: Fact-checking model performance. Columns show the retrieval setting (k), macro precision, macro recall,
+macro F1, weighted F1, accuracy, and support (number of claims). A ✓ in the Û and j columns denote web
+search and reasoning capabilities.
+      Model                       Û   j    k    P (macro)   R (macro)   F1 (macro)   F1 (wt)   Acc.   Sup.
+      DeepSeek-V3                          0         0.36        0.22         0.25     0.29    0.26   6137
+      DeepSeek-V3                          3         0.97        0.83         0.89     0.89    0.84   6137
+      DeepSeek-V3                          6         0.97        0.84         0.89     0.90    0.85   6137
+      DeepSeek-V3                          9         0.97        0.84         0.90     0.90    0.85   6137
+      DeepSeek-R1                     ✓    0         0.37        0.31         0.31     0.32    0.31   6137
+      DeepSeek-R1                     ✓    6         0.96        0.84         0.89     0.90    0.85   6137
+      Llama 3.2 3B                         0         0.43        0.21         0.14     0.15    0.20   6137
+      Llama 3.2 3B                         3         0.62        0.44         0.38     0.39    0.43   6137
+      Llama 3.2 3B                         6         0.62        0.42         0.38     0.38    0.41   6137
+      Llama 3.2 3B                         9         0.62        0.48         0.44     0.45    0.47   6137
+      Llama 3.2 11B                        0         0.40        0.23         0.15     0.14    0.20   6137
+      Llama 3.2 11B                        3         0.80        0.62         0.61     0.65    0.64   6137
+      Llama 3.2 11B                        6         0.80        0.65         0.64     0.67    0.66   6137
+      Llama 3.2 11B                        9         0.80        0.67         0.66     0.69    0.68   6137
+      Llama 3.2 90B                        0         0.30        0.27         0.20     0.18    0.24   6137
+      Llama 3.2 90B                        3         0.91        0.80         0.84     0.84    0.80   6137
+      Llama 3.2 90B                        6         0.91        0.80         0.84     0.84    0.81   6137
+      Llama 3.2 90B                        9         0.90        0.81         0.84     0.84    0.81   6137
+      Gemini 2.0 Flash Lite                0         0.34        0.28         0.25     0.24    0.25   6137
+      Gemini 2.0 Flash Lite                3         0.90        0.82         0.86     0.86    0.82   6137
+      Gemini 2.0 Flash Lite                6         0.91        0.83         0.87     0.87    0.83   6137
+      Gemini 2.0 Flash Lite                9         0.91        0.83         0.87     0.87    0.83   6137
+      Gemini 2.0 Flash                     0         0.38        0.30         0.32     0.35    0.32   6137
+      Gemini 2.0 Flash                     3         0.94        0.84         0.88     0.89    0.84   6137
+      Gemini 2.0 Flash                     6         0.94        0.84         0.88     0.89    0.84   6137
+      Gemini 2.0 Flash                     9         0.94        0.84         0.88     0.89    0.84   6137
+      Gemini 2.0 Flash            ✓        0         0.39        0.25         0.27     0.31    0.29   6137
+      Gemini 2.0 Flash            ✓        6         0.93        0.82         0.87     0.88    0.83   6137
+      Gemini 2.0 Flash Thinking       ✓    0         0.37        0.30         0.29     0.31    0.32   6137
+      Gemini 2.0 Flash Thinking       ✓    6         0.94        0.83         0.88     0.88    0.84   6137
+      Gemini 2.0 Flash Thinking   ✓   ✓    0         0.38        0.28         0.25     0.27    0.29   6137
+      Gemini 2.0 Flash Thinking   ✓   ✓    6         0.95        0.83         0.88     0.89    0.84   6137
+      Gemini 2.0 Pro                       0         0.38        0.29         0.25     0.27    0.29   6137
+      Gemini 2.0 Pro                       3         0.86        0.77         0.80     0.81    0.77   6137
+      Gemini 2.0 Pro                       6         0.85        0.78         0.80     0.81    0.78   6137
+      Gemini 2.0 Pro                       9         0.86        0.79         0.82     0.82    0.79   6137
+      GPT-4o mini                          0         0.30        0.27         0.23     0.25    0.27   6137
+      GPT-4o mini                          3         0.93        0.83         0.88     0.88    0.85   6137
+      GPT-4o mini                          6         0.94        0.85         0.89     0.89    0.86   6137
+      GPT-4o mini                          9         0.94        0.85         0.89     0.89    0.86   6137
+      GPT-4o                               0         0.41        0.25         0.26     0.29    0.27   6137
+      GPT-4o                               3         0.96        0.83         0.89     0.89    0.84   6137
+      GPT-4o                               6         0.97        0.85         0.90     0.90    0.86   6137
+      GPT-4o                               9         0.97        0.85         0.90     0.91    0.86   6137
+      GPT-4o Search               ✓        0         0.87        0.74         0.76     0.77    0.77   6137
+      GPT-4o Search               ✓        6         0.96        0.90         0.92     0.92    0.92   6137
+      GPT-4o mini Search          ✓        0         0.77        0.59         0.57     0.59    0.61   6137
+      GPT-4o mini Search          ✓        6         0.91        0.81         0.81     0.82    0.84   6137
+      o1                              ✓    0         0.44        0.37         0.38     0.42    0.42   6137
+      o1                              ✓    6         0.98        0.86         0.91     0.91    0.87   6137
+      o3-mini                         ✓    0         0.33        0.25         0.27     0.31    0.32   6137
+      o3-mini                         ✓    6         0.96        0.85         0.90     0.90    0.86   6137
+
+
+
+                                                     29353
+Table A3: Relative performance increases from RAG implementation across fact-checking models. Columns show
+the retrieval setting (k), baseline F1 score (k = 0), Curated RAG F1 score (k > 0), and percentage increase from
+baseline to Curated RAG. A ✓ in the Û and j columns denote web search and reasoning capabilities, respectively.
+The bottom row presents the mean and standard deviation of performance increase across all tests.
+
+         Model                       Û   j     k   F1 (macro) Baseline   F1 (macro) RAG   Increase (%)
+         DeepSeek-V3                           3                 0.25              0.89           255
+         DeepSeek-V3                           6                 0.25              0.89           258
+         DeepSeek-V3                           9                 0.25              0.90           259
+         DeepSeek-R1                      ✓    6                 0.31              0.89           185
+         Llama 3.2 3B                          3                 0.14              0.38           173
+         Llama 3.2 3B                          6                 0.14              0.38           173
+         Llama 3.2 3B                          9                 0.14              0.44           221
+         Llama 3.2 11B                         3                 0.15              0.61           318
+         Llama 3.2 11B                         6                 0.15              0.64           336
+         Llama 3.2 11B                         9                 0.15              0.66           351
+         Llama 3.2 90B                         3                 0.20              0.84           323
+         Llama 3.2 90B                         6                 0.20              0.84           323
+         Llama 3.2 90B                         9                 0.20              0.84           324
+         Gemini 2.0 Flash Lite                 3                 0.25              0.86           246
+         Gemini 2.0 Flash Lite                 6                 0.25              0.87           250
+         Gemini 2.0 Flash Lite                 9                 0.25              0.87           250
+         Gemini 2.0 Flash                      3                 0.32              0.88           179
+         Gemini 2.0 Flash                      6                 0.32              0.88           179
+         Gemini 2.0 Flash                      9                 0.32              0.88           179
+         Gemini 2.0 Flash            ✓         6                 0.27              0.87           218
+         Gemini 2.0 Flash Thinking        ✓    6                 0.29              0.88           207
+         Gemini 2.0 Flash Thinking   ✓    ✓    6                 0.25              0.88           258
+         Gemini 2.0 Pro                        3                 0.25              0.80           218
+         Gemini 2.0 Pro                        6                 0.25              0.80           217
+         Gemini 2.0 Pro                        9                 0.25              0.82           223
+         GPT-4o mini                           3                 0.23              0.88           288
+         GPT-4o mini                           6                 0.23              0.89           294
+         GPT-4o mini                           9                 0.23              0.89           295
+         GPT-4o                                3                 0.26              0.89           237
+         GPT-4o                                6                 0.26              0.90           241
+         GPT-4o                                9                 0.26              0.90           242
+         GPT-4o Search               ✓         6                 0.76              0.92            21
+         GPT-4o mini Search          ✓         6                 0.57              0.81            42
+         o1                               ✓    6                 0.38              0.91           142
+         o3-mini                          ✓    6                 0.27              0.90           239
+
+         Mean (SD)                                                                        233.2 (72.8)
+
+
+
+
+                                                    29354
+Table A4: By-label fact-checking performance for the best- and worst-performing models (based on macro F1).
+Columns show web search capability (Û), retrieval setting (k), PolitiFact label, precision, recall, F1, and support
+(number of claims).
+
+                                    Model              Û   k            Label      P      R     F1    Sup.
+                                    GPT-4o Search      ✓   6            True     0.96   0.95   0.95    639
+                                    GPT-4o Search      ✓   6      Mostly true    0.98   0.96   0.97    910
+                                    GPT-4o Search      ✓   6        Half true    0.97   0.97   0.97    907
+                                    GPT-4o Search      ✓   6     Mostly false    0.99   0.93   0.96    929
+                                    GPT-4o Search      ✓   6            False    0.85   0.98   0.91   1931
+                                    GPT-4o Search      ✓   6     Pants on fire   1.00   0.64   0.78    821
+                                    Llama 3.2 3B           0            True     1.00   0.00   0.00    639
+                                    Llama 3.2 3B           0      Mostly true    0.24   0.28   0.26    910
+                                    Llama 3.2 3B           0        Half true    0.20   0.00   0.00    907
+                                    Llama 3.2 3B           0     Mostly false    0.17   0.78   0.27    929
+                                    Llama 3.2 3B           0            False    0.45   0.12   0.18   1931
+                                    Llama 3.2 3B           0     Pants on fire   0.50   0.06   0.11    821
+
+
+
+                                  = 0.997, p < 0.001                       bels despite insufficient evidence (false positive)
+                   1.0
+                                                                           or used NEI when sufficient evidence was present
+                                                                           (false negative). This formulates a binary classifica-
+                   0.8                                                     tion task, for which we computed precision, recall,
+                                                                           and F1 scores to measure how reliably models ab-
+  macro F1 (12k)
+
+
+
+
+                   0.6                                                     stain when evidence is lacking.
+                                                                              Figure A4(a) reports precision, recall, F1, and
+                   0.4                                                     accuracy for NEI across models and settings. Al-
+                                                                           though accuracy is high, precision, recall, and F1
+                                                                           are uniformly low. Figure A4(b) explains why:
+                   0.2
+                                                                           retrieval succeeds for 97% of claims, creating sub-
+                                                                           stantial class imbalance. Most test cases are nega-
+                   0.0                                                     tive (sufficient information present), while positive
+                      0.0   0.2     0.4      0.6    0.8        1.0
+                                    macro F1 (6k)                          cases are rare. As a result, models achieve high
+                                                                           accuracy by defaulting to veracity labels for about
+Figure A2: Comparison of fact-checking macro F1                            90% of claims, even though they often fail to ab-
+scores on the 6k and 12k subsets. Each dot represents a                    stain when they should.
+standard LLM across all test scenarios. The Spearman’s
+                                                                              Against our test set, models rarely face situa-
+correlation (ρ) and level of significance are included
+above.
+                                                                           tions that require the NEI label, and when relevant
+                                                                           evidence is available, they typically give accurate
+                                                                           judgments (Figures 2, 3 in main text). However,
+   We assessed whether models appropriately sig-                           the low precision and recall scores expose a critical
+nal uncertainty by analyzing their use of NEI re-                          limitation: when uncertainty should be signaled,
+sponses as a binary classification problem. Since                          models perform poorly.
+no objective ground truth exists for when mod-                                Figure A4(c) shows how often each model uses
+els should abstain, we operationalized “sufficient                         the NEI label overall, as well as how this varies by
+information” as follows: claims whose matching                             claim veracity. As expected, NEI is used rarely—
+article summary appeared in the top-k retrieval re-                        typically on fewer than 10% of claims. Yet, the fre-
+sults were labeled as having sufficient evidence,                          quency of NEI responses nearly doubles for “Pants
+while those without were labeled as insufficient.                          on Fire” claims. Figure A4(d) helps explain this
+We then considered a model correct when it pro-                            pattern: average top-k retrieval accuracy (across
+vided a response with the NEI label for cases with                         k values) is substantially lower for Pants on Fire
+insufficient evidence (true positive) or provided a                        claims. This suggests that models may be respon-
+veracity judgment when sufficient evidence was                             sive to signals from failed retrieval. Taken together
+available (true negative). Conversely, responses                           with their low performance on the NEI task, this
+were incorrect when models assigned veracity la-                           highlights an important area for improving how
+                                                                     29355
+           1.0
+           0.8                                                                                           OpenAI
+                                                                                                         Google
+           0.6                                                                                           Meta
+F1 score
+
+
+
+                                                                                                         DeepSeek
+                                                                                                         k=0
+           0.4                                                                                           k=3
+                                                                                                         k=6
+           0.2                                                                                           k=9
+
+           0.0
+                 Pants on fire   False   Mostly false Half true Mostly true           True
+Figure A3: Boxplot distributions of F1 scores for individual PolitiFact verdicts across all tested configurations. The
+color and shape of each data point represents the model family and number of retrieved articles (k), respectively.
+
+
+systems detect and act on such signals in order to           ternary scheme, labels are mapped to True (True,
+communicate uncertainty more reliably.                       Mostly True), Mixed (Half True, Mostly False), or
+                                                             False (False, Pants on Fire).
+10          Search Performance Conditional on                   Figure A5 illustrates that performance improves
+            Citation Behavior                                as the number of categories decreases, as expected.
+                                                             However, two patterns remain consistent: (1) the
+Table A5 reports macro F1 scores for search-
+                                                             curated RAG condition outperforms zero-shot and
+enabled GPT models across three conditions: re-
+                                                             search-only settings across all classifications; and
+sponses in which any citation matches the correct
+                                                             (2) finer-grained distinctions remain important for
+PolitiFact article, responses with one or more cita-
+                                                             meaningful fact-checking.
+tions that do not match the original fact-checking
+article, and responses with no URLs cited. As dis-           13    Prompt Robustness
+cussed in the main text, citing irrelevant sources
+is generally more damaging to performance than               To assess whether our results depend on the rela-
+citing no sources at all, though both effects are sub-       tively structured prompt used in the main exper-
+stantially reduced when a curated RAG context is             iments, we conducted a robustness analysis on a
+provided.                                                    random sample of 1,000 claims from the 6k set.
+                                                             We evaluated GPT-4o and GPT-4o mini (with and
+11          Citation Domain Classification                   without search, and with and without curated RAG
+                                                             context) using a more minimal prompt: “Please
+We classify domains cited by LLMs into seven
+                                                             fact check this claim.” This version omits Politi-
+categories using a hierarchical rule-based system
+                                                             Fact’s Truth Scale definitions, numbered instruc-
+detailed in Table A6. The classification proceeds
+                                                             tions, and other scaffolding. The RAG condition
+in order of priority: fact-checking sites are identi-
+                                                             adds only: “Leverage the fact-checking informa-
+fied first, followed by news organizations, govern-
+                                                             tion provided below,” with retrieved items inserted
+ment domains, Wiki-style sites, educational institu-
+                                                             directly below the claim. We also leverage Ope-
+tions, research organizations, and finally a catch-all
+                                                             nAI’s structured response feature, as in our main
+“other” category.
+                                                             experiments. We focus on these models because
+12          Performance with Coarser Veracity                they were the strongest performers in the standard
+                                                             and search conditions.
+            Categories
+                                                                Table A7 indicates that performance is highly
+We report macro F1 performance under three ve-               similar across these prompting styles, with mean
+racity classifications: binary, ternary, and the full        changes of ≤ 0.03 macro F1 when averaged across
+PolitiFact scale. For the binary scheme, labels are          models within each retrieval setting. Retrieval aug-
+mapped to True (True, Mostly True, Half True) or             mentation continues to yield substantial improve-
+False (Mostly False, False, Pants on Fire). For the          ments in macro F1, given the highly similar perfor-
+                                                       29356
+                                                                            DeepSeek                                     Meta
+                                                                            Google                                       OpenAI                                                              predicted              predicted
+                                     (a)                                                                                                                                 (b)                    NEI                  verdict
+                                            1.00
+                           metric value     0.75                                                                                                                                    NEI            1%                    2%
+                                            0.50
+                                            0.25                                                                                                                         summary                   7%                  90%
+                                                                                                                                                                           present
+                                            0.00
+                                                          precision recall F1 score accuracy
+                                     (c)                                                                                                     (d)
+                                                                                                                                                                  1.00
+                                                   0.3                                                                                                                                     0.98 0.99 0.98 0.99 0.99
+
+
+
+
+                                                                                                                                             retrieval accuracy
+                               NEI response rate
+
+
+
+
+                                                                                                                                               average top-k
+                                                   0.2                                                                                                            0.95
+                                                                                                                                                                            0.91
+                                                   0.1                                                                                                            0.90
+                                                   0.0                                                                                                            0.85
+                                                          overall
+                                                                    pants on fire
+                                                                                    false
+
+
+                                                                                                           half true
+
+
+                                                                                                                                     true
+
+
+
+
+                                                                                                                                                                           pants on fire
+                                                                                                                                                                                           false
+
+
+                                                                                                                                                                                                                  half true
+
+
+                                                                                                                                                                                                                                            true
+                                                                                            mostly false
+
+
+                                                                                                                       mostly true
+
+
+
+
+                                                                                                                                                                                                   mostly false
+
+
+                                                                                                                                                                                                                              mostly true
+Figure A4: Models correctly refrain from using the “Not Enough Information” (NEI) label in most cases, but when
+they do use it, they frequently apply it incorrectly. (a) Precision, recall, F1, and accuracy for NEI predictions across
+all models and retrieval settings. (b) Average confusion matrix across tests. (c) NEI usage rates by veracity label.
+(d) Top-k retrieval accuracy by veracity. Dots in (a,c) represent all Curated RAG tests.
+
+Table A5: Fact-checking model performance (macro F1) in search models, depending on whether the search model
+returned the correct URL, another URL, or no URL at all.
+                                                         Model                                               k          Correct Article F1                           Other URL F1                             No URL F1
+                                                         GPT-4o Search                                       0                                       0.90                                    0.50                             0.68
+                                                         GPT-4o Search                                       6                                       0.96                                    0.80                             0.89
+                                                         GPT-4o mini Search                                  0                                       0.76                                    0.40                             0.24
+                                                         GPT-4o mini Search                                  6                                       0.86                                    0.69                             0.77
+
+
+
+                                                                                                                                                      mance.
+                 1.0                                                                                                                                    These findings increase our confidence that the
+                                                                                                                                                      core conclusions are not an artifact of prompt engi-
+                 0.8                                                                                                                                  neering.
+                                                                                                                            OpenAI
+                                                                                                                            Google
+macro F1 score
+
+
+
+
+                                                                                                                            Meta
+                 0.6                                                                                                        DeepSeek                  14 Domain Reliability Sensitivity Analysis
+                                                                                                                            k=0
+                                                                                                                            k=3
+                 0.4                                                                                                        k=6                      We assess whether our findings regarding domain
+                                                                                                                            k=9
+                                                                                                                                                     reliability and political leaning depend on News-
+                                                                                                                                                     Guard’s proprietary reliability scores. To do so,
+                 0.2
+                                                                                                                                                     we reanalyze the data using an alternative set of
+                       2        3                                                                    6                                               domain quality scores from Lin et al. (2023). In
+                             number of veracity categories                                                                                           that work, the authors use an ensemble approach
+                                                                                                                                                     to construct aggregate reliability scores for over
+Figure A5: Macro F1 by model family as the number
+of veracity categories increases. Points represent indi-                                                                                             11k domains by combining multiple well-studied
+vidual model/configuration results, colored by family                                                                                                domain-quality lists along a single principal com-
+with markers indicating RAG k-value. Lines connect                                                                                                   ponent of reliability ratings.
+per-family means.                                                                                                                                       Figure A6 presents the results of this analysis
+                                                                                                                                                     and reveals patterns that are largely consistent with
+                                                                                                                                            29357
+Table A6: Domain classification patterns and examples.                                               15        Temporal Analysis
+         Category                         Key Patterns and Examples                                  Figure A7 shows model performance by fact-check
+         Fact-checking                    Specific organizations: snopes, politi-                    year. The results suggest that performance is
+                                          fact, factcheck.org, truthorfiction, check-                largely stable over time, with information retrieval
+                                          yourfact                                                   playing a much greater role than claim date.
+         News                             Curated list plus patterns: cnn.com,
+                                          pbs.org, reuters.com, news., wusf.org                      16        Details of the Tested LLMs
+         Government                       Official extensions (.gov, .mil), federal
+                                          agencies (whitehouse.gov, senate.gov,                      Table A8 summarizes the tested LLMs, detail-
+                                          cdc.gov), international (.gov.uk, .gov.ca)                 ing their providers, model names, reasoning and
+        Wiki                              Wiki variants: wiki (anywhere in do-                       search capabilities, sizes, release dates, and knowl-
+                                          main)                                                      edge cutoff dates (year/month). Model sizes for
+         Educational                      Academic extensions (.edu, .ac.uk), in-                    Google and OpenAI are not publicly disclosed.
+                                          stitutional terms (university, college,
+                                          .k12.)
+                                                                                                     For some models, initial access was limited to
+                                                                                                     select users before public release; we have listed
+         Research                         Think tanks (brookings.edu, her-
+                                          itage.org, rand.org), policy centers                       the dates when models became broadly available.
+                                          (pewresearch.org,     ballotpedia.org),                    We could not locate the official documentation on
+                                          international organizations (oecd.org,                     the knowledge cutoff dates for two Google mod-
+                                          un.org)
+                                                                                                     els: gemini-2.0-flash-thinking-exp-01-21
+         Other                            All domains not matching above patterns
+                                                                                                     and gemini-2.0-pro-exp-02-05. The table in-
+                                                                                                     cludes information (underlined) for these models
+                                                                       All data                      obtained from a third-party repository.15
+                                                                       Excluding PolitiFact
+
+                          98.4% (91.5%)                         1.6% (8.5%)
+                                                                                                     17        Example PolitiFact Claims
+                    1.0
+                                                                                                     The full list of PolitiFact claims can be found on
+                                                                                                     politifact.com/factchecks. Table A9 shows a few
+                    0.8                                                                              examples.
+reliability score
+
+
+
+
+                    0.6
+                                                                                  99.6% (97.8%)
+
+                    0.4
+
+                    0.2
+
+                                                                                  0.4% (2.2%)
+                    0.0
+                          1.0        0.5          0.0         0.5           1.0
+                                       political leaning score
+                                    1     10     100    1,000 10,000
+                                                count
+
+Figure A6: Reanalysis of reliability and political leaning
+patterns leveraging Lin et al. (2023) reliability scores.
+Joint distribution of reliability and political leaning
+scores for sources cited by search-enhanced GPT mod-
+els. Marginal distributions are shown in the top and
+right panels for all citations (blue) and for citations ex-
+cluding politifact.com (red). Black dashed lines
+separate different regions, and annotated percentages
+indicate the share of sources falling above or below each
+line (0.5 as the threshold for the domain-quality scores);
+values in parentheses report the same percentages with
+PolitiFact excluded.
+                                                                                                          15
+                                                                                                         https://github.com/HaoooWang/llm-knowledge-c
+those reported in the main text.                                                                     utoff-dates (accessed on 2026-02-19)
+
+                                                                                                  29358
+Table A7: Macro F1 performance of our main prompt, which provided clear instructions to the model (“Instr.”), as
+compared with a “Simple” prompt (“Please fact check this claim.”).
+                                                                 k=0                                       k=6
+                      Model                       Instr.        Simple               ∆      Instr.        Simple               ∆
+                      GPT-4o                       0.26           0.26        -0.004          0.90           0.95         +0.05
+                      GPT-4o mini                  0.23           0.23        +0.001          0.89           0.96         +0.07
+                      GPT-4o Search                0.76           0.73         -0.04          0.92           0.93        +0.006
+                      GPT-4o mini Search           0.57           0.55         -0.02          0.81           0.80         -0.01
+                      Average                                                   -0.01                                     +0.03
+
+
+
+
+                                                                                         Zero-shot
+                      GPT-4o Search 0.52 0.77 0.79 0.82 0.82 0.84 0.84 0.81 0.78 0.77 0.73 0.73 0.71 0.71 0.69 0.74 0.67 0.76
+                 GPT-4o mini Search 0.45 0.60 0.49 0.54 0.59 0.61 0.59 0.63 0.58 0.63 0.56 0.58 0.56 0.51 0.46 0.50 0.54 0.58
+                                 o1 0.22 0.33 0.35 0.26 0.30 0.31 0.28 0.34 0.42 0.37 0.37 0.38 0.44 0.41 0.42 0.43 0.40 0.26
+                       DeepSeek-R1 0.30 0.23 0.26 0.24 0.23 0.27 0.24 0.28 0.28 0.28 0.29 0.32 0.34 0.30 0.37 0.34 0.31 0.29
+                             o3-mini 0.14 0.22 0.25 0.19 0.18 0.20 0.25 0.24 0.27 0.21 0.28 0.21 0.29 0.30 0.32 0.29 0.26 0.33
+         Gemini 2.0 Flash + Search 0.13 0.24 0.34 0.19 0.22 0.17 0.23 0.21 0.23 0.21 0.22 0.25 0.24 0.28 0.29 0.30 0.33 0.30
+                             GPT-4o 0.23 0.26 0.20 0.16 0.20 0.18 0.24 0.19 0.27 0.24 0.22 0.25 0.25 0.30 0.30 0.30 0.29 0.23
+                       DeepSeek-V3 0.12 0.22 0.25 0.14 0.19 0.18 0.18 0.17 0.25 0.23 0.26 0.20 0.22 0.26 0.30 0.32 0.31 0.27
+               Gemini 2.0 Flash Lite 0.21 0.22 0.17 0.20 0.20 0.19 0.21 0.24 0.25 0.24 0.24 0.24 0.25 0.25 0.26 0.24 0.23 0.21
+                     Gemini 2.0 Pro 0.15 0.17 0.26 0.17 0.19 0.19 0.24 0.22 0.28 0.24 0.23 0.19 0.23 0.24 0.22 0.27 0.28 0.19
+ Gemini 2.0 Flash Thinking + Search 0.13 0.15 0.23 0.16 0.17 0.16 0.20 0.20 0.19 0.24 0.21 0.22 0.21 0.27 0.25 0.25 0.27 0.28
+                         GPT-4o mini 0.18 0.18 0.18 0.14 0.14 0.15 0.17 0.15 0.19 0.18 0.18 0.19 0.19 0.23 0.26 0.26 0.27 0.23
+                      Llama 3.2 90B 0.20 0.14 0.13 0.14 0.16 0.17 0.17 0.16 0.14 0.22 0.19 0.20 0.22 0.21 0.16 0.19 0.22 0.18
+                      Llama 3.2 11B 0.12 0.09 0.12 0.10 0.12 0.10 0.11 0.13 0.13 0.13 0.16 0.16 0.13 0.17 0.14 0.14 0.14 0.17
+                       Llama 3.2 3B 0.14 0.10 0.13 0.09 0.12 0.10 0.11 0.11 0.10 0.12 0.14 0.17 0.11 0.15 0.12 0.13 0.16 0.19
+                                    2007
+                                           2008
+                                                  2009
+                                                         2010
+                                                                2011
+                                                                       2012
+                                                                              2013
+                                                                                     2014
+                                                                                            2015
+                                                                                                   2016
+                                                                                                          2017
+                                                                                                                 2018
+                                                                                                                        2019
+                                                                                                                               2020
+                                                                                                                                      2021
+                                                                                                                                             2022
+                                                                                                                                                    2023
+                                                                                                                                                           2024
+                                                                                              k=6
+                      GPT-4o Search 0.87 0.92 0.93 0.94 0.94 0.95 0.93 0.91 0.95 0.92 0.92 0.90 0.89 0.91 0.91 0.93 0.88 0.95
+                                 o1 0.85 0.93 0.89 0.89 0.87 0.92 0.91 0.89 0.94 0.92 0.91 0.92 0.92 0.91 0.89 0.89 0.90 0.94
+                             o3-mini 0.87 0.90 0.90 0.88 0.86 0.91 0.90 0.89 0.93 0.91 0.91 0.91 0.92 0.89 0.88 0.89 0.88 0.94
+                             GPT-4o 0.83 0.87 0.88 0.88 0.87 0.91 0.91 0.89 0.94 0.93 0.91 0.91 0.92 0.90 0.88 0.89 0.89 0.94
+                       DeepSeek-R1 0.89 0.86 0.85 0.85 0.86 0.91 0.89 0.88 0.93 0.91 0.89 0.91 0.91 0.90 0.86 0.87 0.90 0.92
+                         GPT-4o mini 0.86 0.88 0.88 0.86 0.84 0.90 0.89 0.88 0.92 0.90 0.91 0.91 0.90 0.90 0.87 0.89 0.89 0.94
+                       DeepSeek-V3 0.81 0.85 0.87 0.88 0.87 0.91 0.90 0.87 0.92 0.92 0.91 0.91 0.90 0.90 0.86 0.87 0.90 0.93
+ Gemini 2.0 Flash Thinking + Search 0.79 0.81 0.85 0.85 0.85 0.90 0.87 0.87 0.91 0.89 0.90 0.91 0.89 0.88 0.84 0.88 0.91 0.94
+         Gemini 2.0 Flash + Search 0.80 0.85 0.82 0.84 0.82 0.88 0.87 0.86 0.89 0.87 0.88 0.90 0.89 0.87 0.87 0.87 0.87 0.92
+               Gemini 2.0 Flash Lite 0.81 0.84 0.80 0.86 0.83 0.89 0.87 0.87 0.91 0.90 0.88 0.90 0.87 0.85 0.84 0.83 0.82 0.90
+                      Llama 3.2 90B 0.73 0.73 0.74 0.79 0.80 0.88 0.87 0.85 0.89 0.89 0.86 0.85 0.83 0.83 0.79 0.80 0.83 0.88
+                 GPT-4o mini Search 0.70 0.79 0.79 0.80 0.82 0.81 0.85 0.81 0.79 0.83 0.80 0.81 0.82 0.81 0.78 0.81 0.83 0.86
+                     Gemini 2.0 Pro 0.68 0.76 0.82 0.78 0.77 0.84 0.83 0.83 0.84 0.82 0.81 0.82 0.77 0.74 0.72 0.72 0.72 0.78
+                      Llama 3.2 11B 0.46 0.51 0.54 0.54 0.57 0.63 0.64 0.67 0.71 0.68 0.67 0.68 0.63 0.66 0.60 0.68 0.65 0.71
+                       Llama 3.2 3B 0.23 0.28 0.34 0.28 0.34 0.33 0.36 0.36 0.41 0.40 0.38 0.39 0.41 0.33 0.37 0.32 0.34 0.38
+                                    2007
+                                           2008
+                                                  2009
+                                                         2010
+                                                                2011
+                                                                       2012
+                                                                              2013
+                                                                                     2014
+                                                                                            2015
+                                                                                                   2016
+                                                                                                          2017
+                                                                                                                 2018
+                                                                                                                        2019
+                                                                                                                               2020
+                                                                                                                                      2021
+                                                                                                                                             2022
+                                                                                                                                                    2023
+                                                                                                                                                           2024
+
+
+
+
+                                                                                      Factcheck Year
+
+                                                                       0.0     0.2       0.4 0.6            0.8         1.0
+                                                                                          F1 macro
+
+Figure A7: Macro F1 scores by fact-check year. Results are shown for all models in the zero-shot setting (top) and
+with Curated RAG at k = 6 (bottom). For Gemini models tested both with and without search (Gemini 2.0 Flash
+and Flash Thinking), only the search-enabled results are reported. Models are ordered by mean yearly performance,
+and orange boxes highlight the best performer in each year.
+
+
+                                                                       29359
+Table A8: Details of the tested LLMs, including their providers, models, reasoning and search capabilities, sizes,
+release dates, and knowledge cutoff dates (year-month). Underscored entries indicate models with uncertain
+knowledge cutoff dates; see the text for details.
+
+ Provider      Model                                       Reasoning      Search       Size      Release   Knowledge cutoff
+ DeepSeek      DeepSeek-V3                                                         671B       2024-12-26            2024-07
+ DeepSeek      DeepSeek-R1                                           ✓             671B       2025-01-20            2024-07
+ Meta          Llama-3.2-3B-Instruct-Turbo                                         3.21B      2024-09-25            2023-12
+ Meta          Llama-3.2-11B-Vision-Instruct-Turbo                                 10.6B      2024-09-25            2023-12
+ Meta          Llama-3.2-90B-Vision-Instruct-Turbo                                 88.8B      2024-09-25            2023-12
+ Google        gemini-2.0-flash                                               ✓        N/A    2025-02-05            2024-08
+ Google        gemini-2.0-flash-lite                                                   N/A    2025-02-05            2024-08
+ Google        gemini-2.0-flash-thinking-exp-01-21                   ✓        ✓        N/A    2025-01-21            2024-05
+ Google        gemini-2.0-pro-exp-02-05                                                N/A    2025-02-05            2025-01
+ OpenAI        gpt-4o-2024-11-20                                                       N/A    2024-11-20            2023-10
+ OpenAI        gpt-4o-mini-2024-07-18                                                  N/A    2024-07-18            2023-10
+ OpenAI        gpt-4o-mini-search-preview-2025-03-11                          ✓        N/A    2025-03-01            2023-10
+ OpenAI        gpt-4o-search-preview-2025-03-11                               ✓        N/A    2025-03-01            2023-10
+ OpenAI        o1-2024-12-17                                         ✓                 N/A    2024-12-17            2023-10
+ OpenAI        o3-mini-2025-01-31                                    ✓                 N/A    2025-01-31            2023-10
+
+
+
+
+                   Table A9: Illustrative examples of PolitiFact claims, their sources, and verdicts.
+
+ Statement                                                                    Source                            Verdict
+ “The fact is, today abortion law in the United States is more aligned with   Mike Pence, Former Vice Presi-    Mostly False
+ China and North Korea than with Western nations in Europe.”                  dent of the United States
+ Every single McDonald’s french fry comes exclusively from potatoes           Facebook Posts                    False
+ grown on Bill Gates-owned farmland.
+ Government shutdowns in 2013 and 2018 “cost our economy billions of          Sarah Jacobs, United States       True
+ dollars each.”                                                               Congresswoman
+ Video shows Elon Musk saying Oreos are “satanic.”                            Viral Image                       Pants on Fire!
+
+
+
+
+                                                             29360
+

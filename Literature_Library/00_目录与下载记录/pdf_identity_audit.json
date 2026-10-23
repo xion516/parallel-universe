@@ -1,0 +1,624 @@
+[
+  {
+    "id": "L01",
+    "pages": 17,
+    "heading_score": 1.0,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "1e3b9dffcfeccf31a6db0ee8483432f38557827987a0b2f096629b0a1a25c2e1",
+    "first_page_excerpt": "Proceedings of the 2024 Conference of the North American Chapter of the Association for Computational Linguistics:\nHuman Language Technologies (V olume 1: Long Papers), pages 3855–3871\nJune 16-21, 2024 ©2024 Association for Computational Linguistics\nThis Land is {Your, My} Land: Evaluating Geopolitical Bias in Language\nModels through Territorial Disputes\nBryan Li, Samar Haider, Chris Callison-Burc"
+  },
+  {
+    "id": "L02",
+    "pages": 27,
+    "heading_score": 1.0,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "be70b50bdba1129a8cd2a27b34d8abea77fe9583c9f049431badb31f2eff8c21",
+    "first_page_excerpt": "Findings of the Association for Computational Linguistics: ACL 2025 , pages 4215–4241\nJuly 27 - August 1, 2025 ©2025 Association for Computational Linguistics\nMultilingual Retrieval Augmented Generation for Culturally-Sensitive\nTasks: A Benchmark for Cross-lingual Robustness\nBryan Li, Fiona Luo*, Samar Haider*, Adwait Agashe*, Tammy Li†, Runqi Liu†,\nMuqing Miao†, Shriya Ramakrishnan†, Yuan Yuan†, "
+  },
+  {
+    "id": "L03",
+    "pages": 13,
+    "heading_score": 1.0,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "5bb3cc49a69dde5da3faef60697065348df8997de879fad72902a0cffb9efaf5",
+    "first_page_excerpt": "Political biases and inconsistencies \nin bilingual GPT models—the cases \nof the U.S. and China\nDi Zhou1 & Yinxian Zhang2\nThe growing popularity of ChatGPT and other large language models (LLMs) has led to many studies \ninvestigating their susceptibility to mistakes and biases. However, most studies have focused on \nmodels trained exclusively on English texts. This is one of the first studies that"
+  },
+  {
+    "id": "L04",
+    "pages": 26,
+    "heading_score": 1.0,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "d2e1da87bb5acc7e99c6196c43d5b436fa429d84e28f6934e36ab3da19073b9e",
+    "first_page_excerpt": "Findings of the Association for Computational Linguistics: ACL 2025 , pages 17179–17204\nJuly 27 - August 1, 2025 ©2025 Association for Computational Linguistics\nNavigating the Political Compass:\nEvaluating Multilingual LLMs across Languages and Nationalities\nChadi Helwe*\nKing Abdullah University\nof Science and Technology,\nSaudi Arabia\nchadi.helwe@kaust.edu.sa\nOana Balalau\nInria,\nInstitut Polytechn"
+  },
+  {
+    "id": "L05",
+    "pages": 26,
+    "heading_score": 1.0,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "067172b628306342e94820356be951fed11a1c3459feca3851c1e98f81f0cb12",
+    "first_page_excerpt": "npj | artiﬁcial intelligence Article\nhttps://doi.org/10.1038/s44387-025-00048-0\nLarge language models reﬂect the\nideology of their creators\nCheck for updates\nMaarten Buyl1,3 , Alexander Rogiers1,3,S a n d e rN o e l s1,3,G u i l l a u m eB i e d1, Iris Dominguez-Catena2,\nEdith Heiter1,I m a nJ o h a r y1, Alexandru-Cristian Mara1, Raphaël Romero1,J e f r e yL i j fﬁjt1 &T i j lD eB i e1\nLarge lang"
+  },
+  {
+    "id": "L06",
+    "pages": 17,
+    "heading_score": 1.0,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "e8d805cc84ac9165916b745c771c6a3aa138d8bed3be3c2b25bbfba87bfa2cbb",
+    "first_page_excerpt": "Geopolitical Divisions Across Languages in Large\nLanguage Models\nMaxim Chupilkin∗\nDepartment of Politics and International Relations,\nUniversity of Oxford, Oxford, UK\n∗Correspondence: maxim.chupilkin@politics.ox.ac.uk\nAbstract\nPeopleincreasinglyturntoAIchatbotsfornewsandexplanationsofworldevents. 1 Butdothey\nreceive the same political answers when they ask in different languages? Here we show that"
+  },
+  {
+    "id": "L07",
+    "pages": 39,
+    "heading_score": 1.0,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "db5fc057ff47ffd3cb6247f1e7038ddcb86966c29245c7af7a11d698295f6b85",
+    "first_page_excerpt": "The Language You Ask In: Language-Conditioned Ideological Divergence\nin LLM Analysis of Contested Political Documents\nOleg Smirnov\nMicrosoft Gaming, Stockholm, Sweden\noleg.smirnov@microsoft.com\nAbstract\nLarge language models are increasingly used to\ninterpret politically contested questions, value-\nladen material on which there is no single cor-\nrect answer, only competing interpretive tradi-\ntion"
+  },
+  {
+    "id": "L08",
+    "pages": 19,
+    "heading_score": 1.0,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "69b09cf23a23f20a91ae523e3fd1ee1bcb0fa0eb0fb58c8225af0e319be1d92d",
+    "first_page_excerpt": "Bilingual Bias in Large Language Models:\nA Taiwan Sovereignty Benchmark Study\nJu-Chun Ko\nMember of Parliament, Legislative Yuan, Republic of China (Taiwan)\nAdjunct Assistant Professor, Graduate Institute of Networking and Multimedia,\nNational Taiwan University\njuchunko@ntu.edu.tw\nFebruary 2026\nAbstract\nLarge Language Models (LLMs) are increasingly deployed in multilingual contexts, yet\ntheir consi"
+  },
+  {
+    "id": "L09",
+    "pages": 20,
+    "heading_score": 1.0,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "4d05d2cc3bc421a0c3f6e5875f59549f01ba5119770a620dd6882438514c220b",
+    "first_page_excerpt": "Proceedings of the 14th International Joint Conference on Natural Language Processing and the 4th Conference of the Asia-Pacific Chapter of the Association for\nComputational Linguistics, pages 279–298\nDecember 20-24, 2025 ©2025 Association for Computational Linguistics\nMultilingual Political Views of Large Language Models:\nIdentification and Steering\nDaniil Gurgurov1,5 Katharina Trinley1 Ivan Vyko"
+  },
+  {
+    "id": "L10",
+    "pages": 22,
+    "heading_score": 1.0,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "5ea6fd046bec3d2846c009fa3a226fa6bd5c7a37c7c8a8815c7bc22ae4b0460f",
+    "first_page_excerpt": "Proceedings of the 19th Conference of the European Chapter of the Association for Computational Linguistics\nV olume 1: Long Papers, pages 319–340\nMarch 24-29, 2026 ©2026 Association for Computational Linguistics\nDo Political Opinions Transfer Between Western Languages?\nAn Analysis of Unaligned and Aligned Multilingual LLMs\nFranziska Weeber1, Tanise Ceron2, Sebastian Padó 1\n1 University of Stuttgar"
+  },
+  {
+    "id": "L11",
+    "pages": 5,
+    "heading_score": 1.0,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "49e33479bee250d360b7bdd9ac426925576e8a9ecc01ab5b48ba862caa94bc6d",
+    "first_page_excerpt": "Unveiling Language-Driven Political Stances in Large Language\nModels on China and Cross-Strait Relations\nYu-Ting Lin\nTaipei Municipal Chenggong\nHigh School, Taiwan\ndong1214.mailbox@gmail.com\nYao-Chung Fan\nDepartment of Computer Science\nand Engineering,\nNational Chung Hsing University, Taiwan\nyfan@nchu.edu.tw\nAbstract\nThis study reveals the political biases pre-\nsented by LLMs from Taiwan, China, a"
+  },
+  {
+    "id": "L12",
+    "pages": 11,
+    "heading_score": 1.0,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "f64b4cc72bdb4c62de3654e536f897b88cf9da4ea85a6cfb11a7c9be376781ac",
+    "first_page_excerpt": "Cultural Bias and Cultural Alignment of Large Language Models\nYan Tao, Olga Viberg, Ryan S. Baker, Ren´ e F. Kizilcec\nAbstract\nCulture fundamentally shapes people’s reasoning, behavior, and communication. As people increasingly use\ngenerative artificial intelligence (AI) to expedite and automate personal and professional tasks, cultural values\nembedded in AI models may bias people’s authentic expr"
+  },
+  {
+    "id": "L13",
+    "pages": 30,
+    "heading_score": 1.0,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "60382997c6901e4bed010e247897007ab638c3482f517925d6c402b525151d1b",
+    "first_page_excerpt": "Towards Measuring the Representation of Subjective\nGlobal Opinions in Language Models\nEsin Durmus∗ Karina Nguyen Thomas I. Liao Nicholas Schiefer\nAmanda Askell Anton Bakhtin Carol Chen Zac Hatfield-Dodds\nDanny Hernandez Nicholas Joseph Liane Lovitt Sam McCandlish Orowa Sikder\nAlex Tamkin Janel Thamkul\nJared Kaplan Jack Clark Deep Ganguli\nAnthropic\nAbstract\nLarge language models (LLMs) may not equi"
+  },
+  {
+    "id": "L14",
+    "pages": 9,
+    "heading_score": 0.143,
+    "evidence": "首页DOI和完整题名一致；双栏PDF提取顺序使题名位于首页文本末尾",
+    "sha256": "355c1c75afc0ff45a66f4c681b2b0cb7cfe2a8d035f5d1af5bb5cf2cdcb1a458",
+    "first_page_excerpt": "RESEARCH\nAI and Ethics (2026) 6:262\nhttps://doi.org/10.1007/s43681-026-01138-8\ntransforming our relationship with the past [2]. When Large \nLanguage Models (LLMs) are prompted to answer histori -\ncal questions, they do not simply reproduce information; \nrather, they assemble narratives that embed specific cultural \nand historiographical frameworks. In doing so, they actively \nparticipate in shapin"
+  },
+  {
+    "id": "L15",
+    "pages": 9,
+    "heading_score": 1.0,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "dc77c018eebd3b8debf3e91f605b2fee8cff72d0aa53f438c5c562fbbfde61dc",
+    "first_page_excerpt": "Proceedings of The 3rd Workshop on Natural Language Processing for Political Sciences (PoliticalNLP 2026) @ LREC 2026 , pages 210–218\n16 May 2026, Palma, Mallorca (Spain). © ELRA Language Resources Association (ELRA), 2026\n210\nDo LLMs Transfer Political Framing Across Languages? A\nCross-Lingual Analysis of LLM-Generated Discourse\nNooredeen Awwad1, Ebtihal Ismail Enfes2, Kolawole John Adebayo3,4\nSc"
+  },
+  {
+    "id": "I01",
+    "pages": 22,
+    "heading_score": 1.0,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "862e19357dd76db66a96b576dbef853c9dee53cb10d8150de465685ec9600c89",
+    "first_page_excerpt": "Political Bias Audits of LLMs Capture Sycophancy to\nthe Inferred Auditor\nPetter Törnberg 1,* and Michelle Schimmel 1\n1Institute of Logic, Language and Computation (ILLC), University of Amsterdam,\nAmsterdam, Netherlands\n*Corresponding author:p.tornberg@uva.nl\nMay 1, 2026\nAbstract\nLarge language models (LLMs) are commonly evaluated for political bias based on their responses\nto fixed questionnaires,"
+  },
+  {
+    "id": "I02",
+    "pages": 13,
+    "heading_score": 1.0,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "a62e480f0ba92e182a6b122d994cfb023f52ee9c735f174ae67e95a133724da7",
+    "first_page_excerpt": "OPEN\nScientific Reports |        (2026) 16:23184 1| https://doi.org/10.1038/s41598-026-52105-6\nLLMs are ideological chameleons: \npersonalized echo chambers in the \nBrazilian political context\nAnderson Luis Bento Soares, Bruno Antonio Veiga de Almeida,  \nLeonardo Nascimento Ferreira, Anderson Rocha, Ruben Interian & Zanoni Dias\nUsers are increasingly relying on Large Language Models (LLMs) for pol"
+  },
+  {
+    "id": "I03",
+    "pages": 13,
+    "heading_score": 1.0,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "d50dfbdfb826ec161352e83aa5b9ff11b448f9cb475668676acc32d7889a4eb1",
+    "first_page_excerpt": "GermanPartiesQA: Benchmarking Commercial Large Language Models and AI\nCompanions for Political Alignment and Sycophancy\nJan Batzner1, 2, Volker Stocker1, 3, Stefan Schmid1, 3, Gjergji Kasneci2\n1Weizenbaum Institute\n2Technical University Munich\n3Technical University Berlin\nAbstract\nLarge language models (LLMs) are increasingly shaping citi-\nzens’ information ecosystems. Products incorporating LLMs,"
+  },
+  {
+    "id": "I04",
+    "pages": 26,
+    "heading_score": 1.0,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "31d04a39ed593a6d75fe0f9c2752f9c9adc51d2955369a833182874bfaca5518",
+    "first_page_excerpt": "Interaction Context Often Increases Sycophancy in LLMs\nShomik Jain\nMassachusetts Institute of Technology\nCambridge, MA, USA\nshomikj@mit.edu\nCharlotte Park\nMassachusetts Institute of Technology\nCambridge, MA, USA\ncispark@mit.edu\nMatt Viana\nPenn State University\nState College, PA, USA\nmmv5513@psu.edu\nAshia Wilson∗\nMassachusetts Institute of Technology\nCambridge, MA, USA\nashia07@mit.edu\nDana Calacci∗"
+  },
+  {
+    "id": "I05",
+    "pages": 14,
+    "heading_score": 1.0,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "1b5a20e463924f448b7f5b8dac28c1d13f610ceefdafa4c040653b8c0250a93c",
+    "first_page_excerpt": "Nature Computational Science | Volume 5 | January 2025 | 65–75\n 65\nnature computational science\nhttps://doi.org/10.1038/s43588-024-00741-1\nAnalysis\nGenerative language models exhibit social \nidentity biases\n \nTiancheng Hu    1,5 , Yara Kyrychenko    2,5 , Steve Rathje3, Nigel Collier1, \nSander van der Linden2 & Jon Roozenbeek    2,4\nSocial identity biases, particularly the tendency to favor one’s "
+  },
+  {
+    "id": "I06",
+    "pages": 25,
+    "heading_score": 1.0,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "2459fcf53c7f158ec68da4876ea4992d1777805e034d2f1e7c780f08ec7fe7b2",
+    "first_page_excerpt": "Nature | Vol 633 | 5 September 2024 | 147\nArticle\nAI generates covertly racist decisions about \npeople based on their dialect\nValentin Hofmann1,2,3 ✉, Pratyusha Ria Kalluri4, Dan Jurafsky4 & Sharese King5 ✉\nHundreds of millions of people now interact with language models, with uses  \nranging from help with writing1,2 to informing hiring decisions3. However, these \nlanguage models are known to perp"
+  },
+  {
+    "id": "I07",
+    "pages": 9,
+    "heading_score": 1.0,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "270f1715e9a5b50a077ccb1080a333187fa8010829f21437c90dc015b901e118",
+    "first_page_excerpt": "RESEARCH ARTICLE PSYCHOLOGICAL AND COGNITIVE SCIENCES\nCOMPUTER SCIENCES\nExplicitly unbiased large language models still form biased\nassociations\nXuechunzi Baia,1 ID , Angelina Wangb ID , Ilia Sucholutskyc ID , and Thomas L. Griﬀithsd,1\nAﬀiliations are included on p. 8.\nEdited by Timothy Wilson, University of Virginia, Charlottesville, VA; received August 11, 2024; accepted January 15, 2025\nLarge l"
+  },
+  {
+    "id": "I08",
+    "pages": 16,
+    "heading_score": 1.0,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "8f723a699f6dc6fd786c19433e389f2d7d9ad00c441035cb907babeb127ef33d",
+    "first_page_excerpt": "Intersectional Sycophancy: How Perceived User Demographics\nShape False Validation in Large Language Models\nBen Maltbie 1 Shivam Raval 2\nAbstract\nLarge language models exhibit sycophantic ten-\ndencies, but whether this behavior varies system-\natically with perceived user demographics is un-\nderexplored. Inspired by intersectionality (over-\nlapping identities produce compounded effects),\nwe probe wh"
+  },
+  {
+    "id": "F01",
+    "pages": 64,
+    "heading_score": 1.0,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "3a82baba6c9cc0f9b63dcb02fa57db7271751e25ab2abcff99bfb07193c9a0e2",
+    "first_page_excerpt": " \n1|64 \nSource framing triggers systematic evaluation bias in Large Language Models Federico Germani1,* Giovanni Spitale1,2*  1: Institute of Biomedical Ethics and History of Medicine, University of Zurich 2: Center for Medical Ethics, University of Oslo *: Co-first authors; Corresponding authors  Abstract Large Language Models (LLMs) are increasingly used not only to generate text but also to eva"
+  },
+  {
+    "id": "F02",
+    "pages": 25,
+    "heading_score": 1.0,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "95de37abf9fa19c506923ea22103ad9eb32f255f9c47027f2b70787d5b3b5465",
+    "first_page_excerpt": "Poli-Bias: Understanding and Measuring Large Language Model Biases in\nInternational Political Conflicts\nMassi-Nissa Abboud1, Aladin Djuhera2, Elena Cabrio1, Holger Boche2\n1 Université Côte d’Azur2 Technical University Munich\nAbstract\nMeasuring political bias in large language mod-\nels (LLMs) remains challenging as it can mani-\nfest through subtle differences in framing, argu-\nmentation, and legal "
+  },
+  {
+    "id": "F03",
+    "pages": 10,
+    "heading_score": 1.0,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "03a7b3a8c790fc2f7e907a756b68e7cf8bdfc1ba5435fc10c1a3ac189c41b6e2",
+    "first_page_excerpt": "Findings of the Association for Computational Linguistics: EMNLP 2025, pages 22803–22812\nNovember 4-9, 2025 ©2025 Association for Computational Linguistics\nEchoes of Agreement: Argument Driven Sycophancy in Large Language\nModels\nA vneet Kaur\nIndependent Researcher\navneetreen@gmail.com\nAbstract\nExisting evaluation of political biases in Large\nLanguage Models (LLMs) outline the high sen-\nsitivity to"
+  },
+  {
+    "id": "F04",
+    "pages": 25,
+    "heading_score": 0.8,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "6b34e4a071a56b74c1ccfc4d78bd24dae051451f265263baf2abaa9113b579e0",
+    "first_page_excerpt": "ASK DON’T TELL:\nREDUCING SYCOPHANCY IN LARGE LANGUAGE MODELS\nMagda Dubois* Cozmin Ududec Christopher Summerfield Lennart Luettgau *\nUK AI Security Institute, London, UK\nABSTRACT\nSycophancy, the tendency of large language models to favour user-affirming responses over critical\nengagement, has been identified as an alignment failure, particularly in high-stakes advisory and\nsocial contexts. While pr"
+  },
+  {
+    "id": "F05",
+    "pages": 15,
+    "heading_score": 1.0,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "52fe510497380e1ff1f396dd65869462256face5f9d0114bdcf908def9ba0fd5",
+    "first_page_excerpt": "FramingQA: Does the Question Shape the Answer? Measuring the\nCompositional Framing Effect\nHazel H. Kim1* Andrew M. Bean2,3† Guilherme Affonso Ferreira de Camargo4†\nShanyu Chauhan5† Felix Drinkall6† Jade Kosché4† Chenyang Ma1†\nGlory Nwaugbala4† Nabeel Seedat7,3† Bradley Max Segal8†\nSamuel Recht9 Hinrich Schütze10 Philip H.S. Torr6\n1Department of Computer Science, University of Oxford;\n2Oxford Inter"
+  },
+  {
+    "id": "F07",
+    "pages": 12,
+    "heading_score": 1.0,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "a3d2c6350e5c17e9977895dfbb1e33858b109178617bd21dd36bf06c7bae804f",
+    "first_page_excerpt": "AI Pandering: Constructing Diverging Political\nRealities through Conversation\nJames Bisbeea1, Joshua D. Clintona, Jennifer M. Larsona, and Diana Da In Leea\naVanderbilt University\nThis manuscript was compiled on February 26, 2026\nAs conversational AI increasingly replaces traditional search for in-\nformation seeking, concerns arise about how engagement-optimized\nchatbots shape the neutrality and co"
+  },
+  {
+    "id": "S01",
+    "pages": 35,
+    "heading_score": 1.0,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "263f0d66b8847563e6dda987376b8928aae8fabd8bab3542cb260518edc9e381",
+    "first_page_excerpt": "Published as a conference paper at ICLR 2024\nTOWARDS UNDERSTANDING\nSYCOPHANCY IN LANGUAGE MODELS\nMrinank Sharma∗, Meg Tong∗, Tomasz Korbak, David Duvenaud\nAmanda Askell, Samuel R. Bowman, Newton Cheng, Esin Durmus, Zac Hatfield-Dodds,\nScott R. Johnston, Shauna Kravec, Timothy Maxwell, Sam McCandlish, Kamal Ndousse,\nOliver Rausch, Nicholas Schiefer, Da Yan, Miranda Zhang,\nEthan Perez\nABSTRACT\nHuman"
+  },
+  {
+    "id": "S02",
+    "pages": 48,
+    "heading_score": 1.0,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "d88e86b7b50a7f48fedb782204ea75af44774557b9c5bcf6e51ac11b3d91985a",
+    "first_page_excerpt": "Findings of the Association for Computational Linguistics: ACL 2023 , pages 13387–13434\nJuly 9-14, 2023 ©2023 Association for Computational Linguistics\nDiscovering Language Model Behaviors with Model-Written Evaluations\nEthan Perez, Sam Ringer∗, Kamil˙e Lukoši¯ut˙e∗, Karina Nguyen∗, Edwin Chen,†\nScott Heiner,†Craig Pettit,†Catherine Olsson, Sandipan Kundu, Saurav Kadavath,\nAndy Jones, Anna Chen, B"
+  },
+  {
+    "id": "S03",
+    "pages": 34,
+    "heading_score": 1.0,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "7d71d7f7a8dad1c741688dd541f75a7161e7a8bacd5b525649ff8b255c1af922",
+    "first_page_excerpt": "February 16, 2024\nSIMPLE SYNTHETIC DATA REDUCES SYCOPHANCY IN\nLARGE LANGUAGE MODELS\nJerry Wei Da Huang Yifeng Lu Denny Zhou Quoc V . Le\nGoogle DeepMind\nABSTRACT\nSycophancy is an undesirable behavior where models tailor their responses to\nfollow a human user’s view even when that view is not objectively correct (e.g.,\nadapting liberal views once a user reveals that they are liberal). In this paper,"
+  },
+  {
+    "id": "S04",
+    "pages": 15,
+    "heading_score": 1.0,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "d9f05ea94a3d4aa33307f2d34e8c865af61bf50428a92acbd9f7af1587b20866",
+    "first_page_excerpt": "Are You Sure? Challenging LLMs Leads to Performance Drops in\nThe FlipFlop Experiment\nPhilippe Laban Lidiya Murakhovs’ka Caiming Xiong Chien-Sheng Wu\nSalesforce AI Research\n{plaban, l.murakhovska, cxiong, wu.jason}@salesforce.com\nAbstract\nThe interactive nature of Large Language Mod-\nels (LLMs) theoretically allows models to re-\nfine and improve their answers, yet systematic\nanalysis of the multi-t"
+  },
+  {
+    "id": "S05",
+    "pages": 18,
+    "heading_score": 1.0,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "d5f18ffbd8c6766db42bce9d01ef60317e9403147bb7bf69a7633243760f3c18",
+    "first_page_excerpt": "Findings of the Association for Computational Linguistics: EMNLP 2025, pages 22461–22478\nNovember 4-9, 2025 ©2025 Association for Computational Linguistics\nChallenging the Evaluator: LLM Sycophancy Under User Rebuttal\nSungwon Kim\nJohns Hopkins University\nBaltimore, Maryland\nskim434@jhu.edu\nDaniel Khashabi\nJohns Hopkins University\nBaltimore, Maryland\ndanielk@jhu.edu\nAbstract\nLarge Language Models ("
+  },
+  {
+    "id": "S06",
+    "pages": 21,
+    "heading_score": 1.0,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "df38d072ad4d7896602523de9ecccd9f82a7ec08cb915d8ae20541086756ddc8",
+    "first_page_excerpt": "Findings of the Association for Computational Linguistics: EMNLP 2025, pages 2239–2259\nNovember 4-9, 2025 ©2025 Association for Computational Linguistics\nMeasuring Sycophancy of Language Models in Multi-turn Dialogues\nJiseung Hong* 1 Grace Byun* 2 Seungone Kim1 Kai Shu2\n1Carnegie Mellon University\n{jiseungh, seungonk}@andrew.cmu.edu\n2Emory University\n{gbyun, kai.shu}@emory.edu\nAbstract\nLarge Langu"
+  },
+  {
+    "id": "S07",
+    "pages": 15,
+    "heading_score": 1.0,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "22f93380955c9d06122f00df78bf8ab96c52513bd5425c298f243558277da5e3",
+    "first_page_excerpt": "Investigating the Influence of Language on Sycophantic Behavior of\nMultilingual LLMs\nBayan Abdullah Aldahlawi1, A. B. M. Ashikur Rahman1, Irfan Ahmad1,2\n1King Fahd University of Petroleum and Minerals, Dhahran, KSA,\n2SDAIA-KFUPM Joint Research Center for AI (JRCAI), Dhahran, KSA,\nCorrespondence: g202204800@kfupm.edu.sa\nAbstract\nLarge language models (LLMs) have achieved\nstrong performance across a"
+  },
+  {
+    "id": "S08",
+    "pages": 19,
+    "heading_score": 1.0,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "8a5118d02114c144f876fdde6f458c455542eb016f05dc4bbb8c58ad1937e58a",
+    "first_page_excerpt": "Sycophancy as a Multilingual Alignment Failure: How Safety Degrades\nAcross Languages, Topics, and Models\nArya Shah\nIIT Gandhinagar\nGandhinagar, India\narya.shah@iitgn.ac.in\nHimanshu Beniwal\nIIT Gandhinagar\nGandhinagar, India\nhimanshu.beniwal@iitgn.ac.in\nMayank Singh\nIIT Gandhinagar\nGandhinagar, India\nsingh.mayank@iitgn.ac.in\nChaklam Silpasuwanchai\nAsian Institute of Technology\nBangkok, Thailand\ncha"
+  },
+  {
+    "id": "S09",
+    "pages": 18,
+    "heading_score": 1.0,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "5106a2c4ee95ad88e7ce3beafc2d6273a99da4d469f2d8d7a0828d6882184fb6",
+    "first_page_excerpt": "Proceedings of the 19th Conference of the European Chapter of the Association for Computational Linguistics\nV olume 1: Long Papers, pages 3664–3681\nMarch 24-29, 2026 ©2026 Association for Computational Linguistics\nLearning Multilingual Agentic Policy to Control Sycophancy\nLeonardo Ranaldi♠,• Giulia Pucci♡,•\n♠ILCC, School of Informatics, University of Edinburgh, United Kingdom\n♡Department of Comput"
+  },
+  {
+    "id": "R01",
+    "pages": 17,
+    "heading_score": 0.909,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "62790758967200917934b698386208af8e6099b6bb1158001e62e344b1b8c15e",
+    "first_page_excerpt": "Generative Echo Chamber? Efects of LLM-Powered Search \nSystems on Diverse Information Seeking \nNikhil Sharma Q. Vera Liao Ziang Xiao \nnsharm27@jhu.edu veraliao@microsoft.com ziang.xiao@jhu.edu \nJohns Hopkins University Microsoft Research Johns Hopkins University \nBaltimore, Maryland, USA Montréal, Canada Baltimore, Maryland, USA \nABSTRACT \nLarge language models (LLMs) powered conversational search"
+  },
+  {
+    "id": "R03",
+    "pages": 15,
+    "heading_score": 1.0,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "8688f2a85e2b04043927c8516db168570d2a67c967c666650fa62def9f48d98c",
+    "first_page_excerpt": "ReFaRAG: Re-ranking for Bias Mitigation in\nRetrieval-Augmented Generation\nYingqi Zhao1, Vasilis Efthymiou2[0000−0002−0683−030X], Jyrki\nNummenmaa1[220000−0002−7476−7840], and Kostas\nStefanidis1[0000−0003−1317−8062]\n1 Tampere University, Finland\n{yingqi.zhao,jyrki.nummenmaa,konstantinos.stefanidis}@tuni.fi\n2 Harokopio University of Athens, Greece\nvefthym@hua.gr\nAbstract. Retrieval-augmented generati"
+  },
+  {
+    "id": "R04",
+    "pages": 11,
+    "heading_score": 1.0,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "6892fa81fc850c329aefdeab68a83d095cf9504010fe9da8d45a7dff9923430e",
+    "first_page_excerpt": "Towards Fair RAG: On the Impact of Fair Ranking in\nRetrieval-Augmented Generation\nTo Eun Kim\nCarnegie Mellon University\nPittsburgh, PA, USA\ntoeunk@cs.cmu.edu\nFernando Diaz\nCarnegie Mellon University\nPittsburgh, PA, USA\ndiazf@acm.org\nAbstract\nDespite the central role of retrieval in retrieval-augmented genera-\ntion (RAG) systems, much of the existing research on RAG over-\nlooks the well-established"
+  },
+  {
+    "id": "R05",
+    "pages": 16,
+    "heading_score": 1.0,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "b2108add0c8e714bb3258e9ef77132701850d464e94c19a053ba7891bf695a35",
+    "first_page_excerpt": "Proceedings of the 31st International Conference on Computational Linguistics , pages 10021–10036\nJanuary 19–24, 2025. ©2025 Association for Computational Linguistics\n10021\nDoes RAG Introduce Unfairness in LLMs? Evaluating Fairness in\nRetrieval-Augmented Generation Systems\nXuyang Wu*\nSanta Clara University\nSanta Clara, CA\nxwu5@scu.edu\nShuowei Li*\nSanta Clara University\nSanta Clara, CA\nsli19@scu.ed"
+  },
+  {
+    "id": "R06",
+    "pages": 8,
+    "heading_score": 0.1,
+    "evidence": "首页DOI及去空格后的英文标题一致（韩文期刊的英文标题无正常空格）",
+    "sha256": "439a8fd848090f8f9a289d199fa2dd34f0193d6c0441ef56e95511011c719fb5",
+    "first_page_excerpt": "ISSN2383-630X(Print)/ISSN2383-6296(Online)JournalofKIISE,Vol.53,No.9,pp.824-831,2026.9https://doi.org/10.5626/JOK.2026.53.9.824RAG에서검색된문서의편향성이생성된답변에미치는영향:정치적편향성실험을통한분석(TheImpactofRetrievedDocumentBiasonGeneratedResponsesinRAG:AnAnalysisthroughPoliticalBiasExperiments)조 승 호† 고 창 건†† 황 태 호††서 정 연†† 박 종 철†††(SeunghoCho)(ChanggeonKo)(TaehoHwang)(JeongyeonSeo)(JongC.Park)요약본 연구는 RAG기반 대규모 언어 모델(LLM)에서 "
+  },
+  {
+    "id": "R07",
+    "pages": 16,
+    "heading_score": 1.0,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "744695e9be11f499158083736aef86a5e44e72e2330846184acca360f9a05cde",
+    "first_page_excerpt": "Answer Bubbles: Information Exposure in AI-Mediated Search\nMichelle Huang‡, Agam Goyal ‡, Koustuv Saha, Eshwar Chandrasekharan\nSiebel School of Computing and Data Science\nUniversity of Illinois Urbana-Champaign, Urbana, IL, USA\n{mh106, agamg2, ksaha2, eshwar}@illinois.edu\nAbstract\nGenerative search systems are increasingly re-\nplacing link-based retrieval with AI-generated\nsummaries, yet little is"
+  },
+  {
+    "id": "R08",
+    "pages": 15,
+    "heading_score": 1.0,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "bce7a6c8aafdec333a96d2d31d9eba838db95acd445d528555360ace44e64d47",
+    "first_page_excerpt": "News Source Citing Patterns in AI Search Systems\nKai-Cheng Yang\nNortheastern University, Boston, MA, USA\nyang3kc@gmail.com\nAbstract\nAI-powered search systems are emerging as new information\ngatekeepers, fundamentally transforming how users access\nnews and information. Despite their growing influence, the\ncitation patterns of these systems remain poorly understood.\nWe address this gap by analyzing "
+  },
+  {
+    "id": "R09",
+    "pages": 23,
+    "heading_score": 1.0,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "81f2a6dab09848a4913fc7869dd257580bdc984fcc252ed0cf8d2e3d251ac218",
+    "first_page_excerpt": "Findings of the Association for Computational Linguistics: ACL 2026, pages 29338–29360\nJuly 2-7, 2026 ©2026 Association for Computational Linguistics\nLarge Language Models Require Curated Context for Reliable Political\nFact-Checking—Even with Reasoning and Web Search\nMatthew R. DeVerna\nStanford University\nKai-Cheng Yang\nBinghamton University\nHarry Yaojun Yan\nTexas A&M University\nFilippo Menczer\nIn"
+  },
+  {
+    "id": "R10",
+    "pages": 74,
+    "heading_score": 1.0,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "b07b1f79afcaf9838d975d4d5add2ed8ce5ed9e5e63b2492aa8093b79c0d52de",
+    "first_page_excerpt": "Evidence of political bias in search engines and language models\nbefore major elections\nÍris Damião 1,2 Paulo Almeida 1 João Franco1∗ Nuno Santos 2,3\nPedro C. Magalhães 4 Joana Gonçalves-Sá 1,5\n1 Social Physics and Complexity Lab - SPAC, LIP -\nLaboratório de Instrumentação e Física Experimental\nde Partículas, Lisbon, Portugal\n2 Instituto Superior Técnico - Universidade de Lisboa,\nLisbon, Portugal\n"
+  },
+  {
+    "id": "R11",
+    "pages": 16,
+    "heading_score": 1.0,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "c14f740a4da2004bffcd08233892f6c83a5d6fe91a7c8c3dcf073b478a8b18e4",
+    "first_page_excerpt": "1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20\n21\n22\n23\n24\n25\n26\n27\n28\n29\n30\n31\n32\n33\n34\n35\n36\n37\n38\n39\n40\n41\n42\n43\n44\n45\n46\n47\n48\n49\nAlgorithmic Amplification of biases on Google Search\nHUSSAM HABIB, University of Iowa, USA\nRYAN STOLDT, Drake University, USA\nANDREW HIGH, Pennsylvania State University, USA\nBRIAN EKDALE, University of Iowa, USA\nASHLEY PETERSON, Peloton Interactive, USA\nKATY BID"
+  },
+  {
+    "id": "R12",
+    "pages": 15,
+    "heading_score": 1.0,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "dcb6dbd7cc6d3182912f4f6c1ae35f6d79ab5f812faca2125ed7a59b13ca1d46",
+    "first_page_excerpt": "Received 8 October 2025, accepted 6 November 2025, date of publication 21 November 2025, date of current version 30 January 2026.\nDigital Object Identifier 10.1 109/ACCESS.2025.3635871\nUnequal Content: Search Engine Personalization\nInfluences Exposure to Information Regarding the\nIsrael–Palestine Conflict\nÍRIS DAMIÃO\n 1,2, JOSÉ M. REIS 1, PAULO ALMEIDA\n 1, NUNO SANTOS\n 2,3, (Member, IEEE),\nAND JOA"
+  },
+  {
+    "id": "R13",
+    "pages": 43,
+    "heading_score": 0.889,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "8233f8fda601dd3648bbafbb51b5a931e67a3114b6d49a1deedd4f2d855b310d",
+    "first_page_excerpt": "Preprint\nWHERE’SWALDO?\nQUERY-LANGUAGEPREFERENCE UNDER\nCROSS-LINGUALKNOWLEDGEDISPARITIES\nDayeon Ki1∗ Ruochen Zhang2 Silviu Cucerzan2 Ryen W. White2 Ning Gao2\n1University of Maryland 2Microsoft\ndayeonki@umd.edu\nABSTRACT\nLarge Language Models increasingly serve as interfaces for knowledge-intensive\ninformation seeking tasks across languages by synthesizing multilingual evidence.\nPrior work has shown "
+  },
+  {
+    "id": "R14",
+    "pages": 26,
+    "heading_score": 1.0,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "3c9dcbce897ad95ffa7c14f2a3b64c14d651bc9683b769527ef19ecea542ff23",
+    "first_page_excerpt": "Findings of the Association for Computational Linguistics: EMNLP 2025, pages 18145–18170\nNovember 4-9, 2025 ©2025 Association for Computational Linguistics\nNo Free Lunch: Retrieval-Augmented Generation Undermines Fairness in\nLLMs, Even for Vigilant Users\nMengxuan Hu1*, Hongyi Wu1*†, Ronghang Zhu2, Zihan Guan1,\nDongliang Guo1, Daiqing Qi1, Sheng Li1\n1University of Virginia, 2 University of Georgia\n"
+  },
+  {
+    "id": "G01",
+    "pages": 14,
+    "heading_score": 1.0,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "9f5801482e12cf25a7f3b6769db8cc691ca1e2b4dd89056730624e891102ce09",
+    "first_page_excerpt": "ARTICLE\nEchoes of power: investigating geopolitical bias in\nUS and China large language models\nAndre G. C. Pacheco 1 ✉, Athus Cavalini 1,2 & Giovanni Comarela 1\nLarge language models (LLMs) have emerged as powerful tools for generating human-like\ntext, transforming human-machine interactions. However, their widespread adoption has\nraised concerns about their potential to in ﬂuence public opinion a"
+  },
+  {
+    "id": "M01",
+    "pages": 15,
+    "heading_score": 1.0,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "86d5008438246d9aba21f37ddddf5506a36956cbb84c72e87de625af4f802710",
+    "first_page_excerpt": "RESEA RCH ARTICL E\nThe political preferences of LLMs\nDavid Rozado\nID\n*\nECL, Otago Polytechn ic, Dunedin, New Zealand\n* david.ro zado@op.ac .nz\nAbstract\nI report here a comprehensive analysis about the political preferences embedded in Large\nLanguage Models (LLMs). Namely, I administer 11 political orientation tests, designed to\nidentify the political preferences of the test taker, to 24 state-of-t"
+  },
+  {
+    "id": "M02",
+    "pages": 21,
+    "heading_score": 1.0,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "49eebfaccc27bf894799ef11fc53694923cfcc030093c3f547d89a7c09dafc3f",
+    "first_page_excerpt": "Vol.:(0123456789)\nPublic Choice (2024) 198:3–23\nhttps://doi.org/10.1007/s11127-023-01097-2\n1 3\nMore human than human: measuring ChatGPT political bias\nFabio Motoki1  · Valdemar Pinho Neto2 · Victor Rodrigues3\nReceived: 17 March 2023 / Accepted: 21 July 2023 / Published online: 17 August 2023 \n© The Author(s) 2023, Corrected publication 2023\nAbstract\nWe investigate the political bias of a large lan"
+  },
+  {
+    "id": "M03",
+    "pages": 26,
+    "heading_score": 1.0,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "9813e9780645fddd6a4a4c5ab339023da3cc595460f2468d68ace7e45dc8f247",
+    "first_page_excerpt": "Proceedings of the 61st Annual Meeting of the Association for Computational Linguistics\nV olume 1: Long Papers, pages 11737–11762\nJuly 9-14, 2023 ©2023 Association for Computational Linguistics\nFrom Pretraining Data to Language Models to Downstream Tasks:\nTracking the Trails of Political Biases Leading to Unfair NLP Models\nShangbin Feng1 Chan Y oung Park2 Yuhan Liu3 Yulia Tsvetkov1\n1University of "
+  },
+  {
+    "id": "M04",
+    "pages": 34,
+    "heading_score": 1.0,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "4981d916f369b1019d38940f02cd219d2f83ba9e85326fc377e00e2a75720892",
+    "first_page_excerpt": "Whose Opinions Do Language Models Reflect?\nShibani Santurkar 1 Esin Durmus 1 Faisal Ladhak 2 Cinoo Lee 1 Percy Liang 1 Tatsunori Hashimoto1\nAbstract\nLanguage models (LMs) are increasingly being\nused in open-ended contexts, where the opinions\nthey reflect in response to subjective queries can\nhave a profound impact, both on user satisfac-\ntion, and shaping the views of society at large.\nWe put fort"
+  },
+  {
+    "id": "M05",
+    "pages": 17,
+    "heading_score": 1.0,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "a5be5c805ccc24139f4aa021c71b01f605541207b150f01ecacbf05d3b61fc47",
+    "first_page_excerpt": "Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics (V olume 1: Long Papers) , pages 15295–15311\nAugust 11-16, 2024 ©2024 Association for Computational Linguistics\nPolitical Compass or Spinning Arrow?\nTowards More Meaningful Evaluations for Values and Opinions in\nLarge Language Models\nPaul Röttger1* Valentin Hofmann2,4,5* Valentina Pyatkin2 Musashi Hinck3\nHannah"
+  },
+  {
+    "id": "M06",
+    "pages": 29,
+    "heading_score": 1.0,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "ddb9861003dd3aad3ee01fa5bb873e12cd8bf83fb12866e9bd910daad9cc7d56",
+    "first_page_excerpt": "Published as a conference paper at ICLR 2024\nQUANTIFYING LANGUAGE MODELS ’ SENSITIVITY TO\nSPURIOUS FEATURES IN PROMPT DESIGN or:\nHow I learned to start worrying about prompt formatting\nMelanie Sclar1 Yejin Choi1,2 Yulia Tsvetkov1 Alane Suhr3\n1Paul G. Allen School of Computer Science & Engineering, University of Washington\n2Allen Institute for Artificial Intelligence 3University of California, Berk"
+  },
+  {
+    "id": "M07",
+    "pages": 29,
+    "heading_score": 1.0,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "1574982845157569b85c1214bfa9987000384d7a5e3b5fbdcc5a29afec59cb81",
+    "first_page_excerpt": "Judging LLM-as-a-Judge\nwith MT-Bench and Chatbot Arena\nLianmin Zheng1∗ Wei-Lin Chiang1∗ Ying Sheng4∗ Siyuan Zhuang1\nZhanghao Wu1 Y onghao Zhuang3 Zi Lin2 Zhuohan Li1 Dacheng Li13\nEric P . Xing35 Hao Zhang12 Joseph E. Gonzalez 1 Ion Stoica1\n1 UC Berkeley 2 UC San Diego 3 Carnegie Mellon University 4 Stanford 5 MBZUAI\nAbstract\nEvaluating large language model (LLM) based chat assistants is challengin"
+  },
+  {
+    "id": "M08",
+    "pages": 7,
+    "heading_score": 1.0,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "7e54e9a0a78ac2efc7a8d8e178ace03352e9a19f8488c885879a098ecd8a0b91",
+    "first_page_excerpt": "Proceedings of the 53rd Annual Meeting of the Association for Computational Linguistics\nand the 7th International Joint Conference on Natural Language Processing (Short Papers) , pages 438–444,\nBeijing, China, July 26-31, 2015. c⃝2015 Association for Computational Linguistics\nThe Media Frames Corpus: Annotations of Frames Across Issues\nDallas Card1 Amber E. Boydstun2 Justin H. Gross3 Philip Resnik"
+  },
+  {
+    "id": "M09",
+    "pages": 17,
+    "heading_score": 1.0,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "7756efcb1286043bae6a304cd8477aae988828a27f85ab7a1552c421536392ae",
+    "first_page_excerpt": "Proceedings of the 14th Joint Conference on Lexical and Computational Semantics (*SEM 2025), pages 83–99\nNovember 8-9, 2025 ©2025 Association for Computational Linguistics\nGeneralizability of Media Frames:\nCorpus creation and analysis across countries\nAgnese Daffara1, Sourabh Dattawad1, Sebastian Padó1, Tanise Ceron2\n1Institute for Natural Language Processing, University of Stuttgart, Germany\n2Boc"
+  },
+  {
+    "id": "M10",
+    "pages": 31,
+    "heading_score": 1.0,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "40f7ffe3802b18c923d573fe433b8fdbb8eb0594915bc35b5961bcab5e126acc",
+    "first_page_excerpt": "Measuring Narrative Polarization in Online\nDiscourse\nJan Elfes 1, Marco T. Bastos 1, Luca Maria Aiello 2,3*\n1Information and Communication Studies, University College Dublin,\nIreland.\n2Data Science, IT University of Copenhagen, Denmark.\n3Pioneer Centre of AI, Denmark.\n*Corresponding author(s). E-mail(s): luai@itu.dk;\nContributing authors: jan.elfes@ucd.ie; marco.bastos@ucd.ie;\nAbstract\nPolarizatio"
+  },
+  {
+    "id": "M11",
+    "pages": 8,
+    "heading_score": 1.0,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "d94a92c5dc4c4ddd75f06f5c2879706edb6d9811ae10c15244ab9348e1a87817",
+    "first_page_excerpt": "Framing: Toward Clarification of a \nFractured Paradigm \nby Robert M. Entman, Northwestern University \nIn response to the proposition that communication lacks disciplinary sta- \ntus because of deficient core knowledge, I propose that we turn an osten- \nsible weakness into a strength. We should identify our mission as bring- \ning together insights and theories that would otherwise remain scattered \n"
+  },
+  {
+    "id": "M12",
+    "pages": 26,
+    "heading_score": 1.0,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "2628c7b68c61dc88c1a5e5d83caa13e587583ae35e2ff48fd8ccb0a5060eddf1",
+    "first_page_excerpt": "1 Apr 2007 12:18 AR ANRV312-PL10-06.tex XMLPublish SM(2004/02/24) P1: OKZ\n10.1146/annurev.polisci.10.072805.103054\nAnnu. Rev. Polit. Sci. 2007. 10:103–26\ndoi: 10.1146/annurev.polisci.10.072805.103054\nCopyright c⃝ 2007 by Annual Reviews. All rights reserved\nFRAMING THEORY\nDennis Chong and James N. Druckman\nDepartment of Political Science, Northwestern University, Evanston, Illinois 60208;\nemail: dc"
+  },
+  {
+    "id": "M13",
+    "pages": 6,
+    "heading_score": 1.0,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "c0b38a214463d00781f21783de700fcd647675a04d6481ab87d583f91fe31810",
+    "first_page_excerpt": "The Framing of Decisions and the\nPsychology of Choice\nAmos Tversky and Daniel Kahneman\nExplanations and predictions of\npeople's choices, in everyday life as well\nas in the social sciences, are often found-\ned on the assumption of human rational-\nity. The definition of rationality has been\nmuch debated, but there is general agree-\nment that rational choices should satisfy\nsome elementary requiremen"
+  },
+  {
+    "id": "M14",
+    "pages": 37,
+    "heading_score": 0.833,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "42ae4e3aeee9de78083316f5eb4c11d535d0c1d2a0c636df3ae9ecf1810661c7",
+    "first_page_excerpt": "Econometrica, Vol. 78, No. 1 (January, 2010), 35–71\nWHAT DRIVES MEDIA SLANT?\nEVIDENCE FROM U.S. DAIL Y NEWSP APERS\nBY MATTHEW GENTZKOW AND JESSE M. SHAPIRO1\nWe construct a new index of media slant that measures the similarity of a news out-\nlet’s language to that of a congressional Republican or Democrat. We estimate a model\nof newspaper demand that incorporates slant explicitly, estimate the slan"
+  },
+  {
+    "id": "M15",
+    "pages": 10,
+    "heading_score": 1.0,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "f73b70bbbc999312c0cd91c22ca4b6fd1b34a47017a2825b6ddd38d488479508",
+    "first_page_excerpt": "The Tower of Babel Meets Web 2.0: User-Generated Content and Its Applications in a Multilingual Context Brent Hecht* and Darren Gergle*† Northwestern University *Dept. of Electrical Engineering and Computer Science, † Dept. of Communication Studies brent@u.northwestern.edu, dgergle@northwestern.edu  ABSTRACT This study explores language’s fragmenting effect on user-generated content by examining t"
+  },
+  {
+    "id": "M16",
+    "pages": 10,
+    "heading_score": 1.0,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "70f260ccce99ef45be2912c3207003314d2d01a7a45e60cc2ad2960f74c35f32",
+    "first_page_excerpt": "The Rashomon Wikipedia: A Data-Perspectivist Analysis of Divergent\nHistorical Narratives\nClaudiu Creanga2,3, Liviu P. Dinu1,3, Anca Dinu3,4\n1 Faculty of Mathematics and Computer Science,\n2 Interdisciplinary School of Doctoral Studies,\n3 HLT Research Center,\n4 Faculty of Foreign Languages and Literatures,\nUniversity of Bucharest, Romania\nclaudiu.creanga@fmi.unibuc.ro, ldinu@fmi.unibuc.ro, anca.dinu"
+  },
+  {
+    "id": "M17",
+    "pages": 14,
+    "heading_score": 1.0,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "998b51f920a912a6659533a83f87eb7aa6895902c27a27233720cbc432e993df",
+    "first_page_excerpt": "Proceedings of The 3rd Workshop on Natural Language Processing for Political Sciences (PoliticalNLP 2026) @ LREC 2026 , pages 234–247\n16 May 2026, Palma, Mallorca (Spain). © ELRA Language Resources Association (ELRA), 2026\n234\nPReSS: An Automated Black-Box Framework for Evaluating\nPolitical Stance Stability in LLMs\nShariar Kabir1, Kevin Esterling2, Yue Dong2\nBangladesh University of Engineering an"
+  },
+  {
+    "id": "M18",
+    "pages": 36,
+    "heading_score": 1.0,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "4d35b7af927c53795591bd9de2ea9a233a47a3293cb1430c19b1038b296ef9c5",
+    "first_page_excerpt": " \n1 \nEcho Chambers and Epistemic Bubbles C. Thi Nguyen  \t\t(This\tis\tthe\tpenultimate\tdraft.\tPlease\tcite\tthe\tpublished\tversion,\tpublished\tin\tEpisteme:\thttps://doi.org/10.1017/epi.2018.32. An\tearlier\tand\tmuch-shortened\tversion\tof\tthis\tessay,\twritten\tfor\ta\tgeneral\taudience,\toriginally\tappeared\tin\tAeon\tMagazine\tas\tEscape\tthe\tEcho\tChamber.)\t\t\t\t Abstract\t\tDiscussion\tof\tthe\tphenomena\tof\tpost-truth\tand\tfake"
+  },
+  {
+    "id": "H01",
+    "pages": 10,
+    "heading_score": 1.0,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "1f41fd729ac2e5c5d5d91349a805199ded3733ef4170571206b4aea4c695040a",
+    "first_page_excerpt": "RESEARCH ARTICLE SUMMARY\n◥\nARTIFICIAL INTELLIGENCE\nAI can help humans find common ground\nin democratic deliberation\nMichael Henry Tessler *†, Michiel A. Bakker *†, Daniel Jarrett, Hannah Sheahan, Martin J. Chadwick,\nRaphael Koster, Georgina Evans, Lucy Campbell-Gillingham, Tantum Collins, David C. Parkes,\nMatthew Botvinick*, Christopher Summerfield *\nINTRODUCTION: Democracy, at its best, rests\nupo"
+  },
+  {
+    "id": "H02",
+    "pages": 12,
+    "heading_score": 1.0,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "05b9b9ea844b8ef4b18cf4ddb685e4ab183d2479009f97d9a0ddc52c5fb2833b",
+    "first_page_excerpt": "Nature Human Behaviour | Volume 9 | August 2025 | 1645–1653\n 1645\nnature human behaviour\nhttps://doi.org/10.1038/s41562-025-02194-6\nArticle\nOn the conversational persuasiveness  \nof GPT -4\n \nFrancesco Salvi    1,2 , Manoel Horta Ribeiro    3, Riccardo Gallotti    2 & \nRobert West    1\nEarly work has found that large language models (LLMs) can generate \npersuasive content. However, evidence on whet"
+  },
+  {
+    "id": "H03",
+    "pages": 11,
+    "heading_score": 1.0,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "fd3d246558353cbf5d6fabb1c5c3a47f4f64434d320ce295b62e6955def6bc38",
+    "first_page_excerpt": "RESEARCH ARTICLE SUMMARY\nFull article and list of \nauthor affiliations:\nhttps://doi.org/10.1126/\nscience.aec8352\nScience 26 March 2026 1348\nARTIFICIAL INTELLIGENCE\nSycophantic AI decreases prosocial intentions  \nand promotes dependence\nMyra Cheng*, Cinoo Lee, Pranav Khadpe, Sunny Yu, Dyllan Han, Dan Jurafsky \nINTRODUCTION:  As artificial intelligence (AI) systems are increas-\ningly used for everyd"
+  },
+  {
+    "id": "H04",
+    "pages": 139,
+    "heading_score": 1.0,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "2d2114214757c365517d93dfb97ec61d1a0e46ab04d53ea0a5c8e26aeefb144a",
+    "first_page_excerpt": "Hackenburg, Kobi, Tappin, Ben M. , Hewitt, Luke, Saunders, Ed, Black, Sid, Lin,\nHause, Fist, Catherine, Margetts, Helen, Rand, David G. & Summerfield,\nChristopher (2025) The levers of political persuasion with conversational artificial\nintelligence. Science, 390 (6777). https://doi.org/10.1126/science.aea3884\nhttps://researchonline.lse.ac.uk/id/eprint/130605/\nVersion: Accepted Version\nLicence: Cre"
+  },
+  {
+    "id": "H05",
+    "pages": 78,
+    "heading_score": 1.0,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "b5ff2aa13d34b9ce0b2a40a1fe99f3c25c0d6b20efee03ee99b21bbdc8eb7f94",
+    "first_page_excerpt": " \n1   \n Title: Durably reducing conspiracy beliefs through dialogues with AI  Authors: Thomas H. Costello12*, Gordon Pennycook3, David G. Rand1.  Affiliations:  1Sloan School of Management, Massachusetts Institute of Technology; Cambridge, USA 5 2Department of Psychology, American University; Washington, D.C., USA 3Department of Psychology, Cornell University; Ithaca, USA *Corresponding author. Em"
+  },
+  {
+    "id": "H06",
+    "pages": 18,
+    "heading_score": 1.0,
+    "evidence": "首页标题区题名关键词匹配通过；实际PDF页数和SHA256通过",
+    "sha256": "5baa4f4b0ec29c10b945bee696929d4e0bee9b57069e8bd682e32e26c466df33",
+    "first_page_excerpt": "RESEARCH ARTICLE\nMaking water knowledge with Artiﬁcial Intelligence: A qualitative\nstudy of expert interviews on water diplomacy\nKyungmee Kim , Abeer S. Ahmad\nReceived: 30 May 2025 / Revised: 1 June 2025 / Accepted: 24 September 2025 / Published online: 14 November 2025\n/C211 The Author(s) 2025\nAbstract Water knowledge, understanding the current and\nfuture availability and needs of water, has been"
+  },
+  {
+    "id": "D01",
+    "format": "HTML",
+    "text_chars": 17980,
+    "sha256": "84a9904a17f9795b04b869d33a82c143c12778aaa448c7128d82e2866339fdf5",
+    "evidence": "机构原始页面及正文TXT；题名、正文长度核对通过"
+  },
+  {
+    "id": "D02",
+    "format": "HTML",
+    "text_chars": 14524,
+    "sha256": "c59e3005089e3e4f315d5fba9945ce0a7321494233f1f23e0a484aa90c0617d6",
+    "evidence": "机构原始页面及正文TXT；题名、正文长度核对通过"
+  }
+]

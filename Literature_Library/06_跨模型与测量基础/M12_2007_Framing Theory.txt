@@ -1,0 +1,1575 @@
+本文件为PDF自动提取文本，仅供检索；排版、图表和页码请以PDF为准。
+Framing Theory
+
+        1 Apr 2007 12:18                                                                       AR      ANRV312-PL10-06.tex        XMLPublishSM (2004/02/24)    P1: OKZ
+                                                                                                                                                     10.1146/annurev.polisci.10.072805.103054
+
+
+
+
+                                                                                                                                                          Annu. Rev. Polit. Sci. 2007. 10:103–26
+                                                                                                                                                 doi: 10.1146/annurev.polisci.10.072805.103054
+                                                                                                                                       Copyright 
+                                                                                                                                                 c 2007 by Annual Reviews. All rights reserved
+
+
+
+
+                                                                                       FRAMING THEORY
+                                                                                            Dennis Chong and James N. Druckman
+                                                                                            Department of Political Science, Northwestern University, Evanston, Illinois 60208;
+                                                                                            email: dchong@northwestern.edu; druckman@northwestern.edu
+Annu. Rev. Polit. Sci. 2007.10:103-126. Downloaded from arjournals.annualreviews.org
+
+
+
+
+                                                                                            Key Words framing, public opinion, political preferences, political
+                                                                                             communication, content analysis
+                                                                                            ■ Abstract We review the meaning of the concept of framing, approaches to study-
+                                                                                            ing framing, and the effects of framing on public opinion. After defining framing and
+                 by 24.12.195.203 on 05/08/07. For personal use only.
+
+
+
+
+                                                                                            framing effects, we articulate a method for identifying frames in communication and
+                                                                                            a psychological model for understanding how such frames affect public opinion. We
+                                                                                            also discuss the relationship between framing and priming, outline future research
+                                                                                            directions, and describe the normative implications of framing.
+
+                                                                                       INTRODUCTION
+                                                                                            The economist Albert Hirschman once noted that having opinions might be es-
+                                                                                            sential to a person’s well being. A person should hold opinions of his own and
+                                                                                            cannot have self-respect without opinions that define and identify him. Hirschman
+                                                                                            (1989, p. 76) wrote, “Vacillation, indifference, or weakly held opinions have long
+                                                                                            met with utmost contempt, while approval and admiration have been bestowed on
+                                                                                            firmness, fullness, and articulation of opinion.”
+                                                                                                Despite Hirschman’s ideal of firm, full, articulate opinions, from the earliest
+                                                                                            days of public opinion research, citizens have been found to have low-quality
+                                                                                            opinions, if they have opinions at all. In the public opinion literature, high-quality
+                                                                                            opinions are usually defined as being stable, consistent, informed, and connected
+                                                                                            to abstract principles and values. The general conclusion among scholars is that
+                                                                                            such opinions are rare in the mass public (e.g., Converse 1964, Zaller 1992).
+                                                                                                Early studies of mass public opinion conducted in the 1950s and 1960s raised se-
+                                                                                            rious doubts about the competence of citizens to participate in political affairs. On
+                                                                                            the whole, citizens were woefully uninformed about the institutions of American
+                                                                                            government, political office holders, and contemporary political issues. Their views
+                                                                                            on issues were superficial and unconnected to overarching principles such as lib-
+                                                                                            eralism or conservatism. When asked the same policy questions at different points
+                                                                                            in time, their answers displayed little stability. Their support for basic democratic
+                                                                                            values was fragile. Individuals endorsed democratic values such as free speech
+                                                                                            and free association when these principles were stated in abstract honorific terms,
+                                                                                            but they failed to defend the application of these rights in specific circumstances.
+
+                                                                                       1094-2939/07/0615-0103$20.00                                                                       103
+        1 Apr 2007 12:18                                                                             AR     ANRV312-PL10-06.tex          XMLPublishSM (2004/02/24)    P1: OKZ
+
+
+
+
+                                                                                       104         CHONG  DRUCKMAN
+
+
+                                                                                             In light of these studies, it was much debated whether a sizable proportion of the
+                                                                                             general public could even be said to hold meaningful attitudes. From their haphaz-
+                                                                                             ard responses to survey questions, it sometimes appeared that respondents chose
+                                                                                             their answers based on a flip of a coin.
+                                                                                                 What is particularly vexing in public opinion research is a phenomenon known
+                                                                                             as “framing effects.” These occur when (often small) changes in the presentation of
+                                                                                             an issue or an event produce (sometimes large) changes of opinion. For example,
+                                                                                             when asked whether they would favor or oppose allowing a hate group to hold a
+                                                                                             political rally, 85% of respondents answered in favor if the question was prefaced
+                                                                                             with the suggestion, “Given the importance of free speech,” whereas only 45%
+Annu. Rev. Polit. Sci. 2007.10:103-126. Downloaded from arjournals.annualreviews.org
+
+
+
+
+                                                                                             were in favor when the question was prefaced with the phrase, “Given the risk of
+                                                                                             violence” (Sniderman & Theriault 2004).1 Similarly, about 20% of the American
+                                                                                             public believes that too little is being spent on “welfare,” but about 65% says
+                                                                                             that too little is being spent on “assistance to the poor” (Rasinski 1989, p. 391).
+                                                                                             In these and many other cases, the alternative phrasings of the same basic issue
+                 by 24.12.195.203 on 05/08/07. For personal use only.
+
+
+
+
+                                                                                             significantly alter its meaning to respondents, even when the change in connotation
+                                                                                             is not immediately identifiable by the researcher (Zaller 1992, p. 34).
+                                                                                                 Some have interpreted such dramatic fluctuations to indicate that opinions are
+                                                                                             too superficial to be indicative of public preferences. Either the public has no
+                                                                                             attitudes on many political issues, or it holds so many fragmentary and conflicting
+                                                                                             attitudes that it cannot reconcile or resolve them. If opinions can be arbitrarily
+                                                                                             manipulated by how issues are framed, there can be no legitimate representation
+                                                                                             of public interests (Riker 1986, Zaller 1992, Entman 1993, Bartels 2003).
+                                                                                                 In this review, we situate framing within the broader democratic process that
+                                                                                             links politicians and other opinion leaders to the public, primarily through the mass
+                                                                                             media. We examine the psychological mechanisms behind framing effects and the
+                                                                                             individual-level mediators and moderators of framing. Beyond the individual, we
+                                                                                             explore the social and political processes that have the potential to reduce framing
+                                                                                             effects. We also clarify conceptual issues in the study of framing and identify
+                                                                                             promising areas for future research. Although we focus most heavily on framing
+                                                                                             effects in public opinion toward policy issues, we suggest how the theoretical ideas
+                                                                                             developed in this context can be applied more generally to related concepts such as
+                                                                                             priming. Finally, we offer normative assessments of the consequences—negative
+                                                                                             or positive—of framing effects for the operation of a democratic political system.
+
+                                                                                       WHAT IS FRAMING?
+                                                                                             The major premise of framing theory is that an issue can be viewed from a variety
+                                                                                             of perspectives and be construed as having implications for multiple values or
+                                                                                             considerations. Framing refers to the process by which people develop a particular
+                                                                                             conceptualization of an issue or reorient their thinking about an issue.
+
+                                                                                             1
+                                                                                                 The respondents in this example were self-identified egalitarians.
+        1 Apr 2007 12:18                                                                  AR      ANRV312-PL10-06.tex         XMLPublishSM (2004/02/24)      P1: OKZ
+
+
+
+
+                                                                                                                                                 FRAMING THEORY              105
+
+
+                                                                                           A more precise definition of framing starts with a conventional expectancy
+                                                                                       value model of an individual’s attitude (e.g., Ajzen & Fishbein 1980, Nelson et
+                                                                                       al. 1997b). An attitude toward an object, in this view, is the weighted          sum of a
+                                                                                       series of evaluative beliefs about that object. Specifically, Attitude =           vi ∗ wi,
+                                                                                       where
+                                                                                              v i is the evaluation of the object on attribute i, and w i is the salience weight
+                                                                                       ( wi = 1) associated with that attribute.
+                                                                                           For example, one’s overall attitude, A, toward a new housing development might
+                                                                                       consist of a combination of negative and positive evaluations, vi, of the project on
+                                                                                       different dimensions i. An individual may believe that the project will favor the
+                                                                                       economy (i = 1) but harm the environment (i = 2). Assuming this individual places
+Annu. Rev. Polit. Sci. 2007.10:103-126. Downloaded from arjournals.annualreviews.org
+
+
+
+
+                                                                                       a positive value on both the economy and the environment, then v1 is positive and
+                                                                                       v2 is negative, and his attitude toward the project will depend on the relative
+                                                                                       magnitudes of v1 and v2 discounted by the relative weights (w1 and w2 ) assigned
+                                                                                       to each attribute (Nelson & Oxley 1999).
+                                                                                           The conventional expectancy model is an idealized conception of an attitude as
+                 by 24.12.195.203 on 05/08/07. For personal use only.
+
+
+
+
+                                                                                       a summary of a definable set of beliefs that an individual holds about a subject.
+                                                                                       In practice, an individual may have only vague notions on many political topics
+                                                                                       and may not have developed overall evaluations that could be called attitudes.
+                                                                                       He or she might express a few considerations that came to mind in response to a
+                                                                                       survey question but be unable to determine their relative importance or to aggregate
+                                                                                       them into a summary score. In such cases, the survey question at best elicits an
+                                                                                       imperfect representation of a person’s feelings based on the subset of beliefs that
+                                                                                       are accessible at that moment.
+                                                                                           Bearing in mind this caveat, the expectancy value model’s general assump-
+                                                                                       tion that an individual can place different emphases on various considerations
+                                                                                       about a subject is a useful abstraction for discussing the psychology of framing.
+                                                                                       This conceptualization applies to any object of evaluation; for instance, a voter’s
+                                                                                       attitude toward a candidate may depend on whether the voter favors the candi-
+                                                                                       date on dimensions that are of varying importance (e.g., the voter may view eco-
+                                                                                       nomic issues as more important than foreign affairs and personality) (see Enelow
+                                                                                       & Hinich 1984; cf. Jones 1994). Or the extent to which an individual assigns
+                                                                                       blame to a welfare recipient may depend on evaluations of the recipient’s per-
+                                                                                       sonal efforts to stay off of public assistance (dimension 1) and the situational
+                                                                                       factors that the recipient has faced (dimension 2). Similarly, one’s tolerance for
+                                                                                       a hate group rally may hinge on the perceived consequences of the rally for
+                                                                                       free speech, public safety, and other values, with each value receiving a differ-
+                                                                                       ent weight. If only one value dimension matters, the individual places all of the
+                                                                                       weight (wi = 1) on that dimension in forming his attitude. Alternatively, without
+                                                                                       loss of generality, we can think of i as a dimension (Riker 1990), a consider-
+                                                                                       ation (Zaller 1992), a value (Sniderman 1993), or a belief (Ajzen & Fishbein
+                                                                                       1980).
+                                                                                           The set of dimensions that affect an individual’s evaluation constitute an indi-
+                                                                                       vidual’s “frame in thought.” For example, if an individual believes that free speech
+                                                                                       dominates all other considerations in deciding whether a hate group has the right
+        1 Apr 2007 12:18                                                                         AR      ANRV312-PL10-06.tex        XMLPublishSM (2004/02/24)    P1: OKZ
+
+
+
+
+                                                                                       106      CHONG  DRUCKMAN
+
+
+                                                                                             to rally, that individual’s frame in thought is free speech. If, instead, he or she
+                                                                                             gives consideration to free speech, public safety, and the effect of the rally on the
+                                                                                             community’s reputation, then his or her frame in thought consists of this mix of
+                                                                                             considerations.
+                                                                                                 Obviously, one’s frame in thought can have a marked impact on one’s overall
+                                                                                             opinion (e.g., a free speech frame inclines one to support the group’s right to
+                                                                                             rally). For this reason, politicians attempt to mobilize voters behind their policies
+                                                                                             by encouraging them to think about those policies along particular lines. This is
+                                                                                             accomplished by highlighting certain features of the policy, such as its likely effects
+                                                                                             or its relationship to important values (e.g., Jacoby 2000, p. 751). In so doing,
+Annu. Rev. Polit. Sci. 2007.10:103-126. Downloaded from arjournals.annualreviews.org
+
+
+
+
+                                                                                             the speaker is invoking a “frame in communication” (on the distinction between
+                                                                                             frames in thought and frames in communication, also see Kinder & Sanders 1996,
+                                                                                             Scheufele 1999, Druckman 2001c, Brewer 2003). For example, if a speaker states
+                                                                                             that a hate group’s planned rally is “a free speech issue,” then he or she invokes a
+                                                                                             free speech frame. Straightforward guidelines on how to identify (or even define
+                 by 24.12.195.203 on 05/08/07. For personal use only.
+
+
+
+
+                                                                                             more precisely) a frame in communication do not exist. In the next section, we
+                                                                                             review extant work on identifying frames in communication, and we put forth an
+                                                                                             inductive approach to gathering data.
+
+
+                                                                                       Frames in Communication
+                                                                                             A frame in a communication “organizes everyday reality” (Tuchman 1978, p. 193)
+                                                                                             by providing “meaning to an unfolding strip of events” (Gamson & Modigliani
+                                                                                             1987, p. 143; 1989) and promoting “particular definitions and interpretations of
+                                                                                             political issues” (Shah et al. 2002, p. 343). Over the past decade, the identification
+                                                                                             of frames in communication—that is, the key considerations emphasized in a
+                                                                                             speech act—has become a virtual cottage industry. Scholars track frames to identify
+                                                                                             trends in issue definitions, compare coverage across media outlets, and examine
+                                                                                             variations across types of media (e.g., Semetko & Valkenburg 2000). Although
+                                                                                             uniform measurement standards do not exist, the most compelling studies tend to
+                                                                                             take the following steps.
+                                                                                                First, an issue or event is identified (Entman 2004, pp. 23–24). A frame in
+                                                                                             communication can be defined only in relation to a specific issue, event, or political
+                                                                                             actor. For example, the frames for social security reform differ from the frames for
+                                                                                             immigration reform. Even the same issue at different times may invoke alternative
+                                                                                             frames (e.g., the frames used for social security reform in 1997–2000 are not
+                                                                                             identical to those invoked in 2003–2005).
+                                                                                                Second, if the goal is to understand how frames in communication affect public
+                                                                                             opinion, then the researcher needs to isolate a specific attitude. For example, one
+                                                                                             could focus on overall attitudes toward welfare reform or, alternatively, on attribu-
+                                                                                             tions of reasons why people are on welfare. Different frames may underlie each of
+                                                                                             these attitudes. The frame defining attitudes toward welfare reform may include
+                                                                                             considerations of economic costs, humanitarianism, and individualism (Feldman
+                                                                                             & Zaller 1992). Causal attributions relevant to welfare might employ an episodic
+        1 Apr 2007 12:18                                                                  AR      ANRV312-PL10-06.tex          XMLPublishSM (2004/02/24)       P1: OKZ
+
+
+
+
+                                                                                                                                                   FRAMING THEORY               107
+
+
+                                                                                       frame such as an individual’s work ethic or a thematic frame such as the economic
+                                                                                       opportunities available in society (Iyengar 1991).2
+                                                                                           Third, an initial set of frames for an issue is identified inductively to create
+                                                                                       a coding scheme. Prior work in the academic and popular literatures serves as a
+                                                                                       good starting point; for example, the book Framing the Social Security Debate
+                                                                                       (Arnold et al. 1998) would be an obvious source for gathering contemporary
+                                                                                       social security frames. Gamson & Modigliani (1987, p. 144; 1989, p. 7) sug-
+                                                                                       gest going further by examining the frames produced by various elite actors and
+                                                                                       organizations on both sides of the issue in court opinions and briefs, editorial
+                                                                                       writings, and the publications of interest groups or social movements (also see,
+Annu. Rev. Polit. Sci. 2007.10:103-126. Downloaded from arjournals.annualreviews.org
+
+
+
+
+                                                                                       e.g., Brewer 2003). This provides the set of “culturally available frames” in elite
+                                                                                       discourse (Gamson & Modigliani 1987, p. 144). These elite sources can be com-
+                                                                                       plemented by asking samples of individuals to record the considerations that come
+                                                                                       to mind on a given issue, using open-ended questions (see Chong & Druckman
+                                                                                       2007 for discussion). Taking these steps in our own analysis of proposals for re-
+                 by 24.12.195.203 on 05/08/07. For personal use only.
+
+
+
+
+                                                                                       forming social security between 1997 and 2000, we identified an initial set of
+                                                                                       seven frames that emphasized the following themes: the magnitude of the prob-
+                                                                                       lem, the beneficiaries and victims of change, the goal of ensuring security in old
+                                                                                       age, the value of providing individual choice, the projected outcomes of reform,
+                                                                                       the partisan political strategies on the issue, and the importance of an egalitarian
+                                                                                       solution.
+                                                                                           Fourth, once an initial set of frames is identified, the next step is to select sources
+                                                                                       for content analysis. These might include the aforementioned advocacy communi-
+                                                                                       cations (e.g., from social movements), but more typically, scholars analyze mass
+                                                                                       media sources including major newspapers, magazines, web sites, and television
+                                                                                       broadcasts. The choice of specific news outlets depends on the researcher’s intent—
+                                                                                       for example, to capture general trends in coverage or to compare specific types of
+                                                                                       coverage across media. Articles or stories are identified via searches (such as key
+                                                                                       word searches on electronic data bases) and typically serve as the unit of analysis
+                                                                                       (cf. Tankard 2001, p. 101; Dimitrova et al. 2005). Coders then analyze a sample,
+                                                                                       identifying the presence or absence of one of the predefined frames in the story or
+                                                                                       article.
+
+                                                                                       2
+                                                                                         de Vreese et al. (2001, pp. 108–9) distinguishes issue-specific and generic frames. The
+                                                                                       former pertain to “specific topics or news events [and the latter are] broadly applicable to
+                                                                                       a range of different news topics, some even over time, and potentially, in different cul-
+                                                                                       tural contexts.” Examples of generic frames include episodic and thematic frames, conflict
+                                                                                       frames, or strategic frames. We agree that some frames apply across issues and are more
+                                                                                       general descriptions of news; however, we prefer to link a frame explicitly to an issue and
+                                                                                       an evaluation (also see Callaghan & Schnell 2004, Entman 2004). This obviates the need
+                                                                                       to specify how general a frame must be in order to be classified as generic. For example, is
+                                                                                       an economic frame a generic frame? de Vreese et al. (2001) suggest it is, but it also serves
+                                                                                       as a specific issue frame for welfare reform according to Shen & Edwards (2005). Also, if
+                                                                                       there is a feature in the communication such as conflict that is not connected to an issue and
+                                                                                       evaluation, we suggest using a term other than frame (Entman suggests “script”).
+        1 Apr 2007 12:18                                                                         AR     ANRV312-PL10-06.tex        XMLPublishSM (2004/02/24)   P1: OKZ
+
+
+
+
+                                                                                       108      CHONG  DRUCKMAN
+
+
+                                                                                                 Prior to coding, it is necessary to specify how any particular frame can be
+                                                                                             identified. When researchers rely on computer programs to analyze large volumes
+                                                                                             of text, they must identify the universe of words that mark the presence of a frame.
+                                                                                             For example, in his study of public attitudes toward government efforts to promote
+                                                                                             racial equality, Kellstedt (2003) tracked the use of two media frames over time:
+                                                                                             individualism and egalitarianism. He created a dictionary of words and phrases
+                                                                                             that indicated the presence of each of these frames (e.g., mentions of “fairness”
+                                                                                             and “equal protection under the law” denoted the egalitarianism frame) and then
+                                                                                             used content-analysis software to analyze more than 4000 Newsweek articles and
+                                                                                             2500 New York Times articles. Shah et al. (2002) used a similar approach to examine
+Annu. Rev. Polit. Sci. 2007.10:103-126. Downloaded from arjournals.annualreviews.org
+
+
+
+
+                                                                                             how the Clinton-Lewinsky scandal was framed in nearly 20,000 news articles (see
+                                                                                             Simon & Xenos 2004 for a proposed computer-based approach).
+                                                                                                 In contrast to machine coding, manual or human coding guided by prototypes
+                                                                                             instead of exact terminology allows greater flexibility to discover new frames that
+                                                                                             were not identified in the initial coding scheme. For example, in our analysis of
+                 by 24.12.195.203 on 05/08/07. For personal use only.
+
+
+
+
+                                                                                             social security reform frames from 1997 to 2000 in The New York Times, coders
+                                                                                             regularly encountered discussion of how evaluations of reform proposals depend
+                                                                                             on uncertain future forecasts; therefore, we added a forecasting frame to the initial
+                                                                                             set of seven frames described above. This added flexibility, however, comes with
+                                                                                             a potential cost of lower reliability and smaller samples. In general, checks for
+                                                                                             intercoder reliability are imperative when manual coding is used.
+                                                                                                 There are copious examples of research on frames in communication using
+                                                                                             approaches similar to those outlined above, including analyses of affirmative action
+                                                                                             (e.g., Gamson & Modigliani 1987), support for war (e.g., Dimitrova et al. 2005),
+                                                                                             opinions about stem cell research (Nisbet et al. 2003, p. 48), cynicism toward
+                                                                                             government (Brewer & Sigelman 2002), and attributions of responsibility for the
+                                                                                             obesity epidemic (Lawrence 2004). These analyses provide insight into cultural
+                                                                                             shifts (Schudson 1995, Richardson & Lancendorfer 2004, p. 75), media biases
+                                                                                             (Tankard 2001), public understanding (Berinsky & Kinder 2006), and opinion
+                                                                                             formation. They also demonstrate that framing is best conceptualized as a process
+                                                                                             that evolves over time. The dimension of time allows us to separate new issues
+                                                                                             from previously debated issues that are familiar to those who pay attention to
+                                                                                             politics. Although new issues are often variants of other issues that have been in
+                                                                                             the news, they are distinguished by the absence of general agreement about how
+                                                                                             to construe them, whereas older issues have a defined structure and elicit more
+                                                                                             routine considerations.
+                                                                                                 “Traditional” issues can therefore potentially be transformed into “new” issues
+                                                                                             by reframing. In the 1980s and 1990s, for example, proponents of hate speech
+                                                                                             regulations on college campuses made considerable headway by drawing a parallel
+                                                                                             between racial harassment in the university and sexual harassment in the workplace
+                                                                                             (Chong 2006). They argued that without speech code regulations, universities could
+                                                                                             become hostile educational environments in which some students were deprived
+                                                                                             of an equal opportunity to thrive (Delgado 1982, 1991; Matsuda 1989; MacKinnon
+                                                                                             1993). Thus, by arguing that hate speech was not a traditional First Amendment
+        1 Apr 2007 12:18                                                                      AR     ANRV312-PL10-06.tex        XMLPublishSM (2004/02/24)    P1: OKZ
+
+
+
+
+                                                                                                                                                  FRAMING THEORY             109
+
+
+                                                                                           issue, they shifted the value dimension corresponding to the issue and reframed
+                                                                                           the debate in terms of whether hate speech violated the civil rights of women and
+                                                                                           racial and ethnic minorities.
+
+                                                                                       Effects of Frames in Communication on Individuals
+                                                                                           Frames in communication matter—that is, they affect the attitudes and behav-
+                                                                                           iors of their audiences. Politicians often adopt communication frames used by
+                                                                                           other politicians, the media, or citizens (e.g., Riker 1996, Edwards & Wood 1999,
+                                                                                           Druckman et al. 2004). Likewise, media frames sometimes mimic those used by
+Annu. Rev. Polit. Sci. 2007.10:103-126. Downloaded from arjournals.annualreviews.org
+
+
+
+
+                                                                                           politicians, social activists, other media outlets, or citizens (e.g., Scheufele 1999,
+                                                                                           p. 109; Entman 2004; Carragee & Roefs 2004; Fridkin & Kenney 2005). and,
+                                                                                           not surprisingly, citizens regularly adopt frames they learn in discussions with
+                                                                                           other citizens (e.g., Gamson 1992, Druckman & Nelson 2003, Walsh 2003). The
+                                                                                           bulk of attention in the political science and communications literatures, however,
+                 by 24.12.195.203 on 05/08/07. For personal use only.
+
+
+
+
+                                                                                           has been on how frames in the communications of elites (e.g., politicians, media
+                                                                                           outlets, interest groups) influence citizens’ frames and attitudes. This process is
+                                                                                           typically called a framing effect.
+                                                                                              There is disagreement about the best measure to use to gauge the magnitude of
+                                                                                           framing effects. One standard is the variance in preferences produced by alterna-
+                                                                                           tive frames on an issue. For example, in assessing tolerance of a hate group rally,
+                                                                                           a comparison would be drawn between respondents who received a free speech
+                                                                                           frame and those who received a public safety frame. A second standard is the
+                                                                                           variation in the correlation between alternative framed preferences and personal
+                                                                                           values relevant to the issue, such as freedom versus law and order on the hate
+                                                                                           group issue (Sniderman & Theriault 2004). This standard assumes that a partic-
+                                                                                           ular value dimension represents one’s “true” preference on the issue, so that low
+                                                                                           correlations indicate large framing effects. A third standard involves comparing
+                                                                                           treatment groups to a control group that receives basic descriptive information
+                                                                                           about the issue without being exposed to any frames (Druckman 2001a). Each
+                                                                                           standard can contribute useful information about the effect of a frame, and the
+                                                                                           “best” standard for any particular study may depend on that study’s assumptions
+                                                                                           and purpose.
+                                                                                              Using one or more of these standards, scholars have demonstrated framing ef-
+                                                                                           fects with experiments, surveys, and case studies across a range of issues including
+                                                                                           government spending (Jacoby 2000), campaign finance (Grant & Rudolph 2003),
+                                                                                           support for the Supreme Court (Nicholson & Howard 2003), evaluations of for-
+                                                                                           eign nations (Brewer et al. 2003), and many others. Some studies focus on how
+                                                                                           different communication frames bias the weight individuals give to various con-
+                                                                                           siderations (Druckman 2001c). Other studies examine how different frames alter
+                                                                                           overall opinions without explicitly tracing changes in underlying considerations.
+                                                                                              For example, Kinder & Sanders (1990) show that an “undeserved advantage”
+                                                                                           frame increases the salience of racial resentments in white respondents’ evaluations
+                                                                                           of affirmative action. A “reverse discrimination” frame increases their concern for
+        1 Apr 2007 12:18                                                                         AR      ANRV312-PL10-06.tex        XMLPublishSM (2004/02/24)    P1: OKZ
+
+
+
+
+                                                                                       110      CHONG  DRUCKMAN
+
+
+                                                                                             group interests, such as their educational and economic opportunities (also see,
+                                                                                             e.g., Kinder & Sanders 1996, Nelson & Kinder 1996). In contrast, Sniderman &
+                                                                                             Theriault (2004) show that attitudes toward government spending for the poor
+                                                                                             depend on representations of the consequences of such policies, but they do not
+                                                                                             directly measure changes in respondents’ considerations (also see, e.g., Haider-
+                                                                                             Markel & Joslyn 2001). Despite differences in focus, all such studies assume the
+                                                                                             same model of attitudes outlined above, in which framing changes attitudes by
+                                                                                             ostensibly altering the underlying considerations used in one’s evaluation (e.g.,
+                                                                                             Berelson et al. 1954, pp. 253–73; Nelson et al. 1997b; Scheufele 1999, p. 117).
+Annu. Rev. Polit. Sci. 2007.10:103-126. Downloaded from arjournals.annualreviews.org
+
+
+
+
+                                                                                       HOW FRAMING EFFECTS WORK
+                                                                                       Mediational Processes
+                                                                                             Over the past decade, researchers have increasingly sought to understand the psy-
+                 by 24.12.195.203 on 05/08/07. For personal use only.
+
+
+
+
+                                                                                             chological processes that explain framing effects (e.g., Iyengar 1991, Zaller 1992,
+                                                                                             Cappella & Jamieson 1997, Nelson et al. 1997a,b, Price & Tewksbury 1997, Gross
+                                                                                             2000, Brewer 2001). Chong & Druckman (2007) attempt to integrate this work by
+                                                                                             tracing the psychological mechanisms behind framing effects.
+                                                                                                 In order for a framing effect to occur, a given consideration—say free speech
+                                                                                             in the evaluation of a hate group’s right to rally—needs to be stored in memory to
+                                                                                             be available for retrieval and use. If, for example, an individual fails to understand
+                                                                                             the concept of free speech, then free speech is not an available consideration and
+                                                                                             the individual will not be affected by a free speech frame.
+                                                                                                 In addition to being available, the consideration must be accessible, meaning
+                                                                                             its activation potential must exceed a certain threshold so that the consideration
+                                                                                             is retrieved from long-term memory. One way in which accessibility increases
+                                                                                             is through regular or recent exposure to a communication frame emphasizing the
+                                                                                             consideration. Considerations become accessible through a passive or unconscious
+                                                                                             process.
+                                                                                                 Individuals sometimes base their opinions on available and accessible consid-
+                                                                                             erations without conscious deliberation (Higgins 1996). Other times, an individual
+                                                                                             will consciously evaluate the applicability of accessible considerations (i.e., acces-
+                                                                                             sibility will not be a sufficient condition for influence). The perceived applicability
+                                                                                             of a given communication frame, and thus the likelihood it will affect an individ-
+                                                                                             ual’s opinion, increases with perceptions of its strength or relevance (Eagly &
+                                                                                             Chaiken 1993, p. 330).
+                                                                                                 Evaluations of applicability occur if one of the following two conditions is met.
+                                                                                             First, if individuals are sufficiently motivated, they will weigh competing consid-
+                                                                                             erations that either come to mind spontaneously or are suggested by a frame (e.g.,
+                                                                                             Stapel et al. 1998). Second, all individuals will become more motivated to engage
+                                                                                             in conscious evaluation when they are exposed to opposing considerations. Thus,
+                                                                                             either personal motivation or the competitive context will stimulate individuals
+                                                                                             to deliberate over alternatives in order to reconcile conflicting considerations (see
+        1 Apr 2007 12:18                                                                      AR     ANRV312-PL10-06.tex        XMLPublishSM (2004/02/24)    P1: OKZ
+
+
+
+
+                                                                                                                                                  FRAMING THEORY             111
+
+
+                                                                                           Druckman 2004, Kuklinski et al. 2001 for discussion of the relevant psychological
+                                                                                           literature).
+                                                                                               In sum, people draw their opinions from the set of available beliefs stored in
+                                                                                           memory. Only some beliefs become accessible at a given moment. Out of the set of
+                                                                                           accessible beliefs, only some are strong enough to be judged relevant or applicable
+                                                                                           to the subject at hand. Framing can work on all three levels, by making new beliefs
+                                                                                           available about an issue, making certain available beliefs accessible, or making
+                                                                                           beliefs applicable or “strong” in people’s evaluations.
+                                                                                               Despite the connotation of these adjectives, there is nothing inherently superior
+                                                                                           about an applicable or strong frame other than its appeal to audiences. Strong
+Annu. Rev. Polit. Sci. 2007.10:103-126. Downloaded from arjournals.annualreviews.org
+
+
+
+
+                                                                                           frames should not be confused with intellectually or morally superior arguments.
+                                                                                           They can be built around exaggerations and outright lies playing on the fears
+                                                                                           and prejudices of the public. Strong frames often rest on symbols, endorsements,
+                                                                                           and links to partisanship and ideology, and may be effective in shaping opinions
+                                                                                           through heuristics rather than direct information about the substance of a policy.
+                 by 24.12.195.203 on 05/08/07. For personal use only.
+
+
+
+
+                                                                                           Indeed, it is troubling when the rationale for policies is built around frames only
+                                                                                           because they are known to resonate with the public and not because they address
+                                                                                           central features of the issue. The strength of arguments in political debate and their
+                                                                                           fairness and relevance as arguments must be judged separately. In the area of civil
+                                                                                           liberties, constitutional frames that invoke Supreme Court rulings have been found
+                                                                                           to hold disproportionate influence over individual attitudes (Chong 1993). Such
+                                                                                           confirmation of the power of legal norms to guide opinions is comforting to those
+                                                                                           who believe in the wisdom of the Court or in the rule of law. However, we can also
+                                                                                           cite countless examples of the successful use of frames that have been designed
+                                                                                           to rally people around racism, xenophobia, ideological extremism, and other less
+                                                                                           ennobling values (e.g., Lipset & Raab 1970, Williamson 1986).
+                                                                                               Chong & Druckman (2007) detail how individuals evaluate the strength of a
+                                                                                           frame. The important point here is that framing effects depend on a mix of factors
+                                                                                           including the strength and repetition of the frame, the competitive environment,
+                                                                                           and individual motivations. Additionally, under certain conditions, the aggregate
+                                                                                           impact of a mix of frames may differ from the sum of their individual effects.
+
+
+                                                                                       Moderators
+                                                                                           A number of studies identify moderator variables that condition framing effects.
+                                                                                           Perhaps the clearest limit on framing effects is provided by individual predispo-
+                                                                                           sitions such as values (e.g., Druckman 2001c, p. 241; Haider-Markel & Joslyn
+                                                                                           2001; Edwards 2003; Barker 2005; Lau & Schlesinger 2005; Shen & Edwards
+                                                                                           2005). For example, Brewer (2001) shows that prior opinions about gay rights
+                                                                                           fundamentally shape individuals’ reactions to and evaluations of alternative gay
+                                                                                           rights frames—individuals who have strong values are less amenable to frames
+                                                                                           that contradict those values (also see Gross 2000, Brewer 2003).
+                                                                                               In general, strong predispositions reduce framing effects by increasing one’s
+                                                                                           resistance to disconfirming information. Nonetheless, even those with firm values
+        1 Apr 2007 12:18                                                                         AR     ANRV312-PL10-06.tex        XMLPublishSM (2004/02/24)   P1: OKZ
+
+
+
+
+                                                                                       112      CHONG  DRUCKMAN
+
+
+                                                                                             are susceptible to framing on new issues that have yet to acquire a settled interpre-
+                                                                                             tation. Elite frames aim to appeal to the partisan and ideological leanings of the
+                                                                                             audience. President Bush’s argument that the current social security program is un-
+                                                                                             fair to minorities is an example of an argument designed to connect a conservative
+                                                                                             Republican policy to a liberal value in order to expand support for the policy. A
+                                                                                             committed liberal Democrat who believes that government policy should reduce
+                                                                                             racial inequality may experience cross-pressures between his belief in equality and
+                                                                                             his partisanship.
+                                                                                                 Studies of another individual-level moderator—knowledge—have produced
+                                                                                             conflicting results. Some framing studies find stronger framing effects on less
+Annu. Rev. Polit. Sci. 2007.10:103-126. Downloaded from arjournals.annualreviews.org
+
+
+
+
+                                                                                             knowledgeable individuals (e.g., Kinder & Sanders 1990, Haider-Markel & Joslyn
+                                                                                             2001), whereas others report the opposite (or Nelson et al. 1997b, Slothuus 2005;
+                                                                                             also see Miller & Krosnick 2000). Druckman & Nelson (2003) argue that the
+                                                                                             conflicting results stem, in part, from a failure to control for prior attitudes, as
+                                                                                             knowledgeable individuals tend to possess entrenched priors that, as mentioned,
+                 by 24.12.195.203 on 05/08/07. For personal use only.
+
+
+
+
+                                                                                             reduce susceptibility to framing. After controlling for prior attitudes, knowledge
+                                                                                             enhances framing effects because it increases the likelihood that the considerations
+                                                                                             emphasized in a frame will be available or comprehensible to the individual.
+                                                                                                 Other moderators influence the perceived applicability or strength of a frame—
+                                                                                             for example, frames delivered by credible sources are more likely to shift opinions
+                                                                                             (Druckman 2001b), as are frames that invoke longstanding cultural values (Gamson
+                                                                                             & Modigliani 1987, pp. 169–70; Chong 2000). The success of any given attempt
+                                                                                             to frame an issue also depends on whether other information is available to the
+                                                                                             audience. For example, Price & Na (2000) show that access to deliberations on a
+                                                                                             particular issue (e.g., mayoral control of public schools) prior to exposure to an
+                                                                                             elite communication frame limits the frame’s impact, whereas Druckman & Nelson
+                                                                                             (2003) demonstrate that conversations with people who hold varying opinions, after
+                                                                                             exposure to a media frame, also mute the effect of the communication.
+
+                                                                                       The Effects of Competition
+                                                                                             In a provocative and influential study, Sniderman & Theriault (2004) argue that
+                                                                                             in many political contexts, people are not exposed to just one frame of an issue
+                                                                                             or problem, as in the conventional framing experiment (e.g., a free speech frame
+                                                                                             or a public safety frame); rather, they are exposed to competing frames. These
+                                                                                             authors argue that when citizens receive different views of an issue, they choose
+                                                                                             the alternative that is consistent with their values or principles. “In short, being
+                                                                                             exposed to opposing sides of an argument increases consistency among decisions
+                                                                                             taken on specific policies and underlying principles” (Sniderman & Theriault 2004,
+                                                                                             p. 147; also see Brewer & Gross 2005).
+                                                                                                To test this claim, Sniderman & Theriault examine issues that are (a) of major
+                                                                                             importance, (b) longstanding, and (c) competitively contested. Examples include
+                                                                                             government spending on the poor and free speech for political extremists. The
+                                                                                             authors show, for example, that egalitarians are more likely to support government
+        1 Apr 2007 12:18                                                                  AR     ANRV312-PL10-06.tex        XMLPublishSM (2004/02/24)    P1: OKZ
+
+
+
+
+                                                                                                                                              FRAMING THEORY             113
+
+
+                                                                                       spending, and economic growth advocates are more likely to oppose spending,
+                                                                                       when they receive a dual message than when they receive a one-sided message
+                                                                                       that is contrary to their values. Those who are most knowledgeable are most likely
+                                                                                       to express a preference on the issue that is consistent with their values.
+                                                                                          However, we suspect these results apply only when individual preferences on
+                                                                                       an issue are anchored by a core value dimension, such as freedom versus social
+                                                                                       order on civil liberties issues or individualism versus egalitarianism on affirmative
+                                                                                       action issues. When an issue is new to the agenda, the public is uncertain of its
+                                                                                       stakes and of how competing positions relate to their values. In the formative stages
+                                                                                       of an issue, opposing sides may each contend that its position is consistent with
+Annu. Rev. Polit. Sci. 2007.10:103-126. Downloaded from arjournals.annualreviews.org
+
+
+
+
+                                                                                       the core values and priorities of the voters it is targeting.
+                                                                                          To elaborate on our earlier example, President Bush promoted his plan to
+                                                                                       overhaul social security by arguing that the current system is unfair to African-
+                                                                                       Americans because they have shorter life expectancies compared to other groups
+                                                                                       and therefore can expect to draw lower total benefits. If egalitarian voters had
+                 by 24.12.195.203 on 05/08/07. For personal use only.
+
+
+
+
+                                                                                       responded favorably to Bush’s egalitarian frame, and ignored the contention of
+                                                                                       Democrats that the Bush plan rewards Wall Street investment firms, they would
+                                                                                       have been acting in accord with their values. But would we say that by doing so,
+                                                                                       they showed immunity to framing effects? It would seem more accurate to con-
+                                                                                       clude on the contrary that the Bush framing strategy had worked to perfection in
+                                                                                       this scenario by appropriating a liberal value for a Republican policy.
+                                                                                          As we have elaborated elsewhere, little is known about the dynamics of fram-
+                                                                                       ing in competitive contexts (Chong & Druckman 2007). We need to study further
+                                                                                       whether competing frames cancel one another and reinforce existing values, push
+                                                                                       people in conflicting directions, or motivate a more careful evaluation of the appli-
+                                                                                       cability of competing alternatives. Our own experimental analysis of competitive
+                                                                                       contexts found that individual preferences are a function of prior values and the rel-
+                                                                                       ative strengths of the competing frames. The participants in our experiment were
+                                                                                       asked to evaluate a local proposal to regulate development and conserve open
+                                                                                       space by creating an urban growth boundary. They were presented with competing
+                                                                                       arguments of varying strength on both sides of the issue. We found that people’s
+                                                                                       preferences on the policy were stabilized by the relative priority they placed on
+                                                                                       protecting the environment versus promoting economic growth. However, individ-
+                                                                                       uals also gauged the relative strengths of alternative frames and were influenced
+                                                                                       to a greater degree by the stronger frame in the debate.
+                                                                                          These results suggest that, in competitive contexts, the strength of the opposition
+                                                                                       frame determines the distance one is pulled away from his or her values even when
+                                                                                       the frame that is congruent with those values is represented in the debate. If frames
+                                                                                       canceled, then individuals who received a congruent frame would agree with that
+                                                                                       frame to the same degree regardless of whether the competing frame was strong
+                                                                                       or weak.
+                                                                                          Our research therefore shows that either side, through the creative use of
+                                                                                       frames, can create alternative home positions for voters. It is generally not the
+                                                                                       case that a campaign can anchor all its supporters unilaterally with a reassuring
+        1 Apr 2007 12:18                                                                         AR      ANRV312-PL10-06.tex       XMLPublishSM (2004/02/24)    P1: OKZ
+
+
+
+
+                                                                                       114      CHONG  DRUCKMAN
+
+
+                                                                                             value-consistent frame. Each side has the potential to draw voters away from its
+                                                                                             opponents using frames for its own position that may also appeal to the other
+                                                                                             side’s voters. Some voters (extreme ideologues and partisans especially) may not
+                                                                                             be movable from one side to the other through framing because they resist dis-
+                                                                                             crepant information or rely heavily on source cues, but most voters may be partially
+                                                                                             susceptible to competing messages.
+
+                                                                                       CONCEPTUAL CLARIFICATIONS
+                                                                                             There is substantial conceptual confusion about types of framing effects and
+Annu. Rev. Polit. Sci. 2007.10:103-126. Downloaded from arjournals.annualreviews.org
+
+
+
+
+                                                                                             the relationship between framing and related concepts. Druckman (2001c, 2004)
+                                                                                             distinguishes between emphasis or issue framing effects—on which we have
+                                                                                             focused—and equivalency or valence framing effects. Equivalency effects occur
+                                                                                             when “different, but logically equivalent, phrases cause individuals to alter their
+                                                                                             preferences” (Tversky & Kahneman 1987). This typically involves “casting the
+                 by 24.12.195.203 on 05/08/07. For personal use only.
+
+
+
+
+                                                                                             same information in either a positive or negative light” (Druckman 2004, p. 671).
+                                                                                                Examples of equivalency communication frames include alternative descrip-
+                                                                                             tions, such as “90% employment” versus “10% unemployment” or “97% fat free”
+                                                                                             versus “3% fat.” These are similar to emphasis or issue communication frames
+                                                                                             insofar as both put the respondent’s focus on specific considerations (e.g., free
+                                                                                             speech or public safety; unemployment or employment). However, equivalency
+                                                                                             frames employ materially identical descriptions (e.g., 90% employment = 10%
+                                                                                             unemployment; from a rationality perspective, the frames should not matter),
+                                                                                             whereas emphasis frames focus on qualitatively different yet potentially relevant
+                                                                                             considerations (e.g., free speech or public safety). Unless increasing free speech
+                                                                                             logically entails reducing public safety, one cannot equate the two types of frames;
+                                                                                             the most that can be claimed is that public discussions of civil liberties issues have
+                                                                                             encouraged perceptions—which we might call “socio-logic”—that there is a direct
+                                                                                             tradeoff between the two values.
+                                                                                                The psychological model we outlined above should apply to both types of effects
+                                                                                             (e.g., compare with Druckman 2004, p. 674); however, in the case of equivalency
+                                                                                             frames, if an individual is motivated to judge their applicability, he or she would
+                                                                                             presumably recognize the equivalence of the two frames and be indifferent between
+                                                                                             them.
+                                                                                                A distinction that generates perhaps even more confusion is between framing
+                                                                                             and priming. When Iyengar & Kinder (1987) introduced the term priming to the
+                                                                                             study of mass communications, they defined it as follows: “By calling attention
+                                                                                             to some matters while ignoring others, television news influences the standards
+                                                                                             by which governments, presidents, policies, and candidates for public office are
+                                                                                             judged. Priming refers to changes in the standards that people use to make political
+                                                                                             evaluations” (p. 63; also see Iyengar et al. 1984). For example, individuals exposed
+                                                                                             to news stories about defense policy tend to base their overall approval of the
+                                                                                             president (or some other political candidate) on their assessment of the president’s
+                                                                                             performance on defense. Thus, if these individuals believe the president does an
+        1 Apr 2007 12:18                                                                   AR     ANRV312-PL10-06.tex           XMLPublishSM (2004/02/24)       P1: OKZ
+
+
+
+
+                                                                                                                                                    FRAMING THEORY               115
+
+
+                                                                                       excellent (or poor) job on defense, they will display high (or low) levels of overall
+                                                                                       approval. If, in contrast, these individuals watch stories about energy policy, their
+                                                                                       overall evaluations of the president’s performance will tend to be based on his
+                                                                                       handling of energy policy. Scholars have amassed a sizable amount of evidence
+                                                                                       for priming effects (see Miller & Krosnick 1996).
+                                                                                           This connotation of priming differs from how most psychologists use the con-
+                                                                                       cept. For instance, Sherman et al. (1990, p. 405) state that “priming may be thought
+                                                                                       of as a procedure that increases the accessibility of some category or construct in
+                                                                                       memory.” The typical “procedure” for increasing accessibility is not the same
+                                                                                       as exposing individuals to continual media emphasis of an issue (see Druckman
+Annu. Rev. Polit. Sci. 2007.10:103-126. Downloaded from arjournals.annualreviews.org
+
+
+
+
+                                                                                       2001c, p. 240). Yet, Iyengar & Kinder and many others assume that media empha-
+                                                                                       sis on an issue passively increases the accessibility of that issue. Miller & Krosnick
+                                                                                       (2000) present evidence to the contrary in arguing that media emphasis on an issue
+                                                                                       does not work through accessibility and thus is not akin to priming as defined by
+                                                                                       psychologists.
+                 by 24.12.195.203 on 05/08/07. For personal use only.
+
+
+
+
+                                                                                           In our view, the psychological model of framing presented above can be gener-
+                                                                                       alized to priming by assuming that each vi constitutes a separate issue dimension
+                                                                                       or image (Druckman & Holmes 2004) used to evaluate a politician. When a mass
+                                                                                       communication places attention on an issue, we expect that issue will receive
+                                                                                       greater weight via changes in its accessibility and applicability. If this is correct,
+                                                                                       then framing effects and what communication scholars have called priming effects
+                                                                                       share common processes, and the two terms can be used interchangeably.
+                                                                                           A final conceptual distinction concerns framing and persuasion. Nelson & Oxley
+                                                                                       (1999) differentiate framing from persuasion by referring to the former as a change
+                                                                                       in the weight component, wi , of an attitude in response to a communication, and
+                                                                                       the latter as a change in the evaluation component, vi . For example, in assessing
+                                                                                       a new housing project, framing takes place if a communication causes economic
+                                                                                       considerations to become more important relative to environmental considerations.
+                                                                                       Persuasion occurs if the communication alters one’s evaluation of the proposal on
+                                                                                       one of those dimensions—e.g., by modifying one’s beliefs about the project’s
+                                                                                       economic consequences. This distinction reflects that most research on persuasion
+                                                                                       focuses on the evaluation components of an attitude. To date, little attention has
+                                                                                       been given to whether the moderators and mediators of framing and persuasion
+                                                                                       are similar.3
+                                                                                           The distinction between changing the content of one’s beliefs and changing the
+                                                                                       weight assigned to different beliefs in one’s overall attitude is useful to maintain
+                                                                                       analytically. However, as we noted above in discussing the expectancy value model,
+                                                                                       many attitudes are fragmentary and consist of vague or ambivalent beliefs that have
+                                                                                       not been summarized in an overall attitude. Frames in communication therefore
+
+                                                                                       3
+                                                                                        Another concept is media agenda setting, which focuses directly on how media coverage
+                                                                                       leads to changes in the importance of different considerations. There is a tangentially related
+                                                                                       debate in the mass communications literature on the distinctions among framing, priming,
+                                                                                       and agenda setting (e.g., Scheufele 2000, Brewer et al. 2003, McCombs 2004).
+        1 Apr 2007 12:18                                                                         AR      ANRV312-PL10-06.tex        XMLPublishSM (2004/02/24)    P1: OKZ
+
+
+
+
+                                                                                       116      CHONG  DRUCKMAN
+
+
+                                                                                             often introduce new considerations about a subject in addition to highlighting
+                                                                                             existing beliefs (Chong & Wolinsky-Nahmias 2005).
+                                                                                                For example, if they have presided over a prosperous economy during their first
+                                                                                             term, presidential incumbents seeking re-election will want voters to give greater
+                                                                                             weight to economic evaluations in their choice. But their campaign messages
+                                                                                             emphasizing the economy must accomplish two things: They must get across the
+                                                                                             message that their administration has done a good job on the economy, and they
+                                                                                             must convince voters that the economy should be the basis of their evaluation. These
+                                                                                             are simultaneously persuasive messages and framing messages that strengthen the
+                                                                                             connection between the object and the attribute (e.g., “the Democrats have created
+Annu. Rev. Polit. Sci. 2007.10:103-126. Downloaded from arjournals.annualreviews.org
+
+
+
+
+                                                                                             jobs and increased disposable income”) and that increase the weight given to that
+                                                                                             object-attribute belief.
+
+
+                                                                                       DIRECTIONS FOR RESEARCH
+                 by 24.12.195.203 on 05/08/07. For personal use only.
+
+
+
+
+                                                                                       Mediators and Moderators
+                                                                                             Even the earliest work on framing effects recognized the importance of develop-
+                                                                                             ing a theoretical base by identifying mediators and moderators. Yet, much work
+                                                                                             remains to be done. Above, we focused on how frames in communication affect
+                                                                                             frames in thought and overall attitudes. Others explore the impact of communi-
+                                                                                             cation frames on belief content (Slothuus 2005), open-ended responses (Chong
+                                                                                             1993, 1996; Brewer & Gross 2005), narratives (Rhee 1997), emotion (Brewer
+                                                                                             2000, Gross & D’Ambrosio 2004), and perceptions of public opinion (Joslyn &
+                                                                                             Haider-Markel 2001). The relationships between these effects and their moderators
+                                                                                             remain unclear.
+
+                                                                                       What Makes a Strong Frame?
+                                                                                             A related challenge for future work concerns the identification of factors that make
+                                                                                             a frame strong. Strong frames are those that emerge from public discussion as the
+                                                                                             best rationales for contending positions on the issue. These frames strike opinion
+                                                                                             leaders and audiences as being more compelling than alternative arguments. The
+                                                                                             typical political strategy is to connect a proposal to a positive idea or value that is
+                                                                                             widely available in the population. For example, conservation organizations have
+                                                                                             found they can garner support for government programs to buy land from private
+                                                                                             interests by associating the program with universally supported goals such as “clean
+                                                                                             drinking water.” Therefore, their campaigns often suggest that conserving land
+                                                                                             from development will improve water quality (Chong & Wolinsky-Nahmias 2005).
+                                                                                                 But frames built around a particular value do not work on every issue. The
+                                                                                             environmental frame is a strong frame when used in local debates over regulat-
+                                                                                             ing growth, but it has been of secondary influence in presidential elections. The
+                                                                                             same frame is not necessarily judged applicable across issues and contexts. Un-
+                                                                                             fortunately, extant work on persuasion provides little guidance on the conditions
+        1 Apr 2007 12:18                                                                      AR      ANRV312-PL10-06.tex        XMLPublishSM (2004/02/24)     P1: OKZ
+
+
+
+
+                                                                                                                                                    FRAMING THEORY             117
+
+
+                                                                                           of strength—for example, dual-process models distinguish the origins of strength
+                                                                                           (e.g., cues or argument quality) but say little about what factors matter when, and
+                                                                                           what makes for a high-quality argument (or frame).
+                                                                                              A number of studies have examined the effectiveness of different kinds of
+                                                                                           appeals on particular subjects without drawing conclusions about the elements
+                                                                                           common to persuasive frames. Gerber & Green (2000), for example, examined
+                                                                                           the relative influence of different appeals to vote and found it made no difference
+                                                                                           whether the message centered on civic duty, neighborhood solidarity, or the close-
+                                                                                           ness of the election. Scholars have tried to identify whether appeals to self-interest
+                                                                                           are more likely to be effective on certain issues than others. Studies of civil liberties
+Annu. Rev. Polit. Sci. 2007.10:103-126. Downloaded from arjournals.annualreviews.org
+
+
+
+
+                                                                                           controversies indicate that constitutional principles and attitudes toward political
+                                                                                           groups tend to be the primary frames people use to decide whether to tolerate
+                                                                                           controversial groups (Chong 1993). Thus, we have an inventory of specific results
+                                                                                           on the persuasiveness of alternative frames on different issues but lack a general
+                                                                                           theory that can allow us to anticipate which frames are likely to emerge as being
+                 by 24.12.195.203 on 05/08/07. For personal use only.
+
+
+
+
+                                                                                           the most applicable on an issue.
+
+                                                                                       The Production of Frames
+                                                                                           How frames in communication emerge continues to befuddle researchers. We
+                                                                                           have to deal with the production side of the equation by developing a model of
+                                                                                           elite strategies of framing to accompany research on the conditions that affect
+                                                                                           their success (e.g., using credible sources, repetition, or different types—moral,
+                                                                                           emotional, normative—of appeals).
+                                                                                               Entman’s (2004) cascade model serves as a provocative baseline on which
+                                                                                           others might build. Entman argues that, at least on foreign policy issues, frames
+                                                                                           originating from the administration shape the frames used by other elites (e.g.,
+                                                                                           members of Congress), media outlets, and the public. However, the public’s reac-
+                                                                                           tion to the initial frame feeds back to the media and other elites, who then influence
+                                                                                           the administration’s (revised) view. This process determines the amount of debate
+                                                                                           on an issue—that is, whether a single frame dominates or there is parity between
+                                                                                           competing frames (see Gamson 2005 for discussion of the model).
+                                                                                               A virtue of Entman’s model is that it takes account of multiple actors who
+                                                                                           attempt to influence and anticipate one another in their creation of frames. Most
+                                                                                           framing studies assume that the communicators are elite actors such as politicians,
+                                                                                           the media, scientific experts, and other opinion leaders, and that the audience
+                                                                                           consists of members of the general public (cf. Gamson 1992, Walsh 2003). But
+                                                                                           the influence is not likely to be exclusively one-way even if there is asymmetrical
+                                                                                           influence. Frames are chosen with audience in mind, so the preferences of the
+                                                                                           audience will have a bearing on the position taking of elites (Chong 1996).
+
+                                                                                       Strategies of Framing
+                                                                                           Scholars also have sought to explain the strategies behind the creation of frames.
+                                                                                           Perhaps the most advanced research in this area comes out of the social movement
+        1 Apr 2007 12:18                                                                          AR      ANRV312-PL10-06.tex          XMLPublishSM (2004/02/24)      P1: OKZ
+
+
+
+
+                                                                                       118       CHONG  DRUCKMAN
+
+
+                                                                                             literature that explores how different groups employ frames for mobilization pur-
+                                                                                             poses (e.g., Snow & Benford 1992, Polletta & Ho 2006). This literature discusses
+                                                                                             framing as a tactic used by political entrepreneurs to coordinate individuals around
+                                                                                             particular interpretations of their problems. Although much of this work remains
+                                                                                             separate from the public opinion scholarship that is the focus of our review—
+                                                                                             despite both literatures’ using Gamson’s work as a critical building block—there
+                                                                                             have been some recent strides toward integration (e.g., Chong 2000, Levin 2005).4
+
+                                                                                       Do Citizens Learn Over Time?
+                                                                                             We discussed above how an issue’s frames evolve over time, in some instances
+Annu. Rev. Polit. Sci. 2007.10:103-126. Downloaded from arjournals.annualreviews.org
+
+
+
+
+                                                                                             transforming the public’s basic understanding of what is at stake. How this evolu-
+                                                                                             tion occurs continues to be poorly understood; however, even less studied is how
+                                                                                             time qualifies the impact of frames on individuals. Most studies of framing effects
+                                                                                             consist of a single session for each subject, with effects tested shortly after exposure
+                 by 24.12.195.203 on 05/08/07. For personal use only.
+
+
+
+
+                                                                                             to communications. Future studies should examine the impact of framing across
+                                                                                             longer durations of time, with individuals being exposed to streams of competing
+                                                                                             information intended to parallel the give and take of political campaigns. This
+                                                                                             would allow us to examine how varying rates of learning and forgetting influence
+                                                                                             the magnitude of framing effects, and to identify conditions under which individ-
+                                                                                             uals might become inoculated against attempts to manipulate their preferences.
+                                                                                                The quality of public opinion depends on whether citizens are able to learn
+                                                                                             over time. Learning refers to the ability to process and retain information and to
+                                                                                             use that information in developing a stable preference on an issue. Citizens should
+                                                                                             be more susceptible to framing in the early stages of exposure to an issue, when
+                                                                                             they are less knowledgeable about the consequences of the issue. We think public
+                                                                                             opinion ought to be malleable at this stage because it would show that people are
+                                                                                             open to arguments and information.
+                                                                                                A characteristic we desire in public opinion is increased stability and therefore
+                                                                                             reduced susceptibility to framing conditional upon exposure to information on both
+                                                                                             sides of an issue. Public opinion should solidify over time as citizens encounter,
+                                                                                             through the media or in conversations, the range of arguments surrounding an
+                                                                                             issue. Resistance to framing is a more important quality in public opinion after
+                                                                                             individuals have had an opportunity to deliberate over the merits of the available
+                                                                                             alternatives.
+                                                                                                Theoretically, we expect that framing effects diminish with active engagement
+                                                                                             with issues. In particular, biased representations of issues should be less influential
+
+                                                                                             4
+                                                                                              Other work looks at how candidates strategically employ alternative frames (e.g., Petrocik
+                                                                                             1996, Riker 1996) and the consequences of these strategies for campaign discourse (J. Jerit,
+                                                                                             unpublished manuscript). Liebes (2000) offers an intriguing case study of how the media
+                                                                                             choose between competing frames. Nelson (2004) categorizes distinct types of frames in
+                                                                                             communication, including frames that rank the importance of different considerations, as-
+                                                                                             sign an ambiguous consideration to a familiar category, or accentuate a critical consideration
+                                                                                             relevant to a specific institutional context.
+        1 Apr 2007 12:18                                                                  AR     ANRV312-PL10-06.tex       XMLPublishSM (2004/02/24)    P1: OKZ
+
+
+
+
+                                                                                                                                             FRAMING THEORY             119
+
+
+                                                                                       as citizens become exposed to the full array of alternative arguments. Competition
+                                                                                       makes accessible a more representative sampling of underlying considerations than
+                                                                                       one-sided communications and therefore provides a broader frame of reference
+                                                                                       for locating one’s preference on an issue. Just as two-sided survey questions yield
+                                                                                       more reliable responses, debate and electoral competition motivate evaluation of
+                                                                                       the relevance of alternative rationales and ease identification of the policies that
+                                                                                       are consistent with one’s values. The knowledge acquired during a competitive
+                                                                                       campaign should reduce susceptibility to biased frames by increasing one’s ability
+                                                                                       to evaluate the applicability of alternative frames.
+                                                                                           However, these conjectures remain untested. No studies have shown whether
+Annu. Rev. Polit. Sci. 2007.10:103-126. Downloaded from arjournals.annualreviews.org
+
+
+
+
+                                                                                       exposure to a full range of alternatives makes one less vulnerable subsequently to
+                                                                                       biased communications. If the benefits of competition prove to be short-lived, they
+                                                                                       may not offer any lasting protection against one-sided frames. Balanced debate can
+                                                                                       diminish framing effects only if citizens are capable of learning over the course of
+                                                                                       a campaign. An individual can claim to have an opinion only if his or her views can
+                 by 24.12.195.203 on 05/08/07. For personal use only.
+
+
+
+
+                                                                                       be distinguished from the set of considerations temporarily made accessible by the
+                                                                                       content of a communication. A “doorstep opinion” or an opinion constructed “on
+                                                                                       the fly” is not a real opinion if it is inseparable from the context in which it was
+                                                                                       elicited.
+                                                                                           The inferences we can draw from previous studies suggest only limited inoc-
+                                                                                       ulation against framing effects in all but the most knowledgeable members of the
+                                                                                       public. If citizens are inoculated on longstanding issues, we should see consider-
+                                                                                       able resistance to one-sided frames on these issues. However, studies show that
+                                                                                       experimental participants continue to be affected by one-sided frames on issues
+                                                                                       that have been much debated in the past. For example, in experiments using the
+                                                                                       well-known civil liberties issue involving an extremist group’s right to conduct a
+                                                                                       rally, one-sided frames influence the preferences of most individuals (though they
+                                                                                       have a greater impact on those who are less knowledgeable). The lack of resis-
+                                                                                       tance to one-sided frames suggests that alternative considerations of free speech
+                                                                                       and social order do not come spontaneously to mind for many individuals. Peo-
+                                                                                       ple’s familiarity with this issue prior to the experiment does not appear to have
+                                                                                       inoculated them against manipulation.
+                                                                                           Competition therefore may only increase the short-term accessibility of alter-
+                                                                                       native considerations. A more enduring resistance to framing requires long-term
+                                                                                       learning, in which individuals are able to evaluate biased presentations of argu-
+                                                                                       ments by independently generating counterarguments against one-sided frames.
+                                                                                       Studies have also shown that experimentally induced framing effects endure only
+                                                                                       briefly (Druckman & Nelson 2003). These results may appear to render framing
+                                                                                       effects more innocuous, but they may also indicate that individuals are continually
+                                                                                       susceptible to the most recent communication. If people soon forget what they
+                                                                                       learn, then they are less likely to be inoculated against subsequent attempts to
+                                                                                       influence them. The benefits of a balanced debate in a political campaign depend
+                                                                                       on the capacity of citizens to retain information about alternative positions so that
+                                                                                       they are not unduly influenced by the latest message they receive.
+        1 Apr 2007 12:18                                                                         AR      ANRV312-PL10-06.tex       XMLPublishSM (2004/02/24)    P1: OKZ
+
+
+
+
+                                                                                       120      CHONG  DRUCKMAN
+
+
+                                                                                       NORMATIVE ASSESSMENTS OF FRAMING EFFECTS
+                                                                                             Framing can be construed in both positive and negative terms. It can be viewed as
+                                                                                             a strategy to manipulate and deceive individuals, or it can refer more neutrally to a
+                                                                                             learning process in which people acquire common beliefs, as in the coordination
+                                                                                             of people around a social norm (see Kinder & Herzog 1993, Chong 2000). In the
+                                                                                             social movements literature, individuals overcome collective action problems by
+                                                                                             developing shared frames about their predicament and agreeing on the best course
+                                                                                             of action.
+                                                                                                 In the public opinion field, however, framing usually takes a negative conno-
+Annu. Rev. Polit. Sci. 2007.10:103-126. Downloaded from arjournals.annualreviews.org
+
+
+
+
+                                                                                             tation because framing effects suggest that distributions of public preferences are
+                                                                                             arbitrary, and that political elites can manipulate popular preferences to serve their
+                                                                                             own interests. The assumption in much of this research is that we should identify
+                                                                                             means to counteract framing effects. Researchers therefore have become interested
+                                                                                             in social and institutional mechanisms that may diminish framing effects and are
+                 by 24.12.195.203 on 05/08/07. For personal use only.
+
+
+
+
+                                                                                             reassured when they identify conditions (e.g., involving deliberation or compe-
+                                                                                             tition) in which individuals are less affected by framing (Sniderman & Bullock
+                                                                                             2004, Sniderman & Levendusky 2007).
+                                                                                                 But framing effects are also intrinsic to the formation of attitudes and opinions.
+                                                                                             Public opinion formation involves the selective acceptance and rejection of com-
+                                                                                             peting frames that contain information about candidates and issues. Discussion and
+                                                                                             debate over the appropriate frames for conceptualizing an issue lead ultimately to
+                                                                                             common perceptions and judgments about the consequences of a policy. Framing
+                                                                                             effects are a liability only if individuals never develop a basis for discriminating
+                                                                                             among frames and remain constantly vulnerable to changing representations of
+                                                                                             issues. As noted above, resistance to framing is also problematic if it means that
+                                                                                             individuals cannot recognize and accept good arguments for changing their pref-
+                                                                                             erences. If debate cannot introduce new considerations in people’s minds, but can
+                                                                                             only serve to remind them of their existing values, then persuasion through the
+                                                                                             exchange of information is impossible. Deliberation is pointless.
+                                                                                                 Individuals who possess strong attitudes are not only more likely to recognize
+                                                                                             which side of an issue is consistent with their values, they are also more likely to
+                                                                                             engage in motivated reasoning, defined by Lodge & Taber (2000, p. 184) as “the
+                                                                                             tendency to evaluate incoming information to support preconception and to devalue
+                                                                                             contrary evidence.” Individuals who hold strong attitudes are least susceptible to
+                                                                                             new information, most likely to counterargue against contrary information, and
+                                                                                             most likely to recognize information consistent with their prior beliefs. Lodge
+                                                                                             & Taber (2000, p. 205) write that “when one is operating in partisan mode, the
+                                                                                             decision maker is trying to build the best possible case for a preferred conclusion.”
+                                                                                                 Stability of opinions per se—divorced from the process by which judgments
+                                                                                             are formed and maintained—is therefore a misguided criterion for evaluating the
+                                                                                             quality of political evaluations. Stable attitudes can reflect sophisticated reasoning
+                                                                                             or dogmatism and inflexibility. Hence, both excessive instability and excessive
+                                                                                             stability of public opinion can be liabilities in a democracy. At one extreme we have
+        1 Apr 2007 12:18                                                                     AR     ANRV312-PL10-06.tex        XMLPublishSM (2004/02/24)     P1: OKZ
+
+
+
+
+                                                                                                                                                 FRAMING THEORY             121
+
+
+                                                                                          citizens without sufficiently developed attitudes, who can be routinely manipulated
+                                                                                          by alternative framings of a problem; at the other extreme, we have citizens whose
+                                                                                          attitudes are held so tightly that they seek only to reinforce existing views, and
+                                                                                          every frame elicits the same closed-minded response. It is not apparent which
+                                                                                          portrait of the public is less desirable.
+                                                                                              Openness to contrary evidence is an essential quality that should be fostered in
+                                                                                          a democracy. Individuals who are motivated to find information that is consistent
+                                                                                          with their prior positions may be more immune to framing effects but at the price of
+                                                                                          being rigid, prone to rationalization, and impervious to information. As Hirschman
+                                                                                          (1989) observed, the ideal is located somewhere in the middle: a citizenry that
+Annu. Rev. Polit. Sci. 2007.10:103-126. Downloaded from arjournals.annualreviews.org
+
+
+
+
+                                                                                          has informed opinions but is tolerant of alternative perspectives and amenable to
+                                                                                          change in the face of a compelling argument.
+
+
+                                                                                       SUMMARY AND CONCLUSION
+                 by 24.12.195.203 on 05/08/07. For personal use only.
+
+
+
+
+                                                                                          We began this review by noting the apparent deficiencies of public opinion in a
+                                                                                          democratic society. We identified framing as a possible source of such deficien-
+                                                                                          cies and went on to explain exactly what framing entails. We offered guidelines
+                                                                                          for identifying frames in communication and a model of how such frames affect
+                                                                                          individuals’ opinions. We discussed moderators, particularly the impact of compe-
+                                                                                          tition, and we clarified the relationship between framing and other concepts. After
+                                                                                          noting areas in need of more research, we returned to a discussion of the normative
+                                                                                          implications of framing for democratic public opinion.
+                                                                                              Such conversations about the implications of framing are timely, as it is com-
+                                                                                          monplace nowadays for polling to be used to test the effectiveness of alternative
+                                                                                          methods of presenting policy proposals. To the extent that people do not have
+                                                                                          independent ideas on the issues they are being asked to vote on, they can more
+                                                                                          easily be manipulated by the framing of proposals. If people remain outside the
+                                                                                          political process, their opinions are vulnerable to being shaped arbitrarily by how
+                                                                                          the issue is represented.
+                                                                                              However, our review suggests that it is possible for people to have the firm, full,
+                                                                                          and articulate opinions that Hirschman idealizes—opinions that are less susceptible
+                                                                                          to manipulation and framing effects. Deliberation, discussion, and exposure to
+                                                                                          information and alternative arguments can raise the quality of public opinion by
+                                                                                          reducing ambivalence and uncertainty. People who are better informed about the
+                                                                                          issues are more likely to have established a frame of reference for their opinions
+                                                                                          and are less likely to be swayed by how other people frame the issues for them.
+                                                                                              We need an active public debate to inform people about the issues. But having
+                                                                                          opinions is only half the problem in a democracy; the other half is that people
+                                                                                          must balance their strong opinions with a capacity to be flexible and open-minded.
+                                                                                          The process of becoming informed and engaged in politics can produce knee-jerk
+                                                                                          ideological beliefs as well as reflective thinking on issues. It is important that
+                                                                                          opinions be the product of some degree of rumination.
+        1 Apr 2007 12:18                                                                          AR     ANRV312-PL10-06.tex           XMLPublishSM (2004/02/24)     P1: OKZ
+
+
+
+
+                                                                                       122      CHONG  DRUCKMAN
+
+
+                                                                                                 Back in the 1950s, when survey research found citizens to be apathetic about
+                                                                                             politics, one response was that perhaps this state of affairs was not so undesirable
+                                                                                             (Berelson et al. 1954). Because democracy requires compromise and the building
+                                                                                             of coalitions, it was suggested that the actual portrait of the electorate is perhaps
+                                                                                             a better underpinning for a stable democratic system than a hypothetical ideal
+                                                                                             electorate of highly interested, politically active citizens. High interest, it was pre-
+                                                                                             dicted, would lead to constant factional disputes and little collective reconciliation
+                                                                                             on important issues. This is a problem of having too many strong opinions as
+                                                                                             opposed to too few.
+                                                                                                 How can we have a more participatory democracy and yet prevent the develop-
+Annu. Rev. Polit. Sci. 2007.10:103-126. Downloaded from arjournals.annualreviews.org
+
+
+
+
+                                                                                             ment of an intense and intransigent collective public that is inimical to democratic
+                                                                                             debate and discussion? Somehow, the taste for opinions has to be tempered by a
+                                                                                             taste for deliberation and open-mindedness. The findings from survey research on
+                                                                                             popular support for democratic values provide glimmers of hope on this matter
+                                                                                             (e.g., McClosky & Brill 1983). One of the most dependable findings is that people
+                 by 24.12.195.203 on 05/08/07. For personal use only.
+
+
+
+
+                                                                                             who participate to a greater degree in public affairs, irrespective of their ideological
+                                                                                             leanings, are also more likely to support such basic democratic values as the right
+                                                                                             to free expression.
+
+
+                                                                                       ACKNOWLEDGMENT
+                                                                                             We thank Toby Bolsen for research assistance.
+
+                                                                                                            The Annual Review of Political Science is online at
+                                                                                                                   http://polisci.annualreviews.org
+
+
+                                                                                       LITERATURE CITED
+                                                                                       Ajzen I, Fishbein M. 1980. Understanding At-      Berinsky AJ, Kinder DR. 2006. Making sense
+                                                                                         titudes and Predicting Social Behavior. En-       of issues through media frames: understand-
+                                                                                         glewood Cliffs, NJ: Prentice-Hall                 ing the Kosovo crisis. J. Polit. 68:640–
+                                                                                       Arnold DR, Munnell AH, Graetz M, eds. 1998.         56
+                                                                                         Framing the Social Security Debate. Wash-       Brewer PR. 2001. Value words and lizard
+                                                                                         ington, DC: Brookings Inst.                       brains: Do citizens deliberate about appeals
+                                                                                       Barker DC. 2005. Values, frames, and persua-        to their core values? Polit. Psychol. 22:45–64
+                                                                                         sion in presidential nomination campaigns.      Brewer PR. 2003. Values, political knowl-
+                                                                                         Polit. Behav. 27:375–94                           edge, and public opinion about gay rights:
+                                                                                       Bartels LM. 2003. Democracy with attitudes.         a framing-based account. Public Opin. Q.
+                                                                                         In Electoral Democracy, ed. MB MacKuen,           67:173–201
+                                                                                         G Rabinowitz, pp. 48–82. Ann Arbor: Univ.       Brewer PR, Graf J, Willnat L. 2003. Priming
+                                                                                         Mich. Press                                       or framing: media influence on attitudes to-
+                                                                                       Berelson BR, Lazarsfeld PF, McPhee WN.              ward foreign countries. Int. J. Commun. Stud.
+                                                                                         1954. Voting: A Study of Opinion Formation        65:493–508
+                                                                                         in a Presidential Campaign. Chicago: Univ.      Brewer PR, Gross K. 2005. Values, framing,
+                                                                                         Chicago Press                                     and citizens’ thoughts about policy issues:
+        1 Apr 2007 12:18                                                                          AR      ANRV312-PL10-06.tex           XMLPublishSM (2004/02/24)     P1: OKZ
+
+
+
+
+                                                                                                                                                          FRAMING THEORY               123
+
+
+                                                                                         effects on content and quality. Polit. Psychol.      constitutional narratives in collision. North-
+                                                                                         26:929–48                                            west Univ. Law Rev. 85:343
+                                                                                       Brewer PR, Sigelman L. 2002. Political scien-        de Vreese CH, Peter J, Semetko HA. 2001.
+                                                                                         tists as color commentators: framing and ex-         Framing politics at the launch of the Euro:
+                                                                                         pert commentary in media campaign cover-             a cross-national comparative study of frames
+                                                                                         age. Press/Politics 7:23–35                          in the news. Polit. Comm. 18:107–22
+                                                                                       Brewer PR, Graf J, Willnat L. 2003. Prim-            Dimitrova DV, Kaid LL, Williams AP,
+                                                                                         ing or framing: media influence on attitudes         Trammell KD. 2005. War on the web: the
+                                                                                         toward foreign countries. The International          immediate news framing of Gulf War II.
+                                                                                         Journal for Communication Studies. 65:493–           Press/Politics 10:22–44
+                                                                                         508                                                Druckman JN. 2001a. Evaluating framing ef-
+Annu. Rev. Polit. Sci. 2007.10:103-126. Downloaded from arjournals.annualreviews.org
+
+
+
+
+                                                                                       Callaghan K, Schnell F. 2004. Framing Ameri-           fects. J. Econ. Psychol. 22:91–101
+                                                                                         can Politics. Pittsburgh, PA: Univ. Pitts. Press   Druckman JN. 2001b. On the limits of framing
+                                                                                       Cappella JN, Jamieson KH. 1997. Spiral of              effects: Who can frame? J. Polit. 63:1041–
+                                                                                         Cynicism: The Press and the Public Good.             66
+                                                                                         New York: Oxford Univ. Press                       Druckman JN. 2001c. The implications of fram-
+                 by 24.12.195.203 on 05/08/07. For personal use only.
+
+
+
+
+                                                                                       Carragee KM, Roefs W. 2004. The neglect of             ing effects for citizen competence. Polit. Be-
+                                                                                         power in recent framing research. J. Com-            hav. 23:225–56
+                                                                                         mun. 54:214–33                                     Druckman JN. 2004. Political preference for-
+                                                                                       Chong D. 1993. How people think, reason, and           mation: competition, deliberation, and the
+                                                                                         feel about rights and liberties. Am. J. Polit.       (ir)relevance of framing effects. Am. Polit.
+                                                                                         Sci. 37:867–99                                       Sci. Rev. 98:671–86
+                                                                                       Chong D. 1996. Creating common frames of             Druckman JN, Holmes JW. 2004. Does pres-
+                                                                                         reference on political issues. In Political Per-     idential rhetoric matter? Priming and pres-
+                                                                                         suasion and Attitude Change, ed. DC Mutz,            idential approval. Pres. Stud. Q. 34:755–
+                                                                                         PM Sniderman, RA Brody, pp. 195–224.                 78
+                                                                                         Ann Arbor: Univ. Mich. Press                       Druckman JN, Jacobs LR, Ostermeier E. 2004.
+                                                                                       Chong D. 2000. Rational Lives: Norms and Val-          Candidate strategies to prime issues and im-
+                                                                                         ues in Politics and Society. Chicago: Univ.          age. J. Polit. 66:1205–27
+                                                                                         Chicago Press                                      Druckman JN, Nelson KR. 2003. Framing and
+                                                                                       Chong D. 2006. Free speech and multicultural-          deliberation. Am. J. Polit. Sci. 47:728–44
+                                                                                         ism in and out of the academy. Polit. Psychol.     Eagly AH, Chaiken S. 1993. The Psychology
+                                                                                         27:29–54                                             of Attitudes. Fort Worth, TX: Harcourt Brace
+                                                                                       Chong D, Druckman JN. 2007. A theory of                College Pub.
+                                                                                         framing and opinion formation in competi-          Edwards III GC. 2003. On Deaf Ears: The Lim-
+                                                                                         tive elite environments. J. Commun. In press         its of the Bully Pulpit. New Haven, CT: Yale
+                                                                                       Chong D, Wolinsky-Nahmias Y. 2005. Green               Univ. Press
+                                                                                         fees: the price of open space. In Ambivalence,     Edwards III GC, Wood BD. 1999. The Presi-
+                                                                                         Politics, and Public Policy, ed. MD Martinez,        dent, Congress and the media. Am. Polit. Sci.
+                                                                                         SC Craig, pp. 103–25. New York: Palgrave             Rev. 93:327–44
+                                                                                       Converse PE. 1964. The nature of belief sys-         Enelow J, Hinich M. 1984. The Spatial Theory
+                                                                                         tems in mass publics. In Ideology and Dis-           of Voting. Boston: Cambridge Univ. Press
+                                                                                         content, ed. DE Apter, pp. 206–61. New             Entman RM. 1993. Framing: toward clarifica-
+                                                                                         York: Free                                           tion of a fractured paradigm. J. Commun.
+                                                                                       Delgado R. 1982. Words that wound: a tort ac-          43:51–58
+                                                                                         tion for racial insults, epithets and name call-   Entman RM. 2004. Projects of Power: Fram-
+                                                                                         ing. Harvard Civil Rights 17:133                     ing News, Public Opinion, and U.S. Foreign
+                                                                                       Delgado R. 1991. Campus antiracism rules:              Policy. Chicago: Univ. Chicago Press
+        1 Apr 2007 12:18                                                                           AR      ANRV312-PL10-06.tex              XMLPublishSM (2004/02/24)     P1: OKZ
+
+
+
+
+                                                                                       124       CHONG  DRUCKMAN
+
+
+                                                                                       Feldman S, Zaller J. 1992. The political culture       Iyengar S. 1991. Is Anyone Responsible?: How
+                                                                                         of ambivalence: ideological responses to the           Television Frames Political Issues. Chicago:
+                                                                                         welfare state. Am. J. Polit. Sci. 36:268–307           Univ. Chicago Press
+                                                                                       Fridkin KL, Kenney PJ. 2005. Campaign                  Iyengar S, Kinder DR. 1987. News That Mat-
+                                                                                         frames: Can candidates influence media cov-            ters: Television and American Opinion.
+                                                                                         erage? In Framing American Politics, ed. K             Chicago: Univ. Chicago Press
+                                                                                         Callaghan, F Schnell, pp. 54–75. Pittsburgh,         Iyengar S, Kinder DR, Peters MD, Krosnik
+                                                                                         PA: Univ. Pitts. Press                                 JA. 1984. The evening news and presidential
+                                                                                       Gamson WA. 1992. Talking Politics. New York:             evaluations. J. Pers. Soc. Psychol. 46:778–87
+                                                                                         Cambridge Univ. Press                                Jacoby WG. 2000. Issue framing and pub-
+                                                                                       Gamson WA. 2005. Book review of Robert                   lic opinion on government spending. Am. J.
+Annu. Rev. Polit. Sci. 2007.10:103-126. Downloaded from arjournals.annualreviews.org
+
+
+
+
+                                                                                         M. Entman, Projections of Power: Framing               Polit. Sci. 44:750–67
+                                                                                         News, Public Opinion, and U.S. Foreign Pol-          Jones BD. 1994. Reconceiving Decision-
+                                                                                         icy. Public Opin. Q. 69:324–26                         Making in Democratic Politics: Attention,
+                                                                                       Gamson WA, Modigliani A. 1987. The chang-                Choice, and Public Policy. Chicago: Univ.
+                                                                                         ing culture of affirmative action. In Research         Chicago Press
+                 by 24.12.195.203 on 05/08/07. For personal use only.
+
+
+
+
+                                                                                         in Political Sociology, ed. RD Braungart.            Joslyn MR, Haider-Markel DP. 2001. The two
+                                                                                         3:137–77. Greenwich, CT: JAI                           faces of issue framing: examining framing
+                                                                                       Gamson WA, Modigliani A. 1989. Media dis-                effects on personal opinion and perception
+                                                                                         course and public opinion on nuclear power:            of public opinion. Presented at Annu. Meet.
+                                                                                         a constructionist approach. Am. J. Sociol.             Western Polit. Sci. Assoc., Las Vegas, NV
+                                                                                         95:1–37                                              Kellstedt PM. 2003. The Mass Media and
+                                                                                       Gerber AS, Green DP. 2000. The effects of can-           the Dynamics of American Racial Attitudes.
+                                                                                         vassing, telephone calls, and direct mail on           New York: Cambridge Univ. Press
+                                                                                         voter turnout: a field experiment. Am. Polit.        Kinder DR, Herzog D. 1993. Democratic dis-
+                                                                                         Sci. Rev. 3:653–63                                     cussion. In Reconsidering the Democratic
+                                                                                       Grant JT, Rudolph TJ. 2003. Value conflict,              Public, ed. GE Marcus, RL Hanson, pp. 347–
+                                                                                         group affect, and the issue of campaign fi-            77. University Park, PA: Penn. State Univ.
+                                                                                         nance. Am. J. Polit. Sci. 47:453–69                    Press
+                                                                                       Gross K. 2000. The limits of framing: how fram-        Kinder DR, Sanders LM. 1990. Mimicking po-
+                                                                                         ing effects may be limited or enhanced by              litical debate with survey questions: the case
+                                                                                         individual level predispositions. Presented            of white opinion on affirmative action for
+                                                                                         at Annu. Meet. Midwest Polit. Sci. Assoc.,             blacks. Soc. Cogn. 8:73–103
+                                                                                         Chicago, IL                                          Kinder DR, Sanders LM. 1996. Divided By
+                                                                                       Gross K, D’Ambrosio L. 2004. Framing emo-                Color: Racial Politics and Democratic Ide-
+                                                                                         tional response. Polit. Psychol. 25:1–29               als. Chicago: Univ. Chicago Press
+                                                                                       Haider-Markel DP, Joslyn MR. 2001. Gun pol-            Kuklinski JH, Quirk PJ, Jerit J, Rich RF. 2001.
+                                                                                         icy, opinion, tragedy, and blame attribution:          The political environment and citizen com-
+                                                                                         the conditional influence of issue frames. J.          petence. Am. J. Polit. Sci. 45:410–24
+                                                                                         Polit. 63:520–43                                     Lau R, Schlesinger M. 2005. Policy frames,
+                                                                                       Higgins ET. 1996. Knowledge activation: ac-              metaphorical reasoning, and support for pub-
+                                                                                         cessibility, applicability, and salience. In So-       lic policies. Polit. Psychol. 26:77–134
+                                                                                         cial Psychology: Handbook of Basic Prin-             Lawrence RG. 2004. Framing obesity: the evo-
+                                                                                         ciples, ed. ET Higgins, AW Kruglanski,                 lution of news discourse on a public health
+                                                                                         pp. 133–68. New York: Guilford                         issue. Press/Politics 9:56–75
+                                                                                       Hirschman AO. 1989. Having opinions—one of             Levin D. 2005. Framing peace policies: the
+                                                                                         the elements of well-being. Am. Econ. Rev.             competition for resonant themes. Polit. Com-
+                                                                                         79:75–79                                               mun. 22:83–108
+        1 Apr 2007 12:18                                                                         AR      ANRV312-PL10-06.tex           XMLPublishSM (2004/02/24)     P1: OKZ
+
+
+
+
+                                                                                                                                                         FRAMING THEORY               125
+
+
+                                                                                       Liebes T. 2000. Inside a news item: a dis-          Nelson TE, Oxley ZM, Clawson RA. 1997b.
+                                                                                         pute over framing. Polit. Commun. 17:295–           Toward a psychology of framing effects.
+                                                                                         305                                                 Polit. Behav. 19:221–46
+                                                                                       Lipset SM, Raab E. 1970. The Politics of Un-        Nicholson SP, Howard RM. 2003. Framing sup-
+                                                                                         reason: Right-Wing Extremism in America,            port for the Supreme Court in the aftermath
+                                                                                         1790–1970. New York: Harper & Row                   of Bush v. Gore. J. Polit. 65:676–95
+                                                                                       Lodge M, Taber C. 2000. Three steps toward          Nisbet MC, Brossard D, Kroepsch A. 2003.
+                                                                                         a theory of motivated political reasoning.          Framing science: the stem cell controversy in
+                                                                                         In Elements of Reason: Cognition, Choice,           an age of press/politics. Press/Politics 8:36–
+                                                                                         and the Bounds of Rationality, ed. A Lupia,         70
+                                                                                         MD McCubbins, SL Popkin, pp. 183–213.             Petrocik JR. 1996. Issue ownership in presiden-
+Annu. Rev. Polit. Sci. 2007.10:103-126. Downloaded from arjournals.annualreviews.org
+
+
+
+
+                                                                                         Cambridge, UK: Cambridge Univ. Press                tial elections, with a 1980 case study. Am. J.
+                                                                                       MacKinnon C. 1993. Only Words. Cambridge,             Polit. Sci. 40:825–50
+                                                                                         MA: Harvard Univ. Press                           Polletta F, Ho MK. 2006. Frames and their con-
+                                                                                       Matsuda MJ. 1989. Public response to racist           sequences. In The Oxford Handbook of Con-
+                                                                                         speech: considering the victim’s story. Mich.       textual Political Studies, ed. RE Gooden, C
+                 by 24.12.195.203 on 05/08/07. For personal use only.
+
+
+
+
+                                                                                         Law Rev. 87:2320–81                                 Tilly. Oxford, UK: Oxford Univ. Press
+                                                                                       McClosky H, Brill A. 1983. Dimensions of Tol-       Price V, Na EK. 2000. Citizen deliberation and
+                                                                                         erance: What Americans Believe About Civil          resistance to framing effects. Presented at
+                                                                                         Liberties. New York: Basic Books                    Annu. Meet. Am. Assoc. Public Opin. Res.,
+                                                                                       McCombs M. 2004. Setting the Agenda: The              Portland, OR
+                                                                                         Mass Media and Public Opinion. Malden,            Price V, Tewksbury D. 1997. News values and
+                                                                                         MA: Blackwell Publishing Inc                        public opinion: a theoretical account of me-
+                                                                                       Miller JM, Krosnick JA. 1996. News media im-          dia priming and framing. In Progress in Com-
+                                                                                         pact on the ingredients of presidential evalu-      munication Sciences: Advances in Persua-
+                                                                                         ations: a program of research on the priming        sion, ed. GA Barnett, FJ Boster. 13:173–212.
+                                                                                         hypothesis. In Political Persuasion and Atti-       Greenwich, CT: Ablex
+                                                                                         tude Change, ed. DC Mutz, PM Sniderman,           Rasinski KA. 1989. The effect of question
+                                                                                         RA Brody, pp. 79–100. Ann Arbor: Univ.              wording on public support for government
+                                                                                         Mich. Press                                         spending. Public Opin. Q. 3:388–94
+                                                                                       Miller JM, Krosnick JA. 2000. News media im-        Rhee JW. 1997. Strategy and issue frames in
+                                                                                         pact on the ingredients of presidential evalu-      election campaign coverage: social cogni-
+                                                                                         ations: politically knowledgeable citizens are      tive account of framing effects. J. Commun.
+                                                                                         guided by a trusted source. Am. J. Polit. Sci.      47:26–48
+                                                                                         44:295–309                                        Richardson JD, Lancendorfer KM. 2004. Fram-
+                                                                                       Nelson TE. 2004. Policy goals, public rhetoric,       ing affirmative action: the influence of race
+                                                                                         and political attitudes. J. Polit. 66:581–          on newspaper editorial responses to the Univ.
+                                                                                         605                                                 of Michigan cases. Press/Politics 9:74–94
+                                                                                       Nelson TE, Clawson RA, Oxley ZM. 1997a.             Riker WH. 1986. The Art of Political Manipu-
+                                                                                         Media framing of a civil liberties conflict and     lation. New Haven, CT: Yale Univ. Press
+                                                                                         its effect on tolerance. Am. Polit. Sci. Rev.     Riker WH. 1990. Heresthetic and rhetoric
+                                                                                         91:567–83                                           in the spatial model. In Advances in the
+                                                                                       Nelson TE, Kinder DR. 1996. Issue frames and          Spatial Theory of Voting, ed. JM Enelow,
+                                                                                         group-centrism in American public opinion.          MJ Hinich, pp. 46–65. Cambridge, UK:
+                                                                                         J. Polit. 58:1055–78                                Cambridge Univ. Press
+                                                                                       Nelson TE, Oxley ZM. 1999. Issue framing ef-        Riker WH. 1996. The Strategy of Rhetoric:
+                                                                                         fects and belief importance and opinion. J.         Campaigning for the American Constitution.
+                                                                                         Polit. 61:1040–67                                   New Haven, CT: Yale Univ. Press
+        1 Apr 2007 12:18                                                                           AR      ANRV312-PL10-06.tex             XMLPublishSM (2004/02/24)     P1: OKZ
+
+
+
+
+                                                                                       126       CHONG  DRUCKMAN
+
+
+                                                                                       Scheufele DA. 1999. Framing as a theory of            Sniderman PM, Levendusky MS. 2007. An in-
+                                                                                         media effects. J. Commun. 49:103–22                   stitutional theory of political choice. In The
+                                                                                       Scheufele DA. 2000. Agenda-setting, priming,            Oxford Handbook of Political Behavior, ed.
+                                                                                         and framing revisited: another look at cogni-         RJ Dalton, HD Klingemann. Oxford, UK:
+                                                                                         tive effects of political communication. Mass         Oxford Univ. Press. In press
+                                                                                         Commun. Soc. 3:297–316                              Sniderman PM, Theriault SM. 2004. The struc-
+                                                                                       Schudson M. 1995. The Power of News. Cam-               ture of political argument and the logic of
+                                                                                         bridge, MA: Harvard Univ. Press                       issue framing. In Studies in Public Opinion,
+                                                                                       Semetko HA, Valkenburg PM. 2000. Framing                ed. WE Saris, PM Sniderman, pp. 133–65.
+                                                                                         European politics: a content analysis of press        Princeton, NJ: Princeton Univ. Press
+                                                                                         and television news. J. Commun. 50:93–              Snow D, Benford R. 1992. Master frames and
+Annu. Rev. Polit. Sci. 2007.10:103-126. Downloaded from arjournals.annualreviews.org
+
+
+
+
+                                                                                         109                                                   cycles of protest. In Frontiers of Social Move-
+                                                                                       Shah DV, Watts MD, Domke D, Fan DP. 2002.               ment Theory, ed. AD Morris, CM Mueller,
+                                                                                         News framing and cueing of issue regimes:             pp. 456–72. New Haven, CT: Yale Univ.
+                                                                                         explaining Clinton’s public approval in spite         Press
+                                                                                         of scandal. Public Opin. Q. 66:339–70               Stapel D, Koomen W, Zeelenberg M. 1998. The
+                 by 24.12.195.203 on 05/08/07. For personal use only.
+
+
+
+
+                                                                                       Shen F, Edwards HH. 2005. Economic indi-                impact of accuracy motivation on interpreta-
+                                                                                         vidualism, humanitarianism, and welfare re-           tion, comparison, and correction processes:
+                                                                                         form: a value-based account of framing ef-            accuracy x knowledge accessibility effects.
+                                                                                         fects. J. Commun. 55:795–809                          J. Pers. Soc. Psychol. 74:878–93
+                                                                                       Sherman SJ, Mackie DM, Driscoll DM. 1990.             Tankard JWJ. 2001. The empirical approach to
+                                                                                         Priming and the differential use of dimen-            the study of media framing. In Framing Pub-
+                                                                                         sions in evaluation. Pers. Soc. Psychol. B.           lic Life, ed. SD Reese, OH Gandy Jr, AE
+                                                                                         16:405–18                                             Grant, pp. 95–106. Mahwah, NJ: Lawrence
+                                                                                       Simon AF, Xenos M. 2004. Dimensional reduc-             Erlbaum
+                                                                                         tion of word-frequency data as a substitute for     Tuchman G. 1978. Making News. New York:
+                                                                                         intersubjective content analysis. Polit. Anal.        Free
+                                                                                         12:63–75                                            Tversky A, Kahneman D. 1987. Rational choice
+                                                                                       Slothuus R. 2005. More than weighting cogni-            and the framing of decisions. In Rational
+                                                                                         tive importance: a dual process model of is-          Choice: The Contrast Between Economics
+                                                                                         sue framing effects. Presented at Annu. Meet.         and Psychology, ed. RM Hogarth, MW
+                                                                                         Midwest Polit. Sci. Assoc., Chicago, IL               Reder, pp. 67–94. Chicago: Univ. Chicago
+                                                                                       Sniderman PM. 1993. The new look in public              Press
+                                                                                         opinion research. In Political Science: The         Walsh KC. 2003. Talking About Politics: Infor-
+                                                                                         State of the Discipline, ed. AW Finifter, pp.         mal Groups and Social Identity in American
+                                                                                         219–45. Washington, DC: Am. Polit. Sci.               Life. Chicago: Univ. Chicago Press
+                                                                                         Assoc.                                              Williamson J. 1986. A Rage for Order:
+                                                                                       Sniderman PM, Bullock J. 2004. A consistency            Black/White Relations in the American South
+                                                                                         theory of public opinion and political choice.        since Emancipation. New York: Oxford
+                                                                                         In Studies in Public Opinion, ed. WE Saris,           Univ. Press
+                                                                                         PM Sniderman, pp. 337–58. Princeton, NJ:            Zaller J. 1992. The Nature and Origins of Mass
+                                                                                         Princeton Univ. Press                                 Opinion. New York: Cambridge Univ. Press
+                                                                                       P1: JRX
+                                                                                       April 9, 2007       10:54      Annual Reviews          ANRV312-FM
+
+
+
+
+                                                                                                             Annual Review of Political Science
+                                                                                                          Volume 10, 2007
+
+
+
+                                                                                                 CONTENTS
+Annu. Rev. Polit. Sci. 2007.10:103-126. Downloaded from arjournals.annualreviews.org
+
+
+
+
+                                                                                                 STATE REPRESSION AND POLITICAL ORDER, Christian Davenport              1
+                                                                                                 BRINGING THE COURTS BACK IN: INTERBRANCH PERSPECTIVES ON
+                                                                                                   THE ROLE OF COURTS IN AMERICAN POLITICS AND POLICY
+                                                                                                   MAKING, Jeb Barnes                                                  25
+                 by 24.12.195.203 on 05/08/07. For personal use only.
+
+
+
+
+                                                                                                 NEOPLURALISM, Andrew S. McFarland                                     45
+                                                                                                 IMMIGRANT INTEGRATION IN EUROPE: EMPIRICAL RESEARCH,
+                                                                                                       Terri E. Givens                                                 67
+                                                                                                 THE LIBERAL TRADITION AND THE POLITICS OF EXCLUSION,
+                                                                                                       Marc Stears                                                     85
+                                                                                                 FRAMING THEORY, Dennis Chong and James N. Druckman                   103
+                                                                                                 POLITICAL PLACES AND INSTITUTIONAL SPACES: THE INTERSECTION
+                                                                                                   OF POLITICAL SCIENCE AND POLITICAL GEOGRAPHY,
+                                                                                                       Philip J. Ethington and Jason A. McDaniel                      127
+                                                                                                 ELECTORAL LAWS, PARTIES, AND PARTY SYSTEMS IN LATIN
+                                                                                                   AMERICA, Scott Morgenstern and Javier Vázquez-D’Elı́a             143
+                                                                                                 BE CAREFUL WHAT YOU WISH FOR: THE RISE OF RESPONSIBLE
+                                                                                                   PARTIES IN AMERICAN NATIONAL POLITICS, Nicol C. Rae                169
+                                                                                                 POLITICAL FINANCE IN COMPARATIVE PERSPECTIVE, Susan E. Scarrow       193
+                                                                                                 WHAT HAVE WE LEARNED ABOUT THE CAUSES OF CORRUPTION
+                                                                                                   FROM TEN YEARS OF CROSS-NATIONAL EMPIRICAL RESEARCH?
+                                                                                                       Daniel Treisman                                                211
+                                                                                                 DIVIDED POLITICS: BICAMERALISM, PARTIES, AND POLICY IN
+                                                                                                   DEMOCRATIC LEGISLATURES, William B. Heller                         245
+                                                                                                 THE END OF ECONOMIC VOTING? CONTINGENCY DILEMMAS AND THE
+                                                                                                   LIMITS OF DEMOCRATIC ACCOUNTABILITY, Christopher J. Anderson       271
+                                                                                                 PUBLIC POLICY ANALYSIS: IDEAS AND IMPACTS, William T. Gormley, Jr.   297
+                                                                                                 IRRATIONAL CHOICE AND MORTAL COMBAT AS POLITICAL DESTINY:
+                                                                                                   THE ESSENTIAL CARL SCHMITT, John P. McCormick                      315
+                                                                                                 HOW DOMESTIC IS DOMESTIC POLITICS? GLOBALIZATION AND
+                                                                                                   ELECTIONS, Mark Andreas Kayser                                     341
+
+                                                                                                                                                                        v
+                                                                                       P1: JRX
+                                                                                       April 9, 2007       10:54      Annual Reviews        ANRV312-FM
+
+
+
+
+                                                                                                 vi        CONTENTS
+
+
+                                                                                                 ELECTORAL LAWS AS POLITICAL CONSEQUENCES: EXPLAINING THE
+                                                                                                   ORIGINS AND CHANGE OF ELECTORAL INSTITUTIONS, Kenneth Benoit                         363
+
+                                                                                                 INDEXES
+                                                                                                      Cumulative Index of Contributing Authors, Volumes 1–10                            391
+                                                                                                      Cumulative Index of Chapter Titles, Volumes 1–10                                  394
+
+                                                                                                 ERRATA
+                                                                                                      An online log of corrections Annual Review of Political Science chapters
+Annu. Rev. Polit. Sci. 2007.10:103-126. Downloaded from arjournals.annualreviews.org
+
+
+
+
+                                                                                                      (if any, 1997 to the present) may be found at http://polisci.annualreviews.org/
+                 by 24.12.195.203 on 05/08/07. For personal use only.
+

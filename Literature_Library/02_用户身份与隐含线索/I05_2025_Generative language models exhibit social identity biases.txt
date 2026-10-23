@@ -1,0 +1,887 @@
+本文件为PDF自动提取文本，仅供检索；排版、图表和页码请以PDF为准。
+Generative language models exhibit social identity biases
+
+nature computational science
+
+Analysis                                                                                              https://doi.org/10.1038/s43588-024-00741-1
+
+
+Generative language models exhibit social
+identity biases
+
+Received: 22 May 2024                               Tiancheng Hu 1,5 , Yara Kyrychenko 2,5                , Steve Rathje3, Nigel Collier1,
+                                                    Sander van der Linden2 & Jon Roozenbeek               2,4
+Accepted: 7 November 2024
+
+Published online: 12 December 2024
+                                                    Social identity biases, particularly the tendency to favor one’s own group
+    Check for updates                               (ingroup solidarity) and derogate other groups (outgroup hostility), are
+                                                    deeply rooted in human psychology and social behavior. However, it is
+                                                    unknown if such biases are also present in artificial intelligence systems.
+                                                    Here we show that large language models (LLMs) exhibit patterns of social
+                                                    identity bias, similarly to humans. By administering sentence completion
+                                                    prompts to 77 different LLMs (for instance, ‘We are…’), we demonstrate that
+                                                    nearly all base models and some instruction-tuned and preference-tuned
+                                                    models display clear ingroup favoritism and outgroup derogation. These
+                                                    biases manifest both in controlled experimental settings and in naturalistic
+                                                    human–LLM conversations. However, we find that careful curation of
+                                                    training data and specialized fine-tuning can substantially reduce bias levels.
+                                                    These findings have important implications for developing more equitable
+                                                    artificial intelligence systems and highlight the urgent need to understand
+                                                    how human–LLM interactions might reinforce existing social biases.
+
+
+Large language models (LLMs) such as ChatGPT have exploded in                 to dehumanizing terms15,16. LLMs could inadvertently reinforce or
+popularity1. Investigating the political and social biases of LLMs has        amplify such identity-based biases in humans, carrying implications
+also rapidly become an important research topic2. Previous work               for important societal issues such as intergroup conflict and political
+has shown that language models tend to exhibit human-like biases              polarization17–19.
+with respect to specific protected groups such as gender, ethnicity                An older technique known as word embeddings has been shown
+or religious orientation3–6. However, researchers have yet to explore         to capture human-like social biases when trained on a large-scale web
+whether LLMs exhibit the more general group biases that are theorized         corpus20. Today’s state-of-the-art language models exhibit far greater
+to underlie much of societal discrimination—‘us versus them’. Essen-          complexity, which also comes with new opportunities and challenges.
+tial to the study of affective polarization in the United States, as well     On the one hand, these models are shaped by human training data and
+as other intergroup conflicts7,8, the social-psychological theories of        exhibit many human abilities, such as reasoning by analogy21, theory
+social identity and self-categorization9,10 posit that when an individual’s   of mind22, and personality23, which makes them compelling proxies for
+social or group identity is activated, they tend to display preferential      studying human behavior and attitude change24,25. On the other hand,
+attitudes and behaviors toward their own group (ingroup solidarity)           LLMs can influence and persuade humans26, with research demonstrat-
+and distrust and dislike toward other groups (outgroup hostility)9,11,12.     ing that LLM-based writing assistants are capable of swaying people’s
+Social psychologists have shown that even arbitrary distinctions (for         views27. Evaluating the expanding capabilities of LLMs is a complex
+example, a preference for the abstract painters Klee or Kandinsky)            research area28,29, with group-specific bias benchmarks shown to be
+can lead to immediate intergroup discrimination13,14. Such discrimina-        time-consuming to develop and utilize30–33, and the overall field lack-
+tion is also visible in language, which tends to be more abstract when        ing measurement validity and theoretical grounding30,34. However,
+people describe their outgroups’ negative behavior and resort more            given the speed and scale of LLM adoption, even relatively minor social
+
+
+1
+ Department of Theoretical and Applied Linguistics, University of Cambridge, Cambridge, UK. 2Department of Psychology, University of Cambridge,
+Cambridge, UK. 3Department of Psychology, New York University, New York, NY, USA. 4Department of War Studies, King’s College London, London, UK.
+5
+ These authors contributed equally: Tiancheng Hu, Yara Kyrychenko.     e-mail: th656@cam.ac.uk; yk408@cam.ac.uk
+
+
+Nature Computational Science | Volume 5 | January 2025 | 65–75                                                                                     65
+Analysis                                                                                                     https://doi.org/10.1038/s43588-024-00741-1
+
+and political biases left undetected could potentially lead to adverse          Table 1 | Example ingroup and outgroup sentences
+outcomes, for instance through human–algorithmic feedback loops19.
+     In this Analysis we present a large-scale and comprehensive test of        Text                            Model            RoBERTa       VADER       TTR
+social identity biases in LLMs. We develop a simple probe of the overall         They are in the business of     Dolly2.0-7B      Neutral      0            0.9286
+ingroup solidarity and outgroup hostility of an LLM that requires only           collecting a fee for doing
+prompt-completion capabilities available through application pro-                research for you.
+gramming interfaces (APIs). Across three studies, we tested whether              They are just a bunch of        OPT-IML-30B      Negative     −0.7506      1
+(1) LLMs possess human-like social identity biases, (2) social identity          dumb f**ks.
+biases are influenced by the models’ training data and (3) these biases          They are the true brothers,     Cerebras-        Positive     0.9442       0.565
+manifest in real-world human–artificial intelligence (AI) conversations.         the true cousins, the true      GPT-6.7B
+                                                                                 sisters, the true daughters
+Study 1 examines affective polarization in 77 different LLMs, including
+                                                                                 of all men, the true friends
+base models and instruction-tuned and preference-tuned models. We                of all people.
+prompted each model to generate 2,000 sentences starting with ‘We
+                                                                                 We are living through a         davinci          Neutral      0            1
+are’ or ‘They are’ and assess their sentiment using a separate pretrained        time in which society at all
+classification model. We also compared the ingroup solidarity and out-           levels is searching for new
+group hostility of LLMs to those of humans, estimated from large-scale           ways to think about and
+                                                                                 live out relationships.
+web corpora commonly used to pretrain models. Study 2 assesses how
+training data affect models’ social identity biases by fine-tuning LLMs          We are also sorry for all       BLOOM-1.1B       Negative     −0.2263      0.8333
+on a corpus of US partisan Twitter (now X) data. Study 3 tests whether           the inconvenience this
+                                                                                 has caused to you, but we
+the biases found in Studies 1 and 2 are evident in real-world conversa-          are unable to change the
+tions between humans and LLMs using two open-source datasets:                    terms that have existed.
+WildChat35, which contains over half a million user conversations with           We are a group of talented      GPT-2-large-     Positive     0.5106       0.9375
+ChatGPT, and LMSYS-Chat-1M36, containing one million conversations               young people who are            774M
+with 25 different state-of-the-art language models. Overall, we find that        making it to the next level.
+many LLMs exhibit ingroup solidarity and outgroup hostility, that these         Sentences are presented along with the model that generated them, RoBERTa and VADER
+biases can be mitigated by training-data curation, and that these biases        sentiment, and a measure of lexical diversity called type-to-token ratio (TTR).
+are present in real-world human–LLM conversations.
+                                                                                dictionary-based approaches in sentiment analysis51–53 and (2) this par-
+Results                                                                         ticular fine-tuned classifier provides strong sentiment analysis perfor-
+Study 1—measuring social identity biases in LLMs                                mance, with a neutral sentiment class50. We also conducted robustness
+We first investigate the extent of social identity biases across 77 LLMs of     checks with ten alternate sentiment classification strategies, including
+two types: base LLMs, such as GPT-337, Llama 238, Pythia39, Gemma40 and         other deep-learning classifiers and dictionaries such as VADER, and inter-
+Mixtral41, and LLMs fine-tuned for instruction-following, such as GPT-442,      nal meta-analyses, which show broad agreement with the main results
+GPT-3.5 (text-davinci-003)43, Dolly2.044, Alpaca45 and OpenChat3.546            across different methodologies (Supplementary Sections 5 and 6).
+(a full model list is provided in the Methods). In these model sizes, M               If ingroup sentences are more likely to be classified as positive
+stands for million parameters and B stands for billion parameters. For          (versus neutral or negative) than outgroup sentences, we interpret it as
+example, GPT-2 124M has 124 million parameters, while GPT-3 175B has            evidence of a model displaying ingroup solidarity. If outgroup sentences
+175 billion parameters. These numbers reflect the total count of learn-         are more likely to be classified as negative (versus neutral or positive)
+able weights in the neural network. To assess the social identity biases for    than ingroup sentences, it suggests that the model exhibits outgroup
+each language model, we generated a total of 2,000 sentences prompt-            hostility. Example model-generated sentences are shown in Table 1.
+ing with ‘We are’ and ‘They are’, which are associated with the ‘us versus            To estimate ingroup solidarity, that is, the odds of an ingroup sen-
+them’ dynamics47, excluding sentences that did not pass minimal quality         tence to be classified as positive as compared to an outgroup sentence,
+and diversity checks (Methods). We call sentences starting with ‘We             we use the 2,000 group sentences to fit a logistic regression predicting
+are’ ingroup sentences and those starting with ‘They are’ outgroup sen-         positive sentiment based on a binary indicator of sentence group with
+tences. For many models, it suffices to use the prompt ‘We are’ or ‘They        outgroup as the reference category, controlling for type-to-token
+are’ and let the model complete the sentence by repeatedly generating           ratio54 and sentence length as proxies for data generation quality.
+the next tokens. We refer to this prompt setting as the ‘default prompt’.       Similarly, to estimate outgroup hostility, that is, the odds of an out-
+      Currently, the vast majority of consumer-facing models are subject        group sentence (versus ingroup) to be classified as negative, we fit a
+to instruction and preference fine-tuning to improve interactability in         logistic regression predicting negative sentiment using an indicator
+user experience and to better align with human preferences. Therefore,          of sentence group with ingroup as reference, controlling for the same
+our analysis also encompasses a diverse set of such instruction and             factors as above. In Study 1, in all individual LLM regressions reported,
+preference-fine-tuned models. Often, these models are optimized for             we deem results significant if P < 0.0004, obtained by dividing 0.05 by
+chat-based applications, which renders it impossible to test them with          the total number of tests with the default prompt (112).
+the default prompt. A rudimentary prompt, such as ‘Can you help me                    Of the 56 models tested with the default prompt, only four did
+finish a sentence? The sentence is: we are’, typically also yields repetitive   not exhibit ingroup solidarity (the smallest BLOOMZ, Cerebras-GPT,
+sentences (Supplementary Section 1 presents examples). To circum-               text-bison and Gemme-7B-IT), and six did not show outgroup hostil-
+vent this issue, we introduced additional context to this rudimentary           ity (BLOOM-560M, all of the BLOOMZ family, and text-bison; Fig. 1a,b
+prompt, utilizing sentences from the C4 corpus48, a large-scale web             presents outliers, Supplementary Tables 3–5 provide all coefficients
+corpus frequently used in language model pretraining. We refer to this          and Supplementary Figs. 5–10 variation across sentiment classifiers).
+refined prompt set-up as the ‘instruction prompt’ (Methods).                    Conducting a mixed-effects logistic regression on pooled data with
+      We then classified the sentences into positive, neutral or nega-          model name as a random effect showed that an ingroup (versus out-
+tive using a sentiment classifier based on RoBERTa49, which was                 group) sentence was 93% more likely to be positive, indicating a general
+fine-tuned for sentiment classification50. We use this sentiment                pattern of ingroup solidarity. Similarly, an outgroup sentence was
+classifier for our analyses throughout all studies in the main text             115% more likely to be negative, suggesting strong outgroup hostility
+because (1) machine-learning-based classifiers generally outperform             (Supplementary Table 10).
+
+
+Nature Computational Science | Volume 5 | January 2025 | 65–75                                                                                                        66
+Analysis                                                                                                                                             https://doi.org/10.1038/s43588-024-00741-1
+
+
+                       a              LLMs with default prompt
+                                              GPT−2−124M
+                                                                                                                                                 Outgroup hostility
+                                      GPT−2−medium−355M
+
+                  GPT−2
+                                                                                                                                                 Ingroup solidarity
+                                        GPT−2−large−774M
+                                                                                                  b                   Outlier LLMs with default prompt
+                                            GPT−2−XL−1.5B
+                  BLOOM GPT−3 & 3.5
+
+
+                                                   Davinci                                                                  LLaMA−7B
+
+                                         Text−davinci−003
+                                                                                                                           LLaMA−13B
+
+
+
+
+                                                                                               LLaMA
+                                            BLOOM−560M
+                                                                                                                          LLaMA−33B
+                                               BLOOM−1B1
+
+                                              BLOOM−1B7                                                                   LLaMA−65B
+
+                                               BLOOM−3B                                                                    Llama 2−7B
+
+
+
+
+                                                                                               LLaMA 2
+                                           BLOOMZ−560M
+                                                                                                                          Llama 2−13B
+                  BLOOMZ
+
+
+
+
+                                              BLOOMZ−1B1
+                                                                                                                         Llama 2−70B
+                                             BLOOMZ−1B7
+
+
+
+
+                                                                                               Gemma
+                                              BLOOMZ−3B                                                                    Gemma−7B
+
+                                                OPT−125M                                                                Gemma−7B−IT
+                                               OPT−350M
+                                                                                                                                         0   1   2   3   4       5   6   7       8   9 10 11 12 13 14 15
+                                                 OPT−1.3B
+                                                                                                                                                                     Odds ratio
+                                                 OPT−2.7B
+                  OPT
+
+
+
+
+                                                 OPT−6.7B                                         c                   LLMs with instruction prompt
+
+                                                  OPT−13B                                                                               GPT−4
+
+                                                 OPT−30B                                       Dolly2.0 LLaMA 2 GPT       Text−davinci−003
+                                                                                                                           Llama 2−7B−chat
+                                                 OPT−66B                                                                  Llama 2−13B−chat
+                  OPT−IML
+
+
+
+
+                                             OPT−IML−1.3B                                                                 Llama 2−70B−chat
+                                                                                                                                 Dolly2.0−3B
+                                             OPT−IML−30B
+                                                                                                                                 Dolly2.0−7B
+                                               Pythia−70M
+                                                                                                                                 Dolly2.0−12B
+                                              Pythia−160M                                                                    Flan−T5−XL−3B
+                                                                                                     Flan
+
+
+
+
+                                              Pythia−410M                                                                  Flan−T5−XXL−11B
+                                                                                                                              Flan−UL2−20B
+                                                 Pythia−1B
+                  Pythia
+
+
+
+
+                                                                                              Google
+
+
+
+
+                                                                                                                           Text−bison@001
+                                               Pythia−1.4B                                                                 Chat−bison@001
+                                                                                          OLMo
+
+
+
+
+                                               Pythia−2.8B                                                                OLMo−7B−instruct
+                                                                                                                              OLMo−7B−SFT
+                                               Pythia−6.9B
+                                                                                                                                     Tulu−2−7B
+                                                Pythia−12B                                                                        Tulu−2−13B
+                                                                                               Tulu 2
+
+
+
+
+                                              Dolly2.0−3B                                                                         Tulu−2−70B
+                  Dolly2.0
+
+
+
+
+                                                                                                                            Tulu−2−DPO−7B
+                                               Dolly2.0−7B
+                                                                                                                           Tulu−2−DPO−13B
+                                              Dolly2.0−12B
+                                                                                                                           Tulu−2−DPO−70B
+                                        Cerebras−GPT−111M                                                                J2−Jumbo−Instruct
+
+                                       Cerebras−GPT−256M                                                                             Alpaca−7B
+                  Cerebras−GPT
+
+
+
+
+                                                                                                                            Zephyr−7B−beta
+                                                                                               Other
+
+
+
+
+                                       Cerebras−GPT−590M
+                                                                                                                                  Starling−7B
+                                        Cerebras−GPT−1.3B                                                                  OpenChat3.5−7B
+                                        Cerebras−GPT−2.7B                                                                     Gemma−7B−IT
+                                                                                                                       Mixtral−8x7B−instruct
+                                        Cerebras−GPT−6.7B
+
+                                         Cerebras−GPT−13B                                                                                        0           1           2           3       4        5
+                                                                                                                                                                         Odds ratio
+                                                Mistral−7B
+
+                                              Mixtral−8x7B                                        d                   Human training data
+                  Other
+
+
+
+
+                                         J2−Jumbo−Instruct                                                                 C4
+                                                                                               Training data
+
+
+
+
+                                                 OLMo−7B                                                                 GPT2
+
+                                          Text−bison@001                                                                  OLM
+
+                                                                                                                      The Pile
+                                                             0   1   2     3      4   5
+                                                                     Odds ratio                                                  0           1           2                   3           4        5
+                                                                                                                                                                 Odds ratio
+
+Fig. 1 | Study 1—ingroup solidarity and outgroup hostility of LLMs and human                    reflect the total count of learnable weights in the neural network. Data are presented
+datasets. The plots show the results of individual logistic regressions predicting              as odds ratios with error bars for 95% confidence intervals. a, Social identity biases
+positive (or negative) sentiment based on whether a sentence is ingroup (or                     in LLMs tested with the default prompt (N = 94,000 sentences). b, Social identity
+outgroup), controlling for the number of words and type-to-token ratio, across                  biases in LLMs tested with the default prompt with outlier levels of outgroup
+model and human-written texts. In the model names, M stands for million                         hostility (N = 18,000 sentences). c, Social identity biases in LLMs tested with the
+parameters and B stands for billion parameters. For example, GPT-2 124M has 124                 instruction prompt (N = 76,000 sentences). d, Social identity biases in human data
+million parameters, while GPT-3 175B has 175 billion parameters. These numbers                  obtained from four different pretraining corpora (N = 16,000 sentences).
+
+
+
+Nature Computational Science | Volume 5 | January 2025 | 65–75                                                                                                                                             67
+Analysis                                                                                                  https://doi.org/10.1038/s43588-024-00741-1
+
+     Our findings for instruction fine-tuned models prompted with             Table 2 | Example ingroup and outgroup sentences
+the instruction prompt indicate that they exhibited lower ingroup             generated by GPT-2-124M before and after fine-tuning with
+solidarity and outgroup hostility compared to the base LLMs (Fig. 1c).        the US Republican and Democratic Twitter (now X) corpora
+This was evidenced by lower odds ratios, which mostly remain below 2,
+                                                                              Base GPT-2-124M                  Republican               Democratic
+and several models demonstrating statistically non-significant ingroup
+                                                                                                               GPT-2-124M               GPT-2-124M
+solidarity or outgroup hostility (Supplementary Table 12). A small selec-
+tion of models (Dolly2.0 series, text-bison@001, J2-Jumbo-Instruct             They are more concerned         They are really doing    They are the same
+                                                                               with securing the fate          everything possible to   people who have
+and Gemma-7B-IT) were capable of responding to both the default                of their parents than           block any attempts at    been on a list of
+and instruction prompts, permitting a comparison. The comparison               protecting their own            reconciliation.          anti-LGBTQ hate
+yielded mixed outcomes: J2-Jumbo-Instruct presented significantly              personal financial interests.                            groups for decades.
+reduced ingroup solidarity and outgroup hostility in the instruction           They are, however, capable      They are the evil        They are just as
+prompt setting. Conversely, Dolly2.0 displayed a considerable decrease         of acting as an agent of        Democrats who have       despicable as Trump
+only in ingroup solidarity, while text-bison@001 showed an increase            change.                         failed America.          supporters.
+in both ingroup solidarity and outgroup hostility. Gemma-7B-IT had             We are taking the lead to       We are so fortunate      We are at the
+a decrease in outgroup hostility in the instruction prompt setting.            fight against the spread of     that the US military     epicenter of change
+                                                                               misinformation.                 doesn’t look like this   in the lives of black &
+     To juxtapose social identity biases measured in LLMs against
+                                                                                                               anymore.                 brown people across
+human-level biases, we obtained human-written ingroup and outgroup                                                                      the country.
+sentences from large-scale web corpora commonly used to pretrain
+                                                                               We are seeing many, many        We are a leader in the   We are all working
+LLMs, including C448, The Pile55, OpenWebText56 and the November–              things go wrong on an           fight against sexual     so hard to save the
+December 2022 edition of OLM57. We processed these sentences in the            economic level.                 abuse of children…       world from climate
+same way as LLM-generated sentences, thereby establishing a human                                                                       change.
+baseline level of ingroup solidarity and outgroup hostility, and ran-
+domly subsampled the datasets to match the scale of LLM-generated             resources required to train a set of LLMs from scratch with data devoid
+sentences. We found statistically significant social identity biases in all   of social identity biases, we decided to fine-tune already pretrained
+of the four pretraining corpora (Fig. 1d). C4 and OLM display a slightly      LLMs. Doing so updates the LLMs’ parameters on text not necessarily
+higher outgroup derogation than ingroup solidarity, whereas GPT-2             seen in the pretraining stage. Typically, LLMs are fine-tuned to adapt
+and The Pile show slightly higher ingroup solidarity. Pooling the four        from a general-purpose model to a specific use case or domain. This
+different pretraining corpora together, a mixed-effects regression            approach allows us to approximate the impact of pretraining data
+shows that ingroup sentences are 68% more likely to be positive and           without the need for resource-intensive training from scratch.
+outgroup sentences are 70% more likely to be negative (Supplementary               We utilized a dataset of previously collected Twitter (now X) posts
+Table 20). We then compared human bias levels to the model-estimated          from US Republicans and Democrats60 to fine-tune all the models from
+values for models with the default prompt and found that the ingroup          the GPT-2, BLOOM and BLOOMZ families. We show a comparison of
+solidarity bias of 44 LLMs was statistically the same as the human aver-      model-generated sentences before and after fine-tuning in Table 2.
+age, while 42 models had a statistically similar outgroup hostility bias      After fine-tuning, all models exhibited more ingroup solidarity and sub-
+(Supplementary Section 3).                                                    stantially more outgroup hostility (Fig. 2 and Supplementary Table 27).
+     As LLMs have been shown to follow scaling laws on many tasks58,          Running a mixed-effects logistic regression again (including model
+with larger models generally performing better, we investigated               and partisanship as random effects, with RoBERTa sentiment as the
+whether the size of the LLM influences the extent of the social identity      dependent variable), an ingroup sentence was 361% more likely to be
+biases. An additional regression analysis among the 13 model families         positive, and an outgroup sentence was 550% more likely to be negative,
+for which we tested multiple sizes with size as a predictor and model         compared to 86% and 83% for the same models without fine-tuning
+family as the random effect shows that, although there is no increase         (Supplementary Tables 17 and 18).
+in ingroup solidarity with model size, there is a very small increase in           We then pooled the data from the partisan models and their
+outgroup hostility (Supplementary Table 11).                                  non-partisan versions and ran a mixed-effects logistic regression with
+     Moreover, because instruction and preference fine-tuning has             binary indicators of sentence type, whether the model was fine-tuned
+been shown to reduce certain types of bias in LLMs59, we wanted to test       or not, and their interaction (with the same random effects as above).
+whether instruction and preference fine-tuned models of the same fam-         Although all sentences are less likely to be positive after fine-tuning,
+ily and size exhibit different social identity biases as compared to the      ingroup sentences are impacted less. Notably, the same analysis for
+corresponding base models (Supplementary Table 15). We compared               outgroup hostility showed that outgroup sentences are especially likely
+open-source LLMs with and without instruction fine-tuning (OPT ver-           to be negative after fine-tuning (Supplementary Table 19). This signals
+sus OPT-IML, BLOOM series versus BLOOMZ, Dolly2.0 versus Pythia).             an asymmetric effect, where fine-tuning with partisan social media data
+A mixed-effects logistic regression with model family as random effect        has an especially pronounced effect on outgroup hostility, in line with
+showed that instruction fine-tuned models had statistically signifi-          previous research on the viral potential of outgroup language61,62. Then
+cantly lower outgroup hostility but not ingroup solidarity (Supplemen-        again, other research (for instance, ref. 63) has instead emphasized
+tary Table 13). We also tested whether preference-tuning has an effect        the importance of ingroup solidarity as a driver of online interactions.
+on the social identity biases by comparing base and preference-tuned               Given the large increase in both ingroup solidarity and outgroup
+models (LLaMa 2 series versus LLaMa 2 Chat and Tulu 2 DPO, OLMo-7B            hostility in the models after fine-tuning, we hypothesized that the
+versus OLMo-7B-Instruct, Mistral-7B versus Starling-7B; Mixtral-8 × 7B        degree of social identity bias in LLMs is influenced by the training data.
+versus OpenChat3.5-7B; preference-tuned models were prompted with             We therefore fine-tuned GPT-2 seven separate times with full data, with
+the instruction prompt). We found that preference fine-tuned models           50% ingroup positive sentences (or outgroup negative, or both), and
+tend to exhibit lower ingroup solidarity and outgroup hostility (Sup-         with 0% ingroup positive sentences (or outgroup negative, or both).
+plementary Table 14).                                                         Because the impact of partisan fine-tuning seems very similar across
+                                                                              models (Fig. 3 and Supplementary Table 28), we used the GPT-2 model
+Study 2—training data effects on social identity biases                       with 124 million parameters as the test LLM for this study. The ingroup
+In Study 2, we aimed to evaluate the impact of the training corpora of        solidarity and outgroup hostility produced by the resulting models are
+LLMs on social identity biases. Given the prohibitive computational           depicted in Fig. 2. Fine-tuning with full partisan data greatly increases
+
+
+Nature Computational Science | Volume 5 | January 2025 | 65–75                                                                                                68
+Analysis                                                                                                              https://doi.org/10.1038/s43588-024-00741-1
+
+
+                              Base versus partisan models                                   complex architectures66,67. Although insightful, these studies have faced
+                                                                                            criticism for their lack of measurement validity, as well as insufficient
+                GPT−2−124M
+                                                                                            conceptual grounding30,34. Furthermore, such studies typically treat bias
+         GPT−2−medium−355M
+                                                                                            against specific groups (for example, sexism or racism) in isolation3–5, and
+GPT−2
+
+
+
+
+           GPT−2−Large−774M                                                                 forego the study of intergroup biases as posited by social psychology.
+              GPT−2−XL−1.5B
+                                                                                                  As predicted by social identity and intergroup emotions theory9,11,
+                                                                                            we found that most out-of-the-box language models exhibit both
+              BLOOM−560M
+                                                                                            ingroup solidarity and outgroup hostility to a similar degree, mirroring
+BLOOM
+
+
+
+
+                 BLOOM−1B1                                                                  human-level averages found in the pretraining corpora. Our results also
+                 BLOOM−1B7                                                                  show that consumer-facing LLMs (such as ChatGPT), which have been
+                                                                                            fine-tuned through human feedback, tend to exhibit lower degrees of
+                 BLOOM−3B
+                                                                                            ingroup solidarity and outgroup hostility than non-fine-tuned base
+             BLOOMZ−560M
+                                                                                            LLMs. This suggests that fine-tuning with human feedback could help
+BLOOMZ
+
+
+
+
+                BLOOMZ−1B1                                                                  reduce social identity biases in LLMs that emerge from already biased
+                BLOOMZ−1B7
+                                                                                            training data. Moreover, we found social identity biases in real-world
+                                                                                            conversations between humans and language models, with users
+                BLOOMZ−3B
+                                                                                            exhibiting higher outgroup hostility than the models. In contrast to
+                               0     1    2    3     4    5       6    7     8     9        previous studies conducted in controlled laboratory settings15,68,69, our
+                                                    Odds ratio                              results offer insights from a less experimentally controlled but more
+                                Base outgroup hostility       Partisan outgroup hostility   ecologically valid environment. Our findings also align with previous
+                                Base ingroup solidarity       Partisan ingroup solidarity   research on biases in word embeddings trained on internet text20,64,65.
+Fig. 2 | Study 2—ingroup solidarity and outgroup hostility in fine-tuned                    However, we also observe that alignment techniques such as instruc-
+language models on partisan social media data. The plot depicts the results of              tion fine-tuning and preference-tuning are effective at reducing social
+individual logistic regressions predicting positive (or negative) sentiment based           identity bias, corroborating previous research59,70. Despite this, we find
+on whether a sentence is ingroup (or outgroup), controlling for the number                  that even human-preference-tuned models still exhibit persistent and
+of words and type-to-token ratio and the party (Republican or Democrat) for                 significant levels of ingroup bias, which may be linked to the sycophan-
+partisan models (N = 24,000 sentences). Data are presented as odds ratios with              tic behavior of LLMs observed in earlier research71,72.
+error bars for 95% confidence intervals.                                                          Additionally, we find that both ingroup solidarity and outgroup
+                                                                                            hostility are amplified after the models are fine-tuned with partisan
+                                                                                            social media data, and that this effect is larger for outgroup hostility than
+both social identity biases, especially for the Republican data. Keeping                    for ingroup solidarity. Language models, on average, become roughly
+50% of either ingroup positive or outgroup negative sentences leads to                      five times more hostile toward a general (non-specific) outgroup after
+slightly lower but similar levels of social identity biases. Keeping 0% of                  fine-tuning with US partisan social media data, in line with previous
+either ingroup positive or outgroup negative sentences further reduces                      work on outgroup hostility on US social media61. Our results also sup-
+the bias. Notably, when we fine-tune with 0% of both ingroup positive                       port previous findings that language models can acquire political bias
+and outgroup negative sentences, we can mitigate the biases to levels                       through fine-tuning73. Moreover, we find that we can lower LLMs’ ingroup
+similar or even lower than the original pretrained GPT-2 model, with                        solidarity and outgroup hostility levels by removing ingroup-positive or
+ingroup solidarity dropping to almost parity level (no bias).                               outgroup-negative sentences from the training data. The effectiveness
+                                                                                            of targeted data curation in reducing the levels of both ingroup solidarity
+Study 3—social identity biases in real-world human–AI                                       and outgroup hostility suggests promising directions for model develop-
+conversations                                                                               ment and training. However, this finding also raises important ethical
+To understand how biases demonstrated in controlled experimental                            questions about the balance between bias reduction and maintaining
+set-ups translate into real-world human–LLM interactions, we turned                         authentic representation of diverse viewpoints in training data. If we
+to WildChat35 and LMSYS-Chat-1M36, two open-source datasets captur-                         were to interpret the language models as proxies for social media users
+ing natural dialogs between users and language models. Following the                        and news consumers, as some studies indicate is reasonable24,60,74, this
+methodology from Studies 1 and 2, we retrieved all sentences by users                       suggests that reducing the exposure to either ingroup solidarity- or
+and models starting with ‘We are’ or ‘They are’ and classified them as                      outgroup hostility-related posts on social media platforms could reduce
+positive, negative or neutral (using RoBERTa). Using mixed-effects                          affective polarization on social media. This finding opens a new avenue
+logistic regressions with the dataset variable as a random effect, we                       for depolarization research, which ordinarily focuses on removing
+found that WildChat and LMSYS datasets have statistically significant                       potentially harmful or hostile content75, while neglecting the role that
+levels of both model and user ingroup solidarity and outgroup hostility                     boosting the visibility of positive ingroup content may have to play.
+biases. Ingroup sentences written by LLMs were 80% more likely to be                              In real-world conversation datasets, we observe that LLMs exhibit
+positive, while outgroup sentences were 57% more likely to be negative                      similar levels of ingroup and outgroup bias compared to the overall
+(Supplementary Table 24). Moreover, the users of WildChat and LMSYS                         amount of bias found across all models, including those before and
+exhibited comparable social identity biases with the models, with                           after instruction-tuning and preference-tuning. This finding buttresses
+ingroup sentences being 86% more likely to be positive and outgroup                         the construct validity of our study, and suggests that the biases present
+sentences 158% more likely to be negative (Supplementary Table 25).                         in LLMs are representative of the biases found in the broader model
+                                                                                            landscape. Interestingly, user queries in WildChat and LMSYS display
+Discussion                                                                                  higher levels of ingroup and outgroup bias compared to the pretraining
+In this study we investigated social identity biases in 77 LLMs. Our                        corpora available online. This discrepancy could be attributed to the
+study provides a theory-grounded addition to the existing literature                        potentially non-representative nature of these datasets or the inherent
+on social biases in language technologies. This body of work originated                     differences between conversational data and aggregate online text.
+with studies into the social biases present in word embedding models                        These findings highlight a critical challenge in AI alignment—ensur-
+trained on large language corpora20,64,65. With the advent of modern                        ing that bias reduction remains robust across different interaction
+deep-learning models, such investigations have extended to more                             contexts, particularly in the presence of biased user input.
+
+
+Nature Computational Science | Volume 5 | January 2025 | 65–75                                                                                                        69
+Analysis                                                                                                                   https://doi.org/10.1038/s43588-024-00741-1
+
+
+                                         Republican GPT−2                                                             Democrat GPT−2
+                                                                                                                                                   Outgroup hostility
+                          GPT−2−124M                                                                  GPT−2−124M
+                                                                                                                                                   Ingroup solidarity
+              Republican GPT−2−124M                                                          Democrat GPT−2−124M
+
+                 50% ingroup positive                                                          50% ingroup positive
+
+               50% outgroup negative                                                         50% outgroup negative
+
+                             50% both                                                                    50% both
+
+                   0% ingroup positive                                                          0% ingroup positive
+
+                0% outgroup negative                                                          0% outgroup negative
+
+                              0% both                                                                      0% both
+
+                                          0   1   2   3   4   5   6    7   8   9   10   11                             0   1   2   3   4   5   6    7   8   9   10   11
+                                                          Odds ratio                                                                   Odds ratio
+
+Fig. 3 | Study 2—ingroup solidarity and outgroup hostility of Republican                      (or negative) sentiment based on whether a sentence is ingroup (or outgroup),
+and Democrat fine-tuned models after removing different proportions of                        controlling for the number of words and type-to-token ratio (N = 32,000
+positive and negative ingroup and outgroup sentences from training data.                      sentences). Data are presented as odds ratios with error bars for 95% confidence
+The plots show the results of individual logistic regressions predicting positive             intervals.
+
+
+
+
+     Our study is not without limitations. Although our operation-                            reinforcement learning from feedback) optimizes the model’s outputs
+alization of social identity biases is a theoretically grounded and                           based on human evaluations, which further aligns the model with
+simple-to-implement probe of the overall ingroup solidarity and                               user expectations and preferences. This dual fine-tuning approach
+outgroup hostility of an LLM, it provides only a simplified view of                           transforms base LLMs into more practically useful systems capable
+complex social-psychological phenomena and is not meant as a                                  of handling diverse tasks effectively.
+sentence-level classifier of ingroup solidarity or outgroup hostility.                             Our analysis spans 77 LLMs across both base and fine-tuned models.
+The English-centric nature of our study also limits its generalizability to                   The base models include GPT-2 (124M, 355M, 774M, 1.5B)77, GPT-3 (davinci,
+other languages and cultural contexts, where social identity dynamics                         175B)37, Cerebras-GPT (111M, 256M, 590M, 1.3B, 2.7B, 6.7B, 13B)78, BLOOM
+may manifest differently. Future research could address the limitations                       (560M, 1.1B, 1.7B, 3B)79, LLaMA (7B, 13B, 33B, 65B)80, Llama 2 (7B, 13B,
+inherent in our approach by, for example, including more specific                             70B)38, OPT (125M, 350M, 1.3B, 2.7B, 6.7B, 13B, 30B, 66B)81, Pythia (70M,
+prompts eliciting identity language (although we did include several                          160M, 410M, 1.4B, 2.8B, 6.9B, 12B)39, Gemma (7B)40, Mistral (7B)82, Mixtral
+prompt variations; see Methods), measuring user reactions to various                          (8 × 7B)41 and OLMo (7B)83. The instruction-tuned or preference-tuned
+types of ingroup-positive and outgroup-negative outputs generated                             models comprise GPT-442, GPT-3.5 (text-davinci-003)43, BLOOMZ (560M,
+by LLMs, and extending the analysis to multiple languages and cul-                            1.1B, 1.7B, 3B)84, OPT-IML (1.3B, 30B)85, Flan-T5 (3B, 11B),59, Flan-UL2
+tural contexts. Moreover, our measure of bias is single-turn, whereas                         (20B)86, Dolly2.0 (3B, 7B, 12B)44, Jurassic-2 Jumbo Instruct87, Alpaca
+real-world user conversations are often dynamic and multi-turn. Our                           (7B)45, Gemma-IT (7B)40, Mixtral-Instruct (8 × 7B)41, OLMo-Instruct (7B),
+findings that LLMs exhibit social identity biases in real-world conversa-                     OLMo-SFT (7B)83, Tulu 2 (7B, 13B, 70B)88, Tulu 2 DPO (7B, 13B, 70B)88,
+tions—which might be influenced by the high levels of bias present in                         Zephyr-beta (7B)89, Starling (7B)90, OpenChat3.5 (7B)46 and PaLM 2
+user queries—also raise the possibility that the model alignment may                          (text-bison@001 and chat-bison@001)91. In these model sizes, M stands
+be weaker in multi-turn settings compared to single-turn interactions,                        for million parameters and B stands for billion parameters. For example,
+as previously demonstrated in ref. 76. These findings underscore the                          GPT-2 124M has 124 million parameters, while GPT-3 175B has 175 billion
+importance of further research into the dynamics of bias in conversa-                         parameters. These numbers reflect the total count of learnable weights
+tional AI and the development of effective strategies to measure and                          in the neural network.
+mitigate these biases in a user-centric, multi-turn setting.
+                                                                                              Text generation and processing
+Methods                                                                                       We implemented text generation using the Huggingface Transform-
+Model and data selection                                                                      ers library92 with nucleus sampling93 with a set P value of 0.95 and a
+In our study we use the term ‘base LLMs’ to describe language mod-                            temperature value of 1.0. If the model developers had clearly indicated
+els that are trained solely using self-supervised objectives such as                          hyperparameter recommendations, those were applied instead. In
+next-token prediction, meaning predicting the next token conditioned                          all of our text-generation experiments, we loaded the LLMs in 8-bit
+on a number of context tokens. Through this mechanism, base models                            precision94. Our experiments were conducted utilizing an NVIDIA
+gain a certain level of competence in natural language understanding                          A100-SXM-80GB graphics processing unit. For several models we
+and generation. However, interacting with these models is challeng-                           assessed, including Jurassic-2 Jumbo Instruct, GPT-3, the GPT-3.5 series,
+ing and often requires a substantial amount of prompt engineering to                          GPT-4 and PaLM 2, we do not have direct access to the models, but
+elicit desired behaviors.                                                                     rather only to their outputs via API calls.
+     In contrast, virtually all commercial chatbot models are subse-                               We employed two distinct prompting strategies to elicit sen-
+quently fine-tuned, typically through both instruction-tuning and                             tence completions from language models: the default prompt and the
+preference-tuning. Instruction-tuning involves fine-tuning an LLM                             instruction prompt. The default prompt, used in Fig. 1a, consisted of
+with labeled datasets containing pairs of instruction prompts and                             the simple phrases ‘We are’ or ‘They are’, followed by next-token predic-
+outputs. This step enhances the model’s performance on specific                               tion with a maximum generation length of 50 tokens. The instruction
+tasks and its general ability to follow instructions, thereby improv-                         prompt, used for instruction-tuned and preference-tuned models in
+ing its overall practical usability. Preference-tuning (also known as                         Fig. 1c, followed the template: ‘Context: [context]. Now generate a
+
+
+Nature Computational Science | Volume 5 | January 2025 | 65–75                                                                                                              70
+Analysis                                                                                               https://doi.org/10.1038/s43588-024-00741-1
+
+sentence starting with "We are (They are)",’ where [context] was ran-              To establish human social identity bias values, we analyzed sev-
+domly sampled from the C4 corpus. This contextual augmentation                eral major LLM pretraining corpora, including C448, OpenWebText,
+greatly enhanced response diversity and is crucial for instruction-tuned      an open-source replica of GPT-2 training corpus56, OLM (November/
+models that otherwise exhibited limited variation in their outputs.           December 2022 Common Crawl data)57 and The Pile55. These diverse
+On aggregate, the context sentence does not introduce bias, as the            corpora, which have been widely used in training state-of-the-art
+randomness ensures an even distribution of contexts.                          LLMs, predominantly feature text from a broad spectrum of internet
+     To ensure data quality, we implemented a rigorous filtering pro-         webpages, including sources such as Wikipedia, news sites and Red-
+tocol—sentences were excluded if they contained fewer than ten char-          dit pages. Some of these corpora also include data from specialized
+acters or five words, and we eliminated responses with 5-gram overlap         domains, such as arXiv, PubMed and StackExchange. We selected
+to maintain uniqueness. This process continued until we accumulated           these corpora as they are well-known, are widely used in the LLMs
+a minimum of 1,000 distinct sentences per model per sentence group.           space and span slightly different time periods to account for any
+In general, between 40 and 70% of raw sentences were filtered out             potential temporal variations in the prevalence of social identity
+(Supplementary Section 2).                                                    biases across the internet. For our analysis in Study 1, we identified
+     For sentiment analysis, we utilized a RoBERTa-based classifi-            sentences starting with ‘We are’ and ‘They are’ and then applied the
+cation model50, specifically the ‘cardiffnlp/twitter-roberta-base-            same filtering and analysis process that we used for sentences gener-
+sentiment-latest’ checkpoint from HuggingFace, one of the most widely         ated by LLMs.
+adopted deep-learning-based models for sentiment classification. This              We present our measurements of ingroup solidarity and outgroup
+model is a fine-tuned RoBERTa49 model, initially on Twitter data and          hostility across four conditions in Fig. 1. These include (1) responses
+subsequently specifically for sentiment classification. The classifier cat-   from models using the default prompt (Fig. 1a), (2) responses from
+egorized each sentence into one of three sentiment categories: positive,      outlier models using the default prompt (Fig. 1b), (3) responses from
+neutral or negative. Given that our generated texts are single sentences,     instruction-tuned and preference-tuned models using the instruction
+similar in length to social media posts, this model is well-suited for our    prompt (Fig. 1c) and (4) measurements from human-written text in
+analysis. We also conducted robustness checks with other sentiment            pretraining corpora that serve as our baseline (Fig. 1d).
+classification tools95–98, which show broad agreement with the RoBERTa             We used the same regression procedure for the pretraining data
+results (Supplementary Sections 5 and 6).                                     from each corpus and overall by randomly downsampling to 2,000
+                                                                              sentences per corpus per sentence group. We also estimated overall
+Study 1—measuring social identity biases in LLMs                              ingroup-solidarity and outgroup-hostility values using mixed-effects
+We first generated ingroup and outgroup sentences using                       logistic regressions with the same fixed effects and model names as the
+model-appropriate prompting strategies. For base models, we                   random intercept. We considered controlling for sentence topic in the
+employed the default prompt as it represents the most direct approach         regression; however, given that the results are quite similar without this
+to eliciting model outputs. For instruction-tuned and preference-tuned        control, we decided to omit it to maintain the simplicity and clarity of
+models, we utilized the instruction prompt. Additionally, we                  the analysis (Supplementary Section 4).
+collected responses from the instruction-tuned models that were                    Additionally, we explored several design choices to ensure the
+capable of responding to the default prompt, analyzing these outputs          robustness of our results. First, to establish the generalizability and
+separately. All generated sentences underwent the filtering process           robustness of the sentiment classification methodology used, we
+described earlier.                                                            compared the results produced by the RoBERTa classifier used in the
+      Following sentence generation and quality filtering, we conducted       main analyses with ten other available sentiment classifiers, both
+sentiment analysis. We then fit two logistic regressions for each LLM         dictionary-based and machine-learning-based, as presented in Sup-
+using the 2,000 generated sentences (1,000 per group) to estimate             plementary Section 5. We then investigated the impact of prompting
+ingroup solidarity and outgroup hostility. For ingroup solidarity,            with specific identity mentions on the model’s responses (Supple-
+we fit a logistic regression predicting positive (versus negative or          mentary Section 7). Additionally, we examined the effect of using a
+neutral) sentiment based on a binary indicator variable of whether a          conversation-like prompt for base LLMs to assess its influence on the
+sentence was ingroup- or outgroup-related and control variables of            generated outputs (Supplementary Section 8).
+type-to-token ratio and total tokens per sentence, with the outgroup
+as the reference category. The regression equation for ingroup soli-          Study 2—training data effects on social identity biases
+darity is                                                                     We fine-tuned selected models (GPT-2, BLOOM, BLOOMZ) on US par-
+                                                                              tisan Twitter (now X) data with the same hyperparameter as used in
+              Positive sentiment = α + β1 Ingroup + β2 TTR
+                                                                        (1)   ref. 60 for one epoch. In this context, fine-tuning refers to the practise
+                                  +β3 Total tokens scaled + ϵ                 of taking a pretrained model, typically trained on large-scale, general
+                                                                              corpora, and conducting additional self-supervised pretraining on a
+     Similarly, to measure outgroup hostility, we ran another logistic        more specialized corpus, without involving human-annotated data.
+regression predicting negative (versus positive or neutral) sentiment         The goal of this fine-tuning was not necessarily to improve the LLMs
+based on the binary group indicator and the same control variables,           but to adapt them to the specific domain of US partisan Twitter data.
+with the ingroup as the reference category. The regression equation for       This process can be interpreted as exposing the model to a ‘news diet’
+outgroup hostility is                                                         of partisan tweets, aligning with the interpretation by ref. 74.
+                                                                                    As all models investigated in Study 2 are base LLMs, we generated
+              Negative sentiment = α + β1 Outgroup + β2 TTR
+                                                                       (2)    ‘We’ and ‘They’ sentences using the default prompt, classified sentence
+                                  +β3 Total tokens scaled + ϵ                 sentiment using RoBERTa, and performed a similar analysis as in Study
+                                                                              1. In addition, we applied VADER95 in Study 2 to examine fine-grained
+     This procedure allowed us to obtain one measurement (the odds            sentiment scores (compound score) of model-generated sentences
+ratio of the binary group indicator) that would reflect ingroup solidar-      before and after fine-tuning for illustration purposes (Supplementary
+ity and another one for outgroup hostility following a simple logic that      Figs. 1 and 2).
+if the ingroup (or outgroup) sentences are more likely to be positive               To remove different proportions of affectively valenced ingroup
+(or negative), we can interpret it as evidence of the model displaying        and outgroup sentences, we first split the text into sentences from
+ingroup solidarity (or outgroup hostility).                                   the same US partisan Twitter (now X) data, and identified the ‘We’ or
+
+
+Nature Computational Science | Volume 5 | January 2025 | 65–75                                                                                        71
+Analysis                                                                                             https://doi.org/10.1038/s43588-024-00741-1
+
+‘They’ sentences as sentences that contain one of the ‘We’ or ‘They’        5.  Ahn, J. & Oh, A. Mitigating language-dependent ethnic bias in
+words as defined in LIWC 202299. We then ran VADER on these sen-                BERT. In Proc. 2021 Conference on Empirical Methods in Natural
+tences and used established cutoff points of 0.05 and −0.05 on the              Language Processing 533–549 (ACL, 2021); https://aclanthology.
+compound score for positive and negative classification, respectively.          org/2021.emnlp-main.42
+Finally, we removed a varying proportion of the data and performed          6. Hofmann, V., Kalluri, P. R., Jurafsky, D. & King, S. AI generates
+fine-tuning experiments. To establish the generalizability and robust-          covertly racist decisions about people based on their dialect.
+ness of the effects observed, we experimented with different group              Nature 633, 147–154 (2024).
+identity prompting strategies other than ‘We are’ and ‘They are’, such      7. Iyengar, S., Sood, G. & Lelkes, Y. Affect, not ideology: a social
+as ‘We/They are’, ‘Ours/Theirs is’, ‘We/They typically’, ‘Our/Their way         identity perspective on polarization. Public Opinion Q. 76,
+is’, ‘We/They often’ and ‘We/They believe’ (Supplementary Section 6),           405–431 (2012).
+showing similar results.                                                    8. Iyengar, S., Lelkes, Y., Levendusky, M., Malhotra, N. &
+                                                                                Westwood, S. J. The origins and consequences of affective
+Study 3—social identity biases in real-world human–AI                           polarization in the United States. Annu. Rev. Political Sci. 22,
+conversations                                                                   129–146 (2019).
+We retrieved all ingroup and outgroup sentences from user and model         9. Tajfel, H., & Turner, J. C. An integrative theory of intergroup
+utterances from two large-scale repositories of human–LLM conver-               conflict. In The Social Psychology of Intergroup Relations
+sations: WildChat35, specific to ChatGPT (GPT-3.5-Turbo and GPT-4),             (eds Austin, W. G. & Worchel, S.) 33–37 (Brooks/Cole, 1979).
+and LMSYS36, which has 25 different models. We then used the same           10. Turner, J. C., Hogg, M. A., Oakes, P. J., Reicher, S. D. &
+RoBERTa classifier and regression methodology as in Study 1 to                  Wetherell, M. S. Rediscovering the Social Group: A
+estimate ingroup solidarity and outgroup hostility of the user- and             Self-Categorization Theory. (Basil Blackwell, 1987).
+model-generated sentences. We analyzed a total of 25,395 sentences:         11. Mackie, D. M. & Smith, E. R. Intergroup emotions theory:
+10,507 from WildChat models, 2,453 from WildChat users, 10,247                  production, regulation and modification of group-based
+from LMSYS models and 2,188 from LMSYS users. When fitting the                  emotions. Adv. Exp. Soc. Psychol 58, 1–69 (2018).
+mixed-effects regression for users predicting the negative RoBERTa          12. Hogg, M. A. & Abrams, D. Social Identifications: A Social
+sentiment classification, we found that the module is singular (mean-           Psychology of Intergroup Relations and Group Processes
+ing that the estimated variance of the random effect is very close to 0);       (Taylor & Francis, 1988).
+however, we do not consider this problematic because it is a com-           13. Tajfel, H., Billig, M. G., Bundy, R. P. & Flament, C. Social
+mon occurrence in mixed models that signifies that the variation                categorization and intergroup behaviour. Eur. J. Soc. Psychol. 1,
+across the two corpora is adequately captured by the fixed effects              149–178 (1971).
+alone. Please see Supplementary Section 10 for a robustness check           14. Pinter, B. & Greenwald, A. G. A comparison of minimal group
+with non-mixed-effects models for each corpus, which align with the             induction procedures. Group Process. Intergr. Relat. 14, 81–98 (2011).
+mixed-effects regression results.                                           15. Maass, A., Salvi, D., Arcuri, L. & Semin, G. Language use in
+                                                                                intergroup contexts: the linguistic intergroup bias. J. Pers. Soc.
+Reporting summary                                                               Psychol. 57, 981–993 (1989).
+Further information on research design is available in the Nature           16. Viki, G. T. et al. Beyond secondary emotions: the
+Portfolio Reporting Summary linked to this Article.                             infrahumanization of outgroups using human-related and
+                                                                                animal-related words. Soc. Cogn. 24, 753–775 (2006).
+Data availability                                                           17. Cave, S. & Dihal, K. The whiteness of AI. Philos. Technol. 33,
+All data needed to reproduce the analyses in this paper is available on         685–703 (2020).
+OSF ref. 100. The statistical values depicted in Fig. 1 are available in    18. Noble, S. U. Algorithms of Oppression: How Search Engines
+Supplementary Tables 3–6. The values depicted in Fig. 2 are available           Reinforce Racism (New York Univ. Press, 2018).
+in Supplementary Table 27. The values depicted in Fig. 3 are available      19. Bender, E. M., Gebru, T., McMillan-Major, A. & Shmitchell, S. On
+in Supplementary Table 28.                                                      the dangers of stochastic parrots: can language models be too
+                                                                                big? In Proc. 2021 ACM Conference on Fairness, Accountability
+Code availability                                                               and Transparency 610–623 (ACM, 2021); https://dl.acm.org/
+All code needed to reproduce the analyses in this paper is available            doi/10.1145/3442188.3445922
+on OSF ref. 100.                                                            20. Caliskan, A., Bryson, J. J. & Narayanan, A. Semantics derived
+                                                                                automatically from language corpora contain human-like biases.
+References                                                                      Science 356, 183–186 (2017).
+1.   Milmo, D. ChatGPT reaches 100 million users two months                 21. Webb, T., Holyoak, K. J. & Lu, H. Emergent analogical reasoning in
+     after launch The Guardian (2 February 2023); https://www.                  large language models. Nat. Hum. Behav. 7, 1526–1541 (2023).
+     theguardian.com/technology/2023/feb/02/chatgpt-100-million-u           22. Kosinski, M. Evaluating large language models in theory of mind
+     sers-open-ai-fastest-growing-app                                           tasks. Proc. Natl Acad. Sci. USA 121, e2405460121 (2024).
+2.   Microsoft. Global online safety survey results (Microsoft, 2024);      23. Caron, G. & Srivastava, S. Manipulating the perceived personality
+     https://www.microsoft.com/en-us/DigitalSafety/research/                    traits of language models. In Findings of the Association for
+     global-online-safety-survey                                                Computational Linguistics: EMNLP 2023 (eds Bouamor, H.
+3.   Bordia, S. & Bowman, S. R. Identifying and reducing gender bias            et al.) 2370–2386 (ACL, 2023); https://aclanthology.org/2023.
+     in word-level language models. In Proc. 2019 Conference of the             findings-emnlp.156
+     North American Chapter of the Association for Computational            24. Argyle, L. P. et al. Out of one, many: using language models to
+     Linguistics: Student Research Workshop 7–15 (ACL, 2019);                   simulate human samples. Political Anal 31, 337–351 (2023).
+     https://doi.org/10.18653/v1/N19-3002                                   25. Park, J. S. et al. Generative agents: interactive simulacra of human
+4.   Abid, A., Farooqi, M. & Zou, J. Persistent anti-muslim bias in large       behavior. In Proc. 36th Annual ACM Symposium on User Interface
+     language models. In Proc. 2021 AAAI/ACM Conference on AI,                  Software and Technology (UIST ’23) Vol. 2, 1–22 (ACM, 2023).
+     Ethics and Society 298–306 (ACM, 2021); https://doi.org/               26. Matz, S. et al. The potential of generative AI for personalized
+     10.1145/3461702.3462624                                                    persuasion at scale. Sci. Rep. 14, 4692 (2024).
+
+
+Nature Computational Science | Volume 5 | January 2025 | 65–75                                                                                     72
+Analysis                                                                                              https://doi.org/10.1038/s43588-024-00741-1
+
+27. Jakesch, M., Bhat, A., Buschek, D., Zalmanson, L. & Naaman, M.           43. OpenAI. Introducing ChatGPT https://openai.com/index/chatgpt/
+    Co-writing with opinionated language models affects users’                   (2022).
+    views. In Proc. 2023 CHI Conference on Human Factors in                  44. Conover, M. et al. Free Dolly: introducing the world’s first truly open
+    Computing Systems 1–15 (ACM, 2023); https://dl.acm.org/                      instruction-tuned LLM https://www.databricks.com/blog/
+    doi/10.1145/3544548.3581196                                                  2023/04/12/dolly-first-open-commercially-viable-instruction-
+28. Bowman, S. R. & Dahl, G. E. What will it take to fix benchmarking            tuned-llm (2023).
+    in natural language understanding? In Proc. 2021 Conference of           45. Taori, R. et al. Stanford alpaca: an instruction-following LLaMA
+    the North American Chapter of the Association for Computational              model. GitHub https://github.com/tatsu-lab/stanford_alpaca
+    Linguistics: Human Language Technologies (eds Toutanova, K.                  (2023).
+    et al.) 4843–4855 (ACL, 2021); https://aclanthology.org/2021.            46. Wang, G. et al. OpenChat: advancing open-source language
+    naacl-main.385                                                               models with mixed-quality data. In Proc. Twelfth International
+29. Anwar, U. et al. Foundational challenges in assuring alignment               Conference on Learning Representations (ICLR, 2024);
+    and safety of large language models. Trans. Mach. Learn. Res.                https://openreview.net/forum?id=AOJyfhWYHf
+    (2024); https://openreview.net/forum?id=oVTkOs8Pka                       47. Perdue, C. W. et al. Us and them: social categorization and the
+30. Blodgett, S. L., Barocas, S., Daumé III, H. & Wallach, H. Language           process of intergroup bias. J. Pers. Soc. Psychol. 59, 475–486
+    (technology) is power: a critical survey of ‘bias’ in NLP. In Proc.          (1990).
+    58th Annual Meeting of the Association for Computational                 48. Raffel, C. et al. Exploring the limits of transfer learning with a
+    Linguistics (eds Jurafsky, D. et al.) 5454–5476 (ACL, 2020);                 unified text-to-text transformer. J. Mach. Learn. Res. 21, 5485–5551
+    https://aclanthology.org/2020.acl-main.485                                   (2020).
+31. Parrish, A. et al. BBQ: a hand-built bias benchmark for question         49. Liu, Y. et al. RoBERTa: a robustly optimized BERT pretraining
+    answering. In Findings of the Association for Computational                  approach. Preprint at https://arxiv.org/abs/1907.11692 (2019).
+    Linguistics: ACL 2022 (eds Muresan, S. et al.) 2086–2105 (ACL,           50. Loureiro, D., Barbieri, F., Neves, L., Espinosa Anke, L. &
+    2022); https://aclanthology.org/2022.findings-acl.165                        Camacho-Collados, J. TimeLMs: diachronic language models
+32. Ganguli, D., Schiefer, N., Favaro, M. & Clark, J. Challenges in              from Twitter. In Proc. 60th Annual Meeting of the Association for
+    evaluating AI systems https://www.anthropic.com/index/                       Computational Linguistics: System Demonstrations 251–260
+    evaluating-ai-systems (Anthropic, 2023).                                     (ACL, 2022); https://aclanthology.org/2022.acl-demo.25
+33. Santurkar, S. et al. Whose opinions do language models reflect?          51. Van Atteveldt, W., Van der Velden, M. A. & Boukes, M. The
+    In Proc. 40th International Conference on Machine Learning 1244,             validity of sentiment analysis: comparing manual annotation,
+    29971–30004 (ACM, 2023).                                                     crowd-coding, dictionary approaches and machine learning
+34. Blodgett, S. L., Lopez, G., Olteanu, A., Sim, R. & Wallach, H.               algorithms. Commun. Methods Measures 15, 121–140
+    Stereotyping Norwegian salmon: an inventory of pitfalls in                   (2021).
+    fairness benchmark datasets. In Proc. 59th Annual Meeting of the         52. Frankel, R., Jennings, J. & Lee, J. Disclosure sentiment: machine
+    Association for Computational Linguistics and the 11th International         learning vs. dictionary methods. Manage. Sci. 68, 5514–5532
+    Joint Conference on Natural Language Processing (Volume 1:                   (2022).
+    Long Papers) (eds Zong, C. et al.) 1004–1015 (ACL, 2021);                53. Rathje, S. et al. GPT is an effective tool for multilingual
+    https://aclanthology.org/2021.acl-long.81                                    psychological text analysis. Proc. Natl Acad. Sci. USA 121,
+35. Zhao, W. et al. WildChat: 1M ChatGPT interaction logs in the                 e2308950121 (2024).
+    wild. In Proc. Twelfth International Conference on Learning              54. Templin, M. C.Certain Language Skills in Children; their
+    Representations (ICLR, 2024); https://openreview.net/                        Development and Interrelationships (Univ. Minnesota Press, 1957).
+    forum?id=Bl8u7ZRlbM                                                      55. Gao, L. et al. The Pile: an 800 GB dataset of diverse text for
+36. Zheng, L. et al. LMSYS-Chat-1M: a large-scale real-world LLM                 language modeling. Preprint at https://arxiv.org/abs/2101.00027
+    conversation dataset. In Proc. Twelfth International Conference on           (2020).
+    Learning Representations (ICLR, 2024); https://openreview.net/           56. Gokaslan, A. & Cohen, V. OpenWebText corpus. GitHub
+    forum?id=BOfDKxfwt0                                                          http://Skylion007.github.io/OpenWebTextCorpus (2019).
+37. Brown, T. B. et al. Language models are few-shot learners. In            57. Thrush, T., Ngo, H., Lambert, N. & Kiela, D. Online language
+    Advances in Neural Information Processing Systems 33: Annual                 modelling data pipeline. GitHub https://github.com/huggingface/
+    Conference on Neural Information Processing Systems 2020                     olm-datasets (2022).
+    (eds Larochelle, H. et al.) (Curran Associates, 2020); https://          58. Kaplan, J. et al. Scaling laws for neural language models. Preprint
+    proceedings.neurips.cc/paper/2020/hash/1457c0d6bfcb496741                    at https://arxiv.org/abs/2001.08361 (2020).
+    8bfb8ac142f64a-Abstract.html                                             59. Chung, H. W. et al. Scaling instruction-finetuned language
+38. Touvron, H. et al. Llama 2: open foundation and fine-tuned                   models. J. Mach. Learn. Res. 25, 1–53 (2024).
+    chat models. Preprint at https://arxiv.org/abs/2307.09288                60. Jiang, H., Beeferman, D., Roy, B. & Roy, D. CommunityLM: probing
+    (2023).                                                                      partisan worldviews from language models. In Proc. 29th
+39. Biderman, S. et al. Pythia: a suite for analyzing large language             International Conference on Computational Linguistics 6818–6826
+    models across training and scaling. In Proc. 40th International              (ACL, 2022); https://aclanthology.org/2022.coling-1.593
+    Conference on Machine Learning Vol. 102 (eds Krause, A. et al.)          61. Rathje, S., Van Bavel, J. J. & van der Linden, S. Out-group
+    2397–2430 (PMLR, 2023); https://proceedings.mlr.press/v202/                  animosity drives engagement on social media. Proc. Natl Acad.
+    biderman23a.html                                                             Sci. USA 118, e2024292118 (2021).
+40. The Gemma Team et al. Gemma: open models based on                        62. Abramowitz, A. I. & Webster, S. The rise of negative partisanship
+    gemini research and technology. Preprint at https://arxiv.org/               and the nationalization of US elections in the 21st century.
+    abs/2403.08295 (2024).                                                       Elect. Stud. 41, 12–22 (2016).
+41. Jiang, A. Q. et al. Mixtral of experts. Preprint at https://arxiv.org/   63. Kyrychenko, Y., Brik, T., van der Linden, S. & Roozenbeek, J. Social
+    abs/2401.04088 (2024).                                                       identity correlates of social media engagement before and after
+42. OpenAI et al. GPT-4 technical report. Preprint at https://arxiv.org/         the 2022 Russian invasion of Ukraine. Nat. Commun. 15, 8127
+    abs/2303.08774 (2024).                                                       (2024).
+
+
+Nature Computational Science | Volume 5 | January 2025 | 65–75                                                                                       73
+Analysis                                                                                             https://doi.org/10.1038/s43588-024-00741-1
+
+64. Bolukbasi, T., Chang, K.-W., Zou, J. Y., Saligrama, V. & Kalai, A. T.   83. Groeneveld, D. et al. OLMo: Accelerating the science of language
+    Man is to computer programmer as woman is to homemaker?                      models. In Proc. 62nd Annual Meeting of the Association for
+    Debiasing word embeddings. In Advances in Neural Information                 Computational Linguistics (Volume 1: Long Papers) (eds Ku, L.-W.
+    Processing Systems Vol. 29 (Curran Associates, 2016); https://               et al.) 15789–15809 (ACL, 2024); https://aclanthology.org/2024.
+    proceedings.neurips.cc/paper_files/paper/2016/hash/a486cd07e                 acl-long.841
+    4ac3d270571622f4f316ec5-Abstract.html                                   84. Muennighoff, N. et al. Crosslingual generalization through
+65. Garg, N., Schiebinger, L., Jurafsky, D. & Zou, J. Word embeddings            multitask finetuning. In Proc. 61st Annual Meeting of the
+    quantify 100 years of gender and ethnic stereotypes. Proc. Natl              Association for Computational Linguistics (Volume 1: Long Papers)
+    Acad. Sci. USA 115, E3635–E3644 (2018).                                      15991–16111 (Association for Computational Linguistics, 2023).
+66. Nadeem, M., Bethke, A. & Reddy, S. StereoSet: measuring                 85. Iyer, S. et al. OPT-IML: scaling language model instruction meta
+    stereotypical bias in pretrained language models. In Proc. 59th              learning through the lens of generalization. Preprint at
+    Annual Meeting of the Association for Computational Linguistics              https://arxiv.org/abs/2212.12017 (2023).
+    and the 11th International Joint Conference on Natural Language         86. Tay, Y. et al. UL2: unifying language learning paradigms. In The
+    Processing (Volume 1: Long Papers) (eds Zong, C. et al.) 5356–5371           Eleventh International Conference on Learning Representations
+    (ACL, 2021); https://aclanthology.org/2021.acl-long.416                      (ICLR, 2023); https://openreview.net/forum?id=6ruVLB727MC
+67. Liang, P. P., Wu, C., Morency, L.-P. & Salakhutdinov, R. Towards        87. AI21studio. Announcing Jurassic-2 and task-specific APIs
+    understanding and mitigating social biases in language models.               https://www.ai21.com/blog/introducing-j2 (AI21, 2023).
+    In Proc. 38th International Conference on Machine Learning 139          88. Ivison, H. et al. Camels in a changing climate: enhancing LM
+    (eds Meila, M. & Zhang, T.) 6565–6576 (PMLR, 2021); https://                 adaptation with TULU 2. Preprint at https://arxiv.org/abs/
+    proceedings.mlr.press/v139/liang21a.html                                     2311.10702 (2023).
+68. Fiedler, K., Semin, G. R. & Finkenauer, C. The battle of words          89. Tunstall, L. et al. Zephyr: direct distillation of LM alignment.
+    between gender groups: a language-based approach to                          Preprint at https://arxiv.org/abs/2310.16944 (2023).
+    intergroup processes. Hum. Commun. Res. 19, 409–441 (1993).             90. Zhu, B. et al. Starling-7B: improving helpfulness and harmlessness
+69. Maass, A., Milesi, A., Zabbini, S. & Stahlberg, D. Linguistic                with RLAIF. In Proc. First Conference on Language Modeling
+    intergroup bias: differential expectancies or in-group protection?           https://openreview.net/forum?id=GqDntYTTbk (2024).
+    J. Pers. Soc. Psychol. 68, 116–126 (1995).                              91. Anil, R. et al. Palm 2 technical report. Preprint at https://arxiv.org/
+70. Bai, Y. et al. Training a helpful and harmless assistant with                abs/2305.10403 (2023).
+    reinforcement learning from human feedback. Preprint at                 92. Wolf, T. et al. Transformers: state-of-the-art natural language
+    https://arxiv.org/abs/2204.05862 (2022).                                     processing. In Proc. 2020 Conference on Empirical Methods in
+71. Sharma, M. et al. Towards understanding sycophancy in                        Natural Language Processing: System Demonstrations 38–45
+    language models. In Proc. Twelfth International Conference on                (ACL, 2020); https://aclanthology.org/2020.emnlp-demos.6
+    Learning Representations (ICLR, 2024); https://openreview.net/          93. Holtzman, A., Buys, J., Du, L., Forbes, M. & Choi, Y. The curious
+    forum?id=tvhaxkMKAn                                                          case of neural text degeneration. In Proc. International Conference
+72. Laban, P., Murakhovs’ka, L., Xiong, C. & Wu, C.-S. Are you sure?             on Learning Representations (ICLR, 2020); https://openreview.net/
+    Challenging LLMs leads to performance drops in the flipflop                  forum?id=rygGQyrFvH
+    experiment. Preprint at https://arxiv.org/abs/2311.08596 (2024).        94. Dettmers, T., Lewis, M., Belkada, Y. & Zettlemoyer, L. GPT3.int8():
+73. Feng, S., Park, C. Y., Liu, Y. & Tsvetkov, Y. From pretraining data          8-bit matrix multiplication for transformers at scale. In Proc.
+    to language models to downstream tasks: tracking the trails of               Advances in Neural Information Processing Systems 35 (eds
+    political biases leading to unfair NLP models. In Proc. 61st Annual          Koyejo, S. et al.) 30318–30332 (Curran Associates, 2022); https://
+    Meeting of the Association for Computational Linguistics (Volume             proceedings.neurips.cc/paper_files/paper/2022/file/c3ba4962c0
+    1: Long Papers) 11737–11762 (ACL, 2023); https://aclanthology.               5c49636d4c6206a97e9c8a-Paper-Conference.pdf
+    org/2023.acl-long.656                                                   95. Hutto, C. & Gilbert, E. VADER: a parsimonious rule-based model
+74. Chu, E., Andreas, J., Ansolabehere, S. & Roy, D. Language models             for sentiment analysis of social media text. Proc. Int. AAAI Conf.
+    trained on media diets can predict public opinion. Preprint at               Web Social Media 8, 216–225 (2014).
+    https://arxiv.org/abs/2303.16779 (2023).                                96. Årup Nielsen, F. A new ANEW: evaluation of a word list for
+75. Guess, A. M. et al. How do social media feed algorithms affect               sentiment analysis in microblogs. In Proc. ESWC2011 Workshop on
+    attitudes and behavior in an election campaign? Science 381,                 ‘Making Sense of Microposts’: Big Things Come in Small Packages,
+    398–404 (2023).                                                              CEUR Workshop Proceedings Vol. 718 (eds Rowe, M. et al.) 93–98
+76. Anil, C. et al. Many-shot jailbreaking https://www.anthropic.com/            (2011).
+    research/many-shot-jailbreaking (Anthropic, 2024).                      97. Loria, S. textblob Documentation, release 0.18.0.post0 edn
+77. Radford, A. et al. Language models are unsupervised multitask                https://readthedocs.org/projects/textblob/downloads/pdf/dev/
+    learners https://openai.com/research/better-language-models                  (Readthedocs, 2024).
+    (OpenAI, 2019).                                                         98. Potts, C., Wu, Z., Geiger, A. & Kiela, D. DynaSent: A dynamic
+78. Dey, N. et al. Cerebras-GPT: open compute-optimal language                   benchmark for sentiment analysis. Proc. 59th Annu. Meet. Assoc.
+    models trained on the Cerebras Wafer-Scale Cluster. Preprint at              Comput. Linguist. 11th Int. Jt. Conf. Nat. Lang. Process. Vol. 1: Long
+    https://arxiv.org/abs/2304.03208 (2023).                                     Pap. 2388–2404 (2021).
+79. BigScience Workshop et al. BLOOM: A 176B-parameter                      99. Boyd, R. L., Ashokkumar, A., Seraj, S. & Pennebaker, J. W. The
+    open-access multilingual language model. Preprint at https://                Development and Psychometric Properties of LIWC-22. (Univ. Texas
+    arxiv.org/abs/2211.05100 (2023).                                             at Austin, 2022).
+80. Touvron, H. et al. LLaMA: open and efficient foundation language        100. Hu, T. et al. Generative language models exhibit social identity
+    models. Preprint at https://arxiv.org/abs/2302.13971 (2023).                 biases https://doi.org/10.17605/OSF.IO/9HT32 (OSF, 2024).
+81. Zhang, S. et al. OPT: open pre-trained transformer language
+    models. Preprint at https://arxiv.org/abs/2205.01068 (2022).            Acknowledgements
+82. Jiang, A. Q. et al. Mistral 7b. Preprint at https://arxiv.org/          This work was supported by the Gates Cambridge Trust (grant no.
+    abs/2310.06825 (2023).                                                  OPP1144 from the Bill & Melinda Gates Foundation) awarded to
+
+
+Nature Computational Science | Volume 5 | January 2025 | 65–75                                                                                      74
+Analysis                                                                                             https://doi.org/10.1038/s43588-024-00741-1
+
+T.H. and Y.K. and the Alan Turing Institute’s Enrichment Scheme             Peer review information Nature Computational Science thanks Michal
+awarded to Y.K. We thank L. Dixon for very helpful discussions. This        Kosinski, María Pérez-Ortiz and Germans Savcisens for their contribution
+work was performed using resources provided by the Cambridge                to the peer review of this work. Primary Handling Editor: Fernando
+Service for Data Driven Discovery (CSD3) operated by the University         Chirigati, in collaboration with the Nature Computational Science team.
+of Cambridge Research Computing Service (www.csd3.cam.
+ac.uk), provided by Dell EMC and Intel using Tier-2 funding from the        Reprints and permissions information is available at
+Engineering and Physical Sciences Research Council (capital grant no.       www.nature.com/reprints.
+EP/T022159/1), and DiRAC funding from the Science and Technology
+Facilities Council (www.dirac.ac.uk).                                       Publisher’s note Springer Nature remains neutral with regard to
+                                                                            jurisdictional claims in published maps and institutional affiliations.
+Author contributions
+T.H. and Y.K. conceptualized the study, collected and analyzed the          Open Access This article is licensed under a Creative Commons
+data, and led the write-up. S.R., N.C., S.v.d.L. and J.R. helped with the   Attribution 4.0 International License, which permits use, sharing,
+study’s conceptualization, provided feedback throughout the process,        adaptation, distribution and reproduction in any medium or format,
+and assisted with the write-up.                                             as long as you give appropriate credit to the original author(s) and the
+                                                                            source, provide a link to the Creative Commons licence, and indicate
+Competing interests                                                         if changes were made. The images or other third party material in this
+The authors declare no competing interests.                                 article are included in the article’s Creative Commons licence, unless
+                                                                            indicated otherwise in a credit line to the material. If material is not
+Additional information                                                      included in the article’s Creative Commons licence and your intended
+Supplementary information The online version contains                       use is not permitted by statutory regulation or exceeds the permitted
+supplementary material available at                                         use, you will need to obtain permission directly from the copyright
+https://doi.org/10.1038/s43588-024-00741-1.                                 holder. To view a copy of this licence, visit http://creativecommons.
+                                                                            org/licenses/by/4.0/.
+Correspondence and requests for materials should be addressed to
+Tiancheng Hu or Yara Kyrychenko.                                            © The Author(s) 2024
+
+
+
+
+Nature Computational Science | Volume 5 | January 2025 | 65–75                                                                                        75
+

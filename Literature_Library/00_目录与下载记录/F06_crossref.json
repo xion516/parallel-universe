@@ -1,0 +1,569 @@
+{
+  "indexed": {
+    "date-parts": [
+      [
+        2026,
+        1,
+        5
+      ]
+    ],
+    "date-time": "2026-01-05T15:05:39Z",
+    "timestamp": 1767625539973,
+    "version": "3.48.0"
+  },
+  "publisher-location": "New York, NY, USA",
+  "reference-count": 51,
+  "publisher": "ACM",
+  "funder": [
+    {
+      "DOI": "10.13039/501100001809",
+      "name": "National Natural Science Foundation of China",
+      "doi-asserted-by": "publisher",
+      "award": [
+        "Nos. U23A20296, 62272469, 62302513"
+      ],
+      "award-info": [
+        {
+          "award-number": [
+            "Nos. U23A20296, 62272469, 62302513"
+          ]
+        }
+      ],
+      "id": [
+        {
+          "id": "10.13039/501100001809",
+          "id-type": "DOI",
+          "asserted-by": "publisher"
+        }
+      ]
+    },
+    {
+      "name": "The Science and Technology Innovation Program of Hunan Province",
+      "award": [
+        "2023RC1007"
+      ],
+      "award-info": [
+        {
+          "award-number": [
+            "2023RC1007"
+          ]
+        }
+      ]
+    }
+  ],
+  "content-domain": {
+    "domain": [
+      "dl.acm.org"
+    ],
+    "crossmark-restriction": true
+  },
+  "short-container-title": [],
+  "published-print": {
+    "date-parts": [
+      [
+        2025,
+        11,
+        10
+      ]
+    ]
+  },
+  "DOI": "10.1145/3746252.3761350",
+  "type": "proceedings-article",
+  "created": {
+    "date-parts": [
+      [
+        2025,
+        11,
+        8
+      ]
+    ],
+    "date-time": "2025-11-08T00:29:28Z",
+    "timestamp": 1762561768000
+  },
+  "page": "4304-4314",
+  "update-policy": "https://doi.org/10.1145/crossmark-policy",
+  "source": "Crossref",
+  "is-referenced-by-count": 1,
+  "title": [
+    "Yes is Harder than No: A Behavioral Study of Framing Effects in Large Language Models Across Downstream Tasks"
+  ],
+  "prefix": "10.1145",
+  "author": [
+    {
+      "ORCID": "https://orcid.org/0009-0001-5342-4021",
+      "authenticated-orcid": false,
+      "given": "Ziheng",
+      "family": "Zhang",
+      "sequence": "first",
+      "affiliation": [
+        {
+          "name": "Laboratory for Big Data and Decision, National University of Defense Technology, China, ChangsSha, China"
+        }
+      ],
+      "role": [
+        {
+          "role": "author",
+          "vocabulary": "crossref"
+        }
+      ]
+    },
+    {
+      "ORCID": "https://orcid.org/0000-0002-2690-3190",
+      "authenticated-orcid": false,
+      "given": "Weixin",
+      "family": "Zeng",
+      "sequence": "additional",
+      "affiliation": [
+        {
+          "name": "Laboratory for Big Data and Decision, National University of Defense Technology, China, Changsha, China"
+        }
+      ],
+      "role": [
+        {
+          "role": "author",
+          "vocabulary": "crossref"
+        }
+      ]
+    },
+    {
+      "ORCID": "https://orcid.org/0000-0002-8113-4398",
+      "authenticated-orcid": false,
+      "given": "Jiuyang",
+      "family": "Tang",
+      "sequence": "additional",
+      "affiliation": [
+        {
+          "name": "Laboratory for Big Data and Decision, National University of Defense Technology, China, Changsha, China"
+        }
+      ],
+      "role": [
+        {
+          "role": "author",
+          "vocabulary": "crossref"
+        }
+      ]
+    },
+    {
+      "ORCID": "https://orcid.org/0000-0002-4199-2793",
+      "authenticated-orcid": false,
+      "given": "Ji",
+      "family": "Wang",
+      "sequence": "additional",
+      "affiliation": [
+        {
+          "name": "Laboratory for Big Data and Decision, National University of Defense Technology, China, Changsha, China"
+        }
+      ],
+      "role": [
+        {
+          "role": "author",
+          "vocabulary": "crossref"
+        }
+      ]
+    },
+    {
+      "ORCID": "https://orcid.org/0000-0001-6339-0219",
+      "authenticated-orcid": false,
+      "given": "Xiang",
+      "family": "Zhao",
+      "sequence": "additional",
+      "affiliation": [
+        {
+          "name": "Laboratory for Big Data and Decision, National University of Defense Technology, China, Changsha, China"
+        }
+      ],
+      "role": [
+        {
+          "role": "author",
+          "vocabulary": "crossref"
+        }
+      ]
+    }
+  ],
+  "member": "320",
+  "published-online": {
+    "date-parts": [
+      [
+        2025,
+        11,
+        10
+      ]
+    ]
+  },
+  "reference": [
+    {
+      "key": "e_1_3_2_1_1_1",
+      "volume-title": "The framing of decisions and the psychology of choice. Science 211 4481",
+      "author": "Tversky Amos",
+      "year": "1981",
+      "unstructured": "Amos Tversky and Daniel Kahneman. 1981. The framing of decisions and the psychology of choice. Science 211 4481 (1981), 453--8. https://api.semanticscholar.org/CorpusID:5643902"
+    },
+    {
+      "key": "e_1_3_2_1_2_1",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1145/359205.359241"
+    },
+    {
+      "key": "e_1_3_2_1_3_1",
+      "unstructured": "Tom Brown Benjamin Mann Nick Ryder Melanie Subbiah Jared D Kaplan Prafulla Dhariwal Arvind Neelakantan Pranav Shyam Girish Sastry Amanda Askell et al. 2020. Language models are few-shot learners. Advances in neural information processing systems 33 (2020) 1877--1901."
+    },
+    {
+      "key": "e_1_3_2_1_4_1",
+      "unstructured": "Abhimanyu Dubey Abhinav Jauhri Abhinav Pandey Abhishek Kadian Ahmad Al-Dahle Aiesha Letman Akhil Mathur Alan Schelten Amy Yang Angela Fan et al. 2024. The llama 3 herd of models. arXiv preprint arXiv:2407.21783 (2024)."
+    },
+    {
+      "key": "e_1_3_2_1_5_1",
+      "unstructured": "An Yang Baosong Yang Beichen Zhang Binyuan Hui Bo Zheng Bowen Yu Chengyuan Li Dayiheng Liu Fei Huang Haoran Wei et al. 2024. Qwen2. 5 technical report. arXiv preprint arXiv:2412.15115 (2024)."
+    },
+    {
+      "key": "e_1_3_2_1_6_1",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.48550/ARXIV.2402.01761"
+    },
+    {
+      "key": "e_1_3_2_1_7_1",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1073/pnas.2218523120"
+    },
+    {
+      "key": "e_1_3_2_1_8_1",
+      "volume-title": "Exploring collaboration mechanisms for llm agents: A social psychology view. arXiv preprint arXiv:2310.02124",
+      "author": "Zhang Jintian",
+      "year": "2023",
+      "unstructured": "Jintian Zhang, Xin Xu, and Shumin Deng. 2023. Exploring collaboration mechanisms for llm agents: A social psychology view. arXiv preprint arXiv:2310.02124 (2023)."
+    },
+    {
+      "key": "e_1_3_2_1_9_1",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1073/pnas.2300963120"
+    },
+    {
+      "key": "e_1_3_2_1_10_1",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1016/j.artint.2024.104145"
+    },
+    {
+      "key": "e_1_3_2_1_11_1",
+      "volume-title": "Do large language models show decision heuristics similar to humans? A case study using GPT-3.5. Journal of Experimental Psychology: General",
+      "author": "Suri Gaurav",
+      "year": "2024",
+      "unstructured": "Gaurav Suri, Lily R Slater, Ali Ziaee, and Morgan Nguyen. 2024. Do large language models show decision heuristics similar to humans? A case study using GPT-3.5. Journal of Experimental Psychology: General (2024)."
+    },
+    {
+      "key": "e_1_3_2_1_12_1",
+      "volume-title": "Sreedath Panat, and Rajat Dandekar.",
+      "author": "Shaikh Ammar",
+      "year": "2024",
+      "unstructured": "Ammar Shaikh, Raj Abhijit Dandekar, Sreedath Panat, and Rajat Dandekar. 2024. CBEval: A framework for evaluating and interpreting cognitive biases in LLMs. arXiv preprint arXiv:2412.03605 (2024)."
+    },
+    {
+      "key": "e_1_3_2_1_13_1",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1038/s41598-024-69032-z"
+    },
+    {
+      "key": "e_1_3_2_1_14_1",
+      "volume-title": "Sungchul Kim",
+      "author": "Gallegos Isabel O",
+      "year": "2024",
+      "unstructured": "Isabel O Gallegos, Ryan A Rossi, Joe Barrow, Md Mehrab Tanjim, Sungchul Kim, Franck Dernoncourt, Tong Yu, Ruiyi Zhang, and Nesreen K Ahmed. 2024. Bias and fairness in large language models: A survey. Computational Linguistics (2024), 1--79."
+    },
+    {
+      "key": "e_1_3_2_1_15_1",
+      "volume-title": "Cognitive Biases in Large Language Models: A Survey and Mitigation Experiments. arXiv preprint arXiv:2412.00323",
+      "author": "Sumita Yasuaki",
+      "year": "2024",
+      "unstructured": "Yasuaki Sumita, Koh Takeuchi, and Hisashi Kashima. 2024. Cognitive Biases in Large Language Models: A Survey and Mitigation Experiments. arXiv preprint arXiv:2412.00323 (2024)."
+    },
+    {
+      "key": "e_1_3_2_1_16_1",
+      "first-page": "11785",
+      "article-title": "Capturing failures of large language models via human cognitive biases",
+      "volume": "35",
+      "author": "Jones Erik",
+      "year": "2022",
+      "unstructured": "Erik Jones and Jacob Steinhardt. 2022. Capturing failures of large language models via human cognitive biases. Advances in Neural Information Processing Systems 35 (2022), 11785--11799.",
+      "journal-title": "Advances in Neural Information Processing Systems"
+    },
+    {
+      "key": "e_1_3_2_1_17_1",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1007/s10462-022-10144-1"
+    },
+    {
+      "key": "e_1_3_2_1_18_1",
+      "volume-title": "GAPX: Generalized Autoregressive Paraphrase-Identification X. In Advances in Neural Information Processing Systems 35: Annual Conference on Neural Information Processing Systems 2022",
+      "author": "Zhou Yifei",
+      "year": "2022",
+      "unstructured": "Yifei Zhou, Renyu Li, Hayden Housen, and Ser Nam Lim. 2022. GAPX: Generalized Autoregressive Paraphrase-Identification X. In Advances in Neural Information Processing Systems 35: Annual Conference on Neural Information Processing Systems 2022, NeurIPS 2022, New Orleans, LA, USA, November 28 - December 9, 2022, Sanmi Koyejo, S. Mohamed, A. Agarwal, Danielle Belgrave, K. Cho, and A. Oh (Eds.). http://papers.nips.cc/paper_files/paper/2022/hash/0f6cc80ad86e553d085842308e0fd2cb-Abstract-Conference.html"
+    },
+    {
+      "key": "e_1_3_2_1_19_1",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.18653/V1/2023.FINDINGS-ACL.652"
+    },
+    {
+      "key": "e_1_3_2_1_20_1",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1109/ICDE48307.2020.00191"
+    },
+    {
+      "key": "e_1_3_2_1_21_1",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1109/ICME57554.2024.10688334"
+    },
+    {
+      "key": "e_1_3_2_1_22_1",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.18653/V1/2023.FINDINGS-EMNLP.405"
+    },
+    {
+      "key": "e_1_3_2_1_23_1",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.18653/V1/2024.ACL-LONG.139"
+    },
+    {
+      "key": "e_1_3_2_1_24_1",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.48550/ARXIV.2310.11244"
+    },
+    {
+      "key": "e_1_3_2_1_25_1",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.18653/v1/D13-1170"
+    },
+    {
+      "key": "e_1_3_2_1_26_1",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1145/2783258.2783380"
+    },
+    {
+      "key": "e_1_3_2_1_27_1",
+      "volume-title": "Proceedings of the Third International Workshop on Paraphrasing, IWP@IJCNLP 2005",
+      "author": "William",
+      "year": "2005",
+      "unstructured": "William B. Dolan and Chris Brockett. 2005. Automatically Constructing a Corpus of Sentential Paraphrases. In Proceedings of the Third International Workshop on Paraphrasing, IWP@IJCNLP 2005, Jeju Island, Korea, October 2005, 2005. Asian Federation of Natural Language Processing. https://aclanthology.org/I05--5002/"
+    },
+    {
+      "key": "e_1_3_2_1_28_1",
+      "volume-title": "Natural language understanding with the quora question pairs dataset. arXiv preprint arXiv:1907.01041",
+      "author": "Sharma Lakshay",
+      "year": "2019",
+      "unstructured": "Lakshay Sharma, Laura Graesser, Nikita Nangia, and Utku Evci. 2019. Natural language understanding with the quora question pairs dataset. arXiv preprint arXiv:1907.01041 (2019)."
+    },
+    {
+      "key": "e_1_3_2_1_29_1",
+      "volume-title": "GLUE: A Multi-Task Benchmark and Analysis Platform for Natural Language Understanding. In 7th International Conference on Learning Representations, ICLR 2019",
+      "author": "Singh Amanpreet",
+      "year": "2019",
+      "unstructured": "AlexWang, Amanpreet Singh, Julian Michael, Felix Hill, Omer Levy, and Samuel R. Bowman. 2019. GLUE: A Multi-Task Benchmark and Analysis Platform for Natural Language Understanding. In 7th International Conference on Learning Representations, ICLR 2019, New Orleans, LA, USA, May 6--9, 2019. OpenReview.net. https://openreview.net/forum?id=rJ4km2R5t7"
+    },
+    {
+      "key": "e_1_3_2_1_30_1",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1145/3405476"
+    },
+    {
+      "key": "e_1_3_2_1_31_1",
+      "volume-title": "Diego de las Casas, Emma Bou Hanna, Florian Bressand, et al.",
+      "author": "Jiang Albert Q",
+      "year": "2024",
+      "unstructured": "Albert Q Jiang, Alexandre Sablayrolles, Antoine Roux, Arthur Mensch, Blanche Savary, Chris Bamford, Devendra Singh Chaplot, Diego de las Casas, Emma Bou Hanna, Florian Bressand, et al. 2024. Mixtral of experts. arXiv preprint arXiv:2401.04088 (2024)."
+    },
+    {
+      "key": "e_1_3_2_1_32_1",
+      "volume-title": "Diego de las Casas, Florian Bressand, Gianna Lengyel, Guillaume Lample, Lucile Saulnier, et al.",
+      "author": "Jiang Albert Q",
+      "year": "2023",
+      "unstructured": "Albert Q Jiang, Alexandre Sablayrolles, Arthur Mensch, Chris Bamford, Devendra Singh Chaplot, Diego de las Casas, Florian Bressand, Gianna Lengyel, Guillaume Lample, Lucile Saulnier, et al. 2023. Mistral 7B. arXiv preprint arXiv:2310.06825 (2023)."
+    },
+    {
+      "key": "e_1_3_2_1_33_1",
+      "volume-title": "Juliette Love, et al.",
+      "author": "Team Gemma",
+      "year": "2024",
+      "unstructured": "Gemma Team, Thomas Mesnard, Cassidy Hardin, Robert Dadashi, Surya Bhupatiraju, Shreya Pathak, Laurent Sifre, Morgane Rivière, Mihir Sanjay Kale, Juliette Love, et al. 2024. Gemma: Open models based on gemini research and technology. arXiv preprint arXiv:2403.08295 (2024)."
+    },
+    {
+      "key": "e_1_3_2_1_34_1",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1007/s00265-020-02916-y"
+    },
+    {
+      "key": "e_1_3_2_1_35_1",
+      "volume-title": "Character-level convolutional networks for text classification. Advances in neural information processing systems 28",
+      "author": "Zhang Xiang",
+      "year": "2015",
+      "unstructured": "Xiang Zhang, Junbo Zhao, and Yann LeCun. 2015. Character-level convolutional networks for text classification. Advances in neural information processing systems 28 (2015)."
+    },
+    {
+      "key": "e_1_3_2_1_36_1",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1037/0022-3514.78.1.81"
+    },
+    {
+      "key": "e_1_3_2_1_37_1",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1207/s15327957pspr1001_3"
+    },
+    {
+      "key": "e_1_3_2_1_38_1",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.2214/ajr.184.1.01840014"
+    },
+    {
+      "key": "e_1_3_2_1_39_1",
+      "unstructured": "Aaron Gokaslan and Vanya Cohen. 2019. OpenWebText Corpus. http://Skylion007.github.io/OpenWebTextCorpus."
+    },
+    {
+      "key": "e_1_3_2_1_40_1",
+      "volume-title": "Tigerbot: An open multilingual multitask llm. arXiv preprint arXiv:2312.08688",
+      "author": "Chen Ye",
+      "year": "2023",
+      "unstructured": "Ye Chen, Wei Cai, Liangmin Wu, Xiaowei Li, Zhanxuan Xin, and Cong Fu. 2023. Tigerbot: An open multilingual multitask llm. arXiv preprint arXiv:2312.08688 (2023)."
+    },
+    {
+      "key": "e_1_3_2_1_41_1",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1162/tacl_a_00298"
+    },
+    {
+      "key": "e_1_3_2_1_42_1",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1109/ICCV.2019.00541"
+    },
+    {
+      "key": "e_1_3_2_1_43_1",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.18653/V1/2023.FINDINGS-EMNLP.334"
+    },
+    {
+      "key": "e_1_3_2_1_44_1",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.18653/V1/2022.EMNLP-MAIN.622"
+    },
+    {
+      "key": "e_1_3_2_1_45_1",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.48550/ARXIV.2309.04658"
+    },
+    {
+      "key": "e_1_3_2_1_46_1",
+      "volume-title": "Challenging the appearance of machine intelligence: Cognitive bias in LLMs and Best Practices for Adoption. arXiv preprint arXiv:2304.01358",
+      "author": "Talboy Alaina N",
+      "year": "2023",
+      "unstructured": "Alaina N Talboy and Elizabeth Fuller. 2023. Challenging the appearance of machine intelligence: Cognitive bias in LLMs and Best Practices for Adoption. arXiv preprint arXiv:2304.01358 (2023)."
+    },
+    {
+      "key": "e_1_3_2_1_47_1",
+      "volume-title": "Subjective probability: A judgment of representativeness. Cognitive psychology 3, 3",
+      "author": "Kahneman Daniel",
+      "year": "1972",
+      "unstructured": "Daniel Kahneman and Amos Tversky. 1972. Subjective probability: A judgment of representativeness. Cognitive psychology 3, 3 (1972), 430--454."
+    },
+    {
+      "key": "e_1_3_2_1_48_1",
+      "volume-title": "The framing effect in medical decision-making: a review of the literature. Psychology, health & medicine 18, 6",
+      "author": "Gong Jingjing",
+      "year": "2013",
+      "unstructured": "Jingjing Gong, Yan Zhang, Zheng Yang, Yonghua Huang, Jun Feng, and Weiwei Zhang. 2013. The framing effect in medical decision-making: a review of the literature. Psychology, health & medicine 18, 6 (2013), 645--653."
+    },
+    {
+      "key": "e_1_3_2_1_49_1",
+      "volume-title": "All frames are not created equal: A typology and critical analysis of framing effects. Organizational behavior and human decision processes 76, 2",
+      "author": "Levin Irwin P",
+      "year": "1998",
+      "unstructured": "Irwin P Levin, Sandra L Schneider, and Gary J Gaeth. 1998. All frames are not created equal: A typology and critical analysis of framing effects. Organizational behavior and human decision processes 76, 2 (1998), 149--188."
+    },
+    {
+      "key": "e_1_3_2_1_50_1",
+      "volume-title": "A Turing Test: Are AI Chatbots Behaviorally Similar to Humans? Available at SSRN",
+      "author": "Mei Qiaozhu",
+      "year": "2023",
+      "unstructured": "Qiaozhu Mei, Yutong Xie, Walter Yuan, and Matthew O Jackson. 2023. A Turing Test: Are AI Chatbots Behaviorally Similar to Humans? Available at SSRN (2023)."
+    },
+    {
+      "key": "e_1_3_2_1_51_1",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1073/pnas.2316205120"
+    }
+  ],
+  "event": {
+    "name": "CIKM '25: The 34th ACM International Conference on Information and Knowledge Management",
+    "sponsor": [
+      "SIGIR ACM Special Interest Group on Information Retrieval",
+      "SIGWEB ACM Special Interest Group on Hypertext, Hypermedia, and Web"
+    ],
+    "location": "Seoul Republic of Korea",
+    "acronym": "CIKM '25"
+  },
+  "container-title": [
+    "Proceedings of the 34th ACM International Conference on Information and Knowledge Management"
+  ],
+  "original-title": [],
+  "link": [
+    {
+      "URL": "https://dl.acm.org/doi/pdf/10.1145/3746252.3761350",
+      "content-type": "unspecified",
+      "content-version": "vor",
+      "intended-application": "similarity-checking"
+    }
+  ],
+  "deposited": {
+    "date-parts": [
+      [
+        2025,
+        12,
+        12
+      ]
+    ],
+    "date-time": "2025-12-12T01:47:15Z",
+    "timestamp": 1765504035000
+  },
+  "score": 1,
+  "resource": {
+    "primary": {
+      "URL": "https://dl.acm.org/doi/10.1145/3746252.3761350"
+    }
+  },
+  "subtitle": [],
+  "short-title": [],
+  "issued": {
+    "date-parts": [
+      [
+        2025,
+        11,
+        10
+      ]
+    ]
+  },
+  "references-count": 51,
+  "alternative-id": [
+    "10.1145/3746252.3761350",
+    "10.1145/3746252"
+  ],
+  "URL": "https://doi.org/10.1145/3746252.3761350",
+  "relation": {},
+  "subject": [],
+  "published": {
+    "date-parts": [
+      [
+        2025,
+        11,
+        10
+      ]
+    ]
+  },
+  "assertion": [
+    {
+      "value": "2025-11-10",
+      "order": 3,
+      "name": "published",
+      "label": "Published",
+      "group": {
+        "name": "publication_history",
+        "label": "Publication History"
+      }
+    }
+  ]
+}

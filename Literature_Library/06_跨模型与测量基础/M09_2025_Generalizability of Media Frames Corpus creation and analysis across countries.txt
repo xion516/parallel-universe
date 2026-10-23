@@ -1,0 +1,966 @@
+本文件为PDF自动提取文本，仅供检索；排版、图表和页码请以PDF为准。
+Generalizability of Media Frames: Corpus creation and analysis across countries
+
+                          Generalizability of Media Frames:
+                      Corpus creation and analysis across countries
+              Agnese Daffara1 , Sourabh Dattawad1 , Sebastian Padó1 , Tanise Ceron2
+           1
+             Institute for Natural Language Processing, University of Stuttgart, Germany
+                                       2
+                                         Bocconi University, Italy
+                         {agnese.daffara,pado}@ims.uni-stuttgart.de
+                                    tanise.ceron@unibocconi.it
+
+
+                      Abstract                               ii) promote an interpretation of it; iii) propose a
+                                                             moral evaluation; and iv) recommend a treatment
+    Frames capture aspects of an issue that are              or a solution. This makes them a valuable tool for
+    emphasized in a debate by interlocutors and              identifying, measuring, and quantifying particular
+    can help us understand how political language
+                                                             worldviews and communication strategies (Card
+    conveys different perspectives and ultimately
+    shapes people’s opinions. The Media Frames               et al., 2015; Mendelsohn et al., 2021).
+    Corpus (MFC) is the most commonly used                      Frames are primarily a methodological frame-
+    framework with categories and detailed guide-            work, and not a fixed set of categories. However,
+    lines for operationalizing frames. It is, how-           a widely used set is based on the Media Frames
+    ever, focused on a few salient U.S. news issues,         Corpus (MFC), 15 frames (see Table 1) with an-
+    making it unclear how well these frames can
+                                                             notation guidelines, developed to cover a limited
+    capture news issues in other cultural contexts.
+    To explore this, we introduce FrameNews-PT,              number of issues concerning the U.S. context, e.g.,
+    a dataset of Brazilian Portuguese news articles          gun control and climate change (Card et al., 2015).
+    covering political and economic news and an-                As in other NLP tasks, however, generalization
+    notate it within the MFC framework. Through              is an issue: coarse-grained frames risk failing to
+    several annotation rounds, we evaluate the ex-           capture important aspects of a debate, notably ide-
+    tent to which MFC frames generalize to the
+                                                             ological bias, while fine-grained frames may not
+    Brazilian debate issues. We further evaluate
+    how fine-tuned and zero-shot models perform
+                                                             generalize across debates. For example, Mendel-
+    on out-of-domain data. Results show that the             sohn et al. (2021) demonstrate that in news about
+    15 MFC frames remain broadly applicable with             migration, the generic frame cultural identity is
+    minor revisions of the guidelines. However,              correlated with liberal texts; introducing two re-
+    some MFC frames are rarely used, and novel               lated sub-frames hero: cultural diversity and threat:
+    news issues are analyzed using general ‘fall-            national cohesion leads to a clear separation by
+    back’ frames. We conclude that cross-cultural            political ideology – liberal in the former and con-
+    frame use requires careful consideration.
+                                                             servative the latter case – but these subframes are
+                                                             presumably irrelevant for other debates. Similar
+1   Introduction
+                                                             questions arise in cross-lingual contexts: the MFC
+Frames are interpretation schemes used to organize           frames were applied by SemEval 2023 Task 3 to
+reality by isolating and highlighting salient aspects        9 languages (Piskorski et al., 2023b), but the ap-
+of it (Otmakhova et al., 2024). They combine three           plicability of the frames was not assessed, nor was
+levels: cognitive (concerning the mental represen-           inter-annotator agreement reported.
+tations of the world); semantic (concerning the                 Indeed, full cross-linguistic generalization of
+linguistic structures involved); and communicative           frames is far from clear, given previous work on the
+(their usage and impact on the audience).                    cross-lingual generalization of semantic inventories
+   Frames are finding increasing application in NLP          (Peters et al., 1998; Reddy et al., 2017; Gilardi and
+as a framework to analyze social media and news              Baker, 2018). For full generalization, frames would
+coverage. In particular the communicative dimen-             show high agreement – their definitions and annota-
+sion of frames can be seen as a bridge between               tion guidelines would allow each markable in a new
+belief and action (Snow and Benford, 2005). Fol-             language to be assigned to a unique frame – and
+lowing Entman (1993), frames have four objectives:           completeness – for each instance in the new lan-
+i) promote a particular definition of a problem;             guage, there would be a suitable frame. However,
+                                                        83
+      Proceedings of the 14th Joint Conference on Lexical and Computational Semantics (*SEM 2025), pages 83–99
+                         November 8-9, 2025 ©2025 Association for Computational Linguistics
+we do not have empirical evidence so far.                           2       Related Work
+  Thus, we set out to answer these questions:
+                                                                    Previous work in NLP has investigated how fram-
+  1. How high are agreement and completeness for                    ing political language influences society and public
+     MFC frames when annotating a representative                    opinion (Lecheler et al., 2015), and how it shapes
+     sample of news articles despite having been                    the spread of information (Gilardi et al., 2021)
+     originally developed on a small number of                      across communication contexts, such as agenda-
+     issues?                                                        setting campaigns (Tsur et al., 2015; Field et al.,
+                                                                    2018) and news media (Card et al., 2015). Frames
+  2. How high are agreement and completeness of                     can help analyze argumentation, and frame detec-
+     the MFC frames when applied to news report-                    tion can be seen as argument assessment (Lauscher
+     ing from other countries?                                      et al., 2022). Given their connection to political
+  3. Even if the frames generalize well, is it possi-               ideologies (Alashri et al., 2015), frames are also
+     ble to transfer computational models of frame                  useful for analyzing and diversifying perspectives,
+     prediction between languages?                                  e.g. in news recommendation (Mulder et al., 2021;
+                                                                    Dattawad et al., 2025).
+Our study proceeds by creating FrameNews-PT,                           The task of frame detection has often been
+a corpus of 300 news articles of ‘hard news’                        approached through topic modeling with unsu-
+(Reinemann et al., 2012) in Brazilian Portuguese.1                  pervised methods (Nguyen et al., 2013; Roberts
+FrameNews-PT is based on the News Portal Recom-                     et al., 2014; Tsur et al., 2015; Ajjour et al., 2019),
+mendation dataset (Lucas et al., 2023). It contains                 which, however, tend to be highly corpus-specific.
+Brazilian news about, e.g., new regulations, taxes,                 Other studies employ supervised classification tech-
+and finance. We manually annotate the articles                      niques, including logistic regression (Card et al.,
+with MFC frames using a perspectivist approach                      2016), neural networks (Naderi and Hirst, 2017;
+(Cabitza et al., 2023). We carry out several rounds                 Liu et al., 2019), and fine-tuning of pre-trained
+of annotation to a) adapt the MFC guidelines while                  models (Kwak et al., 2020), all of which require
+maintaining their level of detail, b) value the indi-               robust gold standard annotations.
+vidual perspectives of annotators, and c) examine                      The Media Framing Corpus (MFC) (Card et al.,
+generalizability and overlap of frames (RQ1+2).                     2016), building on the foundational work of Boyd-
+   After corpus creation, we conduct modeling                       stun et al. (2014), introduced a novel annotation
+experiments (RQ3). We use two transformer-                          framework that has become a reference for frame
+based models fine-tuned on the MFC and 9 chat-                      identification (cf. Section 3). Several studies either
+instructed models in a zero-shot setting, and ana-                  use parts of the MFC or applied its guidelines to
+lyze how well models perform out of domain on                       related datasets, e.g., Kwak et al. (2020) conduct a
+FrameNews-PT in comparison with the MFC.                            systematic analysis of the 15 frames in New York
+   Our results are generally promising: (Most)                      Times articles across 17 years.
+MFC frames are annotated with high agreement                           Khanehzar et al. (2019) are the first to test the
+in Brazilian hard news, with little confusion among                 generalizability of MFC frames to other contexts.
+them. However, some frames appear rarely, being                     They apply the framework to Australian parliamen-
+bound to U.S.-specific issues. Also, completeness                   tary speeches on same-sex marriage and migration,
+is not perfect: Brazilian issues outside the scope                  and fine-tuned three BERT-based classifiers. Their
+of the original MFC are often annotated with rela-                  findings show a drop in accuracy when the models
+tively general frames as a fallback (e.g., Economic),               are applied across different contexts. It is unclear,
+leading to some loss of information. On the mod-                    however, if this is due to the failure of the frames to
+eling side, we find that zero-shot models perform                   generalize, or only to a shift in frame distribution.
+better at frame prediction on the Brazilian data than                  Other corpora and labeling schemes have been
+transferred English classifiers, indicating that the                proposed, though they often focus on specific de-
+data distributions are sufficiently dissimilar. Over-               bate issues. Examples include the Ballistic Missile
+all, use of MFC frames in new languages and issues                  Defense corpus (Morstatter et al., 2018), the Gun
+calls for a reflected process.                                      Violence Corpus (Liu et al., 2019), and the migra-
+   1
+                                                                    tion corpus by Mendelsohn et al. (2021).2
+     The corpus is available for the community at this link:
+                                                                        2
+https://github.com/tceron/FrameNews-PT                                      For a comprehensive overview of framing detection and
+
+                                                               84
+   SemEval-2023 Task 3 introduced a sub-task on                        Frame                       Example
+framing detection in online news within a multilin-                    Capacity and Resources      Immigration debate: Illegals
+                                                                                                   take jobs from Americans
+gual setting (Piskorski et al., 2023b). The dataset                    Crime and Punishment        Two charged in deaths of illegal
+spans multiple topics and languages. It is annotated                                               immigrants in truck
+with an adaptation of the MFC framework (Pisko-                        Cultural Identity           Ethnic shift: Immigration—an
+                                                                                                   Irish enclave learns a new
+rski et al., 2023a) and the proposed models, based                                                 language; Mexican immigrants
+on Transformer architectures, achieved strong per-                                                 boost a growing Latino popula-
+formance. The focus of the study was on modeling,                                                  tion
+                                                                       Economic                    Society makes no-interest loans
+however, not on assessing frame generalizability.                                                  to New York’s immigrants
+                                                                       Fairness and Equality       Strict immigration law unfairly
+3    Data                                                                                          targets Hispanics
+                                                                       External Regulation and     ‘International village’ gets hos-
+                                                                       Reputation                  tile reception
+The Policy Frames Codebook A key contribu-                             Health and Safety           Colombian drug violence leads
+tion to the study of frames is the Policy Frames                                                   to exodus
+Codebook by Boydstun et al. (2014), which in-                          Legality, Constitutional-   House approves bill to abolish
+                                                                       ity and Jurisprudence       INS; The Senate will begin work
+troduced 15 framing dimensions applied to three                                                    next week on its own measure
+debate issues: immigration, tobacco, and same-                                                     dealing with the immigration
+sex marriage. The guidelines for frame annotation                                                  agency
+                                                                       Morality                    County’s undocumented work-
+in this codebook have been dynamically updated                                                     ers say they aren’t here to ‘steal’
+over time (Boydstun and Gross, 2014). This work                        Other                       U.S. under pressure to carry big-
+led to the creation of the Media Frames Corpus                                                     ger load
+                                                                       Policy Prescription and     President Donald Trump stalls
+(Card et al., 2015), later expanded to include three                   Evaluation                  on promise to eliminate J-1 visa
+additional issues: gun control, death penalty, and                                                 program
+climate (MFC v4.0). The MFC was explicitly de-                         Political                   Following Trump voter fraud al-
+                                                                                                   legations, claim that 5.7 million
+veloped for three debate issues and the U.S. con-                                                  non-citizens voted is wrong
+text, which is a potential limitation. Additionally,                   Public Opinion              Immigration: Political evangeli-
+as noted by Ali and Hassan (2022), it may not dis-                                                 cals feel push to take sides
+                                                                       Quality of Life             Big money, cheap labor
+tinguish sufficiently between issues and frames by                     Security and Defense        Decision on refugees overdue;
+introducing overly broad categories, such as Eco-                                                  U.S. officials must loosen immi-
+nomic.                                                                                             gration restrictions
+   For our study, we adopt the 15 framing dimen-
+                                                                      Table 1: The 15 frames and their examples extracted
+sions as labeled in Card et al. (2015), cf. full list in
+                                                                      from the MFC headlines on migration.
+Table 1. Our guidelines are a version of the Policy
+Frames Codebook, shortened from 45 to 9 pages
+to preserve the original information while making                     Data collection Our dataset consists of 300 news
+it more accessible. We remove specific edge cases                     articles randomly extracted from the News Portal
+and marginal notes, but our annotators are encour-                    Recommendation Corpus (NPR), a collection of
+aged to consult the original guidelines in cases of                   148,099 news articles in Portuguese from a Brazil-
+doubt. Our version of the guidelines, in English,                     ian news portal called G1 with user click history
+includes a description for each frame and the cues                    (Lucas et al., 2023). The inclusion of click data
+to recognize it (cf. Appendix A.6). In addition,                      makes it suitable for potential future applications
+they include: i) a contextualization of the project,                  in multi-perspective, frame-based news recommen-
+presenting the tool used for annotation (Google                       dation. The dataset was selected not only for its
+Sheets with drop-down menus), and ii) for each                        relevance to recommendation scenarios, but also
+frame, an example drawn from MFC headlines on                         because it covers a broad range of issues from a
+migration where annotators agreed on the frame.                       cultural and linguistic context different from the
+In contrast to the version used in SemEval 2023                       U.S. and the Global North generally. This allows
+(Piskorski et al., 2023a), our guidelines retain all                  us to investigate our research questions on the gen-
+relevant content from the original codebook. The                      eralizability of framing annotations and model per-
+guidelines are made available in the repository.                      formance across news issues.
+analysis, see Ali and Hassan (2022) and Otmakhova et al.                 We select articles belonging to the economics
+(2024), offering a multidisciplinary perspective on the field.        and politics sections of the newspaper. The articles
+                                                                 85
+                                                                                                                    Annotator 1     Annotator 2
+
+Heading     Ministro do Trabalho quer mesa de negociação entre trabalhadores e controladores das Americanas          Economic         Legality
+
+
+Body        O ministro do Trabalho, Luiz Marinho, afirmou nesta terça-feira (31) que quer estabelecer uma mesa
+            redonda entre os trabalhadores das lojas Americanas e os controladores da empresa. A declaração          Economic         Economic
+            acontece um dia após as maiores centrais sindicais do país terem divulgado comunicado conjunto
+            defendendo a participação direta do Ministério do Trabalho no processo de recuperação judicial da
+                                                                                                                       Crime           Crime
+            Americanas, ocorrido após a revelação no início do mês de pelo menos R$ 20 bilhões em problemas
+            contábeis. As centrais querem preservar empregos na varejista, que têm mais de 44 mil
+            trabalhadores, além de "centenas de milhares" na rede de fornecedores. "Vamos providenciar mesa           Morality        Fairness
+            redonda das Americanas com representantes dos trabalhadores para buscar compreender o que
+            aconteceu. Se houve fraude, vamos acionar os órgãos responsáveis pelas fraudes. Não posso
+            afirmar que houve fraude, mas que tem cheiro tem cheiro", declarou o ministro. [...]
+
+
+Primary (global)                                                                                                      Morality         Legality
+
+
+
+
+Figure 1: Example of an annotation in FramesNews-PT (full article and translation in English are provided in
+Appendix A.2). Each annotator assigns, in this order: (i) one frame to the article heading, (ii) multiple frames to the
+article body, and (iii) a primary frame to the article as a whole.
+
+
+in the NPR dataset often belong to more than one                                 the article level. While span-level annotation may
+category, so they also span across other news cate-                              be preferable for certain applications, article-level
+gories as well. In this way, we ensure that articles                             annotation can still supports various tasks, such as
+i) consist of hard news, typically including topics                              news recommendation with frame diversification.
+such as foreign and domestic politics, economy                                   Figure 1 presents an example annotation.
+and finance (Reinemann et al., 2012), and ii) cover                                 In the MFC, the annotators also decide whether
+a broad domain, spanning multiple debate issues.                                 an article is relevant and do not carry out anno-
+A topic modeling analysis with BerTopic (Groo-                                   tations on irrelevant articles3 . We skip this anno-
+tendorst, 2022) on NPR and FrameNews-PT shows                                    tation phase, and therefore annotate all the arti-
+that our selection of topics is representative of the                            cles, for two main reasons: i) models are presented
+whole NPR corpus (see Appendix A.3). To com-                                     with both relevant and potentially irrelevant articles
+ply with model input length limitations, we limit                                for classification, and we want the annotation pro-
+our selection to articles shorter than 300 words and                             cess to align with the modeling setup; and ii) our
+remove boilerplate (banners, ads).                                               dataset includes only hard news and has already
+                                                                                 been cleaned. We aggregate irrelevant articles and
+Data annotation We hired two annotators, both
+                                                                                 those that do not match any frame’s guidelines un-
+Master’s students: one Brazilian and one Por-
+                                                                                 der a single label, namely Other. This frequently
+tuguese. We expect their cultural backgrounds
+                                                                                 includes news on a personal rather than societal
+to influence the interpretation and application of
+                                                                                 level, such as advice on personal finance, new com-
+frames during the task. In order to acknowledge
+                                                                                 mercial products, or celebrity news. An example
+individual perspectives and subjectivity, we keep
+                                                                                 of this category is the following headline, which
+the annotations disaggregated and we evaluate the
+                                                                                 describes a private decision by President Lula that
+models on each annotator, adopting a perspectivist
+                                                                                 does not match any frame dimension:
+approach (Cabitza et al., 2023).
+   Like in the MFC, our annotators label in the                                  (1)       Lula decide não se mudar para a Granja do
+following order: (i) the heading frame (single la-                                         Torto antes da posse.
+bel), (ii) the body frames (multiple labels), and (iii)                                    Lula decides not to move to Granja do Torto
+the primary frame, i.e., the most prominent frame                                          before the inauguration.
+throughout the article (single label). Following the
+MFC guidelines, the primary frame must be se-
+                                                                                      3
+lected from among the annotated frames; in case of                                      A relevant article: i) concerns the policy issue in question,
+                                                                                 ii) takes place in or explicitly regards the United States, iii)
+doubt, it defaults to the heading frame. Unlike the                              has more than four lines, and iv) is a proper article, not a
+MFC, however, our annotations are performed at                                   correction of a previous error or an obituary.
+
+                                                                            86
+The annotation process was organized into four                      Inter-annotator agreement As Figure 2 shows,
+weekly rounds, with an increasing number of arti-                   the agreement score on the primary frame kept im-
+cles, based on the assumption that annotators be-                   proving generally over the four rounds, with the
+come more efficient and familiar with the task over                 exception of the third round, which contained more
+time: the first two rounds comprised 50 articles                    complex cases. The discussion was useful in distin-
+each, and the last two rounds contained 100 arti-                   guishing difficult frames. After the final revision,
+cles each. After each round, the annotators partici-                the global agreement after discussion on the dataset
+pated in a discussion session to address ambiguous                  was α=0.78. It is substantially higher than the one
+cases and refined the application of the guidelines.                reported on the MFC by (Card et al., 2015), which
+Inter-annotator agreement (IAA) is measured using                   never exceeds 0.70. This can be attributed to four
+Krippendorff’s α4 after each round. We hypothe-                     main reasons: i) in the MFC, new annotators with
+size that i) the IAA increases at each round because                no previous knowledge were introduced in each
+of the discussions, and ii) that the score before and               round, potentially lowering the overall score; ii)
+after discussion becomes closer at each round.                      discussing the guidelines with the same person, as
+                                                                    we did, could in the worst case lead to overfitting
+Annotators’ perspectives In the discussion
+                                                                    (we alleviate the effects in modeling by keeping an-
+rounds, we observe the influence of the annota-
+                                                                    notations disaggregated); iii) annotators usually fell
+tors’ cultural backgrounds on the usage of frames.
+                                                                    back to general frames rather than specific ones5 ;
+The Portuguese annotator struggled to understand
+                                                                    iv) they used Other to annotate articles about per-
+certain contexts due to her different cultural per-
+                                                                    sonal stories that did not match other frames in the
+spective and she would sometimes need to look
+                                                                    guidelines, consequently raising the agreement.
+up acronyms, such as STF (Supremo Tribunal Fed-
+eral). The Brazilian annotator, familiar with the
+local context, often had a deeper understanding of
+the reasons and potential consequences of news
+articles. Consider the following heading sentence,
+referring to scholarships for students:
+
+(2)       Reajuste de bolsas da Capes e do CNPq
+          deve ser anunciado ainda em janeiro, diz
+          Camilo Santana.
+          Adjustment of Capes and CNPq scholar-
+          ships should be announced in January, says
+                                                                    Figure 2: Inter-annotator agreement on the primary
+          Camilo Santana.
+                                                                    frame over four rounds, before and after discussion.
+The Brazilian annotator, aware that access to schol-
+arships is a major issue in Brazil, considered the in-              IAA on single frames We also compute agree-
+troduction of such a policy to be significant and la-               ment on single frames (Figure 3). The results con-
+beled the article as Policy Prescription and Evalua-                firm highest agreement for Other, arguably due
+tion. By contrast, the Portuguese annotator, having                 to its particular function in our annotations (see
+associated the term bolsas with the stock exchange                  Section 3). Other frames with high scores include
+(bolsa de valores), labeled it as Economic. These                   External Regulation and Reputation, suggesting
+differences show that a perspectivist approach is                   that it is particularly well defined, Political, and
+helpful in annotation and modeling. We keep the                     Economic, which is not surprising given that these
+annotations disaggregated in the evaluation (see                    are the dominant categories in the dataset. On the
+Section 5.1 and Table 4 for more details).                          other hand, the frames with the lowest agreement
+                                                                    are Capacity and Resources and Quality of Life.
+4       Analysis of Frame Generalization
+                                                                        5
+                                                                        We use ‘general frames’ to refer to high-frequency frames
+We can now investigate the generalization of the                    — such as Political, Economic, and Legality, Constitutionality
+MFC frames to the Brazilian context.                                and Jurisprudence — that frequently overshadow other frames
+                                                                    during annotation. By contrast, ‘specific frames’ denote low-
+    4
+     Krippendorff’s α was adopted following the MFC. It             frequency frames that are more easily obscured by broader
+calculates agreement considering the whole pool of labels           categories and potentially tied to specific issues, for example
+rather than individual frequency of use (Card et al., 2015).        Capacity and Resources (see Figures 4, 5, and 6).
+
+                                                               87
+      Figure 3: Agreement on each frame (primary).
+
+
+Frame overlap Figure 4 shows the overlap be-
+tween the two annotators on primary frames, indi-
+cating which frame pairs struggle with high agree-            Figure 4: Primary frames overlap between annotators.
+ment. These include: i) Crime and Punishment
+vs. Legality, Constitutionality and Jurisprudence
+ii) Fairness and Equality vs. Quality of Life, iii)           and Public Opinion. We hypothesize that these
+Policy Prescription and Evaluation vs. Economic.              frames are not used frequently because they are
+   Quality of Life and Fairness and Equality fre-             tied to specific issues in the MFC; for example,
+quently co-occur when discussing social issues, as            Capacity and Resources is strongly associated to
+in the following:                                             climate change. Cultural Identity was never used
+                                                              by our annotators, which appears due to its specific
+(3)      Ministério diz que novo Bolsa Família terá           use in the U.S. issues migration and gun control.
+         R$ 18 bilhões para crianças de até 6 anos.              The proportion of Other in our corpus is almost
+         The Ministry says that the new Bolsa                 the same as in the MFC (13%), although it is used
+         Família will have R$ 18 billion for children         more broadly in our annotations (see Section 3).
+         up to 6 years old.                                   This means that, even though we sample from a
+                                                              much broader range of issues, the 15 frames still
+Crime and Punishment and Legality, Constitution-              suffice to classify the news. However, annotators in
+ality and Jurisprudence overlap when talking about            our case tended to fall back to more general frames,
+legal measures to punish someone, while Policy                indicating a lack of completeness.
+Prescription and Economic occur together when
+speaking of policies that affect economy.                     Annotator survey To validate our interpretations
+   We would argue that this overlap is not due to             from above, we asked the annotators to fill a sur-
+failure of a frame to generalize. Rather, it is a case        vey about the annotation process, and discussed
+of a complex situation which is described as having           the results in a meeting. The feedback from the
+an import on multiple aspects. Such multi-class               survey confirmed that annotators found our sum-
+cases are intrinsic to framing.                               marized guidelines easier to read and understand
+                                                              than the original one by Boydstun et al. (2014).
+Completeness: Frame frequency While a low                     They identified two main limitations. First, some
+frequency does not imply that a frame does not                frame descriptions are overly specific to the U.S.
+generalize, high frequencies for Other or general             context. For example, Security and Defense in-
+frames may indicate lack of completeness. We                  cluded immigration issues at the U.S. border (cf.
+therefore compare frame frequencies between MFC               Appendix A.6), a topic not prominent in Brazil.
+and FrameNews-PT (Figures 5 and 6).                           Second, some frames are not described sufficiently
+   Some frames, like Economic, Fairness and                   distinctly by the guidelines, leading to overlap.
+Equality, and External Regulation and Reputation                 Regarding the frequency of frames, the anno-
+appeared more frequently in FrameNews-PT, sug-                tators attributed the low usage of certain frames
+gesting they transfer well to Brazilian debate cov-           to the topics covered, confirming our hypothesis
+erage. In contrast, six frames were used fewer than           that some frames are specific to particular issues.
+20 times: Health and Safety, Security and Defense,            However, when asked whether they would add or
+Quality of Life, Capacity and Resources, Morality,            eliminate any category, they agreed that the same
+                                                         88
+                         Figure 5: Frames frequencies across policy issues in the MFC.
+
+
+                                                              guidelines ensures better fit to the local context.
+
+                                                              5     Frame Prediction on FrameNews-PT
+                                                              Even very good frame generalizability does not
+                                                              imply that frame prediction models transfer well
+                                                              across languages, and at least for some frames we
+                                                              see substantial shifts in frequency (cf. Figure 6).
+                                                              Therefore, a) we run two classifiers trained on the
+Figure 6: Primary frames frequency in the MFC com-            MFC corpus, testing them both on MFC and on
+pared to FrameNews-PT (normalized).                           FrameNews-PT; b), we classify FrameNews-PT in a
+                                                              zero-shot setting with 8 chat-instructed LLMs rang-
+                                                              ing from 1B to 12B parameters as well as ChatGPT-
+tagset could be used for future tasks, provided that          4o (exact parameter size unknown). All chosen
+some adjustments are made, making the frames                  models are multilingual since FrameNews-PT is in
+more context-aware and contrastive.                           Portuguese.
+   The articles tagged as Other mainly focused on
+private issues rather than on societal-level concerns,        5.1    Experimental Setup
+which is why they did not match any frame. While              We split the Media Frames Corpus (MFC) into
+these could be covered by new frames (e.g., Per-              70% training (21,751 examples), 10% validation
+sonal Finance, Advertisement), adding such fine-              (3,107), and 20% test (6,214). The test set is held
+grained categories would be misaligned with the               out and only used for final evaluation. All splits
+goals of framing analysis for hard news.                      are fixed across runs to ensure consistency. The
+                                                              FrameNews-PT corpus is always used as a test set,
+Conclusions In sum, we find that the 15 frames                in order to understand how classifiers perform on a
+generalize well enough that they can be employed              novel set of news issues from a different country.
+in future comparable projects, with the following
+revisions to the guidelines: i) replace U.S.-specific         Supervised classifiers We fine-tune two pre-
+examples with locally relevant counterparts (e.g.,            trained multilingual language models: XLM-
+substitute Medicare with Bolsa Família); ii) clar-            RoBERTa-base (Conneau et al., 2019) and
+ify contrasts between overlapping frames based on             Multilingual-E5-base (Wang et al., 2024) for single-
+the local context (e.g., Quality of Life vs. Health           label classification over 15 frames. Inputs are tok-
+and Safety); iii) better define the scope of Other.           enized using the model tokenizers with a maximum
+The addition of culturally specific frames does not           sequence length of 512, and models are trained us-
+appear necessary, as the existing inventory already           ing cross-entropy loss. Each model is trained for
+provides adequate coverage; rather, adapting the              up to 10 epochs with early stopping based on vali-
+                                                         89
+               Model                 Dataset          Accuracy      Global F1    F1 (ann 1)   F1 (ann 2)   Cohen’s κ
+                                     MFC              0.21          -            -            -            -
+ Majority class baseline
+                                     FrameNews-PT     0.23          -            -            -            -
+                                     MFC              0.67 ±0.00    0.68 ±0.00   -            -            -
+ Fine-tuned    XLM-RoBERTa
+                                     FrameNews-PT     0.53 ±0.00    0.48 ±0.01   0.49 ±0.00   0.47 ±0.01   -
+                                     MFC              0.66 ±0.00    0.67 ±0.01   -            -            -
+ Fine-tuned    Multilingual-E5
+                                     FrameNews-PT     0.56 ±0.01    0.50 ±0.01   0.51 ±0.01   0.49 ±0.01   -
+                                     MFC              0.40 ±0.10    0.38 ±0.01   -            -            0.50 ±0.00
+ Zero-shot     Qwen2.5-7B-Instruct
+                                     FrameNews-PT     0.53 ±0.02    0.44 ±0.02   0.45 ±0.03   0.42 ±0.03   0.49 ±0.18
+                                     MFC              0.46 ±0.00    0.46 ±0.00   -            -            0.69 ±0.00
+ Zero-shot     gpt-4o-2024-08-06
+                                     FrameNews-PT     0.59 ±0.01    0.50 ±0.03   0.51 ±0.04   0.49 ±0.03   0.75 ±0.06
+
+Table 2: Results of the models on the two datasets. For XLM-RoBERTa and Multi-E5, standard deviations are
+across random seeds. For Qwen and ChatGPT, they are across templates. Accuracy considers the output as correct
+if it matches at least one annotation. Global F1 is calculated on the Gold Standard for the MFC, while it is averaged
+on both annotators for FramesNews-PT. Cohen’s κ measures reliability across prompt templates. Best results for
+encoder-based and generative models are in bold.
+
+
+dation loss, using a patience of 3. We use a batch            classifiers on the MFC. On the other hand,
+size of 64 for both training and evaluation. The              ChatGPT-4o is the best model among the zero-shot
+learning rate is 5e-5. All experiments are repeated           classifiers for MFC (acc=46%) and FrameNews-PT
+with five different random seeds.                             (acc=59%) – not surprisingly, given its parameter
+                                                              count. Note that when comparing ChatGPT-4o and
+Zero-shot classifiers For zero-shot classification,           RoBERTa-XLM, ChatGPT-4o yields the best result
+we prompt multilingual chat-instructed models                 on FrameNews-PT, while RoBERTa-XLM outper-
+from the Qwen (Qwen Team et al., 2024), Google                forms it by 8 points accuracy on the MFC. The
+Gemma (Kamath et al., 2025), Llama (Grattafiori               F1-score results follow similar patterns.
+et al., 2024), and GPT (Achiam et al., 2023) fami-
+                                                                 These findings suggest a trade-off: supervised
+lies. Our prompts include the article to be labeled,
+                                                              models trained on annotated data achieve strong in-
+the shortened annotation guidelines, and a task de-
+                                                              domain performance but are less effective in trans-
+scription. We evaluate the models on 3 prompt
+                                                              fer to new corpora, whereas large zero-shot models
+templates (see examples in A.5) and temperature 0.
+                                                              offer more robust cross-domain performance but
+Evaluation metrics We evaluate the perfor-                    fall short in accuracy when compared to supervised
+mance of the models on accuracy and F1-score.                 models in an in-domain setup.
+Accuracy is measured taking the perspectivist ap-                As for reliability across prompt templates, larger
+proach into account. That is, we consider the an-             models are more reliable (Ceron et al., 2024):
+swer of the model correct when it matches the pri-            ChatGPT-4o achieves 0.75 and 0.69 Cohen’s κ on
+mary labels of one of the annotators. The F1-score            the MFC and FrameNews-PT respectively, whereas
+for the MFC corpus is based on the gold labels                Qwen2.5-7B reaches only 0.46 and 0.49.
+while we report the F1-scores for each annotator in              Figure 7 shows model performance and inter-
+FrameNews-PT separately. We also calculate Co-                annotator agreement across frames. The agreement
+hen’s κ for checking the reliability of the models            between human annotators is always higher than
+answers across the evaluated prompt templates.                model-human agreement, except for Quality of Life.
+                                                              The models struggle the most with the category
+5.2 Results                                                   Other – for the supervised models, this is presum-
+We report results for the two supervised models               ably because this category is very infrequent in the
+and the two best-performing zero-shot models in               MFC; for the zero-shot models, we hypothesize
+Table 2; for the remaining results see the Appendix.          that this is due to its status as a ‘catch-all’ category
+   The best model among the supervised learning               which is hard to learn.
+classifiers for MFC is RoBERTa-XLM (acc=67%)                     While supervised models perform relatively well
+while for FrameNews-PT it is Multi-E5 (acc=56%).              across all frames on the MFC (acc=66%-67%), they
+RoBERTa-XLM clearly outperforms the zero-shot                 struggle to generalize to FrameNews-PT (acc=53%-
+                                                         90
+Figure 7: Agreement between models’ predictions and annotator 1 on FrameNews-PT and MFC, and agreement
+between annotators on FrameNews-PT.
+
+
+56%), particularly for Policy Prescription and Eval-        frames. It offers a valuable resource for both the
+uation, Morality, Fairness and Equality, Capac-             NLP and recommender systems communities. By
+ity and Resources, and Quality of Life. The latter          including frame annotations, it also enables new
+three also have the lowest inter-annotator agree-           research directions, such as investigating the rela-
+ment. Our best zero-shot model, GPT-4o, performs            tionship between frames and topics.
+worst for Policy Prescription and Evaluation and               Our analysis focuses on the generalizability of
+Quality of Life on the MFC, arguably due to blurred         the MFC frames to the Brazilian context. We find
+boundaries of these frames (cf. Section 4). On              generally high agreement among annotators, which
+FrameNews-PT, it struggles the most with Morality           we interpret as a promising sign; however, the MFC
+and Capacity and Resources, likely due to the shift         frames are not complete. In the absence of specific
+in topics.                                                  frames, annotators tend to fall back to general ones,
+   These observations give rise to a final question:        with reduced specificity as consequence. This trend
+is the ‘limiting factor’ in the models’ performance         is largely due to the original frames and annotation
+on FrameNews-PT data quality on the MFC, on                 guidelines being developed for the U.S. context on
+FrameNews-PT, or the shift in distribution? To un-          a limited number of policy issues.
+derstand this, we ran a linear regression to predict           Our modeling experiments show that zero-shot
+GPT-4o’s accuracy on the MFC at the frame level             generative models achieve robust results on our
+(cf. Figure 7). Using three predictors: IAA on              dataset. However, the very good in-domain re-
+MFC, IAA on FrameNews-PT, the regression ex-                sults for supervised MFC models indicate that an-
+plains 53% of the variance, with only the IAA on            notated data is still pivotal to reach strong perfor-
+the MFC being a significant predictor at p<0.05.            mance; both model types suffer from shortcomings
+This is surprising, since GPT-4o is not even trained        in frame definition and data creation.
+on the MFC. Our take on this result is that the MFC            We conclude that the 15 MFC frames remain
+inventory includes frames with vague or otherwise           broadly applicable and continue to capture essential
+deficient definitions, which leads to problems both         dimensions of political discourse, even across coun-
+in terms of annotation (low IAA) and in terms of            tries and languages. To improve generalization, we
+prediction (low performance).                               recommend refining the annotation guidelines to
+                                                            offer clearer distinctions between overlapping cate-
+6   Conclusion
+                                                            gories and incorporating locally relevant examples
+This study introduces FrameNews-PT, the first               (e.g., Bolsa Família instead of Medicare). Such
+dataset of Brazilian Portuguese news with both              refinements would enhance the framework’s adapt-
+users’ click history (sampled from the NPR corpus)          ability to diverse cultural contexts and evolving
+and annotation with the 15 Media Frames Corpus              policy debates.
+                                                       91
+Limitations                                                    Saud Alashri, Sultan Alzahrani, Lenka Bustikova, David
+                                                                 Siroky, and Hasan Davulcu. 2015. What animates
+The main limitation of our study is the size of our              political debates? analyzing ideological perspectives
+dataset. We had to limit the number of articles to               in online debates between opposing parties. In Pro-
+300, which is a small sample. The main reason is                 ceedings of the ASE/IEEE International Conference
+                                                                 on Social Computing (SocialCom-15), Stanford, CA.
+the expense of running this type of study. Anno-                 Academy of Science and Engineering.
+tating frames in news articles is costly because the
+guidelines are extensive to learn and the articles             Mohammad Ali and Naeemul Hassan. 2022. A sur-
+                                                                vey of computational framing analysis approaches.
+are long. Annotators also need time to identify all             In Proceedings of the 2022 Conference on Empiri-
+body frames and then the primary frame for each                 cal Methods in Natural Language Processing, pages
+article. For the same reason, we hired only two an-             9335–9348.
+notators and chose articles from a single Brazilian
+                                                               Amber E Boydstun, Dallas Card, Justin H Gross, Philip
+news portal, which may limit the generalizability                Resnik, and Noah A Smith. 2014. Tracking the de-
+of our results. In modeling, we focused on the                  velopment of media frames within and across policy
+primary frame, assuming it represents the article,               issues. In APSA 2014 annual meeting paper.
+but considering multiple frames could yield more               Amber E Boydstun and Justin Gross. 2014. Policy
+accurate analysis. Moreover, including few-shot                 frames codebook. Work in progress.
+examples could help assess whether they improve
+                                                               Federico Cabitza, Andrea Campagner, and Valerio
+performance.                                                     Basile. 2023. Toward a perspectivist turn in ground
+                                                                 truthing for predictive computing. In Proceedings
+Ethics Statement                                                 of the AAAI Conference on Artificial Intelligence,
+                                                                 volume 37, pages 6860–6868.
+The data used in this study is publicly available and
+was collected from the News Portal Recommen-                   Dallas Card, Amber Boydstun, Justin H Gross, Philip
+dation Corpus (NPR) (Lucas et al., 2023), which                  Resnik, and Noah A Smith. 2015. The media frames
+                                                                 corpus: Annotations of frames across issues. In Pro-
+contains news articles from Brazilian outlets. The               ceedings of the 53rd Annual Meeting of the Asso-
+annotation was conducted by two Master’s students                ciation for Computational Linguistics and the 7th
+who were compensated for their work. The study                   International Joint Conference on Natural Language
+follows ethical guidelines for research involving                Processing (Volume 2: Short Papers), pages 438–
+                                                                 444.
+human participants, ensuring that annotators were
+informed about the purpose of the study and their              Dallas Card, Justin Gross, Amber Boydstun, and
+rights. The research does not involve sensitive or               Noah A. Smith. 2016. Analyzing framing through
+                                                                 the casts of characters in the news. In Proceedings of
+personal data, and all data is anonymized.
+                                                                 the 2016 Conference on Empirical Methods in Natu-
+                                                                 ral Language Processing, pages 1410–1420, Austin,
+Acknowledgements                                                 Texas. Association for Computational Linguistics.
+We gratefully acknowledge funding from the Ger-                Tanise Ceron, Neele Falk, Ana Barić, Dmitry Nikolaev,
+man Federal Ministry of Research, Technology and                 and Sebastian Padó. 2024. Beyond prompt brittle-
+Space (BMFTR) under the grant 01IS23072 for the                  ness: Evaluating the reliability and consistency of
+                                                                 political worldviews in llms. Transactions of the
+Software Campus project MULTIVIEW.                               Association for Computational Linguistics, 12:1378–
+                                                                 1400.
+
+References                                                     Alexis Conneau, Kartikay Khandelwal, Naman Goyal,
+                                                                 Vishrav Chaudhary, Guillaume Wenzek, Francisco
+Josh Achiam, Steven Adler, Sandhini Agarwal, Lama                Guzmán, Edouard Grave, Myle Ott, Luke Zettle-
+  Ahmad, Ilge Akkaya, Florencia Leoni Aleman,                    moyer, and Veselin Stoyanov. 2019. Unsupervised
+  Diogo Almeida, Janko Altenschmidt, Sam Altman,                 cross-lingual representation learning at scale. CoRR,
+  Shyamal Anadkat, et al. 2023. Gpt-4 technical report.          abs/1911.02116.
+  arXiv preprint arXiv:2303.08774.
+                                                               Sourabh Dattawad, Agnese Daffara, and Tanise Ceron.
+Yamen Ajjour, Milad Alshomary, Henning Wachsmuth,                2025. Leveraging media frames to improve nor-
+  and Benno Stein. 2019. Modeling frames in argu-                mative diversity in news recommendations. arXiv
+  mentation. In Proceedings of the 2019 Conference on            preprint arXiv:2509.02266.
+  Empirical Methods in Natural Language Processing
+  and the 9th International Joint Conference on Natu-          Robert M Entman. 1993. Framing: Toward clarification
+  ral Language Processing (EMNLP-IJCNLP), pages                  of a fractured paradigm. Journal of communication,
+  2922–2932.                                                     43(4):51–58.
+
+                                                          92
+Anjalie Field, Doron Kliger, Shuly Wintner, Jennifer              Julia Mendelsohn, Ceren Budak, and David Jurgens.
+  Pan, Dan Jurafsky, and Yulia Tsvetkov. 2018. Fram-                 2021. Modeling framing in immigration discourse on
+  ing and agenda-setting in russian news: a computa-                 social media. In Proceedings of the 2021 Conference
+  tional analysis of intricate political strategies. arXiv           of the North American Chapter of the Association
+  preprint arXiv:1808.09386.                                         for Computational Linguistics: Human Language
+                                                                    Technologies, pages 2219–2263, Online. Association
+Fabrizio Gilardi, Charles R Shipan, and Bruno Wüest.                 for Computational Linguistics.
+  2021. Policy diffusion: The issue-definition stage.
+  American Journal of Political Science, 65(1):21–35.             Fred Morstatter, Liang Wu, Uraz Yavanoglu, Stephen R
+                                                                     Corman, and Huan Liu. 2018. Identifying framing
+Luca Gilardi and Collin Baker. 2018. Learning to align               bias in online news. ACM Transactions on Social
+  across languages: Toward multilingual framenet. In                Computing, 1(2):1–18.
+  Proceedings of the Eleventh International Confer-
+  ence on Language Resources and Evaluation (LREC                 Mats Mulder, Oana Inel, Jasper Oosterman, and Nava
+  2018), Paris, France. European Language Resources                Tintarev. 2021. Operationalizing framing to support
+  Association (ELRA).                                              multiperspective recommendations of opinion pieces.
+                                                                   In Proceedings of the 2021 ACM conference on fair-
+Aaron Grattafiori, Abhimanyu Dubey, Abhinav Jauhri,                ness, accountability, and transparency, pages 478–
+  Abhinav Pandey, Abhishek Kadian, Ahmad Al-                       488.
+  Dahle, Aiesha Letman, Akhil Mathur, Alan Schelten,
+  Alex Vaughan, et al. 2024. The llama 3 herd of mod-             Nona Naderi and Graeme Hirst. 2017. Classifying
+  els. arXiv preprint arXiv:2407.21783.                             frames at the sentence level in news articles. Pol-
+                                                                    icy, 9:4–233.
+Maarten Grootendorst. 2022. Bertopic: Neural topic
+ modeling with a class-based tf-idf procedure. arXiv              Viet-An Nguyen, Jordan L Ying, and Philip Resnik.
+ preprint arXiv:2203.05794.                                         2013. Lexical and hierarchical topic regression. Ad-
+                                                                    vances in neural information processing systems, 26.
+Aishwarya Kamath, Johan Ferret, Shreya Pathak, Nino
+  Vieillard, Ramona Merhej, Sarah Perrin, Tatiana                 Julia Otmakhova, Shima Khanehzar, and Lea Frermann.
+  Matejovicova, Alexandre Ramé, Morgane Rivière,                     2024. Media framing: A typology and survey of
+  et al. 2025. Gemma 3 technical report. arXiv                       computational approaches across disciplines. In Pro-
+  preprint arXiv:2503.19786.                                         ceedings of the 62nd Annual Meeting of the Associa-
+                                                                     tion for Computational Linguistics (Volume 1: Long
+Shima Khanehzar, Andrew Turpin, and Gosia Miko-                      Papers), pages 15407–15428.
+  lajczak. 2019. Modeling political framing across
+  policy issues and contexts. In Proceedings of The               Wim Peters, Piek Vossen, Pedro Díez-Orzas, and Geert
+  17th Annual Workshop of the Australasian Language                 Andriaens. 1998. Cross-linguistic alignment of word-
+  Technology Association, pages 61–66.                              nets with an inter-lingual-index. Computers and the
+                                                                    Humanities, 32(2):221–251.
+Haewoon Kwak, Jisun An, and Yong-Yeol Ahn. 2020.
+  A systematic media frame analysis of 1.5 million                Jakub Piskorski, Nicolas Stefanovitch, Valerie-Anne
+  new york times articles from 2000 to 2017. In Pro-                Bausier, Nicolo Faggiani, Jens Linge, Sopho Kharazi,
+  ceedings of the 12th acm conference on web science,               Nikolaos Nikolaidis, Giulia Teodori, Bertrand
+  pages 305–314.                                                    De Longueville, Brian Doherty, et al. 2023a. News
+                                                                    categorization, framing and persuasion techniques:
+Anne Lauscher, Henning Wachsmuth, Iryna Gurevych,                   Annotation guidelines. European Commission, Ispra,
+  and Goran Glavaš. 2022. Scientia potentia est—on                  JRC132862.
+  the role of knowledge in computational argumenta-
+  tion. Transactions of the Association for Computa-              Jakub Piskorski, Nicolas Stefanovitch, Giovanni
+  tional Linguistics, 10:1392–1422.                                 Da San Martino, and Preslav Nakov. 2023b. Semeval-
+                                                                    2023 task 3: Detecting the category, the framing, and
+Sophie Lecheler, Mario Keer, Andreas RT Schuck, and                 the persuasion techniques in online news in a multi-
+  Regula Hänggli. 2015. The effects of repetitive news              lingual setup. In Proceedings of the 17th Interna-
+  framing on political opinions over time. Communi-                 tional Workshop on Semantic Evaluation (SemEval-
+  cation Monographs, 82(3):339–358.                                 2023), pages 2343–2361.
+Siyi Liu, Lei Guo, Kate Mays, Margrit Betke, and                  An Yang Qwen Team, Baosong Yang, Binyuan Hui,
+  Derry Tanti Wijaya. 2019. Detecting frames in news                Bo Zheng, Bowen Yu, Chang Zhou, Chengpeng Li,
+  headlines and its application to analyzing news fram-             Chengyuan Li, Dayiheng Liu, et al. 2024. Qwen2
+  ing trends surrounding us gun violence. In Proceed-               technical report. arXiv preprint arXiv:2407.10671.
+  ings of the 23rd conference on computational natural
+  language learning (CoNLL), pages 504–514.                       Siva Reddy, Oscar Täckström, Slav Petrov, Mark Steed-
+                                                                     man, and Mirella Lapata. 2017. Universal semantic
+Joel Pinho Lucas, João Felipe Guedes da Silva, and                   parsing. In Proceedings of the 2017 Conference on
+  Leticia Freire de Figueiredo. 2023. Npr: a news                    Empirical Methods in Natural Language Processing,
+  portal recommendations dataset. In NORMalize@                      pages 89–101, Copenhagen, Denmark. Association
+  RecSys.                                                            for Computational Linguistics.
+
+                                                             93
+Carsten Reinemann, James Stanyer, Sebastian Scherr,
+  and Guido Legnante. 2012. Hard and soft news:
+  A review of concepts, operationalizations and key
+  findings. Journalism, 13(2):221–239.
+Margaret E Roberts, Brandon M Stewart, Dustin
+ Tingley, Christopher Lucas, Jetson Leder-Luis,
+ Shana Kushner Gadarian, Bethany Albertson, and
+ David G Rand. 2014. Structural topic models for
+ open-ended survey responses. American journal of
+ political science, 58(4):1064–1082.
+David A Snow and Robert D Benford. 2005. Clarify-
+  ing the relationship between framing and ideology.
+  Frames of protest: Social movements and the framing
+  perspective, 205:209.
+Oren Tsur, Dan Calacci, and David Lazer. 2015. A
+  frame of mind: Using statistical models for detec-
+  tion of framing and agenda setting campaigns. In
+  Proceedings of the 53rd Annual Meeting of the As-
+  sociation for Computational Linguistics and the 7th
+  International Joint Conference on Natural Language
+  Processing (Volume 1: Long Papers), pages 1629–
+  1638.
+
+Liang Wang, Nan Yang, Xiaolong Huang, Linjun Yang,
+  Rangan Majumder, and Furu Wei. 2024. Multilin-
+  gual e5 text embeddings: A technical report. arXiv
+  preprint arXiv:2402.05672.
+
+
+
+
+                                                        94
+A    Appendix                                                          já se livrou", disse. "Os acionistas provavelmente vão poder
+                                                                       se locupletar, é possível que tenham se locupletado. Os con-
+A.1 Frames labels                                                      troladores né. Os acionistas minoritários, coitados, estão na
+We adopt the labels from Card et al. (2015). Note                      mesma situação dos trabalhadores", concluiu.
+that some names from Boydstun et al. (2014) were
+                                                                       EN Headline: Minister of Labor wants negotiation table
+changed. For example, Constitutionality and Ju-
+                                                                       between Americanas’ workers and controllers.
+risprudence was modified to Legality, Constitu-
+                                                                       Body: The Minister of Labor, Luiz Marinho, stated this Tues-
+tionality and Jurisprudence, while Law and Order,
+                                                                       day (31) that he wants to establish a roundtable between the
+Crime and Justice was changed into Crime and
+                                                                       workers of the Americanas stores and the company’s con-
+Punishment. In the updated Codebook (Boydstun
+                                                                       trollers. The statement comes one day after the country’s
+and Gross, 2014), the names of some labels were
+                                                                       largest union federations released a joint communiqué de-
+adapted again (e.g., Morality is called Morality and
+                                                                       fending the direct participation of the Ministry of Labor in
+Ethics).
+                                                                       Americanas’ bankruptcy protection process, which followed
+A.2 Annotation example                                                 the revelation earlier this month of at least R$ 20 billion in ac-
+                                                                       counting irregularities. The unions want to preserve jobs at the
+Here we report the complete text of the exam-                          retailer, which employs more than 44,000 workers, in addition
+ple news introduced in Figure 1 in Brazilian Por-                      to “hundreds of thousands” in its supplier network. “We are
+toguese (PT) and its translation in English (EN).                      going to set up a roundtable between Americanas and worker
+PT Headline: Ministro do Trabalho quer mesa de negoci-                 representatives to try to understand what happened. If there
+ação entre trabalhadores e controladores das Americanas.               was fraud, we will trigger the authorities responsible for fraud
+Body: O ministro do Trabalho, Luiz Marinho, afirmou nesta              cases. I cannot say there was fraud, but it certainly smells
+terça-feira (31) que quer estabelecer uma mesa redonda entre           like it,” said the minister. Major shareholders of Americanas
+os trabalhadores das lojas Americanas e os controladores da            release public note Americanas’ main shareholders include
+empresa. A declaração acontece um dia após as maiores cen-             billionaires Jorge Paulo Lemann, Carlos Sicupira, and Mar-
+trais sindicais do país terem divulgado comunicado conjunto            cel Telles. On Tuesday, Luiz Marinho questioned where the
+defendendo a participação direta do Ministério do Trabalho             “compliances” of Americanas were, meaning the company’s
+no processo de recuperação judicial da Americanas, ocorrido            good management and governance practices. “So this is the
+após a revelação no início do mês de pelo menos R$ 20 bilhões          moment for us to question certain values of the so-called mar-
+em problemas contábeis. As centrais querem preservar empre-            ket, which claims to be the voice of reason. It sets rules here
+gos na varejista, que têm mais de 44 mil trabalhadores, além de        and there, yet the sacred rule was not observed: taking care of
+"centenas de milhares" na rede de fornecedores. "Vamos prov-           the health of a company with 1,790 stores across Brazil and
+idenciar mesa redonda das Americanas com representantes                44,000 workers,” he said. The Minister of Labor also argued
+dos trabalhadores para buscar compreender o que aconteceu.             that Americanas “may default on the Brazilian state, may de-
+Se houve fraude, vamos acionar os órgãos responsáveis pelas            fault on creditors, on those who acted in good faith. And he
+fraudes. Não posso afirmar que houve fraude, mas que tem               added that the ‘smart operators probably have no problems.’
+cheiro tem cheiro", declarou o ministro. Acionistas de refer-          ‘Those in charge probably already got away,’ he said. “The
+ência da Americanas divulgam nota pública A Americanas                 shareholders will probably be able to enrich themselves, it is
+tem entre os principais acionistas os bilionários Jorge Paulo          possible that they already have. The controllers, right. The
+Lemann, Carlos Sicupira e Marcel Telles. Luiz Marinho ques-            minority shareholders, poor them, are in the same situation as
+tionou nesta terça-feira onde estavam os "compliances" das             the workers,” he concluded.
+lojas Americanas, ou seja, as regras de boa gestão e de gover-
+                                                                       A.3 FrameNews-PT and NPR analysis
+nança da empresa. "Então é o momento de a gente colocar em
+dúvida alguns valores do chamado mercado, que é o senhor               For the NPR dataset, the average number of words
+da razão. Dita regra para lá e para cá, e a regra sagrada não          in article titles is 14.9 ± 3.6, while the average
+foi observada, que é cuidar da saúde de uma empresa que                number of words in article bodies is 471.7 ± 391.9
+tem 1.790 lojas espalhadas pelo Brasil e tem 44 mil trabal-            (Lucas et al., 2023). Table 3 shows the most fre-
+hadores e trabalhadoras", disse ele. O ministro do Trabalho            quent topics in NPR and FrameNews-PT.
+avaliou, ainda, que a Americanas "pode dar calote no Estado
+brasileiro, pode dar calote nos credores, nos que estavam de
+                                                                       A.4     Expenses
+boa fé. E acrescentou que os "espertalhões provavelmente não           We spent 96 dollars for evaluating ChatGPT-4o
+têm problema". "Quem estava no comando, provavelmente                  with the OpenAI API (3 prompt templates x 6,214
+                                                                  95
+  id   FrameNews-PT                                                         NPR
+  0    presidente, lula, bolsonaro, governo, ex, feira, nesta,              lula, presidente, governo, ex, petrobras, conselho, feira,
+       petrobras, conselho, pt                                              ministro, cargo, nesta
+  1    governo, haddad, sobre, fiscal, tributária, imposto, vai,            bolsonaro, presidente, federal, atos, stf, tribunal, ex, min-
+       ministro, câmara, texto                                              istro, república, justiça
+  2    federal, atos, stf, tribunal, prisão, justiça, torres, ministro,     governo, haddad, fiscal, sobre, tributária, proposta, câ-
+       polícia, pf                                                          mara, regra, ministro, imposto
+  3    mínimo, bilhões, inflação, salário, 2023, pib, governo,              juros, taxa, brasil, tesouro, dívidas, bancos, milhões,
+       valor, anno, tesouro                                                 bilhões, inss, estados
+  4    dívidas, bancos, tesouro, milhões, bilhões, empréstimos,             café, rural, vídeos, bacalhau, globo, produtos, soja, onde,
+       governo, juros, estados, taxa                                        vem, produção
+  5    empresa, petrobras, bahia, companhia, vendas, marca,                 empresa, petrobras, bahia, companhia, vendas, marca,
+       varejo, ford, refinaria, unilever                                    ford, varejo, refinaria, bilhões
+  6    rural, bacalhau, globo, vídeos, soja, produtos, saiba,               mínimo, inflação, salário, bilhões, 2023, pib, governo,
+       água, assistidos, café                                               anno, reajuste, família
+  7    brasil, auxílio, divórcios, mulheres, milhões, número,               microsoft, internet, telemarketing, explorer, uso, blo-
+       julho, ativos, datafolha, analisa                                    queadores, partir, clienti, codice, applicazione
+  8    microsoft, telemarketing, internet, explorer, ataque,                crédito, cartão, americanas, causas, trabalho, bancos,
+       clientes, secretaria, código, aplicativo, partir                     linha, trabalhadores, diagnóstico, câmbio
+
+Table 3: Comparison between top topics in FramesNews-PT and NPR, detected with BERTopic (Grootendorst,
+2022). Topics: politics, economics, justice, production, companies, technology, social support.
+
+
+= 18,642 prompts). We paid 445 euros for each
+                                                                          ### CLASSIFICATION GUIDELINES:
+annotator to annotate the 300 examples in 27 hours
+of work.                                                                  {guidelines}
+
+A.5 Prompt templates                                                      ### PROMPT:
+                                                                          "{content}"
+### PROMPT:
+"{content}"                                                               ### TASK:
+                                                                          Classify the PROMPT above into exactly ONE of
+### TASK:                                                                     the categories below.
+Classify the PROMPT above into exactly ONE of                             "1" Economic
+    these frame categories:                                               "2" Capacity and resources
+                                                                          "3" Morality
+"1" Economic                                                              "4" Fairness and equality
+"2" Capacity and resources                                                "5" Legality, Constitutionality, Jurisdiction
+"3" Morality                                                              "6" Crime and punishment
+"4" Fairness and equality                                                 "7" Security and defense
+"5" Legality, Constitutionality, Jurisdiction                             "8" Health and safety
+"6" Crime and punishment                                                  "9" Quality of life
+"7" Security and defense                                                  "10" Cultural identity
+"8" Health and safety                                                     "11" Public opinion
+"9" Quality of life                                                       "12" Political
+"10" Cultural identity                                                    "13" Policy prescription and evaluation
+"11" Public opinion                                                       "14" External regulation and reputation
+"12" Political                                                            "15" Other
+"13" Policy prescription and evaluation
+"14" External regulation and reputation                                    Answer as a single number ("1",..., "15")
+"15" Other                                                                     corresponding to the most appropriate
+                                                                               category.
+### CLASSIFICATION GUIDELINES:                                             ### ANSWER:
+
+                                                                          Listing 2: Prompt template with guidelines: The
+{guidelines}
+                                                                          guidelines can be found in the github link.
+Base your answer only on the PROMPT and the
+    guidelines provided above. Answer as a
+    single number ("1", ..., "15") corresponding                          A.6     Description of frames
+     to the most appropriate category.                                    Here we provide the descriptions of frames in our guidelines.
+                                                                          The full guidelines are provided in the repository.
+### ANSWER:
+                                                                          1. Economic: The costs, benefits, or any monetary/fi-
+Listing 1: Prompt template without guidelines: zero1                      nancial implications of the issue (to an individual, family,
+                                                                          organization, community or to the economy as a whole). Can
+
+                                                                    96
+include the effect of policy issues on trade, markets, wages,              tation of civil and criminal laws, sentencing and punishment
+employment or unemployment, viability of specific industries               with retribution or sanctions. This frame includes: i) depor-
+or businesses, implications of taxes or tax breaks, financial              tation when an individual does not have the necessary docu-
+incentives, etc.                                                           ments that grant legal standing; ii) increases or reductions in
+                                                                           crime; iii) punishment and execution; iv) resources analysis
+2. Capacity and resources: The lack or availability                        like DNA analysis. Usually found together with other frames,
+of resources (time, physical, geographical, space, human, and              such as Economic, Legality, constitutionality and jurisdiction,
+financial resources). The capacity of existing systems and                 Morality, and Capacity and resources. The primary frame
+resources to carry out policy goals. The easiest way to think              should be chosen according to where the emphasis is.
+about it is in terms of there being "not enough" or “enough” of
+something. The capacity or resources may be an impediment                  7. Security and defense: Any threat to a person,
+to solving a problem or adequately addressing an issue.                    group, or nation, or any defense that needs to be taken to avoid
+                                                                           that threat. Security and Defense frames differ from Health
+3. Morality: Any perspective that is compelled by re-                      and Safety frames in that Security and Defense frames address
+ligious doctrine or interpretation, duty, honor, righteousness             a preemptive action to stop a threat from occurring, whereas
+or any other sense of ethics or social or personal responsibil-            Health and Safety frames address steps taken to ensure safety
+ity. It is sometimes presented from a religious perspective                in the event that something happens. It can include efforts to
+(i.e. “eye for an eye”), but non-religious frames can also be              build a border fence or “secure the borders,” issues of national
+used. For example, the moral imperatives to help others can be             security including resource security, efforts of individuals to
+used to justify military intervention or foreign aid, social pro-          secure homes, neighborhoods or schools, and efforts such as
+grams such as Medicare, welfare, and food stamps. Appeals                  guards and metal detectors that would defend children from a
+that a policy move “is just the right thing to do” or “would               possible threat. Discussion regarding terrorist activity should
+indicate a recognition of our shared humanity” may reflect                 be coded as Security and Defense (e.g. arrests of terrorists, im-
+humanist morality. The commitment aspect of marriage would                 migrants linked to terrorism activity, increased border security
+evoke feelings of morality. Environmental arguments that fo-               to prevent terrorism). Arrests at the border will receive both a
+cus on responsible stewardship or “leaving something for our               Crime and Punishment and Security and Defense frame but
+children” are based in a sense of responsibility or morality.              the primary frame would be Security and Defense since the
+Lawbreakers, including illegal immigrants, can be presented                action is taking place on the border. All terrorist attacks are
+as fundamentally immoral, conversely breaking a law that is                coded as Security and Defense, but attention should be paid
+bad or unjust can be presented as moral (e.g., Rosa Parks). En-            to potential criminal, legal, or any other aspects and double
+acting protective legislation, such as laws that protect children          coded accordingly.
+from pedophiles, guns, violence, poverty, or failure to do so
+can also be presented using moral frames.                                  8. Health and safety: The potential health and safety
+                                                                           outcomes of any policy issue (e.g. health care access and
+4. Fairness and equality: The fairness, equality or in-                    effectiveness, illness, disease, sanitation, carnage, obesity,
+equality with which laws, punishment, rewards, and resources               mental health infrastructure and building safety). Also policies
+are applied or distributed among individuals or groups. Also               taken to ensure safety in case of a tragedy would fit under this
+the balance between the rights or interests of one individual              (e.g. emergency preparedness kits, lock down training in
+or group compared to another individual or group. Fairness                 schools, disaster awareness classes for teachers). It includes
+and Equality frame signals often focus on whether society and              any discussion of the various capital punishment methods
+its laws are equally distributed and enforced across regions,              and procedures and any mentions of refugees. Often used in
+race, gender, economic class, etc. Many gender and race                    conjunction with Quality of Life.
+issues, in particular, include equal pay, access to resources
+such as education, healthcare and housing. Another example                 9. Quality of life: The benefits and costs of any policy
+could be fairness considerations about whether punishments                 on quality of life. The effects of a policy on people’s wealth,
+are proportional to crimes committed. The frame is also used               mobility, access to resources, happiness, social structures,
+when discussing social justice, discrimination and talk of an              ease of day-to-day routines, quality of community life, etc. It
+inmate’s innocence or exogeneration.                                       includes any mention of people receiving generic “benefits”,
+                                                                           adoptions, and weddings. Often used in conjunction with
+5. Legality, Constitutionality, Jurisdiction: The                          Health and Safety.
+legal, constitutional, or jurisdictional aspects of an issue. Legal
+aspects include existinglaws, reasoning on fundamental rights              10. Cultural identity: The social norms, trends, values
+and court cases; constitutional aspects include all discussion             and customs constituting any culture(s). It includes: i) lan-
+of constitutional interpretation and/or potential revisions; ju-           guage issues and language learning; ii) patriotism and national
+risdiction includes any discussion of which government body                traditions, the history of an issue or the significance of an issue
+should be in charge of a policy decision and/or the appropriate            within a group or subculture; iii) census and demographics; iv)
+scope of a body’s policy reach. This frame deals specifically              cultural shifts in a group or society; v) cultural norms of ethnic
+with the authority of government to regulate, and the authority            and political groups. May also include stereotypes or assumed
+of individuals/corporations to act independently of govern-                preferences and reactions of a group (e.g., an affinity for Re-
+ment. Of special note are constraints imposed on freedoms                  publicans to wear cowboy hats); vi) references and quotations
+granted to individuals, government, and corporations via the               of famous people like politicians, leaders or representatives of
+Constitution, Bill of Rights and other amendments. Some                    a subculture.
+frequent arguments and issues are: i) the right to bear arms; ii)
+equal protection; iii) free speech and expression; iv) the con-            11. Public opinion: The opinion of the general pub-
+stitutionality of restricting individual freedoms and imposing             lic. It includes references to general social attitudes, protests,
+taxes; v) conflicts between state, local or federal regulation             polling and demographic information, as well as any public
+and authority, or between different branches of government;                passage of a proposition or law (i.e. “California voters passed
+vi) legal documentation (green card, visas, passports, driver              Prop 8”). All the opinions that represent the sentiment of a
+licenses, marriage license, etc.).                                         group will be coded as Public opinion. However, a group of
+                                                                           experts in a particular domain gets coded according to their
+6. Crime and punishment: The violation of policies                         domain (e.g. police officers in Crime and Punishment, or
+and its consequences. It includes enforcement and interpre-                climate scientists in Capacity and Resources).
+
+                                                                      97
+12. Political: In general, any political considerations sur-
+rounding an issue. It includes political actions, maneuvering,
+efforts or stances towards an issue (e.g. partisan filibusters,
+lobbyist involvement, deal-making and vote trading), mentions
+of political entities or parties (e.g., Democrats, Republicans,
+Libertarians, Green Party). When a headline mentions “both
+sides” this refers to politics.
+13. Policy prescription and evaluation: The anal-
+ysis of whether hypothetical policies will work or existing
+policies are effective. What is/isn’t currently allowed and
+what should/shouldn’t be done? “Policy” encompasses formal
+government regulation (e.g., federal or state laws) as well as
+regulation by businesses (e.g., sports arenas not allowing the
+sale of alcohol). This frame dimension—perhaps more than
+any other—is likely to appear frequently across texts. Yet care
+should be given to only use this code category as the primary
+frame when the main thrust of an article is really about pol-
+icy, for example when it describes the success and failure of
+existing policies or proposes policy solutions to a problem.
+14. External regulation and reputation: In gen-
+eral, the country’s external relations with another nation; the
+external relations of a state with another.This frame includes:
+i) trade agreements and outcomes; ii) comparisons of pol-
+icy outcomes between different groups or regions; iii) the
+perception of one nation, state, and/or group byanother (for
+example, international criticisms of the United States main-
+taining capital punishment); iv) border relations, interstate or
+international efforts to achieve policy goals; v) alliances or
+disputes between groups.
+15. Other: Any frame signal that does not fit in the first
+14 dimensions.
+
+A.7 Further results
+
+
+
+
+Figure 8: Confusion matrix of the best prompt and best
+model (chatGPT-4o) in comparison with annotator 1.
+
+
+
+
+                                                                   98
+                       Model                       Global F1     F1 (ann 1)    F1 (ann 2)     Accuracy
+                       gpt-4o-2024-08-06           0.50 ±0.04    0.51 ±0.04    0.49 ±0.03     0.59 ±0.02
+                       Qwen2.5-7B-Instruct         0.45 ±0.04    0.46 ±0.04    0.43 ±0.03     0.54 ±0.02
+                       Llama-3.1-8B-Instruct       0.36 ±0.04    0.37 ±0.03    0.34 ±0.04     0.44 ±0.04
+                       gemma-3-4b-it               0.35 ±0.03    0.36 ±0.02    0.34 ±0.04     0.43 ±0.02
+                       Qwen2.5-1.5B-Instruct       0.29 ±0.09    0.30 ±0.09    0.28 ±0.08     0.41 ±0.08
+                       Qwen2.5-3B-Instruct         0.33 ±0.08    0.34 ±0.08    0.32 ±0.07     0.40 ±0.07
+                       Llama-3.2-3B-Instruct       0.11 ±0.07    0.12 ±0.06    0.10 ±0.07     0.26 ±0.06
+                       Llama-3.2-1B-Instruct       0.16 ±0.02    0.17 ±0.02    0.15 ±0.02     0.24 ±0.03
+
+(a) FrameNews-PT zero-shot results. We report F1 scores averaged on both annotators (global F1 ), against annotator 1 (ann1) and
+annotator 2 (ann 2).
+
+                                      Model                      Global F1     Accuracy
+                                      gpt-4o-2024-08-06          0.47 ±0.01    0.46 ±0.01
+                                      Qwen2.5-7B-Instruct        0.39 ±0.02    0.40 ±0.01
+                                      Llama-3.1-8B-Instruct      0.35 ±0.02    0.37 ±0.02
+                                      gemma-3-4b-it              0.34 ±0.01    0.37 ±0.03
+                                      Qwen2.5-3B-Instruct        0.30 ±0.05    0.30 ±0.04
+                                      Llama-3.2-3B-Instruct      0.16 ±0.12    0.27 ±0.09
+                                      Qwen2.5-1.5B-Instruct      0.21 ±0.12    0.23 ±0.11
+                                      Llama-3.2-1B-Instruct      0.06 ±0.06    0.12 ±0.07
+
+                               (b) MFC zero-shot results. We report scores against the gold label.
+
+Table 4: Zero-shot results with generative models on both datasets. Accuracy is calculated by considering the output
+as correct if it matches at least one annotation. The standard deviation is calculated based on the three prompt
+templates used to evaluate each model. Best results are in bold.
+
+
+
+
+                                                                99
+

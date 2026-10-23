@@ -1,0 +1,134 @@
+[
+  {
+    "id": "awwad_2026",
+    "requested_url": "https://aclanthology.org/2026.politicalnlp-1.23.pdf",
+    "resolved_url": "https://aclanthology.org/2026.politicalnlp-1.23.pdf",
+    "kind": "pdf",
+    "bytes": 442860,
+    "sha256": "dc77c018eebd3b8debf3e91f605b2fee8cff72d0aa53f438c5c562fbbfde61dc",
+    "text_chars": 38559,
+    "text_path": "D:\\PhD_Research\\Parallel Universe\\Literature_Review\\2026-10-22\\framing_deep_dive\\sources\\awwad_2026.txt",
+    "fetched_utc": "2026-10-22T11:29:42.358979+00:00"
+  },
+  {
+    "id": "kaur_2025",
+    "requested_url": "https://aclanthology.org/2025.findings-emnlp.1241.pdf",
+    "resolved_url": "https://aclanthology.org/2025.findings-emnlp.1241.pdf",
+    "kind": "pdf",
+    "bytes": 556617,
+    "sha256": "03a7b3a8c790fc2f7e907a756b68e7cf8bdfc1ba5435fc10c1a3ac189c41b6e2",
+    "text_chars": 28287,
+    "text_path": "D:\\PhD_Research\\Parallel Universe\\Literature_Review\\2026-10-22\\framing_deep_dive\\sources\\kaur_2025.txt",
+    "fetched_utc": "2026-10-22T11:29:43.648428+00:00"
+  },
+  {
+    "id": "bisbee_2026",
+    "requested_url": "https://www.jamesbisbee.com/assets/pdf/ai_pandering_2_25_2026.pdf",
+    "resolved_url": "https://www.jamesbisbee.com/assets/pdf/ai_pandering_2_25_2026.pdf",
+    "kind": "pdf",
+    "bytes": 408642,
+    "sha256": "a3d2c6350e5c17e9977895dfbb1e33858b109178617bd21dd36bf06c7bae804f",
+    "text_chars": 72666,
+    "text_path": "D:\\PhD_Research\\Parallel Universe\\Literature_Review\\2026-10-22\\framing_deep_dive\\sources\\bisbee_2026.txt",
+    "fetched_utc": "2026-10-22T11:29:42.433147+00:00"
+  },
+  {
+    "id": "bang_2024",
+    "requested_url": "https://aclanthology.org/2024.acl-long.600.pdf",
+    "resolved_url": "https://aclanthology.org/2024.acl-long.600.pdf",
+    "kind": "pdf",
+    "bytes": 4077911,
+    "sha256": "a3c8785063fc16fc1462ba4a759c8d5875d9923b6a4eba2e6ad642e810a34a2e",
+    "text_chars": 68714,
+    "text_path": "D:\\PhD_Research\\Parallel Universe\\Literature_Review\\2026-10-22\\framing_deep_dive\\sources\\bang_2024.txt",
+    "fetched_utc": "2026-10-22T11:29:55.374269+00:00"
+  },
+  {
+    "id": "nadeem_2026",
+    "requested_url": "https://aclanthology.org/2026.acl-long.1689.pdf",
+    "resolved_url": "https://aclanthology.org/2026.acl-long.1689.pdf",
+    "kind": "pdf",
+    "bytes": 39652545,
+    "sha256": "2111f57e115f51da362cd5bad36085ecf4dc7d5fbe7fe98c56cb72c419e72415",
+    "text_chars": 145651,
+    "text_path": "D:\\PhD_Research\\Parallel Universe\\Literature_Review\\2026-10-22\\framing_deep_dive\\sources\\nadeem_2026.txt",
+    "fetched_utc": "2026-10-22T11:31:22.969110+00:00"
+  },
+  {
+    "id": "papaioannou_2026",
+    "requested_url": "https://link.springer.com/article/10.1007/s43681-026-01138-8",
+    "resolved_url": "https://link.springer.com/article/10.1007/s43681-026-01138-8?error=cookies_not_supported&code=4b8e1ab1-f85d-4c89-982f-855aa4c44834",
+    "kind": "html",
+    "bytes": 347889,
+    "sha256": "bf4230e176088a2f0a7401f467e19feba93a200ec707170ac165e378dcae2064",
+    "text_chars": 44138,
+    "text_path": "D:\\PhD_Research\\Parallel Universe\\Literature_Review\\2026-10-22\\framing_deep_dive\\sources\\papaioannou_2026.txt",
+    "fetched_utc": "2026-10-22T11:29:50.825028+00:00"
+  },
+  {
+    "id": "germani_2025",
+    "requested_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13142764/",
+    "resolved_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13142764/",
+    "kind": "html",
+    "bytes": 195581,
+    "sha256": "a1e84e87369e0e73db731e1b6c0fac8e21c0648bd7b6d585d8a7dc16df7d43d7",
+    "text_chars": 75099,
+    "text_path": "D:\\PhD_Research\\Parallel Universe\\Literature_Review\\2026-10-22\\framing_deep_dive\\sources\\germani_2025.txt",
+    "fetched_utc": "2026-10-22T11:29:53.588363+00:00"
+  },
+  {
+    "id": "smirnov_2026",
+    "requested_url": "https://arxiv.org/html/2601.12164v6",
+    "resolved_url": "https://arxiv.org/html/2601.12164v6",
+    "kind": "html",
+    "bytes": 522515,
+    "sha256": "a67dab85d686d2bd2d088e36d74fdd8f2763687020987197e855e2cd0c1644fb",
+    "text_chars": 103044,
+    "text_path": "D:\\PhD_Research\\Parallel Universe\\Literature_Review\\2026-10-22\\framing_deep_dive\\sources\\smirnov_2026.txt",
+    "fetched_utc": "2026-10-22T11:29:52.463324+00:00"
+  },
+  {
+    "id": "polibias_2026",
+    "requested_url": "https://arxiv.org/html/2608.06123v1",
+    "resolved_url": "https://arxiv.org/html/2608.06123v1",
+    "kind": "html",
+    "bytes": 536873,
+    "sha256": "025fa28c6b20279dda96b74089d1291b9873b81c7c7d245dcac46778cacb134d",
+    "text_chars": 118291,
+    "text_path": "D:\\PhD_Research\\Parallel Universe\\Literature_Review\\2026-10-22\\framing_deep_dive\\sources\\polibias_2026.txt",
+    "fetched_utc": "2026-10-22T11:29:54.727243+00:00"
+  },
+  {
+    "id": "framingqa_2026",
+    "requested_url": "https://arxiv.org/html/2609.07448v2",
+    "resolved_url": "https://arxiv.org/html/2609.07448v2",
+    "kind": "html",
+    "bytes": 375179,
+    "sha256": "267de292bab5d6a8d9ec3a9bea087b63e889fdef51b7f65ecc3c22acb174e203",
+    "text_chars": 58638,
+    "text_path": "D:\\PhD_Research\\Parallel Universe\\Literature_Review\\2026-10-22\\framing_deep_dive\\sources\\framingqa_2026.txt",
+    "fetched_utc": "2026-10-22T11:29:54.939980+00:00"
+  },
+  {
+    "id": "dubois_2026",
+    "requested_url": "https://arxiv.org/html/2602.23971v4",
+    "resolved_url": "https://arxiv.org/html/2602.23971v4",
+    "kind": "html",
+    "bytes": 258931,
+    "sha256": "7a3fdee584d651b0ed680316d5b0b29fd5141f1d0cc4af872140e457c8c4a68c",
+    "text_chars": 71964,
+    "text_path": "D:\\PhD_Research\\Parallel Universe\\Literature_Review\\2026-10-22\\framing_deep_dive\\sources\\dubois_2026.txt",
+    "fetched_utc": "2026-10-22T11:29:56.576549+00:00"
+  },
+  {
+    "id": "elfes_2026",
+    "requested_url": "https://arxiv.org/html/2601.07398v2",
+    "resolved_url": "https://arxiv.org/html/2601.07398v2",
+    "kind": "html",
+    "bytes": 265464,
+    "sha256": "3776a8fc67541ec66782e592775b816beed2a3943a01a2068b7829b7c149b9e7",
+    "text_chars": 78344,
+    "text_path": "D:\\PhD_Research\\Parallel Universe\\Literature_Review\\2026-10-22\\framing_deep_dive\\sources\\elfes_2026.txt",
+    "fetched_utc": "2026-10-22T11:29:57.419827+00:00"
+  }
+]

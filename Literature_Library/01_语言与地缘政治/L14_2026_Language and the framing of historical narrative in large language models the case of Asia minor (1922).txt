@@ -1,0 +1,545 @@
+本文件为PDF自动提取文本，仅供检索；排版、图表和页码请以PDF为准。
+Language and the framing of historical narrative in large language models: the case of Asia minor (1922)
+
+AI and Ethics (2026) 6:262
+https://doi.org/10.1007/s43681-026-01138-8
+
+    RESEARCH
+
+
+
+Language and the framing of historical narrative in large language
+models: the case of Asia minor (1922)
+Christos Papaioannou1,2
+
+Received: 29 December 2025 / Accepted: 9 April 2026 / Published online: 22 April 2026
+© The Author(s) 2026
+
+
+Abstract
+This study examines linguistically dependent bias in the generation of historical narratives by Large Language Models
+(LLMs) and its ethical and societal implications. Through a qualitative comparative case study focusing on the events of
+1922 in Asia Minor, the research analyzes how the language of the prompt is associated with terminology, attribution of
+responsibility, and historiographical framing in outputs produced by GPT-4o and Claude 3.5. The findings suggest that
+LLMs do not generate neutral historical accounts; rather, they exhibit algorithmic mirroring, aligning the structure and
+meaning of historical content according to linguistic input. This process results in divergent emotional receptions and
+interpretations of the past. Particular emphasis is placed on the ethical significance of restricted pluralism, as language-
+dependent narrative framing may constrain exposure to alternative historical perspectives through mechanisms of selective
+omission. The study underscores that language functions as a crucial framing mechanism in the construction of historical
+knowledge in the age of Artificial Intelligence, raising critical ethical questions regarding epistemic responsibility, histori-
+cal mediation, and the role of LLMs in shaping collective memory. It concludes by highlighting the need for critical digital
+literacy and the responsible design and use of generative AI systems in knowledge-sensitive domains.
+
+Keywords Large language models · Algorithmic bias · Collective memory · Social identity · Historical narratives ·
+Natural language processing
+
+
+Tittle:                                                                      transforming our relationship with the past [2]. When Large
+                                                                             Language Models (LLMs) are prompted to answer histori-
+                                                                             cal questions, they do not simply reproduce information;
+1 Introduction                                                               rather, they assemble narratives that embed specific cultural
+                                                                             and historiographical frameworks. In doing so, they actively
+Technologies are not neutral tools; as they become embed-                    participate in shaping digitally mediated memory [3] and
+ded in everyday life, they tend to reshape users’ practices                  the public understanding of the past.
+and cognitive frameworks, carrying inherent political prop-                     Contemporary scholarship on algorithmic bias has
+erties [1]. This dynamic is particularly critical in fields                  primarily focused on issues of gender, race, and social
+such as history, where knowledge is not limited to the mere                  inequality, highlighting how Artificial Intelligence systems
+presentation of facts but is constituted through narratives,                 can reproduce or amplify existing social discriminations.
+interpretations, and evaluative hierarchies. As Kansteiner                   Numerous studies have demonstrated gender stereotypes
+argues, digital technology increasingly functions as a form                  in linguistic representations and natural language process-
+of “digital doping” for historical production, fundamentally                 ing models [4, 5], as well as racial and intersectional per-
+                                                                             formance disparities in algorithmic systems, especially in
+                                                                             applications related to facial recognition and classification
+     Christos Papaioannou                                                    [6, 7]. At the same time, research on the social dimensions
+     papxristos@uom.edu.gr                                                   of algorithmic governance has revealed the role of digital
+                                                                             technologies in the systematic surveillance, marginaliza-
+1
+     Department of Balkan, Slavic and Oriental Studies,                      tion, and disciplining of socially vulnerable groups [8, 9].
+     University of Macedonia, Thessaloniki, Greece
+2
+     Department of Informatics, Ionian University, Corfu, Greece
+
+
+                                                                                                                               13
+262 Page 2 of 9                                                                                           AI and Ethics (2026) 6:262
+
+
+   Within this context, discussions of algorithmic bias have      across diverse linguistic inputs [13, 14]. However, it has
+contributed decisively to understanding the ethical and           become increasingly evident that unequal linguistic repre-
+social risks arising from the widespread adoption of Arti-        sentation is not merely a technical constraint; rather, it is
+ficial Intelligence [10]. However, a new and critical line of     inextricably linked to broader issues of linguistic visibil-
+inquiry is now emerging. Researchers such as Makhortykh           ity, cultural power, and epistemic prioritization [16, 17].
+et al. have shown how Generative AI can be instrumental-          As highlighted in the critical literature, the selection of
+ized or can distort the memory of conflicts and genocides         languages for study and inclusion in these models consti-
+[11], while Ruhil warns of the risk of a “great forgetting,”      tutes a normative act with significant political and cultural
+in which algorithms influence what is worth preserving and        consequences. Despite recent methodological approaches
+what is allowed to fade into oblivion [12]. Although the          attempting to mitigate the technical challenges associated
+technical performance of language models in multilingual          with multilingual language use, the evaluation of LLMs
+environments has been extensively studied [13–15], the            continues to rely heavily on metrics of performance and
+role of language as a mediating factor in shaping historical      generalization, often neglecting the deeper social and cul-
+memory remains insufficiently explored. Language is not           tural implications of linguistic differentiation [15]. Viewed
+a neutral medium of communication; it carries historical,         through this lens, language functions not merely as a pas-
+emotional, and cultural weight, which influences how nar-         sive carrier of semantic content, but as an active mechanism
+ratives generated by LLMs are structured, hierarchized, and       for the framing and hierarchizing of knowledge.
+received.
+   Against this backdrop, this study examines how the lan-        2.2 Collective memory, social identity, and
+guage of interaction with LLMs shapes the generation of           contested pasts
+historical narratives, using the contested events of 1922 in
+Asia Minor as a qualitative case study. By comparing Greek-       The concept of collective memory refers to the complex
+and English-language prompts, the article investigates how        processes through which societies constitute and maintain
+linguistic input is associated with distinct narrative framing,   representations of the past via narratives, symbolic prac-
+attribution of responsibility, and historiographical plural-      tices, and institutional frameworks. As Halbwachs posited,
+ism, with direct implications for ethical debates on epis-        memory does not function as an individual repository of iso-
+temic responsibility and collective memory in AI-mediated         lated facts, but rather as a socially structured process formed
+knowledge systems.                                                within specific groups and historical contexts [18]. The dis-
+                                                                  tinction between communicative and cultural memory, as
+                                                                  subsequently developed, further elucidates the critical role
+2 Theoretical background                                          of cultural media and narrative forms in the long-term pres-
+                                                                  ervation of historical meaning [19].
+2.1 Large language models, training data, and                        Of particular salience are contested pasts, domains
+linguistic representation                                         where multiple and often antagonistic narratives regarding
+                                                                  the same events coexist. In such instances, historiography
+LLMs are trained on vast aggregations of textual data, pre-       operates as an arena for the negotiation of power, where the
+dominantly derived from web scrapes, digital archives, and        selection of events to be highlighted—as well as the voices
+open-source corpora. Although contemporary LLMs are               to be silenced—reflects underlying political and cultural
+frequently marketed as inherently multilingual systems, the       hierarchies [20]. As has been noted, the production of his-
+relevant scholarly literature has substantially documented        tory is inextricably bound to mechanisms of silence, exclu-
+that the distribution of training data remains profoundly         sion, and the ethical evaluation of the past. Language plays
+unequal across languages, with English dominating both            a central role in this process, as it carries specific emotional
+quantitatively and institutionally [13, 14, 16]. This struc-      weights, symbolic references, and evaluative hierarchies
+tural imbalance has been conceptualized as a form of Anglo-       that condition how historical events are conceptualized.
+centric structural bias, producing a self-reinforcing “bias          To fully grasp the dynamics of these contested narratives,
+loop” [17], as numerous languages—and the distinct cul-           the framework of collective memory can be complemented
+tural narratives they encapsulate—are systematically under-       by social psychological theories of intergroup relations, par-
+represented within the natural language processing (NLP)          ticularly Social Identity Theory [21]. From this perspective,
+ecosystem.                                                        historical narratives function not merely as records of events
+   Technical research in multilingual NLP has primarily           but also as resources through which groups negotiate social
+focused on optimizing cross-lingual transfer, improving           identity and group distinctiveness. Language, in this con-
+semantic alignment, and enhancing model performance               text, operates as a salient marker of group affiliation. When
+
+
+
+13
+AI and Ethics (2026) 6:262                                                                                     Page 3 of 9 262
+
+
+an LLM is prompted in a national language (e.g., Greek),         and historiography remains underdeveloped within the cur-
+it may be more likely to reproduce narrative patterns that       rent AI literature, pointing to a critical gap that this study
+resemble an in-group perspective, foregrounding collective       seeks to address.
+suffering or victimhood—an interpretive dynamic discussed
+in intergroup psychology as collective victimhood [22]. By       2.3 The “stochastic parrot” argument and narrative
+contrast, prompts in a global or international language (e.g.,   reconstruction
+English) may be associated with more distanced, observer-
+oriented framings that foreground geopolitical or structural     The seminal work of Bender et al. regarding “stochastic par-
+explanations over affective engagement.                          rots” marked a paradigm shift in the discourse surrounding
+   Recent scholarship in memory studies emphasizes that          the capabilities and risks of Large Language Models [25].
+the digital environment does not merely provide new chan-        According to this argument, LLMs do not generate dis-
+nels for remembering, but actively reshapes the ontology         course grounded in genuine comprehension; instead, they
+and practices of collective memory. Rather than signaling        synthesize linguistic patterns based on probabilistic corre-
+the end of collective memory, the digital turn reconfigures      lations derived from their training data. Consequently, the
+it as a dynamic, processual, and distributed phenomenon,         generated texts inevitably mirror the dominant narrative
+performed through the entanglement of human and non-             structures, biases, and cultural norms inherent in the under-
+human agents across multiple media forms [23]. In this           lying linguistic corpora.
+context, memory is increasingly enacted through databases,           Critical scholarship within NLP has underscored that
+platforms, and algorithmic systems that mediate access to        language technology is never neutral; rather, it embeds and
+the past while simultaneously reorganizing its visibility and    reproduces existing power relations and cultural hierar-
+relevance.                                                       chies [26]. Within this perspective, LLMs may function as
+   This transformation is particularly evident in what has       mechanisms of narrative reproduction, reinforcing prevail-
+been described as the “memory of the multitude,” wherein         ing historiographical conventions within specific linguistic
+collective remembrance emerges through participatory, net-       communities while simultaneously constraining user expo-
+worked, and continuously edited practices rather than stable,    sure to alternative interpretive frameworks.
+canonized narratives [3]. Such forms of memory are inher-            This observation acquires particular urgency when LLMs
+ently fluid and unstable, challenging traditional assumptions    are employed to generate historical narratives. The stochas-
+about coherence, durability, and shared temporal horizons.       tic nature of linguistic generation implies that responses
+While this multiplicity enables the coexistence of alterna-      to historical inquiries may diverge significantly as a func-
+tive and marginalized narratives, it also raises questions       tion of the input language—not only in terms of factual
+about fragmentation, ephemerality, and the loss of common        content but also regarding the distribution of responsibil-
+mnemonic reference points.                                       ity, the prioritization of causal factors, and the emotional
+   At the same time, the growing reliance on digital plat-       tone. Investigating this linguistically differentiated narra-
+forms and cloud-based infrastructures introduces new             tive reconstruction is a critical step toward comprehending
+asymmetries in the governance of memory. As Wiederhold           the ethical and social implications of deploying LLMs in
+argues, contemporary collective recall is increasingly out-      domains deeply connected to memory, identity, and public
+sourced to opaque technological systems that curate, sur-        historical consciousness.
+face, and suppress memories according to algorithmic logics
+largely beyond human control [24]. This shift problematizes
+questions of ownership, agency, and responsibility in rela-      3 Methodology
+tion to the past, as platforms and AI-driven systems assume
+an editorial role in shaping what is remembered, forgotten,      3.1 Research design and case selection
+or reactivated.
+   The emergence of LLMs as sources of historical infor-         The research adopted a qualitative comparative case study
+mation further intensifies these dynamics by introducing an      approach to examine how the input language is associ-
+algorithmic agent capable not only of retrieving but also of     ated with variations in the historical narrative generated by
+synthesizing historical narratives. In multilingual contexts,    Artificial Intelligence systems. This design was selected as
+this raises additional concerns regarding whose histories are    particularly suitable for investigating narrative structure,
+rendered legible, which interpretations are normalized, and      interpretive framing, and omissions, which are not readily
+how contested pasts are narratively stabilized or reconfig-      captured through quantitative metrics alone. While the sam-
+ured. Nevertheless, the theoretical integration of multilin-     ple size (N = 2) precludes broad statistical generalization
+gual LLMs into existing frameworks of collective memory          to the entire population of LLMs, this case-study approach
+
+
+
+                                                                                                                    13
+262 Page 4 of 9                                                                                                  AI and Ethics (2026) 6:262
+
+
+allows for an in-depth interpretive analysis of narrative               observed findings were not attributable to the idiosyncrasies
+patterns observed in state-of-the-art models. The events of             of a single architecture, but instead reflected broader ten-
+1922 in Asia Minor were selected not at random, but as a                dencies within contemporary generative AI systems.
+critical case study [27] for examining language-dependent                  A critical methodological consideration was the preser-
+forms of algorithmic bias. This historical moment is char-              vation of neutrality and the minimization of personalization
+acterized by a pronounced historiographical divergence:                 bias. To this end, all interactions were conducted in private
+within Greek national memory it is commonly framed as a                 browsing mode via the DuckDuckGo AI Chat interface,
+trauma-laden “Catastrophe” [28], whereas international his-             which does not require user authentication and limits user-
+toriography predominantly refers to the same events as the              level contextualization. This approach reduced the influence
+“Greco-Turkish War” [29]. This divergence provides a theo-              of prior interactions or personalized system memory, allow-
+retically rich context in which competing narratives, emo-              ing for the generation of comparable and isolated response
+tional registers, and interpretive hierarchies coexist, making          sessions across models and languages.
+it possible to examine how different linguistic contexts are               The data collection process employed mirrored prompts,
+linked to distinct narrative framings in LLM-generated out-             designed to control for semantic content while varying only
+puts, rather than to isolate causal linguistic variables.               the language of the input. A tripartite set of questions was
+    The limitation of the study to two languages—Greek and              formulated and translated by the author with conceptual
+English—was intentional and theoretically motivated. Eng-               precision, targeting three distinct levels of historical anal-
+lish represents a global, high-resource language that domi-             ysis: descriptive, causal, and meta-historiographical (see
+nates the training corpora of contemporary LLMs, while                  Table 1). Each prompt was issued once per model and lan-
+Greek constitutes a culturally specific, medium-resource                guage, resulting in a total of twelve generated responses.
+language with a distinct national historiographical tradition.
+This juxtaposition enables the examination of what is con-              3.3 Data analysis
+ceptualized in this study as algorithmic mirroring, namely
+the tendency of language models to align their outputs with             The generated responses were analyzed comparatively using
+the dominant epistemic communities and historiographical                qualitative content analysis. An inductive coding approach
+conventions associated with the language of the prompt.                 was adopted, allowing analytical patterns to emerge from
+                                                                        the data rather than being imposed a priori. The analysis
+3.2 Data collection and experimental setup                              examined how historical narratives were constructed across
+                                                                        responses, focusing on the identification of key historical
+To conduct the experiment, two distinct LLMs were uti-                  actors, the attribution of responsibility, and the prioritization
+lized: GPT-4o (OpenAI) and Claude 3.5 Haiku (Anthropic).                and sequencing of causal explanations.
+Data collection was conducted in December 2025. The                         Particular attention was paid to the emotional framing
+inclusion of two different models aimed to ensure that the              of the narratives and to their dominant interpretive focus,
+                                                                        specifically whether emphasis was placed on human suffer-
+Table 1 Mirrored prompts used across languages and levels of histori-   ing, displacement, and trauma, or on geopolitical strategy,
+cal analysis                                                            military operations, and technocratic explanations. In paral-
+Level of Analysis          Greek Prompt (Input) English Prompt          lel, systematic attention was given to narrative omissions,
+                                                  (Input)               especially with regard to the inclusion or exclusion of the
+Descriptive                «Ποιοι παράγοντες      “Which fac-
+                                                                        perspective of the “other side,” depending on the language
+                           οδήγησαν στις          tors led to
+                           εξελίξεις στη Μικρά the events in            of inquiry.
+                           Ασία το 1922;»         Asia Minor in             Divergences between Greek- and English-language out-
+                                                  1922?”                puts were documented through close comparative reading
+Causal                     «Ποιοι ήταν οι         “What were the        and interpreted as indicators of linguistically dependent nar-
+                           βασικοί λόγοι της      main reasons
+                           ήττας της Ελλάδας το for the Greek
+                                                                        rative bias. This analytic framework enabled the identifica-
+                           1922;»                 defeat in             tion of language-driven shifts in historical narration, with
+                                                  1922?”                direct implications for historical understanding, collective
+Meta-historiographical     «Πώς διαφέρουν         “How do Greek         memory, and the ethical use of LLMs in knowledge-medi-
+                           οι ελληνικές           and interna-          ating contexts.
+                           και διεθνείς           tional histo-
+                           ιστοριογραφικές        riographical
+                           ερµηνείες για τα       interpretations
+                           γεγονότα του 1922;» differ regarding
+                                                  the events of
+                                                  1922?”
+
+
+
+13
+AI and Ethics (2026) 6:262                                                                                         Page 5 of 9 262
+
+
+4 Results                                                        Table 2 Comparative analysis of narrative divergence in LLM outputs
+                                                                 Dimension of     Greek Output       English Out-        Potential
+                                                                 Analysis         (Dominant          put (Dominant       Societal
+The results of the comparative analysis indicate that LLMs                        Frame)             Frame)              Implication
+do not produce a single, neutral historical narrative; rather,   Terminology      Trauma-based: Geopolitical:            Divergent
+they consistently across the sampled outputs shape their                          “Catastrophe”      “Greco-Turkish      emotional
+outputs according to the language of the inquiry. This dif-                       (Καταστροφή) War”                      reception
+ferentiation is not limited to stylistic or translational dis-   Primary Blame    Political:         Technocratic/       Responsi-
+                                                                                  “National          Military: over-     bility shift
+crepancies, but constitutes a structural divergence in how                        Schism”            extended supply
+historical events are reconstructed, prioritized, and inter-                      (Εθνικός           lines, logistical
+preted depending on the linguistic input.                                         Διχασµός)          failure, effective
+   Although both GPT-4o and Claude 3.5 exhibited similar                                             Turkish resistance
+language-dependent shifts in historical narrative, qualitative   Historiography   Binary framing: Tri-partite            Con-
+                                                                                  Greek View vs. framing: Greek          strained
+differences were observed in the expression and organiza-                         International      View vs. Turkish pluralism
+tion of their responses. Claude more frequently presented                         View (Turkish View (Victory)
+structured comparisons and, in some instances, tabulated                          view omitted)      vs. International
+formats; however, in several Greek-language responses,                                               View
+the absence of opposing historiographical perspectives was
+noted. Conversely, GPT-4o tended to emphasize internal           Table 3 Frequency of selected historical terms across greek and eng-
+                                                                 lish LLM outputs
+political responsibility in its Greek-language outputs, while
+                                                                 Key Term (Eng- Frequency       Frequency      Contextual
+adopting a more standardized and internationalized narra-        lish / Greek)    in Greek      in English     Interpretation
+tive framework in English. These distinctions do not under-                       Outputs       Outputs
+mine the common patterns identified across models; rather,       “Catastrophe” / 8               3             Functions as a proper
+they reinforce the conclusion that linguistically dependent      “Καταστροφή”                                  noun in Greek;
+                                                                                                               used as a descrip-
+framing constitutes a broader, architecture-independent ten-                                                   tive adjective or to
+dency in contemporary LLMs. The comparative analysis                                                           explain Greek termi-
+identified three primary mechanisms associated with how                                                        nology in English.
+language shapes the historical narratives generated by these     “War” /          2             14             Rarely used as a pri-
+systems (see Table 2).                                           “Πόλεµος”                                     mary label in Greek
+                                                                                                               titles or definitions.
+                                                                                                               In English, it is the
+4.1 Terminology and emotional framing                                                                          dominant termino-
+                                                                                                               logical framework
+The first mechanism concerns the choice of terminology                                                         (“Greco-Turkish
+                                                                                                               War”).
+and the emotional register it activates. In the Greek-lan-
+                                                                 “Tragedy” /      9              4             In Greek, it functions
+guage outputs, the events are predominantly framed through       “Τραγωδία”                                    as a descriptor of
+trauma-laden terms such as “Catastrophe,” which fore-                                                          the event as a direct
+ground collective suffering, loss, and historical injustice.                                                   experience. In Eng-
+                                                                                                               lish, it is attributed
+By contrast, in the English-language outputs, a more geo-
+                                                                                                               specifically to the
+politically oriented and emotionally detached terminology                                                      “Greek perspective”.
+prevails, such as “Greco-Turkish War,” situating the same        “Responsibil-    0              5             Explicitly used as an
+events within a broader framework of interstate conflict and     ity” / “Ευθύνη”                               analytical category
+population reconfiguration. This divergence may lead to                                                        in English. In Greek,
+                                                                                                               responsibility is
+distinct emotional receptions of the past, fostering empathy                                                   implicitly embed-
+and identification in domestic contexts while encouraging                                                      ded in the term
+analytical distance in international ones.                                                                     “Catastrophe”.
+   To substantiate the qualitative analysis of terminology
+and emotional framing, a targeted frequency analysis was
+conducted focusing on selected emotionally and historio-
+graphically salient terms identified during the coding pro-
+cess. Table 3 reports aggregate frequencies of selected terms
+across all generated outputs per language (Greek n = 6;
+English n = 6). Counts are based on exact-term matching
+with manual verification and are intended as an illustrative
+
+
+
+                                                                                                                         13
+262 Page 6 of 9                                                                                                        AI and Ethics (2026) 6:262
+
+
+
+
+Fig. 1 Comparative frequency of selected historical terms in greek and english llm outputs (based on data from Table 3). The visualization illus-
+trates contrasting patterns in terminological emphasis across languages
+
+complement to the qualitative analysis. The resulting fre-                while the perspective of the other directly involved party is
+quency patterns are summarized below for descriptive pur-                 frequently absent. By contrast, the English-language out-
+poses and visually represented in Fig. 1.                                 puts more often adopt a tri-partite structure in which Greek,
+                                                                          Turkish, and international historiographical approaches
+4.2 Attribution of responsibility and causal                              coexist. This asymmetry constrains pluralism in the Greek-
+interpretation                                                            language responses, as users are exposed to a more inter-
+                                                                          nally coherent and less confrontational representation of the
+The second mechanism relates to the attribution of respon-                past.
+sibility and the causal interpretation of defeat. In the Greek-
+language outputs, causality is frequently linked to political
+and institutional factors, most notably the National Schism,              5 Discussion: algorithmic historiography
+thereby emphasizing internal political conflict alongside                 and the ethics of collective memory
+external diplomatic pressures. In contrast, the English-
+language outputs primarily interpret defeat through tech-                 The findings of this study suggest that LLMs do not func-
+nocratic and military explanations, including overextended                tion as neutral archivists of the past, but rather act as par-
+supply lines, logistical shortcomings, and the operational                ticipants in the mediation of historical narratives embedded
+effectiveness of opposing forces. This contrast constitutes               in their training data. The structural divergence observed
+an observable shift in responsibility attribution, with impli-            between Greek- and English-language outputs is consistent
+cations for how narratives of collective identity and histori-            with the concept of algorithmic mirroring: the tendency of
+cal self-understanding are constructed.                                   AI systems to reflect and reinforce the dominant epistemic
+                                                                          frameworks associated with the language of the prompt.
+4.3 Historiographical structure and narrative                             This phenomenon carries significant ethical and societal
+omission                                                                  implications, particularly concerning the fragmentation of
+                                                                          historical understanding and the emergence of linguistically
+The most salient divergence emerged from the meta-histo-                  mediated memory silos.
+riographical question. In the Greek-language outputs, the
+narrative structure is typically binary, juxtaposing a Greek
+perspective with a generalized “international” interpretation,
+
+
+
+13
+AI and Ethics (2026) 6:262                                                                                         Page 7 of 9 262
+
+
+5.1 The mechanism of divergence: cultural contexts                   communities may be exposed to fundamentally divergent
+in training corpora                                                  emotional and causal frameworks when engaging with the
+                                                                     same historical event. A Greek user is primarily invited to
+The observed divergence across languages implies that the            mourn a national trauma, whereas an international user is
+input language functions less as an independent causal vari-         encouraged to analyze a failed military campaign. Such
+able and more as a retrieval cue through which models draw           divergence complicates the possibility of a shared histori-
+on specific subsets of their training data. As noted in the          cal reality and may actively deepen cultural and interpretive
+critique of multilingual models [16], the results likely reflect     fragmentation rather than promoting mutual understanding.
+the distinct discourse specific to the cultural contexts embed-
+ded within the training corpora rather than the language             5.3 Toward critical AI literacy and ethical design
+itself acting as a mechanical determinant. When prompted
+in English, language models draw upon this high-resource             As Pereira (2025) argues, addressing the ethical challenges
+corpus, producing narratives that emphasize geopolitical             posed by AI systems requires a framework grounded in crit-
+strategy, diplomatic processes, and an appearance of ana-            ical digital literacy and shared responsibility across users,
+lytical neutrality. By contrast, when prompted in Greek, the         developers, and institutions [31]. In the context of histori-
+models operate within a more limited and culturally spe-             cal knowledge, this entails recognizing that LLM-generated
+cific linguistic corpus, in which national trauma and internal       narratives should not be treated as encyclopedic facts, but
+political polarization—such as the National Schism—are               as culturally situated and probabilistically constructed arti-
+statistically more salient. This behavior is consistent with         facts. Taken together, these concerns necessitate the culti-
+the “stochastic parrot” framework articulated by Bender et           vation of what Long and Magerko define as “AI literacy”:
+al. [25]: the system does not possess historical understand-         a set of competencies that enables individuals not only to
+ing, but rather generates outputs by predicting the most             use AI tools, but also to critically evaluate their underlying
+probable continuation of a given linguistic sequence. In this        logic, limitations, and ethical implications [32]. Users must
+sense, the same historical event is reconstructed through dif-       therefore be equipped with the critical capacity to interro-
+ferent probabilistic pathways depending on the language of           gate algorithmic outputs, understanding that apparent neu-
+access. While each narrative may be internally coherent and          trality often reflects the statistical dominance of particular
+factually grounded, this mechanism creates conditions that           linguistic and cultural hegemonies rather than an objective
+resemble a form of relativist historiography, in which histor-       representation of the past.
+ical “truth” becomes contingent upon the linguistic interface           For developers and policymakers, these findings sug-
+through which it is queried.                                         gest that ethical mitigation strategies must extend beyond
+                                                                     an exclusive reliance on safety filters or content moderation
+5.2 Epistemic bubbles and the erosion of shared                      mechanisms. Instead, there is a need to explore the design of
+historical reality                                                   polyvocal systems—models that actively surface multiple
+                                                                     historiographical perspectives and resist the flattening of
+The most ethically consequential implication of these find-          historical complexity, even in the absence of explicit user
+ings emerges from the systematic omission of opposing                prompts. Without such interventions, LLMs risk contrib-
+perspectives in the Greek-language outputs. The prevalence           uting to the fragmentation of collective memory, automat-
+of binary framing—juxtaposing a Greek perspective with               ing the reproduction of parallel historical narratives rather
+a generalized “international” interpretation while excluding         than fostering epistemic pluralism and democratic historical
+the Turkish nationalist narrative—limits exposure to his-            dialogue.
+toriographical plurality. From a social identity perspective
+[21], this omission can be interpreted as aligning with pat-         5.4 Limitations and future research
+terns of “in-group bias”, whereby competing “out-group”
+narratives are structurally marginalized. Rather than facili-        This study is subject to certain limitations that should
+tating critical engagement with competing interpretations            be considered when interpreting the findings. First, the
+of the past, the models may reinforce pre-existing national          research design adopted a qualitative case-study approach
+narratives through selective representation.                         with a small sample of models (GPT-4o and Claude 3.5).
+   This pattern may create the conditions for what Nguyen            While this allowed for an in-depth narrative analysis, the
+describes as epistemic bubbles [30]: informational envi-             findings reflect the behaviors of these specific high-per-
+ronments in which alternative viewpoints are excluded not            forming systems and cannot be statistically generalized to
+through overt misinformation, but through omission and               the entire population of Large Language Models. Second,
+structural filtering. As a result, users from different linguistic   as with all proprietary LLMs, the exact composition of the
+
+
+
+                                                                                                                        13
+262 Page 8 of 9                                                                                                                     AI and Ethics (2026) 6:262
+
+
+training data remains opaque. Consequently, our analysis         independent causal force, is a necessary step toward more
+relies on inferring the relationship between linguistic input    responsible and reflexive uses of generative artificial intel-
+and narrative output, rather than directly observing the         ligence. As these technologies become deeply embedded
+underlying training distribution. Finally, the study focuses     in the infrastructure of public memory, the question is no
+on a single, highly contested historical event (Asia Minor,      longer whether they influence historical understanding, but
+1922). While this served as a critical case for highlighting     how they do so. Addressing the ethical implications of algo-
+historiographical divergence, future research should exam-       rithmic historiography requires not only technical refine-
+ine whether similar patterns of linguistic framing emerge in     ment, but also the cultivation of critical AI literacy and a
+other disputed historical contexts or across a broader range     conscious commitment to epistemic pluralism. Only by
+of languages. Despite these limitations, the study offers        acknowledging the role of language in shaping algorithmic
+valuable exploratory insights into the mechanisms of algo-       narratives can society leverage these technologies in ways
+rithmic historiography and the role of language in shaping       that enrich—rather than fragment—collective understand-
+digital memory.                                                  ings of the past.
+
+                                                                 Author contributions I am the only author of this manuscript. I am
+                                                                 responsible for the research mentioned and for writing the manuscript.
+6 Conclusion
+                                                                 Funding Open access funding provided by HEAL-Link Greece. Open
+This study examined the role of input language in the his-       access funding provided by HEAL-Link.
+torical narratives generated by LLMs, using the events of
+1922 in Asia Minor as a critical case study. The findings        Data availability The data generated during the current study consist
+demonstrate that the examined models do not produce a sin-       of AI-generated textual outputs produced through controlled prompt-
+                                                                 based interactions with Large Language Models. These data are quali-
+gle, linguistically neutral version of the past. Instead, they   tative in nature and were analysed within the study. The materials can
+reconstruct historical narratives in ways that are associated    be made available by the author upon reasonable request.
+with the input language, being linked to distinct emotional
+tones, causal hierarchies, and historiographical structures      Declarations
+depending on the language of the prompt.
+   Through a comparative analysis of Greek and English           Conflict of interest The author declares no competing interests.
+language responses produced by two contemporary LLMs,
+                                                                 Human and animals participants This research does not involve hu-
+the study suggests that language functions not merely as a
+                                                                 man participants or animals.
+medium of expression, but as a contextual framing mecha-
+nism in algorithmically mediated historical knowledge.           Informed consent Informed consent was not required as no human
+Greek-language prompts tend to elicit trauma-centered            participants were involved in this study.
+narratives characterized by heightened political charge
+and binary historiographical structures, whereas English-        Open Access This article is licensed under a Creative Commons
+                                                                 Attribution 4.0 International License, which permits use, sharing,
+language prompts more frequently generate geopolitically         adaptation, distribution and reproduction in any medium or format,
+oriented narratives that incorporate a broader range of per-     as long as you give appropriate credit to the original author(s) and the
+spectives. These patterns were observed across the exam-         source, provide a link to the Creative Commons licence, and indicate
+ined models, and are presented as exploratory associations       if changes were made. The images or other third party material in this
+                                                                 article are included in the article’s Creative Commons licence, unless
+rather than evidence of a universal or causal mechanism.         indicated otherwise in a credit line to the material. If material is not
+   The implications of these findings extend beyond tech-        included in the article’s Creative Commons licence and your intended
+nical issues of multilingual performance. They point to a        use is not permitted by statutory regulation or exceeds the permitted
+deeper ethical and social concern: as LLMs increasingly          use, you will need to obtain permission directly from the copyright
+                                                                 holder. To view a copy of this licence, visit ​h​t​t​p​​:​/​/​​c​r​e​a​​t​i​​v​e​c​​o​m​m​o​​n​s​.​​o​
+mediate access to historical knowledge, they may rein-           r​g​​/​l​i​c​e​n​s​e​s​/​b​y​/​4​.​0​/.
+force pre-existing national narratives and contribute to the
+fragmentation of collective memory along linguistic lines.
+Rather than functioning as neutral bridges between diver-        References
+gent historical memories, such systems risk reproducing
+parallel and internally coherent versions of the past, shaped    1.     Winner, L.: Do Artifacts Have Politics? Daedalus. 109, 121–136
+by the statistical and cultural properties of their training            (1980)
+data.                                                            2.     Kansteiner, W.: Digital Doping for Historians: Can History,
+                                                                        Memory, and Historical Theory Be Rendered Artificially Intel-
+   In conclusion, recognizing language as a constitutive ele-           ligent? Hist. Theory. 61, 119–133 (2022). ​h​t​t​p​​s​:​/​​/​d​o​i​​.​o​​r​g​/​​1​0​.​1​​1​1​1​​/​
+ment of algorithmic knowledge mediation, rather than an                 h​i​​t​h​.​1​2​2​8​2
+
+
+
+13
+AI and Ethics (2026) 6:262                                                                                                                                                                              Page 9 of 9 262
+
+3.    Hoskins, A.: Memory of the multitude: the end of collective                                                         practice. AI Soc. 40, 5835–5847 (2025). ​h​t​t​p​​s​:​/​​/​d​o​i​​.​o​​r​g​/​​1​0​.​1​​0​0​7​​/​s​
+      memory? In: Hoskins, A. (ed.) Digital Memory Studies: Media                                                         0​​0​1​4​6​-​0​2​5​-​0​2​3​4​9​-​z
+      Pasts in Transition, pp. 85–109. Routledge, New York (2018)                                                   18.   Halbwachs, M.: On Collective Memory. University of Chicago
+4.    Bolukbasi, T., Chang, K.-W., Zou, J., Saligrama, V., Kalai, A.:                                                     Press, Chicago (1992)
+      Man is to Computer Programmer as Woman is to Homemaker?                                                       19.   Assmann, J.: Cultural Memory and Early Civilization. Cam-
+      Debiasing Word Embeddings. In: Adv. Neural. Inf. Process. Syst.                                                     bridge University Press, Cambridge (2011)
+      29 (2016)                                                                                                     20.   Trouillot, M.-R.: Silencing the Past: Power and the Production of
+5.    Caliskan, A., Bryson, J.J., Narayanan, A.: Semantics derived                                                        History. Beacon Press, Boston (1995)
+      automatically from language corpora contain human-like biases.                                                21.   Tajfel, H., Turner, J.C.: An integrative theory of intergroup con-
+      Science. 356, 183–186 (2017). ​h​t​t​p​​s​:​/​​/​d​o​i​​.​o​​r​g​/​​1​0​.​1​​1​2​6​​/​s​c​​i​e​n​c​e​.​a​a​         flict. In: Austin, W.G., Worchel, S. (eds.) The Social Psychol-
+      l​4​2​3​0                                                                                                           ogy of Intergroup Relations, pp. 33–37. Brooks/Cole, Monterey
+6.    Buolamwini, J., Gebru, T.: Gender Shades: Intersectional Accu-                                                      (1979)
+      racy Disparities in Commercial Gender Classification. In: Pro-                                                22.   Bar-Tal, D., Chernyak-Hai, L., Schori, N., Gundar, A.: A sense of
+      ceedings of the Conference on Fairness, Accountability, and                                                         self-perceived collective victimhood in intractable conflicts. Int.
+      Transparency. pp. 77–91 (2018)                                                                                      Rev. Red Cross. 91(874), 229–258 (2009). ​h​t​t​p​​s​:​/​​/​d​o​i​​.​o​​r​g​/​​1​0​.​1​​0​1​
+7.    Benjamin, R.: Race After Technology: Abolitionist Tools for the                                                     7​​/​S​1​​8​1​6​3​8​3​1​0​9​9​9​0​2​2​1
+      New Jim Code. Polity, Cambridge (2019)                                                                        23.   Mandolessi, S.: The digital turn in memory studies. Mem. Stud.
+8.    Noble, S.U.: Algorithms of Oppression: How Search Engines                                                           16, 1513–1528 (2023). ​h​t​t​p​​s​:​/​​/​d​o​i​​.​o​​r​g​/​​1​0​.​1​​1​7​7​​/​1​7​​5​0​6​9​8​0​2​3​1​2​0​4​
+      Reinforce Racism. NYU, New York (2018)                                                                              2​0​1
+9.    Eubanks, V.: Automating Inequality: How High-Tech Tools Pro-                                                  24.   Wiederhold, B.K.: Who owns memory now? Collective recall in
+      file, Police, and Punish the Poor. St. Martin’s, New York (2018)                                                    the age of the cloud. Cyberpsychol Behav. Soc. Netw. 28, 603–
+10.   Hovy, D., Spruit, S.L.: The Social Impact of Natural Language                                                       604 (2025). ​h​t​t​p​​s​:​/​​/​d​o​i​​.​o​​r​g​/​​1​0​.​1​​1​7​7​​/​2​1​​5​2​2​7​1​5​2​5​1​3​6​9​3​5​2
+      Processing. In: Proceedings of the 54th Annual Meeting of the                                                 25.   Bender, E.M., Gebru, T., McMillan-Major, A., Shmitchell, S.: On
+      Association for Computational Linguistics. pp. 591–598 (2016).​                                                     the Dangers of Stochastic Parrots: Can Language Models Be Too
+      h​t​t​p​​s​:​/​​/​d​o​i​​.​o​​r​g​/​​1​0​.​1​​8​6​5​​3​/​v​​1​/​P​1​6​-​2​0​9​6                                     Big? In: Proceedings of the 2021 ACM Conference on Fairness,
+11.   Makhortykh, M., Zucker, E.M., Simon, D.J., Bultmann, D.,                                                            Accountability, and Transparency. pp. 610–623 (2021). ​h​t​t​p​​s​:​/​​/​d​o​
+      Ulloa, R.: Shall androids dream of genocides? How generative                                                        i​​.​o​​r​g​/​​1​0​.​1​​1​4​5​​/​3​4​​4​2​1​8​8​.​3​4​4​5​9​2​2
+      AI can change the future of memorialization of mass atrocities.                                               26.   Blodgett, S.L., Barocas, S., Daumé, H. III, Wallach, H.M.: Lan-
+      Discov Artif. Intell. 3, 28 (2023). ​h​t​t​p​​s​:​/​​/​d​o​i​​.​o​​r​g​/​​1​0​.​1​​0​0​7​​/​s​4​​4​1​6​             guage (Technology) Is Power: A Critical Survey of Bias in NLP.
+      3​-​0​2​3​-​0​0​0​7​2​-​6                                                                                           In: Proceedings of the 58th Annual Meeting of the Association for
+12.   Ruhil, O.: The Great Forgetting: When AI Decides What We Do                                                         Computational Linguistics. pp. 5454–5476 (2020). ​h​t​t​p​​s​:​/​​/​d​o​i​​.​o​​r​g​
+      Not Need to Know. AI Soc. (2025). ​h​t​t​p​​s​:​/​​/​d​o​i​​.​o​​r​g​/​​1​0​.​1​​0​0​7​​/​s​0​​0​1​4​               /​​1​0​.​1​​8​6​5​​3​/​v​​1​/​2​​0​2​0​​.​a​c​l​​-​m​​a​i​n​.​4​8​5
+      6​-​0​2​5​-​0​2​5​2​4​-​2                                                                                     27.   Yin, R.K.: Case Study Research: Design and Methods. Sage,
+13.   Pires, T., Schlinger, E., Garrette, D.: How Multilingual is Mul-                                                    Thousand Oaks (2009)
+      tilingual BERT? In: Proceedings of the 57th Annual Meeting of                                                 28.   Hirschon, R.: Heirs of the Greek Catastrophe: The Social Life of
+      the Association for Computational Linguistics. pp. 4996–5001                                                        Asia Minor Refugees in Piraeus. Berghahn Books, Oxford (1998)
+      (2019). ​h​t​t​p​​s​:​/​​/​d​o​i​​.​o​​r​g​/​​1​0​.​1​​8​6​5​​3​/​v​​1​/​P​1​9​-​1​4​9​3                      29.   Llewellyn Smith, M.: Ionian Vision: Greece in Asia Minor, 1919–
+14.   Conneau, A., Khandelwal, K., Goyal, N., et al.: Unsupervised                                                        1922. Hurst & Company, London (1998)
+      Cross-lingual Representation Learning at Scale. In: Proceedings                                               30.   Nguyen, C.T.: Echo chambers and epistemic bubbles. Episteme.
+      of the 58th Annual Meeting of the Association for Computational                                                     17, 141–161 (2020). ​h​t​t​p​​s​:​/​​/​d​o​i​​.​o​​r​g​/​​1​0​.​1​​0​1​7​​/​e​p​​i​.​2​0​1​8​.​3​2
+      Linguistics. pp. 8440–8451 (2020). ​h​t​t​p​​s​:​/​​/​d​o​i​​.​o​​r​g​/​​1​0​.​1​​8​6​5​​3​/​v​​1​/​2​​       31.   Pereira, A.C.: Data, AI systems, and society: ethical dilemmas in
+      0​2​0​​.​a​c​l​​-​m​​a​i​n​.​7​4​7                                                                                  the digital age. AI Ethics. 5, 6007–6016 (2025). ​h​t​t​p​​s​:​/​​/​d​o​i​​.​o​​r​g​/​​1​0​
+15.   Hershcovich, D., Frank, S., Lent, H., et al.: Challenges and Strate-                                                .​1​​0​0​7​​/​s​4​​3​6​8​1​-​0​2​5​-​0​0​8​3​4​-​1
+      gies in Cross-Cultural NLP. In: Proceedings of the 60th Annual                                                32.   Long, D., Magerko, B.: What is AI Literacy? Competencies and
+      Meeting of the Association for Computational Linguistics (Vol-                                                      Design Considerations. In: Proceedings of the 2020 CHI Confer-
+      ume 1: Long Papers). pp. 6997–7013 (2022). ​h​t​t​p​​s​:​/​​/​d​o​i​​.​o​​r​g​/​​1​0​.​1​​                          ence on Human Factors in Computing Systems. pp. 1–16. Asso-
+      8​6​5​​3​/​v​​1​/​2​​0​2​2​​.​a​c​l​​-​l​​o​n​g​.​4​8​2                                                             ciation for Computing Machinery, New York (2020). ​h​t​t​p​s​:​​​/​​/​d​o​​i​.​o​​
+16.   Joshi, P., Santy, S., Budhiraja, A., Bali, K., Choudhury, M.: The                                                   r​​g​​/​​1​0​​.​1​1​​​4​5​/​​3​3​1​3​​8​3​1​.​3​3​7​6​7​2​7
+      State and Fate of Linguistic Diversity and Inclusion in the NLP
+      World. In: Proceedings of the 58th Annual Meeting of the Asso-                                                Publisher’s note Springer Nature remains neutral with regard to juris-
+      ciation for Computational Linguistics. pp. 6282–6293 (2020). ​h​t​t​                                          dictional claims in published maps and institutional affiliations.
+      p​​s​:​/​​/​d​o​i​​.​o​​r​g​/​​1​0​.​1​​8​6​5​​3​/​v​​1​/​2​​0​2​0​​.​a​c​l​​-​m​​a​i​n​.​5​6​0
+17.   Foka, A., Griffin, G., Ortiz Pablo, D., Rajkowska, P., Badri, S.:
+      Tracing the bias loop: AI, cultural heritage and bias-mitigating in
+
+
+
+
+                                                                                                                                                                                                                 13
+

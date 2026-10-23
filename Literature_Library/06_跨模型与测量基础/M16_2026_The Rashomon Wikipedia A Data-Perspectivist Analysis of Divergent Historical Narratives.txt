@@ -1,0 +1,519 @@
+本文件为PDF自动提取文本，仅供检索；排版、图表和页码请以PDF为准。
+The Rashomon Wikipedia: A Data-Perspectivist Analysis of Divergent Historical Narratives
+
+                                             The Rashomon Wikipedia: A Data-Perspectivist Analysis of Divergent
+                                                                 Historical Narratives
+                                                                    Claudiu Creanga2,3 , Liviu P. Dinu1,3 , Anca Dinu3,4
+                                                                     1
+                                                                        Faculty of Mathematics and Computer Science,
+                                                                       2
+                                                                         Interdisciplinary School of Doctoral Studies,
+                                                                                   3
+                                                                                     HLT Research Center,
+                                                                      4
+                                                                        Faculty of Foreign Languages and Literatures,
+                                                                              University of Bucharest, Romania
+                                                        claudiu.creanga@fmi.unibuc.ro, ldinu@fmi.unibuc.ro, anca.dinu@lls.unibuc.ro
+
+
+                                                                Abstract                                ing perspectives fairly and without bias. However,
+                                                                                                        Wikipedia is not a single unified record. It is a
+                                             Wikipedia aims to provide a unified, neu-
+arXiv:2609.37498v1 [cs.CL] 27 Sep 2026
+
+
+
+
+                                             tral record of history, yet its independent lan-           federation of independent language editions, each
+                                             guage editions often function as distinct epis-            written by a distinct community of editors who of-
+                                             temic communities, creating divergent narra-               ten rely on their own national historiography. When
+                                             tives around contested events. This paper in-              history is contested, such as in wars or territorial
+                                             vestigates cross-lingual historiographical bias            disputes, these communities can produce articles
+                                             by analyzing Wikipedia articles across five                that describe the same event in fundamentally dif-
+                                             languages (Romanian, Hungarian, Russian,
+                                                                                                        ferent ways.
+                                             Turkish, and English) focusing on three con-
+                                             tentious events in Romanian history: the Bat-                 This problem goes beyond simple translation
+                                             tle of Posada (1330), the Soviet occupation                differences. A reader of the Romanian Wikipedia
+                                             of Bessarabia (1940), and the Night Attack                 might learn about a heroic defense of independence,
+                                             at Târgovis, te (1462). Using human annota-                while a reader of the Turkish or Russian Wikipedia
+                                             tors and Large Language Models (LLMs) to                   reads about a failed rebellion or a justified annexa-
+                                             classify citation stance and quantify narrative            tion. While the NPOV policy exists in all editions,
+                                             evolution from 2005 to 2024, we identify a phe-            its application varies. Local editors often cite local
+                                             nomenon of "citation isolation". In the case of
+                                                                                                        sources, creating "citation universes" that rarely
+                                             the Battle of Posada, only 2 out of 119 citations
+                                             were shared between language editions, with                overlap. As a result, the bias is not just in the
+                                             the Romanian edition exhibiting a 91% pro-                 text, but in the choice of which facts to include and
+                                             national bias compared to the balanced Hun-                which authorities to trust.
+                                             garian edition. Longitudinal analysis reveals                 In this paper, we study how these conflicting
+                                             that these narratives are volatile and respon-             narratives form and evolve. We focus on three
+                                             sive to contemporary geopolitics, evidenced                events that are central to Romanian history but
+                                             by a significant shift in the Russian framing
+                                                                                                        contested by its neighbors: the Battle of Posada
+                                             of Bessarabia in 2024. Finally, we propose a
+                                             "Peace-Maker" pipeline to automate conflict                (1330) against Hungary, the Soviet occupation of
+                                             reconciliation. We demonstrate that while stan-            Bessarabia (1940) involving Russia, and the Night
+                                             dard prompting leads models to hallucinate con-            Attack at Târgovis, te (1462) against the Ottoman
+                                             sensus, "adversarial" prompting, which explic-             Empire. We analyze articles from five language
+                                             itly instructs the model to preserve and attribute         editions (Romanian, Hungarian, Russian, Turkish,
+                                             disagreement, achieves near-perfect neutrality             and English) to answer three questions:
+                                             scores.                                                       1. How do citation choices reflect national
+                                                                                                        bias? We find that editors almost exclusively cite
+                                                  History is that certainty produced at the point
+                                                  where the imperfections of memory meet the            authors from their own country. In our analysis of
+                                                  inadequacies of documentation.                        the Battle of Posada, only 2 out of 119 citations
+                                                                                        Julian Barnes   were shared between the Romanian, Hungarian,
+                                                                                                        and English editions.
+                                                                                                           2. How do narratives evolve over time? By
+                                         1   Introduction
+                                                                                                        analyzing article versions from 2005 to 2024, we
+                                         Wikipedia is the first place many people turn to for           show that these narratives are not static. While the
+                                         historical information. It aims to provide a "Neu-             Romanian account of the Night Attack has moder-
+                                         tral Point of View" (NPOV), representing conflict-             ated in recent years, the Russian account of Bessara-
+bia has been volatile, shifting significantly in 2024.    of a unified standard for verifiability. Our work
+   3. Can AI help reconcile these conflicts? We           provides a granular case study of this phenomenon:
+test whether LLMs can act as neutral arbiters. We         we show that for the Battle of Posada, the "Ro-
+find that standard prompting fails because models         manian epistemic community" and the "Hungarian
+try to "fix" the conflict by choosing one side. How-      epistemic community" rely on entirely disjoint sets
+ever, an "adversarial" prompting strategy, which          of historical authorities, with only 2 shared sources
+explicitly instructs the model to preserve the dis-       out of 119.
+agreement, can generate summaries that are rated
+as perfectly neutral.                                     2.2 Bias Detection: From Syntax to Semantics
+   It is important to note that "neutrality" in his-      Traditional approaches to bias detection in NLP
+tory is a contested concept. Often, there is no sin-      have focused on linguistic cues. Recasens et al.
+gle objective truth between two national myths.           (2013) created the foundational "NPOV corpus",
+Therefore, we do not define neutrality as finding a       identifying subjective intensifiers (e.g., "famous",
+"middle ground" or a "correct" version of events.         "outrageous") as markers of bias. Pryzant et al.
+Instead, we define it operationally as perspectival       (2020) advanced this by using BERT-based models
+balance: a neutral summary is one that accurately         to automatically rewrite such sentences into neutral
+represents the existence and nature of the conflict it-   forms.
+self, attributing claims to their respective traditions      However, historical bias is often implicit and
+without endorsing one over the other.                     structural rather than purely stylistic. Rogers and
+                                                          Sendijarevic (2012) demonstrated this in their man-
+2     Related Work                                        ual analysis of the Srebrenica massacre articles,
+                                                          where the bias lay in which facts were selected
+The challenge of addressing conflicting historical        rather than how they were phrased. Recent work
+narratives on Wikipedia sits at the intersection of       by Ghanbari Haez and Dragoni (2025) confirms
+computational social science, natural language pro-       that modern LLMs still struggle with this "narra-
+cessing, and digital history. While early work fo-        tive bias", often reproducing intersectional identity
+cused on metadata-driven analysis of "edit wars",         biases even when explicitly instructed to be neu-
+recent advances in LLMs have shifted attention            tral. Our methodology addresses this by moving
+toward semantic analysis of bias and automated            beyond sentence-level style transfer to document-
+conflict resolution.                                      level narrative analysis, using LLMs to quantify the
+                                                          "stance" of citations and the evolution of historical
+2.1    Epistemic Communities & Cross-Lingual
+                                                          framing over decades.
+       Divergence
+Wikipedia is ostensibly a global project, but em-         2.3   Perspectivism and Automated
+pirical research suggests it functions more as a                Reconciliation
+federation of distinct "epistemic communities"            The emerging "Perspectivist Data" paradigm (Per-
+(Samoilenko et al., 2016). Hecht and Gergle (2009)        spectivist Data Manifesto, 2020) argues that dis-
+first quantified the "self-focus bias" inherent in        agreement in data should not always be aggregated
+these communities, showing that language editions         away or treated as noise. Instead, valid conflicting
+disproportionately cover topics related to their own      perspectives should be preserved. This is particu-
+geography. Miquel-Ribé and Laniado (2018) ex-             larly relevant for LLMs, which tend to hallucinate
+panded this to 40 languages, revealing a persistent       a single "consensus" reality when none exists. Kök-
+"culture gap" where shared knowledge is the excep-        sal et al. (2023) and Li et al. (2023) have shown
+tion rather than the rule.                                that LLMs exhibit strong "nationality bias", often
+   In the domain of history, this divergence of-          aligning with the geopolitical views of their train-
+ten manifests as "citation isolation". Taylor et al.      ing data’s dominant language.
+(2025) found that non-English Wikipedias cite                To mitigate this, recent frameworks like "MoDS"
+millions of unique sources not found in English           (Moderating a Mixture of Document Speakers)
+Wikipedia, effectively creating parallel knowledge        (Balepur et al., 2025) and "Multi-Perspective Fu-
+bases. Baigutanova and Others (2023) further              sion" (Guan et al., 2025) have proposed treating
+showed that sources deemed unreliable in one lan-         documents as debating agents. Our "Peace-Maker"
+guage often persist in others, highlighting the lack      pipeline extends this line of inquiry. We show that
+standard "summarization" prompts fail because           in the bibliography lacked context (e.g., just "Dju-
+they encourage the model to resolve conflict (a         vara, p. 180"). To address this, we developed a
+form of hallucinated consensus), whereas "adver-        Context Enhancer module. For each citation, the
+sarial" prompts that enforce the preservation of        module searched the full article text for mentions
+conflict, aligning with the perspectivist approach,     of the author or title, extracting a ±300 charac-
+achieve significantly higher neutrality scores.         ter window around the mention. This "enhanced
+                                                        context" was then fed to Google’s Gemini 3.0 Pro
+3     Methodology                                       Preview model (Gemini Team, Google, 2025) with
+Our approach combines historical data mining with       the following prompt structure:
+LLM-based analysis to quantify bias and generate             "You are an expert historian analyzing the Battle
+neutral narratives. The pipeline consists of three           of Posada (1330) between Wallachia and Hun-
+                                                             gary. Analyze the following text snippet from
+stages: (1) multi-lingual data collection, (2) granu-        a Wikipedia article to determine the STANCE
+lar stance classification, and (3) adversarial narra-        of the citation. The citation being analyzed is:
+tive generation.                                             "citation − text". The surrounding context is:
+                                                             "context". Determine if the citation is used to
+                                                             support a specific narrative:: Pro-RO (heroic de-
+3.1    Data Collection                                       fense), Pro-HU (treacherous trap), Neutral, or
+We targeted three historical events chosen for their         Contested".
+contentious nature in Eastern European historiog-       All API calls were executed with a temperature of
+raphy:                                                  0 to ensure deterministic reproducibility.
+    1. Battle of Posada (1330): A foundational con-     3.2.2 Human validation
+       flict between Wallachia and Hungary.
+                                                        To validate the LLM’s classifications, we used two
+    2. Soviet Occupation of Bessarabia (1940): A        human annotators. One annotator reviewed a ran-
+       territorial dispute between Romania and the      dom 50% sample of the Romanian and English
+       USSR/Russia.                                     citations, while a second annotator reviewed the
+                                                        complete set of Hungarian citations. Both annota-
+    3. Night Attack at Târgovis, te (1462): A mili-     tors assessed the same "enhanced context" provided
+       tary encounter between Vlad the Impaler (Wal-    to the LLM using the identical 4-category scheme
+       lachia) and Mehmed II (Ottoman Empire).          (Pro-RO, Pro-HU, Neutral, Contested), blinded to
+   For the citation analysis (Posada), we extracted     the LLM’s ratings. The human-LLM agreement
+the full content of the Romanian (ro), Hungarian        was substantial, yielding Cohen’s Kappa scores of
+(hu), and English (en) Wikipedia articles as of         0.80 for Romanian, 0.75 for English, and 0.85 for
+February 2026. We used a standard github library        Hungarian.
+(Kurtovic, 2023) to parse the MediaWiki markup          3.2.3   Granular Narrative Metrics
+and extract all citations, including those in ‘<ref>‘           (Bessarabia/Târgovis, te)
+tags and bibliography sections.                         For the temporal analysis, we defined event-
+   For the temporal analysis (Bessarabia and            specific metrics on a 0-100 scale. For example,
+Târgovis, te), we used the Wikipedia Action API         for the Night Attack, we measured:
+(Wikimedia Foundation, 2024) to fetch historical
+snapshots of the articles from January 1st of 2005,        • Vlad Heroism: Extent to which Vlad is por-
+2010, 2015, 2020, and 2024. This resulted in a               trayed as a brave defender.
+dataset of 29 article versions across Romanian, Rus-
+                                                           • Ottoman Threat: Emphasis on the magni-
+sian, Turkish, and English editions.
+                                                             tude of the invading force.
+3.2    Stance Classification & Metrics
+                                                           • Cruelty: Emphasis on impalement and brutal
+To quantify bias, we used LLMs and human anno-               tactics.
+tators.
+                                                        We processed each article version through the LLM
+3.2.1 Citation Stance (Posada)                          to score these metrics, allowing us to track the
+We classified 119 citations into four categories:       evolution of the narrative over 20 years. The full
+Pro-Romanian, Pro-Hungarian, Neutral, and Con-          prompt used for this granular scoring is provided
+tested. A major challenge was that many citations       in Appendix A.
+   While the prompt requested categorical stances
+and confidence scores (0.0-1.0), we aggregated
+these into 0-100 scales for visualization by map-
+ping the confidence of a "Pro-X" classification to a
+positive score and "Pro-Y" to a negative or lower
+score, normalized to a 0-100 range where 100 rep-
+resents the maximum intensity of the national nar-
+rative.
+
+3.3    The "Peace-Maker" Pipeline
+To address the challenge of representing conflict-        Figure 1: Raw count of citations by stance. Note the
+ing narratives, we developed the "Peace-Maker"            overwhelming volume of Pro-Romanian citations in the
+pipeline.                                                 Romanian edition compared to the balanced distribution
+                                                          in Hungarian.
+    1. Claim Extraction: We first extract key fac-
+       tual claims from each source text (e.g., "Ro-
+       manian source claims 15,000 Ottoman casual-
+       ties").
+    2. Conflict Matching: We use an LLM to iden-
+       tify pairs of conflicting claims (e.g., "RO: At-
+       tack was a victory" vs. "TR: Attack was a
+       failed assassination").
+    3. Adversarial Generation: We tested four
+       prompting strategies to generate a summary:
+          • Standard: "Summarize these sources".
+          • Academic: "Write as a peer-reviewed his-      Figure 2: Stance distribution of citations in the Battle
+            torian".                                      of Posada articles. Romanian Wikipedia is 91% Pro-
+          • Mediator: "Write a diplomatic report ac-      Romanian, while Hungarian Wikipedia is balanced.
+            ceptable to both sides".
+          • Adversarial: "Preserve the conflict. Ex-         Bias Scores: The Romanian edition exhibited
+            plicitly state ’Source A says X while         a strong national bias, with 91.1% of citations
+            Source B says Y’. Do not resolve the          classified as Pro-Romanian and only 2.2% as Pro-
+            dispute".                                     Hungarian (Figure 2). In contrast, the Hungar-
+    4. LLM-as-a-Judge: We evaluated the gener-            ian edition was remarkably balanced, with 23.1%
+       ated summaries using a separate LLM in-            Pro-Romanian and 25.0% Pro-Hungarian citations.
+       stance to score them on Neutrality (0-1), Con-     The English edition, often assumed to be neutral,
+       flict Preservation (0-1), and Source Attribu-      showed a moderate Pro-Romanian lean (31.8% Pro-
+       tion (0-1).                                        RO vs 0% Pro-HU).
+                                                             Figure 1 highlights the sheer volume disparity.
+4     Experiments & Results                               It is important to note that raw citation volume is
+We present results from three experiments: (1) cita-      not a proxy for quality; a higher count could sim-
+tion stance analysis of the Battle of Posada, (2) tem-    ply indicate a more detailed article. However, in
+poral analysis of narratives surrounding Bessarabia       this context, the volume reinforces the echo cham-
+and Târgovis, te, and (3) the evaluation of the Peace-    ber. The Romanian article builds an "illusion of
+Maker pipeline.                                           consensus" through the repetition of a large, mono-
+                                                          perspectival corpus, whereas the Hungarian article
+4.1    Experiment 1: Citation Isolation (Posada)          achieves a balanced narrative with a smaller but
+We analyzed 119 citations across the Roma-                more diverse set of references.
+nian (RO), Hungarian (HU), and English (EN)                  Citation Isolation: The most striking finding
+Wikipedia articles on the Battle of Posada (1330).        was the lack of overlap. Out of 119 unique ci-
+                                                              tion emphasizes "Deportations" (Score: 40) and
+                                                              "Victimhood" (Score: 80), whereas the Russian
+                                                              edition emphasizes "Soviet Justification" (Score:
+                                                              40). Figure 6 tracks this "Deportation Gap" over
+                                                              time, showing that while Romanian mentions of
+                                                              atrocities have remained high, Russian mentions
+                                                              have been near-zero for two decades, only appear-
+                                                              ing slightly in 2024.
+                                                                 Night Attack (1462): The Romanian article
+                                                              peaked in nationalism in 2020 (Score: 85), por-
+Figure 3: LLM Confidence Distribution. The high confi-        traying Vlad the Impaler as a "valiant defender",
+dence scores across all stances indicate that the "Citation   before moderating to 72 in 2024 (Figure 4, Right).
+Isolation" is not due to model uncertainty but reflects       The Turkish edition showed a gradual decline in
+clear, distinct narrative framing in the sources.             Pro-Romanian sentiment (70 → 65) and consis-
+                                                              tently emphasized Vlad’s cruelty (Score: 80) far
+tations, only 2 sources were shared across more               more than the Romanian edition (Score: 60). The
+than one language edition. This confirms that these           English edition remained remarkably stable at a
+Wikipedia communities operate in distinct "cita-              score of 70 throughout the 14-year period.
+tion universes", constructing their narratives from              The shape of these narratives is visualized in
+entirely disjoint sets of historical authorities. It is       Figure 7. The Turkish narrative is defined by high
+important to note that this isolation is partly driven        "Cruelty" and "Ottoman Threat" scores but lower
+by linguistic accessibility: Romanian scholars natu-          "Heroism". The Romanian narrative is the inverse.
+rally cite Romanian historians writing in Romanian,           Figure 8 isolates the "Cruelty Gap", showing a
+while Hungarian scholars cite Hungarian sources.              persistent 15-20 point difference between Turkish
+However, the result is the same: readers of dif-              and Romanian portrayals of Vlad’s tactics.
+ferent language editions are presented with funda-            4.3   Experiment 3: Peace-Maker LLM
+mentally different evidentiary bases. As shown in
+                                                              We evaluated four prompting strategies for generat-
+Figure 3, the LLM’s classification confidence re-
+                                                              ing neutral summaries of the Night Attack, using
+mained high across all categories, validating that
+                                                              conflicting claims extracted from Romanian and
+these sources express clear, unambiguous stances
+                                                              Turkish articles.
+rather than vague or subtle biases.
+                                                               Prompt Strategy       Neutrality     Conflict Pres.
+4.2   Experiment 2: Temporal Evolution                         Standard                0.47             0.60
+                                                               Mediator                0.95             1.00
+We tracked narrative metrics across 29 article ver-
+                                                               Academic                0.97             1.00
+sions from 2005 to 2024.
+                                                               Adversarial             1.00             1.00
+   Bessarabia (1940): The Romanian article for
+"Basarabia" showed significant moderation, with               Table 1: Performance of prompting strategies. Neutral-
+its Pro-Romanian score dropping from a peak of 76             ity and Conflict Preservation are scored 0-1.
+(2010) to 55 (2024) (Figure 4, Left). Conversely,
+the Russian article was highly volatile. After fluc-             As shown in Table 1 and Figure 9, the Standard
+tuating between Pro-Soviet (30) and balanced (65)             prompt failed (Neutrality: 0.47) because the LLM
+stances, the 2024 version of the "Accession" ar-              attempted to resolve the conflict, often choosing
+ticle spiked to a Pro-Romanian score of 72. We                one side’s version of events (e.g., regarding the at-
+speculate that this may reflect a post-2022 shift             tack’s success). The Adversarial prompt, which
+where Russian editors are becoming more critical              explicitly instructed the model to preserve con-
+of Soviet expansionism, though further qualitative            flict, achieved perfect scores. Figure 10 breaks
+research is needed to confirm this causal link.               this down further, showing that the Adversarial
+   Figure 5 reveals the specific dimensions of this           prompt’s success stems from its high "Source At-
+divergence. While both editions now acknowledge               tribution" score—it explicitly attributes disputed
+the Molotov-Ribbentrop Pact, they differ funda-               claims ("Romanian sources state X..".), avoiding
+mentally on the consequences. The Romanian edi-               the trap of hallucinated consensus.
+Figure 4: Evolution of the "Pro-National" score over time. Left: Bessarabia (RO vs RU). Right: Night Attack at
+Târgovis, te (RO vs TR vs EN).
+
+
+
+
+Figure 5: Detailed metric comparison for Bessarabia
+(2024). Note the divergence in "Soviet Justification"
+and "Deportations".
+                                                            Figure 7: Radar chart of narrative metrics for the Night
+                                                            Attack (2024). The shapes illustrate distinct narra-
+                                                            tive priorities: Turkish (Cruelty-focused), Romanian
+                                                            (Heroism-focused), and English (Balanced).
+
+
+                                                            guidelines, using neutral language and avoiding ed-
+                                                            itorializing, while still presenting a heavily biased
+                                                            narrative simply by selecting sources from a single
+                                                            national tradition. This "bibliography bias" is invis-
+Figure 6: Deportation mentions over time. Roma-             ible to standard NLP tools that focus on sentiment
+nian Wikipedia consistently highlights Soviet atrocities,   analysis, but it is the primary driver of narrative
+while Russian Wikipedia largely omits them.                 divergence in historical topics.
+
+5     Discussion                                            5.2   Narrative Evolution and Geopolitics
+                                                            Our temporal analysis shows that these narratives
+Our findings challenge the assumption that                  are not static. The moderation of the Romanian
+Wikipedia functions as a unified global encyclope-          "Night Attack" article (from 85 to 72) suggests that
+dia. Instead, it operates as a federation of distinct       community maturity and international scrutiny can
+epistemic communities, each validating knowledge            temper nationalism over time. However, the volatil-
+through its own national lens.                              ity of the Russian "Bessarabia" article demonstrates
+                                                            that Wikipedia is not immune to external geopo-
+5.1    The Illusion of Neutrality
+                                                            litical shocks. The sudden 2024 shift toward a
+The "Citation Isolation" we observed in the Posada          Pro-Romanian stance likely reflects a broader re-
+case study shows the challenge of achieving neu-            alignment of Russian opposition discourse follow-
+trality. An article can adhere perfectly to NPOV            ing the invasion of Ukraine, where Soviet imperial
+                                                            Figure 10: Detailed evaluation of generated summaries.
+                                                            The Adversarial prompt excels not just in Neutrality, but
+Figure 8: Comparison of "Vlad Cruelty" scores. Turk-        in Source Attribution and Conflict Preservation.
+ish Wikipedia consistently emphasizes Vlad’s brutality
+much more than the Romanian edition.
+                                                            rather that the disagreement itself is a historical fact
+                                                            worth reporting. When Source A claims 15,000 ca-
+                                                            sualties and Source B claims 1,500, a LLM that
+                                                            averages these numbers fails both. A LLM that
+                                                            reports the discrepancy preserves the epistemic in-
+                                                            tegrity of the conflict. Future systems must bal-
+                                                            ance this perspectivism with rigorous fact-checking
+                                                            to avoid "false balance" when one perspective is
+                                                            demonstrably pseudohistorical. This suggests that
+                                                            the future of AI in education and historiography
+                                                            lies not in generating "objective" answers, but in
+Figure 9: Neutrality scores (0-1) for different prompting   synthesizing and attributing diverse perspectives.
+strategies. The Adversarial prompt achieves perfect
+neutrality.                                                 6    Conclusion and Future Work
+                                                            This study demonstrates that Wikipedia functions
+history is being critically re-examined.                    not as a unified global archive, but as a federation
+   Bias often manifests as silence. As Figure 6             of distinct epistemic communities defined by "cita-
+illustrates, the Russian Wikipedia’s historical omis-       tion isolation". Our analysis of the Battle of Posada
+sion of Soviet deportations is a form of narrative          revealed that the Romanian and Hungarian editions
+control. The sudden appearance of these mentions            shared only 2 out of 119 citations, constructing mu-
+in 2024 signals a potential "thaw" in this histori-         tually exclusive historical realities based on non-
+ographical freeze. Similarly, the "Cruelty Gap"             overlapping authorities. Longitudinally, we found
+in the Targoviste narrative (Figure 8) shows how            these narratives to be volatile and responsive to
+national identity is constructed not just by what is        geopolitics, evidenced by the 2024 shift in the Rus-
+celebrated (Heroism), but by what is minimized              sian framing of Bessarabia.
+(Cruelty).                                                     Methodologically, we show that standard LLM
+                                                            prompting fails to address this by hallucinating
+5.3   AI as a Mediator, Not a Judge
+                                                            consensus. Instead, we propose a "Peace-Maker"
+Standard LLM summarization fails because it mim-            pipeline using "adversarial" prompting. By explic-
+ics the human tendency to seek a single, coherent           itly instructing models to preserve conflict rather
+truth, effectively hallucinating a consensus where          than resolve it, we achieve "perspectival balance",
+none exists. By explicitly prompting the model to           generating summaries that accurately attribute dis-
+be "adversarial" and preserve conflict, we force it         agreement without enforcing a false middle ground.
+to act as a mediator rather than a judge.                      We propose several directions for future re-
+   However, a distinction must be drawn between             search:
+interpretive disagreements (e.g., whether a war was
+"justified") and factual contradictions (e.g., casu-            • Baseline Comparison: Compare these con-
+alty counts). For the latter, "preserving conflict"               tested events to uncontested historical topics
+does not imply that all claims are equally valid, but             to establish a baseline for citation overlap
+     and narrative divergence. This would verify
+     whether the "citation isolation" we observed
+     is specific to conflict or a general feature of
+     Wikipedia’s language editions.
+
+   • Geographic and Domain Expansion: While
+     our case studies are well-chosen for their con-
+     tentiousness, they are limited to Eastern Euro-
+     pean history. Future research should inves-
+     tigate if "Citation Isolation" holds true for
+     global topics (e.g., WWII in the Pacific or
+     Colonialism in the Americas) or scientific con-
+     troversies.
+
+Limitations
+Our study relies on human annotators and LLMs.
+LLM-based classification, while calibrated, may
+still contain inherent biases. We focused on three
+specific events in Eastern European history; results
+may vary for other regions. Our validation method-
+ology presents a potential circularity: annotators
+assigned by language (Romanian/English vs. Hun-
+garian) were native speakers whose historiographi-
+cal perspectives may reflect the national biases we
+sought to measure, rather than providing an inde-
+pendent benchmark. Annotator neutrality is hard
+to verify.
+
+Ethics Statement
+This study utilizes publicly available data under
+the Creative Commons Attribution-ShareAlike 4.0
+license. To validate our LLM-based classifications
+on sensitive historical topics, we used two human
+annotators. Strict privacy protocols were main-
+tained to preserve their anonymity. We emphasize
+that our computational metrics quantify "perspec-
+tival balance" and are not intended to adjudicate
+historical truth or resolve geopolitical disputes.
+
+Acknowledgments
+This research is supported by:
+
+   • the project “Romanian Hub for Artificial In-
+     telligence - HRIA”, Smart Growth, Digitiza-
+     tion and Financial Instruments Program, 2021-
+     2027, MySMIS no. 351416;
+
+   • a grant of the Ministry of Research, In-
+     novation and Digitization, CNCS - UEFIS-
+     CDI, project SIROLA, number PN-IV-P1-
+     PCE-2023-1701, within PNCDI IV;
+A   Granular Narrative Scoring Prompt               References
+                                                    A. Baigutanova and Others. 2023. Reference reliability
+The following prompt was used for temporal anal-       divergence in multilingual wikipedia. arXiv preprint
+ysis of the Bessarabia and Târgovis, te articles:      arXiv:2309.00196.
+
+                                                    Nishant Balepur, Alexa Siu, Nedim Lipka, Franck Der-
+                                                      noncourt, Tong Sun, Jordan Boyd-Graber, and Puneet
+    Analyze    the    following    Wikipedia          Mathur. 2025. Mods: Moderating a mixture of doc-
+    article excerpt about Bessarabia/Soviet
+    occupation.
+                                                      ument speakers to summarize debatable queries in
+    ARTICLE: {article}                                document collections. In Proceedings of the 2025
+    LANGUAGE: {lang} (Romanian or Russian)            Conference of the North American Chapter of the
+    YEAR: {year}                                      Association for Computational Linguistics: Human
+    TEXT:                                             Language Technologies.
+    {text}
+    —                                               Gemini Team, Google. 2025. Gemini: A family of
+    Analyze the NARRATIVE STANCE of this              highly capable multimodal models. arXiv preprint
+    article. Consider:                                arXiv:2312.11805. Updated to include Gemini 3,
+    1. **Overall Stance**: Is the article             November 2025.
+    Pro-Romanian, Pro-Russian, Neutral, or
+    Mixed?                                          Saba Ghanbari Haez and Mauro Dragoni. 2025. Neutral
+    - Pro-Romanian: Portrays Soviet actions           is not unbiased: Evaluating implicit and intersec-
+    as occupation, theft, aggression
+    -   Pro-Russian:      Portrays     Soviet
+                                                      tional identity bias in llms through structured nar-
+    actions as liberation, reunification,             rative scenarios. In Findings of the Association for
+    protection                                        Computational Linguistics: EMNLP 2025.
+    - Neutral: Balanced presentation of
+    facts without emotional framing                 Xin Guan, Pei-Hsin Lin, Zekun Wu, Ze Wang, Ruibo
+    - Mixed: Contains elements of both                Zhang, Emre Kazim, and Adriano Koshiyama. 2025.
+    perspectives                                      Mpf: Aligning and debiasing language models post
+    2. **Key Themes**: What are the main              deployment via multi-perspective fusion. Findings
+    themes/topics discussed? (list 3-5)               of IJCNLP 2025.
+    3. **Emotional Tone**: What is the
+    emotional framing?                              Brent Hecht and Darren Gergle. 2009. Measuring
+    - Accusatory (blaming the other side)             self-focus bias in community-maintained knowledge
+    - Neutral (factual, academic)                     repositories. In Proceedings of the 27th international
+    - Defensive (justifying actions)
+                                                      conference on Human factors in computing systems,
+    - Victimization (emphasizing suffering)
+    4. **Key Terminology**: What loaded               pages 11–20.
+    terms are used? For example:
+    - "occupation" vs "liberation" vs               Abdullatif Köksal, Omer Yalcin, Ahmet Akbiyik,
+    "annexation" vs "reunification"                   M. Kilavuz, Anna Korhonen, and Hinrich Schuetze.
+    -   "ultimatum"   vs    "agreement"    vs         2023. Language-agnostic bias detection in language
+    "request"                                         models with bias probing. In Findings of the Associ-
+    - How is the USSR/Romania described?              ation for Computational Linguistics: EMNLP 2023,
+    Respond in this EXACT JSON format:                pages 12735–12747.
+    {
+    "overall_stance": "Pro-RO" or "Pro-RU"          Ben Kurtovic. 2023. mwparserfromhell: A parser
+    or "Neutral" or "Mixed",                          for mediawiki wikicode. https://github.com/
+    "stance_confidence": 0.0 to 1.0,                  earwig/mwparserfromhell.
+    "key_themes":     ["theme1",    "theme2",
+    "theme3"],                                      Bryan Li, Samar Haider, and Chris Callison-Burch.
+    "emotional_tone":           "Accusatory"
+    or    "Neutral"   or   "Defensive"     or
+                                                      2023. Geopolitical bias in large language models.
+    "Victimization",                                  arXiv preprint arXiv:2305.14610.
+    "terminology": {
+    "event_name":    "what the event is             Marc Miquel-Ribé and David Laniado. 2018. Wikipedia
+    called",                                          culture gap: quantifying content imbalances across
+    "soviet_actions": "how Soviet actions            40 language editions. Frontiers in Physics, 6:54.
+    are described",
+    "key_loaded_terms": "any loaded/biased          Perspectivist Data Manifesto. 2020. The perspectivist
+    terms used"                                       data manifesto. https://pdai.info/. Accessed:
+    },                                                2026-02-09.
+    "reasoning": "Brief explanation of why
+    you classified it this way"                     Reid Pryzant, Richard Diehl Martinez, Nathan Dass,
+    }                                                 Sadao Kurohashi, Dan Jurafsky, and Diyi Yang. 2020.
+                                                      Automatically neutralizing subjectivity in text. In
+                                                      Proceedings of the AAAI Conference on Artificial
+                                                      Intelligence, volume 34, pages 8669–8676.
+Marta Recasens, Cristian Danescu-Niculescu-Mizil, and
+  Dan Jurafsky. 2013. Linguistic models for analyzing
+  and detecting biased language. In Proceedings of the
+ 51st Annual Meeting of the Association for Compu-
+  tational Linguistics (Volume 1: Long Papers), pages
+ 1650–1659.
+Richard Rogers and Emina Sendijarevic. 2012. Neu-
+  tral or national point of view? a comparison of sre-
+  brenica articles across wikipedia’s language versions.
+  In Wikipedia Academy: Research and Free Knowl-
+  edge, Berlin. Wikipedia Academy.
+Anna Samoilenko, Fariba Karimi, Daniel Edler, Mar-
+  tin Rosvall, and Markus Strohmaier. 2016. Linguis-
+  tic neighbourhoods: explaining cultural borders on
+  wikipedia through multilingual co-editing activity.
+  EPJ Data Science, 5:1–21.
+Michael Taylor, Roisi Proven, and Carlos Areia. 2025.
+  Evaluating the diversity of scientific discourse on
+  twenty-one multilingual wikipedias using citation
+  analysis. arXiv preprint arXiv:2501.09666.
+Wikimedia Foundation. 2024.    Mediawiki action
+  api.   https://www.mediawiki.org/wiki/API:
+  Main_page. Accessed: 2025-02-09.
+

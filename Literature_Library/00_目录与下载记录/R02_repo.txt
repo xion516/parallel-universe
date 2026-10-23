@@ -1,0 +1,341 @@
+{
+  "sha": "f8da1fae12ae66991b6412ee04f502f6e5c9e30b",
+  "url": "https://api.github.com/repos/bigbases/FAIR-RAG/git/trees/f8da1fae12ae66991b6412ee04f502f6e5c9e30b",
+  "tree": [
+    {
+      "path": "0_annotation",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "b1504c2df20f15758052acb5b2cf483cbfa37200",
+      "url": "https://api.github.com/repos/bigbases/FAIR-RAG/git/trees/b1504c2df20f15758052acb5b2cf483cbfa37200"
+    },
+    {
+      "path": "0_annotation/README.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d8786b447b3f74d93f65e1527db8b58a15eb3afd",
+      "size": 872,
+      "url": "https://api.github.com/repos/bigbases/FAIR-RAG/git/blobs/d8786b447b3f74d93f65e1527db8b58a15eb3afd"
+    },
+    {
+      "path": "0_annotation/annotation_process.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a1bd2bd03bb02063b520378f7b870c9f3b0757ac",
+      "size": 15848,
+      "url": "https://api.github.com/repos/bigbases/FAIR-RAG/git/blobs/a1bd2bd03bb02063b520378f7b870c9f3b0757ac"
+    },
+    {
+      "path": "0_annotation/c4_collection.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9ff4e1affcbb0f28a6d34a80c430003011cea943",
+      "size": 14065,
+      "url": "https://api.github.com/repos/bigbases/FAIR-RAG/git/blobs/9ff4e1affcbb0f28a6d34a80c430003011cea943"
+    },
+    {
+      "path": "0_annotation/chatgpt",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "e4c2c7b21095ea22f5481484d9981d3bbee3d3ca",
+      "url": "https://api.github.com/repos/bigbases/FAIR-RAG/git/trees/e4c2c7b21095ea22f5481484d9981d3bbee3d3ca"
+    },
+    {
+      "path": "0_annotation/chatgpt/__pycache__",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "4778c2192b0f455d1119f986d16e30580bb4422d",
+      "url": "https://api.github.com/repos/bigbases/FAIR-RAG/git/trees/4778c2192b0f455d1119f986d16e30580bb4422d"
+    },
+    {
+      "path": "0_annotation/chatgpt/__pycache__/chatgpt_request.cpython-310.pyc",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1fd9d4f2cd2a8e97d2be6464df10ca5ba233372c",
+      "size": 2382,
+      "url": "https://api.github.com/repos/bigbases/FAIR-RAG/git/blobs/1fd9d4f2cd2a8e97d2be6464df10ca5ba233372c"
+    },
+    {
+      "path": "0_annotation/chatgpt/chatgpt_request.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "95fc21746009ffe1b40cf4c564ca93e8f1c86591",
+      "size": 3815,
+      "url": "https://api.github.com/repos/bigbases/FAIR-RAG/git/blobs/95fc21746009ffe1b40cf4c564ca93e8f1c86591"
+    },
+    {
+      "path": "0_annotation/claude",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "01c11642ca3e0eee4bd666f8b173651b550be50b",
+      "url": "https://api.github.com/repos/bigbases/FAIR-RAG/git/trees/01c11642ca3e0eee4bd666f8b173651b550be50b"
+    },
+    {
+      "path": "0_annotation/claude/__pycache__",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "6a050035cca5edf08a5958bbe0c6d22cecd04834",
+      "url": "https://api.github.com/repos/bigbases/FAIR-RAG/git/trees/6a050035cca5edf08a5958bbe0c6d22cecd04834"
+    },
+    {
+      "path": "0_annotation/claude/__pycache__/claude_request.cpython-310.pyc",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d6024e2e55547fbdc881aec63d1cedc47ad2f1cb",
+      "size": 2335,
+      "url": "https://api.github.com/repos/bigbases/FAIR-RAG/git/blobs/d6024e2e55547fbdc881aec63d1cedc47ad2f1cb"
+    },
+    {
+      "path": "0_annotation/claude/claude_request.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "97751c1569b05dad4a3e2e20070f147996be1050",
+      "size": 3595,
+      "url": "https://api.github.com/repos/bigbases/FAIR-RAG/git/blobs/97751c1569b05dad4a3e2e20070f147996be1050"
+    },
+    {
+      "path": "0_annotation/prompt",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "c96748f7ef129230eba506f289674105fd9fa110",
+      "url": "https://api.github.com/repos/bigbases/FAIR-RAG/git/trees/c96748f7ef129230eba506f289674105fd9fa110"
+    },
+    {
+      "path": "0_annotation/prompt/prompt_input.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "62b45de2e1972e0075c7433111adae3e98d86a38",
+      "size": 59,
+      "url": "https://api.github.com/repos/bigbases/FAIR-RAG/git/blobs/62b45de2e1972e0075c7433111adae3e98d86a38"
+    },
+    {
+      "path": "0_annotation/prompt/prompt_role_opp-left.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e5b86aabe7bc2f4f45dc6d355c442e4981b61743",
+      "size": 12010,
+      "url": "https://api.github.com/repos/bigbases/FAIR-RAG/git/blobs/e5b86aabe7bc2f4f45dc6d355c442e4981b61743"
+    },
+    {
+      "path": "0_annotation/prompt/prompt_role_opp-right.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6b6515a4959167170ca5e2d19c0417ebca404e46",
+      "size": 12011,
+      "url": "https://api.github.com/repos/bigbases/FAIR-RAG/git/blobs/6b6515a4959167170ca5e2d19c0417ebca404e46"
+    },
+    {
+      "path": "0_annotation/prompt/prompt_role_sup-left.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b0d33595e0591b9dbbed218e13b012b231e231e6",
+      "size": 12013,
+      "url": "https://api.github.com/repos/bigbases/FAIR-RAG/git/blobs/b0d33595e0591b9dbbed218e13b012b231e231e6"
+    },
+    {
+      "path": "0_annotation/prompt/prompt_role_sup-right.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "dc4afd6b93d6ea8a568a07b08eb7554d961767d1",
+      "size": 12014,
+      "url": "https://api.github.com/repos/bigbases/FAIR-RAG/git/blobs/dc4afd6b93d6ea8a568a07b08eb7554d961767d1"
+    },
+    {
+      "path": "1_doc2vec",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "f387e75b59a267bfaf2ef33aa668a77072464dca",
+      "url": "https://api.github.com/repos/bigbases/FAIR-RAG/git/trees/f387e75b59a267bfaf2ef33aa668a77072464dca"
+    },
+    {
+      "path": "1_doc2vec/README.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d091f16f0ce9af3614d8b2b2083bcfa5a9632cc5",
+      "size": 1047,
+      "url": "https://api.github.com/repos/bigbases/FAIR-RAG/git/blobs/d091f16f0ce9af3614d8b2b2083bcfa5a9632cc5"
+    },
+    {
+      "path": "1_doc2vec/check_query2db.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d0a6bb9ec5aa5c643fd3eeaef124e3a0f0a0d8a9",
+      "size": 1334,
+      "url": "https://api.github.com/repos/bigbases/FAIR-RAG/git/blobs/d0a6bb9ec5aa5c643fd3eeaef124e3a0f0a0d8a9"
+    },
+    {
+      "path": "1_doc2vec/ingest_csv_to_chroma.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "03c31e770f8969e093c548648ff4c5eac0dc7c8f",
+      "size": 17135,
+      "url": "https://api.github.com/repos/bigbases/FAIR-RAG/git/blobs/03c31e770f8969e093c548648ff4c5eac0dc7c8f"
+    },
+    {
+      "path": "2_rag",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "5ff029d23d0a7dfdbcdfa7af94242866b0d4d115",
+      "url": "https://api.github.com/repos/bigbases/FAIR-RAG/git/trees/5ff029d23d0a7dfdbcdfa7af94242866b0d4d115"
+    },
+    {
+      "path": "2_rag/OUR_rag_system.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1369a260aea8a4f0b52fd74244ceef835158b02f",
+      "size": 40229,
+      "url": "https://api.github.com/repos/bigbases/FAIR-RAG/git/blobs/1369a260aea8a4f0b52fd74244ceef835158b02f"
+    },
+    {
+      "path": "2_rag/README.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8a488cd05839f8e5536c727578d0b1c1de31097d",
+      "size": 1243,
+      "url": "https://api.github.com/repos/bigbases/FAIR-RAG/git/blobs/8a488cd05839f8e5536c727578d0b1c1de31097d"
+    },
+    {
+      "path": "2_rag/__pycache__",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "929e7c8b6a15d0d22b19a46a2a73a789ef6a6ed1",
+      "url": "https://api.github.com/repos/bigbases/FAIR-RAG/git/trees/929e7c8b6a15d0d22b19a46a2a73a789ef6a6ed1"
+    },
+    {
+      "path": "2_rag/__pycache__/A1_rag_system.cpython-310.pyc",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9158d3009343efbdfc081e0d8049a2df62d69ec5",
+      "size": 15118,
+      "url": "https://api.github.com/repos/bigbases/FAIR-RAG/git/blobs/9158d3009343efbdfc081e0d8049a2df62d69ec5"
+    },
+    {
+      "path": "2_rag/__pycache__/G1_rag_system.cpython-310.pyc",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f777440687aacac0f198e8d885884168086ce295",
+      "size": 15963,
+      "url": "https://api.github.com/repos/bigbases/FAIR-RAG/git/blobs/f777440687aacac0f198e8d885884168086ce295"
+    },
+    {
+      "path": "2_rag/__pycache__/OUR_rag_system.cpython-310.pyc",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c142c5e176c2558f3ba9d16e66e8c3c544ab2877",
+      "size": 24882,
+      "url": "https://api.github.com/repos/bigbases/FAIR-RAG/git/blobs/c142c5e176c2558f3ba9d16e66e8c3c544ab2877"
+    },
+    {
+      "path": "2_rag/__pycache__/R1_rag_system.cpython-310.pyc",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4d7a75af2cda8f4959d0406d3e7ef81ea7d94839",
+      "size": 13545,
+      "url": "https://api.github.com/repos/bigbases/FAIR-RAG/git/blobs/4d7a75af2cda8f4959d0406d3e7ef81ea7d94839"
+    },
+    {
+      "path": "README.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "33dab1e4859a550828a27e3c022e84f21fab063b",
+      "size": 7361,
+      "url": "https://api.github.com/repos/bigbases/FAIR-RAG/git/blobs/33dab1e4859a550828a27e3c022e84f21fab063b"
+    },
+    {
+      "path": "c4_analysis_summary.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "18ba297eae88a7b7fe0f9da9d728e7db2ac37124",
+      "size": 2698,
+      "url": "https://api.github.com/repos/bigbases/FAIR-RAG/git/blobs/18ba297eae88a7b7fe0f9da9d728e7db2ac37124"
+    },
+    {
+      "path": "metric_base_test_with_gemini.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "565c3846ac2255f52e5ea0f39aa4874e63dfe191",
+      "size": 23085,
+      "url": "https://api.github.com/repos/bigbases/FAIR-RAG/git/blobs/565c3846ac2255f52e5ea0f39aa4874e63dfe191"
+    },
+    {
+      "path": "metric_base_test_with_gpt.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d200354bf92248a46cbb12af71c73e2f38cf9499",
+      "size": 25443,
+      "url": "https://api.github.com/repos/bigbases/FAIR-RAG/git/blobs/d200354bf92248a46cbb12af71c73e2f38cf9499"
+    },
+    {
+      "path": "metric_fairness_test_with_gemini.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b7bad68cb43b0c9d111ef5197439f42be1a0ccd1",
+      "size": 35997,
+      "url": "https://api.github.com/repos/bigbases/FAIR-RAG/git/blobs/b7bad68cb43b0c9d111ef5197439f42be1a0ccd1"
+    },
+    {
+      "path": "metric_fairness_test_with_gpt.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a796d5eeac2978886b6a94e2a8a72e43a2469523",
+      "size": 34441,
+      "url": "https://api.github.com/repos/bigbases/FAIR-RAG/git/blobs/a796d5eeac2978886b6a94e2a8a72e43a2469523"
+    },
+    {
+      "path": "querylist",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "fff215e85c9c040132fa1acd2d39b708f7e400f5",
+      "url": "https://api.github.com/repos/bigbases/FAIR-RAG/git/trees/fff215e85c9c040132fa1acd2d39b708f7e400f5"
+    },
+    {
+      "path": "querylist/README.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "fd0698703ac8157a298faf918e103a96c07f889b",
+      "size": 875,
+      "url": "https://api.github.com/repos/bigbases/FAIR-RAG/git/blobs/fd0698703ac8157a298faf918e103a96c07f889b"
+    },
+    {
+      "path": "querylist/debate_questions_general.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e195b7915d62a50c000a8672460caacb59145071",
+      "size": 1843,
+      "url": "https://api.github.com/repos/bigbases/FAIR-RAG/git/blobs/e195b7915d62a50c000a8672460caacb59145071"
+    },
+    {
+      "path": "querylist/debate_questions_oppose.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "692b6b5e313e4d61bdc9ce4552cac0bfe7fe23ba",
+      "size": 1893,
+      "url": "https://api.github.com/repos/bigbases/FAIR-RAG/git/blobs/692b6b5e313e4d61bdc9ce4552cac0bfe7fe23ba"
+    },
+    {
+      "path": "querylist/debate_questions_support.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "004d46945d7b94563e6f9d5eb7163f6fefb45127",
+      "size": 1919,
+      "url": "https://api.github.com/repos/bigbases/FAIR-RAG/git/blobs/004d46945d7b94563e6f9d5eb7163f6fefb45127"
+    },
+    {
+      "path": "test_ablation_study.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "66d689c9a53725a6bdb8ea8fd15ef7f94fc3e0ff",
+      "size": 7337,
+      "url": "https://api.github.com/repos/bigbases/FAIR-RAG/git/blobs/66d689c9a53725a6bdb8ea8fd15ef7f94fc3e0ff"
+    },
+    {
+      "path": "topics-questions.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "06d22427a1fe4dc9f681decb724bdb7edb3e84e6",
+      "size": 12565,
+      "url": "https://api.github.com/repos/bigbases/FAIR-RAG/git/blobs/06d22427a1fe4dc9f681decb724bdb7edb3e84e6"
+    }
+  ],
+  "truncated": false
+}

@@ -1,0 +1,51 @@
+[
+  {
+    "temporary_filename": "H01_rivista_candidate.pdf",
+    "sha256": "1f41fd729ac2e5c5d5d91349a805199ded3733ef4170571206b4aea4c695040a",
+    "bytes": 1812704,
+    "pages": 10,
+    "first_page_excerpt": "RESEARCH ARTICLE SUMMARY\n◥\nARTIFICIAL INTELLIGENCE\nAI can help humans find common ground\nin democratic deliberation\nMichael Henry Tessler *†, Michiel A. Bakker *†, Daniel Jarrett, Hannah Sheahan, Martin J. Chadwick,\nRaphael Koster, Georgina Evans, Lucy Campbell-Gillingham, Tantum Collins, David C. Parkes,\nMatthew Botvinick*, Christopher Summerfield *\nINTRODUCTION: Democracy, at its best, rests\nupo"
+  },
+  {
+    "temporary_filename": "H01_verified_candidate.pdf",
+    "sha256": "d94c772521debec1213b3f8f0a4977ec63fab208c074d15f345f2c68cecc6c36",
+    "bytes": 9100673,
+    "pages": 66,
+    "first_page_excerpt": "AI for helping people to find consensusZhaoweiZhangInsituteforAI, Peking University25/11/2025"
+  },
+  {
+    "temporary_filename": "R03_curl_candidate.pdf",
+    "sha256": "8688f2a85e2b04043927c8516db168570d2a67c967c666650fa62def9f48d98c",
+    "bytes": 767309,
+    "pages": 15,
+    "first_page_excerpt": "ReFaRAG: Re-ranking for Bias Mitigation in\nRetrieval-Augmented Generation\nYingqi Zhao1, Vasilis Efthymiou2[0000−0002−0683−030X], Jyrki\nNummenmaa1[220000−0002−7476−7840], and Kostas\nStefanidis1[0000−0003−1317−8062]\n1 Tampere University, Finland\n{yingqi.zhao,jyrki.nummenmaa,konstantinos.stefanidis}@tuni.fi\n2 Harokopio University of Athens, Greece\nvefthym@hua.gr\nAbstract. Retrieval-augmented generati"
+  },
+  {
+    "temporary_filename": "R06_candidate.pdf",
+    "sha256": "439a8fd848090f8f9a289d199fa2dd34f0193d6c0441ef56e95511011c719fb5",
+    "bytes": 1988523,
+    "pages": 8,
+    "first_page_excerpt": "ISSN2383-630X(Print)/ISSN2383-6296(Online)JournalofKIISE,Vol.53,No.9,pp.824-831,2026.9https://doi.org/10.5626/JOK.2026.53.9.824RAG에서검색된문서의편향성이생성된답변에미치는영향:정치적편향성실험을통한분석(TheImpactofRetrievedDocumentBiasonGeneratedResponsesinRAG:AnAnalysisthroughPoliticalBiasExperiments)조 승 호† 고 창 건†† 황 태 호††서 정 연†† 박 종 철†††(SeunghoCho)(ChanggeonKo)(TaehoHwang)(JeongyeonSeo)(JongC.Park)요약본 연구는 RAG기반 대규모 언어 모델(LLM)에서 "
+  },
+  {
+    "temporary_filename": "F01_arxiv.pdf",
+    "sha256": "3a82baba6c9cc0f9b63dcb02fa57db7271751e25ab2abcff99bfb07193c9a0e2",
+    "bytes": 5277340,
+    "pages": 64,
+    "first_page_excerpt": " \n1|64 \nSource framing triggers systematic evaluation bias in Large Language Models Federico Germani1,* Giovanni Spitale1,2*  1: Institute of Biomedical Ethics and History of Medicine, University of Zurich 2: Center for Medical Ethics, University of Oslo *: Co-first authors; Corresponding authors  Abstract Large Language Models (LLMs) are increasingly used not only to generate text but also to eva"
+  },
+  {
+    "temporary_filename": "quarantine\\M18_unrelated_download.pdf",
+    "sha256": "d243bd22d2424e06d197bb5614dd61a5d3654c78d03e788e1d35594ff683b00c",
+    "bytes": 1642354,
+    "pages": 11,
+    "first_page_excerpt": "Partisan Sharing:\nFacebook Evidence and Societal Consequences\nJisun An\nQatar Computing Research\nInstitute, Qatar\njan@qf.org.qa\nDaniele Quercia\nY ahoo Labs Barcelona, Spain\ndquercia@acm.org\nJon Crowcroft\nUniversity of Cambridge, UK\nJon.Crowcroft@cl.cam.ac.uk\nABSTRACT\nThe hypothesis of selective exposure assumes that people seek out\ninformation that supports their views and eschew information that\nc"
+  },
+  {
+    "temporary_filename": "quarantine\\R03_unrelated_download.pdf",
+    "sha256": "09e8fc0e2b9ee2530805f184406259f1b4584338601555a7dc25b16776701081",
+    "bytes": 1835073,
+    "pages": 79,
+    "first_page_excerpt": "Bias and Fairness in Large Language Models:\nA Survey\nIsabel O. Gallegos∗\nStanford University\nRyan A. Rossi∗∗\nAdobe Research\nJoe Barrow†\nPattern Data\nMd Mehrab Tanjim\nAdobe Research\nSungchul Kim\nAdobe Research\nFranck Dernoncourt\nAdobe Research\nTong Yu\nAdobe Research\nRuiyi Zhang\nAdobe Research\nNesreen K. Ahmed\nIntel Labs\nRapid advancements of large language models (LLMs) have enabled the processing,"
+  }
+]

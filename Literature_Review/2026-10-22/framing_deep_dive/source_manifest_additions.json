@@ -1,0 +1,31 @@
+[
+  {
+    "id": "guey_2026",
+    "requested_url": "https://arxiv.org/html/2503.23688v2",
+    "resolved_url": "https://arxiv.org/html/2503.23688v2",
+    "kind": "html",
+    "bytes": 358170,
+    "sha256": "37d5ee6d0d568ab2098eee8a046d062c1355fdfcb1fc14512080efaa77fac333",
+    "text_chars": 77522,
+    "text_path": "D:\\PhD_Research\\Parallel Universe\\Literature_Review\\2026-10-22\\framing_deep_dive\\sources\\guey_2026.txt",
+    "fetched_utc": "2026-10-22T11:35:20.128965+00:00"
+  },
+  {
+    "id": "yoo_2025",
+    "requested_url": "https://aclanthology.org/2025.emnlp-main.856.pdf",
+    "kind": "pdf",
+    "bytes": 4912165,
+    "sha256": "a8177a83a4dbf591bb25e53e4b7ae1acf83584498bc52cae9d5a1e8fb87a3133",
+    "text_path": "D:\\PhD_Research\\Parallel Universe\\Literature_Review\\2026-10-22\\framing_deep_dive\\sources\\yoo_2025.txt",
+    "text_sha256": "9557bb98f7501b3338323013a296ce32ee331bb592b6ced9bbcc1e9d4d39c1b4",
+    "fetched_utc": "2026-10-22T11:32:39.889931+00:00"
+  },
+  {
+    "id": "nadeem_arxiv_2026",
+    "requested_url": "https://arxiv.org/html/2506.00068v3",
+    "kind": "html_alternative_text",
+    "text_path": "D:\\PhD_Research\\Parallel Universe\\Literature_Review\\2026-10-22\\framing_deep_dive\\sources\\nadeem_arxiv_2026.txt",
+    "text_sha256": "e8499faec0dfc9d92e96a2f3ca075c30667fa73f8e515415138ebb8e81b62bd4",
+    "note": "Alternative reading copy for the same paper as the final ACL PDF; not an additional independent study."
+  }
+]

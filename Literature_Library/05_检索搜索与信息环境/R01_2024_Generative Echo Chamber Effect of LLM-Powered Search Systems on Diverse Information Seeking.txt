@@ -1,0 +1,1150 @@
+本文件为PDF自动提取文本，仅供检索；排版、图表和页码请以PDF为准。
+Generative Echo Chamber? Effects of LLM-Powered Search Systems on Diverse Information Seeking
+
+       Generative Echo Chamber? Efects of LLM-Powered Search
+               Systems on Diverse Information Seeking
+                  Nikhil Sharma                                            Q. Vera Liao                               Ziang Xiao
+               nsharm27@jhu.edu                                     veraliao@microsoft.com                        ziang.xiao@jhu.edu
+            Johns Hopkins University                                  Microsoft Research                       Johns Hopkins University
+            Baltimore, Maryland, USA                                   Montréal, Canada                        Baltimore, Maryland, USA
+
+ABSTRACT                                                                           1   INTRODUCTION
+Large language models (LLMs) powered conversational search sys-                    Exposure to diverse viewpoints is essential for critical thinking,
+tems have already been used by hundreds of millions of people,                     balanced views, and informed decision-making, and at a collective
+and are believed to bring many benefts over conventional search.                   level, preventing opinion polarization or even dangerous radicaliza-
+However, while decades of research and public discourse interro-                   tion. However, such ideals are often challenging to achieve because
+gated the risk of search systems in increasing selective exposure                  people have a natural tendency of selective exposure [16], or con-
+and creating echo chambers—limiting exposure to diverse opin-                      frmation bias [63], favoring consonant information and avoiding
+ions and leading to opinion polarization, little is known about                    dissonant information. In the last two decades, much research and
+such a risk of LLM-powered conversational search. We conduct                       public discourse have expressed concerns regarding the exacer-
+two experiments to investigate: 1) whether and how LLM-powered                     bating efect of information and web technologies on selective
+conversational search increases selective exposure compared to                     exposure. For example, by personalization and supplying only in-
+conventional search; 2) whether and how LLMs with opinion biases                   formation people want to see, search engines and recommender
+that either reinforce or challenge the user’s view change the efect.               systems such as news feeds may produce “flter bubbles” [46] of
+Overall, we found that participants engaged in more biased infor-                  ideological and cultural isolation. By allowing people to easily se-
+mation querying with LLM-powered conversational search, and                        lect whom to connect with and what they want to see, social media
+an opinionated LLM reinforcing their views exacerbated this bias.                  can create “echo chambers” where people end up only interacting
+These results present critical implications for the development of                 with like-minded others. In short, information technologies can
+LLMs and conversational search systems, and the policy governing                   have multiplex mechanisms to exacerbate people’s selective expo-
+these technologies.                                                                sure bias, from data and algorithmic biases, to biases induced by
+                                                                                   interaction afordances [5].
+CCS CONCEPTS                                                                          With the recent rise of powerful large language models (LLMs)
+                                                                                   such as the GPT-4, a new generation of LLM-powered informa-
+• Human-centered computing → Human computer interac-
+                                                                                   tion technologies has emerged, from conversational search, open-
+tion (HCI); • Computing methodologies → Artifcial intelli-
+                                                                                   domain or specialized chatbots, to productivity tools such as writing
+gence; • Information systems → Web searching and informa-
+                                                                                   support. These technologies can have profound efects on the infor-
+tion discovery; Search interfaces.
+                                                                                   mation consumption of individuals and the society at large. First,
+                                                                                   LLMs are in essence “next token predictors” that optimize for giv-
+KEYWORDS                                                                           ing expected outputs, and thus can potentially be more inclined to
+Conversational Search, Information Seeking, Information Diversity,                 provide consonant information than traditional information system
+Echo Chamber Efect, Confrmation Bias, Large Language Models,                       algorithms. However, LLMs can be used to provide “synthesized”
+Generative AI                                                                      content (e.g., a concise summary) based on a collection of docu-
+                                                                                   ments, which may help expose people to diverse information by
+ACM Reference Format:                                                              removing biases that they may exhibit when selecting which doc-
+Nikhil Sharma, Q. Vera Liao, and Ziang Xiao. 2024. Generative Echo Cham-           ument to read. Information technologies powered by LLMs also
+ber? Efects of LLM-Powered Search Systems on Diverse Information Seek-             support natural and interactive conversational interactions. How
+ing. In Proceedings of the CHI Conference on Human Factors in Computing            these new afordances of interaction shape people’s information-
+Systems (CHI ’24), May 11–16, 2024, Honolulu, HI, USA. ACM, New York, NY,          seeking behaviors remains an open question. Last but not least,
+USA, 17 pages. https://doi.org/10.1145/3613904.3642459                             LLMs are known to encode biases from the training data [1, 52],
+                                                                                   and can be easily steered to exhibit certain opinion biases through
+                                                                                   model adaptation techniques such as fne-tuning or prompting [6].
+                                                                                   Little is known whether the encoded opinion biases can exacer-
+                                                                                   bate selective exposure of people with similar views, or be used to
+This work is licensed under a Creative Commons Attribution International           expose people to diferent viewpoints. Given the rapidly growing
+4.0 License.                                                                       reach and usage frequency of LLM-powered information technolo-
+CHI ’24, May 11–16, 2024, Honolulu, HI, USA                                        gies, it is paramount for the research community to investigate
+© 2024 Copyright held by the owner/author(s).                                      these issues and LLMs’ efect on information diversity to inform
+ACM ISBN 979-8-4007-0330-0/24/05
+https://doi.org/10.1145/3613904.3642459
+CHI ’24, May 11–16, 2024, Honolulu, HI, USA                                                                                      Sharma et al.
+
+
+the development of LLMs, design of LLM-powered systems, as well          and web technologies on the diversity of information that peo-
+as policy governing these technologies.                                  ple consume. In particular, by coining the term “flter bubble”, Eli
+   In this work, we take a formative step toward understanding           Pariser [46] raised much public attention in the 2010s on the poten-
+the echo chamber efect of LLMs by focusing on LLM-powered                tials of personalization and algorithmic fltering used by search
+conversational search systems. Since the public release of Microsoft     engines, recommendation systems, and social networking plat-
+Bing Chat and Google Bard in 2023, LLM-powered conversational            forms in reducing people’s exposure to diverse viewpoints. Other
+search systems have already reached hundreds of millions of users        researchers were concerned about the afordances of technologies
+in just a few months. While conversational search is believed to         for people to selectively curate their own information environment,
+bring many benefts [51, 67] such as ease of interaction, support for     such as by following only or mostly like-minded others on social
+complex queries, and overall user engagement, little is known at         media platforms [2, 8] or limiting the diversity of the sources for
+present about how people actually interact with LLM-powered con-         one’s news feed [18]. However, others challenged these concerns,
+versational search systems, let alone their drawbacks and potential      suggesting that the actual selective exposure is less prevalent than
+harms. We conducted a critical investigation into LLM-powered            theorized [22], and that there are individuals who actively seek di-
+conversational search systems through two experiments. In the            verse perspectives [33, 40] and the high-choice environment made
+frst experiment (N = 115), using information-seeking tasks on            possible by information and web technologies can facilitate diverse
+controversial topics, we compared people’s information-seeking           information seeking [12].
+behaviors and their attitude change outcomes when using a conven-           Researchers have also explored various approaches to combat
+tional search system versus LLM-powered conversational search            selective exposure and increase information diversity. In informa-
+systems (versions with and without references to the information         tion retrieval and recommender systems, serendipity is studied as
+sources). In the second experiment (N = 213), we explored whether        an optimization criterion to increase the exposure to novel and
+and how conversational search systems using LLMs with manip-             diverse information [54, 59]. Many systems were developed to help
+ulated opinion biases that either reinforce or challenge the user’s      people encounter diverse perspectives [14, 68], deliberate on con-
+existing attitude change their selective exposure. In short, we ask      troversial topics [13, 30, 48], be aware of one’s own information
+the following research questions:                                        bubble and better control fltering mechanisms [17, 27, 41]. As Gar-
+                                                                         rett and Resnick [19] argued, to increase people’s consumption of
+     • How does interacting with an LLM-powered conversational
+                                                                         attitude-challenging information, the key lies in presenting high-
+       search system afect selective exposure and opinion polar-
+                                                                         quality challenging items in the right context, and/or reducing
+       ization compared to a web search system? (Study 1)
+                                                                         people’s cognitive dissonance. To this end, HCI researchers con-
+     • How does an LLM-powered conversational search system
+                                                                         ducted experiments to study the efects of diversity-enhancing
+       that exhibits opinion bias, either consonant or dissonant with
+                                                                         designs such as highlighting or presenting agreeable information
+       the user’s existing attitude, afect people’s selective exposure
+                                                                         frst to reduce cognitive dissonance [40], and highlighting the ex-
+       and opinion polarization? (Study 2)
+                                                                         pertise [35], focused aspect [36], or the common ground [34] of
+   Below, we frst review related work that shaped our study and          challenging information. Overall, these designs are shown to have
+then present the methods and results of the two experiments. We          a positive diversity-enhancing efect but often only for a sub-group
+will list hypotheses for each study after introducing the measure-       of people who have the predisposition to be open to diverse views,
+ments in the Method section.                                             highlighting the challenge in combating selective exposure.
+                                                                            Building on these prior works, our research aims to investigate
+2 RELATED WORK                                                           whether and how LLM-powered conversational search systems can
+                                                                         exacerbate people’s selective exposure and reduce information di-
+2.1 Selective Exposure, Confrmation Bias, and                            versity. Our experimental design was informed by previous HCI re-
+    Echo Chamber Efect                                                   search conducting laboratory studies on selective exposure [17, 33–
+Psychologists have extensively studied people’s selective exposure       35, 40], adopting an information-seeking task of writing an essay
+bias [16, 23]—systematic preference towards information that is          for a controversial topic, and measurements of biases in information
+consonant with one’s existing view over dissonant information,           seeking behaviors and post-task attitude changes.
+and the related concept of confrmation bias [63]—actively seeking
+or assigning more weights to consonant information. Both biases
+can be attributed to a fundamental desire to avoid or reduce cog-        2.2    Human-LM Interaction
+nitive dissonance [15]. Selective exposure and confrmation bias          HCI researchers have started to explore applications of generative
+have been found to lead to opinion biases and polarization as well       language models (LMs) and study human interactions with them
+as suboptimal decision-making in many settings such as health,           before this wave of widely adopted LLMs. Popular applications of
+politics, and scientifc research [23, 43]. Collectively, these biases    LMs include code generation as programming assistance [55, 57, 65],
+can lead to an information environment or segregated group com-          various forms of writing assistance such as next sentence gener-
+munication where only information of a certain belief or ideology        ation [25, 31], summarization of documents [10], rewriting [69],
+is shared—this is often referred to as the “echo chamber efect” in       and metaphor generation [20], as well as chatbots [44, 66] and so-
+social and political sciences [7, 58].                                   cial agents [47]. Research on LLM-powered search is only recently
+   The HCI and broader research and activist communities have            emerging. For example, Liu et al. [39] conducted a human evalua-
+had long-standing concerns over the negative efect of information        tion to audit popular LLM-powered search systems, including Bing
+Generative Echo Chamber?                                                                                  CHI ’24, May 11–16, 2024, Honolulu, HI, USA
+
+
+Chat, and found that while the responses are fuent and appear              Generation approach (details in Sec. 3.2). In the second experiment,
+informative, they frequently contain unsupported statements and            we further study the efects of LLM with manipulated opinion bias
+inaccurate references (i.e., URLs to original sources).                    on people’s information behaviors and consumption—an issue that
+   Our study is particularly informed by works that are concerned          has not been explored for conversational search but can be poten-
+with the negative efects of language models on people’s informa-           tially prevalent with the use of LLMs.
+tion consumption and production. In the context of co-writing with
+LMs, common concerns include over-reliance on AI and automation-           3     STUDY 1 METHOD: COMPARING EFFECTS
+induced complacency [45] that can lead to not only sub-optimal                   OF LLM-POWERED CONVERSATIONAL
+writing outcomes [3] but also loss of human agency and perceived
+                                                                                 SEARCH AND WEB SEARCH
+ownership of the created content [11]. While over-reliance on AI’s
+suggestions has been studied as a common issue in human-AI in-             The frst study investigates whether and how LLM-powered con-
+teraction, LMs can exert additional informational infuence by ex-          versational search drives more selective search behaviors and leads
+posing people to, or making it easier to express, some views more          to more opinion polarization compared to conventional web search.
+often than others. Jakesch et al. [24] refer to this efect as “latent      Through an online between-subject experiment, we compared peo-
+persuasion” by language models. Their experiment demonstrated              ple’s information-seeking behaviors and outcomes with three search
+that when writing with an LLM-powered writing assistant that               systems: conventional web search, LLM-powered conversational
+was confgured to have a certain bias on the given topic, not only          search, and LLM-powered conversational search with source ref-
+did participants’ writing exhibit more of the model’s bias, but also       erences (links to the information sources). While earlier LLM-
+their own opinions shifted towards that direction afterward. These         powered information systems such as ChatGPT often did not in-
+negative efects of LMs can be exploited by malicious parties to            clude references, most recent ones, including Bing Chat and Google
+infuence public opinion or spread misinformation [28, 72].                 Bard, boast the reference feature as essential for ensuring informa-
+   Our work contributes to the literature on human-LM interac-             tion credibility for the search experience, especially given current
+tion with insights about a new and popular application domain—             LLMs’ limitation of generating non-factual information.
+conversational search, and explores whether and how a human                   Below, we frst elaborate on the study procedure and experiment
+bias—selective exposure—interacts with the properties and afor-            apparatus. Then, we introduce our measurements, hypotheses, and
+dances of LLMs to impact people’s information consumption.                 analysis plan. The study design and procedure were approved by
+                                                                           the Institutional Review Board of the author’s institution.
+
+2.3    Conversational Search                                               3.1    Study Procedure
+While LLM-powered search systems are a recent phenomenon,                  The study procedure includes three parts, as illustrated in Fig.1:
+years of research have pursued the idea of “conversational search”,        a pre-task survey, the main information-seeking task, and a post-
+which allows information retrieval through natural and fexible con-        task survey. The pre-task survey asked participants to rate their
+versations [26, 37, 51, 67, 70]. Radlinski and Craswell [51] lay out the   prior experiences with and attitudes toward conversational AIs,
+desirable properties of conversational search, including supporting        such as Siri, ChatGPT, and Bing Chat. Participants were also asked
+users to express complex information needs, revealing system capa-         to rate their attitudes on and familiarity with the controversial
+bilities through multi-turn interactions, supporting mixed-initiative      topic assigned to them (to be discussed below) and share any initial
+interactions, and so on. The authors also argue that conversational        thoughts they had on the topic with open-ended responses. All
+search is especially suitable for complex information tasks, such          ratings were based on 5-point Likert scales except for the one on
+as when searching for a set of items or referencing a set of criteria.     topical attitude—we used a 6-point scale with no neutral point to
+Others similarly argued that conversational search could better            force participants to take a position.
+engage users to interact for multiple rounds and respond to system            For the main task, participants were instructed to search for
+questions to form more complex and/or refned queries [29, 71].             information on the assigned controversial topic to write a short
+However, the implementation of conversational search, especially           essay on the topic. Participants were randomly assigned to one of
+in an open-domain context, faced technical challenges before LLMs          three conditions: a conventional web search system (WebSearch), a
+emerged. Empirical studies of human interaction with a conversa-           conversational search system without references (ConvSearch), or
+tional search system were relatively limited [4, 60, 62], and often        a conversational search system with references (ConvSearchRef).
+relied on wizard-of-oz approaches. For example, using a human              They were asked to perform at least three search queries before
+intermediary, Trippas et al. [60] studied how people interact with a       proceeding to the next step. They were also instructed not to use
+spoken search system through verbal communication and observed             other tools during the study. After participants indicated they were
+changes in query formation and reformation as well as search result        done with the search step, they were directed to a diferent page to
+exploration compared to search behaviors with conventional search          write an essay in 50-100 words on the given topic.
+engines. For example, participants used more verbose and varied               In the post-task survey, participants were asked to rate their
+expressions in the queries, preferred reading summaries rather than        attitudes on and familiarity with the topic again. Then, they were
+the lengthy original content in the output, and were more likely to        presented with two articles on the given topic that did not appear in
+provide explicit feedback for the search results.                          the search session, one consonant and the other one dissonant with
+   Our study investigates people’s interaction with an LLM-powered         their attitude (as measured in the pre-survey), in random order.
+search system that was implemented with a Retrieval Augmented              For each article, participants were asked to rate their perceived
+CHI ’24, May 11–16, 2024, Honolulu, HI, USA                                                                                                                              Sharma et al.
+
+
+                   PRE TASK SURVEY                                         INFORMATION SEEKING TASK                                          POST TASK SURVEY
+
+
+
+                  Prior experience with
+                    conversational AI                                                                                            Consonant                         Dissonant
+                                                                                               WebSearch
+                                                                                                                                   article                           article
+
+
+               Initial thought, familiarity and                                                                                                     Random
+            attitude about the assigned topic                                                                                                       Order
+
+
+
+                                                                Randomly
+                                                                Assigned                       ConvSearch
+
+                       Randomly
+                                                                                                                                       Agreement, trust and position
+                       Assigned
+                                                                                                                                             extremeness
+
+
+                                                                                                                                       Essay, familiarity and attitude
+                                                                                             ConvSearchRef                                 after search session
+             Topics:
+
+               1. Universal Health Care
+               2. Student Loan Debt                                                                                                          Demographics survey
+               3. Sanctuary Cities
+
+
+
+
+Figure 1: Overall study procedure for Study 1. In the pre-task survey, participants answered questions regarding their prior
+experience with conversational AI and their prior attitude and familiarity with a randomly assigned topic. Then, participants
+performed an information-seeking task to gather information on the topic with a randomly assigned search system. After the
+search session, participants wrote an essay about the assigned topic. In the post-task survey, participants again rated their
+attitude and familiarity with the topic, indicated their perception of two new articles (one consonant and one dissonant) on the
+topic, and their experience with the system and demographic information.
+
+
+agreement, trust, and position extremeness of the article. Before                         construct the database for each topic, we curated 47 documents from
+exiting the study, participants were asked about their overall expe-                      verifed and trustworthy sources (e.g., ncbi.nlm.nih.gov, procon.org,
+rience with the system and demographic information. How their                             jhunewsletter.com, etc. ) that provide evidence and viewpoints for
+answers are used as measurements will be discussed in Sec. 3.3.                           Supporting (N=18), Opposing (N=20), and Neutral (N=9) opinions on
+Before exit, participants were debriefed on the purpose of the study                      the given topic (rated by two authors with consensus). In Study 1,
+and provided with sources to a collection of articles that ofered                         to ensure a neutral search experience, the systems in all conditions
+balanced and comprehensive information on the topic.                                      search from the same balanced set of documents.
+    Topics for the Information-Seeking Task. Three criteria guided                        3.2.1 Web Search (WebSearch). The Web Search system is similar
+our selection of the topics. First, the topic should be deemed as                         to conventional web search experience, such as Google 5 or Mi-
+controversial. Second, it should not be a niche topic so the general                      crosoft Bing 6 . The user inputs a query into the search box and the
+population we recruit from should likely have pre-existing opinions                       system retrieves related articles. The retrieved articles are displayed
+on the topic. Third, the topic should be complex and not necessarily                      as a list with their title and the frst 200 characters of the article as
+familiar in everyday conversations so that participants could beneft                      a preview (Fig. 2a). We used the Double Metaphone algorithm to
+from the information-seeking activity. We searched ProCon.org                             perform fuzzy search in the above-mentioned document database
+1 , an online resource for deliberation on controversial issues with
+                                                                                          of the assigned topic [49]. To provide a neutral search experience,
+thoroughly researched references to identify topics for this study.                       the algorithm retrieves articles regardless of the stance on the topic.
+Guided by the three criteria, we selected the following topics:                           Participants could click the title and open the link to the article.
+    • Should the U.S. Government Provide Universal Health Care? 2
+    • Should Sanctuary Cities Receive Federal Funding? 3                                  3.2.2 Conversational Search (ConvSearch). The ConvSerach condi-
+    • Should Student Loan Debt Be Eliminated via Forgiveness or                           tion aims to provide an LLM-powered conversational search expe-
+        Bankruptcy? 4                                                                     rience, similar to ChatGPT, in which participants converse with an
+                                                                                          AI agent and issue queries in a multi-turn conversation and receive
+3.2     Experiment Apparatus                                                              search results as generated texts (i.e., often a synthesis) rather than
+                                                                                          the original articles (Fig. 2b). While the implementation details of
+To have control over the content that participants would see in
+                                                                                          these commercial systems are largely proprietary, we developed our
+diferent conditions, we created “closed-world” versions of web
+                                                                                          system based on a state-of-the-art approach of Retrieval Augmented
+search and conversational search systems with a curated retrieval
+                                                                                          Generation (RAG), which is also used as a part of Bing Chat’s sys-
+database following state-of-the-art algorithmic implementation. To
+                                                                                          tem architecture 7 . As illustrated in Fig 3, given a query, the system
+1 www.procon.org                                                                          frst retrieves chunks of texts from relevant articles by semantic
+2 healthcare.procon.org/should-all-americans-have-the-right-be-entitled-to-health-
+care-pro-con-quotes
+3 www.procon.org/headlines/sanctuary-cities-top-3-pros-and-cons                           5 www.google.com
+4 www.procon.org/headlines/should-student-loan-debt-be-easier-to-discharge-in-            6 www.bing.com
+
+bankruptcy-top-3-pros-cons                                                                7 blogs.bing.com/search-quality-insights/february-2023/Building-the-New-Bing
+Generative Echo Chamber?                                                                                 CHI ’24, May 11–16, 2024, Honolulu, HI, USA
+
+
+
+
+(a) User Interface for Web Search (Web-            (b) User Interface for Conversational          (c) User Interface for Conversational Search
+Search)                                            Search (ConvSearch)                            with references (ConvSearchRef)
+
+
+
+Figure 2: User Interfaces for the experiment apparatus in this study. We created “closed-world” versions of web search and
+conversational search systems with a curated retrieval database following state-of-the-art algorithmic implementation.
+
+
+search using the Pinecone vector database 8 . Then, the retrieved        the LLM always gives references from the retrieved documents.
+texts are added to the prompt as context, along with the partici-        These references are parsed and displayed in a similar design as
+pant’s conversation history. With prompt engineering, we created         Bing Chat. By clicking the reference URL, participants can view the
+prompts to instruct the LLM to generate the responses based on           source of the agent’s response.
+the retrieved texts (See Supplementary Material for prompt details).
+Consistent with the Web Search condition, the system retrieves           3.3    Measurements
+articles regardless of their stances on the topic. The hand-crafted
+prompts ensure the generated responses refect a neutral attitude on      Our main hypotheses consider two sets of measurements: partici-
+the topic. This approach provides a fair comparison with the Web         pants’ selective information querying and their post-task opinion
+Search condition, as the generated search results are conditioned on     polarization as the information-seeking outcome.
+the same set of articles that would be retrieved in the Web Search
+condition if the same query were issued. We used GPT-4 with a 32k        3.3.1 Information Qerying. Refecting participants’ information-
+context window (gpt-4-32k-0613) as the backbone model.                   seeking tendency, we are interested in whether and how much they
+                                                                         exhibited biases toward seeking attitude-confrmatory information.
+3.2.3 Conversational Search with References (ConvSearchRef). This            Confrmatory Query is measured by the percentage (over the
+condition is similar to the above system with one diference—adding       total number of queries) diference between a participant’s queries
+in-line source references in the generated response (Fig. 2c). This      that are consistent and inconsistent with their existing attitude, as
+system provides an experience similar to popular conversational          refected in the pre-task survey. For example, suppose the partici-
+search engines, such as Microsoft Bing Chat 9 , perplexity.ai 10 , and   pant supports that Sanctuary Cities should receive federal funding,
+YouChat 11 . The system uses the same implementation as the system       if they search “What are the benefts of giving federal funding to
+for ConvSearch. The prompts are structured in a way that ensures         sanctuary cities?”, it is an attitude-consistent query. If they issued
+                                                                         the same number of attitude-consistent and inconsistent queries,
+8 www.pinecone.io
+9 www.bing.com                                                           their confrmatory query would be 0%; if they issued three attitude-
+10 www.perplexity.ai                                                     consistent queries and two inconsistent queries, this measurement
+11 you.com                                                               would be 20%. We hand-coded all participants’ 391 queries into four
+CHI ’24, May 11–16, 2024, Honolulu, HI, USA                                                                                                                  Sharma et al.
+
+
+                                                                                                       • Confrmatory Arguments is measured by the percentage
+                           START
+                                                                                  Opposing
+                                                                                                         diference of sentences in the fnal essay that are consis-
+                                                                                                         tent and inconsistent with the participant’s existing attitude
+                                                                                   Neutral
+                                                                                                         in the pre-task survey. We coded all participants’ 794 sen-
+                                                                                   Support               tences into Consonant, Dissonant, and Neutral, following the
+                                                                                                         same coding procedure for Confrmatory Query as described
+                                                                                                         above. The Cohen’s Kappa between the two independent
+  User assigned a Topic:
+                                   User assigned a bias:                                                 coders with an initial random sample of 20% data is 0.95.
+                                     Support, Neutral,
+   Universal Healthcare
+                                         Opposing                                                      • Confrmatory Agreement is measured by a participant’s
+                                                                                                         agreement rating given to the consonant article minus that
+                                                                                                         of the dissonant article shown in the post-task survey. We
+                                                                                                         used a 5-point Likert scale from Strongly Disagree (1) to
+    User Asks Question                                     Inquiry Question
+   Can you tell me about              Inquiry Model        What is Universal
+                                                                               Retrieval through
+                                                                               semantic search
+                                                                                                         Strongly Agree (5) on “I agree with the article”.
+            it?                                              Healthcare?
+                                                                                                       • Confrmatory Trust is calculated by a participant’s rating
+                                                                                                         of trust in the consonant article minus that of the dissonant
+                                                                                                         article. We used a 5-point Likert scale from Strongly Disagree
+                                                                                                         (1) to Strongly Agree (5) on “I trust the article”.
+                                                                                                       • Confrmatory Extremeness is calculated by a participant’s
+                                                              Response
+                                                            modification to
+                                                                                                         rating of position extremeness of the consonant article minus
+                                              Answer                             RAG Model
+                                                            ensure neutral
+                                                               stance
+                                                                                                         that of the dissonant article. We used a 5-point Likert scale
+                                                                                                         from Strongly Disagree (1) to Strongly Agree (5) on “The po-
+                                                                                                         sition refected in the article is extreme”. Note that a negative
+Figure 3: System Architecture of the Conversational Search                                               value of confrmatory extremeness indicates a more favor-
+system, implemented with the Retrieval Augmented Genera-                                                 able attitude towards consonant information (less extreme),
+tion approach. When the user issues a query, the system will                                             and a lower negative value refects higher polarization.
+frst retrieve related documents from a curated document
+database on the given topic. The retrieved documents will be
+fed into an LLM as part of the context, along with the user’s
+conversation history, to produce the answer. The system in                                         3.3.3 Other Variables. We measured the following variables for
+our study is powered by gpt-4-32k-0613.                                                            manipulation checks or as control variables in the analysis.
+                                                                                                       Perceived Bias of the Search System. Since we aimed to provide
+                                                                                                   a neutral search experience, we measured participants’ perceived
+categories: consistent, inconsistent, neutral, and non-query. Two                                  system bias as a manipulation check. Participants were asked to rate
+researchers, blind to the condition, frst independently coded 20%                                  on two statements, “I found the search system is biased against my
+of randomly sampled data, with a Cohen’s Kappa of 0.91. Given the                                  own attitude on this topic.” and “I found the search system is biased
+high inter-rater agreement, the two coders resolved the diference,                                 towards my own attitude on this topic.”, on 5-point Likert Scales
+and one coder continued to code the rest of the data.                                              form “Strongly Disagree” to “Strongly Agree”. The inverse score on
+                                                                                                   the second statement was averaged with the frst statement as a
+3.3.2 Opinion Polarization. We are interested in whether biases in                                 single score for perceived system bias.
+information seeking, if any, led to participants’ opinion polarization—                                Familiarity Change as Search Efectiveness. We measured partici-
+moving further in the direction of their pre-existing attitude. We                                 pants’ self-reported change of familiarity with the assigned topic as
+consider three sets of measurements: self-reported attitude change,                                a manipulation check on the efectiveness of the search session. It
+confrmatory arguments in their fnal essay, and their confrmatory                                   is calculated by the diference between the participant’s topic famil-
+perception of the two articles shown in the post-task survey (i.e.,                                iarity ratings in the post- and pre-task survey. We used a 5-point
+favoring the consonant article over the dissonant one). We are inter-                              Likert Scale from “Very Unfamilar” (1) to “Very Familiar” (5).
+ested in confrmatory perception because opinion polarization can                                       Prior experience with Conversational AI: People’s prior experience
+be manifested as more assimilation with similar views and more                                     with and attitude towards technology may afect their interaction
+aversion against diverging views, which can further skew future                                    experience [42]. We adapted questions from the Technology Accep-
+information seeking.                                                                               tance Model [61] for conversational AI, which measures people’s
+      • Confrmatory Attitude Change is the degree of attitude                                      attitudes towards a system from the perspective of Usefulness (5
+        change towards the direction of the pre-existing attitude.                                 items) and Satisfaction (4 items). We added questions to measure
+        That is, if the participant’s attitude was on the supporting                               people’s pre-existing trust toward conversational AIs and their in-
+        side in the pre-task survey (rating 4-6, based on a 6-point                                teraction frequency with conversational AIs. This set of measures
+        Likert scale with no neutral point), we calculated the score                               was used as control variables in our analysis.
+        by the rating diference in the post- and the pre-task survey                                   Basic Demographics: We collected basic demographic informa-
+        (post- minus pre-task survey); if their pre-task attitude was                              tion, e.g., age, gender, education, and annual household income, as
+        on the opposing side (rating 1-3), we reversed the calculation.                            control variables.
+Generative Echo Chamber?                                                                                   CHI ’24, May 11–16, 2024, Honolulu, HI, USA
+
+
+3.4     Hypotheses                                                           All analysis results and descriptive statistics are listed in Tab. 1.
+Based on these measurements, we make the following hypotheses             In the last column, we list only pairwise comparisons that are
+regarding participants’ information querying behaviors and opin-          signifcant in the post-hoc analysis. When discussing the results
+ion polarization outcome after the search session. While we take          below, we will focus on highlighting the patterns and encourage
+the position to test whether conversational search leads to higher        readers to refer to Tab. 1 for more details. Throughout the paper,
+confrmatory querying and opinion polarization, we note that there         following convention in psychology studies [50], we consider � <
+are possible mechanisms for both directions. On the one hand,             0.05 to be statistically signifcant, while a p-value between 0.05 and
+prior work [60] comparing conversational queries (though with a           0.1 to be marginal signifcance that indicates a trend that is close to
+spoken instead of chat-based system) to web search queries found          statistical signifcance. We will interpret a marginal signifcance as
+that people tend to use more verbose and expressive language with         providing only partial support for the corresponding hypothesis.
+more subjectivity. It is hence possible that people may express more
+pre-existing biases in their search queries with a conversational         3.6     Participants Overview
+search system which can lead to higher selective exposure. On the         We recruited participants on Prolifc 12 . The inclusion criteria were
+other hand, a neutral LLM provides a synthesized output based             fuent English-speaking participants from the United States. All
+on multiple retrieved articles and does not require participants to       participants were compensated at the rate of $15 per hour. Of the
+select which article to read, possibly increasing the overall diversity   124 participants who started the study, 115 completed the study
+of viewpoints that participants are exposed to. Below, we refer to        and passed our attention check (WebSearch: N = 40; ConvSearch:
+both the versions with or without references as “Conversational           N = 38; ConvSearchRef: N = 37). Our analysis is based on those 115
+Search” in the hypotheses and we are interested in comparing them         valid responses. Among those participants, 48 identifed as women,
+to the baseline Web Search condition. Our analysis will also explore      61 identifed as men, and 5 identifed as non-binary or third gender.
+whether there is a diference between the two versions.                    The median education level was a Bachelor’s degree. The median
+                                                                          household income was between $50,000 - $ 100,000. The median
+      • [H1]: Compared to Web Search, Conversational Search will          age of participants was between 25 and 34 years old.
+        lead to a higher percentage of Confrmatory Queries.
+      • [H2]: Compared to Web Search, Conversational Search will          4 STUDY 1 RESULTS
+        introduce a higher level of Confrmatory Attitude Change.
+      • [H3]: Compared to Web Search, Conversational Search will          4.1 Manipulation Checks
+        introduce a higher percentage of Confrmatory Arguments            We embedded two manipulation checks in this study. The frst
+        in people’s fnal essays after the search session.                 manipulation check validates that the neutral stance design of the
+      • [H4]: Compared to Web Search, participants in the Con-            three experiment apparatus is efective. Participants’ post-survey
+        versational Search conditions will exhibit a higher level of      reported that they perceived the search system as non-biased (Mean
+        Confrmatory Agreement on articles on the same topic.              = 3.04, SD = 0.49). There was no signifcant diference in perceived
+      • [H5]: Compared to Web Search, participants in the Con-            system bias across conditions (WebSearch: M = 3.02, SD = 0.27;
+        versational Search conditions will exhibit a higher level of      ConvSearch: M = 3.15, SD = 0.55; ConvSearchRef: M = 2.94, SD =
+        Confrmatory Trust on articles on the same topic.                  0.57; F(2, 100) = 1.91, p = 0.15).
+      • [H6]: Compared to Web Search, participants in the Con-               The second manipulation check validates the efectiveness of the
+        versational Search conditions will exhibit a lower level of       search session, as it helped participants gain familiarity with the
+        Confrmatory Extremeness on articles on the same topic.            topics (Pre-search: Mean = 3.34, SD = 1.10; Post-search: Mean = 3.86,
+                                                                          SD = 0.87; t(216.31) = 4.033, p < 0.001 ***). This post-pre familiarity
+                                                                          diference did not vary across conditions (WebSearch: M = 0.75, SD
+3.5     Analysis Plan                                                     = 0.80; ConvSearch: M = 0.50, SD = 1.06; ConvSearchRef: M = 0.32,
+Since the goal of this study is to compare the outcomes of three          SD = 1.07; F(2, 100) = 1.95, p = 0.15).
+information search systems, WebSearch, ConvSearch, and Con-                  Moreover, participants were engaged with the search systems and
+vSearchRef, we chose to run the analysis of covariance (ANCOVA).          the study task. On average, participants spent 21.18 mins (SD =
+ANCOVA is a general linear model blending analysis of variance            13.25) completing the study in WebSearch condition, 19.22 mins
+and regression, which helps us examine the efect of the search            (SD = 10.79) in the ConvSearch condition, and 20.03 mins (SD =
+method. In each ANCOVA analysis, the independent variable was             10.01) in the ConvSearchRef condition. Despite study instruction
+the search method, and the dependent variable was a measure in a          only requiring three queries, They issued a mean of 3.40 queries
+hypothesis. Since research suggests that demographics and their           per search session (SD = 0.79), with participants in the Conversa-
+prior experience with the technology infuence people’s behavior           tional Search conditions issuing more queries than those in the Web
+with new technology, all analyses were controlled for participants’       Search condition (Web Search: M = 3.15, SD = 0.43; ConvSearch: M
+age, gender, education level, income, prior attitude towards con-         = 3.53, SD = 0.83; ConvSearchRef: M = 3.54, SD = 0.98). An ANCOVA
+versational AI, and usage frequency. We additionally control for          analysis indicated a marginal diference (F(2, 100) = 2.96, p = 0.06 .),
+the assigned topic and the participant’s prior attitude to the topic.     and the Post-Hoc analysis confrmed that the diferences between
+When ANCOVA showed signifcance, we used the Tukey method                  WebSearch and ConvSearch ( p = 0.09 ., Cohen’s D = 0.52), and
+(adjusting p-value for multiple comparisons) to perform Post-Hoc
+analysis to make pair-wise comparisons between conditions.                12 www.prolifc.co
+CHI ’24, May 11–16, 2024, Honolulu, HI, USA                                                                                        Sharma et al.
+
+
+between WebSearch and ConvSearchRef (p = 0.08 ., Cohen’s D =              = 0.63; ConvSearchRef-WebSearch: p = 0.005 **, Cohen’s D = 0.78),
+0.57), were marginally signifcant.                                        see Tab. 1. The results support H4.
+                                                                             For perceived trust, participants trusted the consonant article (M
+4.2     Conversational Search Induced Higher Level                        = 3.83, SD = 0.74) more than the dissonant article (M = 3.15, SD =
+                                                                          0.80; p < 0.001 ***). The ANCOVA analysis showed that participants
+        of Confrmatory Information Querying (H1                           in the ConvSearch (M = 0.79) and ConvSearchRef (M = 0.89) con-
+        Confrmed)                                                         ditions exhibited a higher level of Confrmatory Trust than those
+Participants generally issued more consonant queries (M = 20.16 %,        using the conventional web search interface (M = 0.35; p = 0.03 *),
+SD = 22.10 %) with their prior attitude than dissonant ones (M = 5.16     with the Post-Hoc analysis showing signifcance in the diference
+%, SD = 12.60 %). Participants who interacted with Conversational         between ConvSearchRef and WebSearch (p = 0.04 *, Cohen’s D =
+Search systems, both ConvSearch and ConvSearchRef, had more               0.65), see Tab. 1. The results partially support H5.
+confrmatory querying (WebSearch: M = 1.46 %, ConvSearch: M =                 For extremeness, participants perceived the dissonant article as
+15.00 %, ConvSearchRef: M = 16.15 %; p = 0.01 *). For more details, see   more extreme (M = 3.48, SD = 1.08) than the consonant article (M
+Tab. 1. The Post-Hoc analysis showed that the diferences between          = 2.37, SD = 1.01; p < 0.001 ***). The ANCOVA analysis was not
+WebSearch and ConvSearch (p = 0.03 *, Cohen’s D = 0.76) and               signifcant but there was a trend that participants in the ConvSearch
+between WebSearch and ConvSearchRef (p = 0.02 *, Cohen’s D =              (M = -1.11) and ConvSearchRef (M = -1.08) conditions exhibited a
+0.60) were statistically signifcant; both with medium to large efect      lower level of Confrmatory Extremeness than those in the Web
+sizes. These results support H1: compared to conventional Web             Search condition (WebSearch: M = - 0.53; p = 0.21). The diference
+Search, Conversational Search led to a higher tendency for selective      was not statistically signifcant, which does not support H6.
+exposure in information-querying behavior. Showing references in
+the conversational search had no efect.                                   4.4    STUDY 1: Result Summary
+                                                                          In summary, Study 1 results showed that users of LLM-powered
+4.3     Conversational Search Induced A Higher                            conversational search systems (ConvSearch and ConvSearchRef)
+        Degree of Opinion Polarization (H2-6                              exhibit higher levels of confrmatory information querying (H1)
+                                                                          compared to users of conventional web search systems (WebSearch).
+        Partially Confrmed)
+                                                                          Even with neutrally designed systems, we found evidence that LLM-
+4.3.1 Confirmatory Atitude Change. We measured participants’              powered conversational search systems led to higher degrees of
+attitudes on the assigned topic before and after the information-         opinion polarization regarding post-search perception of consonant
+seeking task. We did not observe a signifcant change in participants’     versus dissonant information (H4 and partially H5), although we
+self-reported attitude after the search session (WebSearch: M = 0.03;     did not observe signifcant efects in self-reported confrmatory
+ConvSearch: M = 0.08; ConvSearchRef: M = -0.08). The ANCOVA               attitude change after the short search sessions nor diferences across
+analysis did not show a signifcant diference across conditions (p         conditions in the confrmatory stances of participants’ essays.
+= 0.60). There is no evidence supporting H2.
+                                                                          5     STUDY 2 METHOD: EFFECTS OF
+4.3.2 Confirmatory Arguments. We analyzed participants’ essays
+after the information-seeking tasks. We found that although partic-
+                                                                                OPINIONATED LLM-POWERED
+ipants provided confrmatory arguments in their essays in support                CONVERSATIONAL SEARCH SYSTEMS
+of their pre-existing attitudes (M = 35.00 %, SD = 45.08 %), there        Study 1 shows that, compared to conventional web search, con-
+was no signifcant diference across conditions (WebSearch: M =             versational search, even when designed to be neutral, could lead
+35.39 %, ConvSearch: M = 34.77 %, ConvSearchRef: M = 34.83 %; p =         to a higher level of confrmatory search behaviors and opinion
+0.998). There was no evidence supporting H3. This could mean that         polarization. Study 2 investigates whether a conversational search
+despite participants’ more confrmatory querying with conversa-            system powered by an LLM with an opinion bias can change these
+tional search, the neutral systems still provided relatively balanced     tendencies. Specifcally, we ask whether a consonant LLM with
+information that did not signifcantly skew their essays.                  an opinion bias that reinforces one’s existing attitude exacerbates
+                                                                          selective exposure; and whether a dissonant LLM with an opinion
+4.3.3 Confirmatory Perception of Given Articles. We consider these        bias that challenges one’s attitude mitigates selective exposure.
+three types of perceptions participants had of a consonant versus            We conducted another online experiment in Study 2. Like Study
+a dissonant article given after the search session as measures of         1, participants were asked to perform an information-seeking task
+opinion polarization.                                                     on a given controversial topic. We ran a 2x3 fully factorial between-
+   For perceived agreement, participants agreed with the consonant        subjects design where we compared two interfaces, ConvSearch and
+article (M = 3.76, SD = 0.88) and disagreed with the dissonant article    ConvSearchRef, and three opinion bias settings: Consonant, Neu-
+(M = 2.29, SD = 1.01; p < 0.001 ***). The ANCOVA analysis showed          tral, and Dissonant. As we did not observe signifcant diferences
+that participants in the ConvSearch (M = 1.79) and ConvSearchRef          between ConvSearch and ConvSearchRef as in Study 1, we will
+(M = 1.89) conditions exhibited signifcantly higher levels of Con-        focus on comparing the efects of the three diferent LLM opinion
+frmatory Agreement than those in the Web Search condition (M =            biases (i.e., aggregating the results with the two interfaces).
+0.80; p = 0.002 **), with both pairwise comparisons signifcant in the        We adopted a largely similar study procedure, the same set of
+Post-Hoc analysis (ConvSearch-WebSearch: p = 0.01 **, Cohen’s D           three topics, conversational search system UI, and measurements as
+Generative Echo Chamber?                                                                                      CHI ’24, May 11–16, 2024, Honolulu, HI, USA
+
+
+
+               Hypothesis                    WebSearch           ConvSearch        ConvSearchRef                     Post-Hoc Analysis
+      H1: Confrmatory Query                 ���� = 1.46%       ���� = 15.00%       ���� = 16.15%                ConvSearch > WebSearch *
+      � (2, 100) = 4.71, � = 0.01*          �� = 14.60%         �� = 20.62%         �� = 31.58%                ConvSearchRef > WebSearch *
+        H2: Attitude Change                 ���� = 0.03          ���� = 0.08        ���� = −0.08
+                                                                                                                                  —
+       � (2, 100) = 0.53, � = 0.60           �� = 0.80            �� = 0.67          �� = 0.64
+    H3: Confrmatory Argument               ���� = 35.39%       ���� = 34.77%        ���� = 34.83%
+                                                                                                                                  —
+     � (2, 100) = 0.002, � = 0.998          �� = 37.80%         �� = 47.62%          �� = 50.57%
+   H4: Confrmatory Agreement                ���� = 0.80          ���� = 1.79         ���� = 1.89               ConvSearch > WebSearch **
+    � (2, 100) = 6.61, � = 0.002*            �� = 1.42            �� = 1.71           �� = 1.37               ConvSearchRef > WebSearch **
+       H5: Confrmatory Trust                ���� = 0.35          ���� = 0.79         ���� = 0.89
+                                                                                                             ConvSearchRef > WebSearch ***
+       � (2, 100) = 3.76, � = 0.03*          �� = 0.89            �� = 1.14           �� = 1.78
+  H6: Confrmatory Extremeness              ���� = −0.53         ���� = −1.11        ���� = −1.08
+                                                                                                                                  —
+      � (2, 100) = 1.57, � = 0.21           �� = 1.51            �� = 1.70           �� = 1.66
+
+Table 1: Summary of quantitative results for Study 1. The left column shows �-values obtained via ANCOVA tests for each
+hypothesis. The right column shows pairs of conditions where the efect is statistically signifcant or marginally signifcant.
+Signifcance is marked as � < 0.1 (†), � < 0.05 (*), � < 0.01 (**), or � < 0.001 (***).
+
+
+
+in Study 1. Below, we will only discuss the additional step in Study    from a database with a balanced mixture of attitudes on the given
+2 method: how we confgured the opinionated LLMs to power the            topic (the same set of documents as used in Study 1), the biased
+search systems, and the hypotheses. Study 2 was also approved by        system retrieves from documents of a biased database with only
+the Institutional Review Board of the author’s institution.             documents with the given bias and neutral documents. Note that
+                                                                        the neutral documents often express balanced views so participants
+5.1    Study Procedure                                                  were still exposed to some diferent views even with a biased system.
+                                                                           For the response generation, we manually designed prompts to
+As illustrated in Fig. 4, the study procedure is largely similar to
+                                                                        generate biased responses for the experiment. In pilot studies, we
+Study 1 (see Sec. 3.1) with one exception: participants were ran-
+                                                                        observed that an extremely strong system bias manipulation under-
+domly assigned to one of the six conditions as a combination of
+                                                                        mined the response quality generation, e.g., instead of answering
+two conversational search system interfaces (ConvSearch or Con-
+                                                                        people’s queries, the system only expressed biased opinions on the
+vSearchRef) and three manipulated opinion bias (Consonant, Neu-
+                                                                        topic, and the user quickly disengaged. We adjusted the prompts to
+ral, Dissonant). The biased LLM-powered conversational search
+                                                                        balance between system bias and usability 13
+system was assigned based on a participant’s pre-existing attitude
+                                                                           With the two biased (supporting/opposing) and the neutral con-
+provided in the pre-task survey. That is, if a participant indicated
+                                                                        fgurations for each topic, we created three experimental conditions
+they had an opposing attitude on the assigned topic, and they were
+                                                                        based on participants’ pre-existing attitudes in the pre-task survey:
+assigned to be in the Consonant condition, then the system au-
+tomatically selected the confguration with an opposing opinion                 • Consonant: The conversational search system is biased
+bias on the topic. Similar to Study 1, participants were debriefed on            towards the participant’s attitude, providing information
+the purpose of the study and their assigned conditions at the end,               that supports their pre-existing views.
+and provided with sources to a collection of articles that ofered              • Neutral: The conversational search system maintains a neu-
+balanced and comprehensive information on the topic.                             tral stance, providing a balanced mixture of information from
+                                                                                 diferent viewpoints.
+                                                                               • Dissonant: The conversational search system is biased against
+5.2    Confguring Opinionated LLM-Powered
+                                                                                 the participant’s attitude, providing information that chal-
+       Conversational Search Systems                                             lenges their pre-existing views.
+For each topic, we implemented two versions of biased conversa-
+tional search systems in addition to the neutral one used in Study      5.3      Hypotheses
+1—one with a supporting bias and one with opposing bias towards         Our hypotheses are based on the same set of measurements as col-
+the given controversial topic.                                          lected in Study 1 (see Sec. 3.3). An additional 265 search queries and
+   As shown in Fig. 3, we manipulated these opinion biases in the       1000 essay sentences were coded with the same coding procedure in
+conversational search system with two modules in the RAG system
+architecture—information retrieval and response generation. For         13 See the Supplementary Material for system architecture. As discussed in Sec. 7.5,
+information retrieval, while the neutral system retrieves documents     prompts used in Study 2 will only be made available upon request to prevent misuse.
+CHI ’24, May 11–16, 2024, Honolulu, HI, USA                                                                                                                         Sharma et al.
+
+
+                PRE TASK SURVEY                                       INFORMATION SEEKING TASK                                          POST TASK SURVEY
+
+
+
+                 Prior experience with
+                   conversational AI                                                                                        consonant                         dissonant
+                                                                                                         Consonant
+                                                                                                                              article                           article
+
+
+              Initial thought, familiarity and
+                                                             ConvSearch                                                                        Random
+
+           attitude about the assigned topic                                                                                                   Order
+
+
+
+
+                                                 Randomly                           Randomly
+                                                                                                          Neutral
+                                                 Assigned                           Assigned
+
+                      Randomly
+                                                                                                                                  agreement, trust and position
+                      Assigned
+                                                                                                                                        extremeness
+                                                            ConvSearchRef
+
+                                                                                                                                  essay, familiarity and attitude
+                                                                                                         Dissonant                    after search session
+            Topics:
+
+              1. Universal Health Care
+              2. Student Loan Debt
+                                                                                                                                        Demographics Survey
+              3. Sanctuary Cities
+
+
+
+
+Figure 4: Overall study procedure for Study 2. In the pre-task survey, participants answered questions regarding their prior
+experience with conversational AI and their prior attitude and familiarity with a randomly assigned topic. Then, participants
+performed an information-seeking task to gather information on the topic with a randomly assigned information search system
+with a randomly assigned search system bias. After the search session, participants wrote an essay about the assigned topic. In
+the post-task survey, the participants again rated their attitude and familiarity with the topic, indicated their perception of two
+new articles on the topic (one consonant and one dissonant), and answered a demographic survey.
+
+
+Study 1. In Study 2, we are interested in the possible diferent efects                           • [H2.b]: When searching with a Dissonant conversational
+of consonant and dissonant conversational search systems. More                                     search system, compared to a Neutral system, people will
+specifcally, we hypothesized that a consonant system may rein-                                     exhibit a lower level of Confrmatory Attitude Change.
+force people’s existing views and increase selective exposure, while                             • [H3.b]: When searching with a Dissonant conversational
+a dissonant system may nudge people to seek diverse views and                                      search system, compared to a Neutral system, people will
+reduce opinion polarization. We made the following six hypotheses                                  write a lower percentage of Confrmatory Argument in
+for the Consonant and Dissonant LLM-powered conversational                                         their essays.
+search system, respectively.                                                                     • [H4.b]: When searching with a Dissonant conversational
+                                                                                                   search system, compared to a Neutral system, people will
+5.3.1     Hypotheses about Consonant Search System.                                                display a lower level of Confrmatory Agreement.
+        • [H1.a]: When searching with a Consonant conversational                                 • [H5.b]: When searching with a Dissonant conversational
+          search system, compared to a Neutral system, people will                                 search system, compared to a Neutral system, people will
+          issue a higher percentage of Confrmatory Queries.                                        display a lower level of Confrmatory Trust.
+        • [H2.a]: When searching with a Consonant conversational                                 • [H6.b]: When searching with a Dissonant conversational
+          search system, compared to a Neutral system, people will                                 search system, compared to a Neutral system, people will
+          exhibit a higher level of Confrmatory Attitude Change.                                   display a higher level of Confrmatory Extremeness.
+        • [H3.a]: When searching with a Consonant conversational
+          search system, compared to a Neutral system, people will
+                                                                                        5.4        Analysis Plan
+          write a higher percentage of Confrmatory Argument in
+          their essays.                                                                 We again ran the analysis of covariance (ANCOVA) with Tukey’s
+        • [H4.a]: When searching with a Consonant conversational                        method (p-values adjusted for multiple comparisons) to conduct
+          search system, compared to a Neutral system, people will                      post-hoc analysis when ANCOVA showed signifcance. In each
+          display a higher level of Confrmatory Agreement.                              ANCOVA analysis, the independent variable was the search sys-
+        • [H5.a]: When searching with a Consonant conversational                        tem bias (Consonant, Neutral, and Dissonant), and the dependent
+          search system, compared to a Neutral system, people will                      variable was a measure in a hypothesis. Control variables include
+          display a higher level of Confrmatory Trust.                                  search interface, participants’ demographics, their prior experience
+        • [H6.a]: When searching with a Consonant conversational                        with conversational AI, usage frequency, assigned topic, and par-
+          search system, compared to a Neutral system, people will                      ticipant’s pre-existing attitudes to the topic. All analysis results
+          display a lower level of Confrmatory Extremeness.                             and descriptive statistics are listed in Tab. 3. When discussing the
+                                                                                        results below, we will focus on highlighting the patterns.
+5.3.2     Hypotheses about Dissonant Search System.
+        • [H1.b]: When searching with a Dissonant conversational                        5.5        Participant Overview
+          search system, compared to a Neutral system, people will                      In addition to the participants in ConvSearch and ConvSearchRef
+          issue a lower percentage of Confrmatory Queries.                              condition in Study 1 (Neutral condition), we recruited an additional
+Generative Echo Chamber?                                                                                                        CHI ’24, May 11–16, 2024, Honolulu, HI, USA
+
+
+
+
+                                   START
+                                                                                                                     Bias?
+
+                                                                                               SUPPORT
+                                                                                                                                             AGAINST
+                                         Assigned bias:
+                 Assigned topic:
+               Universal Healthcare
+                                       Supporting, Neutral,                Opposing                                NEUTRAL
+                                           Opposing
+
+
+                                                                            Neutral            Support                                        Against
+                 User Question                  Inquiry                                                              Neutral
+                 Can you tell me
+                   about it?                     Model                     Supporting
+                                                                                                Neutral                                       Neutral
+                                                                                                                     Support
+
+
+                                           Inquiry Question                                                         Opposing
+                                           What is Universal
+                                             Healthcare?
+
+
+
+
+                                                                       Retrieval through
+                                                                                                                   RAG Model
+                                                                       semantic search
+
+
+
+
+                                                                                           Answer                Bias Calibration
+
+
+
+
+Figure 5: System Architecture of the Opinionated LLM-powered Conversational Search system. When the user issues a query, the
+system will frst retrieve related documents from a curated document database on the given topic. By adjusting the bias mixture
+of the document pool, along with a set of handcrafted prompts, the system will produce a response that is either consonant
+with the user’s attitude, dissonant with the user’s attitude, or neutral. The backbone model of our system is gpt-4-32k-0613.
+
+
+148 participants to interact with opinionated conversational search                         6 STUDY 2 RESULTS
+systems. Similar to Study 1, we recruited fuent English speakers
+                                                                                            6.1 Manipulation Checks
+from the United States on Prolifc. The compensation rate was $15
+per hour. Participants in Study 1 were not allowed to participate                           We performed manipulation checks on the perceived bias (0: Disso-
+in Study 2. As a result, Study 2 included 223 participants (Tab. 2).                        nant, 3: Neutral, 5: Consonant) of the opinionated conversational
+Among them, 112 identifed as women, 104 identifed as men, and 7                             search systems, participants in the Consonant condition believed
+identifed as non-binary or third gender. Similar to participants in                         the system was biased toward them (M = 3.28, SD = 0.68), partici-
+Study 1, the median education level was a Bachelor’s degree. The                            pants in the Neutral condition did not perceive any bias from the
+median household income was between $50,000 - $ 100,000. The                                search system (M = 3.05, SD = 0.57), and participants in the Disso-
+median age of participants was between 25 and 34 years old.                                 nant conditions perceived the search system is against their attitude
+                                                                                            (M = 2.64, SD = 0.86). An ANCOVA analysis showed there was a
+                                                                                            signifcant diference across conditions (F(2, 210) = 15.53, p < 0.001
+                                                                                            *). Post-hoc analysis showed the diferences between Consonant
+                           Consonant              Neutral      Dissonant    Total           and Dissonant (p < 0.001 ***) and between Neutral and Dissonant (p
+    ConvSearch             37                     38           38           113             = 0.001 **) were signifcant. Interestingly, the perceived diference
+    ConvSearchRef          36                     37           37           110
+                                                                                            between Consonant and Neutral was not signifcant (p = 0.13).
+    Total                  73                     75           75           223
+                                                                                                The second manipulation check looks at the efectiveness of
+                                                                                            the search session. There was a signifcant self-report familiarity
+                                                                                            change (Pre-Search: Mean = 3.31, SD = 1.13; Post-Search: Mean
+Table 2: Participants distribution in Study 2. 73 participants                              = 3.85, SD = 0.87) and no signifcant diference across conditions
+interacted with a conversational search system aligned with                                 (Consonant: M = 0.63, SD = 1.02; Neutral: M = 0.41, SD = 0.93; Dis-
+their pre-existing attitude on the topic, 75 participants inter-                            sonant: M = 0.57, SD = 0.92; F(2, 200) = 1.06, p = 0.35). These results
+acted with a neutral system, and 75 participants interacted                                 indicated that in all conditions, participants reported searching
+with a system biased against their pre-existing attitude.                                   with the system made them more familiar with the given topic.
+CHI ’24, May 11–16, 2024, Honolulu, HI, USA                                                                                      Sharma et al.
+
+
+   On average, our participants spent 20.63 mins (SD = 10.29) com-      H3.b, suggesting that interacting with the Consonant system led
+pleting the study. Although participants in the Consonant (M =          to higher opinion polarization; meanwhile, the Dissonant system
+21.15 mins, SD = 10.60) or Dissonant (M = 21.15 mins, SD = 9.98)        has the potential to reduce opinion polarization, at least regarding
+spent a longer time than the Neutral condition (M = 19.61 mins, SD      the information people produce after the search session.
+= 10.35), the diference was not signifcant. Participants, on average,
+issued 3.69 queries per search session (SD = 1.10). An ANCOVA           6.3.3 Confirmatory Perception of Given Articles. Similar to Study
+analysis did not suggest diferences in terms of search conditions       1, we asked participants to rate three types of perceptions of a
+(Consonant: M = 3.65, SD = 0.96; Neutral: M = 3.53, SD = 0.91;          consonant article and a dissonant article after the search session to
+Dissonant: M = 3.88, SD = 1.35; F(2, 210) = 1.90, p = 0.15).            measure opinion polarization: agreement, trust, and extremeness.
+                                                                           For agreement, participants agreed with the consonant article
+6.2     Consonant Conversational Search Induced                         (M = 4.07, SD = 0.80) and disagreed with the dissonant article (M =
+        Higher Level of Confrmatory Information                         2.15, SD = 1.12). The ANCOVA analysis showed that participants in
+        Seeking (H1.a Supported; H1.b Not                               the Consonant condition (M = 2.44) displayed a signifcantly higher
+        Supported)                                                      level of Confrmatory Agreement than those in the Dissonant con-
+                                                                        dition (M = 1.51) and Neutral condition (M = 1.84; p < 0.001 ***).
+We found that participants in the Consonant condition issued more
+                                                                        Post-Hoc analysis found the diferences between Consonant and
+confrmatory queries (Consonant: M = 42.92 %) than their counter-
+                                                                        Dissonant (p < 0.001 ***, Cohen’s D = 0.61) and between Conso-
+parts did in Neutral and Dissonant conditions (Neutral: M = 15.57
+                                                                        nant and Neutral (p = 0.04 *, Cohen’s D = 0.42) were statistically
+%; Dissonant: M = 12.33 %; p < 0.001 ***), details see Tab. 3. The
+                                                                        signifcant. The diference between Dissonant and Neutral was not
+pair-wise comparison showed that the diference was signifcant
+                                                                        signifcant (p = 0.38). The results support H4.a but not H4.b.
+between Consonant and Dissonant (p < 0.001 ***; Cohen’s D = 1.19)
+                                                                           For trust, participants trusted the consonant (M = 4.01, SD =
+and between Consonant and Neutral (p < 0.001 ***; Cohen’s D =
+                                                                        0.74) more than the dissonant article (M = 3.00, SD = 0.81). The
+1.01); both indicated large efect sizes.
+                                                                        Consonant search system led to a higher level of Confrmatory Trust
+   This result supports H1.a that a Consonant conversational search
+                                                                        (Consonant: M = 1.24) than the other two systems (Neutral: M =
+system leads to more confrmatory information-seeking behaviors
+                                                                        0.84; Dissonant: M = 0.93), with the ANCOVA test showing marginal
+compared to a Neutral system, suggesting that people’s confrma-
+                                                                        signifcance (p = 0.057). The diferences between Consonant and
+tory information-seeking behaviors can be further biased when
+                                                                        Neutral (p = 0.094, Cohen’s D = 0.41) and between Consonant and
+having conversational interactions that reinforce their existing
+                                                                        Dissonant (p = 0.05, Cohen’s D = 0.27) were marginally signifcant.
+views. However, we found no evidence supporting H1.b, which in-
+                                                                        The diference between Dissonant and Neutral was not signifcant
+dicates a limited efect of using Dissonant conversational search to
+                                                                        (p = 0.96). The results partially support H5.a but not for H5.b.
+nudge people towards more diverse information-seeking behaviors.
+                                                                           For extremeness, participants perceived the dissonant article
+                                                                        as more extreme (M = 3.58, SD = 1.05) than the consonant article
+6.3     Consonant Conversational Search Induced                         (M = 2.33, SD = 1.02). Participants who searched with the Conso-
+        Higher-level of Opinion Polarization                            nant system exhibited a lower level of Confrmatory Extremeness
+        (H2.a-6.a Mostly Supported; H2.b-6b Mostly                      (Consonant: M = -1.63) than participants in the other two condi-
+        Not Supported)                                                  tions (Neutral: M = -1.09; Dissonant: M = -1.03; p = 0.04 *). In the
+6.3.1 Participant’s Confirmatory Atitude Change. We observed dif-       Post-Hoc analysis, the results showed that the diferences between
+ferences in participants’ self-reported confrmatory attitude change     Consonant and Dissonant conditions (p = 0.05, Cohen’s D = -0.40)
+after the search session (Consonant: M = 0.27; Dissonant: M = 0.08;     and between Consonant and Neutral (p = 0.09, Cohen’s D = -0.34)
+Neutral: M = 0.00). The ANCOVA analysis showed signifcance (p           were marginally signifcant, but not between Neutral and Dissonant
+= 0.04 *). Post-Hoc analysis showed that the diference between          conditions (p = 0.96). H6.a is partially supported but H6.b is not.
+the Consonant and Neutral conditions is marginally signifcant
+(p = 0.053, Cohen’s D = 0.39). The result partially supports H2.a       6.4    STUDY 2: Result Summary
+showing that searching with a Consonant system could lead to
+                                                                        In conclusion, Study 2 revealed that opinionated LLM-powered
+more polarized attitude change with even a short search session.
+                                                                        conversational search systems can signifcantly infuence people’s
+In contrast, there is no support for H2.b) with regard to the efect
+                                                                        information-seeking behaviors and opinions, and whether the en-
+of using a Dissonant system.
+                                                                        coded opinion bias was consonant or dissonant with people’s ex-
+6.3.2 Confirmatory Arguments. The results showed that an opin-          isting views had distinct efects. Participants interacting with a
+ionated LLM-powered conversational search system could skew             Consonant system exhibited more confrmatory queries (H1.a),
+the content people wrote in their essays. We found signifcant           and a signifcantly higher degree of opinion polarization across
+diferences in Confrmatory arguments in the fnal essays across           all measures (H2.a-H6.a). In contrast, we found that interacting
+conditions (Consonant: M = 51.69 %; Neutral: M = 34.79 %; Disso-        with a dissonant system had a rather limited efect in mitigating
+nant: M = 15.58 %; p < 0.001 ***). Post-Hoc analysis showed marginal    confrmatory information-seeking and opinion polarization. These
+diferences between Consonant and Neutral (p = 0.09, Cohen’s D           fndings highlight the potential risks associated with opinionated
+= 0.7) and between Neutral and Dissonant (H3.b: p = 0.05, Co-           LLM-powered search systems in reinforcing people’s existing be-
+hen’s D = 0.36). The results provide partial support for H3.a and       liefs and biases.
+Generative Echo Chamber?                                                                                    CHI ’24, May 11–16, 2024, Honolulu, HI, USA
+
+
+
+                Hypothesis                     Consonant                Neutral            Dissonant               Post-Hoc Analysis
+       H1: Confrmatory Query                 ���� = 42.92%        ���� = 15.57%          ���� = 12.33%          Consonant > Neutral ***
+      � (2, 210) = 31.24, � < 0.001***        �� = 29.11%          �� = 29.11%            �� = 24.60%          Consonant > Dissonant ***
+           H2: Attitude Change                 ���� = 0.27             ���� = 0.00        ���� = 0.08
+                                                                                                                  Consonant > Neutral†
+         � (2, 210) = 3.36, � = 0.04*           �� = 0.75               �� = 0.65          �� = 0.73
+                                                                                                               Consonant > Dissonant ***
+      H3: Confrmatory Argument               ���� = 51.69%        ���� = 34.79%          ���� = 15.58%
+                                                                                                                 Consonant > Neutral†
+      � (2, 210) = 10.30, � < 0.001***        �� = 43.00%          �� = 48.76%            �� = 58.18%
+                                                                                                                 Neutral > Dissonant†
+    H4: Confrmatory Agreement                  ���� = 2.44             ���� = 1.84        ���� = 1.51          Consonant > Dissonant ***
+     � (2, 210) = 7.43, � < 0.001***            �� = 1.27               �� = 1.55          �� = 1.75            Consonant > Neutral *
+        H5: Confrmatory Trust                  ���� = 1.24             ���� = 0.84        ���� = 0.93           Consonant > Dissonant†
+        � (2, 210) = 2.91, � = 0.057†           �� = 1.02               �� = 0.97          �� = 1.24             Consonant > Neutral†
+    H6: Confrmatory Extremeness               ���� = −1.63         ���� = −1.09          ���� = −1.03           Consonant < Dissonant†
+        � (2, 210) = 3.30, � = 0.04*           �� = 1.49            �� = 1.67             �� = 1.52              Consonant < Neutral†
+
+Table 3: Summary of quantitative results from Study 2. The left column shows �-values obtained via ANCOVA tests for each
+hypothesis. The right column shows pairs of conditions that are statistically signifcantly diferent or marginally signifcant.
+Signifcance is marked as � < 0.1 (†), � < 0.05 (*), � < 0.01 (**), or � < 0.001 (***).
+
+
+
+7     DISCUSSION                                                           so when the LLMs have reinforcing opinion biases. There can be
+Through two controlled experiments, we demonstrate the risks               multiple mechanisms contributing to this phenomenon. First, con-
+of LLM-powered conversational search in exacerbating people’s              sistent with prior work studying a spoken conversational search
+selective exposure bias and opinion polarization. We found that,           system [60], we observed that compared to keyword-based search,
+even with a neutral LLM-powered search system (regardless of               participants’ conversational queries were more verbose and ex-
+whether source references are provided or not), participants ex-           pressive. For example, one participant asked “College here in the
+hibited signifcantly more bias of their pre-existing views in their        USA is disgusting overpriced and greedy. Wouldn’t it be better to look
+information queries compared to when using a conventional web              at that as the issue instead of keeping our current greedy practices
+search system. This biased querying behavior led to some degree of         and debating about forgiving some?”. It is also possible that conver-
+opinion polarization regarding the post-search perception of con-          sational interactions resemble social interactions, and people are
+sonant versus dissonant information, which risks further skewing           more likely to engage in opinionated communication, especially
+people’s future information consumption. This bias towards seek-           when the other party reinforces their views (i.e., consonant LLM).
+ing consonant information was even more pronounced when using              For example, one asked “Yeah, give me that information please. Tell
+a conversational search system powered by an opinionated LLM               me about the arguments in favor of sanctuary cities.”. Linguistic and
+that reinforces participants’ pre-existing views, leading to signif-       communication accommodation [9, 21], with which people con-
+cantly more opinion polarization across all measures compared to           verge to the conversational partners’ communication behaviors,
+when using a neutral LLM-powered conversational search system.             could also have played a role.
+Interestingly and alarmingly, interacting with a dissonant LLM-               We must note that there may exist additional diferences in infor-
+powered conversational search system with the opposite opinion             mation consumption mechanisms besides the diference in querying
+had little efect in reducing the selective exposure bias in informa-       behavior when using conversational search versus conventional
+tion querying and opinion polarization (with the exception of a            search systems. These mechanisms may bring in diferent selective
+more balanced view in participants’ essays). Below, we interpret           exposure biases. With a conventional search system, people engage
+the potential mechanisms, suggest strategies to mitigate the echo          in additional information selection through clicks of links. Indeed,
+chamber efect in conversational search, and consider our results’          we observed that in the Web Search Condition, on average, partici-
+implications for potential harms brought by LLMs.                          pants clicked 4.48 (SD = 4.27) links of consonant articles versus 3.28
+                                                                           (SD = 3.11) dissonant articles. In theory, a neutral LLM-powered
+                                                                           conversational search would synthesize the retrieved articles in a
+7.1     Selective Information Seeking with                                 relatively faithful fashion (i.e., refecting the overall position of the
+        Conversational Search                                              retrieved articles). However, people may place selective attention
+Our results suggest that the natural conversational interactions           or retention on these synthesized outputs. Indeed, we observed that
+enabled by LLMs exhibit more of people’s existing biases, and more
+CHI ’24, May 11–16, 2024, Honolulu, HI, USA                                                                                       Sharma et al.
+
+
+participants spent an average of 116.6 seconds (SD = 177.62) read-      7.3    Efect of References in LLM-powered
+ing consonant outputs versus 78.66 seconds (SD = 111.90) reading               Information Systems
+dissonant outputs in the two conversational search conditions; they
+                                                                        While earlier LLM-powered information systems such as ChatGPT
+also gave 0.29 thumbs-up (and 0.08 thumbs-down) to consonant
+                                                                        often generate responses to a user’s question without specifying the
+outputs versus 0.21 (and 0.04 thumbs-down) to dissonant outputs.
+                                                                        information sources, most recent LLM-powered search systems, in-
+   While we observed these additional behavioral biases, our study
+                                                                        cluding Bing Chat and Google Bard, added the source reference fea-
+does not fully capture participants’ information consumption pat-
+                                                                        ture as essential for ensuring information credibility for the search
+terns, nor provide comparable ways to characterize how these
+                                                                        experience. However, both of our studies showed that including ref-
+patterns impact attitude polarization in conversational and con-
+                                                                        erences had a very limited impact on people’s information-seeking
+ventional search diferently. We encourage future work to explore
+                                                                        behavior and opinion polarization.
+these questions empirically (e.g., through eye-tracking studies) and
+                                                                           We observed that, on average, participants clicked less than one
+develop a more principled understanding of where and how cogni-
+                                                                        reference per search session (M = 0.43, SD = 1.13). This implies
+tive biases could impact people’s information consumption using
+                                                                        people’s low willingness to engage with the information source fea-
+conversational search systems.
+                                                                        ture in today’s LLM-powered conversational search system (though
+                                                                        admittedly, participants did not necessarily perform a high-stake
+7.2     Mitigating Selective Exposure in                                task in our study). Such low engagement may put people at risk
+        Conversational Search                                           especially given current LLMs’ tendency to generate non-factual
+                                                                        information. For example, a recent study [39] found that popular
+Surprisingly, our results suggest that injecting the opposite opinion
+                                                                        commercial LLM-powered search systems frequently output inac-
+bias in LLM-powered conversational search systems may have a
+                                                                        curate information and wrong references. We encourage future
+limited efect in combating selective exposure. It is, therefore, nec-
+                                                                        research to explore designs that guide people to verify information
+essary to resort to other design interventions to mitigate selective
+                                                                        generated by LLMs and attend to the information sources. The
+exposure and increase people’s information diversity. HCI research
+                                                                        reference feature can also be leveraged to provide additional oppor-
+has a long history of developing diversity-enhancing designs and
+                                                                        tunities for exposure to diverse information, such as encouraging
+systems [13, 27, 30, 41], ranging from deliberation platforms, vi-
+                                                                        people to check out sources that present balanced views.
+sualization systems, and diverse news feeds. In particular, Liao et
+al. [34–36] draw lessons from psychology research on selective
+exposure [23] and recommend targeting two fundamental psycho-
+                                                                        7.4    Implications for Information Harms of
+logical mechanisms that can reduce individuals’ selective exposure:            LLMs
+increasing people’s accuracy motivation to learn accurate and com-      LLMs have already reached hundreds of millions of users and their
+prehensive information, and/or reducing people’s defense mecha-         impact is poised to continue growing. Many are concerned about the
+nism when being confronted with opposing views. Example designs         potential harms they can bring to individuals and society. A unique
+that can increase accuracy motivation include highlighting the val-     aspect of LLMs is that they produce content and information, which
+ues of the information with opposing views, such as the expertise       can be consumed and circulated, impacting multiple stakeholder
+of the information source or new knowledge it brings, or making         parties including the co-creator of the information, the readers
+people aware of their own bias. A conversational search system can      of the information, as well as subjects described in the texts [53].
+leverage simple nudges through conversations, such as reminding         These processes can lead to multiple types of harm [56, 64], from dis-
+the user of biases in the information they consumed and suggesting      crimination and exclusion, to disinformation and misinformation,
+diverse queries to try. Example designs that can decrease defense       as well as creating information hazards such as leaking sensitive
+mechanisms include acknowledging the common ground in the               information or compromising privacy. Our results further imply
+opposing views, and presenting diverse perspectives with agreeable      that the conversational interaction afordance of LLMs may have
+information to make them easier to consume. Future work should          a reinforcing efect on their information harms, and are especially
+explore leveraging these more sophisticated communication and           likely to harm those already with a predisposition towards the
+presentation strategies in LLM outputs.                                 biases, misinformation, disinformation or other information haz-
+   It is worth noting that the search systems we tested constitute      ards produced by LLMs. In other words, potential harms of LLMs
+an active information-seeking paradigm, and the information con-        should be approached as sociotechnical problems [38], considering
+sumption is predominantly determined by the people’ querying            not only the limits of the technology, but also people’s interaction
+behaviors. People also receive information passively or through         behaviors with specifc LLM-powered applications.
+scanning. Indeed, prior works argued that conversational search            As large-scale information and knowledge systems, we must
+and agent systems have the potential advantage of making indi-          consider LLMs’ societal risks through “subjugation” [56]—how they
+viduals more receptive toward proactive interactions from the sys-      can proliferate dominant views and languages and foreclose alter-
+tem [51], and HCI researchers explored leveraging conversational        native ones. A previous study by Jakesch et al. [24] highlights that
+systems such as Alexa to broadcast diverse views [14]. It would be      LLM-powered writing support can exert latent persuasion with
+interesting to explore whether conversational interactions enabled      biases in its generated content. Our results imply an additional
+by LLMs can efectively act as active nudging for diverse views,         mechanism for such a risk by creating echo chambers. We must
+and whether they provide benefts over conventional information          consider the risks from both dominant views and biases encoded
+systems such as news feed and deliberation platforms.                   in widely used LLMs, as well as the danger of targeted opinion
+Generative Echo Chamber?                                                                                           CHI ’24, May 11–16, 2024, Honolulu, HI, USA
+
+
+infuence by political or commercial groups that exploit the echo           inform such guardrails. To prevent misuse, we decided not to make
+chamber efect. As our Study 2 shows, it can be extremely easy to           public the prompts we used to generate biased LLM responses but
+steer LLMs to exhibit certain biases through adaptation techniques.        will only make them available for requests that we can verify for
+Extra attention is demanded as LLMs in information systems often           safe usage (e.g., scientifc and non-commercial purposes).
+serve multiple functions (e.g., retrieval and response generation).
+Without proper auditing and mitigation, biases encoded in an LLM           8     CONCLUSION
+can slip in to produce unwanted information risk. These biased             The recently developed powerful LLMs have experienced exponen-
+LLMs can be used for not only conversational search but also writ-         tial growth in user population. They have been adopted to power nu-
+ing support, chatbots, social media bots, and so on. Overall, our          merous information systems, such as conversational search, open-
+results suggest that opinion biases in LLMs present risks that may         domain, or specialized chatbots, to various productivity tools. These
+outweigh the potential benefts. We encourage the development               applications can have a profound impact on the ways people search
+of technical guardrails and auditing methods to detect opinion bi-         and consume information. In this study, through two controlled
+ases of LLMs and prevent malicious manipulation of such biases.            experiments, we empirically showed: 1) LLM-powered conversa-
+Policymakers and society at large must also grapple with how to            tional search could lead to increased selective exposure and opinion
+establish norms and regulations to restrain such manipulation and          polarization compared to conventional web search, by inducing
+make transparent LLMs’ possible opinion biases. We also encour-            more confrmatory querying behaviors in conversational interac-
+age future work to explore how the embedding of LLM-powered                tions; 2) an opinionated LLM that reinforces the user’s view could
+information systems and agents can shape public opinions.                  exacerbate the efect, together suggesting the risk of “generative
+                                                                           echo chambers”. Our study also suggests the limitations of inter-
+7.5    Limitations and Ethical Considerations                              ventions such as providing references and leveraging an LLM that
+                                                                           challenges one’s existing view, both of which had little efect in
+We acknowledge several limitations of our study. First, we adopted         reducing selective exposure. With millions of people already being
+a closed-world version of search systems and a highly focused              exposed to LLM-powered information technologies, these results
+essay-writing task. The results may not be fully generalizable to di-      call for actions to regulate the use of LLM-powered search systems,
+verse real-world information-seeking settings with search systems.         develop technical guardrails against misuses of LLMs for opinion
+Second, we acknowledge that there can be alternative implementa-           infuence, and explore mitigation strategies for selective exposure
+tions of LLM-powered conversational search systems and ways to             in conversational search.
+create opinionated LLMs, and they may exhibit diferent biases and
+infuences. For example, the RAG architecture utilizes prompt engi-
+neering to ensure the synthesized outputs to refect the views in
+                                                                           ACKNOWLEDGMENTS
+the retrieved articles in a relatively faithful and balanced fashion. It   We thank Susan Dumais for providing thoughtful feedback. We
+is possible that without this layer, LLMs are more likely to generate      also thank our participants for their participation and anonymous
+more catering responses that can introduce further biases. In Study        reviewers for their constructive comments on this work.
+2, we manipulated the LLM’s bias in both the retrieval and the re-
+sponse generation modules. This approach may create opinionated            REFERENCES
+search systems with strong biases, which may not be as pronounced           [1] Abubakar Abid, Maheen Farooqi, and James Zou. 2021. Persistent anti-muslim
+                                                                                bias in large language models. In Proceedings of the 2021 AAAI/ACM Conference
+in other settings especially when biases are “unintended”. Second,              on AI, Ethics, and Society. 298–306.
+participants engaged in relatively short search sessions (an average        [2] Lada A Adamic and Natalie Glance. 2005. The political blogosphere and the 2004
+of 3.40 queries per session) with a specifc task of essay writing.              US election: divided they blog. In Proceedings of the 3rd international workshop
+                                                                                on Link discovery. 36–43.
+The results may not be generalizable to other information-seeking           [3] Kenneth C Arnold, Krysta Chauncey, and Krzysztof Z Gajos. 2020. Predictive text
+settings that require longer or continuous learning. However, we                encourages predictable writing. In Proceedings of the 25th International Conference
+emphasize that diferences in querying behavioral patterns and                   on Intelligent User Interfaces. 128–138.
+                                                                            [4] Sandeep Avula, Bogeum Choi, and Jaime Arguello. 2022. The efects of system
+opinion polarization can be observed even in such short interaction             initiative during conversational collaborative search. Proceedings of the ACM on
+sessions. Third, as discussed in Section 7.1, our study focuses on in-          Human-Computer Interaction 6, CSCW1 (2022), 1–30.
+                                                                            [5] Ricardo Baeza-Yates. 2020. Bias in search and recommender systems. In Proceed-
+formation querying behaviors without capturing other information                ings of the 14th ACM Conference on Recommender Systems. 2–2.
+consumption mechanisms such as selective attention, perception,             [6] Rishi Bommasani, Drew A Hudson, Ehsan Adeli, Russ Altman, Simran Arora,
+and retention that can further afect opinion polarization. Lastly, it           Sydney von Arx, Michael S Bernstein, Jeannette Bohg, Antoine Bosselut, Emma
+                                                                                Brunskill, et al. 2021. On the opportunities and risks of foundation models. arXiv
+is known that there are individual diferences in diversity-seeking              preprint arXiv:2108.07258 (2021).
+tendencies [33, 40] and tendencies to engage in human-like conver-          [7] Matteo Cinelli, Gianmarco De Francisci Morales, Alessandro Galeazzi, Walter
+sational interactions with machines [32]. Our study only looked at              Quattrociocchi, and Michele Starnini. 2021. The echo chamber efect on social
+                                                                                media. Proceedings of the National Academy of Sciences 118, 9 (2021), e2023301118.
+participants’ behaviors at an aggregate level without considering           [8] Michael Conover, Jacob Ratkiewicz, Matthew Francisco, Bruno Gonçalves, Filippo
+these individual diferences.                                                    Menczer, and Alessandro Flammini. 2011. Political polarization on twitter. In
+                                                                                Proceedings of the international aaai conference on web and social media, Vol. 5.
+   We also acknowledge that our results and system design may                   89–96.
+incur misuse. Overall, we caution against using LLMs with opinion           [9] Cristian Danescu-Niculescu-Mizil, Michael Gamon, and Susan Dumais. 2011.
+biases to power search systems without appropriate risk assessment              Mark my words! Linguistic style accommodation in social media. In Proceedings
+                                                                                of the 20th international conference on World wide web. 745–754.
+and oversight, which should be enforced not only through technical         [10] Hai Dang, Karim Benharrak, Florian Lehmann, and Daniel Buschek. 2022. Beyond
+guardrails but also norms and policy. We hope our results can                   text generation: Supporting writers with continuous automatic text summaries.
+CHI ’24, May 11–16, 2024, Honolulu, HI, USA                                                                                                                            Sharma et al.
+
+
+     In Proceedings of the 35th Annual ACM Symposium on User Interface Software and              In Proceedings of the SIGCHI conference on human factors in computing systems.
+     Technology. 1–13.                                                                           2359–2368.
+[11] Fiona Draxler, Anna Werner, Florian Lehmann, Matthias Hoppe, Albrecht                  [34] Q Vera Liao and Wai-Tat Fu. 2014. Can you hear me now? Mitigating the echo
+     Schmidt, Daniel Buschek, and Robin Welsch. 2023. The AI Ghostwriter Ef-                     chamber efect by source position indicators. In Proceedings of the 17th ACM
+     fect: When Users Do Not Perceive Ownership of AI-Generated Text But Self-                   conference on Computer supported cooperative work & social computing. 184–196.
+     Declare as Authors. ACM Trans. Comput.-Hum. Interact. (dec 2023). https:               [35] Q Vera Liao and Wai-Tat Fu. 2014. Expert voices in echo chambers: efects of
+     //doi.org/10.1145/3637875 Just Accepted.                                                    source expertise indicators on exposure to diverse opinions. In Proceedings of the
+[12] Elizabeth Dubois and Grant Blank. 2018. The echo chamber is overstated: the                 SIGCHI conference on human factors in computing systems. 2745–2754.
+     moderating efect of political interest and diverse media. Information, communi-        [36] Q Vera Liao, Wai-Tat Fu, and Sri Shilpa Mamidi. 2015. It is all about perspective: An
+     cation & society 21, 5 (2018), 729–745.                                                     exploration of mitigating selective exposure with aspect indicators. In Proceedings
+[13] Siamak Faridani, Ephrat Bitton, Kimiko Ryokai, and Ken Goldberg. 2010. Opinion              of the 33rd annual ACM conference on Human factors in computing systems. 1439–
+     space: a scalable tool for browsing online comments. In Proceedings of the SIGCHI           1448.
+     Conference on Human Factors in Computing Systems. 1175–1184.                           [37] Q Vera Liao, Werner Geyer, Michael Muller, and Yasaman Khazaen. 2020. Con-
+[14] Tom Feltwell, Gavin Wood, Phillip Brooker, Scarlett Rowland, Eric PS Baumer, Kiel           versational interfaces for information search. Understanding and Improving
+     Long, John Vines, Julie Barnett, and Shaun Lawson. 2020. Broadening exposure                Information Search: A Cognitive Approach (2020), 267–287.
+     to socio-political opinions via a pushy smart home device. In Proceedings of the       [38] Q Vera Liao and Ziang Xiao. 2023. Rethinking Model Evaluation as Narrowing
+     2020 CHI Conference on Human Factors in Computing Systems. 1–14.                            the Socio-Technical Gap. arXiv preprint arXiv:2306.03100 (2023).
+[15] Leon Festinger. 1962. Cognitive dissonance. Scientifc American 207, 4 (1962),          [39] Nelson F. Liu, Tianyi Zhang, and Percy Liang. 2023. Evaluating Verifability
+     93–106.                                                                                     in Generative Search Engines. In The 2023 Conference on Empirical Methods in
+[16] Dieter Frey. 1986. Recent research on selective exposure to information. Advances           Natural Language Processing. https://openreview.net/forum?id=ZQV5iRPAua
+     in experimental social psychology 19 (1986), 41–80.                                    [40] Sean A Munson and Paul Resnick. 2010. Presenting diverse political opinions:
+[17] Mingkun Gao, Ziang Xiao, Karrie Karahalios, and Wai-Tat Fu. 2018. To label                  how and how much. In Proceedings of the SIGCHI conference on human factors in
+     or not to label: The efect of stance and credibility labels on readers’ selection           computing systems. 1457–1466.
+     and perception of news articles. Proceedings of the ACM on Human-Computer              [41] Sayooran Nagulendra and Julita Vassileva. 2014. Understanding and controlling
+     Interaction 2, CSCW (2018), 1–16.                                                           the flter bubble through interactive visualization: a user study. In Proceedings of
+[18] R Kelly Garrett. 2009. Echo chambers online?: Politically motivated selective ex-           the 25th ACM conference on Hypertext and social media. 107–115.
+     posure among Internet news users. Journal of computer-mediated communication           [42] Cliford Nass, Jonathan Steuer, and Ellen R Tauber. 1994. Computers are social
+     14, 2 (2009), 265–285.                                                                      actors. In Proceedings of the SIGCHI conference on Human factors in computing
+[19] R Kelly Garrett and Paul Resnick. 2011. Resisting political fragmentation on the            systems. ACM, 72–78.
+     Internet. Daedalus 140, 4 (2011), 108–120.                                             [43] Raymond S Nickerson. 1998. Confrmation bias: A ubiquitous phenomenon in
+[20] Katy Ilonka Gero and Lydia B Chilton. 2019. Metaphoria: An algorithmic com-                 many guises. Review of general psychology 2, 2 (1998), 175–220.
+     panion for metaphor creation. In Proceedings of the 2019 CHI conference on human       [44] Changhoon Oh, Jinhan Choi, Sungwoo Lee, SoHyun Park, Daeryong Kim, Jung-
+     factors in computing systems. 1–12.                                                         woo Song, Dongwhan Kim, Joonhwan Lee, and Bongwon Suh. 2020. Understand-
+[21] Howard Giles, Nikolas Coupland, and Justine Coupland. 1991. Accomodation                    ing user perception of automated news generation system. In Proceedings of the
+     theory: communication, context, and consequences. In Contexts of accommo-                   2020 CHI Conference on Human Factors in Computing Systems. 1–13.
+     dation: developments in applied sociolinguistics/ed. by Howard Giles. Cambridge        [45] Raja Parasuraman, Robert Molloy, and Indramani L Singh. 1993. Performance
+     Univ. Press, 1–68.                                                                          consequences of automation-induced’complacency’. The International Journal of
+[22] Andrew Guess, Brendan Nyhan, Benjamin Lyons, and Jason Reifer. 2018. Avoid-                 Aviation Psychology 3, 1 (1993), 1–23.
+     ing the echo chamber about echo chambers. Knight Foundation 2, 1 (2018), 1–25.         [46] Eli Pariser. 2011. The flter bubble: How the new personalized web is changing what
+[23] William Hart, Dolores Albarracín, Alice H Eagly, Inge Brechan, Matthew J Lind-              we read and how we think. Penguin.
+     berg, and Lisa Merrill. 2009. Feeling validated versus being correct: a meta-          [47] Joon Sung Park, Joseph O’Brien, Carrie Jun Cai, Meredith Ringel Morris, Percy
+     analysis of selective exposure to information. Psychological bulletin 135, 4 (2009),        Liang, and Michael S. Bernstein. 2023. Generative Agents: Interactive Simu-
+     555.                                                                                        lacra of Human Behavior. In Proceedings of the 36th Annual ACM Symposium
+[24] Maurice Jakesch, Advait Bhat, Daniel Buschek, Lior Zalmanson, and Mor Naaman.               on User Interface Software and Technology (, San Francisco, CA, USA,) (UIST ’23).
+     2023. Co-writing with opinionated language models afects users’ views. In                   Association for Computing Machinery, New York, NY, USA, Article 2, 22 pages.
+     Proceedings of the 2023 CHI Conference on Human Factors in Computing Systems.               https://doi.org/10.1145/3586183.3606763
+     1–15.                                                                                  [48] Souneil Park, Seungwoo Kang, Sangyoung Chung, and Junehwa Song. 2009.
+[25] Maurice Jakesch, Megan French, Xiao Ma, Jefrey T Hancock, and Mor Naaman.                   NewsCube: delivering multiple aspects of news to mitigate media bias. In Pro-
+     2019. AI-mediated communication: How the perception that profle text was                    ceedings of the SIGCHI conference on human factors in computing systems. 443–452.
+     written by AI afects trustworthiness. In Proceedings of the 2019 CHI Conference        [49] Lawrence Philips. 2000. The double metaphone search algorithm. C/C++ users
+     on Human Factors in Computing Systems. 1–13.                                                journal 18, 6 (2000), 38–43.
+[26] Dietmar Jannach, Ahtsham Manzoor, Wanling Cai, and Li Chen. 2021. A survey             [50] Laura Pritschet, Derek Powell, and Zachary Horne. 2016. Marginally signif-
+     on conversational recommender systems. ACM Computing Surveys (CSUR) 54, 5                   cant efects as evidence for hypotheses: Changing attitudes over four decades.
+     (2021), 1–36.                                                                               Psychological science 27, 7 (2016), 1036–1042.
+[27] Youngseung Jeon, Bogoan Kim, Aiping Xiong, Dongwon Lee, and Kyungsik                   [51] Filip Radlinski and Nick Craswell. 2017. A theoretical framework for conversa-
+     Han. 2021. Chamberbreaker: Mitigating the echo chamber efect and supporting                 tional search. In Proceedings of the 2017 conference on conference human informa-
+     information hygiene through a gamifed inoculation system. Proceedings of the                tion interaction and retrieval. 117–126.
+     ACM on Human-Computer Interaction 5, CSCW2 (2021), 1–26.                               [52] Jack W Rae, Sebastian Borgeaud, Trevor Cai, Katie Millican, Jordan Hofmann,
+[28] Elise Karinshak, Sunny Xun Liu, Joon Sung Park, and Jefrey T Hancock. 2023.                 Francis Song, John Aslanides, Sarah Henderson, Roman Ring, Susannah Young,
+     Working With AI to Persuade: Examining a Large Language Model’s Ability to                  et al. 2021. Scaling language models: Methods, analysis & insights from training
+     Generate Pro-Vaccination Messages. Proceedings of the ACM on Human-Computer                 gopher. CoRR arXiv:2112.11446.
+     Interaction 7, CSCW1 (2023), 1–29.                                                     [53] Maribeth Rauh, John Mellor, Jonathan Uesato, Po-Sen Huang, Johannes Welbl,
+[29] Kimiya Keyvan and Jimmy Xiangji Huang. 2022. How to approach ambiguous                      Laura Weidinger, Sumanth Dathathri, Amelia Glaese, Geofrey Irving, Iason
+     queries in conversational search: A survey of techniques, approaches, tools, and            Gabriel, et al. 2022. Characteristics of harmful text: Towards rigorous bench-
+     challenges. Comput. Surveys 55, 6 (2022), 1–40.                                             marking of language models. Advances in Neural Information Processing Systems
+[30] Travis Kriplean, Jonathan Morgan, Deen Freelon, Alan Borning, and Lance Ben-                35 (2022), 24720–24739.
+     nett. 2012. Supporting refective public thought with considerit. In Proceedings of     [54] Urbano Reviglio. 2019. Serendipity as an emerging design principle of the info-
+     the ACM 2012 conference on Computer Supported Cooperative Work. 265–274.                    sphere: challenges and opportunities. Ethics and Information Technology 21, 2
+[31] Mina Lee, Percy Liang, and Qian Yang. 2022. Coauthor: Designing a human-                    (2019), 151–166.
+     ai collaborative writing dataset for exploring language model capabilities. In         [55] Steven I Ross, Fernando Martinez, Stephanie Houde, Michael Muller, and Justin D
+     Proceedings of the 2022 CHI conference on human factors in computing systems.               Weisz. 2023. The programmer’s assistant: Conversational interaction with a large
+     1–19.                                                                                       language model for software development. In Proceedings of the 28th International
+[32] Q Vera Liao, Matthew Davis, Werner Geyer, Michael Muller, and N Sadat Shami.                Conference on Intelligent User Interfaces. 491–514.
+     2016. What can you do? Studying social-agent orientation and agent proactive           [56] Renee Shelby, Shalaleh Rismani, Kathryn Henne, AJung Moon, Negar Ros-
+     interactions with an agent for employees. In Proceedings of the 2016 acm conference         tamzadeh, Paul Nicholas, N’Mah Yilla-Akbari, Jess Gallegos, Andrew Smart,
+     on designing interactive systems. 264–275.                                                  Emilio Garcia, and Gurleen Virk. 2023. Sociotechnical Harms of Algorith-
+[33] Q Vera Liao and Wai-Tat Fu. 2013. Beyond the flter bubble: interactive efects               mic Systems: Scoping a Taxonomy for Harm Reduction. In Proceedings of the
+     of perceived threat and topic involvement on selective exposure to information.             2023 AAAI/ACM Conference on AI, Ethics, and Society (, Montréal, QC, Canada,)
+Generative Echo Chamber?                                                                                                         CHI ’24, May 11–16, 2024, Honolulu, HI, USA
+
+
+     (AIES ’23). Association for Computing Machinery, New York, NY, USA, 723–741.         [65] Justin D Weisz, Michael Muller, Stephanie Houde, John Richards, Steven I Ross,
+     https://doi.org/10.1145/3600211.3604673                                                   Fernando Martinez, Mayank Agarwal, and Kartik Talamadupula. 2021. Perfection
+[57] Jiao Sun, Q Vera Liao, Michael Muller, Mayank Agarwal, Stephanie Houde, Kartik            not required? Human-AI partnerships in code translation. In 26th International
+     Talamadupula, and Justin D Weisz. 2022. Investigating explainability of generative        Conference on Intelligent User Interfaces. 402–412.
+     AI for code through scenario-based design. In 27th International Conference on       [66] Ziang Xiao, Tifany Wenting Li, Karrie Karahalios, and Hari Sundaram. 2023.
+     Intelligent User Interfaces. 212–228.                                                     Inform the Uninformed: Improving Online Informed Consent Reading with an
+[58] Cass R Sunstein. 1999. The law of group polarization. University of Chicago Law           AI-Powered Chatbot. In Proceedings of the 2023 CHI Conference on Human Factors
+     School, John M. Olin Law & Economics Working Paper 91 (1999).                             in Computing Systems. 1–17.
+[59] Maria Taramigkou, Efthimios Bothos, Konstantinos Christidis, Dimitris Apos-          [67] Ziang Xiao, Q Vera Liao, Michelle Zhou, Tyrone Grandison, and Yunyao Li. 2023.
+     tolou, and Gregoris Mentzas. 2013. Escape the bubble: Guided exploration of               Powering an AI Chatbot with Expert Sourcing to Support Credible Health Infor-
+     music preferences for serendipity and novelty. In Proceedings of the 7th ACM              mation Access. In Proceedings of the 28th International Conference on Intelligent
+     conference on Recommender systems. 335–338.                                               User Interfaces. 2–18.
+[60] Johanne R Trippas, Damiano Spina, Lawrence Cavedon, Hideo Joho, and Mark             [68] Elad Yom-Tov, Susan Dumais, and Qi Guo. 2014. Promoting civil discourse
+     Sanderson. 2018. Informing the design of spoken conversational search: Perspec-           through search engine diversity. Social Science Computer Review 32, 2 (2014),
+     tive paper. In Proceedings of the 2018 conference on human information interaction        145–154.
+     & retrieval. 32–41.                                                                  [69] Ann Yuan, Andy Coenen, Emily Reif, and Daphne Ippolito. 2022. Wordcraft:
+[61] Jinke D Van Der Laan, Adriaan Heino, and Dick De Waard. 1997. A simple                    story writing with large language models. In 27th International Conference on
+     procedure for the assessment of acceptance of advanced transport telematics.              Intelligent User Interfaces. 841–852.
+     Transportation Research Part C: Emerging Technologies 5, 1 (1997), 1–10.             [70] Hamed Zamani, Johanne R Trippas, Jef Dalton, Filip Radlinski, et al. 2023. Con-
+[62] Alexandra Vtyurina, Denis Savenkov, Eugene Agichtein, and Charles LA Clarke.              versational information seeking. Foundations and Trends® in Information Retrieval
+     2017. Exploring conversational search with humans, assistants, and wizards.               17, 3-4 (2023), 244–456.
+     In Proceedings of the 2017 chi conference extended abstracts on human factors in     [71] Yongfeng Zhang, Xu Chen, Qingyao Ai, Liu Yang, and W Bruce Croft. 2018.
+     computing systems. 2187–2193.                                                             Towards conversational search and recommendation: System ask, user respond. In
+[63] Peter C Wason. 1960. On the failure to eliminate hypotheses in a conceptual task.         Proceedings of the 27th acm international conference on information and knowledge
+     Quarterly journal of experimental psychology 12, 3 (1960), 129–140.                       management. 177–186.
+[64] Laura Weidinger, Jonathan Uesato, Maribeth Rauh, Conor Grifn, Po-Sen Huang,          [72] Jiawei Zhou, Yixuan Zhang, Qianni Luo, Andrea G Parker, and Munmun
+     John Mellor, Amelia Glaese, Myra Cheng, Borja Balle, Atoosa Kasirzadeh, et al.            De Choudhury. 2023. Synthetic lies: Understanding ai-generated misinformation
+     2022. Taxonomy of risks posed by language models. In Proceedings of the 2022              and evaluating algorithmic and human solutions. In Proceedings of the 2023 CHI
+     ACM Conference on Fairness, Accountability, and Transparency. 214–229.                    Conference on Human Factors in Computing Systems. 1–20.
+

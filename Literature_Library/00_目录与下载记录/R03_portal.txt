@@ -1,0 +1,897 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en" class="nexus-font-support">
+
+
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="google" content="nositelinkssearchbox"/>
+    <meta name="tdm-reservation" content="0">
+    <title>
+        ReFaRAG: Re-ranking for Bias Mitigation in Retrieval-Augmented Generation
+      -  Tampere University Research Portal</title>
+    
+    
+    
+
+<link rel='alternate' hreflang='en-gb' href='https://researchportal.tuni.fi/en/publications/refarag-re-ranking-forbias-mitigation-inretrieval-augmented-gener/' /><link rel='alternate' hreflang='fi-fi' href='https://researchportal.tuni.fi/fi/publications/refarag-re-ranking-forbias-mitigation-inretrieval-augmented-gener/' />
+
+<meta property="og:site_name" content="Tampere University Research Portal">
+
+
+    <meta property="og:title" content="ReFaRAG: Re-ranking for&#160;Bias Mitigation in&#160;Retrieval-Augmented Generation"/>
+
+
+<meta property="og:url" content="https://researchportal.tuni.fi/en/publications/refarag-re-ranking-forbias-mitigation-inretrieval-augmented-gener/">
+<meta property="og:locale" content="en_GB">
+
+
+
+
+    
+        <meta property="og:image" content="https://researchportal.tuni.fi/skin/headerImage/">
+    
+
+
+
+
+    
+        <meta property="og:type" content="article">
+    
+
+    
+
+    
+
+
+    <link rel="stylesheet" href="/assets/application-d8c4196ba42289b701050fcf209ab3eb.css" />
+    <!-- OneTrust Cookies Consent Notice start -->
+<script async src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript" charset="UTF-8" data-domain-script="46e939df-424b-489a-8980-78be9c0797ba" data-document-language="true"></script>
+<script type="text/javascript">
+    document.cookieConsentBannerShowAll = true;
+    function OptanonWrapper() { }
+</script>
+<!-- OneTrust Cookies Consent Notice end -->
+    
+    <link href="/skin/css/" rel="stylesheet"/>
+    
+    <script src="/skin/script/" type="text/javascript"></script>
+    <script type="text/javascript" src="/assets/application-d9c3c96b32ee7877543159e1191a25d2.js" ></script>
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="/assets/html5shiv.min-ca5300beead9a4a9d2c9c584a9016410.js" ></script>
+    <script type="text/javascript" src="/assets/respond.min-678d372b349e434d9923e1b591f14a1e.js" ></script>
+    <![endif]-->
+    
+        
+        
+        <meta name="citation_title" content="ReFaRAG: Re-ranking for Bias Mitigation in Retrieval-Augmented Generation"></meta><meta name="citation_inbook_title" content="New Trends in Database and Information Systems - ADBIS 2025 Short Papers, Workshops, Doctoral Consortium and Tutorials, 2025, Proceedings"></meta><meta name="citation_author" content="Yingqi Zhao"></meta><meta name="citation_author_institution" content="Computing Sciences"></meta><meta name="citation_author_email" content="yingqi.zhao@tuni.fi"></meta><meta name="citation_author" content="Vasilis Efthymiou"></meta><meta name="citation_author_institution" content="Harokopio University"></meta><meta name="citation_author" content="Jyrki Nummenmaa"></meta><meta name="citation_author_institution" content="Computing Sciences"></meta><meta name="citation_author_email" content="jyrki.nummenmaa@tuni.fi"></meta><meta name="citation_author" content="Kostas Stefanidis"></meta><meta name="citation_author_institution" content="Computing Sciences"></meta><meta name="citation_author_email" content="konstantinos.stefanidis@tuni.fi"></meta><meta name="citation_author_orcid" content="0000-0003-1317-8062"></meta><meta name="citation_publication_date" content="2025"></meta><meta name="citation_pdf_url" content="https://researchportal.tuni.fi/files/164620547/ReFaRAG_Re-ranking_for_Bias_Mitigation_in_Retrieval-Augmented_Generation.pdf"></meta><meta name="citation_online_date" content="2026/09/22"></meta><meta name="citation_doi" content="10.1007/978-3-032-05727-3_42"></meta><meta name="citation_language" content="English"></meta><meta name="citation_keywords" content="LLM; Political bias; RAG"></meta><meta name="citation_publisher" content="Springer"></meta><meta name="citation_firstpage" content="516"></meta><meta name="citation_lastpage" content="530"></meta><meta name="citation_conference_title" content="European Conference on New Trends in Databases and Information Systems"></meta>
+        <script src="/assets/Chart.min-27bff060c3e539ceb22e763c8f2e9e10.js"></script>
+        <script src="/assets/jquery.content-chart-9c09bb79ba3fc3829b6478d0e114f737.js"></script>
+        
+    
+    
+    <!-- Google Analytics: No account ID (G) found -->
+    <script src="//assets.adobedtm.com/4a848ae9611a/ea83f870454d/launch-af020409b299.min.js" class="optanon-category-2" type="text/plain" async=""></script>
+    
+    
+</head>
+
+<body class="webkit" data-page="publications">
+
+<div id="aria-polite" aria-live="polite"></div>
+<div id="aria-assertive" aria-live="assertive"></div>
+
+<a href="#main-navigation" class="sr-only sr-only-focusable">Skip to main navigation</a>
+
+    <a href="#main-search" class="sr-only sr-only-focusable">Skip to search</a>
+
+<a href="#main-content" class="sr-only sr-only-focusable">Skip to main content</a>
+
+
+
+
+
+
+
+    <header class="header" id="page-header">
+        <div class="primary  ">
+            <div class="container">
+                
+                <a href="/en/" class="logo">
+                    
+                        <span class="sr-only">Tampere University Research Portal Home</span>
+                        <img src="/skin/headerImage/" alt="Tampere University Research Portal Logo"/>
+                    
+                </a>
+                
+                    <ul class="header-tools ">
+                        
+                            <li class="help-and-faq">
+                                <a href="https://libguides.tuni.fi/researchers-guide/tunicris" target="_blank">
+                                    <i class="icon icon-lifebuoy" aria-hidden="true"></i>
+                                    <span class="label">Help &amp; FAQ</span>
+                                    <span class="sr-only">&nbsp; Link opens in a new tab</span>
+                                </a>
+                            </li>
+                        
+                        
+                            <li class="language-dropdown dropdown">
+                                <button data-toggle="dropdown" class="language_btn" aria-label="Select language" aria-expanded="false">
+                                    <i class="icon icon-globe" aria-hidden="true"></i></button>
+
+                                <div class="dropdown-container">
+                                    <ul class='language-selector dropdown-menu'><li class='selected'><a href="/en/publications/refarag-re-ranking-forbias-mitigation-inretrieval-augmented-gener/" aria-current="true" lang="en">English</a></li><li><a href="/fi/publications/refarag-re-ranking-forbias-mitigation-inretrieval-augmented-gener/" lang="fi">Suomi</a></li></ul>
+                                </div>
+                            </li>
+                        
+                    </ul>
+                
+                
+                
+            </div>
+        </div>
+
+        
+            <div class="header-search">
+                
+<form action="/en/searchAll/index/refarag-re-ranking-forbias-mitigation-inretrieval-augmented-gener/" method="get"
+      class="search-form" id="search-everything">
+
+    <div class="global-search-wrapper">
+        <div class="global-search mini">
+            <div class="field-button-wrapper">
+                <div class="search-cell search-field">
+                    <label for="main-search" class="sr-only">Search content at Tampere University Research Portal</label>
+                    <input id="main-search" class="search-field" value="" name="search"
+                           placeholder="Search..."/>
+                </div>
+
+                <div class="search-submit">
+                    <button type="submit" aria-label="Search">
+                        <i class="icon icon-magnifying-glass" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<script>
+    $(function () {
+        var searchForm = $("#search-everything");
+        var searchField = $(".search-field", searchForm);
+        searchForm.on("submit", function () {
+            var field = searchField.find("input");
+            var searchString = field.val();
+
+            // No enter key submit nothing :-)
+            if (!searchString) return false;
+
+            if (searchString.length >= 200) {
+                searchForm.attr("method", "post");
+                searchForm.attr("action", "/en/concepts/copypaste/");
+                field.attr("name", "text");
+            }
+        });
+    });
+</script>
+            </div>
+        
+
+
+        
+        
+            <div class="subMenu">
+                <div class="secondary">
+                    <div class="container">
+                        <nav id="main-navigation" aria-label="Main navigation" class="content-navigation three-third">
+                            <ul data-value="More" role="menubar" aria-label="Main navigation">
+                                <li class="" role="none">
+                                    <a href="/en/" role="menuitem" tabindex="-1">Home</a>
+                                </li>
+
+                                
+                                    <li class="" role="none">
+                                        <a class="portal_link" tabindex="-1" role="menuitem" href="/en/persons/"><span>Profiles</span></a>
+                                    </li>
+                                
+                                    <li class="selected" role="none">
+                                        <a class="portal_link" tabindex="0" role="menuitem" href="/en/publications/"><span>Research outputs</span></a>
+                                    </li>
+                                
+                                    <li class="" role="none">
+                                        <a class="portal_link" tabindex="-1" role="menuitem" href="/en/organisations/"><span>Research units</span></a>
+                                    </li>
+                                
+                                    <li class="" role="none">
+                                        <a class="portal_link" tabindex="-1" role="menuitem" href="/en/activities/"><span>Activities</span></a>
+                                    </li>
+                                
+                                    <li class="" role="none">
+                                        <a class="portal_link" tabindex="-1" role="menuitem" href="/en/datasets/"><span>Datasets and software</span></a>
+                                    </li>
+                                
+                                    <li class="" role="none">
+                                        <a class="portal_link" tabindex="-1" role="menuitem" href="/en/equipments/"><span>Research Infrastructures</span></a>
+                                    </li>
+                                
+                                    <li class="" role="none">
+                                        <a class="portal_link" tabindex="-1" role="menuitem" href="/en/clippings/"><span>Press/Media</span></a>
+                                    </li>
+                                
+                                    <li class="" role="none">
+                                        <a class="portal_link" tabindex="-1" role="menuitem" href="/en/prizes/"><span>Prizes</span></a>
+                                    </li>
+                                
+                                    <li class="" role="none">
+                                        <a class="portal_link" tabindex="-1" role="menuitem" href="/en/projects/"><span>Projects</span></a>
+                                    </li>
+                                
+                            </ul>
+                        </nav>
+
+                    </div>
+                </div>
+            </div>
+        
+    </header>
+
+    <main id="page-content">
+        
+    <div class="page-section page-section-publications page-section-publications-view ">
+
+        
+        
+        
+        
+        <section
+                class="page-section-header page-section-header-publications page-section-header-publications-view
+                 no-backdrop-image"
+                data-stickyheader=""
+                style="">
+            
+            
+        
+
+
+<div class="container">
+    <div class="row">
+        <div class="introduction no-metrics">
+            <div class="rendering"><h1><span>ReFaRAG: Re-ranking for Bias Mitigation in Retrieval-Augmented Generation</span></h1></div>
+            <div class="rendering rendering_researchoutput  rendering_researchoutput_associatespersonsclassifiedportal rendering_contributiontobookanthology rendering_associatespersonsclassifiedportal rendering_contributiontobookanthology_associatespersonsclassifiedportal"><ul class="relations persons"><li><a rel="Person" href="https://researchportal.tuni.fi/en/persons/yingqi-zhao/" class="link person"><span>Yingqi Zhao</span></a><sup>*</sup></li><li>, Vasilis Efthymiou</li><li>, <a rel="Person" href="https://researchportal.tuni.fi/en/persons/jyrki-nummenmaa/" class="link person"><span>Jyrki Nummenmaa</span></a></li><li>, <a rel="Person" href="https://researchportal.tuni.fi/en/persons/konstantinos-stefanidis/" class="link person"><span>Kostas Stefanidis</span></a></li><div class="info-block"><div class="info"><sup>*</sup><span>Corresponding author for this work</span></div></div></div>
+            <div class="rendering rendering_researchoutput  rendering_researchoutput_associatesorganisationsportal rendering_contributiontobookanthology rendering_associatesorganisationsportal rendering_contributiontobookanthology_associatesorganisationsportal"><ul class="relations organisations"><li class="department"><a rel="Organisation" href="https://researchportal.tuni.fi/en/organisations/computing-sciences/" class="link"><span>Computing Sciences</span></a></li><li class="research_centre"><a rel="Organisation" href="https://researchportal.tuni.fi/en/organisations/data-science-research-centre/" class="link"><span>Data Science Research Centre</span></a></li></ul></div>
+            
+            <div class="rendering rendering_researchoutput  rendering_researchoutput_publicationcontenttyperendererportalng rendering_contributiontobookanthology rendering_publicationcontenttyperendererportalng rendering_contributiontobookanthology_publicationcontenttyperendererportalng"><p class="type"><span class="type_family">Research output<span class="type_family_sep">: </span></span><span class="type_classification_parent">Chapter in Book/Report/Conference proceeding<span class="type_parent_sep"> › </span></span><span class="type_classification">Conference contribution</span><span class="type_classification"><span class="type_parent_sep"> › </span>Scientific</span><span class="type_classification"><span class="type_parent_sep"> › </span>peer-review</span></p></div>
+        </div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="publication-metrics" role="region" aria-label="Publication metrics section">
+        
+            <div class="metrics-container">
+                
+                    <div class="metrics-wrap metrics-top ">
+                        
+                            <div class="metric scopus-citations">
+                                
+                                <span class="count">2</span>
+                                
+                                <span class="label">Citations
+(Scopus)</span>
+                            </div>
+                        
+                        
+                            <div class="metric metrics-downloads">
+                                <span class="count tooltipped tooltipped-n" aria-label="Total downloads for this work">1</span>
+                                <span class="label">Downloads
+(Pure)</span>
+                            </div>
+                        
+                    </div>
+                
+                
+                    <div class="metrics-wrap metrics-bottom ">
+                        
+                            <div class="metric metric-plum-x">
+                                <a href="https://plu.mx/plum/a/?doi=10.1007/978-3-032-05727-3_42" class="plumx-plum-print-popup" data-on-empty="plumXError" data-on-fail="plumXError" data-on-success="plumXSuccess" data-popup="left" data-hide-when-empty="true" data-site="plum"
+                                   data-badge="false"></a>
+                            </div>
+                        
+
+                        
+                            <div class="metric metric-altmetric">
+                                
+                                    <div data-badge-popover="top" data-badge-type="donut" data-doi="10.1007/978-3-032-05727-3_42" data-hide-no-mentions="true" data-link-target='_blank'
+                                         class="altmetric-embed"></div>
+                                
+                            </div>
+                        
+                    </div>
+                
+            </div>
+        
+    </div>
+
+
+    </div>
+
+</div>
+<div class="subMenu">
+    <div class="content-profile-navigation">
+    <div class="container">
+        <nav role="navigation">
+            <ul role="menubar">
+                <li class="selected" role="none">
+                    <a class="portal_link" role="menuitem" href="/en/publications/refarag-re-ranking-forbias-mitigation-inretrieval-augmented-gener/"><span>
+                        <i class="icon icon-publication" aria-hidden="true"></i>
+                        <span class="label">Overview</span>
+                    </span></a>
+                </li>
+                
+                    <li class="" role="none">
+                        <a class="portal_link" role="menuitem" href="/en/publications/refarag-re-ranking-forbias-mitigation-inretrieval-augmented-gener/fingerprints/"><span>
+                            <i class="icon icon-fingerprint" aria-hidden="true"></i>
+                            <span class="label">Fingerprint</span>
+                        </span></a>
+                    </li>
+                
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+
+            </ul>
+        </nav>
+    </div>
+    </div>
+</div>
+
+    
+        </section>
+
+        <div id="main-content"
+             class="page-section-content page-section-content-publications page-section-content-publications-view   ">
+            
+        <section class="page-section content-relation-section">
+            <div class="container">
+                <div class="clearfix">
+                    <div class="content-content publication-content">
+                        
+                        
+                            <h2 class="subheader">Abstract</h2>
+                        <div class="rendering rendering_researchoutput  rendering_researchoutput_abstractportal rendering_contributiontobookanthology rendering_abstractportal rendering_contributiontobookanthology_abstractportal"><div class="textblock"><p>Retrieval-augmented generation (RAG) improves the performance of LLM-based applications by incorporating information from external knowledge bases. However, the introduction of search engines and knowledge sources can also introduce new biases and stereotypes into the system. Previous studies have shown that adjusting the bias of retrievers through fine-tuning can influence the overall bias of the RAG system, mitigating bias in RAG. In this work, we propose a re-ranking-based method, termed ReFaRAG, as an alternative to fine-tuning for controlling the bias in retrieval results. We further investigate how biased retrieval output affects different LLMs within the RAG framework.</p></div></div>
+                        <div class="rendering rendering_researchoutput  rendering_researchoutput_detailsportal rendering_contributiontobookanthology rendering_detailsportal rendering_contributiontobookanthology_detailsportal"><div class="conference"><table class="properties"><tbody><tr class="language"><th scope="row">Original language</th><td>English</td></tr><tr><th scope="row">Title of host publication</th><td>New Trends in Database and Information Systems - ADBIS 2025 Short Papers, Workshops, Doctoral Consortium and Tutorials, 2025, Proceedings</td></tr><tr><th scope="row">Editors</th><td>Panos K. Chrysanthis, Kjetil Nørvåg, Kostas Stefanidis, Zheying Zhang, Elisa Quintarelli, Ester Zumpano</td></tr><tr><th scope="row">Publisher</th><td><a rel="Publisher" href="#" class="link"><span>Springer</span></a></td></tr><tr><th scope="row">Pages</th><td>516-530</td></tr><tr class="numberofpages"><th scope="row">Number of pages</th><td>15</td></tr><tr class="isbn-print"><th scope="row">ISBN (Print)</th><td>978-3-032-05726-6</td></tr><tr class="digital_object_identifiers"><th scope="row">DOIs</th><td><ul class="relations digital_object_identifiers"><li><a onclick="window.open(this.href, '_blank','noopener,noreferrer'); return false;" href="https://doi.org/10.1007/978-3-032-05727-3_42" class="link"><span>https://doi.org/10.1007/978-3-032-05727-3_42</span></a> </li></ul></td></tr><tr class="status"><th scope="row">Publication status</th><td><span class="prefix">Published - </span><span class="date">2025</span></td></tr><tr class="assessmentType"><th scope="row">Publication type</th><td>A4 Article in conference proceedings</td></tr><tr class="event"><th scope="row">Event</th><td><a rel="Event" href="#" class="link"><span><span class="prefix">European Conference on New Trends in Databases and Information Systems</span></a> - Tampere, Finland<br />Duration: <span class="date">23 Sept 2025</span> → <span class="date">26 Sept 2025</span></span></td></tr></tbody></table></div><div class="publication-series"><h3 class="subheader">Publication series</h3><table class="properties"><tbody><tr><th scope="row">Name</th><td>Communications in Computer and Information Science</td></tr><tr><th scope="row">Volume</th><td>2676 CCIS</td></tr><tr><th scope="row">ISSN (Print)</th><td>1865-0929</td></tr><tr><th scope="row">ISSN (Electronic)</th><td>1865-0937</td></tr></tbody></table></div><h3 class="subheader">Conference</h3><table class="properties"><tbody><tr><th scope="row">Conference</th><td>European Conference on New Trends in Databases and Information Systems</td></tr><tr><th scope="row">Country/Territory</th><td>Finland</td></tr><tr><th scope="row">City</th><td>Tampere</td></tr><tr class="period"><th scope="row">Period</th><td><span class="date">23/09/25</span> → <span class="date">26/09/25</span></td></tr></tbody></table></div>
+                        
+
+                        
+
+                        
+
+                        <div class="rendering rendering_keywordable rendering_expertkeywordgrouspbytypeportal rendering_keywordable_expertkeywordgrouspbytypeportal"><div class="keyword-group"><h2 class="subheader">Keywords</h2><ul class="relations keywords"><li class="userdefined-keyword"><span>LLM</span></li><li class="userdefined-keyword"><span>Political bias</span></li><li class="userdefined-keyword"><span>RAG</span></li></ul></div><div class="keyword-group"><h2 class="subheader">Publication forum classification</h2><ul class="relations keywords"><li><span>Publication forum level 1</span></li></ul></div><div class="keyword-group"><h2 class="subheader">ASJC Scopus subject areas</h2><ul class="relations keywords"><li><span>General Computer Science</span></li><li><span>General Mathematics</span></li></ul></div></div>
+
+                    </div>
+
+                    <div class="content-sidebar publication-sidebar">
+                        
+                            <h2 class="subheader">Access to Document</h2>
+                        <div class="rendering rendering_researchoutput  rendering_researchoutput_publicationaccessrenderer rendering_contributiontobookanthology rendering_publicationaccessrenderer rendering_contributiontobookanthology_publicationaccessrenderer"><ul class="dois"><li><div class="doi"><a onclick="window.open(this.href, '_blank','noopener,noreferrer'); return false;" href="https://doi.org/10.1007/978-3-032-05727-3_42" class="link"><span>10.1007/978-3-032-05727-3_42</span></a></div></li></ul><ul class="documents"><li class="open-access"><div class="document"><a onclick="if (this.href) {window.open(this.href)}; return false;" href="/files/164620547/ReFaRAG_Re-ranking_for_Bias_Mitigation_in_Retrieval-Augmented_Generation.pdf" class="link document-link"><span>ReFaRAG Re-ranking for Bias Mitigation in Retrieval-Augmented Generation</span></a><p class="property">This publication is copyrighted. You may download, display and print it for Your own personal use. Commercial use is prohibited.</p><span class="meta">Accepted author manuscript, 749 KB</span><span class="meta">Licence: Unspecified</span></div></li></ul><ul class="links"><li class="open-access"><div class="link electronic-version-link"><a onclick="window.open(this.href, '_blank','noopener,noreferrer'); return false;" href="https://urn.fi/URN:NBN:fi:tuni-202601292057" class="link"><span>https://urn.fi/URN:NBN:fi:tuni-202601292057</span></a><span class="meta">Licence: Unspecified</span></div></li></ul></div>
+
+                        
+
+                        
+
+                        
+
+                        <div class="rendering rendering_researchoutput  rendering_researchoutput_versioneddocumentspureportal rendering_contributiontobookanthology rendering_versioneddocumentspureportal rendering_contributiontobookanthology_versioneddocumentspureportal"><ul class="relations documents"></ul></div>
+
+                        
+
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+            <section class="page-section content-relation-section publication-fingerprint">
+                <div class="container">
+                    <div class="header">
+                        <h2 class="section-title">
+                            <i class="icon icon-fingerprint" aria-hidden="true"></i>
+                            <span class="title">Fingerprint</span>
+                        </h2>
+                        <span class="sub-title">
+                            Dive into the research topics of 'ReFaRAG: Re-ranking for Bias Mitigation in Retrieval-Augmented Generation'. Together they form a unique fingerprint.
+                        </span>
+                    </div>
+
+                    <ul class="publication-top-concepts" role="menubar"  aria-label="Related fingerprints">
+                        
+                            <li class="concept-badge-large-container dropdown-overflow" role="none">
+
+    <button tabindex="0"
+            class="concept-badge-large dropdown-toggle"
+            type="button"
+            role="menuitem"
+            aria-haspopup="true"
+            aria-expanded="false"
+            aria-controls="6bc6ec19-28c7-4fb8-b68d-c061b4b4a78c"
+            data-concept-uuid="6bc6ec19-28c7-4fb8-b68d-c061b4b4a78c"
+            data-rank-size="32"
+            data-rank-thickness="8"
+            data-rank-value="1.0"
+            data-summary="true"
+            data-summary-url="/en/concepts/summary/">
+        <span class="concept-wrapper" title="100%">
+            <span class="rank"></span>
+            <span class="concept">Re-ranking</span>
+            <span class="thesauri">Keyphrases</span>
+            <span class="value sr-only">100%</span>
+        </span>
+    </button>
+
+    <div class="dropdown-container"></div>
+
+</li>
+                        
+                            <li class="concept-badge-large-container dropdown-overflow" role="none">
+
+    <button tabindex="0"
+            class="concept-badge-large dropdown-toggle"
+            type="button"
+            role="menuitem"
+            aria-haspopup="true"
+            aria-expanded="false"
+            aria-controls="d0c70d66-a650-4629-b933-5e6862b4beb8"
+            data-concept-uuid="d0c70d66-a650-4629-b933-5e6862b4beb8"
+            data-rank-size="32"
+            data-rank-thickness="8"
+            data-rank-value="1.0"
+            data-summary="true"
+            data-summary-url="/en/concepts/summary/">
+        <span class="concept-wrapper" title="100%">
+            <span class="rank"></span>
+            <span class="concept">Retrieval-Augmented Generation</span>
+            <span class="thesauri">Keyphrases</span>
+            <span class="value sr-only">100%</span>
+        </span>
+    </button>
+
+    <div class="dropdown-container"></div>
+
+</li>
+                        
+                            <li class="concept-badge-large-container dropdown-overflow" role="none">
+
+    <button tabindex="0"
+            class="concept-badge-large dropdown-toggle"
+            type="button"
+            role="menuitem"
+            aria-haspopup="true"
+            aria-expanded="false"
+            aria-controls="ae81c0be-e5e3-44eb-8137-1c1319be05e6"
+            data-concept-uuid="ae81c0be-e5e3-44eb-8137-1c1319be05e6"
+            data-rank-size="32"
+            data-rank-thickness="8"
+            data-rank-value="1.0"
+            data-summary="true"
+            data-summary-url="/en/concepts/summary/">
+        <span class="concept-wrapper" title="100%">
+            <span class="rank"></span>
+            <span class="concept">Augmented Generation</span>
+            <span class="thesauri">Keyphrases</span>
+            <span class="value sr-only">100%</span>
+        </span>
+    </button>
+
+    <div class="dropdown-container"></div>
+
+</li>
+                        
+                            <li class="concept-badge-large-container dropdown-overflow" role="none">
+
+    <button tabindex="0"
+            class="concept-badge-large dropdown-toggle"
+            type="button"
+            role="menuitem"
+            aria-haspopup="true"
+            aria-expanded="false"
+            aria-controls="a4ffb42c-44d3-4486-86ed-5ce217daedf5"
+            data-concept-uuid="a4ffb42c-44d3-4486-86ed-5ce217daedf5"
+            data-rank-size="32"
+            data-rank-thickness="8"
+            data-rank-value="0.5"
+            data-summary="true"
+            data-summary-url="/en/concepts/summary/">
+        <span class="concept-wrapper" title="50%">
+            <span class="rank"></span>
+            <span class="concept">Large Language Model</span>
+            <span class="thesauri">Computer Science</span>
+            <span class="value sr-only">50%</span>
+        </span>
+    </button>
+
+    <div class="dropdown-container"></div>
+
+</li>
+                        
+                            <li class="concept-badge-large-container dropdown-overflow" role="none">
+
+    <button tabindex="0"
+            class="concept-badge-large dropdown-toggle"
+            type="button"
+            role="menuitem"
+            aria-haspopup="true"
+            aria-expanded="false"
+            aria-controls="0f2af73e-2493-4289-a741-7b422ae1102a"
+            data-concept-uuid="0f2af73e-2493-4289-a741-7b422ae1102a"
+            data-rank-size="32"
+            data-rank-thickness="8"
+            data-rank-value="0.5"
+            data-summary="true"
+            data-summary-url="/en/concepts/summary/">
+        <span class="concept-wrapper" title="50%">
+            <span class="rank"></span>
+            <span class="concept">Information Retrieval</span>
+            <span class="thesauri">Computer Science</span>
+            <span class="value sr-only">50%</span>
+        </span>
+    </button>
+
+    <div class="dropdown-container"></div>
+
+</li>
+                        
+                            <li class="concept-badge-large-container dropdown-overflow" role="none">
+
+    <button tabindex="0"
+            class="concept-badge-large dropdown-toggle"
+            type="button"
+            role="menuitem"
+            aria-haspopup="true"
+            aria-expanded="false"
+            aria-controls="157c4eea-f518-4746-b53d-fc639a6dba1a"
+            data-concept-uuid="157c4eea-f518-4746-b53d-fc639a6dba1a"
+            data-rank-size="32"
+            data-rank-thickness="8"
+            data-rank-value="0.25"
+            data-summary="true"
+            data-summary-url="/en/concepts/summary/">
+        <span class="concept-wrapper" title="25%">
+            <span class="rank"></span>
+            <span class="concept">Ranking Method</span>
+            <span class="thesauri">Keyphrases</span>
+            <span class="value sr-only">25%</span>
+        </span>
+    </button>
+
+    <div class="dropdown-container"></div>
+
+</li>
+                        
+                            <li class="concept-badge-large-container dropdown-overflow" role="none">
+
+    <button tabindex="0"
+            class="concept-badge-large dropdown-toggle"
+            type="button"
+            role="menuitem"
+            aria-haspopup="true"
+            aria-expanded="false"
+            aria-controls="d67b0c7e-cefb-4e54-afae-d038ee761bda"
+            data-concept-uuid="d67b0c7e-cefb-4e54-afae-d038ee761bda"
+            data-rank-size="32"
+            data-rank-thickness="8"
+            data-rank-value="0.25"
+            data-summary="true"
+            data-summary-url="/en/concepts/summary/">
+        <span class="concept-wrapper" title="25%">
+            <span class="rank"></span>
+            <span class="concept">Search Engine</span>
+            <span class="thesauri">Keyphrases</span>
+            <span class="value sr-only">25%</span>
+        </span>
+    </button>
+
+    <div class="dropdown-container"></div>
+
+</li>
+                        
+                            <li class="concept-badge-large-container dropdown-overflow" role="none">
+
+    <button tabindex="0"
+            class="concept-badge-large dropdown-toggle"
+            type="button"
+            role="menuitem"
+            aria-haspopup="true"
+            aria-expanded="false"
+            aria-controls="ae0cf65b-61d5-4b7f-8c3f-242ea184844e"
+            data-concept-uuid="ae0cf65b-61d5-4b7f-8c3f-242ea184844e"
+            data-rank-size="32"
+            data-rank-thickness="8"
+            data-rank-value="0.25"
+            data-summary="true"
+            data-summary-url="/en/concepts/summary/">
+        <span class="concept-wrapper" title="25%">
+            <span class="rank"></span>
+            <span class="concept">Retrieval Results</span>
+            <span class="thesauri">Keyphrases</span>
+            <span class="value sr-only">25%</span>
+        </span>
+    </button>
+
+    <div class="dropdown-container"></div>
+
+</li>
+                        
+                    </ul>
+                    <div class="footer">
+                        <div class="view-all align-center">
+                            <a class="portal_link btn-primary btn-large btn-content-link" href="/en/publications/refarag-re-ranking-forbias-mitigation-inretrieval-augmented-gener/fingerprints/"><span>
+                                View full fingerprint
+                                <i class="icon icon-right-open-mini" aria-hidden="true"></i>
+                            </span></a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+        <section class="page-section cite">
+            <div class="container">
+                <section class="publication-cite" aria-labelledby="publications-cite-title">
+    <h2 class="subheader" id="publications-cite-title">Cite this</h2>
+    <ul class="tabs" role="tablist" aria-label="Cite this">
+        
+            <li class="selected" role="tab" id="tab-0" aria-controls="cite-apa" tabindex="-1"  aria-selected="false" >
+                APA
+            </li>
+        
+            <li class="" role="tab" id="tab-1" aria-controls="cite-author" tabindex="-1"  aria-selected="false" >
+                Author
+            </li>
+        
+            <li class="" role="tab" id="tab-2" aria-controls="cite-BIBTEX" tabindex="-1"  aria-selected="false" >
+                BIBTEX
+            </li>
+        
+            <li class="" role="tab" id="tab-3" aria-controls="cite-harvard" tabindex="-1"  aria-selected="false" >
+                Harvard
+            </li>
+        
+            <li class="" role="tab" id="tab-4" aria-controls="cite-standard" tabindex="-1"  aria-selected="false" >
+                Standard
+            </li>
+        
+            <li class="" role="tab" id="tab-5" aria-controls="cite-RIS" tabindex="-1"  aria-selected="false" >
+                RIS
+            </li>
+        
+            <li class="" role="tab" id="tab-6" aria-controls="cite-vancouver" tabindex="-1"  aria-selected="false" >
+                Vancouver
+            </li>
+        
+    </ul>
+    <div class="tab-container">
+        
+            <div id="cite-apa" class="tab selected" role="tabpanel" aria-labelledby="tab-0" tabindex="-1" aria-hidden="true">
+                <div class="rendering rendering_researchoutput  rendering_researchoutput_apa rendering_contributiontobookanthology rendering_apa rendering_contributiontobookanthology_apa"><a rel="Person" href="https://researchportal.tuni.fi/en/persons/yingqi-zhao/" class="link"><span>Zhao, Y.</span></a>, Efthymiou, V.<a rel="Person" href="https://researchportal.tuni.fi/en/persons/jyrki-nummenmaa/" class="link"><span>, Nummenmaa, J.</span></a><a rel="Person" href="https://researchportal.tuni.fi/en/persons/konstantinos-stefanidis/" class="link"><span>, &amp; Stefanidis, K.</span></a> (2025). <a rel="ContributionToBookAnthology" href="https://researchportal.tuni.fi/en/publications/refarag-re-ranking-forbias-mitigation-inretrieval-augmented-gener/" class="link"><span>ReFaRAG: Re-ranking for Bias Mitigation in Retrieval-Augmented Generation</span></a>. In P. K. Chrysanthis, K. Nørvåg, K. Stefanidis, Z. Zhang, E. Quintarelli, &amp; E. Zumpano (Eds.), <em>New Trends in Database and Information Systems - ADBIS 2025 Short Papers, Workshops, Doctoral Consortium and Tutorials, 2025, Proceedings </em>(pp. 516-530). (Communications in Computer and Information Science; Vol. 2676 CCIS). Springer. <a onclick="window.open(this.href, '_blank','noopener,noreferrer'); return false;" href="https://doi.org/10.1007/978-3-032-05727-3_42" class="link"><span>https://doi.org/10.1007/978-3-032-05727-3_42</span></a></div>
+            </div>
+        
+            <div id="cite-author" class="tab " role="tabpanel" aria-labelledby="tab-1" tabindex="-1" aria-hidden="true">
+                <div class="rendering rendering_researchoutput  rendering_researchoutput_author rendering_contributiontobookanthology rendering_author rendering_contributiontobookanthology_author"><a rel="Person" href="https://researchportal.tuni.fi/en/persons/yingqi-zhao/" class="link"><span>Zhao, Yingqi</span></a> ; Efthymiou, Vasilis <a rel="Person" href="https://researchportal.tuni.fi/en/persons/jyrki-nummenmaa/" class="link"><span> ; Nummenmaa, Jyrki</span></a> et al. / <a rel="ContributionToBookAnthology" href="https://researchportal.tuni.fi/en/publications/refarag-re-ranking-forbias-mitigation-inretrieval-augmented-gener/" class="link"><span><strong>ReFaRAG : Re-ranking for Bias Mitigation in Retrieval-Augmented Generation</strong></span></a>. New Trends in Database and Information Systems - ADBIS 2025 Short Papers, Workshops, Doctoral Consortium and Tutorials, 2025, Proceedings. editor / Panos K. Chrysanthis ; Kjetil Nørvåg ; Kostas Stefanidis ; Zheying Zhang ; Elisa Quintarelli ; Ester Zumpano. Springer, 2025. pp. 516-530 (Communications in Computer and Information Science).</div>
+            </div>
+        
+            <div id="cite-BIBTEX" class="tab " role="tabpanel" aria-labelledby="tab-2" tabindex="-1" aria-hidden="true">
+                <div class="rendering rendering_researchoutput  rendering_researchoutput_bibtex rendering_contributiontobookanthology rendering_bibtex rendering_contributiontobookanthology_bibtex"><div>@inproceedings{31e2f980d4b24b36a12604a73b9f448d,</div><div>  title     = "ReFaRAG: Re-ranking for Bias Mitigation in Retrieval-Augmented Generation",</div><div>  abstract  = "Retrieval-augmented generation (RAG) improves the performance of LLM-based applications by incorporating information from external knowledge bases. However, the introduction of search engines and knowledge sources can also introduce new biases and stereotypes into the system. Previous studies have shown that adjusting the bias of retrievers through fine-tuning can influence the overall bias of the RAG system, mitigating bias in RAG. In this work, we propose a re-ranking-based method, termed ReFaRAG, as an alternative to fine-tuning for controlling the bias in retrieval results. We further investigate how biased retrieval output affects different LLMs within the RAG framework.",</div><div>  keywords  = "LLM, Political bias, RAG",</div><div>  author    = "Yingqi Zhao and Vasilis Efthymiou and Jyrki Nummenmaa and Kostas Stefanidis",</div><div>  note      = "Publisher Copyright: {\textcopyright} The Author(s), under exclusive license to Springer Nature Switzerland AG 2026.; European Conference on New Trends in Databases and Information Systems ; Conference date: 23-09-2025 Through 26-09-2025",</div><div>  year      = "2025",</div><div>  doi       = "10.1007/978-3-032-05727-3\_42",</div><div>  language  = "English",</div><div>  isbn      = "978-3-032-05726-6",</div><div>  series    = "Communications in Computer and Information Science",</div><div>  publisher = "Springer",</div><div>  pages     = "516--530",</div><div>  editor    = "Chrysanthis, \{Panos K.\} and Kjetil N{\o}rv{\aa}g and Kostas Stefanidis and Zheying Zhang and Elisa Quintarelli and Ester Zumpano",</div><div>  booktitle = "New Trends in Database and Information Systems - ADBIS 2025 Short Papers, Workshops, Doctoral Consortium and Tutorials, 2025, Proceedings",</div><p>}</p></div>
+            </div>
+        
+            <div id="cite-harvard" class="tab " role="tabpanel" aria-labelledby="tab-3" tabindex="-1" aria-hidden="true">
+                <div class="rendering rendering_researchoutput  rendering_researchoutput_harvard rendering_contributiontobookanthology rendering_harvard rendering_contributiontobookanthology_harvard"><a rel="Person" href="https://researchportal.tuni.fi/en/persons/yingqi-zhao/" class="link"><span>Zhao, Y</span></a>, Efthymiou, V<a rel="Person" href="https://researchportal.tuni.fi/en/persons/jyrki-nummenmaa/" class="link"><span>, Nummenmaa, J</span></a><a rel="Person" href="https://researchportal.tuni.fi/en/persons/konstantinos-stefanidis/" class="link"><span> &amp; Stefanidis, K</span></a> 2025, <a rel="ContributionToBookAnthology" href="https://researchportal.tuni.fi/en/publications/refarag-re-ranking-forbias-mitigation-inretrieval-augmented-gener/" class="link harvard_title"><span>ReFaRAG: Re-ranking for Bias Mitigation in Retrieval-Augmented Generation</span></a>. in PK Chrysanthis, K Nørvåg, K Stefanidis, Z Zhang, E Quintarelli &amp; E Zumpano (eds), <em>New Trends in Database and Information Systems - ADBIS 2025 Short Papers, Workshops, Doctoral Consortium and Tutorials, 2025, Proceedings.</em> Communications in Computer and Information Science, vol. 2676 CCIS, Springer, pp. 516-530, European Conference on New Trends in Databases and Information Systems, Tampere, Finland, <span class="date">23/09/25</span>. <a onclick="window.open(this.href, '_blank','noopener,noreferrer'); return false;" href="https://doi.org/10.1007/978-3-032-05727-3_42" class="link"><span>https://doi.org/10.1007/978-3-032-05727-3_42</span></a></div>
+            </div>
+        
+            <div id="cite-standard" class="tab " role="tabpanel" aria-labelledby="tab-4" tabindex="-1" aria-hidden="true">
+                <div class="rendering rendering_researchoutput  rendering_researchoutput_standard rendering_contributiontobookanthology rendering_standard rendering_contributiontobookanthology_standard"><a rel="ContributionToBookAnthology" href="https://researchportal.tuni.fi/en/publications/refarag-re-ranking-forbias-mitigation-inretrieval-augmented-gener/" class="link"><span><strong>ReFaRAG: Re-ranking for Bias Mitigation in Retrieval-Augmented Generation.</strong></span></a> / <a rel="Person" href="https://researchportal.tuni.fi/en/persons/yingqi-zhao/" class="link"><span>Zhao, Yingqi</span></a>; Efthymiou, Vasilis<a rel="Person" href="https://researchportal.tuni.fi/en/persons/jyrki-nummenmaa/" class="link"><span>; Nummenmaa, Jyrki</span></a> et al. <br />New Trends in Database and Information Systems - ADBIS 2025 Short Papers, Workshops, Doctoral Consortium and Tutorials, 2025, Proceedings. ed. / Panos K. Chrysanthis; Kjetil Nørvåg; Kostas Stefanidis; Zheying Zhang; Elisa Quintarelli; Ester Zumpano. Springer, 2025. p. 516-530 (Communications in Computer and Information Science; Vol. 2676 CCIS).<p class="type"><span class="type_family">Research output<span class="type_family_sep">: </span></span><span class="type_classification_parent">Chapter in Book/Report/Conference proceeding<span class="type_parent_sep"> › </span></span><span class="type_classification">Conference contribution</span><span class="type_classification"><span class="type_parent_sep"> › </span>Scientific</span><span class="type_classification"><span class="type_parent_sep"> › </span>peer-review</span></p></div>
+            </div>
+        
+            <div id="cite-RIS" class="tab " role="tabpanel" aria-labelledby="tab-5" tabindex="-1" aria-hidden="true">
+                <div class="rendering rendering_researchoutput  rendering_researchoutput_ris rendering_contributiontobookanthology rendering_ris rendering_contributiontobookanthology_ris"><p>TY  - GEN</p><p>T1  - ReFaRAG</p><p>T2  - European Conference on New Trends in Databases and Information Systems</p><p>AU  - Zhao, Yingqi</p><p>AU  - Efthymiou, Vasilis</p><p>AU  - Nummenmaa, Jyrki</p><p>AU  - Stefanidis, Kostas</p><p>N1  - Publisher Copyright:
+© The Author(s), under exclusive license to Springer Nature Switzerland AG 2026.</p><p>PY  - 2025</p><p>Y1  - 2025</p><p>N2  - Retrieval-augmented generation (RAG) improves the performance of LLM-based applications by incorporating information from external knowledge bases. However, the introduction of search engines and knowledge sources can also introduce new biases and stereotypes into the system. Previous studies have shown that adjusting the bias of retrievers through fine-tuning can influence the overall bias of the RAG system, mitigating bias in RAG. In this work, we propose a re-ranking-based method, termed ReFaRAG, as an alternative to fine-tuning for controlling the bias in retrieval results. We further investigate how biased retrieval output affects different LLMs within the RAG framework.</p><p>AB  - Retrieval-augmented generation (RAG) improves the performance of LLM-based applications by incorporating information from external knowledge bases. However, the introduction of search engines and knowledge sources can also introduce new biases and stereotypes into the system. Previous studies have shown that adjusting the bias of retrievers through fine-tuning can influence the overall bias of the RAG system, mitigating bias in RAG. In this work, we propose a re-ranking-based method, termed ReFaRAG, as an alternative to fine-tuning for controlling the bias in retrieval results. We further investigate how biased retrieval output affects different LLMs within the RAG framework.</p><p>KW  - LLM</p><p>KW  - Political bias</p><p>KW  - RAG</p><p>U2  - 10.1007/978-3-032-05727-3_42</p><p>DO  - 10.1007/978-3-032-05727-3_42</p><p>M3  - Conference contribution</p><p>AN  - SCOPUS:105017373381</p><p>SN  - 978-3-032-05726-6</p><p>T3  - Communications in Computer and Information Science</p><p>SP  - 516</p><p>EP  - 530</p><p>BT  - New Trends in Database and Information Systems - ADBIS 2025 Short Papers, Workshops, Doctoral Consortium and Tutorials, 2025, Proceedings</p><p>A2  - Chrysanthis, Panos K.</p><p>A2  - Nørvåg, Kjetil</p><p>A2  - Stefanidis, Kostas</p><p>A2  - Zhang, Zheying</p><p>A2  - Quintarelli, Elisa</p><p>A2  - Zumpano, Ester</p><p>PB  - Springer</p><p>Y2  - 23 September 2025 through 26 September 2025</p><p>ER  - </p></div>
+            </div>
+        
+            <div id="cite-vancouver" class="tab " role="tabpanel" aria-labelledby="tab-6" tabindex="-1" aria-hidden="true">
+                <div class="rendering rendering_researchoutput  rendering_researchoutput_vancouver rendering_contributiontobookanthology rendering_vancouver rendering_contributiontobookanthology_vancouver"><a rel="Person" href="https://researchportal.tuni.fi/en/persons/yingqi-zhao/" class="link"><span>Zhao Y</span></a>, Efthymiou V<a rel="Person" href="https://researchportal.tuni.fi/en/persons/jyrki-nummenmaa/" class="link"><span>, Nummenmaa J</span></a><a rel="Person" href="https://researchportal.tuni.fi/en/persons/konstantinos-stefanidis/" class="link"><span>, Stefanidis K</span></a>. <span class="title"><a rel="ContributionToBookAnthology" href="https://researchportal.tuni.fi/en/publications/refarag-re-ranking-forbias-mitigation-inretrieval-augmented-gener/" class="link"><span>ReFaRAG: <span class="subtitle">Re-ranking for Bias Mitigation in Retrieval-Augmented Generation</span></span></a></span>. In Chrysanthis PK, Nørvåg K, Stefanidis K, Zhang Z, Quintarelli E, Zumpano E, editors, New Trends in Database and Information Systems - ADBIS 2025 Short Papers, Workshops, Doctoral Consortium and Tutorials, 2025, Proceedings. Springer. 2025. p. 516-530. (Communications in Computer and Information Science). doi: 10.1007/978-3-032-05727-3_42</div>
+            </div>
+        
+
+        <script>
+            $(function() {
+                $(".tab-container .rendering a:not([href^='http://dx.doi.org'])").contents().unwrap();
+            });
+        </script>
+    </div>
+</section>
+
+            </div>
+        </section>
+        <script>
+    $(function () {
+        if($('.publication-sidebar').length > 0){
+            if($('a.document-link').length === 0){
+                $(".metrics-top").addClass("one");
+                $('div.metrics-downloads').remove();
+            }
+        }
+    });
+
+    function plumXError(e) {
+        $(e).closest('.metric-plum-x').closest('.metrics-bottom').addClass('one');
+        $(e).closest('.metric-plum-x').remove();
+    }
+    $('div.altmetric-embed').on('altmetric:hide', function () {
+        $(this).closest('.metric-altmetric').closest('.metrics-bottom').addClass('one');
+        $(this).closest('.metric-altmetric').remove();
+    });
+</script>
+        
+
+
+
+    
+    
+    
+    
+    
+    
+
+    
+        
+        
+        
+    
+
+    <div class="share-box">
+        <ul>
+            <li class="icon-share"></li>
+            <li><a aria-label="Share on Facebook"
+                   href="https://www.facebook.com/sharer.php?u=https://researchportal.tuni.fi/en/publications/refarag-re-ranking-forbias-mitigation-inretrieval-augmented-gener/%3Futm_source%3Dfacebook%26utm_medium%3Dsocial%26utm_campaign%3Dsharelink%26doi%3D10.1007%2F978-3-032-05727-3_42&p[summary]=Check+out+this+research+output+at+Tampere+University+Research+Portal%3A+ReFaRAG%3A+Re-ranking+for%C2%A0Bias+Mitigation+in%C2%A0Retrieval-Augmented+Generation"
+                   class="icon-facebook"
+                   onclick="window.location.origin('https://www.facebook.com/sharer.php?u=https://researchportal.tuni.fi/en/publications/refarag-re-ranking-forbias-mitigation-inretrieval-augmented-gener/%3Futm_source%3Dfacebook%26utm_medium%3Dsocial%26utm_campaign%3Dsharelink%26doi%3D10.1007%2F978-3-032-05727-3_42&p[summary]=Check+out+this+research+output+at+Tampere+University+Research+Portal%3A+ReFaRAG%3A+Re-ranking+for%C2%A0Bias+Mitigation+in%C2%A0Retrieval-Augmented+Generation', 'Facebook', 'width=600,height=600,scrollbars=no,resizable=no');
+                   return false;" target="popup"></a></li>
+            <li><a aria-label="Share on Twitter"
+                   href="https://twitter.com/intent/tweet?url=https://researchportal.tuni.fi/en/publications/refarag-re-ranking-forbias-mitigation-inretrieval-augmented-gener/%3Futm_source%3Dtwitter%26utm_medium%3Dsocial%26utm_campaign%3Dsharelink%26doi%3D10.1007%2F978-3-032-05727-3_42&text=Check+out+this+research+output+at+Tampere+University+Research+Portal%3A+ReFaRAG%3A+Re-ranking+for%C2%A0Bias+Mitigation+in%C2%A0Retrieval-Augmented+Generation"
+                   onclick="window.location.origin('https://twitter.com/intent/tweet?url=https://researchportal.tuni.fi/en/publications/refarag-re-ranking-forbias-mitigation-inretrieval-augmented-gener/%3Futm_source%3Dtwitter%26utm_medium%3Dsocial%26utm_campaign%3Dsharelink%26doi%3D10.1007%2F978-3-032-05727-3_42&text=Check+out+this+research+output+at+Tampere+University+Research+Portal%3A+ReFaRAG%3A+Re-ranking+for%C2%A0Bias+Mitigation+in%C2%A0Retrieval-Augmented+Generation doi%3A10.1007%2F978-3-032-05727-3_42', 'Twitter', 'width=600,height=600,scrollbars=no,resizable=no');
+                   return false;" class="twitter" target="popup"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 300 271">
+                    
+                    <path d="m236 0h46l-101 115 118 156h-92.6l-72.5-94.8-83 94.8h-46l107-123-113-148h94.9l65.5 86.6zm-16.1 244h25.5l-165-218h-27.4z"></path>
+                </svg></a></li>
+            <li><a aria-label="Share on LinkedIn"
+                   href="https://www.linkedin.com/shareArticle?mini=true&url=https://researchportal.tuni.fi/en/publications/refarag-re-ranking-forbias-mitigation-inretrieval-augmented-gener/%3Futm_source%3Dlinkedin%26utm_medium%3Dsocial%26utm_campaign%3Dsharelink%26doi%3D10.1007%2F978-3-032-05727-3_42&summary=Check+out+this+research+output+at+Tampere+University+Research+Portal%3A+ReFaRAG%3A+Re-ranking+for%C2%A0Bias+Mitigation+in%C2%A0Retrieval-Augmented+Generation"
+                   onclick="window.location.origin('https://www.linkedin.com/shareArticle?mini=true&url=https://researchportal.tuni.fi/en/publications/refarag-re-ranking-forbias-mitigation-inretrieval-augmented-gener/%3Futm_source%3Dlinkedin%26utm_medium%3Dsocial%26utm_campaign%3Dsharelink%26doi%3D10.1007%2F978-3-032-05727-3_42&summary=Check+out+this+research+output+at+Tampere+University+Research+Portal%3A+ReFaRAG%3A+Re-ranking+for%C2%A0Bias+Mitigation+in%C2%A0Retrieval-Augmented+Generation doi%3A10.1007%2F978-3-032-05727-3_42', 'LinkedIn', 'width=600,height=600,scrollbars=no,resizable=no');
+                   return false;" class="icon-linkedin" target="popup"></a></li>
+            <li><a aria-label="Share by email" href="/cdn-cgi/l/email-protection#142b6761767e717760294671527546555331275531262446713966757a7f7d7a73312624727b66315726315524567d7567312624597d607d7375607d7b7a3126247d7a315726315524467160667d716275783955617379717a60717031262453717a716675607d7b7a32767b706d29577c71777f3126247b6160312624607c7d67312624667167717566777c3126247b6160646160312624756031262440757964716671312624417a7d627166677d606d312624467167717566777c312624447b666075783127553126244671527546555331275531262446713966757a7f7d7a73312624727b66315726315524567d7567312624597d607d7375607d7b7a3126247d7a315726315524467160667d716275783955617379717a60717031262453717a716675607d7b7a3468347c606064672e3b3b667167717566777c647b666075783a60617a7d3a727d3b717a3b646176787d7775607d7b7a673b667172756675733966713966757a7f7d7a7339727b66767d756739797d607d7375607d7b7a397d7a667160667d716275783975617379717a6071703973717a71663b2b6160794b677b61667771297179757d78327579642f6160794b7971707d6179297179757d78327579642f6160794b77757964757d737a29677c756671787d7a7f" class="icon-email"></a></li>
+        </ul>
+    </div>
+
+
+
+
+    
+        </div>
+    </div>
+
+    <div id="new-modal-overlay"></div>
+    
+    </main>
+
+    <footer id="page-footer" class="main-footer">
+        <div class="container">
+            <div class="footer-wrapper">
+                <div class="content-navigation three-third">
+                    <div dir="ltr" class="footer-columns">
+                        
+                        <div class="footer-column">
+                            <p>
+                                Powered by <a href="http://www.elsevier.com/online-tools/research-intelligence/products-and-services/pure" target="_blank">Pure <span class="sr-only">Link opens in a new tab</span></a>, <a href="http://www.scopus.com/" target="_blank">Scopus <span class="sr-only">Link opens in a new tab</span></a> & <a href="https://www.elsevier.com/products/elsevier-fingerprint-engine" target="_blank">Elsevier Fingerprint Engine&trade; <span class="sr-only">Link opens in a new tab</span></a>
+                            </p>
+
+                            <p>
+                                All content on this site: Copyright &copy; 2026 Tampere University Research Portal, its licensors, and contributors. All rights are reserved, including those for text and data mining, AI training, and similar technologies. For all open access content, the relevant licensing terms apply
+                            </p>
+
+                            <p>We use cookies to help provide and enhance our service and tailor content. By continuing you agree to the <a href="/en/about/cookies/">use of cookies</a></p>
+                            <p><button id="ot-sdk-btn" class="ot-sdk-show-settings"></button></p>
+                            
+                            <p></p>
+                        </div>
+
+                        <div class="footer-column">
+                            
+                                <p><a href="https://www.tuni.fi/privacynotice-tunicris" target="_blank">Tampere University Research Portal data protection policy <span class="sr-only">&nbsp; Link opens in a new tab</span></a></p>
+                            
+                            
+                            
+                                <p><a href="/en/web-accessibility/" rel="nofollow" target="_blank">About web accessibility <span class="sr-only">&nbsp; Link opens in a new tab</span></a></p>
+                            
+
+                            <p>
+                                
+                            </p>
+
+                            <p>
+                                
+                            </p>
+
+                            <p>
+                                <a href="https://elsevier.responsibledisclosure.com/hc/en-us/requests/new" target="_blank" rel="nofollow">Report vulnerability <span class="sr-only">&nbsp; Link opens in a new tab</span></a>
+                            </p>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="back-to-top">
+            <a href="#" class="back-to-top" aria-label="Go to top"><i class="icon icon-up-open"></i></a>
+        </div>
+    </footer>
+
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="//d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script>
+
+
+
+    
+
+    
+
+
+<script>window.appData = window.appData || [];</script><script type="text/javascript">
+try {(function() {
+appData.push({...{"page":{"businessUnit":"ELS:RP:ST","cmsName":"Pure Portal","environment":"prod","language":"en","loadTime":"298","loadTimestamp":"1792671084652","name":"pure portal:publications:view","noTracking":"false","productName":"PR","type":"CP-CA"},"visitor":{"accountId":"","accountName":"pr:Tampere University of Technology","ipAddress":"","accessType":"pr:ANON_GUEST","loginStatus":"anonymous"},"content":[{"id":"31e2f980-d4b2-4b36-a126-04a73b9f448d","title":"ReFaRAG: Re-ranking for Bias Mitigation in Retrieval-Augmented Generation","recordType":"researchoutput"}]}, event: "pageLoad"});})();} catch(e) {if(console) { console.log(e) } }</script>
+<script>function trackPage(){try {(function() {
+window.appData = window.appData || [];
+})();} catch(e) {if(console) { console.log(e) } }}</script>
+
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" data-cf-beacon='{"version":"2024.11.0","token":"9d2ff5cbad50470d8a05650251088ddf","spa":2}' crossorigin="anonymous"></script>
+</body>
+</html>
+

@@ -1,0 +1,114 @@
+[
+  {
+    "id": "R02",
+    "title": "FAIR-RAG: An End-to-End Framework for Mitigating Political Bias through Fair Retrieval-Augmented Generation",
+    "open_access": {
+      "is_oa": true,
+      "oa_status": "hybrid",
+      "oa_url": "https://doi.org/10.1145/3805712.3809651",
+      "any_repository_has_fulltext": false
+    },
+    "locations": [
+      {
+        "id": "doi:10.1145/3805712.3809651",
+        "doi": "https://doi.org/10.1145/3805712.3809651",
+        "is_oa": true,
+        "landing_page_url": "https://doi.org/10.1145/3805712.3809651",
+        "pdf_url": null,
+        "source": {
+          "id": "https://openalex.org/S4363608773",
+          "display_name": "International ACM SIGIR Conference on Research and Development in Information Retrieval (SIGIR)",
+          "issn_l": null,
+          "issn": null,
+          "is_oa": false,
+          "is_in_doaj": false,
+          "is_core": false,
+          "listed_in": [],
+          "host_organization": null,
+          "host_organization_name": null,
+          "host_organization_lineage": [],
+          "host_organization_lineage_names": [],
+          "type": "conference"
+        },
+        "license": "cc-by",
+        "license_id": "https://openalex.org/licenses/cc-by",
+        "version": "publishedVersion",
+        "is_accepted": true,
+        "is_published": true,
+        "raw_source_name": "Proceedings of the 49th International ACM SIGIR Conference on Research and Development in Information Retrieval",
+        "raw_type": "proceedings-article"
+      }
+    ],
+    "best_oa_location": {
+      "id": "doi:10.1145/3805712.3809651",
+      "doi": "https://doi.org/10.1145/3805712.3809651",
+      "is_oa": true,
+      "landing_page_url": "https://doi.org/10.1145/3805712.3809651",
+      "pdf_url": null,
+      "source": {
+        "id": "https://openalex.org/S4363608773",
+        "display_name": "International ACM SIGIR Conference on Research and Development in Information Retrieval (SIGIR)",
+        "issn_l": null,
+        "issn": null,
+        "is_oa": false,
+        "is_in_doaj": false,
+        "is_core": false,
+        "listed_in": [],
+        "host_organization": null,
+        "host_organization_name": null,
+        "host_organization_lineage": [],
+        "host_organization_lineage_names": [],
+        "type": "conference"
+      },
+      "license": "cc-by",
+      "license_id": "https://openalex.org/licenses/cc-by",
+      "version": "publishedVersion",
+      "is_accepted": true,
+      "is_published": true,
+      "raw_source_name": "Proceedings of the 49th International ACM SIGIR Conference on Research and Development in Information Retrieval",
+      "raw_type": "proceedings-article"
+    }
+  },
+  {
+    "id": "F06",
+    "title": "Yes is Harder than No: A Behavioral Study of Framing Effects in Large Language Models Across Downstream Tasks",
+    "open_access": {
+      "is_oa": false,
+      "oa_status": "closed",
+      "oa_url": null,
+      "any_repository_has_fulltext": false
+    },
+    "locations": [
+      {
+        "id": "doi:10.1145/3746252.3761350",
+        "doi": "https://doi.org/10.1145/3746252.3761350",
+        "is_oa": false,
+        "landing_page_url": "https://doi.org/10.1145/3746252.3761350",
+        "pdf_url": null,
+        "source": {
+          "id": "https://openalex.org/S7407085931",
+          "display_name": "ACM International Conference on Information and Knowledge Management (CIKM)",
+          "issn_l": null,
+          "issn": null,
+          "is_oa": false,
+          "is_in_doaj": false,
+          "is_core": false,
+          "listed_in": [],
+          "host_organization": null,
+          "host_organization_name": null,
+          "host_organization_lineage": [],
+          "host_organization_lineage_names": [],
+          "type": "conference"
+        },
+        "license": null,
+        "license_id": null,
+        "version": "publishedVersion",
+        "is_accepted": true,
+        "is_published": true,
+        "raw_source_name": "Proceedings of the 34th ACM International Conference on Information and Knowledge Management",
+        "raw_type": "proceedings-article"
+      }
+    ],
+    "best_oa_location": null
+  }
+]

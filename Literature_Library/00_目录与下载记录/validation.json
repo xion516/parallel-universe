@@ -1,0 +1,22 @@
+{
+  "validated_utc": "2026-10-22T12:23:52.927398+00:00",
+  "record_count": 80,
+  "unique_id_count": 80,
+  "primary_pdf_count": 76,
+  "primary_pdf_unique_sha256_count": 76,
+  "institutional_html_fulltext_count": 2,
+  "pending_fulltext_ids": [
+    "F06",
+    "R02"
+  ],
+  "standalone_appendix_pdf_count": 1,
+  "all_pdf_headers_pages_titles_or_dois_and_hashes_checked": true,
+  "original_catalog_unchanged_against_snapshot": true,
+  "original_catalog_sha256": "a7af6c60b53d494ef25665b4c08d6214dc797b889b7a96a76e02bee77e56b250",
+  "pdf_actual_pages_total": 1752,
+  "main_fulltext_bytes": 183463051,
+  "markdown_local_links_checked": 433,
+  "broken_local_links": 0,
+  "physical_pdf_count_including_one_appendix": 77,
+  "all_80_record_cards_exist": true
+}

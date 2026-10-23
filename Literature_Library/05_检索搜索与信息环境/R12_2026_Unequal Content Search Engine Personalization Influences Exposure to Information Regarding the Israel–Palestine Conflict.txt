@@ -1,0 +1,1009 @@
+本文件为PDF自动提取文本，仅供检索；排版、图表和页码请以PDF为准。
+Unequal Content: Search Engine Personalization Influences Exposure to Information Regarding the Israel–Palestine Conflict
+
+Received 8 October 2025, accepted 6 November 2025, date of publication 21 November 2025, date of current version 30 January 2026.
+Digital Object Identifier 10.1109/ACCESS.2025.3635871
+
+
+
+
+Unequal Content: Search Engine Personalization
+Influences Exposure to Information Regarding the
+Israel–Palestine Conflict
+ÍRIS DAMIÃO 1,2 , JOSÉ M. REIS1 , PAULO ALMEIDA                                         1 , NUNO SANTOS                 2,3 , (Member, IEEE),
+
+AND JOANA GONÇALVES-SÁ 1,4
+1 Social Physics and Complexity Laboratory, Laboratório de Instrumentação e Física Experimental de Partículas (LIP), 1649-003 Lisbon, Portugal
+2 Instituto Superior Técnico, Universidade de Lisboa, Lisbon, Portugal
+3 INESC-ID, 1000-029 Lisbon, Portugal
+4 NOVA LINCS, NOVA Laboratory for Computer Science and Informatics, Department of Computer Science, NOVA School of Science and Technology, NOVA
+
+University of Lisbon, 2829-516 Caparica, Portugal
+Corresponding author: Joana Gonçalves-Sá (joanagsa@lip.pt)
+This work was funded by the European Research Council (ERC) through the European Union’s (EU) Horizon 2020 and Horizon Europe
+research and innovation programs, both to JGS (Grant 853566 and 101100653), by the Fundação para a Ciência e Tecnologia (FCT)
+through Ph.D. Fellowship 2022.12547.BD to ID and, by the EU’s Resilience and Recovery Plan in the framework of the FCT contract
+GDI4CA with the support of the Centro Nacional de Computação Distribuída (CNCA).
+
+
+  ABSTRACT Search engines serve as primary gateways to information, and users tend to trust them,
+  despite being opaque algorithms and customizing results in non-transparent ways. Personalization, such
+  as tailoring content based on a user’s location, is useful for routine content searches (e.g., finding nearby
+  restaurants). However, this same personalization becomes problematic – and potentially harmful – when
+  users seek information on sensitive or contentious geopolitical topics. In this work, we present the first
+  large-scale measurement of how search engine curation and personalization affect users across different
+  countries with distinct regional, political, and cultural traits. We developed a novel, privacy-preserving, bot-
+  based methodology that simulates online user profiles embedded with cumulative regional traits. These
+  customized bots were deployed from different locations and conducted identical searches, either on the
+  Israel-Palestine conflict (e.g. ‘‘Hamas’’) or neutral queries (e.g. ‘‘dinner recipe’’), using both Google and
+  DuckDuckGo. Our study addresses two main questions: 1) How do search results for the same query
+  differ across countries, and which factors drive these differences?; and 2) Does personalization vary more
+  significantly for conflict-related or for general queries? Our findings show that search result rankings are
+  significantly influenced by location, interface language, and simulated browsing context, with the strongest
+  effects observed for conflict-related queries. In many cases, these differences led to non-neutral portrayals
+  of the same event, depending on the user’s presumed region. These results highlight how search engine
+  personalization can shape public understanding of global events, creating fragmented or biased informational
+  environments. This underscores the importance of educating users about the invisible filters that influence
+  their access to information and, from a policy standpoint, these findings reveal a pressing need for greater
+  transparency and accountability in how search engines personalize politically sensitive content. This is
+  especially urgent given their outsized role in shaping democratic discourse and public opinion worldwide.
+
+
+  INDEX TERMS Search engine audit, filter bubble effect, personalization, algorithmic transparency.
+
+
+I. INTRODUCTION                                                                                 decisions. In recent decades, the way people seek information
+Access to high-quality information is a central tenet of                                        has shifted from traditional to online media [1], [2], [3], with
+democratic regimes, allowing citizens to make informed                                          search engines playing a crucial role as gatekeepers. Google,
+                                                                                                for example, processes around 8.5 billion daily queries [4],
+   The associate editor coordinating the review of this manuscript and                          [5], highlighting its influence on global information con-
+approving it for publication was Derek Abbott              .                                    sumption.
+                                  2025 The Authors. This work is licensed under a Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 License.
+VOLUME 14, 2026                                      For more information, see https://creativecommons.org/licenses/by-nc-nd/4.0/                         15347
+                                                                 Í. Damião et al.: Unequal Content: Search Engine Personalization Influences Exposure
+
+
+
+
+    While this shift has greatly enhanced the speed and                 in a way that closely resembled real users – robust enough
+convenience of accessing information, it also raises concerns           to evade detection mechanisms. Specifically, we queried two
+about how search results shape users’ worldviews. Studies               search engines – Google, the most widely used globally, and
+show that people searching for news place high trust in search          DuckDuckGo, a privacy-oriented alternative – on conflict-
+engine results [6], [7], [8], [9], [10], often seeing these results     specific (e.g.: ‘‘Hamas attacks’’) and general topics (e.g:
+as the most relevant [11]. Simultaneously, search engines               ‘‘Popular books 2024’’). Our analysis focuses on three main
+explicitly acknowledge their use of personalization algo-               research questions: (1) Does personalization affect polarizing
+rithms that tailor content based on user-specific factors, such         and non-polarizing queries differently, and is it amplified
+as location, language, preferences, and search history [12],            by additional user identity traits (e.g., language, browsing
+[13], [14], [15]. While such tailoring can be very useful               history)? (2) Do variations in URLs reflect fundamentally
+for routine tasks, such as looking for a service, it becomes            different content recommendations? (3) Do these differences
+problematic for sensitive topics, such as political news, where         lead to distinct representations of the Israeli–Palestinian
+customized results can introduce bias and reinforce ‘‘filter            conflict depending on the user’s location?
+bubbles’’ [15], [16]. Given the opaque nature of search engine             Performing this study presented several challenges. First,
+algorithms, which tend to monetize clicks, it is difficult to           search engines are proprietary and opaque, making it difficult
+determine how much of this tailoring affects controversial              to systematically examine how their algorithms work.
+topics compared to less sensitive ones. If differences exist,           Second, it is essential to mimic realistic user behavior across
+greater transparency is needed to explain how and why search            different regions, languages, and browsing habits without
+engines suggest user-specific results.                                  introducing bias. Third, it is not trivial to distinguish between
+    Prior research has largely focused on either non-sensitive          neutral and politically charged queries to draw meaningful
+topics [15], [17] or political events – almost exclusively              conclusions, and define reliable metrics to measure the
+elections [18], [19], [20], [21], [22], [23], [24]. Moreover,           variations in search engine results. This paper addresses these
+these works often focused on isolated factors, typically                challenges and makes the following key contributions:
+analyzing a single feature at a time (e.g. location [14],                  1. Crawling method with incremental profiling: Our
+[15]), with an emphasis on URL differences rather than                  bots were developed to increasingly resemble users from dif-
+a comprehensive assessment of content type or slant [15],               ferent countries (Israel, Saudi Arabia, Brazil, United States)
+[20], [22], [23]. This narrow approach leaves a gap in the              with different perspectives and interests regarding the Israel-
+full understanding of the scope, extent and implications of             Palestine conflict. Type 1 bots differed only by location.
+search engine personalization. In this work, we address these           Type 2 bots included browser language customization. Type 3
+limitations by presenting, to the best of our knowledge, the            bots added browsing history through exposure to regional
+first empirical study of search engine personalization to:              news content. This staged profiling allowed us to assess both
+    (i) Explore country-level location-based personaliza-               the level of personalization and the specific contribution of
+tion on geopolitical topics: while previous studies have                each attribute.
+documented the impact of location on search engine results,                2. Metrics for measuring customization: We analyzed
+little is known about how users from different countries                both the degree and nature of variation in search results
+receive search results for identical queries, particularly for          using a metricbased on Rank-Biased Overlap (RBO) [25],
+topics in which geographic context is central to interpretation.        which gives more weight to top-ranking results. We also
+    (ii) Investigate the combined effect of multiple regional           applied qualitative methods to assess content differences and
+traits: in contrast to previous studies that isolate the effects        potential ideological leanings. This dual approach enables a
+of single features, we propose a method to evaluate how                 broader application, beyond this specific case study.
+a combination of user online attributes (location, browser                 3. Significant findings: Our study reveals stronger levels
+language, and local browsing history) may interact to                   of search engine personalization than previously reported,
+influence search engine personalization.                                particularly for politically sensitive queries [18], [20], [26].
+    (iii) Focus on a globally polarizing case study: unlike             The results indicate that personalization is significantly
+studies centered on broad or domestic political topics,                 more pronounced in conflict-related searches than in gen-
+we analyze the Israeli-Palestinian conflict, a setting where            eral queries, often leading to divergent portrayals of the
+location fundamentally shapes interpretation. Characterized             Israeli–Palestinian conflict. Moreover, despite claims by
+by divergent political, cultural, and linguistic narratives,            search engines that they limit personalization, browsing
+this conflict serves as an ideal lens to examine how                    history had a measurable effect on results variation, including
+search personalization (driven by location and other identity           for DuckDuckGo.
+markers) can amplify politically consequential biases.
+    To this end, we developed a methodology using web                   II. BACKGROUND AND RELATED WORK
+crawlers (bots) designed to closely mimic human browsing                Algorithmic personalization, particularly recommendation
+behavior. These bots, customizable by location (via proxies),           bias, has been extensively studied in the context of social
+language, and user profiles (via cookies), were programmed              media feeds [27], [28], [29] and content platforms [30],
+to perform queries at a human-like pace, scroll through results         [31], [32]. Studies of Facebook, TikTok, and Twitter/X have
+
+15348                                                                                                                                VOLUME 14, 2026
+Í. Damião et al.: Unequal Content: Search Engine Personalization Influences Exposure
+
+
+
+
+investigated how tailoring of content reinforces existing pref-                   TABLE 1. Customization features disclosed by search engines’ terms of
+                                                                                  service. ✓ - feature impacts search results ✗ - feature does not impact
+erences [33], contributing to phenomena such as filter bubbles                    search results ● - feature impacts results when user is logged in ❍ -
+[34] and/or echo chambers [33] and polarization [35]. Similar                     policy is unclear on whether feature impacts results.
+concerns have been raised in platforms such as YouTube [30],
+[31] and Amazon [36], where recommendation algorithms
+influence both consumer behavior and public opinion. While
+there is disagreement on the extent and pervasiveness of
+these phenomena [29], [33], [34], a large body of work
+highlights risks of polarization, reinforcement of biases, and
+reduced exposure to diverse viewpoints. This has led to
+significant discussions on how recommender systems might
+be redesigned to promote more democratic and less biased
+information ecosystems [37], [38].
+   By contrast, and despite occupying a key position as
+gatekeepers to information, search engines have received
+comparatively less attention. First, they are often the starting
+point for active information seeking – users repeatedly turn
+to search engines to ‘‘find the truth’’ or to obtain knowledge
+[39], [40]. Second, factors such as keyword matching, site
+authority, user location, and language contribute to how
+                                                                                      Google is the most widely used search engine, and claims
+results are selected and ranked [41], [42], but the exact
+                                                                                  that results may differ from user to user based on ‘‘time,
+mechanisms remain opaque. Third, they are highly trusted
+and the trust placed in their results can be so significant that                  context and personalization’’ [44]. Time differences arise
+even subtle ranking manipulations have been shown to shape                        from data being updated at various speeds across data centers.
+                                                                                  Context includes aspects such as location, language, device
+users’ attitudes and decisions [43].
+                                                                                  type (screen, mobile or desktop), and related results, which
+   Still, the literature on search engine personalization
+                                                                                  may appear if a user engages with specific content on the
+remains divided on two key questions: (1) the extent of
+                                                                                  results page. Personalized results – specifically tailored to an
+curation present in search results, and (2) the magnitude of its
+                                                                                  individual user profile – are claimed to be tied to a Google
+impact on users, including whether search engines generate
+                                                                                  Account, only occurring when users are logged in.
+filter-bubble-like effects.
+                                                                                      DuckDuckGo is known for its privacy-concerned model,
+   In this work, we examine how both well-documented
+                                                                                  explicitly stating that it does not log IP addresses, browsing
+features (e.g., location, as acknowledged by search engines
+                                                                                  history, or search history to determine results. However, while
+and confirmed in prior studies) and less explored factors
+                                                                                  it does not use exact user locations, it provides geographically
+influence the order, content, and leaning of search engine
+                                                                                  tailored results through proxies [12].
+results, particularly in the context of geographically and
+politically sensitive topics such as the deeply polarized
+Israeli-Palestinian conflict. To better situate this study, the                    B. SEARCH ENGINE AUDITS
+remainder of this section first outlines the public policies                      Given the proprietary nature of search engine algorithms,
+regarding personalization of search engine results, and then                      researchers have relied on external audits to evaluate the
+reviews prior audit studies of search engine algorithms.                          extent and possible negative consequences of search engine
+                                                                                  personalization. In 2013, Hannak et al. [15] introduced a
+                                                                                  methodology based on comparing the results of a ‘‘real’’
+A. SEARCH ENGINE POLICIES                                                         person with those of a ‘‘fresh’’ profile for the same query,
+Search engines typically outline their public policies regard-                    through a browser extension. They showed that ‘‘location’’
+ing personalization and customization of results on their web-                    and ‘‘being logged-in’’ were the most important factors to
+sites. To understand what kinds of behavior can be expected                       induce differences in search results. Since this pioneering
+under these policies, we describe the approaches of Google                        work, other studies have relied solely on data donation, both
+and DuckDuckGo below and summarize their main claims in                           from general users [17], [20], [45], [46] and from search
+Table 1. Although search engines often distinguish between                        engine companies themselves [47]. More recently, research
+more general factors used to curate results – customization –                     has shifted towards agent-based methodologies, closer to the
+and more personal cues, such as browsing history, that tailor                     one proposed and developed in this work [24], [48], [49].
+results to an individual user – personalization – throughout                      However, our approach distinguishes itself through the incre-
+this paper we use personalization to refer to any form of                         mental development, robustness, and detailed configuration
+tailoring. This simplification follows prior literature and                       of our agent infrastructure – here referred to as bots.
+reflects the view that any influence on search results can                           Notably, due to its importance, most previous studies
+shape users’ perspectives on particular topics.                                   have focused on political customization in the context of
+
+VOLUME 14, 2026                                                                                                                                      15349
+                                                              Í. Damião et al.: Unequal Content: Search Engine Personalization Influences Exposure
+
+
+
+
+electoral processes, and almost solely audit Google [18], [19],      more general, non-sensitive queries. Figure 1 summarizes our
+[20], [22], [24], [50]. These often examine the effects of           methodology for developing and implementing this querying
+different factors in isolation (typically either location [14],      and auditing system. It is divided into three main stages: 1)
+[17] or browsing history [24]), and have produced mixed              design of each bot, including its incremental feature design
+findings: while some earlier research found no significant           and deployment, 2) audit of search engine results, and 3)
+personalization in search results based on users’ political          evaluation of search result differences in terms of URLs,
+profiles [18], [20], [26], more recent studies suggest that          content, and possible leaning.
+a user’s political leaning can influence the political bias
+of results, especially for top news listings [22], [24].             A. BOTS AND THEIR INCREMENTAL DESIGN
+Moreover, location has been shown to have a stronger                 Using bots over real user data offers several advantages: (1)
+influence on local queries than on political ones [14], [17].        precise control over key profile features to isolate their impact
+Methodologically, this literature primarily compares URLs,           on search results; (2) it is an ethical and privacy protecting
+only rarely investigating differences in the content that            approach, avoiding sensitive user data collection; and (3) does
+these URLs direct to. Important exceptions are the work              not require asking users to perform sensitive searches, which
+of Le et al. [24] – measuring the leaning of search engine           could influence their future experiences [61].
+results’ domains, but not of individual URLs –, of Robertson
+et al. [22] – grouping search results in categories –, and of        1) BOT CONSTRUCTION AND OPTIMIZATION
+Hu et al. [21] – scoring partisan bias of results’ snippets and      We developed each bot by extending the functionalities
+their corresponding web pages.                                       of OpenWPM1 (Version 0.28.0), a community-trusted and
+   More recently, scholars have also turned their attention to       flexible instrument for internet measurements and automating
+the inherent biases of search engines themselves [51], beyond        web browsing [62]. The bots were built using Selenium and
+those possibly introduced by personalization. This body of           deployed using version 123 of the Firefox browser, which
+work has documented systematic disparities, including gen-           can be parallelized and allows control of location, through
+der [52], [53], race [53], [54], and source-related biases [55],     proxy configuration, and browser settings such as language,
+[56], [57], as well as the amplification of inaccurate or            cookies, and other forms of tracking, as detailed below.
+conspiracy-promoting content [58], [59]. In parallel, another        To minimize bot detection by search engines, we prioritized
+line of research has shown that biases can also arise from           fresh browser instances, used residential proxies, and the bots
+users themselves, particularly through the ways in which             were programmed to mimic human-like behavior, scrolling
+queries are framed and selected, which significantly shape the       through pages, clicking on page elements, and typing queries
+results returned [46], [60]. These findings raise the question       at a human-like pace. Together, these were sufficient to
+of whether similar structural and self imposed biases might          bypass detection and allowed the completion of nearly
+emerge when users seek information on politically polarizing         all queries (Appendix, Figure A4): despite the technical
+topics – where the stakes of representation and accuracy are         challenges posed by search engine defenses, the process was
+particularly high.                                                   robust, yielding a substantial dataset for analysis (7,496 first-
+   Therefore, our work aims to bridge these perspectives             page search results).
+by exploring not only the impact of individual features on              Location: To change the location of the bots, Firefox
+a single search engine, but the more natural setting of a            settings were adjusted to use residential ISP proxies provided
+combination of several significant factors – those highlighted       by Bright Data.2
+by previous studies and publicly acknowledged by search                 ISP proxies act as intermediate remote services for Internet
+engines (Table 1). Our encompassing methodology analyzes             access, masking the original source of the HTTP request.
+how these factors increasingly influence search outcomes in          Using this system, the bots were placed in one of four
+terms of URLs, content, and leaning. Specifically, we con-           locations: Israel (IL), Saudi Arabia (SA), Brazil (BR), and
+figure bots to simulate users from different regions, each           New York, United States (US-NY). Israel was selected due
+carrying multiple identity signals (e.g., language settings,         to its direct involvement in the conflict, with a majority
+location, and browsing history), and compare the results when        Jewish and Hebrew-speaking population. Since Bright Data
+performing two types of queries: (1) popular and general             did not offer ISP proxies for Palestine, Lebanon, or Iran,
+queries, and (2) queries on topics where location is a critical      Saudi Arabia was chosen for its majority Muslim and Arabic-
+factor.                                                              speaking population. New York and Brazil were chosen as
+                                                                     not-directly involved controls: New York due to its sizable
+III. METHODOLOGY                                                     Jewish community [63], and the U.S.’s strong support for
+Our methodology relies on a web crawling system, specif-             Israel, and Brazil as a more neutral location [64], with less
+ically developed to explore how search engine results may            support for Israel, and having a predominantly Christian
+change for different user profiles. It enables the execution         population.
+of web crawlers (bots) that can mimic typical online user
+behavior, be deployed to different locations, and make queries         1 https://github.com/openwpm/OpenWPM
+that are either related to the Israeli-Palestinian conflict or         2 https://brightdata.com
+
+
+15350                                                                                                                             VOLUME 14, 2026
+Í. Damião et al.: Unequal Content: Search Engine Personalization Influences Exposure
+
+
+
+
+                   FIGURE 1. Methodological scheme. Three types of bots were deployed (1): Type 1 (green) only differ in location,
+                   Type 2 (violet) in location and language, Type 3 (yellow) in location, language, and browsing history, having
+                   collected cookies beforehand. These bots are directed to search engines and make ‘‘general’’ or ‘‘conflict specific’’
+                   queries (2). The results are analyzed according to URL, content type, and leaning (3).
+
+
+
+
+   Browser Language: To simulate Internet access with                             of URLs (20) per location. The final list of visited domains is
+browsers in the predominant language of the aforementioned                        provided in Table A11 in Appendix.
+locations, Firefox language settings for each bot were                               To generate browsing profiles for Type 3 bots, newly
+adjusted accordingly: Hebrew (he) for Israel, Arabic (ar) for                     created bots, with no history or cookies, were instructed
+Saudi Arabia, Portuguese (pt) for Brazil, and English (en) for                    to visit the random sample of 20 websites sequentially for
+the United States.                                                                each of the two lists curated for that particular location
+   Browsing History: Online activity and browsing history                         (Figure 1, 1A). During these visits, the bots collected and
+(website visits, content interactions, etc.) can be tracked                       saved all tracking data, which included cookies placed by
+through cookies placed by first and third party sites, or by                      first and third parties (OpenWPM setting: tp_cookies
+the specific configuration of the device and browser used                         = always), JavaScript fingerprinting files (OpenWPM
+to access the internet (fingerprinting) [65], [66], [67].                         setting: js_instrument = True), and HTTP requests
+By instructing the bots to visit different online content, and                    (i.e., calls from external parties), which are collected by
+saving the resulting tracking data, we aimed to create distinct                   default with OpenWPM crawlers – Figure 1, 1B). This data
+browsing histories outside of the search engine platforms                         was then stored in Firefox’s profiles, which contained the
+(Type 3 bots).                                                                    bots’ full browsing history and tracking information.
+   Site selection: Two URL lists were created for each of
+the bot locations: 1- Conflict news: local news that contained                    2) INCREMENTAL DESIGN AND DEPLOYMENT
+one of the keywords ‘‘Palestine’,’ ‘‘Israel’’, ‘‘Hamas’’, and                     To study the impact of these three features (location, browser
+‘‘Netanyahu’’; 2- General news: local news that included                          language, and browsing history) on search engine results,
+the keywords ‘‘movie’’, ‘‘health’’, ‘‘well-being’’, ‘‘dinner                      we deployed three types of bots with an increasing number
+recipe’’, and ‘‘sports’’. When necessary, the keywords were                       of features. Type 1 are bots specified to be solely associated
+translated from English into the three other languages,                           to one of the four locations, Type 2 are bots that have both
+to collect local news in the most spoken language of the                          different location and browsing languages, and Type 3 are
+country. For all lists (one conflict-related news list and one                    bots that diverge in their location, browser language, and
+general news list for each of the four locations), URLs were                      browsing history (Figure 1). Importantly, the bots of Type 3
+obtained from October 7, 2023 to March 30, 2024, through                          were deployed simultaneously with bots having no browsing
+Media Cloud,3 a free and community supported tool that                            history (equivalent to a Type 2 bot) as a temporal control
+allows retrieval of news articles by keywords. To minimize                        (Stateless bots). Table 2 presents a summary of the features
+selection bias and to ensure that only local news sources were                    used by each type of bot, as well as the number (last column)
+included for each country, we applied consistent rules across                     deployed by type.
+all cases: (1) use of Media Cloud’s national collections [68],
+(2) reliance on the same keywords to identify relevant news                        B. SEARCH ENGINE AUDIT
+within those collections, which together yielded a total of                       In our study, two search engines were audited – Google
+230,598 URLs, and (3) random sampling of the same number                          and DuckDuckGo. Google was chosen for being the most
+                                                                                  used search engine worldwide [69], and DuckDuckGo for its
+  3 https://www.mediacloud.org/                                                   emphasis on privacy [12].
+
+VOLUME 14, 2026                                                                                                                            15351
+                                                                         Í. Damião et al.: Unequal Content: Search Engine Personalization Influences Exposure
+
+
+
+
+TABLE 2. Summary of bot types, their features, and respective number of         location and language settings (e.g., ‘‘il-HE’’ for Israel with
+bots associated with each configuration. In the case of Type 3 bots (with
+cookies) two different browsing histories were used: (Conflict news) if         Hebrew).
+the bot visited news articles related with the conflict and (General news)         To account for potential temporal fluctuations in ranking
+if the bots has a browsing history of news articles not related with the
+conflict. (Stateless) corresponds to bots that were released with Type 3
+                                                                                algorithms, two strategies were employed: (1) conducting
+bots but had no browsing history.                                               simultaneous searches on the same search engine to minimize
+                                                                                short-term variations, and (2) performing audits at least twice
+                                                                                over distinct time points to address longer-term changes.
+                                                                                   All audits were carried out in a local server with
+                                                                                two octacore processors and 64 GB of RAM, by setting
+                                                                                up a Docker container with Firefox and OpenWPM pre-
+                                                                                configured. Within each Docker container, Firefox instances
+                                                                                were configured to connect to the Internet through a
+                                                                                Bright Data proxy, using OpenWPM’s flexible configuration
+                                                                                features. The code for our audits methodology can be found
+                                                                                at this public repository: 10.5281/zenodo.17642372.
+
+                                                                                2) SEARCH ENGINE QUERIES
+                                                                                Queries were split into two categories: ‘‘General’’ (denoted
+                                                                                by the solid bars in Figures 2 and 3) and ‘‘Conflict-Specific’’
+                                                                                (dashed bars in said figures). The first category comprises
+                                                                                20 popular (and not conflict related) queries such as ‘‘Home
+                                                                                workout routines’’, ‘‘Popular books 2024’’, ‘‘how to tie a tie’’
+                                                                                (Table A1, column on the left). The second category, specific
+                                                                                to the conflict (e.g., ‘‘military complex Al-Shifa hospital’’,
+                                                                                ‘‘Hamas rapes’’), was defined in collaboration with the NGO
+                                                                                HoneyComb, an investigative journalism association that
+                                                                                tracks controversial online content, including disinformation.
+1) AUDIT
+                                                                                HoneyComb provided 10 distinct topics that were expanded
+For each search engine audit, multiple bots associated with                     using ChatGPT 3.5, to generate 27 specific queries, which
+different online user characteristics (see Table 2) were                        were then reduced to 20 to prevent redundancy (Table A1,
+simultaneously deployed. These bots input identical queries                     column on the right).
+and collect the resulting URLs along with their rankings.                          A total of 20 queries per group (general and conflict-
+This process is repeated across various queries and applied                     specific) were executed during the search engine audits
+to the two search engines. To minimize the risk of carry-over                   for both Type 1 and Type 2 bots. As additional complex-
+effects (where previous searches could influence current                        ity exponentially increases the number of combinations,
+results [15]), each audit began with the same initial user                      the audit deploying Type 3 bots performed a subset of
+profiles, launched in fresh browser instances.                                  8 queries from the original set (Appendix A, Table A1, gray
+   Three audits were conducted between 30 March and 4 May                       background). To maintain statistical integrity, each result
+2024 (before the inclusion of AI-generated responses and                        comparison ensured a consistent number of bots (accounting
+Chatbots in search responses), with each audit lasting an                       for occasional IP failures, Appendix A, Figure A5) and
+average of two days and involving the deployment of bots                        queries per location (Appendix A, Figure A4).
+of all types (Appendix I, Figure A1). For audits using
+Type 2 (location + browser language) and Type 3 (location
+                                                                                C. QUANTIFYING DIFFERENCES IN SEARCH RESULTS
++ browser language + browsing history) bots, where
+specifications became more detailed, we configured the bots                     After collecting search engine results and their respective
+so that the settings of each search engine were directly                        rankings, the differences across distinct bot profiles were
+comparable. Specifically, we ensured that engines were                          analyzed. This analysis was conducted in three stages:
+configured to use the primary language of the country
+and to prioritize local results. By default, DuckDuckGo                         1) QUANTIFYING DIFFERENCES IN URLS
+uses the browser language, while Google automatically uses                      When comparing two lists of URLs returned by search
+the regional ‘‘current location’’ to prioritize local content.                  engine queries (i.e., [website_1.com, website_2.com, . . . ]
+To make the settings consistent, we explicitly set both search                  vs. [website_3.com, website_1.com, . . . ]), both the links
+engines to use local results and the primary language of the                    themselves and their order were considered, as users typically
+country. For reference, see Appendix, Figures A2 (Google)                       prioritize top results over lower-ranked ones [70]. The
+and A3 (DuckDuckGo). Each of these bot configurations was                       Rank-Biased Overlap (RBO) metric [71] was used, which
+validated by collecting the HTML element that specifies the                     calculates how similar two lists are (ranging from 0 for totally
+
+15352                                                                                                                                        VOLUME 14, 2026
+Í. Damião et al.: Unequal Content: Search Engine Personalization Influences Exposure
+
+
+
+
+different lists to 1 for equal lists), considering the order of the               could influence the results, we also compared the overall
+items and different list sizes [71]:                                              number of unique URLs, domains, and news shown to the
+                                            ∞                                     bots by location. We found no concerning disparities – if
+                                            X              Xd
+             RBO(S, T , p) = (1 − p)              pd−1 ·                (1)       anything, bots located in Israel and Saudi Arabia were often
+                                                           d                      shown a greater diversity of results (see Appendix A, Figures
+                                            d=1
+                                                                                  A6, A7 and A8).
+where S and T are two ranked lists, d is the rank, Xd =
+|S1:d ∩ T1:d | and p determines the top-weightiness of the
+metric. For our analysis, p was set to 0.7, meaning that the                      3) QUANTIFYING DIFFERENCES IN LEANING
+first 3 results account for ≈ 66% of the total value of the                       To quantify leaning, the URLs from domains classified
+calculated RBO. The differences between two lists of search                       as ‘‘News’’ were selected from the 8 queries that were
+engine URL results were calculated as:                                            common to all three bot types (see Appendix A, Table A1).
+                                                                                  To minimize coder bias, these articles were scraped, all
+                             D = 1 − RBO                                (2)       domain-related information removed, and their title and
+                                                                                  content collected and automatically translated to English,
+   Specifically, we computed dissimilarity D for pairs of bots
+                                                                                  using the Google Translate package for Python, which
+with the same location and specifications, as well as for pairs
+                                                                                  provided an interface to Google’s translation API.
+with different locations and specifications (Table 2), while
+                                                                                     Two approaches were used to quantify leaning as pro-
+controlling for the number of comparisons when calculating
+                                                                                  Israel, slightly pro-Israel, neutral, slightly pro-Palestine or
+the averages of each condition. Other metrics, such as edit
+                                                                                  pro-Palestine: a) prompting the GPT-4o API (Appendix D,
+distance [72] and intersections of lists were also applied and
+                                                                                  Figure A17), and b) tasking workers hired through the MTurk
+yielded similar results.
+                                                                                  platform (Appendix D, Figure A18). In both cases, the
+                                                                                  prompt read: ‘‘Pro-Israel or pro-Palestine means that the text
+2) QUANTIFYING DIFFERENCES IN CONTENT
+                                                                                  favors the narrative of that side of the conflict, or elicits
+To account for the possibility that the bots received
+                                                                                  sympathy towards it.’’ MTurk workers who participated in
+similar results through different local or language spe-
+                                                                                  text classification were subject to two attention controls:
+cific URLs (e.g. https://en.wikipedia.org/wiki/Palestine vs.
+                                                                                  one during the recruitment stage, and another during the
+https://pt.wikipedia.org/wiki/Estado_da_Palestina), we clas-
+                                                                                  classification task. Each article was classified by a minimum
+sified all domains retrieved in broad categories (e.g. Enter-
+                                                                                  of two and a maximum of three MTurk workers. For this
+tainment, News, etc.). The classification was perfomed
+                                                                                  analysis, we retained only the articles where at least two
+automatically using ChatGPT-4o, and all domains were
+                                                                                  independent workers attributed the same classification, which
+manually verified by one of the researchers (Appendix C,
+                                                                                  corresponds to 65% of the total dataset. Thus, our leaning
+Table A8). After this classification, the comparisons were
+                                                                                  analysis is based exclusively on articles with total inter-coder
+computed considering lists of website categories ([[News_1,
+                                                                                  agreement.
+Political_1, . . . ] vs. [Political_1, News_1. . . ]), instead of
+single URL lists. As search results may contain multiple
+websites of the same category on a single results page,                            IV. RESULTS
+converting these lists into sets (i.e., removing duplicates)                      We organized the results as answers to the main questions
+would distort the comparison and produce unfair RBO values.                       guiding our work. We ask if our bots (or proxy-users) see
+Therefore, Xd in (1) was adapted to use a set-based overlap                       different results when querying search engines and, if so,
+for lists with repeated elements and defined as the count of                      how user features affect those differences (section IV-A).
+minimum occurrences of each element present in both lists                         This was done incrementally, by varying the level of bot
+up to that depth:                                                                 customization: first varying only the location (Type 1), then
+                 X                                                                varying both location and browser language (Type 2), and
+                        min count(x, Sd ), count(x, Td ) . (3)
+                                                         
+        Xd =                                                                      finally varying location, browser language, and browsing
+                  x∈Sd ∩Td                                                        history (Type 3). Next, we tested whether disparities in result
+where count(x, Sd ) is the number of times element x appears                      URLs also correspond to meaningful differences in content
+in the top d results of list S. For example, consider the top-5                   (section IV-B) and/or content leaning (section IV-C) towards
+elements of two lists: S5 = [a, b, a, c, d], T5 = [a, a, b, e, a].                Israel or Palestine.
+A regular set-based overlap calculation would score 2 (for
+a and b). However, since a appears at least twice in both                         A. QUANTIFYING THE IMPACT OF PROFILES AND OF
+lists, it should contribute more to the overlap. Equation 3,                      QUERIES ON SEARCH ENGINE RESULTS
+by considering the minimum number of occurrences of each                          1) DOES GEOGRAPHICAL LOCATION INFLUENCE SEARCH
+element in both lists, correctly accounts for repeated elements                   ENGINE RESULTS?
+and provides a more accurate measure of similarity.                               As discussed in the methods and summarized in Table 1,
+   Moreover, as Hebrew is much less spoken than the other                         search engines typically report customizing results based on
+languages and the availability of local sources per country                       location or proxy location, and this may prove problematic
+
+VOLUME 14, 2026                                                                                                                             15353
+                                                                           Í. Damião et al.: Unequal Content: Search Engine Personalization Influences Exposure
+
+
+
+
+FIGURE 2. URL Dissimilarity Results (D = 1 − RBO, where RBO is a similarity metric). Higher values of D indicate that the lists of search results differ more
+substantially, especially at the top of the page, whereas smaller values of D indicate that differences are infrequent and occur mainly at the bottom of the
+results page. (a) Average D values between search engine results for Type 1 bot pairs in the same location (light green) and different locations (dark
+green), for general (left) and conflict-specific (right, dashed) queries. (b) Average D for Type 2 bots with the same (light violet) and different (dark violet)
+locations and browser languages, across query types and search engines. (c) Average D for Type 3 bots with the same (light yellow) and different (dark
+yellow) location, browser language, and browsing history (cookies). (d) Average D for the 8 common conflict-specific queries across bot types, comparing
+bots with the same specifications (right) and different (left) across types (colors). Error bars represent 95% confidence intervals based on the
+bootstrapped samples from RBO values for the reported category comparisons (n=10,000 and seed=42). P-values were calculated with Mann-Whitney U
+test and adjusted with Bonferroni correction.*** denotes significant differences with p-value less than 0.001, ** less than 0.01, and * less than 0.05.
+Statistical details in Tables A2 and A3.
+
+
+
+
+when querying on geopolitical conflicts. To examine how                            2) DOES BROWSER LANGUAGE IMPACT SEARCH ENGINE
+location affects search engine results, we deployed Type 1                         RESULTS?
+bots in four distinct regions: Israel (IL), Saudi Arabia (SA),                     In the second phase of our experiment, we configured Type 2
+United States (US), and Brazil (BR). These were directed                           bots not only to be deployed from different locations, but
+to query both Google and DuckDuckGo about the the                                  also to interact with the search engines using the primary
+conflict (conflict-specific queries) or neutral topics (general                    language of each location (see Methods, section III-A). These
+queries). The first page of the results, with their respective                     bots performed the same general and conflict-specific queries
+ranks, was collected and the dissimilarity metric D (2)                            as before, under the hypothesis that this combination would
+computed.                                                                          further intensify the customization of search outcomes.
+   Figure 2, panel a) (green), summarizes these results,                              Figure 2, panel b) (violet), shows this: changing browser
+by comparing dissimilarity values (2) for different query                          language to the local language leads to a greater divergence
+types (general on the left and conflict-specific queries,                          in search results for both search engines. These differences
+dashed, on the right) for each search engine (vertically).                         are larger when comparing bots from different locations
+Light green corresponds to the average D values for bots                           (dark violet bars), and for conflict-specific queries (dashed
+deployed at the same location (e.g. one BR bot compared                            bars), regardless of query length (Appendix B, Figure A11).
+to another BR bot) and in dark green the bots were                                 In particular, Google search results become very diverse, but
+deployed at different locations (e.g. BR bots vs US bots),                         both engines show an average difference of 4 out of 10 results,
+with a high D meaning that (the top) results were more                             with at least one different result in the Top 3 (Appendix B,
+dissimilar.                                                                        Figure A9).
+   We found a tendency of larger variation between locations                          Finding 2: The combination of location and browser
+(dark green) than within locations (light green), with the                         language increases the personalization of search results,
+difference more pronounced for DuckDuckGo (p-values in                             especially for Google. This effect is more prominent for
+Appendix B, Table A2) than for Google. This contradicts                            conflict-specific queries.
+previous findings [14], [17], as in our results different
+locations do not seem to play a significant role.
+   Finding 1: Unlike anticipated (from previous research and                       3) DOES BROWSING HISTORY IMPACT SEARCH ENGINE
+from Google’s privacy policy), location alone does not sig-                        RESULTS?
+nificantly impact Google’s search results. For DuckDuckGo,                         It is debatable the extent to which search engines personalize
+it does play a role (in line with their stated policy), and this                   the displayed content based on the user’s past browsing
+effect is stronger for lower ranking results.                                      experience. DuckDuckGo claims not to collect or use
+
+15354                                                                                                                                           VOLUME 14, 2026
+Í. Damião et al.: Unequal Content: Search Engine Personalization Influences Exposure
+
+
+
+
+personal data, presumably including browser history, [12],                        were not a major contributor to the observed differences,
+and Google claims not to personalize results unless users                         and 2) bots with varying locations and features are shown
+are logged-in to their Google accounts [44] (Background,                          different domains – not just different pages within the same
+Table 1). To test this, we directed the bots to visit (and                        domain (Appendix C, Figure A13).
+collect cookies from) 20 general websites or 20 websites                             Moreover, even when comparing domains, differences
+related to the conflict prior to querying the search engines                      remained more pronounced for conflict-specific queries than
+(Type 3 bots). If search engines do not personalize results                       for general ones, despite the ‘‘general’’ queries covering a
+based on browsing history, these cookies should have no                           wide range of topics. As the observed effect may arise from
+impact, and the results would mirror those of Type 2 (location                    greater local diversity of content – such as an increased
+and language) bots. However, Figure 2, panel c) (yellow)                          presence of local news articles on the conflict – we further
+shows that the average D is generally even higher across both                     classified all identified domains by category (e.g., News, E-
+platforms, particularly for different locations (dark yellow                      Commerce, Sports; see Methods section III-C3, Figure 3-b,
+bars) and for conflict-related queries (dashed bars), despite                     Appendix C - Table A8, and Appendix C - Figure A16) and
+the users (bots) having no Google (or other) accounts.                            repeated the analysis using these broad groupings.
+   This trend remained consistent when we compared the                               Since the number of categories is much smaller than that of
+average D values obtained using the 8 queries common to                           URLs or domains, the variability measured by D is expected
+all 3 bot types – details in the Methods section III-B – as                       to be lower. Nonetheless, Figure 3-a shows that D remains
+summarized in Figure 2-d. Type 3 (yellow) bots retrieve the                       higher when comparing bots with different characteristics
+most variable results, and even more so for bots deployed with                    (light vs. darker colors), with particularly elevated values for
+different locations, languages, and browsing history (darker                      Type 2 and Type 3 bots, especially on Google (top row) and
+colors on the right versus lighter colors on the left).                           for conflict-specific queries (dashed bars). This is somewhat
+   Since the results shown for Type 2 and Type 3 were                             surprising, as bots issuing general queries typically encounter
+collected a few days apart (Appendix B, Figure A1), we also                       more result categories per page. Notably, this variability
+tested whether the observed increase in D could be attributed                     persists even when a single category, ‘‘News’’, dominates the
+to fluctuations in browser language customization rather than                     result set (Figure 3-b).
+the presence of cookies. As Type 3 bots were always deployed                         Together, these three analyses – URLs, domains and type
+alongside control bots with no browsing history (i.e., stateless                  of content – strongly support the finding that both search
+bots equivalent to Type 2), we explicitly analyzed whether,                       engines, but particularly Google, personalize the results and
+when controlling for location and language, comparing the                         content of political and sensitive queries to a greater extent,
+results of simultaneously deployed bots with and without                          than for general and more popular queries.
+browsing history lead to different D values. We found that,                          Next, we examined how the type of suggested content
+on average, bots with a conflict-related browsing history                         varied. As bots are personalized via browser language
+were twice as likely as stateless bots to receive a different                     (Type 2) and browsing history (Type 3), those performing
+top-3 result (see Figure A12 in Appendix B). This suggests                        general queries (Figure 3-b, left panel) tend to be shown
+that, even within the same location – where baseline result                       similar content categories. In contrast, for conflict-specific
+variability is low – the presence of cookies increases                            queries (right panel), bots are increasingly shown ‘‘News’’
+divergence in results.                                                            content (light blue), particularly on DuckDuckGo (bottom
+   Finding 3: Despite search engine claims of limited or                          row). For conflict-specific queries on Google, we also
+no personalization based on user information, browsing                            observed that the number of unique news domains grows
+history influences search engine results, particularly for                        with bots’ profiling, which corresponded to an increase of
+conflict-specific queries on Google.                                              unique domains being shown only to bots of a certain location
+                                                                                  (Figure 3-c and Figure A14 in Appendix C).
+B. DIFFERENCES IN SEARCH ENGINE SUGGESTED                                            This reinforces the argument that search engines are
+CONTENT                                                                           leveraging bot information, including browsing history,
+One simple explanation for some of these differences,                             to tailor results and rankings: bots previously exposed to
+especially between Type 1 and Type 2 bots, could be that the                      ‘‘News’’ (Type 3 bots) have a higher chance of encountering a
+search engines are directing the bots to very similar content                     ‘‘News’’ result, per page, for both search engines, with these
+but in different local domains. To investigate this, we repeated                  results also being more country-specific, even for identical
+the analysis from Figure 2, this time comparing domains (e.g.                     queries.
+wikipedia.org, newyorktimes.com) instead of URLs. This                               Finding 4: Distinct bot profiles are directed not just
+accounts for cases like wikipedia/en/palestine vs.                                to local versions of the same URLs, but to fundamentally
+wikipedia/pt/palestina, which are distinct URLs                                   different types of results. These disparities are particularly
+but may offer comparable content in different languages.                          pronounced for conflict-specific queries rather than general
+However, the results closely mirrored those of Figure 2. This                     unpolitical ones, especially for bots that have collected
+implies that: 1) different language versions of the same page                     cookies.
+
+
+VOLUME 14, 2026                                                                                                                             15355
+                                                                      Í. Damião et al.: Unequal Content: Search Engine Personalization Influences Exposure
+
+
+
+
+            FIGURE 3. Content Dissimilarity Results (D = 1 − RBO). Higher values of D indicate that the lists of search results differ
+            more substantially, especially at the top of the page, whereas smaller values of D indicate that differences are infrequent
+            and occur mainly at the bottom of the results page. (a) Average value of D = 1 − RBO for website categories of results
+            shown to bots with the same (lighter colors) or different features (darker colors). Left: general queries; Right and dashed:
+            specific queries. Error bars represent 95% confidence intervals based on the bootstrapped samples from RBO values for
+            the reported category comparisons (n=10,000 and seed=42). P-values were computed using the Mann-Whitney U test and
+            adjusted via Bonferroni correction. Significance is indicated as follows: *** p < 0.001, ** p < 0.01, * p < 0.05 - more
+            information in Appendix C, Table A9. (b) Top three most frequent categories of websites in results for general (left) and
+            conflict-specific (right) queries, for the common queries (8) performed by all bot types. (c) Number of unique news
+            websites for the specific query results for the three bot types.
+
+
+
+
+C. LEANING OF SEARCH ENGINE RESULTS                                          formation [73]. This analysis was done in two steps: we
+Even if the results and the page contents differ, and even                   successfully retrieved the content from over 90% of the
+if these differences increase with bot profilling, it could                  714 unique news URLs, and then classified each as pro-Israel,
+still be argued that the variance stems from algorithmic                     pro-Palestine, or neutral, using a combined approach of
+randomness and is ultimately inconsequential. Conversely,                    human and automatic classification (details in Methods). For
+if search engine algorithms use information such as location                 the human coding, the analysis was done on the 465 articles
+and browsing history to customize geopolitical content, this                 that received exactly the same classification by at least two
+could reinforce pre-existing views (for a detailed and real                  independent MTurk workers.
+example, consult Appendix Table A5).                                            We highlight five important observations. First, ChatGPT
+   To explore this, we examined whether content differences                  (Figure 4-a) labeled significantly more content as neutral
+also reflect differences in political leaning. We focused                    (gray) than human coders (Figure 4-b). Second, MTurk clas-
+on the ‘‘News’’ category of the conflict-related searches                    sifiers mark more content as pro-Israel (shades of turquoise)
+for two reasons: this topic dominates the query results                      than pro-Palestine (shades of orange). Third, MTurk work-
+(Figure 3-b), and news articles strongly influence opinion                   ers disagreed more often with ChatGPT’s pro-Palestine
+
+15356                                                                                                                                      VOLUME 14, 2026
+Í. Damião et al.: Unequal Content: Search Engine Personalization Influences Exposure
+
+
+
+
+FIGURE 4. Percentage of news articles classified as being ‘‘neutral’’ (grey), ‘‘pro-Israel’’ and ‘‘slightly pro-Israel’’ (turquoise shades) and as being
+‘‘pro-Palestine’’ and ‘‘slightly pro-Palestine’’ (orange shades), for each country (y-axis) and search engine (top, Google, bottom, DuckDuckGo). (a):
+ChatGPT 4o classification and (b): MTurk classification.
+
+
+
+
+classifications, than with pro-Israel ones (Appendix D,                            than they would for human-generated traffic. To minimize
+Figure A19 and Figure A20). In fact, the calculated Cohen’s                        this, we coded the bots to act more human-like (introducing
+Kappa value [74] and the Krippendorff’s α [75] were 0.28 and                       delays, natural ‘‘typing’’, avoiding VPN farms, etc.) and we
+0.23 respectively, indicating a fair, but low agreement that                       have reasons to believe that they were only rarely identified as
+exposes the task’s complexity and subjectivity – more details                      such (e.g. we received few ‘‘captcha’’ requests and only some
+on classification agreement in Appendix Figure A19 – and                           queries failed, with Google trials succeeding about 72% of the
+per search engine and location in Figure A20. Fourth, leaning                      time and DuckDuckGo over 98% of the time). Also, the bots
+shifted based on ranking: while more articles overall were                         have none (Type 1 and Type 2) to limited (Type 3) browsing
+labeled as pro-Palestine (29%) than pro-Israel (20%), the                          history, and this could limit personalization of the results.
+top three results – especially on Google – favored pro-Israel                      However, that even such a conservative approach managed
+content (Figure 4-a), for both ChatGPT and MTurk (Figure 4-                        to reveal significant differences for conflict-specific queries
+a, last column).                                                                   should raise important alarms, as these are likely to be even
+   Finally, we analyzed how domain-level leanings influ-                           higher for human queries. In the future, audits could enhance
+enced results. We asked whether some sites consistently                            the bot’s realism by increasing browsing history (breadth and
+leaned one way (expected), and whether search engines                              size) and adding features such as search language or social
+favored such domains in personalized results (less expected).                      media profiles.
+We found that some domains consistently published content                              2. Combinatorial complexity: The incremental and com-
+classified as predominantly leaning towards one side of                            binatorial design of our approach led to a rapid increase in
+the conflict (e.g., Al-Monitor, The Arab Weekly, Jewish                            the number of variables, making exhaustive testing complex
+Telegraphic Agency; see Appendix D, Table A10). Notably,                           and expensive. Type 3 bots only queried approximately one
+these domains appeared more often on Google for the Type 3                         third of the original list and we used a conservative approach
+bots, with both classifiers indicating fewer neutral results                       for their selection: the selected 8 queries were the ones for
+(Appendix C, Figure A14).                                                          which Type 1 and Type 2 bots had the smallest differences in
+   Finding 5: Bots at different locations receive content with                     D between locations. Thus, it is possible that if other queries
+different leanings on the conflict, according to both ChatGPT                      were chosen the observed effects would have been larger, but
+and MTurkers, despite ChatGPT classifying as neutral news                          it is unlikely they would have been smaller.
+that humans perceive as biased.                                                        3. Geographical IP limitations: In the absence of IP
+                                                                                   addresses for Palestine or for countries historically very
+V. DISCUSSION AND LIMITATIONS
+                                                                                   supportive of Palestine (such as Iran or Lebanon), the choice
+Here, we discuss some of the study’s weaknesses, our                               of Saudi Arabia may have reduced the bot exposure to
+attempts at minimizing possible threats to validity, and                           pro-Palestine content – despite having a majority Sunni pop-
+possible impacts of our findings:                                                  ulation and an official pro-Palestine stance. This omission,
+   1. Non-human queries: Despite our best efforts, the bots                        together with the English language queries, could underes-
+do not perfectly mimic humans and, if identified as bots,                          timate the pro-Palestine perspectives in the overall dataset,
+the search engines might handle their queries differently                          leading to reported smaller bias / gap than the possible real
+
+VOLUME 14, 2026                                                                                                                                            15357
+                                                                  Í. Damião et al.: Unequal Content: Search Engine Personalization Influences Exposure
+
+
+
+
+one. Moreover, despite using residential proxies, which are              for queriesrelated to the conflict. Importantly, this effect
+typically less subject to controls, the bots occasionally failed,        is not limited to differences in URLs, but extends to
+for unknown reasons (see Appendix A, Figure A5).                         the types of content displayed, such as news or political
+   4. Dynamic nature of search engines: That search engine               content. Contrary to some earlier studies [18], [20], [26], our
+algorithms are both fast-evolving and proprietary means                  results revealed that browsing history does induce notable
+that even minor variations in the timing of our audits                   differences, particularly in the case of Google, and this may
+could yield different results. To control for such temporal              further amplify the effects of information bubbles or echo
+fluctuations, particularly during such a rapidly unfolding               chambers.
+situation, we repeated the same queries for stateless Type 2                Several reasons can explain these differences. First, we use
+bots three times and observed no temporal trend (Appendix                a different approach, relying on systematic bot tailoring,
+E, Figure A22). Future studies should perform audits more                instead of specific user profiles. Real users are likely to
+frequently and for longer periods, and include more queries,             be profiled in highly non-linear ways, and this complexity
+search engines, and Large Language Model (LLM)-based                     might mask recommendation differences. Second, we are
+interfaces.                                                              comparing across continents, while previous studies were
+   5. Analysis of leaning: There is no objective metric of               mostly US based. In fact, similar patterns were reported by
+leaning and there were significant differences in classification         Paramita et al. [77], who found that Covid-19 image search
+between ChatGPT and human coders. In particular, news that               results varied substantially across European regions, and that
+humans identified as more favorable to Israel were likely                queries in different languages often produced completely
+to be considered neutral by ChatGPT. This is, in itself,                 non-overlapping results. Taken together, this suggests that
+a highly interesting result that deserves future research: why           the targeting of local results imposes strong filters on the
+does this happen? Are human coders better at identifying                 information users can access. Third, these algorithms are fast
+subtle bias, or is ChatGPT more impartial? Could such                    evolving, and it is possible that our analysis is uncovering
+apparent impartiality be a consequence of its training,                  current personalization trends – and that the previous findings
+designed to promote neutrality, particularly around political            are no longer applicable. If so, this means that search engines
+issues? Future work should have more coders, from different              may no longer fully adhere to their stated personalization
+locations, including expert coders, and explore classifications          policies: browsing history produced even more divergent
+around different topics. In addition, it can be argued that              results, despite their claims and our use of a controlled and
+the identified bias in news articles, in favor or against a              relatively modest history. This is worrying and consistent
+particular perspective on the conflict, is the responsibility of         with published research on Google News [24].
+news outlets and not of the search engines. However, it is                  Another key finding is that customization of search
+ultimately the algorithmic decision of the search engines to             results was more pronounced for queries related to the
+prioritize specific content (whether it is driven by search              Israeli-Palestinian conflict than for general ones, even when
+engine optimization techniques, higher engagement, and/or                some of which deliberately selected for cultural sensitivity
+information favoring a particular side of the conflict). That            and potential geographic variation, such as ‘‘recipe’’ and
+biased content might be shown has significant consequences:              ‘‘best books 2024’’. This is concerning: while everyday
+just as social media algorithms surface the most popular                 searches showed limited personalization, politically sensitive
+content – often aligned with users’ viewpoints – search engine           queries were strongly shaped by user profiles. In other
+curation can also influence the diversity and polarization of            words, the algorithmic personalization that subtly adjusts
+the information [28], [76]. It might be even more impactful              recipe or book suggestions appears amplified in a context
+as people tend to place a higher trust in search engine results,         where divergent content may reinforce biases or deepen
+as discussed in section II.                                              polarization. Importantly, this work demonstrates that while
+                                                                         tailoring search results based on region is often considered
+VI. CONCLUSION AND FUTURE WORK                                           ‘‘neutral’’ or benign, this assumption fails in the context
+This paper presents a novel methodology for auditing                     of geopolitical conflicts. When individuals across political
+search engine results using web crawlers designed to mimic               borders are shown different content – potentially with
+different ‘‘human-like’’ online profiles. By focusing on                 opposing political leanings – the consequences can be
+the Israeli-Palestinian conflict and examining how factors               serious, unpredictable, and difficult to measure.
+such as location, browser language, and browsing history                    Future work should focus on the impacts of such
+affect search results across Google and DuckDuckGo, we                   personalized results. A similar approach can be applied to
+demonstrated that there are significant differences in search            other sensitive situations, such as pre-electoral periods (e.g.,
+engine results,as these features vary.                                   how do search engines reply to broad and neutral electoral
+    We found that location alone had limited impact on Google            queries across countries or states?), harmful profiling (e.g.,
+search results but led to noticeable variation in DuckDuckGo.            are users with a history of visiting low credibility websites
+However, when combined with other identity and regional                  more likely to be shown misinformation?), or even bias
+signals, specifically browser language and browsing history,             amplification (e.g., are users profiled as male recommended
+it lead to significant increases in result variability, particularly     sexist content?). Such systematic analysis can also help
+
+15358                                                                                                                                 VOLUME 14, 2026
+Í. Damião et al.: Unequal Content: Search Engine Personalization Influences Exposure
+
+
+
+
+disentangle how specific components of browsing history                            REFERENCES
+(e.g., cookies, session data) contribute to personalization                        [1] (2024). Online News: For Many Home Broadband Users, the Internet is
+outcomes; however, the way forward in the online tracking                              a Primary News Source. [Online]. Available: https://www.pewresearch.
+                                                                                       org/internet/2006/03/22/online-news-for-many-home-broadband-users-
+space is uncertain. Not only is there strong resistance from                           the-internet-is-a-primary-news-source/
+the platforms to sharing fundamental data and metadata, but                        [2] (2024). News Platform Fact Sheet. [Online]. Available: https://www.
+even the relative importance of such data keeps changing.                              pewresearch.org/journalism/fact-sheet/news-platform-fact-sheet/
+In 2022, Google led a shift away from third-party cookies,                         [3] N. Newman, A. Ross Arguedas, C. T. Robertson, R. K. Nielsen,
+                                                                                       and R. Fletcher. Digital News Report 2024. Accessed: Oct. 3, 2024.
+then seemingly turned around [78] and, more recently,                                  [Online]. Available: https://reutersinstitute.politics.ox.ac.uk/digital-news-
+announced a greater integration with LLM-based results [79],                           report/2024
+further blurring the line between traditional search results and                   [4] T. Flensted. (2024). How Many People Use Google? Statistics &
+                                                                                       Facts (2024). [Online]. Available: https://seo.ai/blog/how-many-people-
+generative AI responses. Importantly, our results suggest that                         use-google
+content judged as partial by human coders may be interpreted                       [5] Maximizing Access—How Google Search Works. Accessed: Oct. 12,
+as impartial by LLMs such as ChatGPT. As these models are                              2024. [Online]. Available: https://www.google.com/intl/enus/search/
+                                                                                       howsearchworks/our-approach/maximize-access/
+increasingly used, such apparent neutrality may contribute to                      [6] S. Schultheiß and D. Lewandowski, ‘‘Misplaced trust? The relationship
+amplifying trust in search engines, while masking troubling                            between trust, ability to identify commercially influenced results and
+biases.                                                                                search engine preference,’’ J. Inf. Sci., vol. 49, no. 3, pp. 609–623,
+                                                                                       Jun. 2023.
+   Overall, our findings underscore the urgent need for
+                                                                                   [7] B. Pan, H. Hembrooke, T. Joachims, L. Lorigo, G. Gay, and L. Granka,
+greater transparency and auditing of these rapidly evolving                            ‘‘In Google we trust: Users’ decisions on rank, position, and relevance,’’ J.
+platforms, used by millions daily, often for sensitive topics                          Computer-Mediated Commun., vol. 12, no. 3, pp. 801–823, Apr. 2007.
+such as the one studied here.                                                      [8] K. Purcell, J. Brenner, and L. Rainie. (2024). Search Engine Use
+                                                                                       2012. [Online]. Available: https://www.pewresearch.org/internet/2012/
+   In the European Union, the Digital Services Act specif-                             03/09/search-engine-use-2012/
+ically states that very large online search engines must                           [9] J.    Unkel     and     A.    Haas,     ‘‘The     effects    of    credibility
+provide access to data and/or code deemed necessary to                                 cues on the selection of search engine results,’’ J.
+                                                                                       Assoc. Inf. Sci. Technol., vol. 68, no. 8, pp. 1850–1862,
+monitor and guarantee compliance on areas such as privacy                              Aug. 2017.
+protection and personalization. This regulation also includes                     [10] Edelman Trust Barometer 2020. Accessed: Oct. 3, 2024. [Online].
+a mechanism for researcher access and academic auditing                                Available: https://www.edelman.com/sites/g/files/aatuss191/files/2020-
+                                                                                       01/2020%20Edelman%20Trust%20Barometer%20Global
+around systemic threats. Using such a mechanism, it should                             %20ReportLIVE.pdf
+be possible to extend this methodology or request access                          [11] Special Eurobarometer 447: Online Platforms. Accessed: Oct. 3,
+to relevant information on algorithmic recommendations,                                2024. [Online]. Available: https://ec.europa.eu/informationsociety/
+crucial to our understanding of what is shown to which                                 newsroom/image/document/2016-24/ebs447en16136.pdf
+                                                                                  [12] Duckduckgo Privacy Policy. Accessed: Oct. 3, 2024. [Online]. Available:
+user and why. This includes providing sufficient researcher                            https://duckduckgo.com/privacy
+support, standardizing and streamlining data access, sharing                      [13] (2024). Google Terms of Service. Accessed: Oct. 12, 2024. [Online].
+metadata and indexes, and allowing controlled A/B testing.                             Available: https://policies.google.com/terms/embedded?hl=en-U.S
+To mitigate search engine bias and opaque targeting, plat-                        [14] C. Kliman-Silver, A. Hannak, D. Lazer, C. Wilson, and A. Mislove,
+                                                                                       ‘‘Location, location, location: The impact of geolocation on web search
+forms should adopt strategies such as diversification prompts                          personalization,’’ in Proc. Internet Meas. Conf., Oct. 2015, pp. 121–127,
+(e.g., creating a tab to ‘‘explore different perspectives’’),                          doi: 10.1145/2815675.2815714.
+disclosure of ranking and personalization mechanisms, and                         [15] A. Hannak, P. Sapiezynski, A. Molavi Kakhki, B. Krishnamurthy, D. Lazer,
+                                                                                       A. Mislove, and C. Wilson, ‘‘Measuring personalization of web search,’’
+access to clear documentation. In summary, collaborative                               in Proc. 22nd Int. Conf. World Wide Web, May 2013, pp. 527–538.
+governance mechanisms, between platforms, researchers,                            [16] E. Pariser, The Filter Bubble: What the Internet is Hiding From You. U.K.:
+and regulators, are essential to ensure effective oversight                            Penguin Books, 2011.
+                                                                                  [17] X. Xing, W. Meng, D. Doozan, N. Feamster, W. Lee, and A. C. Snoeren,
+and uphold the public interest, increasing transparency                                ‘‘Exposing inconsistent web search results with bobble,’’ in Proc. Int. Conf.
+and algorithmic explainability of the entire online search                             Passive Act. Netw. Meas. (PAM), 2014, pp. 131–140.
+environment.                                                                      [18] R. E. Robertson, S. Jiang, K. Joseph, L. Friedland, D. Lazer, and C.
+   Building on these directions, future work should further                            Wilson, ‘‘Auditing partisan audience bias within Google search,’’ Proc.
+                                                                                       ACM Hum.-Comput. Interact., vol. 2, no. CSCW, pp. 1–22, Nov. 2018, doi:
+adapt this methodology to study AI-generated responses,                                10.1145/3274417.
+which are becoming increasingly pervasive in both search                          [19] N. Diakopoulos, D. Trielli, J. Stark, and S. Mussenden, ‘‘I vote for—How
+results and used for everyday tasks.                                                   search informs our choice of candidate,’’ in Digital Dominance: The Power
+                                                                                       of Google, Amazon, Facebook, and Apple, vol. 22. USA: Oxford Univ.
+                                                                                       Press, 2018, pp. 320–341.
+                                                                                  [20] T. D. Krafft, M. Gamer, and K. A. Zweig, ‘‘What did you see? A study to
+                                                                                       measure personalization in Google’s search engine,’’ EPJ Data Sci., vol. 8,
+ACKNOWLEDGMENT                                                                         no. 1, p. 38, Dec. 2019.
+The authors thank members of the Social Physics and                               [21] D. Hu, S. Jiang, R. E. Robertson, and C. Wilson, ‘‘Auditing the partisanship
+Complexity (SPAC) Group at LIP for comments and critical                               of Google search snippets,’’ in Proc. World Wide Web Conf., May 2019,
+                                                                                       pp. 693–704.
+reading of the manuscript. They thank HoneyComb for
+                                                                                  [22] R. E. Robertson, D. Lazer, and C. Wilson, ‘‘Auditing the personalization
+support in identifying meaningful topics for this study and                            and composition of politically-related search engine results pages,’’ in
+BrightData for generously providing proxy services.                                    Proc. World Wide Web Conf. World Wide Web, 2018, pp. 955–965, doi:
+                                                                                       10.1145/3178876.3186143.
+
+VOLUME 14, 2026                                                                                                                                               15359
+                                                                                Í. Damião et al.: Unequal Content: Search Engine Personalization Influences Exposure
+
+
+
+
+[23] A. Urman, M. Makhortykh, and R. Ulloa, ‘‘The matter of chance: Auditing           [44] Why Your Google Search Results Might Differ From Other People.
+     web search results related to the 2020 U.S. presidential primary elections             Accessed: Oct. 3, 2024. [Online]. Available: https://support.google.com/
+     across six search engines,’’ Social Sci. Comput. Rev., vol. 40, no. 5,                 websearch/answer/12412910
+     pp. 1323–1339, Oct. 2022.                                                         [45] H. Habib, R. Stoldt, A. High, B. Ekdale, A. Peterson, K. Biddle, J.
+[24] H. Le, R. Maragh, B. Ekdale, A. High, T. Havens, and Z. Shafiq, ‘‘Measur-              Ssozi, and R. Nithyanand, ‘‘Algorithmic amplification of biases on Google
+     ing political personalization of Google news search,’’ in Proc. World Wide             search,’’ 2024, arXiv:2401.09044.
+     Web Conf., May 2019, pp. 2957–2963, doi: 10.1145/3308558.3313682.                 [46] A. G. Ekström, G. Madison, E. J. Olsson, and M. Tsapos, ‘‘The search
+[25] A. Moffat and J. Zobel, ‘‘Rank-biased precision for measurement of                     query filter bubble: Effect of user ideology on political leaning of search
+     retrieval effectiveness,’’ ACM Trans. Inf. Syst., vol. 27, no. 1, pp. 1–27,            results through query selection,’’ Inf., Commun. Soc., vol. 27, no. 5,
+     Dec. 2008, doi: 10.1145/1416950.1416952.                                               pp. 878–894, Apr. 2024, doi: 10.1080/1369118x.2023.2230242.
+[26] M. Haim, A. Graefe, and H.-B. Brosius, ‘‘Burst of the filter bubble?:             [47] K. T. Greene, N. Pisharody, L. A. Meyer, M. Pereira, R. Dodhia,
+     Effects of personalization on the diversity of Google news,’’ Digit.                   J. L. Ferres, and J. N. Shapiro, ‘‘Current engagement with unreliable sites
+     Journalism, vol. 6, no. 3, pp. 330–343, Mar. 2018.                                     from web search driven by navigational search,’’ Sci. Adv., vol. 10, no. 44,
+[27] D. Nikolov, D. F. M. Oliveira, A. Flammini, and F. Menczer, ‘‘Measuring                p. 3750, Nov. 2024.
+     online social bubbles,’’ PeerJ Comput. Sci., vol. 1, p. e38, Dec. 2015.           [48] R. Ulloa, M. Makhortykh, and A. Urman, ‘‘Scaling up search engine
+     [Online]. Available: https://peerj.com/articles/cs-38/                                 audits: Practical insights for algorithm auditing,’’ J. Inf. Sci., vol. 50, no. 2,
+[28] A. Mahmoudi, D. Jemielniak, and L. Ciechanowski, ‘‘Echo chambers                       pp. 404–419, Apr. 2024.
+     in online social networks: A systematic literature review,’’ IEEE Access,         [49] A. Urman, M. Makhortykh, and R. Ulloa, ‘‘Auditing the representation of
+     vol. 12, pp. 9594–9620, 2024.                                                          migrants in image web search results,’’ Humanities Social Sci. Commun.,
+[29] A. Ross Arguedas, C. T. Robertson, R. Fletcher, and R. K. Nielsen.                     vol. 9, no. 1, p. 130, Apr. 2022.
+     (2022). Echo Chambers, Filter Bubbles, and Polarisation: A Literature             [50] C. Courtois, L. Slechten, and L. Coenen, ‘‘Challenging Google search
+     Review. Reuters Institute for the Study of Journalism, University of                   filter bubbles in social and political information: Disconforming evidence
+     Oxford. [Online]. Available: https://reutersinstitute.politics.ox.ac.uk/echo-          from a digital methods case study,’’ Telematics Informat., vol. 35, no. 7,
+     chambers-filter-bubbles-and-polarisation-literature-review                             pp. 2006–2015, Oct. 2018.
+[30] E. Hussein, P. Juneja, and T. Mitra, ‘‘Measuring misinformation in video          [51] J. Bandy, ‘‘Problematic machine behavior: A systematic literature review
+     search platforms: An audit study on YouTube,’’ Proc. ACM Hum.-Comput.                  of algorithm audits,’’ Proc. ACM Hum.-Comput. Interact., vol. 5,
+     Interact., vol. 4, no. CSCW1, pp. 1–27, May 2020, doi: 10.1145/3392854.                no. CSCW1, pp. 1–34, Apr. 2021, doi: 10.1145/3449148.
+[31] M. Haroon, M. Wojcieszak, A. Chhabra, X. Liu, P. Mohapatra, and Z.                [52] J. Otterbacher, J. Bates, and P. Clough, ‘‘Competent men and warm women:
+     Shafiq, ‘‘Auditing YouTube’s recommendation system for ideologically                   Gender stereotypes and backlash in image search results,’’ in Proc. CHI
+     congenial, extreme, and problematic recommendations,’’ Proc. Nat.                      Conf. Human Factors Comput. Syst., May 2017, pp. 6620–6631, doi:
+     Acad. Sci. USA, vol. 120, no. 50, Dec. 2023, Art. no. 2213020120, doi:                 10.1145/3025453.3025727.
+     10.1073/pnas.2213020120.
+                                                                                       [53] M. Makhortykh, A. Urman, R. Ulloa, M. Makhortykh, A. Urman, and
+[32] J. Chan, F. Choi, K. Saha, and E. Chandrasekharan, ‘‘Examining
+                                                                                            R. Ulloa, ‘‘Detecting race and gender bias in visual representation
+     algorithmic curation on social media: An empirical audit of Reddit’s
+                                                                                            of AI on web search engines,’’ in Proc. Int. Workshop Algorithmic
+     r/popular feed,’’ 2025, arXiv:2502.20491.
+                                                                                            Bias Search Recommendation, 2021, pp. 36–50. [Online]. Available:
+[33] M. Cinelli, G. D. F. Morales, A. Galeazzi, W. Quattrociocchi, and M.                   https://api.semanticscholar.org/CorpusID:235659011
+     Starnini, ‘‘The echo chamber effect on social media,’’ Proc. Nat. Acad.
+                                                                                       [54] S. U. Noble, Algorithms Oppression: How Search Engines Reinforce
+     Sci. USA, vol. 118, no. 9, 2021, Art. no. 2023301118. [Online]. Available:
+                                                                                            Racism. New York, NY, USA: New York University Press, 2018. [Online].
+     https://www.pnas.org/doi/10.1073/pnas.2023301118
+                                                                                            Available: https://nyupress.org/books/9781479837243/
+[34] B. Kitchens, S. L. Johnson, and P. Gray, ‘‘Understanding echo chambers
+                                                                                       [55] J. Unkel and M. Haim, ‘‘Googling politics: Parties, sources, and issue
+     and filter bubbles: The impact of social media on diversification and
+                                                                                            ownerships on Google in the 2017 German federal election campaign,’’
+     partisan shifts in news consumption,’’ MIS Quart., vol. 44, no. 4,
+                                                                                            Social Sci. Comput. Rev., vol. 39, no. 5, pp. 844–861, Oct. 2021. [Online].
+     pp. 1619–1649, Dec. 2020, doi: 10.25300/misq/2020/16371.
+                                                                                            Available: https://api.semanticscholar.org/CorpusID:212894107
+[35] E. Loru, A. Galeazzi, A. Bonetti, E. Sangiorgio, N. Di Marco, M. Cinelli,
+     M. Falkenberg, A. Baronchelli, and W. Quattrociocchi, ‘‘Ideology and              [56] D. Kravets and F. Toepfl, ‘‘Gauging reference and source bias
+     polarization set the agenda on social media,’’ 2024, arXiv:2412.05176.                 over time: How Russia’s partially state-controlled search engine yan-
+                                                                                            dex mediated an anti-regime protest event,’’ Inf., Commun. Soc.,
+[36] M. Narendran, ‘‘Personalized product recommendation system for Ama-
+                                                                                            vol. 25, no. 15, pp. 2207–2223, Nov. 2022. [Online]. Available:
+     zon,’’ Int. J. Res. Appl. Sci. Eng. Technol., vol. 13, no. 4, pp. 1992–1997,
+                                                                                            https://api.semanticscholar.org/CorpusID:236293550
+     Apr. 2025. [Online]. Available: https://www.ijraset.com/best-journal/
+     personalized-product-recommendation-system-for-amazon                             [57] E. J. Olsson, G. Madison, and A. G. Ekström, ‘‘Is Google liberal on
+[37] R. Interian, R. G. Marzo, I. Mendoza, and C. C. Ribeiro, ‘‘Network                     immigration? Attitude bias, politicisation and filter bubbles in search
+     polarization, filter bubbles, and echo chambers: An annotated review of                engine result pages,’’ Heliyon, vol. 11, no. 3, Feb. 2025, Art. no. e42020,
+     measures and reduction methods,’’ Int. Trans. Oper. Res., vol. 30, no. 6,              doi: 10.1016/j.heliyon.2025.e42020.
+     pp. 3122–3158, Nov. 2023, doi: 10.1111/itor.13224.                                [58] A. Urman, M. Makhortykh, R. Ulloa, and J. Kulshrestha, ‘‘Where the Earth
+[38] J. Gonçalves-Sá and F. L. Pinheiro, ‘‘Societal implications of recommen-               is flat and 9/11 is an inside job: A comparative algorithm audit of conspir-
+     dation systems: A technical perspective,’’ in Multidisciplinary Perspectives           atorial information in web search results,’’ 2021, arXiv:2112.01278.
+     on Artificial Intelligence and the Law. Cham, Switzerland: Springer, 2023.        [59] N. F. Liu, T. Zhang, and P. Liang, ‘‘Evaluating verifiability in generative
+[39] M. Morris, J. Teevan, and K. Panovich, ‘‘A comparison of information                   search engines,’’ 2023, arXiv:2304.09848.
+     seeking using search engines and social networks,’’ in Proc. Int. AAAI            [60] M. van Hoof, C. S. Meppelink, J. Moeller, and D. Trilling, ‘‘Searching
+     Conf. Web Social Media, May 2010, pp. 291–294. [Online]. Available:                    differently? How political attitudes impact search queries about political
+     https://cs.stanford.edu/                                                               issues,’’ New Media Soc., vol. 26, no. 7, pp. 3728–3750, Jul. 2024, doi:
+[40] (2025). State of Search USA. Accessed: Aug. 27, 2025. [Online]. Available:             10.1177/14614448221104405.
+     https://www.claneo.com/en/state-of-search-us/                                     [61] M. Hines. Google Takes Searching Personally. Accessed: Apr. 24, 2024.
+[41] (2024). How Search Works: Ranking Results. Accessed: Oct. 12, 2024.                    [Online]. Available: https://www.cnet.com/tech/services-and-software/
+     [Online]. Available: https://www.google.com/search/howsearchworks/                     google-takes-searching-personally/
+     how-search-works/ranking-results/                                                 [62] S. Englehardt and A. Narayanan, ‘‘Online tracking: A 1-million-site
+[42] B. Müller. (2024). How Search Engines Operate: The Beginner’s Guide                    measurement and analysis,’’ in Proc. ACM SIGSAC Conf. Comput.
+     To SEO. Accessed: Oct. 12, 2024. [Online]. Available: https://moz                      Commun. Secur., Oct. 2016, pp. 1388–1401.
+     .com/beginners-guide-to-seo/how-search-engines-operate                            [63] ‘‘2023-24 U.S. religious landscape study interact database,’’ Pew Research
+[43] R. Epstein and R. E. Robertson, ‘‘The search engine manipulation effect                Center, 2015, doi: 10.58094/3zs9-jc14.
+     (SEME) and its possible impact on the outcomes of elections,’’ Proc.              [64] Brazil’s Changing Religious Landscape. Accessed: Sep. 11,
+     Nat. Acad. Sci. USA, vol. 112, no. 33, pp. E4512–E4521, Aug. 2015, doi:                2024. [Online]. Available: https://www.pewresearch.org/religion/
+     10.1073/pnas.1419828112.                                                               2013/07/18/brazils-changing-religious-landscape/
+
+15360                                                                                                                                                       VOLUME 14, 2026
+Í. Damião et al.: Unequal Content: Search Engine Personalization Influences Exposure
+
+
+
+
+[65] N. Nikiforakis, A. Kapravelos, W. Joosen, C. Kruegel, F. Piessens, and                                  JOSÉ M. REIS received the Ph.D. degree from
+     G. Vigna, ‘‘Cookieless monster: Exploring the ecosystem of web-based                                    the University of Hamburg. He is currently a
+     device fingerprinting,’’ in Proc. IEEE Symp. Secur. Privacy, Mar. 2013,                                 Research Analyst with the Portuguese National
+     pp. 541–555.                                                                                            Cybersecurity Centre (CNCS). He was a Post-
+[66] P. Agarwal, S. Joglekar, P. Papadopoulos, N. Sastry, and N. Kourtellis,                                 doctoral Researcher with the Social Physics and
+     ‘‘Stop tracking me bro! Differential tracking of user demographics on                                   Complexity Laboratory, Laboratório de Instru-
+     hyper-partisan websites,’’ in Proc. Web Conf., Apr. 2020, pp. 1479–1490.                                mentação e Física Experimental de Partículas
+[67] R. Upathilake, Y. Li, and A. Matrawy, ‘‘A classification of web browser                                 (LIP), where he participated in research projects
+     fingerprinting techniques,’’ in Proc. 7th Int. Conf. New Technol., Mobility
+                                                                                                             funded by the European Research Council. He was
+     Secur. (NTMS), Jul. 2015, pp. 1–5, doi: 10.1109/NTMS.2015.7266460.
+                                                                                                             also a Researcher with the Institute of Law and
+[68] (2020). Approaches To Searching By Place in Media Cloud.
+     Accessed: Sep. 14, 2025. [Online]. Available: https://www.mediacloud.          Economics, University of Hamburg, and a Visiting Researcher with the
+     org/blog/approaches-to-searching-by-place-in-media-cloud                       University of Pennsylvania.
+[69] (May 2025). Most Visited Websites in the World. Accessed: Jun. 13, 2025.
+     [Online]. Available: https://www.semrush.com/website/top/
+[70] O. Fay. Value of #1 Position on Google-Positional Analysis Study.
+     Accessed: Sep. 5, 2024. [Online]. Available: https://pollthepeople.app/the-                               PAULO ALMEIDA received the B.S. degree in
+     value-of-google-result-positioning-3/                                                                     microbiology and genetics from the Faculty of
+[71] W. Webber, A. Moffat, and J. Zobel, ‘‘A similarity measure for indefinite                                 Sciences, University of Lisbon, in 2001.
+     rankings,’’ ACM Trans. Inf. Syst., vol. 28, no. 4, pp. 1–38, Nov. 2010, doi:                                 From 2002 to 2007, he was a Research Assistant
+     10.1145/1852102.1852106.                                                                                  with the Disease Genetics Group, Gulbenkian
+[72] E. S. Ristad and P. N. Yianilos, ‘‘Learning string-edit distance,’’ IEEE                                  Institute for Science, Oeiras, Portugal, specializing
+     Trans. Pattern Anal. Mach. Intell., vol. 20, no. 5, pp. 522–532, May 1998.                                in bioinformatics. In 2007, he joined the Bioinfor-
+[73] A. S. Gerber, D. Karlan, and D. Bergan, ‘‘Does the media matter? A                                        matics Unit, Disease Genetics Group, Gulbenkian
+     field experiment measuring the effect of newspapers on voting behavior                                    Institute for Science, where he stayed until the
+     and political opinions,’’ Amer. Econ. Journal: Appl. Econ., vol. 1, no. 2,                                end of 2015, before joining the Social Physics and
+     pp. 35–52, Mar. 2009, doi: 10.1257/app.1.2.35.                                 Complexity Group. He is currently with the Laboratory of Instrumentation
+[74] J. R. Landis and G. G. Koch, ‘‘The measurement of observer agreement           and Experimental Particle Physics, Lisbon, where he has been a Research
+     for categorical data,’’ Biometrics, vol. 33, no. 1, pp. 159–174, Mar. 1977,    Technician, since 2016, and accumulating with the function of Data
+     doi: 10.2307/2529310.                                                          Protection Officer, since 2021. His research interests include data acquisition
+[75] K. Krippendorff, Content Analysis: An Introduction To Its Methodology.
+                                                                                    and management, with a focus on automation and privacy, in the context of
+     Newbury Park, CA, USA: Sage, 2018.
+                                                                                    computational social science.
+[76] A. Ross Arguedas, C. Robertson, R. Fletcher, and R. Nielsen, Echo
+     Chambers, Filter Bubbles, and Polarisation: A Literature Review. New
+     York, NY, USA: Oxford, 2022.
+[77] M. L. Paramita, K. Orphanou, E. Christoforou, J. Otterbacher, and F.
+                                                                                                              NUNO SANTOS (Member, IEEE) received the
+     Hopfgartner, ‘‘Do you see what i see? Images of the COVID-19 pandemic
+                                                                                                              Ph.D. degree from the Max Planck Institute for
+     through the lens of Google,’’ Inf. Process. Manage., vol. 58, no. 5,
+     Sep. 2021, Art. no. 102654. [Online]. Available: https://europepmc.org/                                  Software Systems, in 2013. Currently, he is an
+     article/pmc/9759662                                                                                      Associate Professor with the Department of Com-
+[78] A. Chavez. (2024). Privacy Sandbox. Accessed: Oct. 14, 2024. [Online].                                   puter Science and Engineering, Instituto Superior
+     Available: https://privacysandbox.com/news/privacy-sandbox-update/                                       Técnico, University of Lisbon, and a Senior
+[79] E. Reid. (2024). Generative Ai in Search: Let Google Do the Searching for                                Researcher with INESC-ID Lisbon, where he is
+     You. [Online]. Available: https://blog.google/products/search/generative-                                a member of the Distributed, Parallel, and Secure
+     ai-google-search-may-2024/                                                                               Systems (DPSS) Group, and the Coordinator of
+                                                                                                              the security and privacy thematic line. He also
+                                                                                    coordinates the Ph.D. Program in Computer Science and Engineering at IST.
+                                                                                    His research focuses on systems security and privacy, and has been published
+                                                                                    in top-tier venues, including USENIX Security, S&P, CCS, and NDSS.
+                                                                                    He has served on the program committees of major security conferences and
+                                                                                    was the Program Vice Co-Chair for USENIX Security 2025.
+
+
+                         ÍRIS DAMIÃO received the B.S. and M.S. degrees
+                         in biomedical and biophysics engineering from the
+                                                                                                             JOANA GONÇALVES-SÁ received the degree
+                         Faculty of Sciences, University of Lisbon, in 2021.
+                                                                                                             in physics engineering from Instituto Superior
+                         She is currently pursuing the Ph.D. degree in
+                                                                                                             Técnico, University of Lisbon, in 2003, and the
+                         computer science with Instituto Superior Técnico,
+                                                                                                             Ph.D. degree in systems biology from NOVA
+                         University of Lisbon. From 2021 to 2022, she was
+                                                                                                             ITQB, in 2010, having developed her thesis at
+                         a Research Assistant with the Social Physics and
+                                                                                                             Harvard University.
+                         Complexity Group, Laboratory of Instrumentation
+                                                                                                                She is currently a Researcher with NOVA
+                         and Experimental Particle Physics (LIP), Lisbon,
+                                                                                                             University (NOVA-LINCS) and LIP, where she
+                         where she is conducting her Ph.D. research. Her
+                                                                                                             leads the Social Physics and Complexity (SPAC)
+work focuses on algorithmic biases, particularly in search engines and
+                                                                                                             Group. She is also an External Faculty Member
+large language models, and the ways these technologies shape today’s
+                                                                                    of the Complexity Science Hub, Vienna. Previously, she was an Associate
+informational landscape. Her Ph.D. is supported by a grant from the
+                                                                                    Professor with Nova SBE, from 2018 to 2020, and a Principal Investigator
+Fundação para a Ciência e a Tecnologia (FCT), Portugal. Her research
+                                                                                    with Instituto Gulbenkian de Ciência, from 2011 to 2018. She received three
+interests include computational social science, network science, and related
+                                                                                    ERC grants (StG 2019, PoC 2022, and 2024) to study human and algorithmic
+methodologies that address complex societal questions.
+                                                                                    biases.
+
+
+
+
+VOLUME 14, 2026                                                                                                                                              15361
+
