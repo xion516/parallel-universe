@@ -286,7 +286,7 @@
 | [待补全文清单.md](<Literature_Library/待补全文清单.md>) | md | 1,639 B |
 | [文献总目录_80条.md](<Literature_Library/文献总目录_80条.md>) | md | 32,798 B |
 
-## Literature_Review（55份文件）
+## Literature_Review（61份文件）
 
 | 文件 | 类型 | 大小 |
 |---|---|---:|
@@ -345,6 +345,12 @@
 | [2026-10-23/results_measurement/verification.json](<Literature_Review/2026-10-23/results_measurement/verification.json>) | json | 340 B |
 | [2026-10-23/results_measurement/复算与待核事项.md](<Literature_Review/2026-10-23/results_measurement/复算与待核事项.md>) | md | 3,432 B |
 | [2026-10-23/results_measurement/逐篇测量与Results核查.md](<Literature_Review/2026-10-23/results_measurement/逐篇测量与Results核查.md>) | md | 31,419 B |
+| [2026-10-27/core_review.md](<Literature_Review/2026-10-27/core_review.md>) | md | 6,446 B |
+| [2026-10-27/near_neighbor_comparison.md](<Literature_Review/2026-10-27/near_neighbor_comparison.md>) | md | 5,150 B |
+| [2026-10-27/relationship_evidence_and_increment.md](<Literature_Review/2026-10-27/relationship_evidence_and_increment.md>) | md | 11,078 B |
+| [2026-10-27/source_index.json](<Literature_Review/2026-10-27/source_index.json>) | json | 3,871 B |
+| [2026-10-27/sources/polibias_2608.06123v3.pdf](<Literature_Review/2026-10-27/sources/polibias_2608.06123v3.pdf>) | pdf | 576,568 B |
+| [2026-10-27/whether_why_neighbor_audit.md](<Literature_Review/2026-10-27/whether_why_neighbor_audit.md>) | md | 11,537 B |
 
 ## Research_Notes（5份文件）
 

@@ -8,6 +8,7 @@
 |---|---|
 | [项目原始资料](<Basic Idea/>) | 研究构想PPT与会议逐字稿 |
 | [文献版图与创新性初筛](<Literature_Review/2026-10-22/README.md>) | H1—H5文献地图；第2节按维度比较直接近邻研究 |
+| [核心文献短评（2026-10-27）](<Literature_Review/2026-10-27/core_review.md>) | 六篇核心文献；聚焦大模型输出偏差，Poli-Bias采用v3 |
 | [80条完整文献目录](<Literature_Review/2026-10-22/literature_catalog.md>) | 作者、出处、发表状态、与项目关系及核验层级 |
 | [文献全文库](<Literature_Library/>) | 分类论文PDF、机构报告、正文提取与下载/验证记录 |
 | [Framing正文核查](<Literature_Review/2026-10-22/framing_deep_dive/README.md>) | 研究问题、测量、结果、贡献主张及正文核查 |

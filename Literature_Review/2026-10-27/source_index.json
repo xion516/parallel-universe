@@ -1,0 +1,103 @@
+{
+  "review_date": "2026-10-27",
+  "analysis_by": "Codex",
+  "user_judgment_preserved_separately": true,
+  "records": [
+    {
+      "provided_file": "C:\\Users\\David\\Desktop\\2026.acl-long.1689.pdf",
+      "version": "ACL 2026",
+      "repo_file": "Literature_Review/2026-10-22/framing_deep_dive/sources/nadeem_2026.pdf",
+      "sha256": "2111f57e115f51da362cd5bad36085ecf4dc7d5fbe7fe98c56cb72c419e72415",
+      "pdf_pages": 43,
+      "reviewed_relevant_pdf_pages": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        10
+      ],
+      "source_role": "user_selected"
+    },
+    {
+      "provided_file": "C:\\Users\\David\\Desktop\\2024.naacl-long.213.pdf",
+      "version": "NAACL 2024",
+      "repo_file": "Literature_Library/01_语言与地缘政治/L01_2024_This Land is Your, My Land Evaluating Geopolitical Bias in Language Models through Territorial Disputes.pdf",
+      "sha256": "1e3b9dffcfeccf31a6db0ee8483432f38557827987a0b2f096629b0a1a25c2e1",
+      "pdf_pages": 17,
+      "reviewed_relevant_pdf_pages": [
+        5,
+        6,
+        7,
+        8
+      ],
+      "source_role": "user_selected"
+    },
+    {
+      "provided_file": "C:\\Users\\David\\Desktop\\2609.20005v1.pdf",
+      "version": "arXiv v1",
+      "repo_file": "Literature_Library/01_语言与地缘政治/L06_2026_Geopolitical Divisions Across Languages in Large Language Models.pdf",
+      "sha256": "e8d805cc84ac9165916b745c771c6a3aa138d8bed3be3c2b25bbfba87bfa2cbb",
+      "pdf_pages": 17,
+      "reviewed_relevant_pdf_pages": [
+        1,
+        3,
+        5,
+        7,
+        8,
+        14,
+        15
+      ],
+      "source_role": "user_selected"
+    },
+    {
+      "provided_file": "C:\\Users\\David\\Desktop\\2608.06123v3.pdf",
+      "version": "arXiv v3, 2026-10-15",
+      "repo_file": "Literature_Review/2026-10-27/sources/polibias_2608.06123v3.pdf",
+      "sha256": "95de37abf9fa19c506923ea22103ad9eb32f255f9c47027f2b70787d5b3b5465",
+      "pdf_pages": 25,
+      "reviewed_relevant_pdf_pages": [
+        1,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "source_role": "user_selected"
+    },
+    {
+      "source_role": "added_to_core_review",
+      "title": "BordIRLines",
+      "version": "Findings of ACL 2025",
+      "primary_url": "https://aclanthology.org/2025.findings-acl.219/",
+      "repo_file": "Literature_Library/01_语言与地缘政治/L02_2025_Multilingual Retrieval Augmented Generation for Culturally-Sensitive Tasks A Benchmark for Cross-lingual Robustness.pdf",
+      "format": "publisher_pdf",
+      "sha256": "be70b50bdba1129a8cd2a27b34d8abea77fe9583c9f049431badb31f2eff8c21"
+    },
+    {
+      "source_role": "added_to_core_review",
+      "title": "Source framing triggers systematic bias in large language models",
+      "version": "Science Advances 2025, formal published full text",
+      "primary_url": "https://doi.org/10.1126/sciadv.adz2924",
+      "repo_file": "Literature_Library/03_提问框架与来源框架/F01_2025_Source framing triggers systematic bias in large language models.xml",
+      "format": "publisher_fulltext_xml",
+      "sha256": "5dfce69bc261cbc7ce3114b33f3ada266082fb327b4d451b4ce190bdbb643fac"
+    }
+  ],
+  "additional_sources": [
+    "https://aclanthology.org/2025.findings-acl.219/",
+    "https://doi.org/10.1126/sciadv.adz2924"
+  ],
+  "polibias_table3_visually_checked": true,
+  "paper_experiments_rerun": false,
+  "core_source_count": 6,
+  "project_scope": {
+    "study_object": "LLM output bias",
+    "human_subject_experiments": false,
+    "human_coding_for_measurement_validation": "allowed; separate from human-subject outcome experiments",
+    "polarization_or_neutrality_claims": "limited to defined model-output measures, not human attitude change"
+  }
+}
