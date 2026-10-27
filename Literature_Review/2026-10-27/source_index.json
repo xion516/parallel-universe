@@ -99,5 +99,15 @@
     "human_subject_experiments": false,
     "human_coding_for_measurement_validation": "allowed; separate from human-subject outcome experiments",
     "polarization_or_neutrality_claims": "limited to defined model-output measures, not human attitude change"
+  },
+  "user_text_update": {
+    "source_filename": "My thoughts.docx",
+    "source_sha256": "5edc5f02e74008f82c0be2b20106fbf3d194797572bc71edd9081e185574199d",
+    "target_file": "Literature_Review/2026-10-27/core_review.md",
+    "title": "Parallel Universe",
+    "body_paragraph_count": 7,
+    "body_synced_verbatim": true,
+    "existing_reference_appendix_preserved": true,
+    "source_docx_unchanged": true
   }
 }
